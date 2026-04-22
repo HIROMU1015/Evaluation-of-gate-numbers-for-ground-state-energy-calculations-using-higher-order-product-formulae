@@ -18,6 +18,8 @@ from .cost_extrapolation import (
     exp_extrapolation_diff,
     num_gate_plot_grouping,
     efficient_accuracy_range_plt_grouper,
+    efficient_accuracy_range_bar,
+    exp_and_rz_extrapolation_combined,
 )
 
 __all__ = [
@@ -31,4 +33,6 @@ __all__ = [
     "t_depth_extrapolation_diff",
     "num_gate_plot_grouping",
     "efficient_accuracy_range_plt_grouper",
+    "efficient_accuracy_range_bar",
+    "exp_and_rz_extrapolation_combined",
 ]
