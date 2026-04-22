@@ -73,7 +73,7 @@ DEFAULT_DISTANCE = 1.0     # :contentReference[oaicite:5]{index=5}
 POOL_PROCESSES = 32        # :contentReference[oaicite:6]{index=6}
 
 # QPE のユニタリ作用回数β (M = β / ε)
-BETA = 1.2                 # :contentReference[oaicite:7]{index=7}
+BETA = 1.56                # :contentReference[oaicite:7]{index=7}
 
 # 化学的精度
 CA = 1.59360010199040e-3   # :contentReference[oaicite:8]{index=8}

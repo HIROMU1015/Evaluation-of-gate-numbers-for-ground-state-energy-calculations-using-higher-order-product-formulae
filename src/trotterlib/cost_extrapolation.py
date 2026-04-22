@@ -86,9 +86,13 @@ def _load_coeff_data(
 def _legend_label(labelkey: str) -> str:
     """Plot legend/display labels used in this module."""
     label = label_replace(labelkey)
-    return label.replace("4th (new_2)", "4th(new_m2)").replace(
-        "4th(new_2)", "4th(new_m2)"
-    )
+    replacements = {
+        "4th (new_2)": "4th (ours)",
+        "4th(new_2)": "4th (ours)",
+        "4th (new_3)": "4th (ours, variant)",
+        "4th(new_3)": "4th (ours, variant)",
+    }
+    return replacements.get(label, label)
 
 
 def calculation_cost(
@@ -303,6 +307,7 @@ def exp_extrapolation(
     band_height: float = 0.06,
     band_alpha: float = 0.28,
     use_original: bool = False,
+    save_path: Optional[str] = None,
 ) -> None:
     """PF 別に総コストの外挿をプロットする（use_original=True で original を参照）。"""
     _, Hchain_str, num_qubits = _hchain_series(Hchain)
@@ -375,10 +380,12 @@ def exp_extrapolation(
     )
 
     # 軸など
-    ax.set_xlabel("Num qubits", fontsize=15)
+    ax.set_xlabel("Number of qubits", fontsize=15)
     ax.set_ylabel("Number of Pauli rotations", fontsize=15)
     ax.grid(True, which="minor", axis="y", linestyle=":", linewidth=0.5, alpha=0.35)
     ax.grid(True, which="major", axis="y", linestyle="-", linewidth=0.8, alpha=0.6)
+    if save_path is not None:
+        plt.savefig(save_path, format="pdf", bbox_inches="tight")
     plt.show()
 
 
@@ -389,6 +396,7 @@ def exp_extrapolation_diff(
     X_MIN_CALC: float = 4,
     X_MAX_DISPLAY: float = 100,
     use_original: bool = False,
+    save_path: Optional[str] = None,
 ) -> None:
     """
     単一図（左右Y軸）:
@@ -506,13 +514,15 @@ def exp_extrapolation_diff(
             ax2.legend(hr, lr, loc="upper right", framealpha=0.9)
 
     # 軸ラベル・グリッド
-    ax.set_xlabel("Num qubits", fontsize=15)
+    ax.set_xlabel("Number of qubits", fontsize=15)
     ax.set_ylabel("Number of Pauli rotations", fontsize=15)
     ax2.set_ylabel("Difference in number of Pauli rotations", fontsize=15)
     ax.grid(True, which="minor", axis="y", linestyle=":", linewidth=0.5, alpha=0.35)
     ax.grid(True, which="major", axis="y", linestyle="-", linewidth=0.8, alpha=0.6)
 
     plt.tight_layout()
+    if save_path is not None:
+        plt.savefig(save_path, format="pdf", bbox_inches="tight")
     plt.show()
 
 
@@ -524,6 +534,7 @@ def t_depth_extrapolation(
     band_height: float = 0.06,
     band_alpha: float = 0.28,
     use_original: bool = False,
+    save_path: Optional[str] = None,
 ) -> None:
     """H-chain サイズに対する T-depth / RZ レイヤー数を外挿する（use_original=True で original を参照）。"""
 
@@ -618,13 +629,15 @@ def t_depth_extrapolation(
     )
 
     # 軸など
-    ax.set_xlabel("Num qubits", fontsize=15)
+    ax.set_xlabel("Number of qubits", fontsize=15)
     if rz_layer:
         ax.set_ylabel("Depth of RZ rotation layers", fontsize=15)
     else:
         ax.set_ylabel("T-depth", fontsize=15)
     ax.grid(True, which='minor', axis='y', linestyle=':', linewidth=0.5, alpha=0.35)
     ax.grid(True, which='major', axis='y', linestyle='-', linewidth=0.8, alpha=0.6)
+    if save_path is not None:
+        plt.savefig(save_path, format="pdf", bbox_inches="tight")
     plt.show()
 
 
@@ -636,6 +649,7 @@ def t_depth_extrapolation_diff(
     X_MIN_CALC: float = 4,
     X_MAX_DISPLAY: float = 100,
     use_original: bool = False,
+    save_path: Optional[str] = None,
 ) -> None:
     """
     2つの PF を指定して T-depth を比較するプロット関数（双Y軸）。
@@ -828,7 +842,7 @@ def t_depth_extrapolation_diff(
     ax.legend(h_u, l_u, loc="upper left", framealpha=0.9)
 
     # 軸ラベル
-    ax.set_xlabel("Num qubits", fontsize=15)
+    ax.set_xlabel("Number of qubits", fontsize=15)
     if rz_layer:
         ax.set_ylabel("Depth of RZ rotation layers", fontsize=15)
         ax2.set_ylabel("Difference in RZ rotation depth", fontsize=15)
@@ -855,6 +869,8 @@ def t_depth_extrapolation_diff(
     )
 
     plt.tight_layout()
+    if save_path is not None:
+        plt.savefig(save_path, format="pdf", bbox_inches="tight")
     plt.show()
 
 
@@ -1152,3 +1168,290 @@ def efficient_accuracy_range_plt_grouper(
         plt.show()
 
     plot_with_horizontal_offset(dic, xdic, offset=0.2)
+
+
+def efficient_accuracy_range_bar(
+    Hchain: int,
+    n_w_list: Sequence[PFLabel],
+    use_original: bool = False,
+    bar_width: float = 1.3,
+    save_path: Optional[str] = None,
+) -> None:
+    """各 H-chain で最適な PF の target-error 帯を積み上げ棒で描画する。
+
+    x 軸: spin orbitals 数、y 軸: target error [Hartree] (log)。
+    各 H-chain に縦棒 1 本を立て、error 帯ごとに最適 PF の色で塗り分ける。
+    """
+    from matplotlib.patches import Rectangle, Patch
+    from matplotlib.lines import Line2D
+
+    # 落ち着いた配色とハッチ（白黒でも判別可能）
+    muted_color_map: Dict[str, str] = {
+        "2nd": "#6fa8dc",           # muted blue
+        "4th": "#93c47d",           # muted green
+        "8th(Yoshida)": "#e06666",  # muted red
+        "8th(Morales)": "#f6b26b",  # muted orange
+        "10th(Morales)": "#8e7cc3", # muted purple
+        "4th(new_2)": "#c27ba0",    # muted magenta
+        "4th(new_3)": "#a2c4c9",    # muted teal
+    }
+    hatch_map: Dict[str, str] = {
+        "2nd": "",
+        "4th": "///",
+        "8th(Yoshida)": "...",
+        "8th(Morales)": "xxx",
+        "10th(Morales)": "\\\\\\",
+        "4th(new_2)": "++",
+        "4th(new_3)": "||",
+    }
+
+    def _color(pf: str) -> str:
+        return muted_color_map.get(pf, COLOR_MAP.get(pf, "0.7"))
+
+    def _hatch(pf: str) -> str:
+        return hatch_map.get(pf, "")
+
+    bars: List[Tuple[int, float, float, str]] = []
+    for chain in range(2, Hchain + 1):
+        mol = f"H{chain}"
+        _, _, ham_name, n_qubits = jw_hamiltonian_maker(chain, 1.0)
+        ham_name = ham_name + "_grouping"
+        result, _, _ = best_product_formula_all(
+            mol, ham_name, n_w_list, use_original=use_original
+        )
+        for pf, err_range in result.items():
+            if not err_range:
+                continue
+            ymin = CA * (10 ** min(err_range))
+            ymax = CA * (10 ** max(err_range))
+            bars.append((n_qubits, ymin, ymax, pf))
+
+    if not bars:
+        raise RuntimeError("No accuracy-range data collected.")
+
+    fig, ax = plt.subplots(figsize=(10, 6), dpi=200)
+
+    used_pfs: List[str] = []
+    for pf in n_w_list:
+        if pf not in used_pfs:
+            used_pfs.append(str(pf))
+
+    drawn_pfs: List[str] = []
+    for x, ymin, ymax, pf in bars:
+        rect = Rectangle(
+            (x - bar_width / 2, ymin),
+            bar_width,
+            ymax - ymin,
+            facecolor=_color(pf),
+            edgecolor="black",
+            linewidth=0.5,
+            hatch=_hatch(pf),
+            alpha=0.9,
+        )
+        ax.add_patch(rect)
+        if pf not in drawn_pfs:
+            drawn_pfs.append(pf)
+
+    all_x = sorted({b[0] for b in bars})
+    ymin_all = min(b[1] for b in bars)
+    ymax_all = max(b[2] for b in bars)
+
+    ax.set_yscale("log")
+    ax.set_xlim(min(all_x) - 1, max(all_x) + 1)
+    ax.set_ylim(ymin_all * 0.5, ymax_all * 2)
+    ax.set_xticks(all_x)
+
+    ca_line = ax.axhline(y=CA, color="r", linestyle="--", linewidth=1.2)
+
+    ax.set_xlabel("Number of spin orbitals", fontsize=15)
+    ax.set_ylabel("Target error [Hartree]", fontsize=15)
+    ax.tick_params(labelsize=13)
+    ax.grid(True, which="major", axis="y", linestyle="-", linewidth=0.6, alpha=0.5)
+    ax.grid(True, which="minor", axis="y", linestyle=":", linewidth=0.4, alpha=0.3)
+
+    legend_handles = [
+        Patch(
+            facecolor=_color(pf),
+            edgecolor="black",
+            linewidth=0.5,
+            hatch=_hatch(pf),
+            label=_legend_label(pf),
+        )
+        for pf in drawn_pfs
+    ]
+    legend_handles.append(
+        Line2D([0], [0], color="r", linestyle="--", label="chemical accuracy")
+    )
+    ax.legend(
+        handles=legend_handles,
+        title="Best PF",
+        loc="upper left",
+        bbox_to_anchor=(1.02, 1),
+        fontsize=11,
+        title_fontsize=12,
+    )
+
+    plt.tight_layout()
+    if save_path is not None:
+        plt.savefig(save_path, format="pdf", bbox_inches="tight")
+    plt.show()
+
+
+def _plot_cost_on_axes(
+    ax: Any,
+    Hchain: int,
+    n_w_list: Sequence[PFLabel],
+    *,
+    mode: str,
+    show_bands: bool,
+    band_height: float,
+    band_alpha: float,
+    use_original: bool,
+    label_fontsize: int,
+    tick_fontsize: int,
+    legend_fontsize: int,
+) -> None:
+    """exp_extrapolation / t_depth_extrapolation の描画ロジックを 1 つの Axes に出す。
+
+    mode: "pauli" ... 総 Pauli 回転数
+          "rz_layer" ... RZ レイヤー深さ
+    """
+    _, Hchain_str, num_qubits = _hchain_series(Hchain)
+    target_error = TARGET_ERROR
+
+    total_dir: Dict[int, Dict[str, float]] = {}
+    for qubits, mol in zip(num_qubits, Hchain_str):
+        if qubits % 4 == 0:
+            ham_name = mol + "_sto-3g_singlet_distance_100_charge_0_grouping"
+        else:
+            ham_name = mol + "_sto-3g_triplet_1+_distance_100_charge_1_grouping"
+
+        total_dir[qubits] = {}
+
+        for n_w in n_w_list:
+            if n_w == "10th(Morales)" and qubits == 30:
+                continue
+
+            data = _load_coeff_data(ham_name, n_w, use_original=use_original)
+            coeff = data
+            expo = P_DIR[n_w]
+
+            if mode == "pauli":
+                min_f = _compute_min_f(target_error, expo, coeff)
+                unit_expo = DECOMPO_NUM[mol][n_w]
+                total_dir[qubits][n_w] = unit_expo * min_f
+            elif mode == "rz_layer":
+                pf_layer_rz = PF_RZ_LAYER[mol][n_w]
+                M_qpe = _qpe_iteration_factor(
+                    float(coeff), float(expo), float(target_error)
+                )
+                total_dir[qubits][n_w] = M_qpe * pf_layer_rz
+            else:
+                raise ValueError(f"Unknown mode: {mode}")
+
+    series: DefaultDict[str, Dict[str, List[float]]] = defaultdict(
+        lambda: {"x": [], "y": []}
+    )
+    for qubit, gate_dir in total_dir.items():
+        for pf, gate in gate_dir.items():
+            lb = _legend_label(pf)
+            ax.plot(
+                qubit,
+                gate,
+                ls="None",
+                marker=MARKER_MAP[pf],
+                color=COLOR_MAP[pf],
+                label=lb if qubit == num_qubits[0] else None,
+            )
+            series[pf]["x"].append(float(qubit))
+            series[pf]["y"].append(float(gate))
+
+    set_loglog_axes(ax)
+
+    XMAX = 100
+    xmin_current, xmax_current = ax.get_xlim()
+    ax.set_xlim(xmin_current, max(xmax_current, XMAX))
+
+    _apply_loglog_fit_with_bands(
+        ax,
+        series,
+        show_bands=show_bands,
+        band_height=band_height,
+        band_alpha=band_alpha,
+    )
+
+    ax.set_xlabel("Number of qubits", fontsize=label_fontsize)
+    if mode == "pauli":
+        ax.set_ylabel("Number of Pauli rotations", fontsize=label_fontsize)
+    else:
+        ax.set_ylabel("Depth of RZ rotation layers", fontsize=label_fontsize)
+    ax.tick_params(labelsize=tick_fontsize)
+    ax.grid(True, which="minor", axis="y", linestyle=":", linewidth=0.5, alpha=0.35)
+    ax.grid(True, which="major", axis="y", linestyle="-", linewidth=0.8, alpha=0.6)
+
+    leg = ax.get_legend()
+    if leg is not None:
+        for t in leg.get_texts():
+            t.set_fontsize(legend_fontsize)
+
+
+def exp_and_rz_extrapolation_combined(
+    Hchain: int,
+    n_w_list: Sequence[PFLabel],
+    *,
+    show_bands: bool = False,
+    band_height: float = 0.06,
+    band_alpha: float = 0.28,
+    use_original: bool = False,
+    save_path: Optional[str] = None,
+    label_fontsize: int = 20,
+    tick_fontsize: int = 16,
+    legend_fontsize: int = 14,
+    subcaption_fontsize: int = 22,
+) -> None:
+    """(a) 総 Pauli 回転数 と (b) RZ レイヤー深さ を横並びで描く。"""
+    fig, axes = plt.subplots(1, 2, figsize=(16, 6), dpi=200)
+
+    _plot_cost_on_axes(
+        axes[0],
+        Hchain,
+        n_w_list,
+        mode="pauli",
+        show_bands=show_bands,
+        band_height=band_height,
+        band_alpha=band_alpha,
+        use_original=use_original,
+        label_fontsize=label_fontsize,
+        tick_fontsize=tick_fontsize,
+        legend_fontsize=legend_fontsize,
+    )
+    _plot_cost_on_axes(
+        axes[1],
+        Hchain,
+        n_w_list,
+        mode="rz_layer",
+        show_bands=show_bands,
+        band_height=band_height,
+        band_alpha=band_alpha,
+        use_original=use_original,
+        label_fontsize=label_fontsize,
+        tick_fontsize=tick_fontsize,
+        legend_fontsize=legend_fontsize,
+    )
+
+    for ax, tag in zip(axes, ("(a)", "(b)")):
+        ax.text(
+            0.97,
+            0.97,
+            tag,
+            transform=ax.transAxes,
+            ha="right",
+            va="top",
+            fontsize=subcaption_fontsize,
+            fontweight="bold",
+        )
+
+    plt.tight_layout()
+    if save_path is not None:
+        plt.savefig(save_path, format="pdf", bbox_inches="tight")
+    plt.show()
