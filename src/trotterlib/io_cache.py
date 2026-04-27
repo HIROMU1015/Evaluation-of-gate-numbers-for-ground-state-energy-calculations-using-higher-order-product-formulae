@@ -39,7 +39,7 @@ def label_replace(labelkey: str) -> str:  # 凡例用
     """凡例表示用のラベルに変換する。"""
     # 表示名の置換ルール
     replacedir = {
-        "4th(new_2)": "4th (new_2)",
+        "4th(new_2)": "4th (new, m=2)",
         "4th(new_3)": "4th (new_3)",
         "8th(Morales)": "8th (Morales et al.)",
         "10th(Morales)": "10th (Morales et al.)",

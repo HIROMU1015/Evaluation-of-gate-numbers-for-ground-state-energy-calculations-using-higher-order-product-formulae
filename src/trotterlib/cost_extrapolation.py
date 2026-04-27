@@ -85,10 +85,7 @@ def _load_coeff_data(
 
 def _legend_label(labelkey: str) -> str:
     """Plot legend/display labels used in this module."""
-    label = label_replace(labelkey)
-    return label.replace("4th (new_2)", "4th(new_m2)").replace(
-        "4th(new_2)", "4th(new_m2)"
-    )
+    return label_replace(labelkey).replace("4th(new_2)", "4th (new, m=2)")
 
 
 def calculation_cost(
@@ -279,16 +276,20 @@ def _apply_loglog_fit_with_bands(
     seen = set(labels_u)
 
     if show_bands and winners_in_order:
-        proxies = [
-            Patch(
-                facecolor=COLOR_MAP[lb],
-                alpha=0.6,
-                edgecolor="none",
-                label=f"{lb} (lowest)",
+        proxies = []
+        for lb in winners_in_order:
+            display_lb = _legend_label(lb)
+            lowest_label = f"{display_lb} (lowest)"
+            if lowest_label in seen:
+                continue
+            proxies.append(
+                Patch(
+                    facecolor=COLOR_MAP[lb],
+                    alpha=0.6,
+                    edgecolor="none",
+                    label=lowest_label,
+                )
             )
-            for lb in winners_in_order
-            if f"{lb} (lowest)" not in seen
-        ]
         handles_u += proxies
         labels_u += [str(p.get_label()) for p in proxies]
 
