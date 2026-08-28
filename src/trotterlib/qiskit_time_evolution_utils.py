@@ -1,4 +1,8 @@
+import ctypes
 from functools import lru_cache
+import os
+from pathlib import Path
+import sys
 from typing import List, Tuple
 
 import numpy as np
@@ -16,6 +20,71 @@ from .config import (
 from .product_formula import _get_w_list as _pf_get_w_list
 
 
+_CUDA_PRELOAD_HANDLES: list[object] = []
+_CUDA_PRELOAD_ERRORS: Tuple[str, ...] = ()
+_AER_RUNTIME_PREPARED = False
+
+
+def _prepare_aer_runtime() -> None:
+    """Prefer CUDA libraries bundled with the active Python environment.
+
+    ``qiskit-aer-gpu`` installs CUDA wheels alongside Aer.  On shared GPU
+    servers, an older system ``libnvJitLink`` can otherwise be loaded before
+    the matching wheel libraries and make even the Aer CPU backend fail to
+    import.  Loading the wheel libraries in dependency order keeps the fix
+    local to this Python process and does not modify the server environment.
+    """
+    global _AER_RUNTIME_PREPARED, _CUDA_PRELOAD_ERRORS
+    if _AER_RUNTIME_PREPARED:
+        return
+    _AER_RUNTIME_PREPARED = True
+
+    site_packages_roots = (
+        Path(sys.prefix)
+        / "lib"
+        / f"python{sys.version_info.major}.{sys.version_info.minor}"
+        / "site-packages",
+        Path(sys.prefix)
+        / "lib64"
+        / f"python{sys.version_info.major}.{sys.version_info.minor}"
+        / "site-packages",
+    )
+    library_paths = (
+        Path("nvidia/nvjitlink/lib/libnvJitLink.so.12"),
+        Path("nvidia/cuda_runtime/lib/libcudart.so.12"),
+        Path("nvidia/cublas/lib/libcublasLt.so.12"),
+        Path("nvidia/cublas/lib/libcublas.so.12"),
+        Path("nvidia/cusparse/lib/libcusparse.so.12"),
+        Path("nvidia/cusolver/lib/libcusolver.so.11"),
+    )
+
+    cuda_lib_dirs: list[str] = []
+    errors: list[str] = []
+    mode = getattr(ctypes, "RTLD_GLOBAL", 0)
+    for site_packages in site_packages_roots:
+        for relative_path in library_paths:
+            library_path = site_packages / relative_path
+            if not library_path.is_file():
+                continue
+            library_dir = str(library_path.parent)
+            if library_dir not in cuda_lib_dirs:
+                cuda_lib_dirs.append(library_dir)
+            try:
+                _CUDA_PRELOAD_HANDLES.append(
+                    ctypes.CDLL(str(library_path), mode=mode)
+                )
+            except OSError as exc:
+                errors.append(f"{library_path}: {exc}")
+
+    current_dirs = [
+        path for path in os.environ.get("LD_LIBRARY_PATH", "").split(":") if path
+    ]
+    merged_dirs = list(dict.fromkeys([*cuda_lib_dirs, *current_dirs]))
+    if merged_dirs:
+        os.environ["LD_LIBRARY_PATH"] = ":".join(merged_dirs)
+    _CUDA_PRELOAD_ERRORS = tuple(errors)
+
+
 def free_var(name: str, scope: dict) -> None:
     """ローカル変数を解放して GC を促す（メモリ圧を下げるための補助）。"""
     # スコープから削除して GC を促進
@@ -29,6 +98,7 @@ def free_var(name: str, scope: dict) -> None:
 @lru_cache(maxsize=None)
 def available_aer_devices() -> Tuple[str, ...]:
     """Return the simulator devices provided by the installed Aer package."""
+    _prepare_aer_runtime()
     try:
         from qiskit_aer import AerSimulator
     except ImportError as exc:  # pragma: no cover - depends on server setup
@@ -48,6 +118,7 @@ def _aer_simulator(
     target_gpus: Tuple[int, ...],
 ):
     """Construct one Aer backend per worker process and simulator setting."""
+    _prepare_aer_runtime()
     from qiskit_aer import AerSimulator
 
     normalized_device = device.upper()
