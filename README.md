@@ -50,14 +50,26 @@ export TROTTER_POOL_PROCESSES=1
 
 ジョブスケジューラでGPUを割り当てる場合は通常 `CUDA_VISIBLE_DEVICES` に従う。複数の可視GPUを明示的に使う場合は、例えば `TROTTER_QISKIT_TARGET_GPUS=0,1` を設定する。数値精度は既定でdoubleであり、`TROTTER_QISKIT_AER_PRECISION=single` で変更できる。
 
-新しいPFをH鎖で検証する例：
+新しいMorales 8次PFをH鎖で検証する例：
 
 ```bash
 PYTHONPATH=src python review_response/run_morales_y8m10b_hchain.py \
   --h-chains 2 4 5 \
-  --labels '8th(Morales-Y8m10b)' '4th(m5_best)' \
-  --t-start 0.12 --t-stop 1.2 --num-times 18 \
-  --run-name gpu_new_pf
+  --labels '8th(Morales)' '8th(Morales-Y8m10b)' \
+  --t-start 0.5 --t-stop 1.2 --num-times 18 \
+  --run-name gpu_morales_y8m10b \
+  --baseline-label '8th(Morales)'
+```
+
+新4次PFは8次とは別の時間窓で実行する。
+
+```bash
+PYTHONPATH=src python review_response/run_morales_y8m10b_hchain.py \
+  --h-chains 2 4 5 \
+  --labels '4th(new_2)' '4th(m5_best)' \
+  --t-start 0.12 --t-stop 0.8 --num-times 18 \
+  --run-name gpu_new_fourth \
+  --baseline-label '4th(new_2)'
 ```
 
 ## 使い方（ノートブック）
