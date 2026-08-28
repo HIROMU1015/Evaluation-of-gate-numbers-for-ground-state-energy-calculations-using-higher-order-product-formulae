@@ -4,6 +4,9 @@
 
 ## できること
 - 2nd/4th/8th/10thなどの積公式係数に基づく誤差評価
+- Morales et al. QIC 2025 の Y8m10b、processed YP8m8、10次m=17
+- 探索済みの新4次 m=5/m=6
+- Qiskit Statevector のCPU実行とQiskit AerのGPU実行
 - グルーピングあり/なしの時間発展誤差プロット
 - QPEのβ評価
 - 誤差のlog-logフィット結果を保存
@@ -27,11 +30,41 @@ pip install -r requirements.txt
 
 `requirements.txt` には `-e .` が含まれているため、`trotterlib` がインストールされる。
 
+### GPU計算機
+
+NVIDIA GPU上でQiskit Aerを使う場合は、通常版の代わりにGPU用依存関係をインストールする。
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements-gpu.txt
+python -c "from qiskit_aer import AerSimulator; print(AerSimulator().available_devices())"
+```
+
+出力に `GPU` が含まれることを確認してから、時間発展前に以下を設定する。
+
+```bash
+export TROTTER_QISKIT_DEVICE=GPU
+export TROTTER_POOL_PROCESSES=1
+```
+
+ジョブスケジューラでGPUを割り当てる場合は通常 `CUDA_VISIBLE_DEVICES` に従う。複数の可視GPUを明示的に使う場合は、例えば `TROTTER_QISKIT_TARGET_GPUS=0,1` を設定する。数値精度は既定でdoubleであり、`TROTTER_QISKIT_AER_PRECISION=single` で変更できる。
+
+新しいPFをH鎖で検証する例：
+
+```bash
+PYTHONPATH=src python review_response/run_morales_y8m10b_hchain.py \
+  --h-chains 2 4 5 \
+  --labels '8th(Morales-Y8m10b)' '4th(m5_best)' \
+  --t-start 0.12 --t-stop 1.2 --num-times 18 \
+  --run-name gpu_new_pf
+```
+
 ## 使い方（ノートブック）
 `abe_trotter_project.ipynb` を開いて、Error plt → extrapolation の流れで実行する。論文と同様の外挿を再現する場合は `artifacts/trotter_expo_coeff_gr_original` を参照する（例: `exp_extrapolation(..., use_original=True)`）。既存の挙動で実行したい場合は従来通り `artifacts/trotter_expo_coeff_gr` のデータを使う。
 
 ## 主要関数（trotterlib.__all__）
-`pf_label` は積公式ラベル（例: `"2nd"`, `"4th(new_2)"`, `"8th(Morales)"`, `"10th(Morales)"`）を指定する。
+`pf_label` は積公式ラベル（例: `"2nd"`, `"4th(m5_best)"`, `"8th(Morales-Y8m10b)"`, `"8th(Morales-YP8m8)"`, `"10th(Morales-QIC-m17)"`）を指定する。
 
 - `jw_hamiltonian_maker(mol_type, distance=None)`: 水素鎖のJWハミルトニアンを構築し、`(jw_hamiltonian, HFエネルギー, ham_name, num_qubits)` を返す。`mol_type` はH鎖の原子数、`distance` は原子間距離（省略時は `config.DEFAULT_DISTANCE`）。
 - `trotter_error_plt(t_start, t_end, t_step, molecule_type, pf_label)`: 対角化ベースの時間発展誤差をlog-logでプロットし、`(t_list, error_list)` を返す。`t_start`/`t_end` は時間範囲、`t_step` は刻み幅、`molecule_type` はH鎖原子数、`pf_label` は積公式ラベル。
@@ -49,7 +82,8 @@ pip install -r requirements.txt
 `src/trotterlib/config.py` で出力先やプロセス数を調整できる。
 - `ARTIFACTS_DIR`: 生成物の保存先（`MATRIX_DIR`, `CALCULATION_DIR`, `PICKLE_DIR_PATH` の基点）
 - `PICKLE_DIR` / `PICKLE_DIR_GROUPED`: 係数保存フォルダ名（`artifacts/` 配下に作成）
-- `POOL_PROCESSES`: 並列プロセス数（時間発展の並列評価に使用）
+- `POOL_PROCESSES`: 並列プロセス数（`TROTTER_POOL_PROCESSES` で変更可能。GPU時の既定値は1、CPU時は32）
+- `QISKIT_SIMULATOR_DEVICE`: `TROTTER_QISKIT_DEVICE=GPU` でAer GPU時間発展に切り替える
 - `DEFAULT_BASIS` / `DEFAULT_DISTANCE`: 分子基底と原子間距離のデフォルト値
 - `BETA`: QPE のユニタリ作用回数 M の比例定数（`M = β / ε`）
 - `CA`: 化学的精度

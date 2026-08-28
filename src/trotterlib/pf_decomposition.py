@@ -3,6 +3,19 @@ from __future__ import annotations
 from typing import Iterable, Sequence
 
 
+def symmetric_s2_sequence(w_list: Sequence[float]) -> list[float]:
+    """Convert compact ``[w0, ..., wm]`` weights to the 2m+1 S2 sequence."""
+    weights = list(w_list)
+    if not weights:
+        return []
+    return list(reversed(weights[1:])) + [weights[0]] + weights[1:]
+
+
+def inverse_s2_sequence(sequence: Sequence[float]) -> list[float]:
+    """Return the S2-block sequence implementing the inverse operator."""
+    return [-weight for weight in reversed(sequence)]
+
+
 def _iter_s2_steps(num_terms: int, w: float) -> Iterable[tuple[int, float]]:
     """単一 w の S2 対称ステップを生成する。"""
     for i in range(num_terms - 1):
@@ -50,22 +63,27 @@ def iter_pf_steps(
     w_list: Sequence[float],
 ) -> Iterable[tuple[int, float]]:
     """Yield (index, weight) steps for symmetric product-formula decomposition."""
-    if num_terms <= 0 or not w_list:
+    yield from iter_s2_sequence_steps(num_terms, symmetric_s2_sequence(w_list))
+
+
+def iter_s2_sequence_steps(
+    num_terms: int,
+    sequence: Sequence[float],
+) -> Iterable[tuple[int, float]]:
+    """Expand an arbitrary S2-block sequence, merging adjacent equal terms."""
+    if num_terms <= 0 or not sequence:
         return
 
-    m = len(w_list)
-    if m == 1:
-        # 単一 w の S2 ステップ
-        yield from _iter_s2_steps(num_terms, w_list[0])
-        return
-
-    # 先頭側のステップ
-    yield from _iter_left_steps(num_terms, w_list[m - 1], w_list[m - 2])
-    for i in reversed(range(1, m - 1)):
-        # 中央の折り返し（前半）
-        yield from _iter_middle_steps(num_terms, w_list[i], w_list[i - 1])
-    for i in range(0, m - 1):
-        # 中央の折り返し（後半）
-        yield from _iter_middle_steps(num_terms, w_list[i], w_list[i + 1])
-    # 末尾側のステップ
-    yield from _iter_right_steps(num_terms, w_list[m - 1])
+    pending_index: int | None = None
+    pending_weight = 0.0
+    for block_weight in sequence:
+        for term_index, term_weight in _iter_s2_steps(num_terms, block_weight):
+            if term_index == pending_index:
+                pending_weight += term_weight
+                continue
+            if pending_index is not None:
+                yield pending_index, pending_weight
+            pending_index = term_index
+            pending_weight = term_weight
+    if pending_index is not None:
+        yield pending_index, pending_weight

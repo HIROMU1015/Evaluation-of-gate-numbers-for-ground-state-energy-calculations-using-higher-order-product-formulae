@@ -8,8 +8,8 @@ from pprint import pformat
 from typing import Any
 
 from .config import PFLabel, require_pf_label
-from .pf_decomposition import iter_pf_steps
-from .product_formula import _get_w_list
+from .pf_decomposition import iter_s2_sequence_steps
+from .product_formula import _get_s2_sequence
 
 
 # Per-clique RZ layer depths generated from the original
@@ -579,8 +579,11 @@ def calculate_pf_rz_layer_from_group_layers(
 ) -> int:
     """Sum per-group RZ depths over one product-formula unitary."""
     label = require_pf_label(pf_label)
-    weights = _get_w_list(label)
-    return sum(group_layers[group_idx] for group_idx, _ in iter_pf_steps(len(group_layers), weights))
+    sequence = _get_s2_sequence(label)
+    return sum(
+        group_layers[group_idx]
+        for group_idx, _ in iter_s2_sequence_steps(len(group_layers), sequence)
+    )
 
 
 def calculate_pf_rz_layer(h_chain: int | str, pf_label: PFLabel) -> int:

@@ -70,7 +70,40 @@ def pickle_dir(gr: bool | None = None, *, use_original: bool = False) -> Path:
 DEFAULT_BASIS = "sto-3g"   # :contentReference[oaicite:4]{index=4}
 DEFAULT_DISTANCE = 1.0     # :contentReference[oaicite:5]{index=5}
 
-POOL_PROCESSES = 32        # :contentReference[oaicite:6]{index=6}
+QISKIT_SIMULATOR_DEVICE = os.environ.get(
+    "TROTTER_QISKIT_DEVICE", "CPU"
+).strip().upper()
+if QISKIT_SIMULATOR_DEVICE not in {"CPU", "GPU"}:
+    raise ValueError("TROTTER_QISKIT_DEVICE must be either CPU or GPU")
+
+QISKIT_AER_METHOD = os.environ.get(
+    "TROTTER_QISKIT_AER_METHOD", "statevector"
+).strip()
+QISKIT_AER_PRECISION = os.environ.get(
+    "TROTTER_QISKIT_AER_PRECISION", "double"
+).strip().lower()
+if QISKIT_AER_PRECISION not in {"single", "double"}:
+    raise ValueError(
+        "TROTTER_QISKIT_AER_PRECISION must be either single or double"
+    )
+
+_target_gpus_raw = os.environ.get("TROTTER_QISKIT_TARGET_GPUS", "").strip()
+QISKIT_AER_TARGET_GPUS = (
+    tuple(int(value.strip()) for value in _target_gpus_raw.split(","))
+    if _target_gpus_raw
+    else ()
+)
+if any(device_id < 0 for device_id in QISKIT_AER_TARGET_GPUS):
+    raise ValueError("TROTTER_QISKIT_TARGET_GPUS must contain non-negative IDs")
+
+# A single process avoids loading an independent statevector into the same GPU
+# from every time-point worker. CPU calculations retain the previous default.
+_default_pool_processes = 1 if QISKIT_SIMULATOR_DEVICE == "GPU" else 32
+POOL_PROCESSES = int(
+    os.environ.get("TROTTER_POOL_PROCESSES", str(_default_pool_processes))
+)  # :contentReference[oaicite:6]{index=6}
+if POOL_PROCESSES < 1:
+    raise ValueError("TROTTER_POOL_PROCESSES must be at least 1")
 
 # QPE のユニタリ作用回数β (M = β / ε)
 BETA = 1.2                 # :contentReference[oaicite:7]{index=7}
@@ -97,11 +130,16 @@ PLOT_STYLE: Dict[str, PlotStyle] = {
     "4th(new_3)": PlotStyle(color="r", marker="v"),
     "4th(new_1)": PlotStyle(color="lightcoral", marker="x"),
     "4th(new_2)": PlotStyle(color="b", marker="<"),
+    "4th(m5_best)": PlotStyle(color="royalblue", marker="D"),
+    "4th(m6)": PlotStyle(color="navy", marker="d"),
     "6th(new_4)": PlotStyle(color="darkgreen", marker="*"),
     "6th(new_3)": PlotStyle(color="seagreen", marker="s"),
     "4th": PlotStyle(color="c", marker="^"),
     "8th(Morales)": PlotStyle(color="m", marker="h"),
+    "8th(Morales-Y8m10b)": PlotStyle(color="purple", marker="P"),
+    "8th(Morales-YP8m8)": PlotStyle(color="darkviolet", marker="X"),
     "10th(Morales)": PlotStyle(color="greenyellow", marker="H"),
+    "10th(Morales-QIC-m17)": PlotStyle(color="olive", marker="*"),
     "8th(Yoshida)": PlotStyle(color="orange", marker=">"),
 }  # :contentReference[oaicite:9]{index=9}
 
@@ -119,14 +157,37 @@ P_DIR = {
     "4th(new_1)": 4,
     "4th(new_2)": 4,
     "4th(new_3)": 4,
+    "4th(m6)": 4,
+    "4th(m5_best)": 4,
     "2nd": 2,
     "4th": 4,
     "8th(Morales)": 8,
+    "8th(Morales-Y8m10b)": 8,
+    "8th(Morales-YP8m8)": 8,
     "10th(Morales)": 10,
+    "10th(Morales-QIC-m17)": 10,
     "8th(Yoshida)": 8,
 }  # :contentReference[oaicite:11]{index=11}
 
 PFLabel: TypeAlias = str
+
+_PF_LABEL_ALIASES = {
+    "w2": "2nd",
+    "w3": "4th",
+    "wyoshida": "8th(Yoshida)",
+    "w8": "8th(Morales)",
+    "Y8m10b": "8th(Morales-Y8m10b)",
+    "YP8m8": "8th(Morales-YP8m8)",
+    "w1016": "10th(Morales)",
+    "Y10m17": "10th(Morales-QIC-m17)",
+    "wmy4": "4th(new_2)",
+}
+
+
+def normalize_pf_label(label: PFLabel) -> PFLabel:
+    """PF ラベルの既存エイリアス表記を標準名に寄せる。"""
+    value = str(label).strip()
+    return _PF_LABEL_ALIASES.get(value, value)
 
 
 def require_pf_label(num_w: PFLabel | None) -> PFLabel:
@@ -182,6 +243,33 @@ DECOMPO_NUM = {
     for h, vals in _DECOMPO_NUM_VALUES.items()
 } # :contentReference[oaicite:12]{index=12}
 
+_Y8M10B_DECOMPO_NUM = [
+    304, 2058, 7596, 19858, 42876, 82446, 143524,
+    237954, 366660, 539806, 770748, 1073682, 1452556, 1939542,
+]
+for _row, _value in zip(DECOMPO_NUM.values(), _Y8M10B_DECOMPO_NUM):
+    _row["8th(Morales-Y8m10b)"] = _value
+
+# Published m=17 has 35 S2 stages, compared with 33 for the legacy m=16
+# formula.  The merged circuit cost is affine in the number of stages.
+for _row in DECOMPO_NUM.values():
+    _per_stage = (_row["10th(Morales)"] - _row["2nd"]) // 32
+    _row["10th(Morales-QIC-m17)"] = _row["10th(Morales)"] + 2 * _per_stage
+
+_M5_FOURTH_DECOMPO_NUM = [
+    164, 1088, 3996, 10428, 22496, 43236, 75244,
+    124724, 192160, 282876, 403868, 562572, 761056, 1016172,
+]
+_M6_FOURTH_DECOMPO_NUM = [
+    192, 1282, 4716, 12314, 26572, 51078, 88900,
+    147370, 227060, 334262, 477244, 664794, 899356, 1200846,
+]
+for _row, _m5_value, _m6_value in zip(
+    DECOMPO_NUM.values(), _M5_FOURTH_DECOMPO_NUM, _M6_FOURTH_DECOMPO_NUM
+):
+    _row["4th(m5_best)"] = _m5_value
+    _row["4th(m6)"] = _m6_value
+
 # PF 1 ステップに含まれる RZ のレイヤー数
 # Inoue グルーピングにより A → n にそのまま変換した場合
 _PF_RZ_LAYER_KEYS = ['2nd', '4th', '8th(Morales)', '10th(Morales)', '8th(Yoshida)', '4th(new_3)', '4th(new_2)']
@@ -207,6 +295,31 @@ PF_RZ_LAYER = {
     h: dict(zip(_PF_RZ_LAYER_KEYS, vals))
     for h, vals in _PF_RZ_LAYER_VALUES.items()
 } # :contentReference[oaicite:13]{index=13}
+
+_Y8M10B_PF_RZ_LAYER = [
+    109, 659, 1899, 6921, 11628, 22004, 25200,
+    50822, 66092, 94191, 101565, 156336, 178367, 244037,
+]
+for _row, _value in zip(PF_RZ_LAYER.values(), _Y8M10B_PF_RZ_LAYER):
+    _row["8th(Morales-Y8m10b)"] = _value
+
+for _row in PF_RZ_LAYER.values():
+    _per_stage = (_row["10th(Morales)"] - _row["2nd"]) // 32
+    _row["10th(Morales-QIC-m17)"] = _row["10th(Morales)"] + 2 * _per_stage
+
+_M5_FOURTH_PF_RZ_LAYER = [
+    59, 349, 999, 3631, 6098, 11534, 13210,
+    26632, 34632, 49351, 53215, 81906, 93447, 127847,
+]
+_M6_FOURTH_PF_RZ_LAYER = [
+    69, 411, 1179, 4289, 7204, 13628, 15608,
+    31470, 40924, 58319, 62885, 96792, 110431, 151085,
+]
+for _row, _m5_value, _m6_value in zip(
+    PF_RZ_LAYER.values(), _M5_FOURTH_PF_RZ_LAYER, _M6_FOURTH_PF_RZ_LAYER
+):
+    _row["4th(m5_best)"] = _m5_value
+    _row["4th(m6)"] = _m6_value
 
 
 # =========================

@@ -11,9 +11,9 @@ from scipy.sparse import eye
 from scipy.sparse.linalg import expm
 
 from .chemistry_hamiltonian import ham_list_maker
-from .product_formula import _get_w_list
+from .product_formula import _get_s2_sequence, _get_w_list
 from .config import MATRIX_DIR, PFLabel
-from .pf_decomposition import iter_pf_steps
+from .pf_decomposition import iter_pf_steps, iter_s2_sequence_steps
 
 
 def _make_time_dirs(
@@ -142,6 +142,20 @@ def _apply_pf_steps(
     return idx
 
 
+def _apply_s2_sequence_steps(
+    ham_list: Sequence[Any],
+    t: float,
+    n_qubits: int,
+    sequence: Sequence[float],
+    folder_path: Union[str, os.PathLike[str]],
+    idx: int,
+) -> int:
+    """Generate exponentials for an arbitrary sequence of S2 blocks."""
+    for term_idx, weight in iter_s2_sequence_steps(len(ham_list), sequence):
+        idx = eU_strage(ham_list[term_idx], t, n_qubits, weight, idx, folder_path)
+    return idx
+
+
 def folder_maker_multiprocessing_values(
     t_values: Sequence[float],
     jw_hamiltonian: Any,
@@ -205,7 +219,8 @@ def w_trotter_folder_maker_multi(
     matrix_root = MATRIX_DIR / f"{ham_name}_Operator_w{num_w}"
     os.makedirs(matrix_root, exist_ok=True)
     ham_list = ham_list_maker(jw_hamiltonian)
-    w_list = _get_w_list(num_w)
+    w_list = _get_w_list(num_w) if num_w != "8th(Morales-YP8m8)" else []
+    sequence = _get_s2_sequence(num_w)
     m = len(w_list)
     for t in t_list:
         terms_dir = _make_time_dirs(
@@ -220,4 +235,6 @@ def w_trotter_folder_maker_multi(
             )
             print(f"idx{idx}")
             continue
-        idx = _apply_pf_steps(ham_list, t, n_qubits, w_list, terms_dir, idx)
+        idx = _apply_s2_sequence_steps(
+            ham_list, t, n_qubits, sequence, terms_dir, idx
+        )

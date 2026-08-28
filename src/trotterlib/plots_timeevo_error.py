@@ -123,20 +123,29 @@ def _collect_perturbation_errors(
     energy: float,
     state_vec: np.ndarray,
 ) -> Tuple[List[float], List[float]]:
-    """摂動論ベースの誤差と対応する時間列を集計する。"""
+    """位相回転した重なりから摂動的な固有値誤差を集計する。"""
     error_list_perturb: List[float] = []
     times_out: List[float] = []
     for item in final_state_list:
-        t = item[0]
-        statevector = item[1]
-        time = -t
-        statevector = statevector.data.reshape(-1, 1)
-        phase_factor = np.exp(1j * energy * time)
-        delta_state = (statevector - (phase_factor * state_vec)) / (1j * time)
-        overlap = state_vec.conj().T @ delta_state
-        overlap = overlap.real / np.cos(energy * time)
-        error_list_perturb.extend(np.abs(overlap.real))
-        times_out.append(time)
+        circuit_time = float(item[0])
+        statevector_object = item[1]
+        if isinstance(statevector_object, np.ndarray):
+            evolved_state = np.asarray(statevector_object, dtype=complex).reshape(-1)
+        else:
+            evolved_state = np.asarray(statevector_object.data, dtype=complex).reshape(-1)
+
+        reference_state = np.asarray(state_vec, dtype=complex).reshape(-1)
+        exact_phase = np.exp(-1j * energy * circuit_time)
+        delta_state = evolved_state - exact_phase * reference_state
+        overlap = np.vdot(reference_state, delta_state)
+
+        # If E_pf = E + delta_E, then
+        # exp(i E t)<psi|Delta psi> = -i t delta_E + O(delta_E^2 t^2).
+        estimate = -np.imag(np.exp(1j * energy * circuit_time) * overlap)
+        estimate /= circuit_time
+
+        error_list_perturb.append(abs(float(estimate)))
+        times_out.append(abs(circuit_time))
     return times_out, error_list_perturb
 
 
@@ -164,7 +173,7 @@ def trotter_error_plt_qc(
     task_args = [
         (hamiltonian_terms, t, num_qubits, state_vec, pf_label) for t in neg_times
     ]
-    with Pool(processes=32) as pool:
+    with Pool(processes=POOL_PROCESSES) as pool:
         final_state_list = pool.starmap(tEvolution_vector, task_args)
 
     # 摂動論ベースの誤差を集計

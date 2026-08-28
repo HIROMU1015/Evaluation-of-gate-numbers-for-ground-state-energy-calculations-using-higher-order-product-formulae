@@ -11,10 +11,10 @@ from qiskit.quantum_info import SparsePauliOp, Statevector
 from .config import PFLabel
 from .qiskit_time_evolution_utils import (
     apply_time_evolution,
-    _get_w_list,
     term_to_sparse_pauli,
 )
-from .pf_decomposition import iter_pf_steps
+from .pf_decomposition import iter_s2_sequence_steps
+from .product_formula import _get_s2_sequence
 
 
 def add_clique_to_circuit_grouper(
@@ -62,9 +62,11 @@ def w_trotter_grouper(
 ) -> int:
     """与えられた w シリーズで PF 分解を回路に追加し、累計項数を返す。"""
     # PF 係数列に従ってクリークを順次追加
-    weights = _get_w_list(pf_label)
+    sequence = _get_s2_sequence(pf_label)
     exp_term_count = 0
-    for term_idx, weight in iter_pf_steps(len(commuting_cliques), weights):
+    for term_idx, weight in iter_s2_sequence_steps(
+        len(commuting_cliques), sequence
+    ):
         exp_term_count += add_clique_to_circuit_grouper(
             commuting_cliques[term_idx], time, num_qubits, weight, circuit
         )

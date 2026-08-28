@@ -42,7 +42,12 @@ def label_replace(labelkey: str) -> str:  # 凡例用
         "4th(new_2)": "4th (new, m=2)",
         "4th(new_3)": "4th (new_3)",
         "8th(Morales)": "8th (Morales et al.)",
+        "8th(Morales-Y8m10b)": "8th (Morales et al., Y8m10b)",
+        "8th(Morales-YP8m8)": "8th (Morales et al., YP8m8, processed)",
+        "4th(m5_best)": "4th (new, m=5)",
+        "4th(m6)": "4th (eigenvalue-optimized, m=6)",
         "10th(Morales)": "10th (Morales et al.)",
+        "10th(Morales-QIC-m17)": "10th (Morales et al., QIC 2025 m=17)",
         "8th(Yoshida)": "8th (Yoshida)",
     }
     if labelkey in replacedir.keys():

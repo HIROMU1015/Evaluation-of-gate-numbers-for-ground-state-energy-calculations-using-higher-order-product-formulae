@@ -9,10 +9,10 @@ from qiskit.quantum_info import Statevector
 from .config import PFLabel
 from .qiskit_time_evolution_utils import (
     apply_time_evolution,
-    _get_w_list,
     term_to_sparse_pauli,
 )
-from .pf_decomposition import iter_pf_steps
+from .pf_decomposition import iter_s2_sequence_steps
+from .product_formula import _get_s2_sequence
 
 
 def add_term_to_circuit(
@@ -51,8 +51,10 @@ def w_trotter(
 ) -> None:
     """与えられた w シリーズで PF 分解を回路に追加し、累計の指数項数を返す。"""
     # PF 係数列に従って項を追加
-    weights = _get_w_list(pf_label)
-    for term_idx, weight in iter_pf_steps(len(hamiltonian_terms), weights):
+    sequence = _get_s2_sequence(pf_label)
+    for term_idx, weight in iter_s2_sequence_steps(
+        len(hamiltonian_terms), sequence
+    ):
         add_term_to_circuit(
             hamiltonian_terms[term_idx], num_qubits, time, weight, circuit
         )
