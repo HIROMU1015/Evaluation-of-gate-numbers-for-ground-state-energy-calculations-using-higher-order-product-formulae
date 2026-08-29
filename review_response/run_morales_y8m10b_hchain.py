@@ -33,6 +33,7 @@ from trotterlib.config import (
     QISKIT_SIMULATOR_DEVICE,
     pf_order,
 )
+from trotterlib.cost_validation import combined_time_grid
 from trotterlib.processed_cost import morales_yp8m8_hchain_costs
 from trotterlib.qiskit_time_evolution_grouping import tEvolution_vector_grouper
 from trotterlib.qiskit_time_evolution_pyscf import (
@@ -82,6 +83,9 @@ def _evaluate_label(
     state = state_column.reshape(-1)
     energy = float(system["energy_without_constant"])
     errors = []
+    overlap_phase_errors = []
+    survival_probabilities = []
+    phase_rotated_overlaps = []
     pauli_rotations_per_step = None
     started = time.perf_counter()
 
@@ -101,9 +105,11 @@ def _evaluate_label(
             raise RuntimeError("The per-step rotation count changed with time.")
 
         evolved_state = np.asarray(evolved.data)
-        delta_state = (
-            evolved_state - np.exp(1j * energy * evolution_time) * state
-        )
+        ideal_phase = np.exp(1j * energy * evolution_time)
+        delta_state = evolved_state - ideal_phase * state
+        phase_rotated_overlap = np.exp(
+            -1j * energy * evolution_time
+        ) * np.vdot(state, evolved_state)
         # This is the t -> -t form of
         # -Im[e^(i E0 t) <psi0|Delta psi(t)>] / t.
         estimate = (
@@ -111,6 +117,16 @@ def _evaluate_label(
             * np.vdot(state, delta_state)
         ).imag / evolution_time
         errors.append(abs(float(estimate)))
+        overlap_phase_errors.append(
+            abs(float(np.angle(phase_rotated_overlap) / evolution_time))
+        )
+        survival_probabilities.append(float(abs(phase_rotated_overlap) ** 2))
+        phase_rotated_overlaps.append(
+            {
+                "real": float(phase_rotated_overlap.real),
+                "imag": float(phase_rotated_overlap.imag),
+            }
+        )
 
     errors_array = np.asarray(errors)
     fit_mask = errors_array > float(min_fit_error)
@@ -172,6 +188,9 @@ def _evaluate_label(
         "fixed_order_alpha": fixed_order_alpha,
         "fit_mask": fit_mask.tolist(),
         "errors_hartree": errors,
+        "overlap_phase_errors_hartree": overlap_phase_errors,
+        "ground_state_survival_probabilities": survival_probabilities,
+        "phase_rotated_overlaps": phase_rotated_overlaps,
     }
 
 
@@ -325,6 +344,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--t-start", type=float, default=0.5)
     parser.add_argument("--t-stop", type=float, default=1.2)
     parser.add_argument("--num-times", type=int, default=10)
+    parser.add_argument(
+        "--grid-kind", choices=("linear", "geometric"), default="linear"
+    )
+    parser.add_argument("--dense-t-start", type=float)
+    parser.add_argument("--dense-t-stop", type=float)
+    parser.add_argument("--dense-num-times", type=int, default=0)
+    parser.add_argument("--include-times", nargs="*", type=float, default=[])
     parser.add_argument("--min-fit-error", type=float, default=5e-15)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--run-name", default="morales_qic2025")
@@ -338,11 +364,16 @@ def main() -> None:
     print(f"Qiskit simulator device: {QISKIT_SIMULATOR_DEVICE}", flush=True)
     if QISKIT_SIMULATOR_DEVICE == "GPU":
         print(f"Aer devices: {available_aer_devices()}", flush=True)
-    if args.num_times < 2:
-        raise ValueError("--num-times must be at least 2")
-    if args.t_start <= 0 or args.t_stop <= args.t_start:
-        raise ValueError("Require 0 < --t-start < --t-stop")
-    times = np.linspace(args.t_start, args.t_stop, args.num_times)
+    times = combined_time_grid(
+        args.t_start,
+        args.t_stop,
+        args.num_times,
+        grid_kind=args.grid_kind,
+        dense_t_start=args.dense_t_start,
+        dense_t_stop=args.dense_t_stop,
+        dense_num_times=args.dense_num_times,
+        include_times=args.include_times,
+    )
     for h_chain in args.h_chains:
         run_system(
             h_chain,
