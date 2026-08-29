@@ -112,7 +112,10 @@ def run_validation() -> dict[str, object]:
             "times": times.tolist(),
             "direct_errors_hartree": direct_errors,
             "perturbative_errors_hartree": perturbative_errors,
-            "relative_differences": relative_difference.tolist(),
+            "relative_differences": [
+                float(value) if np.isfinite(value) else None
+                for value in relative_difference
+            ],
             "num_reliable_points": int(np.count_nonzero(reliable)),
             "max_relative_difference": float(
                 np.nanmax(relative_difference)

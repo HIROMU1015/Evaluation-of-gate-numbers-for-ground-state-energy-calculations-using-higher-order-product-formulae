@@ -16,6 +16,7 @@
 - `src/trotterlib/`: 実験用ライブラリ本体
 - `abe_trotter_project.ipynb`: 解析の一連の流れをまとめたノートブック
 - `artifacts/`: 生成物（係数、行列キャッシュ、スケーリング結果）
+- [`artifacts/server_pf_window_validation/`](artifacts/server_pf_window_validation/): H4/H5のGPU時間窓検証、CPU比較、H2直接対角化、系・PF別ノイズ床
 - `Greatly-improved-higher-order-product-formulae-for-quantum-simulation.pdf`: 参照論文
 - `Evaluation of gate numbers for ground state energy calculations using higher-order product formulae`: 本論文
 
