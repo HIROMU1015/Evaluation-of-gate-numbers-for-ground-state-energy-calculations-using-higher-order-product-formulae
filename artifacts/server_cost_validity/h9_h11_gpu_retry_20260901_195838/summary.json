@@ -1,0 +1,2757 @@
+{
+  "C_ov_is_exact_pf_eigenvalue_cost": false,
+  "cost_model": {
+    "BETA": 1.2,
+    "epsilon_E_hartree": 0.00015936001019904,
+    "formula": "BETA*N_rotation/[t*(epsilon_E-e(t))]",
+    "invalid_when": "e(t) >= epsilon_E"
+  },
+  "created_at": "2026-09-02T02:04:11.784744+09:00",
+  "direct_pf_unitary_diagonalization_used": false,
+  "environment": {
+    "nvidia_smi_gpu_inventory": [
+      "0, NVIDIA A100-SXM4-40GB, GPU-7b7753f3-d258-9e61-9349-e64d2fa59a08, 560.35.05, 40960 MiB",
+      "1, NVIDIA A100-SXM4-40GB, GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d, 560.35.05, 40960 MiB",
+      "2, NVIDIA A100-SXM4-40GB, GPU-43a18e74-6ec8-53f9-43a4-b97d4c2fb7d3, 560.35.05, 40960 MiB",
+      "3, NVIDIA A100-SXM4-40GB, GPU-e1d3fde4-c1af-1654-855b-3bdca33b5f5e, 560.35.05, 40960 MiB",
+      "4, NVIDIA A100-SXM4-40GB, GPU-9e24f6d6-dd6f-5ffd-e0ed-2af80e55464b, 560.35.05, 40960 MiB",
+      "5, NVIDIA A100-SXM4-40GB, GPU-8a8c78b9-45e3-9955-4548-2a6bbff77b46, 560.35.05, 40960 MiB",
+      "6, NVIDIA A100-SXM4-40GB, GPU-f682c30a-50d4-d21f-0c9a-b225d02fadb7, 560.35.05, 40960 MiB",
+      "7, NVIDIA A100-SXM4-40GB, GPU-19895fa1-e15a-b3d9-408e-cfdaf9664931, 560.35.05, 40960 MiB"
+    ],
+    "nvidia_smi_query_error": null,
+    "packages": {
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "timestamp": "2026-09-02T02:04:11.887815+09:00"
+  },
+  "purpose": "H9-H11 system-size dependence of the overlap-phase proxy cost relative to the short-time power-law model",
+  "results": {
+    "H10": {
+      "4th(m5_best)": {
+        "C_model_t_ana": 960323476.5066704,
+        "C_ov_over_C_model": null,
+        "C_ov_t_ana": null,
+        "C_pert_t_ana": 871498397.6546959,
+        "aer_precision": "double",
+        "e_model_t_ana_hartree": 3.1872002039807995e-05,
+        "e_ov_t_ana_hartree": 1.6679675721487655,
+        "e_pert_t_ana_hartree": 1.8878137211255813e-05,
+        "fixed_order_alpha": 2.5326777054741286e-06,
+        "formal_order": 4,
+        "gpu_memory": {
+          "maximum_peak_used_mib": 931,
+          "pilot": {
+            "by_physical_gpu": {
+              "7": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 931,
+                "physical_gpu_id": 7,
+                "samples": 1605,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H10_m5_pilot_gpu7.csv"
+              }
+            },
+            "maximum_peak_used_mib": 931
+          },
+          "refinement": {
+            "by_physical_gpu": {
+              "2": {
+                "maximum_utilization_percent": 99,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 443,
+                "physical_gpu_id": 2,
+                "samples": 1199,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H10_m5_refine_gpu2.csv"
+              }
+            },
+            "maximum_peak_used_mib": 443
+          }
+        },
+        "ground_state_survival_probability_t_ana": 0.9999841412804171,
+        "local_schedule": {
+          "e_model_hartree": [
+            1.9920001274879997e-06,
+            7.652467689757897e-06,
+            1.6637384264792525e-05,
+            3.1872002039807995e-05,
+            5.574433076763693e-05,
+            9.10296250258956e-05,
+            0.00016135201032652804
+          ],
+          "e_ov_hartree": [
+            3.3359711014882,
+            2.382831685658592,
+            1.9623253778970848,
+            1.6679675721487655,
+            1.4503957726886543,
+            1.2830303933303606,
+            1.1119417365918738
+          ],
+          "e_ov_over_alpha_t_to_p": [
+            1674684.1807158953,
+            311380.8227962578,
+            117946.74851921837,
+            52333.31655995381,
+            26018.713521460013,
+            14094.646583080743,
+            6891.4030531236485
+          ],
+          "e_ov_over_alpha_t_to_p_variation": {
+            "max_to_min_ratio": 243.01062756107632,
+            "maximum": 1674684.1807158953,
+            "median": 52333.31655995381,
+            "minimum": 6891.4030531236485,
+            "relative_span_about_median": 31.868662016712122
+          },
+          "e_pert_hartree": [
+            1.7993831252288647e-06,
+            6.100676170343109e-06,
+            1.1622593737638656e-05,
+            1.8878137211255813e-05,
+            2.7226976406721995e-05,
+            3.6104419316269897e-05,
+            4.921967583595646e-05
+          ],
+          "ground_state_survival_probabilities": [
+            0.99999997427197,
+            0.9999993720417817,
+            0.9999962599384968,
+            0.9999841412804171,
+            0.9999475709457172,
+            0.9998567969057834,
+            0.9995657928975572
+          ],
+          "minimum_principal_phase_branch_margin": 1.6945368104259728e-06,
+          "phase_rotated_overlap_angles": [
+            3.1415909590529827,
+            3.1415846103039407,
+            3.1415740464273254,
+            3.14155709701351,
+            3.1415336788552075,
+            3.141504245466824,
+            3.141453568149017
+          ],
+          "times": [
+            0.9417320664592979,
+            1.318424893043017,
+            1.6009445129808064,
+            1.8834641329185957,
+            2.165983752856385,
+            2.4485033727941743,
+            2.825196199377894
+          ]
+        },
+        "minimum_ground_state_survival_probability": 0.9995657928975572,
+        "overlap_phase_cost_interpretation": "proxy based on the ground-state overlap phase; not a direct PF eigenvalue error",
+        "pauli_rotations_per_step": 192160,
+        "pilot_fit": {
+          "candidate_windows": [
+            {
+              "fixed_order_alpha": 2.724663346647694e-06,
+              "free_alpha": 1.8142924969790655e-06,
+              "free_order": 3.7356692318313365,
+              "num_points": 4,
+              "order_deviation": 0.2643307681686635,
+              "r2": 0.9991324485196045,
+              "start_index": 0,
+              "stop_index_exclusive": 4,
+              "t_start": 0.15,
+              "t_stop": 0.307370470890596,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.587765574206921e-06,
+              "free_alpha": 2.2723592119907147e-06,
+              "free_order": 3.8999622306681716,
+              "num_points": 4,
+              "order_deviation": 0.1000377693318284,
+              "r2": 0.9999244637624753,
+              "start_index": 1,
+              "stop_index_exclusive": 5,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.3904083552733738,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.5326777054741286e-06,
+              "free_alpha": 2.388858392139667e-06,
+              "free_order": 3.94485446547012,
+              "num_points": 4,
+              "order_deviation": 0.055145534529879914,
+              "r2": 0.9999976398153936,
+              "start_index": 2,
+              "stop_index_exclusive": 6,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.4958793973462468,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.4955954456730843e-06,
+              "free_alpha": 2.381216428603433e-06,
+              "free_order": 3.942854645504479,
+              "num_points": 4,
+              "order_deviation": 0.05714535449552116,
+              "r2": 0.9999962139031683,
+              "start_index": 3,
+              "stop_index_exclusive": 7,
+              "t_start": 0.307370470890596,
+              "t_stop": 0.6298440425033783,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.450732156952858e-06,
+              "free_alpha": 2.3319830331798772e-06,
+              "free_order": 3.914638500014848,
+              "num_points": 4,
+              "order_deviation": 0.08536149998515219,
+              "r2": 0.9999792047856962,
+              "start_index": 4,
+              "stop_index_exclusive": 8,
+              "t_start": 0.3904083552733738,
+              "t_stop": 0.8,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.6815421827459218e-06,
+              "free_alpha": 2.022269983944638e-06,
+              "free_order": 3.801125401174277,
+              "num_points": 5,
+              "order_deviation": 0.19887459882572278,
+              "r2": 0.9992846477952623,
+              "start_index": 0,
+              "stop_index_exclusive": 5,
+              "t_start": 0.15,
+              "t_stop": 0.3904083552733738,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.566953620709194e-06,
+              "free_alpha": 2.3253668889674323e-06,
+              "free_order": 3.916214394231658,
+              "num_points": 5,
+              "order_deviation": 0.08378560576834193,
+              "r2": 0.9999453226314787,
+              "start_index": 1,
+              "stop_index_exclusive": 6,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.4958793973462468,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.5137676450732567e-06,
+              "free_alpha": 2.3782675709238547e-06,
+              "free_order": 3.941088020879005,
+              "num_points": 5,
+              "order_deviation": 0.058911979120995106,
+              "r2": 0.9999979043159497,
+              "start_index": 2,
+              "stop_index_exclusive": 7,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.6298440425033783,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.4688937831165375e-06,
+              "free_alpha": 2.3447451330419954e-06,
+              "free_order": 3.926444509359606,
+              "num_points": 5,
+              "order_deviation": 0.0735554906403939,
+              "r2": 0.9999806241767987,
+              "start_index": 3,
+              "stop_index_exclusive": 8,
+              "t_start": 0.307370470890596,
+              "t_stop": 0.8,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.6478025246266965e-06,
+              "free_alpha": 2.153535883123133e-06,
+              "free_order": 3.840973183575023,
+              "num_points": 6,
+              "order_deviation": 0.15902681642497685,
+              "r2": 0.9994561700198862,
+              "start_index": 0,
+              "stop_index_exclusive": 6,
+              "t_start": 0.15,
+              "t_stop": 0.4958793973462468,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 2.5452630732604645e-06,
+              "free_alpha": 2.3425335754927266e-06,
+              "free_order": 3.9217069541632847,
+              "num_points": 6,
+              "order_deviation": 0.07829304583671526,
+              "r2": 0.9999662272837764,
+              "start_index": 1,
+              "stop_index_exclusive": 7,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.6298440425033783,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 2.488323410917661e-06,
+              "free_alpha": 2.3491040224448783e-06,
+              "free_order": 3.929871244954236,
+              "num_points": 6,
+              "order_deviation": 0.0701287550457641,
+              "r2": 0.9999879335538266,
+              "start_index": 2,
+              "stop_index_exclusive": 8,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.8,
+              "window_size": 6
+            }
+          ],
+          "fixed_order_alpha_sensitivity": {
+            "max_to_min_ratio": 1.0941800290734518,
+            "maximum": 2.6815421827459218e-06,
+            "median": 2.5326777054741286e-06,
+            "minimum": 2.450732156952858e-06
+          },
+          "noise_floor_hartree": 5e-12,
+          "runner_full_grid_fixed_order_alpha": 2.584070448052891e-06,
+          "runner_full_grid_free_fit": {
+            "alpha": 2.2608963154571514e-06,
+            "order": 3.873973671643259,
+            "r2": 0.9997247608487104
+          },
+          "selected_window": {
+            "fixed_order_alpha": 2.5326777054741286e-06,
+            "free_alpha": 2.388858392139667e-06,
+            "free_order": 3.94485446547012,
+            "num_points": 4,
+            "order_deviation": 0.055145534529879914,
+            "r2": 0.9999976398153936,
+            "start_index": 2,
+            "stop_index_exclusive": 6,
+            "t_start": 0.24199432491487494,
+            "t_stop": 0.4958793973462468,
+            "window_size": 4
+          },
+          "stable_candidate_count": 11
+        },
+        "pilot_free_fit": {
+          "alpha": 2.2608963154571514e-06,
+          "order": 3.873973671643259,
+          "r2": 0.9997247608487104
+        },
+        "runtime": {
+          "pilot_result_elapsed_seconds": 1571.0128092310042,
+          "pilot_task": {
+            "elapsed_seconds": 1604.8063774108887,
+            "exit_status": 0,
+            "finished_epoch": 1788263225.3839319,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H10_m5_pilot.tsv",
+            "started_epoch": 1788261620.5775545
+          },
+          "refinement_execution_profile": {
+            "clique_precompute_seconds": 0.35970840499794576,
+            "device": "GPU",
+            "execution_strategy": "precomputed_cliques_parameterized_gpu",
+            "num_cliques": 217,
+            "pauli_rotations_per_step": 192160,
+            "processes": 1,
+            "simulation_seconds": 1103.5113947249993,
+            "target_gpus": [
+              0
+            ],
+            "template_prepare": {
+              "device": "GPU",
+              "execution_strategy": "pretranspiled_parameterized_body",
+              "input_num_instructions": 4753,
+              "optimization_level": 0,
+              "total_seconds": 59.817634183003975,
+              "transpile_seconds": 55.25130764699861,
+              "transpiled_num_instructions": 4024896
+            },
+            "time_profiles": [
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 4.626604261000466,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -0.9417320664592979,
+                "simulator_run_seconds": 144.5593910730022,
+                "target_gpus": [],
+                "total_seconds": 149.2194848999934,
+                "worker_cuda_visible_devices": "2"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 4.841444459998456,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.318424893043017,
+                "simulator_run_seconds": 145.04765699199925,
+                "target_gpus": [],
+                "total_seconds": 149.8893306730024,
+                "worker_cuda_visible_devices": "2"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 4.839404061000096,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.6009445129808064,
+                "simulator_run_seconds": 145.5478748969981,
+                "target_gpus": [],
+                "total_seconds": 150.3874979989996,
+                "worker_cuda_visible_devices": "2"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 4.817456100994605,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.8834641329185957,
+                "simulator_run_seconds": 145.08805716699862,
+                "target_gpus": [],
+                "total_seconds": 149.90571624799486,
+                "worker_cuda_visible_devices": "2"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 4.803017074002128,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.165983752856385,
+                "simulator_run_seconds": 146.4778494130005,
+                "target_gpus": [],
+                "total_seconds": 151.28107644600095,
+                "worker_cuda_visible_devices": "2"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 4.749934578998364,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.4485033727941743,
+                "simulator_run_seconds": 144.90197131899913,
+                "target_gpus": [],
+                "total_seconds": 149.65210152700456,
+                "worker_cuda_visible_devices": "2"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 4.809413697003038,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.825196199377894,
+                "simulator_run_seconds": 145.69173480800237,
+                "target_gpus": [],
+                "total_seconds": 150.50274460999935,
+                "worker_cuda_visible_devices": "2"
+              }
+            ],
+            "worker_cuda_visible_devices": [
+              "2"
+            ]
+          },
+          "refinement_result_elapsed_seconds": 1165.5912038620008,
+          "refinement_task": {
+            "elapsed_seconds": 1198.9639072418213,
+            "exit_status": 0,
+            "finished_epoch": 1788277526.7017357,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H10_m5_refine.tsv",
+            "started_epoch": 1788276327.7378285
+          }
+        },
+        "simulator_device": "GPU",
+        "source_pilot": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H10_h9_h11_m5_pilot.json",
+        "source_refinement": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H10_h9_h11_m5_tana.json",
+        "status": "complete",
+        "t_ana": 1.8834641329185957
+      },
+      "8th(Morales-Y8m10b)": {
+        "C_model_t_ana": 1050274442.5684452,
+        "C_ov_over_C_model": null,
+        "C_ov_t_ana": null,
+        "C_pert_t_ana": 1011607370.8746351,
+        "aer_precision": "double",
+        "e_model_t_ana_hartree": 1.7706667799893332e-05,
+        "e_ov_t_ana_hartree": 1.0622572182465926,
+        "e_pert_t_ana_hartree": 1.2292195640126515e-05,
+        "fixed_order_alpha": 3.025628409622498e-09,
+        "formal_order": 8,
+        "gpu_memory": {
+          "maximum_peak_used_mib": 931,
+          "pilot": {
+            "by_physical_gpu": {
+              "7": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 931,
+                "physical_gpu_id": 7,
+                "samples": 3157,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H10_y8_pilot_gpu7.csv"
+              }
+            },
+            "maximum_peak_used_mib": 931
+          },
+          "refinement": {
+            "by_physical_gpu": {
+              "3": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 443,
+                "physical_gpu_id": 3,
+                "samples": 2237,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H10_y8_refine_gpu3.csv"
+              }
+            },
+            "maximum_peak_used_mib": 443
+          }
+        },
+        "ground_state_survival_probability_t_ana": 0.9999900674289527,
+        "local_schedule": {
+          "e_model_hartree": [
+            6.916667109333333e-08,
+            1.0207541623949274e-06,
+            4.824899205485194e-06,
+            1.7706667799893332e-05,
+            5.416510161925791e-05,
+            0.0001444387289091448,
+            0.0004538025290433598
+          ],
+          "e_ov_hartree": [
+            2.1245389543078983,
+            1.5175269984333783,
+            1.2497251174231716,
+            1.0622572182465926,
+            0.9236790639436457,
+            0.8170531866000539,
+            0.7079914609262579
+          ],
+          "e_ov_over_alpha_t_to_p": [
+            30716223.87957707,
+            1486672.358869354,
+            259015.7978849423,
+            59991.932431972986,
+            17053.029281408013,
+            5656.74589336769,
+            1560.1311487151515
+          ],
+          "e_ov_over_alpha_t_to_p_variation": {
+            "max_to_min_ratio": 19688.231918754693,
+            "maximum": 30716223.87957707,
+            "median": 59991.932431972986,
+            "minimum": 1560.1311487151515,
+            "relative_span_about_median": 511.9799030187404
+          },
+          "e_pert_hartree": [
+            6.66986661522967e-08,
+            8.737141212772867e-07,
+            3.7184603578443857e-06,
+            1.2292195640126515e-05,
+            3.355316352208059e-05,
+            7.720055846634998e-05,
+            0.0001881554246540475
+          ],
+          "ground_state_survival_probabilities": [
+            0.9999999992766766,
+            0.9999998927061227,
+            0.999998555839748,
+            0.9999900674289527,
+            0.9999569830532233,
+            0.9998566180491877,
+            0.9993912488630547
+          ],
+          "minimum_principal_phase_branch_margin": 9.862847294428434e-08,
+          "phase_rotated_overlap_angles": [
+            3.14159255496132,
+            3.1415908448230074,
+            3.1415833060450757,
+            3.141556300043983,
+            3.141478535153486,
+            3.1412958220163536,
+            3.1407577132611735
+          ],
+          "times": [
+            1.478717322923713,
+            2.070204252093198,
+            2.513819448970312,
+            2.957434645847426,
+            3.4010498427245395,
+            3.844665039601654,
+            4.436151968771139
+          ]
+        },
+        "minimum_ground_state_survival_probability": 0.9993912488630547,
+        "overlap_phase_cost_interpretation": "proxy based on the ground-state overlap phase; not a direct PF eigenvalue error",
+        "pauli_rotations_per_step": 366660,
+        "pilot_fit": {
+          "candidate_windows": [
+            {
+              "fixed_order_alpha": 3.3568289517652154e-09,
+              "free_alpha": 3.2081801388967274e-09,
+              "free_order": 7.392954017041308,
+              "num_points": 4,
+              "order_deviation": 0.6070459829586916,
+              "r2": 0.9994657030079536,
+              "start_index": 0,
+              "stop_index_exclusive": 4,
+              "t_start": 0.8,
+              "t_stop": 1.0767201541058848,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 3.1898562528461457e-09,
+              "free_alpha": 3.2159995387794785e-09,
+              "free_order": 7.6656008226427526,
+              "num_points": 4,
+              "order_deviation": 0.33439917735724745,
+              "r2": 0.9999160113415955,
+              "start_index": 1,
+              "stop_index_exclusive": 5,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.1887954313095588,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 3.0952775266545036e-09,
+              "free_alpha": 3.1846296390796636e-09,
+              "free_order": 7.769436774338508,
+              "num_points": 4,
+              "order_deviation": 0.23056322566149223,
+              "r2": 0.9999921232477563,
+              "start_index": 2,
+              "stop_index_exclusive": 6,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.3125365696122206,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 3.025628409622498e-09,
+              "free_alpha": 3.16921923667881e-09,
+              "free_order": 7.791565612873016,
+              "num_points": 4,
+              "order_deviation": 0.20843438712698426,
+              "r2": 0.9999997051047844,
+              "start_index": 3,
+              "stop_index_exclusive": 7,
+              "t_start": 1.0767201541058848,
+              "t_stop": 1.4491578628222506,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.9594533212173477e-09,
+              "free_alpha": 3.1835823782972195e-09,
+              "free_order": 7.772911750573368,
+              "num_points": 4,
+              "order_deviation": 0.22708824942663242,
+              "r2": 0.9999962658310965,
+              "start_index": 4,
+              "stop_index_exclusive": 8,
+              "t_start": 1.1887954313095588,
+              "t_stop": 1.6,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 3.2944385225892276e-09,
+              "free_alpha": 3.2539219217793248e-09,
+              "free_order": 7.507012061405891,
+              "num_points": 5,
+              "order_deviation": 0.4929879385941094,
+              "r2": 0.9995101657620661,
+              "start_index": 0,
+              "stop_index_exclusive": 5,
+              "t_start": 0.8,
+              "t_stop": 1.1887954313095588,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 3.15029846246379e-09,
+              "free_alpha": 3.2193255167044436e-09,
+              "free_order": 7.706780149058068,
+              "num_points": 5,
+              "order_deviation": 0.2932198509419317,
+              "r2": 0.9999299042467313,
+              "start_index": 1,
+              "stop_index_exclusive": 6,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.3125365696122206,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 3.061931711689519e-09,
+              "free_alpha": 3.183242225303338e-09,
+              "free_order": 7.775331756774139,
+              "num_points": 5,
+              "order_deviation": 0.2246682432258611,
+              "r2": 0.9999954927690469,
+              "start_index": 2,
+              "stop_index_exclusive": 7,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.4491578628222506,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.990976445282316e-09,
+              "free_alpha": 3.175863886687529e-09,
+              "free_order": 7.779454944598656,
+              "num_points": 5,
+              "order_deviation": 0.2205450554013444,
+              "r2": 0.9999974286282464,
+              "start_index": 3,
+              "stop_index_exclusive": 8,
+              "t_start": 1.0767201541058848,
+              "t_stop": 1.6,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 3.242874803546033e-09,
+              "free_alpha": 3.2761521540090743e-09,
+              "free_order": 7.581736940627409,
+              "num_points": 6,
+              "order_deviation": 0.4182630593725909,
+              "r2": 0.9995960952072539,
+              "start_index": 0,
+              "stop_index_exclusive": 6,
+              "t_start": 0.8,
+              "t_stop": 1.3125365696122206,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 3.112836225566443e-09,
+              "free_alpha": 3.2187627913693594e-09,
+              "free_order": 7.72889274373507,
+              "num_points": 6,
+              "order_deviation": 0.27110725626492993,
+              "r2": 0.9999492599434641,
+              "start_index": 1,
+              "stop_index_exclusive": 7,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.4491578628222506,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 3.0266580101736707e-09,
+              "free_alpha": 3.184608174223559e-09,
+              "free_order": 7.77131952403502,
+              "num_points": 6,
+              "order_deviation": 0.2286804759649801,
+              "r2": 0.9999970663730097,
+              "start_index": 2,
+              "stop_index_exclusive": 8,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.6,
+              "window_size": 6
+            }
+          ],
+          "fixed_order_alpha_sensitivity": {
+            "max_to_min_ratio": 1.0458950321883387,
+            "maximum": 3.0952775266545036e-09,
+            "median": 3.0261432098980844e-09,
+            "minimum": 2.9594533212173477e-09
+          },
+          "noise_floor_hartree": 5e-12,
+          "runner_full_grid_fixed_order_alpha": 3.1518849265257247e-09,
+          "runner_full_grid_free_fit": {
+            "alpha": 3.287645659890782e-09,
+            "order": 7.658340539956413,
+            "r2": 0.9997634753646661
+          },
+          "selected_window": {
+            "fixed_order_alpha": 3.025628409622498e-09,
+            "free_alpha": 3.16921923667881e-09,
+            "free_order": 7.791565612873016,
+            "num_points": 4,
+            "order_deviation": 0.20843438712698426,
+            "r2": 0.9999997051047844,
+            "start_index": 3,
+            "stop_index_exclusive": 7,
+            "t_start": 1.0767201541058848,
+            "t_stop": 1.4491578628222506,
+            "window_size": 4
+          },
+          "stable_candidate_count": 6
+        },
+        "pilot_free_fit": {
+          "alpha": 3.287645659890782e-09,
+          "order": 7.658340539956413,
+          "r2": 0.9997634753646661
+        },
+        "runtime": {
+          "pilot_result_elapsed_seconds": 3123.706027934997,
+          "pilot_task": {
+            "elapsed_seconds": 3157.5010998249054,
+            "exit_status": 0,
+            "finished_epoch": 1788266383.478588,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H10_y8_pilot.tsv",
+            "started_epoch": 1788263225.9774883
+          },
+          "refinement_execution_profile": {
+            "clique_precompute_seconds": 0.3584671700009494,
+            "device": "GPU",
+            "execution_strategy": "precomputed_cliques_parameterized_gpu",
+            "num_cliques": 217,
+            "pauli_rotations_per_step": 366660,
+            "processes": 1,
+            "simulation_seconds": 2085.069851552995,
+            "target_gpus": [
+              0
+            ],
+            "template_prepare": {
+              "device": "GPU",
+              "execution_strategy": "pretranspiled_parameterized_body",
+              "input_num_instructions": 9073,
+              "optimization_level": 0,
+              "total_seconds": 113.77150680700288,
+              "transpile_seconds": 105.11381023599824,
+              "transpiled_num_instructions": 7683356
+            },
+            "time_profiles": [
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 8.825047187994642,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.478717322923713,
+                "simulator_run_seconds": 272.7159974450042,
+                "target_gpus": [],
+                "total_seconds": 281.5733143539983,
+                "worker_cuda_visible_devices": "3"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 9.267624997002713,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.070204252093198,
+                "simulator_run_seconds": 275.4826485750018,
+                "target_gpus": [],
+                "total_seconds": 284.7506141809936,
+                "worker_cuda_visible_devices": "3"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 9.212973904002865,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.513819448970312,
+                "simulator_run_seconds": 275.1227069669985,
+                "target_gpus": [],
+                "total_seconds": 284.3359922499949,
+                "worker_cuda_visible_devices": "3"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 9.178028953996545,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.957434645847426,
+                "simulator_run_seconds": 275.6606610750023,
+                "target_gpus": [],
+                "total_seconds": 284.83901435799635,
+                "worker_cuda_visible_devices": "3"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 9.14837823400012,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.4010498427245395,
+                "simulator_run_seconds": 276.68492386899743,
+                "target_gpus": [],
+                "total_seconds": 285.83357233100105,
+                "worker_cuda_visible_devices": "3"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 9.05824819800182,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.844665039601654,
+                "simulator_run_seconds": 274.67675686700386,
+                "target_gpus": [],
+                "total_seconds": 283.7353195840042,
+                "worker_cuda_visible_devices": "3"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 9.234621928997512,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -4.436151968771139,
+                "simulator_run_seconds": 274.9339906679961,
+                "target_gpus": [],
+                "total_seconds": 284.16896971599635,
+                "worker_cuda_visible_devices": "3"
+              }
+            ],
+            "worker_cuda_visible_devices": [
+              "3"
+            ]
+          },
+          "refinement_result_elapsed_seconds": 2202.7223667599974,
+          "refinement_task": {
+            "elapsed_seconds": 2237.0403060913086,
+            "exit_status": 0,
+            "finished_epoch": 1788278564.8176012,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H10_y8_refine.tsv",
+            "started_epoch": 1788276327.777295
+          }
+        },
+        "simulator_device": "GPU",
+        "source_pilot": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H10_h9_h11_y8_pilot.json",
+        "source_refinement": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H10_h9_h11_y8_tana.json",
+        "status": "complete",
+        "t_ana": 2.957434645847426
+      }
+    },
+    "H11": {
+      "4th(m5_best)": {
+        "C_model_t_ana": 1369987918.7793584,
+        "C_ov_over_C_model": null,
+        "C_ov_t_ana": null,
+        "C_pert_t_ana": 1243361616.9612057,
+        "aer_precision": "double",
+        "e_model_t_ana_hartree": 3.1872002039808015e-05,
+        "e_ov_t_ana_hartree": 1.616417422134933,
+        "e_pert_t_ana_hartree": 1.888838184504876e-05,
+        "fixed_order_alpha": 2.23379978208508e-06,
+        "formal_order": 4,
+        "gpu_memory": {
+          "maximum_peak_used_mib": 1157,
+          "pilot": {
+            "by_physical_gpu": {
+              "7": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 931,
+                "physical_gpu_id": 7,
+                "samples": 6091,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_m5_pilot_gpu7.csv"
+              }
+            },
+            "maximum_peak_used_mib": 931
+          },
+          "refinement": {
+            "by_physical_gpu": {
+              "4": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1157,
+                "physical_gpu_id": 4,
+                "samples": 3138,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_m5_refine_gpu4.csv"
+              },
+              "5": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 491,
+                "physical_gpu_id": 5,
+                "samples": 3139,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_m5_refine_gpu5.csv"
+              }
+            },
+            "maximum_peak_used_mib": 1157
+          }
+        },
+        "ground_state_survival_probability_t_ana": 0.9999823856072653,
+        "local_schedule": {
+          "e_model_hartree": [
+            1.992000127488001e-06,
+            7.652467689757902e-06,
+            1.663738426479253e-05,
+            3.1872002039808015e-05,
+            5.574433076763694e-05,
+            9.10296250258957e-05,
+            0.00016135201032652804
+          ],
+          "e_ov_hartree": [
+            3.2328708043791528,
+            2.309188588796073,
+            1.9016781142512855,
+            1.616417422134933,
+            1.4055695824496712,
+            1.2433763473422967,
+            1.0775740177469797
+          ],
+          "e_ov_over_alpha_t_to_p": [
+            1622927.0067647756,
+            301757.37845802365,
+            114301.50821698291,
+            50715.904828194776,
+            25214.57452433337,
+            13659.029650936018,
+            6678.404660507751
+          ],
+          "e_ov_over_alpha_t_to_p_variation": {
+            "max_to_min_ratio": 243.01118145203654,
+            "maximum": 1622927.0067647756,
+            "median": 50715.904828194776,
+            "minimum": 6678.404660507751,
+            "relative_span_about_median": 31.86867330040689
+          },
+          "e_pert_hartree": [
+            1.8169870969495806e-06,
+            6.140749105512367e-06,
+            1.166299865494192e-05,
+            1.888838184504876e-05,
+            2.7208660389067982e-05,
+            3.6196488270937385e-05,
+            5.017750127145217e-05
+          ],
+          "ground_state_survival_probabilities": [
+            0.999999970975719,
+            0.9999992959773369,
+            0.9999958262538792,
+            0.9999823856072653,
+            0.99994205743746,
+            0.9998426155403008,
+            0.9995269015665882
+          ],
+          "minimum_principal_phase_branch_margin": 1.7656845989755254e-06,
+          "phase_rotated_overlap_angles": [
+            3.141590887905194,
+            3.141584299275269,
+            3.141573386268805,
+            3.141555943127472,
+            3.1415318388492732,
+            3.141501192737469,
+            3.141446336746594
+          ],
+          "times": [
+            0.9717650589840109,
+            1.3604710825776152,
+            1.6520006002728185,
+            1.9435301179680218,
+            2.235059635663225,
+            2.5265891533584286,
+            2.9152951769520326
+          ]
+        },
+        "minimum_ground_state_survival_probability": 0.9995269015665882,
+        "overlap_phase_cost_interpretation": "proxy based on the ground-state overlap phase; not a direct PF eigenvalue error",
+        "pauli_rotations_per_step": 282876,
+        "pilot_fit": {
+          "candidate_windows": [
+            {
+              "fixed_order_alpha": 2.531104215173963e-06,
+              "free_alpha": 1.366399015578545e-06,
+              "free_order": 3.59927682970348,
+              "num_points": 4,
+              "order_deviation": 0.40072317029652016,
+              "r2": 0.9978741030434017,
+              "start_index": 0,
+              "stop_index_exclusive": 4,
+              "t_start": 0.15,
+              "t_stop": 0.307370470890596,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.3430606305123154e-06,
+              "free_alpha": 1.9331152175423067e-06,
+              "free_order": 3.851974534795211,
+              "num_points": 4,
+              "order_deviation": 0.148025465204789,
+              "r2": 0.9997899077107053,
+              "start_index": 1,
+              "stop_index_exclusive": 5,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.3904083552733738,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.2727147315588533e-06,
+              "free_alpha": 2.1113606476115314e-06,
+              "free_order": 3.930534637475001,
+              "num_points": 4,
+              "order_deviation": 0.06946536252499902,
+              "r2": 0.9999886076622304,
+              "start_index": 2,
+              "stop_index_exclusive": 6,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.4958793973462468,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.23379978208508e-06,
+              "free_alpha": 2.1268144340176888e-06,
+              "free_order": 3.940220163385652,
+              "num_points": 4,
+              "order_deviation": 0.059779836614347825,
+              "r2": 0.9999981443948147,
+              "start_index": 3,
+              "stop_index_exclusive": 7,
+              "t_start": 0.307370470890596,
+              "t_stop": 0.6298440425033783,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.1932782413177707e-06,
+              "free_alpha": 2.0897399200197224e-06,
+              "free_order": 3.916890111320593,
+              "num_points": 4,
+              "order_deviation": 0.08310988867940683,
+              "r2": 0.9999825884166612,
+              "start_index": 4,
+              "stop_index_exclusive": 8,
+              "t_start": 0.3904083552733738,
+              "t_stop": 0.8,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.4723382097074436e-06,
+              "free_alpha": 1.6185109811432053e-06,
+              "free_order": 3.7014057486493046,
+              "num_points": 5,
+              "order_deviation": 0.2985942513506954,
+              "r2": 0.9982345663934131,
+              "start_index": 0,
+              "stop_index_exclusive": 5,
+              "t_start": 0.15,
+              "t_stop": 0.3904083552733738,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.318483344183683e-06,
+              "free_alpha": 2.0169403148485297e-06,
+              "free_order": 3.881892519516292,
+              "num_points": 5,
+              "order_deviation": 0.11810748048370812,
+              "r2": 0.9998371727935831,
+              "start_index": 1,
+              "stop_index_exclusive": 6,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.4958793973462468,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.2544783181487484e-06,
+              "free_alpha": 2.1139611780702957e-06,
+              "free_order": 3.9315780596586305,
+              "num_points": 5,
+              "order_deviation": 0.0684219403413695,
+              "r2": 0.9999942363879025,
+              "start_index": 2,
+              "stop_index_exclusive": 7,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.6298440425033783,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.210361157366924e-06,
+              "free_alpha": 2.098560357740594e-06,
+              "free_order": 3.926001299210083,
+              "num_points": 5,
+              "order_deviation": 0.07399870078991722,
+              "r2": 0.9999859488291531,
+              "start_index": 3,
+              "stop_index_exclusive": 8,
+              "t_start": 0.307370470890596,
+              "t_stop": 0.8,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.428869603026131e-06,
+              "free_alpha": 1.791638649920556e-06,
+              "free_order": 3.7657953909203257,
+              "num_points": 6,
+              "order_deviation": 0.23420460907967433,
+              "r2": 0.9986357108144768,
+              "start_index": 0,
+              "stop_index_exclusive": 6,
+              "t_start": 0.15,
+              "t_stop": 0.4958793973462468,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 2.2953297449384403e-06,
+              "free_alpha": 2.056880640132618e-06,
+              "free_order": 3.896535569064219,
+              "num_points": 6,
+              "order_deviation": 0.10346443093578106,
+              "r2": 0.9998888214564007,
+              "start_index": 1,
+              "stop_index_exclusive": 7,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.6298440425033783,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 2.23131862087679e-06,
+              "free_alpha": 2.0961613378556182e-06,
+              "free_order": 3.9238909005980815,
+              "num_points": 6,
+              "order_deviation": 0.07610909940191846,
+              "r2": 0.9999915763924248,
+              "start_index": 2,
+              "stop_index_exclusive": 8,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.8,
+              "window_size": 6
+            }
+          ],
+          "fixed_order_alpha_sensitivity": {
+            "max_to_min_ratio": 1.107415172990916,
+            "maximum": 2.428869603026131e-06,
+            "median": 2.263596524853801e-06,
+            "minimum": 2.1932782413177707e-06
+          },
+          "noise_floor_hartree": 5e-12,
+          "runner_full_grid_fixed_order_alpha": 2.356144265882025e-06,
+          "runner_full_grid_free_fit": {
+            "alpha": 1.9640254645154723e-06,
+            "order": 3.8282946259125192,
+            "r2": 0.9992593712953538
+          },
+          "selected_window": {
+            "fixed_order_alpha": 2.23379978208508e-06,
+            "free_alpha": 2.1268144340176888e-06,
+            "free_order": 3.940220163385652,
+            "num_points": 4,
+            "order_deviation": 0.059779836614347825,
+            "r2": 0.9999981443948147,
+            "start_index": 3,
+            "stop_index_exclusive": 7,
+            "t_start": 0.307370470890596,
+            "t_stop": 0.6298440425033783,
+            "window_size": 4
+          },
+          "stable_candidate_count": 10
+        },
+        "pilot_free_fit": {
+          "alpha": 1.9640254645154723e-06,
+          "order": 3.8282946259125192,
+          "r2": 0.9992593712953538
+        },
+        "runtime": {
+          "pilot_result_elapsed_seconds": 6038.568584480003,
+          "pilot_task": {
+            "elapsed_seconds": 6091.945288181305,
+            "exit_status": 0,
+            "finished_epoch": 1788267712.5232434,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H11_m5_pilot.tsv",
+            "started_epoch": 1788261620.5779552
+          },
+          "refinement_execution_profile": {
+            "clique_precompute_seconds": 0.4159517840016633,
+            "device": "GPU",
+            "execution_strategy": "precomputed_cliques_parameterized_gpu",
+            "num_cliques": 257,
+            "pauli_rotations_per_step": 282876,
+            "processes": 2,
+            "simulation_seconds": 2990.970054354002,
+            "target_gpus": [
+              0,
+              1
+            ],
+            "template_prepare": {
+              "device": "GPU",
+              "execution_strategy": "pretranspiled_parameterized_body",
+              "input_num_instructions": 5633,
+              "optimization_level": 0,
+              "total_seconds": 90.74666312000045,
+              "transpile_seconds": 83.8461725629968,
+              "transpiled_num_instructions": 6261772
+            },
+            "time_profiles": [
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 7.019916272998671,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -0.9717650589840109,
+                "simulator_run_seconds": 702.3357412350015,
+                "target_gpus": [],
+                "total_seconds": 709.3881037760002,
+                "worker_cuda_visible_devices": "4"
+              },
+              {
+                "assigned_gpu_id": 1,
+                "bind_seconds": 6.961416659003589,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.3604710825776152,
+                "simulator_run_seconds": 616.1394459430012,
+                "target_gpus": [],
+                "total_seconds": 623.1329804310008,
+                "worker_cuda_visible_devices": "5"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 7.333717330999207,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.6520006002728185,
+                "simulator_run_seconds": 702.6979803430004,
+                "target_gpus": [],
+                "total_seconds": 710.032021742998,
+                "worker_cuda_visible_devices": "4"
+              },
+              {
+                "assigned_gpu_id": 1,
+                "bind_seconds": 7.237962746999983,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.9435301179680218,
+                "simulator_run_seconds": 617.1846935479989,
+                "target_gpus": [],
+                "total_seconds": 624.4229722939999,
+                "worker_cuda_visible_devices": "5"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 7.29198546599946,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.235059635663225,
+                "simulator_run_seconds": 700.5645415949984,
+                "target_gpus": [],
+                "total_seconds": 707.8568592089941,
+                "worker_cuda_visible_devices": "4"
+              },
+              {
+                "assigned_gpu_id": 1,
+                "bind_seconds": 7.215110049000941,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.5265891533584286,
+                "simulator_run_seconds": 616.428735898,
+                "target_gpus": [],
+                "total_seconds": 623.6441932550006,
+                "worker_cuda_visible_devices": "5"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 7.273723799000436,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.9152951769520326,
+                "simulator_run_seconds": 700.7959649719996,
+                "target_gpus": [],
+                "total_seconds": 708.0700349800027,
+                "worker_cuda_visible_devices": "4"
+              }
+            ],
+            "worker_cuda_visible_devices": [
+              "4",
+              "5"
+            ]
+          },
+          "refinement_result_elapsed_seconds": 3084.954711432998,
+          "refinement_task": {
+            "elapsed_seconds": 3137.9241185188293,
+            "exit_status": 0,
+            "finished_epoch": 1788279466.062923,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H11_m5_refine.tsv",
+            "started_epoch": 1788276328.1388044
+          }
+        },
+        "simulator_device": "GPU",
+        "source_pilot": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H11_h9_h11_m5_pilot.json",
+        "source_refinement": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H11_h9_h11_m5_tana.json",
+        "status": "complete",
+        "t_ana": 1.9435301179680218
+      },
+      "8th(Morales-Y8m10b)": {
+        "C_model_t_ana": 1511358474.6486378,
+        "C_ov_over_C_model": null,
+        "C_ov_t_ana": null,
+        "C_pert_t_ana": 1445124236.175155,
+        "aer_precision": "double",
+        "e_model_t_ana_hartree": 1.7706667799893335e-05,
+        "e_ov_t_ana_hartree": 1.0382944689345852,
+        "e_pert_t_ana_hartree": 1.1214283943773521e-05,
+        "fixed_order_alpha": 2.5208076452199927e-09,
+        "formal_order": 8,
+        "gpu_memory": {
+          "maximum_peak_used_mib": 1157,
+          "pilot": {
+            "by_physical_gpu": {
+              "0": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1133,
+                "physical_gpu_id": 0,
+                "samples": 2844,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu0.csv"
+              },
+              "1": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 669,
+                "physical_gpu_id": 1,
+                "samples": 2845,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu1.csv"
+              },
+              "2": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1133,
+                "physical_gpu_id": 2,
+                "samples": 2845,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu2.csv"
+              },
+              "3": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1135,
+                "physical_gpu_id": 3,
+                "samples": 2845,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu3.csv"
+              },
+              "4": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1157,
+                "physical_gpu_id": 4,
+                "samples": 2846,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu4.csv"
+              },
+              "5": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 669,
+                "physical_gpu_id": 5,
+                "samples": 2847,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu5.csv"
+              },
+              "6": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1157,
+                "physical_gpu_id": 6,
+                "samples": 2847,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu6.csv"
+              },
+              "7": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1157,
+                "physical_gpu_id": 7,
+                "samples": 2848,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_pilot_gpu7.csv"
+              }
+            },
+            "maximum_peak_used_mib": 1157
+          },
+          "refinement": {
+            "by_physical_gpu": {
+              "6": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1157,
+                "physical_gpu_id": 6,
+                "samples": 5920,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_refine_gpu6.csv"
+              },
+              "7": {
+                "maximum_utilization_percent": 100,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 491,
+                "physical_gpu_id": 7,
+                "samples": 5921,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H11_y8_refine_gpu7.csv"
+              }
+            },
+            "maximum_peak_used_mib": 1157
+          }
+        },
+        "ground_state_survival_probability_t_ana": 0.9999888333621861,
+        "local_schedule": {
+          "e_model_hartree": [
+            6.916667109333334e-08,
+            1.0207541623949276e-06,
+            4.824899205485198e-06,
+            1.7706667799893335e-05,
+            5.41651016192579e-05,
+            0.00014443872890914486,
+            0.00045380252904336045
+          ],
+          "e_ov_hartree": [
+            2.0766113010087266,
+            1.4832930001985776,
+            1.2215326343440582,
+            1.0382944689345852,
+            0.9028445179401705,
+            0.7986292685173191,
+            0.6920447016806066
+          ],
+          "e_ov_over_alpha_t_to_p": [
+            30023293.996707637,
+            1453134.412617457,
+            253172.67414733887,
+            58638.61459810298,
+            16668.380395305536,
+            5529.190644011236,
+            1524.9908437916226
+          ],
+          "e_ov_over_alpha_t_to_p_variation": {
+            "max_to_min_ratio": 19687.52410477428,
+            "maximum": 30023293.996707637,
+            "median": 58638.61459810298,
+            "minimum": 1524.9908437916226,
+            "relative_span_about_median": 511.97950721767364
+          },
+          "e_pert_hartree": [
+            6.555356295435932e-08,
+            8.330601464186004e-07,
+            3.46363083376383e-06,
+            1.1214283943773521e-05,
+            2.9988557519656992e-05,
+            6.740574917557758e-05,
+            0.00015903543229593803
+          ],
+          "ground_state_survival_probabilities": [
+            0.9999999990618924,
+            0.9999998690161028,
+            0.9999983108848179,
+            0.9999888333621861,
+            0.999953100361075,
+            0.9998463290482453,
+            0.9993498034428585
+          ],
+          "minimum_principal_phase_branch_margin": 9.917242804746706e-08,
+          "phase_rotated_overlap_angles": [
+            3.141592554417365,
+            3.14159088918159,
+            3.141583745685729,
+            3.141558722437019,
+            3.1414883046013755,
+            3.141327499511888,
+            3.1408706305330525
+          ],
+          "times": [
+            1.5128457371349744,
+            2.117984031988964,
+            2.5718377531294565,
+            3.0256914742699488,
+            3.4795451954104406,
+            3.9333989165509338,
+            4.538537211404924
+          ]
+        },
+        "minimum_ground_state_survival_probability": 0.9993498034428585,
+        "overlap_phase_cost_interpretation": "proxy based on the ground-state overlap phase; not a direct PF eigenvalue error",
+        "pauli_rotations_per_step": 539806,
+        "pilot_fit": {
+          "candidate_windows": [
+            {
+              "fixed_order_alpha": 2.9461069549941548e-09,
+              "free_alpha": 2.743593168608796e-09,
+              "free_order": 7.0455131374607385,
+              "num_points": 4,
+              "order_deviation": 0.9544868625392615,
+              "r2": 0.9985344386201914,
+              "start_index": 0,
+              "stop_index_exclusive": 4,
+              "t_start": 0.8,
+              "t_stop": 1.0767201541058848,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.721601227326175e-09,
+              "free_alpha": 2.755976537236061e-09,
+              "free_order": 7.485786415434233,
+              "num_points": 4,
+              "order_deviation": 0.5142135845657672,
+              "r2": 0.9997390461564659,
+              "start_index": 1,
+              "stop_index_exclusive": 5,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.1887954313095588,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.6014636270213037e-09,
+              "free_alpha": 2.7092033076536374e-09,
+              "free_order": 7.671227608083508,
+              "num_points": 4,
+              "order_deviation": 0.328772391916492,
+              "r2": 0.9999684515350871,
+              "start_index": 2,
+              "stop_index_exclusive": 6,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.3125365696122206,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.5208076452199927e-09,
+              "free_alpha": 2.6793871212619933e-09,
+              "free_order": 7.7257431065628905,
+              "num_points": 4,
+              "order_deviation": 0.27425689343710946,
+              "r2": 0.9999991223577718,
+              "start_index": 3,
+              "stop_index_exclusive": 7,
+              "t_start": 1.0767201541058848,
+              "t_stop": 1.4491578628222506,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.450010082252886e-09,
+              "free_alpha": 2.684214405287421e-09,
+              "free_order": 7.7160065785086855,
+              "num_points": 4,
+              "order_deviation": 0.28399342149131446,
+              "r2": 0.9999963193079617,
+              "start_index": 4,
+              "stop_index_exclusive": 8,
+              "t_start": 1.1887954313095588,
+              "t_stop": 1.6,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.8626609259757948e-09,
+              "free_alpha": 2.8080444932221453e-09,
+              "free_order": 7.232585503273828,
+              "num_points": 5,
+              "order_deviation": 0.7674144967261718,
+              "r2": 0.9986364680419949,
+              "start_index": 0,
+              "stop_index_exclusive": 5,
+              "t_start": 0.8,
+              "t_stop": 1.1887954313095588,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.673097603668217e-09,
+              "free_alpha": 2.761204828854071e-09,
+              "free_order": 7.5612909436597,
+              "num_points": 5,
+              "order_deviation": 0.4387090563402998,
+              "r2": 0.9997724207578296,
+              "start_index": 1,
+              "stop_index_exclusive": 6,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.3125365696122206,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.5642763840890348e-09,
+              "free_alpha": 2.7054042173254537e-09,
+              "free_order": 7.690211424713453,
+              "num_points": 5,
+              "order_deviation": 0.3097885752865466,
+              "r2": 0.9999782096982569,
+              "start_index": 2,
+              "stop_index_exclusive": 7,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.4491578628222506,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.48455783914519e-09,
+              "free_alpha": 2.6836303123533827e-09,
+              "free_order": 7.716593200664025,
+              "num_points": 5,
+              "order_deviation": 0.28340679933597457,
+              "r2": 0.9999981541512406,
+              "start_index": 3,
+              "stop_index_exclusive": 8,
+              "t_start": 1.0767201541058848,
+              "t_stop": 1.6,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 2.7964320922407144e-09,
+              "free_alpha": 2.840539321679726e-09,
+              "free_order": 7.358860426909263,
+              "num_points": 6,
+              "order_deviation": 0.6411395730907374,
+              "r2": 0.9988550330020359,
+              "start_index": 0,
+              "stop_index_exclusive": 6,
+              "t_start": 0.8,
+              "t_stop": 1.3125365696122206,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 2.629286242510386e-09,
+              "free_alpha": 2.7602233578505405e-09,
+              "free_order": 7.606261288230728,
+              "num_points": 6,
+              "order_deviation": 0.3937387117692719,
+              "r2": 0.999824882583567,
+              "start_index": 1,
+              "stop_index_exclusive": 7,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.4491578628222506,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 2.52630131709477e-09,
+              "free_alpha": 2.7043583090875843e-09,
+              "free_order": 7.6938276867427104,
+              "num_points": 6,
+              "order_deviation": 0.30617231325728955,
+              "r2": 0.9999872654324929,
+              "start_index": 2,
+              "stop_index_exclusive": 8,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.6,
+              "window_size": 6
+            }
+          ],
+          "fixed_order_alpha_sensitivity": {
+            "max_to_min_ratio": 1.0466391149423664,
+            "maximum": 2.5642763840890348e-09,
+            "median": 2.5208076452199927e-09,
+            "minimum": 2.450010082252886e-09
+          },
+          "noise_floor_hartree": 5e-12,
+          "runner_full_grid_fixed_order_alpha": 2.6866320446110698e-09,
+          "runner_full_grid_free_fit": {
+            "alpha": 2.8584137442599334e-09,
+            "order": 7.497865710292872,
+            "r2": 0.9992935263742981
+          },
+          "selected_window": {
+            "fixed_order_alpha": 2.5208076452199927e-09,
+            "free_alpha": 2.6793871212619933e-09,
+            "free_order": 7.7257431065628905,
+            "num_points": 4,
+            "order_deviation": 0.27425689343710946,
+            "r2": 0.9999991223577718,
+            "start_index": 3,
+            "stop_index_exclusive": 7,
+            "t_start": 1.0767201541058848,
+            "t_stop": 1.4491578628222506,
+            "window_size": 4
+          },
+          "stable_candidate_count": 5
+        },
+        "pilot_free_fit": {
+          "alpha": 2.8584137442599334e-09,
+          "order": 7.497865710292872,
+          "r2": 0.9992935263742981
+        },
+        "runtime": {
+          "pilot_result_elapsed_seconds": 2793.1131740389974,
+          "pilot_task": null,
+          "refinement_execution_profile": {
+            "clique_precompute_seconds": 0.8884012269991217,
+            "device": "GPU",
+            "execution_strategy": "precomputed_cliques_parameterized_gpu",
+            "num_cliques": 257,
+            "pauli_rotations_per_step": 539806,
+            "processes": 2,
+            "simulation_seconds": 5685.223459483997,
+            "target_gpus": [
+              0,
+              1
+            ],
+            "template_prepare": {
+              "device": "GPU",
+              "execution_strategy": "pretranspiled_parameterized_body",
+              "input_num_instructions": 10753,
+              "optimization_level": 0,
+              "total_seconds": 175.50120741900173,
+              "transpile_seconds": 162.2699691220041,
+              "transpiled_num_instructions": 11953642
+            },
+            "time_profiles": [
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 14.640606076995027,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.5128457371349744,
+                "simulator_run_seconds": 1340.6212638169964,
+                "target_gpus": [],
+                "total_seconds": 1355.2955068880037,
+                "worker_cuda_visible_devices": "6"
+              },
+              {
+                "assigned_gpu_id": 1,
+                "bind_seconds": 13.459653689002153,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.117984031988964,
+                "simulator_run_seconds": 1175.0603410890035,
+                "target_gpus": [],
+                "total_seconds": 1188.5536788619938,
+                "worker_cuda_visible_devices": "7"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 14.364173066001968,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.5718377531294565,
+                "simulator_run_seconds": 1340.6260559319999,
+                "target_gpus": [],
+                "total_seconds": 1354.990627715997,
+                "worker_cuda_visible_devices": "6"
+              },
+              {
+                "assigned_gpu_id": 1,
+                "bind_seconds": 14.073304684003233,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.0256914742699488,
+                "simulator_run_seconds": 1177.9246516860003,
+                "target_gpus": [],
+                "total_seconds": 1191.9983412590009,
+                "worker_cuda_visible_devices": "7"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 13.991738953001914,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.4795451954104406,
+                "simulator_run_seconds": 1337.7024654370034,
+                "target_gpus": [],
+                "total_seconds": 1351.6945336189965,
+                "worker_cuda_visible_devices": "6"
+              },
+              {
+                "assigned_gpu_id": 1,
+                "bind_seconds": 14.035179958002118,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.9333989165509338,
+                "simulator_run_seconds": 1176.7448760099942,
+                "target_gpus": [],
+                "total_seconds": 1190.7803978970041,
+                "worker_cuda_visible_devices": "7"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 13.99165479500516,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -4.538537211404924,
+                "simulator_run_seconds": 1315.7615580800048,
+                "target_gpus": [],
+                "total_seconds": 1329.753587444,
+                "worker_cuda_visible_devices": "6"
+              }
+            ],
+            "worker_cuda_visible_devices": [
+              "6",
+              "7"
+            ]
+          },
+          "refinement_result_elapsed_seconds": 5866.753411755999,
+          "refinement_task": {
+            "elapsed_seconds": 5921.215567827225,
+            "exit_status": 0,
+            "finished_epoch": 1788282249.1747394,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H11_y8_refine.tsv",
+            "started_epoch": 1788276327.9591715
+          }
+        },
+        "simulator_device": "GPU",
+        "source_pilot": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H11_h9_h11_y8_pilot.json",
+        "source_refinement": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H11_h9_h11_y8_tana.json",
+        "status": "complete",
+        "t_ana": 3.0256914742699488
+      }
+    },
+    "H9": {
+      "4th(m5_best)": {
+        "C_model_t_ana": 582231203.7505668,
+        "C_ov_over_C_model": null,
+        "C_ov_t_ana": null,
+        "C_pert_t_ana": 532846912.99403477,
+        "aer_precision": "double",
+        "e_model_t_ana_hartree": 3.187200203980801e-05,
+        "e_ov_t_ana_hartree": 1.5580371841815357,
+        "e_pert_t_ana_hartree": 2.0056404145977042e-05,
+        "fixed_order_alpha": 1.9281618671937714e-06,
+        "formal_order": 4,
+        "gpu_memory": {
+          "maximum_peak_used_mib": 1073,
+          "pilot": {
+            "by_physical_gpu": {
+              "1": {
+                "maximum_utilization_percent": 99,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 859,
+                "physical_gpu_id": 1,
+                "samples": 506,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H9_m5_pilot_gpu1.csv"
+              },
+              "7": {
+                "maximum_utilization_percent": 0,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1,
+                "physical_gpu_id": 7,
+                "samples": 506,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H9_m5_pilot_gpu7.csv"
+              }
+            },
+            "maximum_peak_used_mib": 859
+          },
+          "refinement": {
+            "by_physical_gpu": {
+              "0": {
+                "maximum_utilization_percent": 99,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1073,
+                "physical_gpu_id": 0,
+                "samples": 677,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H9_m5_refine_gpu0.csv"
+              }
+            },
+            "maximum_peak_used_mib": 1073
+          }
+        },
+        "ground_state_survival_probability_t_ana": 0.9999830390962403,
+        "local_schedule": {
+          "e_model_hartree": [
+            1.9920001274880005e-06,
+            7.652467689757902e-06,
+            1.6637384264792522e-05,
+            3.187200203980801e-05,
+            5.574433076763693e-05,
+            9.102962502589569e-05,
+            0.00016135201032652804
+          ],
+          "e_ov_hartree": [
+            3.116112668689073,
+            2.225789837803952,
+            1.8329964796837142,
+            1.5580371841815357,
+            1.354802292902474,
+            1.19846331822474,
+            1.0386411376361513
+          ],
+          "e_ov_over_alpha_t_to_p": [
+            1564313.4885832702,
+            290859.09644322435,
+            110173.35721232575,
+            48884.19567228796,
+            24303.85788556316,
+            13165.6405031198,
+            6437.113089166062
+          ],
+          "e_ov_over_alpha_t_to_p_variation": {
+            "max_to_min_ratio": 243.0147593982894,
+            "maximum": 1564313.4885832702,
+            "median": 48884.19567228796,
+            "minimum": 6437.113089166062,
+            "relative_span_about_median": 31.868712455409206
+          },
+          "e_pert_hartree": [
+            1.8128224548758295e-06,
+            6.220416453660672e-06,
+            1.2038828148468066e-05,
+            2.0056404145977042e-05,
+            3.008952998041869e-05,
+            4.224843341885724e-05,
+            6.367540022949076e-05
+          ],
+          "ground_state_survival_probabilities": [
+            0.9999999716064953,
+            0.9999993142671441,
+            0.9999959556675697,
+            0.9999830390962403,
+            0.9999446066738953,
+            0.9998507145885484,
+            0.9995562167288976
+          ],
+          "minimum_principal_phase_branch_margin": 1.827644593888067e-06,
+          "phase_rotated_overlap_angles": [
+            3.1415908259451992,
+            3.141583873800081,
+            3.141572020204749,
+            3.1415522124656525,
+            3.1415228798924497,
+            3.1414819012663093,
+            3.1414000227595107
+          ],
+          "times": [
+            1.0081762631730657,
+            1.411446768442292,
+            1.7138996473942116,
+            2.0163525263461315,
+            2.318805405298051,
+            2.621258284249971,
+            3.0245287895191972
+          ]
+        },
+        "minimum_ground_state_survival_probability": 0.9995562167288976,
+        "overlap_phase_cost_interpretation": "proxy based on the ground-state overlap phase; not a direct PF eigenvalue error",
+        "pauli_rotations_per_step": 124724,
+        "pilot_fit": {
+          "candidate_windows": [
+            {
+              "fixed_order_alpha": 2.047131350263047e-06,
+              "free_alpha": 1.4642311724775024e-06,
+              "free_order": 3.7821718521902303,
+              "num_points": 4,
+              "order_deviation": 0.21782814780976967,
+              "r2": 0.999411908158683,
+              "start_index": 0,
+              "stop_index_exclusive": 4,
+              "t_start": 0.15,
+              "t_stop": 0.307370470890596,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 1.9620524421590604e-06,
+              "free_alpha": 1.7655327012941127e-06,
+              "free_order": 3.918770902994486,
+              "num_points": 4,
+              "order_deviation": 0.08122909700551384,
+              "r2": 0.9999495693428727,
+              "start_index": 1,
+              "stop_index_exclusive": 5,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.3904083552733738,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 1.9281618671937714e-06,
+              "free_alpha": 1.8398190796709395e-06,
+              "free_order": 3.955760303041464,
+              "num_points": 4,
+              "order_deviation": 0.04423969695853591,
+              "r2": 0.9999983808020372,
+              "start_index": 2,
+              "stop_index_exclusive": 6,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.4958793973462468,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 1.9055782339647393e-06,
+              "free_alpha": 1.835849105629119e-06,
+              "free_order": 3.9545934887767205,
+              "num_points": 4,
+              "order_deviation": 0.045406511223279544,
+              "r2": 0.9999977167505428,
+              "start_index": 3,
+              "stop_index_exclusive": 7,
+              "t_start": 0.307370470890596,
+              "t_stop": 0.6298440425033783,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 1.8784181015407617e-06,
+              "free_alpha": 1.8061564327212027e-06,
+              "free_order": 3.932579307732655,
+              "num_points": 4,
+              "order_deviation": 0.06742069226734504,
+              "r2": 0.9999873960177572,
+              "start_index": 4,
+              "stop_index_exclusive": 8,
+              "t_start": 0.3904083552733738,
+              "t_stop": 0.8,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 2.0205744206002e-06,
+              "free_alpha": 1.6022000212861905e-06,
+              "free_order": 3.836483341751608,
+              "num_points": 5,
+              "order_deviation": 0.1635166582483918,
+              "r2": 0.9995138799810667,
+              "start_index": 0,
+              "stop_index_exclusive": 5,
+              "t_start": 0.15,
+              "t_stop": 0.3904083552733738,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 1.9493393606567366e-06,
+              "free_alpha": 1.7995011393054279e-06,
+              "free_order": 3.932202304395454,
+              "num_points": 5,
+              "order_deviation": 0.06779769560454607,
+              "r2": 0.9999632894045067,
+              "start_index": 1,
+              "stop_index_exclusive": 6,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.4958793973462468,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 1.9167030818793297e-06,
+              "free_alpha": 1.8337404503999682e-06,
+              "free_order": 3.952955019068377,
+              "num_points": 5,
+              "order_deviation": 0.047044980931623126,
+              "r2": 0.9999986856238767,
+              "start_index": 2,
+              "stop_index_exclusive": 7,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.6298440425033783,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 1.8894610455837661e-06,
+              "free_alpha": 1.813853510460063e-06,
+              "free_order": 3.9417782691496535,
+              "num_points": 5,
+              "order_deviation": 0.05822173085034654,
+              "r2": 0.9999882812515256,
+              "start_index": 3,
+              "stop_index_exclusive": 8,
+              "t_start": 0.307370470890596,
+              "t_stop": 0.8,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 1.9998381314591374e-06,
+              "free_alpha": 1.6881370622090784e-06,
+              "free_order": 3.8695879316788275,
+              "num_points": 6,
+              "order_deviation": 0.13041206832117247,
+              "r2": 0.9996293687263046,
+              "start_index": 0,
+              "stop_index_exclusive": 6,
+              "t_start": 0.15,
+              "t_stop": 0.4958793973462468,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 1.9361526037951474e-06,
+              "free_alpha": 1.8109284135341986e-06,
+              "free_order": 3.9369293868849566,
+              "num_points": 6,
+              "order_deviation": 0.06307061311504336,
+              "r2": 0.999977150366005,
+              "start_index": 1,
+              "stop_index_exclusive": 7,
+              "t_start": 0.19052335483407604,
+              "t_stop": 0.6298440425033783,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 1.9013385957231292e-06,
+              "free_alpha": 1.8163042241276432e-06,
+              "free_order": 3.944269424965714,
+              "num_points": 6,
+              "order_deviation": 0.05573057503428602,
+              "r2": 0.9999927801298524,
+              "start_index": 2,
+              "stop_index_exclusive": 8,
+              "t_start": 0.24199432491487494,
+              "t_stop": 0.8,
+              "window_size": 6
+            }
+          ],
+          "fixed_order_alpha_sensitivity": {
+            "max_to_min_ratio": 1.089816664662622,
+            "maximum": 2.047131350263047e-06,
+            "median": 1.9321572354944596e-06,
+            "minimum": 1.8784181015407617e-06
+          },
+          "noise_floor_hartree": 5e-12,
+          "runner_full_grid_fixed_order_alpha": 1.960961137953962e-06,
+          "runner_full_grid_free_fit": {
+            "alpha": 1.7591099808987081e-06,
+            "order": 3.8975346797919723,
+            "r2": 0.9998107205758767
+          },
+          "selected_window": {
+            "fixed_order_alpha": 1.9281618671937714e-06,
+            "free_alpha": 1.8398190796709395e-06,
+            "free_order": 3.955760303041464,
+            "num_points": 4,
+            "order_deviation": 0.04423969695853591,
+            "r2": 0.9999983808020372,
+            "start_index": 2,
+            "stop_index_exclusive": 6,
+            "t_start": 0.24199432491487494,
+            "t_stop": 0.4958793973462468,
+            "window_size": 4
+          },
+          "stable_candidate_count": 12
+        },
+        "pilot_free_fit": {
+          "alpha": 1.7591099808987081e-06,
+          "order": 3.8975346797919723,
+          "r2": 0.9998107205758767
+        },
+        "runtime": {
+          "pilot_result_elapsed_seconds": 484.0140070740017,
+          "pilot_task": {
+            "elapsed_seconds": 505.5442547798157,
+            "exit_status": 0,
+            "finished_epoch": 1788260851.1993682,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H9_m5_pilot.tsv",
+            "started_epoch": 1788260345.6551135
+          },
+          "refinement_execution_profile": {
+            "clique_precompute_seconds": 0.15587979299743893,
+            "device": "GPU",
+            "execution_strategy": "precomputed_cliques_parameterized_gpu",
+            "num_cliques": 213,
+            "pauli_rotations_per_step": 124724,
+            "processes": 1,
+            "simulation_seconds": 616.7161604080029,
+            "target_gpus": [
+              0
+            ],
+            "template_prepare": {
+              "device": "GPU",
+              "execution_strategy": "pretranspiled_parameterized_body",
+              "input_num_instructions": 4665,
+              "optimization_level": 0,
+              "total_seconds": 37.15648851700098,
+              "transpile_seconds": 34.33631424100167,
+              "transpiled_num_instructions": 2455204
+            },
+            "time_profiles": [
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 2.9774498529950506,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.0081762631730657,
+                "simulator_run_seconds": 79.71424580099847,
+                "target_gpus": [],
+                "total_seconds": 82.72384097900067,
+                "worker_cuda_visible_devices": "0"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 3.1139519490025123,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.411446768442292,
+                "simulator_run_seconds": 80.1790125319967,
+                "target_gpus": [],
+                "total_seconds": 83.29325302900543,
+                "worker_cuda_visible_devices": "0"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 3.0711271060063154,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.7138996473942116,
+                "simulator_run_seconds": 80.30390385200008,
+                "target_gpus": [],
+                "total_seconds": 83.3753068090009,
+                "worker_cuda_visible_devices": "0"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 3.046829543003696,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.0163525263461315,
+                "simulator_run_seconds": 80.20015426600003,
+                "target_gpus": [],
+                "total_seconds": 83.24722293700324,
+                "worker_cuda_visible_devices": "0"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 3.052867625003273,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.318805405298051,
+                "simulator_run_seconds": 80.04299592700409,
+                "target_gpus": [],
+                "total_seconds": 83.09610693099967,
+                "worker_cuda_visible_devices": "0"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 3.5819692090008175,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.621258284249971,
+                "simulator_run_seconds": 79.88560520399915,
+                "target_gpus": [],
+                "total_seconds": 83.46779574300308,
+                "worker_cuda_visible_devices": "0"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 3.05701610899996,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.0245287895191972,
+                "simulator_run_seconds": 80.00691681199532,
+                "target_gpus": [],
+                "total_seconds": 83.06415727900458,
+                "worker_cuda_visible_devices": "0"
+              }
+            ],
+            "worker_cuda_visible_devices": [
+              "0"
+            ]
+          },
+          "refinement_result_elapsed_seconds": 655.4888617519973,
+          "refinement_task": {
+            "elapsed_seconds": 676.9804804325104,
+            "exit_status": 0,
+            "finished_epoch": 1788277004.7416532,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H9_m5_refine.tsv",
+            "started_epoch": 1788276327.7611728
+          }
+        },
+        "simulator_device": "GPU",
+        "source_pilot": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H9_h9_h11_m5_pilot.json",
+        "source_refinement": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H9_h9_h11_m5_tana.json",
+        "status": "complete",
+        "t_ana": 2.0163525263461315
+      },
+      "8th(Morales-Y8m10b)": {
+        "C_model_t_ana": 591444076.6765227,
+        "C_ov_over_C_model": null,
+        "C_ov_t_ana": null,
+        "C_pert_t_ana": 563259592.7058275,
+        "aer_precision": "double",
+        "e_model_t_ana_hartree": 1.770666779989334e-05,
+        "e_ov_t_ana_hartree": 0.9217457141645916,
+        "e_pert_t_ana_hartree": 1.0618592585647868e-05,
+        "fixed_order_alpha": 9.724491443909793e-10,
+        "formal_order": 8,
+        "gpu_memory": {
+          "maximum_peak_used_mib": 859,
+          "pilot": {
+            "by_physical_gpu": {
+              "1": {
+                "maximum_utilization_percent": 99,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 859,
+                "physical_gpu_id": 1,
+                "samples": 944,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H9_y8_pilot_gpu1.csv"
+              },
+              "7": {
+                "maximum_utilization_percent": 0,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 1,
+                "physical_gpu_id": 7,
+                "samples": 944,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H9_y8_pilot_gpu7.csv"
+              }
+            },
+            "maximum_peak_used_mib": 859
+          },
+          "refinement": {
+            "by_physical_gpu": {
+              "1": {
+                "maximum_utilization_percent": 98,
+                "memory_total_mib": 40960,
+                "peak_used_mib": 431,
+                "physical_gpu_id": 1,
+                "samples": 1252,
+                "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/memory/H9_y8_refine_gpu1.csv"
+              }
+            },
+            "maximum_peak_used_mib": 431
+          }
+        },
+        "ground_state_survival_probability_t_ana": 0.9999783450978498,
+        "local_schedule": {
+          "e_model_hartree": [
+            6.916667109333335e-08,
+            1.0207541623949285e-06,
+            4.824899205485198e-06,
+            1.770666779989334e-05,
+            5.416510161925794e-05,
+            0.00014443872890914467,
+            0.00045380252904336034
+          ],
+          "e_ov_hartree": [
+            1.8435126028039392,
+            1.3167939835418108,
+            1.0844159875549462,
+            0.9217457141645916,
+            0.8014984160941185,
+            0.7089772951376633,
+            0.6143374888512746
+          ],
+          "e_ov_over_alpha_t_to_p": [
+            26653192.55160202,
+            1290020.684757536,
+            224754.12259848358,
+            52056.41877858826,
+            14797.321377297161,
+            4908.4985757775985,
+            1353.755101687799
+          ],
+          "e_ov_over_alpha_t_to_p_variation": {
+            "max_to_min_ratio": 19688.341353891894,
+            "maximum": 26653192.55160202,
+            "median": 52056.41877858826,
+            "minimum": 1353.755101687799,
+            "relative_span_about_median": 511.97987533216
+          },
+          "e_pert_hartree": [
+            6.29403684722276e-08,
+            7.77704004758669e-07,
+            3.2275830682966794e-06,
+            1.0618592585647868e-05,
+            2.8828587624011183e-05,
+            6.602774943994296e-05,
+            0.00016662505290131435
+          ],
+          "ground_state_survival_probabilities": [
+            0.9999999975589264,
+            0.9999996944349543,
+            0.9999964705680411,
+            0.9999783450978498,
+            0.999910235285454,
+            0.9996944247872588,
+            0.9987050505650145
+          ],
+          "minimum_principal_phase_branch_margin": 1.072588231565419e-07,
+          "phase_rotated_overlap_angles": [
+            3.14159254633097,
+            3.141590798152915,
+            3.141583303175296,
+            3.1415564621881416,
+            3.141479654630737,
+            3.141300056528044,
+            3.1407402471315384
+          ],
+          "times": [
+            1.7041340219495553,
+            2.3857876307293773,
+            2.897027837314244,
+            3.4082680438991106,
+            3.919508250483977,
+            4.430748457068844,
+            5.112402065848666
+          ]
+        },
+        "minimum_ground_state_survival_probability": 0.9987050505650145,
+        "overlap_phase_cost_interpretation": "proxy based on the ground-state overlap phase; not a direct PF eigenvalue error",
+        "pauli_rotations_per_step": 237954,
+        "pilot_fit": {
+          "candidate_windows": [
+            {
+              "fixed_order_alpha": 1.1463078894517967e-09,
+              "free_alpha": 1.0617555492483342e-09,
+              "free_order": 6.973053704765367,
+              "num_points": 4,
+              "order_deviation": 1.0269462952346329,
+              "r2": 0.9982276040931644,
+              "start_index": 0,
+              "stop_index_exclusive": 4,
+              "t_start": 0.8,
+              "t_stop": 1.0767201541058848,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 1.0530096731767529e-09,
+              "free_alpha": 1.0671235948093447e-09,
+              "free_order": 7.454530175343774,
+              "num_points": 4,
+              "order_deviation": 0.5454698246562257,
+              "r2": 0.9996789818683882,
+              "start_index": 1,
+              "stop_index_exclusive": 5,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.1887954313095588,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 1.0041866453560693e-09,
+              "free_alpha": 1.0470716698140949e-09,
+              "free_order": 7.661188826483991,
+              "num_points": 4,
+              "order_deviation": 0.3388111735160093,
+              "r2": 0.999958622338828,
+              "start_index": 2,
+              "stop_index_exclusive": 6,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.3125365696122206,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 9.724491443909793e-10,
+              "free_alpha": 1.0335345762651484e-09,
+              "free_order": 7.726132784782371,
+              "num_points": 4,
+              "order_deviation": 0.2738672152176287,
+              "r2": 0.9999984581749125,
+              "start_index": 3,
+              "stop_index_exclusive": 7,
+              "t_start": 1.0767201541058848,
+              "t_stop": 1.4491578628222506,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 9.453551750382956e-10,
+              "free_alpha": 1.033911268432006e-09,
+              "free_order": 7.721457829033544,
+              "num_points": 4,
+              "order_deviation": 0.27854217096645595,
+              "r2": 0.9999970198618696,
+              "start_index": 4,
+              "stop_index_exclusive": 8,
+              "t_start": 1.1887954313095588,
+              "t_stop": 1.6,
+              "window_size": 4
+            },
+            {
+              "fixed_order_alpha": 1.1118423414833884e-09,
+              "free_alpha": 1.089142571274944e-09,
+              "free_order": 7.178230307565702,
+              "num_points": 5,
+              "order_deviation": 0.8217696924342981,
+              "r2": 0.9983479897494955,
+              "start_index": 0,
+              "stop_index_exclusive": 5,
+              "t_start": 0.8,
+              "t_stop": 1.1887954313095588,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 1.0335826319829796e-09,
+              "free_alpha": 1.0693942856067202e-09,
+              "free_order": 7.5392103914090915,
+              "num_points": 5,
+              "order_deviation": 0.46078960859090845,
+              "r2": 0.9997169488584593,
+              "start_index": 1,
+              "stop_index_exclusive": 6,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.3125365696122206,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 9.897804856976165e-10,
+              "free_alpha": 1.0452561478736822e-09,
+              "free_order": 7.684665832081803,
+              "num_points": 5,
+              "order_deviation": 0.3153341679181967,
+              "r2": 0.9999701041254279,
+              "start_index": 2,
+              "stop_index_exclusive": 7,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.4491578628222506,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 9.586955057685198e-10,
+              "free_alpha": 1.0347717214001756e-09,
+              "free_order": 7.719215446666394,
+              "num_points": 5,
+              "order_deviation": 0.2807845533336062,
+              "r2": 0.9999984246766291,
+              "start_index": 3,
+              "stop_index_exclusive": 8,
+              "t_start": 1.0767201541058848,
+              "t_stop": 1.6,
+              "window_size": 5
+            },
+            {
+              "fixed_order_alpha": 1.0848476921500716e-09,
+              "free_alpha": 1.1030674301430087e-09,
+              "free_order": 7.317658995548946,
+              "num_points": 6,
+              "order_deviation": 0.6823410044510538,
+              "r2": 0.9986080028902153,
+              "start_index": 0,
+              "stop_index_exclusive": 6,
+              "t_start": 0.8,
+              "t_stop": 1.3125365696122206,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 1.0163121418409016e-09,
+              "free_alpha": 1.0689579713944797e-09,
+              "free_order": 7.590830662571788,
+              "num_points": 6,
+              "order_deviation": 0.40916933742821193,
+              "r2": 0.999778793005078,
+              "start_index": 1,
+              "stop_index_exclusive": 7,
+              "t_start": 0.8832716109390499,
+              "t_stop": 1.4491578628222506,
+              "window_size": 6
+            },
+            {
+              "fixed_order_alpha": 9.75225502629642e-10,
+              "free_alpha": 1.044484496228053e-09,
+              "free_order": 7.691572577056314,
+              "num_points": 6,
+              "order_deviation": 0.3084274229436863,
+              "r2": 0.9999818720126494,
+              "start_index": 2,
+              "stop_index_exclusive": 8,
+              "t_start": 0.9752109233635804,
+              "t_stop": 1.6,
+              "window_size": 6
+            }
+          ],
+          "fixed_order_alpha_sensitivity": {
+            "max_to_min_ratio": 1.0469932484978688,
+            "maximum": 9.897804856976165e-10,
+            "median": 9.724491443909793e-10,
+            "minimum": 9.453551750382956e-10
+          },
+          "noise_floor_hartree": 5e-12,
+          "runner_full_grid_fixed_order_alpha": 1.0409938018453704e-09,
+          "runner_full_grid_free_fit": {
+            "alpha": 1.1108450720626918e-09,
+            "order": 7.473829735344899,
+            "r2": 0.999129886205007
+          },
+          "selected_window": {
+            "fixed_order_alpha": 9.724491443909793e-10,
+            "free_alpha": 1.0335345762651484e-09,
+            "free_order": 7.726132784782371,
+            "num_points": 4,
+            "order_deviation": 0.2738672152176287,
+            "r2": 0.9999984581749125,
+            "start_index": 3,
+            "stop_index_exclusive": 7,
+            "t_start": 1.0767201541058848,
+            "t_stop": 1.4491578628222506,
+            "window_size": 4
+          },
+          "stable_candidate_count": 5
+        },
+        "pilot_free_fit": {
+          "alpha": 1.1108450720626918e-09,
+          "order": 7.473829735344899,
+          "r2": 0.999129886205007
+        },
+        "runtime": {
+          "pilot_result_elapsed_seconds": 922.7379360350023,
+          "pilot_task": null,
+          "refinement_execution_profile": {
+            "clique_precompute_seconds": 0.15627105200110236,
+            "device": "GPU",
+            "execution_strategy": "precomputed_cliques_parameterized_gpu",
+            "num_cliques": 213,
+            "pauli_rotations_per_step": 237954,
+            "processes": 1,
+            "simulation_seconds": 1154.7801217809974,
+            "target_gpus": [
+              0
+            ],
+            "template_prepare": {
+              "device": "GPU",
+              "execution_strategy": "pretranspiled_parameterized_body",
+              "input_num_instructions": 8905,
+              "optimization_level": 0,
+              "total_seconds": 71.87576105599874,
+              "transpile_seconds": 66.43313859100454,
+              "transpiled_num_instructions": 4686774
+            },
+            "time_profiles": [
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 5.616442439000821,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -1.7041340219495553,
+                "simulator_run_seconds": 149.2941146259982,
+                "target_gpus": [],
+                "total_seconds": 154.94460366899875,
+                "worker_cuda_visible_devices": "1"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 5.826826782998978,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.3857876307293773,
+                "simulator_run_seconds": 149.9466481230047,
+                "target_gpus": [],
+                "total_seconds": 155.77384385399637,
+                "worker_cuda_visible_devices": "1"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 5.808111685997574,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -2.897027837314244,
+                "simulator_run_seconds": 150.53551770100603,
+                "target_gpus": [],
+                "total_seconds": 156.34394011599943,
+                "worker_cuda_visible_devices": "1"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 5.800826873004553,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.4082680438991106,
+                "simulator_run_seconds": 150.39319794499897,
+                "target_gpus": [],
+                "total_seconds": 156.19424528699892,
+                "worker_cuda_visible_devices": "1"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 5.835155237000436,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -3.919508250483977,
+                "simulator_run_seconds": 149.47351552799955,
+                "target_gpus": [],
+                "total_seconds": 155.3089350049995,
+                "worker_cuda_visible_devices": "1"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 6.891851300999406,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -4.430748457068844,
+                "simulator_run_seconds": 149.59061243299948,
+                "target_gpus": [],
+                "total_seconds": 156.48282323199965,
+                "worker_cuda_visible_devices": "1"
+              },
+              {
+                "assigned_gpu_id": 0,
+                "bind_seconds": 5.798117841994099,
+                "device": "GPU",
+                "execution_strategy": "pretranspiled_parameterized_body",
+                "parameter_value": -5.112402065848666,
+                "simulator_run_seconds": 149.4536968800021,
+                "target_gpus": [],
+                "total_seconds": 155.25218064199726,
+                "worker_cuda_visible_devices": "1"
+              }
+            ],
+            "worker_cuda_visible_devices": [
+              "1"
+            ]
+          },
+          "refinement_result_elapsed_seconds": 1229.594602709003,
+          "refinement_task": {
+            "elapsed_seconds": 1251.797615289688,
+            "exit_status": 0,
+            "finished_epoch": 1788277579.5862563,
+            "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/timings/H9_y8_refine.tsv",
+            "started_epoch": 1788276327.788641
+          }
+        },
+        "simulator_device": "GPU",
+        "source_pilot": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H9_h9_h11_y8_pilot.json",
+        "source_refinement": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/H9_h9_h11_y8_tana.json",
+        "status": "complete",
+        "t_ana": 3.4082680438991106
+      }
+    }
+  },
+  "schedule_source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_cost_validity/h9_h11_gpu_retry_20260901_195838/analytic_schedule.json",
+  "schema_version": 1,
+  "status": "complete_with_documented_skips",
+  "system_convention": {
+    "H10": "neutral H10, singlet, STO-3G, 20 qubits",
+    "H11": "H11+, triplet, STO-3G, 22 qubits",
+    "H9": "H9+, triplet, STO-3G, 18 qubits"
+  },
+  "warnings": [
+    "H9 4th(m5_best): C_ov invalid because e_ov(t_ana) >= epsilon_E",
+    "H9 8th(Morales-Y8m10b): C_ov invalid because e_ov(t_ana) >= epsilon_E",
+    "H10 4th(m5_best): C_ov invalid because e_ov(t_ana) >= epsilon_E",
+    "H10 8th(Morales-Y8m10b): C_ov invalid because e_ov(t_ana) >= epsilon_E",
+    "H11 4th(m5_best): C_ov invalid because e_ov(t_ana) >= epsilon_E",
+    "H11 8th(Morales-Y8m10b): C_ov invalid because e_ov(t_ana) >= epsilon_E"
+  ]
+}
