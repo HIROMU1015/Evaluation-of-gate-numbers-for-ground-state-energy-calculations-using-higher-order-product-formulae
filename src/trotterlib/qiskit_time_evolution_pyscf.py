@@ -1,5 +1,6 @@
+from dataclasses import dataclass
 from functools import reduce
-from typing import List, Tuple
+from typing import Any, List, Tuple
 
 import numpy as np
 
@@ -17,12 +18,175 @@ from .Almost_optimal_grouping import Almost_optimal_grouper
 from .chemistry_hamiltonian import geo
 
 DEFAULT_BASIS = "sto-3g"  # PySCF 基底関数
+FCI_RESIDUAL_TOLERANCE = 1e-10
+FCI_DAVIDSON_RETRY_LINDEP = 1e-20
+MAX_FULL_PSPACE_DIMENSION = 1024
 
 
-def make_fci_vector_from_pyscf_solver_grouper(
+@dataclass(frozen=True)
+class GroupedFCIResult:
+    """Grouped Hamiltonian and a checked PySCF FCI ground state."""
+
+    grouped_jw_list: List[List[QubitOperator]]
+    n_qubits: int
+    energy: float
+    state_vector: np.ndarray
+    diagnostics: dict[str, Any]
+
+
+def _fci_residual_norm(
+    solver: Any,
+    one_body_integrals: np.ndarray,
+    eri_mo: np.ndarray,
+    ci_matrix: np.ndarray,
+    electronic_energy: float,
+) -> float:
+    """Return ||H_FCI c - E_elec c|| without a sparse eigensolve."""
+    h2e = solver.absorb_h1e(
+        one_body_integrals,
+        eri_mo,
+        solver.norb,
+        solver.nelec,
+        0.5,
+    )
+    h_ci = solver.contract_2e(h2e, ci_matrix, solver.norb, solver.nelec)
+    return float(np.linalg.norm(h_ci - electronic_energy * ci_matrix))
+
+
+def _solve_checked_fci(
+    mol: Any,
+    mf: Any,
+    one_body_integrals: np.ndarray,
+    eri_mo: np.ndarray,
+) -> tuple[Any, float, np.ndarray, dict[str, Any]]:
+    """Solve FCI with a bounded exact-PySCF path and verify its residual.
+
+    PySCF's default pspace threshold (400 determinants) sends H7's 735
+    determinant sector through Davidson convergence.  On this server that
+    solver reports convergence even though the state residual is about 2.5e-6.
+    For small sectors we instead ask PySCF to diagonalize the complete FCI
+    pspace with LAPACK.  The explicit dimension and memory guard prevents this
+    small-system remedy from silently becoming a large dense calculation.
+    """
+    if not bool(mf.converged):
+        raise RuntimeError("PySCF RHF did not converge")
+
+    n_orbitals = int(mf.mo_coeff.shape[1])
+    n_alpha, n_beta = mol.nelec
+    ci_dimension = int(
+        cistring.num_strings(n_orbitals, n_alpha)
+        * cistring.num_strings(n_orbitals, n_beta)
+    )
+    full_pspace = ci_dimension <= MAX_FULL_PSPACE_DIMENSION
+
+    solver = fci.FCI(mol, mf.mo_coeff)
+    solver.conv_tol = 1e-12
+    solver.conv_tol_residual = FCI_RESIDUAL_TOLERANCE
+    solver.max_cycle = 400
+    solver.max_space = 40
+    if full_pspace:
+        solver.pspace_size = ci_dimension
+        solver.davidson_only = False
+        method = "pyscf_full_pspace_lapack_eigh"
+    else:
+        solver.pspace_size = min(int(solver.pspace_size), ci_dimension)
+        solver.davidson_only = True
+        method = "pyscf_davidson"
+
+    energy, ci_matrix = solver.kernel()
+    electronic_energy = float(energy - mf.energy_nuc())
+    residual = _fci_residual_norm(
+        solver,
+        one_body_integrals,
+        eri_mo,
+        ci_matrix,
+        electronic_energy,
+    )
+    attempts = [
+        {
+            "attempt": 1,
+            "initial_guess": "pyscf_default",
+            "lindep": float(solver.lindep),
+            "fci_converged": bool(solver.converged),
+            "fci_residual_norm": residual,
+            "energy_hartree": float(energy),
+        }
+    ]
+
+    # PySCF's Davidson solver can reach an energy-stationary vector and then
+    # stop on a linearly dependent correction before the requested residual
+    # tolerance is met.  Keep PySCF as the eigensolver and restart from that CI
+    # vector with a tighter linear-dependence threshold.  H9--H11 need this
+    # continuation on the GPU server; small full-pspace solves do not.
+    if not full_pspace and (
+        not bool(solver.converged) or residual > FCI_RESIDUAL_TOLERANCE
+    ):
+        previous_energy = float(energy)
+        solver.lindep = min(
+            float(solver.lindep),
+            FCI_DAVIDSON_RETRY_LINDEP,
+        )
+        energy, ci_matrix = solver.kernel(ci0=np.asarray(ci_matrix))
+        electronic_energy = float(energy - mf.energy_nuc())
+        residual = _fci_residual_norm(
+            solver,
+            one_body_integrals,
+            eri_mo,
+            ci_matrix,
+            electronic_energy,
+        )
+        attempts.append(
+            {
+                "attempt": 2,
+                "initial_guess": "previous_ci_vector",
+                "lindep": float(solver.lindep),
+                "fci_converged": bool(solver.converged),
+                "fci_residual_norm": residual,
+                "energy_hartree": float(energy),
+                "energy_change_hartree": float(energy) - previous_energy,
+            }
+        )
+    diagnostics = {
+        "source": "PySCF FCI",
+        "method": method,
+        "scf_converged": bool(mf.converged),
+        "fci_converged": bool(solver.converged),
+        "fci_residual_norm": residual,
+        "fci_residual_tolerance": FCI_RESIDUAL_TOLERANCE,
+        "n_orbitals": int(solver.norb),
+        "n_alpha": int(n_alpha),
+        "n_beta": int(n_beta),
+        "ci_dimension": ci_dimension,
+        "full_pspace_dimension_limit": MAX_FULL_PSPACE_DIMENSION,
+        "full_pspace_dense_matrix_bytes": (
+            int(ci_dimension * ci_dimension * np.dtype(float).itemsize)
+            if full_pspace
+            else None
+        ),
+        "davidson_retry_performed": len(attempts) > 1,
+        "davidson_retry_lindep": FCI_DAVIDSON_RETRY_LINDEP,
+        "davidson_attempts": attempts,
+        "used_scipy_eigsh": False,
+    }
+    if not bool(solver.converged):
+        raise RuntimeError(
+            "PySCF FCI did not converge: "
+            f"method={method}, dimension={ci_dimension}, residual={residual}"
+        )
+    if residual > FCI_RESIDUAL_TOLERANCE:
+        raise RuntimeError(
+            "PySCF FCI residual exceeds tolerance: "
+            f"{residual} > {FCI_RESIDUAL_TOLERANCE} "
+            f"(method={method}, dimension={ci_dimension})"
+        )
+    return solver, float(energy), np.asarray(ci_matrix), diagnostics
+
+
+def make_checked_fci_result_from_pyscf_solver_grouper(
     molecule_type: int,
-) -> Tuple[List[List[QubitOperator]], int, float, np.ndarray]:
-    """PySCF FCI から |ψ₀⟩ を構築し、グルーピング済み JW 演算子群とともに返す。"""
+) -> GroupedFCIResult:
+    """Build grouped JW terms and a residual-checked PySCF FCI state."""
+    # PySCF FCI から |ψ₀⟩ を構築し、グルーピング済み JW 演算子群とともに返す。
     # 分子情報を構築して SCF を実行
     geometry, multiplicity, molcharge = geo(molecule_type)
     mol = gto.Mole()
@@ -46,18 +210,29 @@ def make_fci_vector_from_pyscf_solver_grouper(
 
     # 近似グルーピングで JW 演算子を作成
     almost_optimal_grouper = Almost_optimal_grouper(
-        constant, one_body_integrals, two_body_integrals, fermion_qubit_mapping=jordan_wigner, validation=True
+        constant,
+        one_body_integrals,
+        two_body_integrals,
+        fermion_qubit_mapping=jordan_wigner,
+        validation=True,
     )
     grouping_term_list = almost_optimal_grouper.group_term_list
     # 定数項をグループ先頭へ（OpenFermion FermionOperator の空文字は恒等項）
-    grouping_term_list[0].insert(0, FermionOperator("", almost_optimal_grouper._const_fermion))
+    grouping_term_list[0].insert(
+        0,
+        FermionOperator("", almost_optimal_grouper._const_fermion),
+    )
     grouped_jw_list: List[List[QubitOperator]] = [
         jordan_wigner(sum(group_term)) for group_term in grouping_term_list
     ]
 
     # FCI を解いて基底状態を構築
-    fci_solver = fci.FCI(mol, mf.mo_coeff)
-    energy, ci_matrix = fci_solver.kernel()
+    fci_solver, energy, ci_matrix, diagnostics = _solve_checked_fci(
+        mol,
+        mf,
+        one_body_integrals,
+        eri_mo,
+    )
     n_qubits = fci_solver.norb * 2
     n_orbitals = fci_solver.norb
     nelec_alpha, nelec_beta = fci_solver.nelec
@@ -85,7 +260,26 @@ def make_fci_vector_from_pyscf_solver_grouper(
             fci_vector[index] = sign * ci_matrix[i][j]
 
     state_vec = fci_vector.reshape(-1, 1)
-    return grouped_jw_list, n_qubits, energy, state_vec
+    return GroupedFCIResult(
+        grouped_jw_list=grouped_jw_list,
+        n_qubits=n_qubits,
+        energy=energy,
+        state_vector=state_vec,
+        diagnostics=diagnostics,
+    )
+
+
+def make_fci_vector_from_pyscf_solver_grouper(
+    molecule_type: int,
+) -> Tuple[List[List[QubitOperator]], int, float, np.ndarray]:
+    """Compatibility wrapper returning the historical four-value tuple."""
+    result = make_checked_fci_result_from_pyscf_solver_grouper(molecule_type)
+    return (
+        result.grouped_jw_list,
+        result.n_qubits,
+        result.energy,
+        result.state_vector,
+    )
 
 
 def make_fci_vector_from_pyscf_solver(
@@ -123,8 +317,12 @@ def make_fci_vector_from_pyscf_solver(
 
     # --- FCI solve ---
     # FCI を解いて基底状態を構築
-    fci_solver = fci.FCI(mol, mf.mo_coeff)
-    energy, ci_matrix = fci_solver.kernel()
+    fci_solver, energy, ci_matrix, _ = _solve_checked_fci(
+        mol,
+        mf,
+        one_body,
+        eri_mo,
+    )
     num_orbitals = fci_solver.norb
     n_qubits = num_orbitals * 2
     nelec_alpha, nelec_beta = fci_solver.nelec

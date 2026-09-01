@@ -35,9 +35,11 @@ from trotterlib.config import (
 )
 from trotterlib.cost_validation import combined_time_grid
 from trotterlib.processed_cost import morales_yp8m8_hchain_costs
-from trotterlib.qiskit_time_evolution_grouping import tEvolution_vector_grouper
+from trotterlib.qiskit_time_evolution_grouping import (
+    tEvolution_vectors_grouper_optimized,
+)
 from trotterlib.qiskit_time_evolution_pyscf import (
-    make_fci_vector_from_pyscf_solver_grouper,
+    make_checked_fci_result_from_pyscf_solver_grouper,
 )
 from trotterlib.qiskit_time_evolution_utils import available_aer_devices
 
@@ -49,6 +51,7 @@ DEFAULT_OUTPUT_DIR = Path("artifacts/reviewer_response/morales_qic2025")
 
 
 def _prepare_system(h_chain: int) -> dict[str, Any]:
+    ground_state_diagnostics: dict[str, Any] | None = None
     with contextlib.redirect_stdout(io.StringIO()):
         hamiltonian, _, ham_name, num_qubits = jw_hamiltonian_maker(h_chain)
 
@@ -57,9 +60,14 @@ def _prepare_system(h_chain: int) -> dict[str, Any]:
             grouped_operators, _ = min_hamiltonian_grouper(hamiltonian, ham_name)
             groups = [[operator] for operator in grouped_operators]
         else:
-            groups, num_qubits, energy, state = (
-                make_fci_vector_from_pyscf_solver_grouper(h_chain)
+            fci_result = make_checked_fci_result_from_pyscf_solver_grouper(
+                h_chain
             )
+            groups = fci_result.grouped_jw_list
+            num_qubits = fci_result.n_qubits
+            energy = fci_result.energy
+            state = fci_result.state_vector
+            ground_state_diagnostics = fci_result.diagnostics
 
     constant = float(np.real(hamiltonian.terms.get((), 0.0)))
     return {
@@ -69,6 +77,7 @@ def _prepare_system(h_chain: int) -> dict[str, Any]:
         "energy_without_constant": float(energy - constant),
         "state": np.asarray(state, dtype=complex).reshape(-1, 1),
         "constant": constant,
+        "ground_state_diagnostics": ground_state_diagnostics,
     }
 
 
@@ -89,16 +98,21 @@ def _evaluate_label(
     pauli_rotations_per_step = None
     started = time.perf_counter()
 
-    for evolution_time in times:
-        # PauliEvolutionGate implements exp(-i H t).  Passing -t follows the
-        # sign convention of the submitted calculation code.
-        _, evolved, rotation_count = tEvolution_vector_grouper(
-            system["groups"],
-            -float(evolution_time),
-            int(system["num_qubits"]),
-            state_column,
-            label,
-        )
+    # PauliEvolutionGate implements exp(-i H t). Passing -t follows the sign
+    # convention of the submitted calculation code. The batch path converts
+    # cliques once and, on GPU, transpiles one parameterized circuit body.
+    evolution_results, execution_profile = tEvolution_vectors_grouper_optimized(
+        system["groups"],
+        [-float(evolution_time) for evolution_time in times],
+        int(system["num_qubits"]),
+        state_column,
+        label,
+    )
+    for evolution_time, (_, evolved, rotation_count) in zip(
+        times,
+        evolution_results,
+        strict=True,
+    ):
         if pauli_rotations_per_step is None:
             pauli_rotations_per_step = int(rotation_count)
         elif pauli_rotations_per_step != int(rotation_count):
@@ -164,6 +178,7 @@ def _evaluate_label(
         "label": label,
         "formal_order": order,
         "elapsed_seconds": time.perf_counter() - started,
+        "execution_profile": execution_profile,
         "pauli_rotations_per_step": pauli_rotations_per_step,
         "asymptotic_pauli_rotations_per_kernel_step": (
             processed_components.kernel
@@ -236,6 +251,14 @@ def run_system(
             f"H{h_chain}: {label} alpha={results[-1]['fixed_order_alpha']:.6e}",
             flush=True,
         )
+        execution_profile = results[-1]["execution_profile"]
+        print(
+            f"H{h_chain}: {label} strategy="
+            f"{execution_profile['execution_strategy']} "
+            f"processes={execution_profile['processes']} "
+            f"target_gpus={execution_profile.get('target_gpus', [])}",
+            flush=True,
+        )
 
     comparison = None
     result_by_label = {result["label"]: result for result in results}
@@ -303,6 +326,9 @@ def run_system(
             "constant_hartree": system["constant"],
             "ground_energy_without_constant_hartree": system[
                 "energy_without_constant"
+            ],
+            "ground_state_diagnostics": system[
+                "ground_state_diagnostics"
             ],
         },
         "calculation": {

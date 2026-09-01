@@ -96,9 +96,13 @@ QISKIT_AER_TARGET_GPUS = (
 if any(device_id < 0 for device_id in QISKIT_AER_TARGET_GPUS):
     raise ValueError("TROTTER_QISKIT_TARGET_GPUS must contain non-negative IDs")
 
-# A single process avoids loading an independent statevector into the same GPU
-# from every time-point worker. CPU calculations retain the previous default.
-_default_pool_processes = 1 if QISKIT_SIMULATOR_DEVICE == "GPU" else 32
+# Use at most one time-point worker per explicitly selected GPU. With no
+# explicit target list, retain the safe single-GPU default.
+_default_pool_processes = (
+    max(1, len(QISKIT_AER_TARGET_GPUS))
+    if QISKIT_SIMULATOR_DEVICE == "GPU"
+    else 32
+)
 POOL_PROCESSES = int(
     os.environ.get("TROTTER_POOL_PROCESSES", str(_default_pool_processes))
 )  # :contentReference[oaicite:6]{index=6}

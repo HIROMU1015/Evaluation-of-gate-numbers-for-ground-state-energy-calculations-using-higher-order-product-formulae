@@ -1,13 +1,16 @@
 import ctypes
+from dataclasses import dataclass
 from functools import lru_cache
 import os
 from pathlib import Path
 import sys
+from time import perf_counter
 from typing import List, Tuple
 
 import numpy as np
 
 from qiskit import QuantumCircuit, transpile
+from qiskit.circuit import Parameter
 from qiskit.quantum_info import SparsePauliOp, Statevector
 
 from .config import (
@@ -23,6 +26,30 @@ from .product_formula import _get_w_list as _pf_get_w_list
 _CUDA_PRELOAD_HANDLES: list[object] = []
 _CUDA_PRELOAD_ERRORS: Tuple[str, ...] = ()
 _AER_RUNTIME_PREPARED = False
+
+_AER_PARAMETERIZED_BASIS_GATES = (
+    "unitary",
+    "u",
+    "cx",
+    "rz",
+    "p",
+    "x",
+    "sx",
+    "id",
+)
+
+
+@dataclass(frozen=True)
+class AerParameterizedTemplate:
+    """Aer-safe circuit body transpiled once with one time parameter."""
+
+    circuit: QuantumCircuit
+    parameter_name: str
+    num_qubits: int
+    optimization_level: int
+    input_num_instructions: int
+    transpiled_num_instructions: int
+    prepare_profile: dict[str, object]
 
 
 def _prepare_aer_runtime() -> None:
@@ -85,6 +112,13 @@ def _prepare_aer_runtime() -> None:
     _CUDA_PRELOAD_ERRORS = tuple(errors)
 
 
+# Match the reference GPU runner's import contract: importing the project
+# module is sufficient to prepare the CUDA wheel libraries before a caller
+# imports qiskit_aer.  The operation is process-local and is a no-op when the
+# active environment does not contain the optional CUDA wheels.
+_prepare_aer_runtime()
+
+
 def free_var(name: str, scope: dict) -> None:
     """ローカル変数を解放して GC を促す（メモリ圧を下げるための補助）。"""
     # スコープから削除して GC を促進
@@ -135,9 +169,149 @@ def _aer_simulator(
         "device": normalized_device,
         "precision": precision,
     }
+    if normalized_device == "GPU":
+        # The body circuit is already decomposed and transpiled. Repeating
+        # Aer's host-side fusion analysis for every time value is expensive.
+        options["fusion_enable"] = False
+    simulator = AerSimulator(**options)
     if normalized_device == "GPU" and target_gpus:
-        options["target_gpus"] = list(target_gpus)
-    return AerSimulator(**options)
+        # qiskit-aer-gpu 0.15.1 does not expose target_gpus. Newer builds may
+        # support it, so set it only after inspecting the actual backend.
+        if "target_gpus" not in vars(simulator.options):
+            raise RuntimeError(
+                "This Qiskit Aer build does not support target_gpus. "
+                "Select one GPU per process with CUDA_VISIBLE_DEVICES instead."
+            )
+        simulator.set_options(target_gpus=list(target_gpus))
+    return simulator
+
+
+def _find_parameter(circuit: QuantumCircuit, parameter_name: str) -> Parameter:
+    matches = [
+        parameter
+        for parameter in circuit.parameters
+        if getattr(parameter, "name", None) == parameter_name
+    ]
+    if len(matches) != 1:
+        raise ValueError(
+            "Parameterized Aer circuit must contain exactly one parameter "
+            f"named {parameter_name!r}; found {len(matches)}."
+        )
+    return matches[0]
+
+
+def build_parameterized_aer_template(
+    circuit: QuantumCircuit,
+    *,
+    parameter_name: str,
+    device: str = "GPU",
+    optimization_level: int = 0,
+) -> AerParameterizedTemplate:
+    """Transpile a one-parameter circuit body once for repeated Aer runs."""
+    started = perf_counter()
+    normalized_device = device.upper()
+    if normalized_device not in available_aer_devices():
+        raise RuntimeError(
+            f"Requested Aer device {normalized_device!r} is not available."
+        )
+    _find_parameter(circuit, parameter_name)
+
+    transpile_started = perf_counter()
+    compiled = transpile(
+        circuit,
+        basis_gates=list(_AER_PARAMETERIZED_BASIS_GATES),
+        optimization_level=int(optimization_level),
+    )
+    transpile_seconds = perf_counter() - transpile_started
+    _find_parameter(compiled, parameter_name)
+
+    unsupported = sorted(
+        {
+            getattr(instruction.operation, "name", "")
+            for instruction in compiled.data
+        }
+        & {"PauliEvolution", "pauli_evolution", "rzz", "xx_plus_yy"}
+    )
+    if unsupported:
+        raise ValueError(
+            "Aer template transpilation left unsupported instructions: "
+            f"{unsupported}"
+        )
+
+    profile: dict[str, object] = {
+        "execution_strategy": "pretranspiled_parameterized_body",
+        "device": normalized_device,
+        "optimization_level": int(optimization_level),
+        "input_num_instructions": int(len(circuit.data)),
+        "transpiled_num_instructions": int(len(compiled.data)),
+        "transpile_seconds": float(transpile_seconds),
+        "total_seconds": float(perf_counter() - started),
+    }
+    return AerParameterizedTemplate(
+        circuit=compiled,
+        parameter_name=str(parameter_name),
+        num_qubits=int(circuit.num_qubits),
+        optimization_level=int(optimization_level),
+        input_num_instructions=int(len(circuit.data)),
+        transpiled_num_instructions=int(len(compiled.data)),
+        prepare_profile=profile,
+    )
+
+
+def run_parameterized_aer_template(
+    template: AerParameterizedTemplate,
+    eigenvector: np.ndarray,
+    *,
+    parameter_value: float,
+    device: str = "GPU",
+    target_gpus: Tuple[int, ...] = (),
+) -> tuple[Statevector, dict[str, object]]:
+    """Bind one value and run a pretranspiled circuit body without retranspiling."""
+    started = perf_counter()
+    initial_state = np.asarray(eigenvector, dtype=complex).reshape(-1)
+    expected_size = 1 << int(template.num_qubits)
+    if initial_state.size != expected_size:
+        raise ValueError(
+            f"Initial state has size {initial_state.size}, expected {expected_size}"
+        )
+
+    backend = _aer_simulator(
+        device.upper(),
+        QISKIT_AER_METHOD,
+        QISKIT_AER_PRECISION,
+        tuple(int(value) for value in target_gpus),
+    )
+
+    bind_started = perf_counter()
+    simulation_circuit = QuantumCircuit(template.num_qubits)
+    simulation_circuit.set_statevector(initial_state)
+    simulation_circuit.compose(template.circuit, inplace=True, copy=False)
+    simulation_circuit.save_statevector()
+    parameter = _find_parameter(simulation_circuit, template.parameter_name)
+    bound_circuit = simulation_circuit.assign_parameters(
+        {parameter: float(parameter_value)},
+        inplace=False,
+    )
+    bind_seconds = perf_counter() - bind_started
+
+    run_started = perf_counter()
+    result = backend.run(bound_circuit).result()
+    run_seconds = perf_counter() - run_started
+    if not result.success:
+        raise RuntimeError(f"Aer simulation failed: {result.status}")
+    statevector = Statevector(
+        np.asarray(result.get_statevector(0), dtype=complex)
+    )
+    profile: dict[str, object] = {
+        "execution_strategy": "pretranspiled_parameterized_body",
+        "device": device.upper(),
+        "target_gpus": [int(value) for value in target_gpus],
+        "parameter_value": float(parameter_value),
+        "bind_seconds": float(bind_seconds),
+        "simulator_run_seconds": float(run_seconds),
+        "total_seconds": float(perf_counter() - started),
+    }
+    return statevector, profile
 
 
 def _apply_time_evolution_aer(
