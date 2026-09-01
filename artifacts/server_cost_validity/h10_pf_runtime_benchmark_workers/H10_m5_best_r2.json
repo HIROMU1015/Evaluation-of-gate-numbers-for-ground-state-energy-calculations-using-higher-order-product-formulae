@@ -1,0 +1,432 @@
+{
+  "benchmark": "H-chain grouped PF statevector runtime",
+  "environment": {
+    "aer_available_devices": [
+      "CPU",
+      "GPU"
+    ],
+    "cuda_visible_devices": "2",
+    "ffsim_available": false,
+    "ffsim_decision": "not installed; no package installation performed",
+    "gpu": {
+      "driver_version": "560.35.05",
+      "memory_total_mib": 40960,
+      "memory_used_mib": 1,
+      "name": "NVIDIA A100-SXM4-40GB",
+      "physical_gpu_id": 2,
+      "utilization_percent": 0,
+      "uuid": "GPU-43a18e74-6ec8-53f9-43a4-b97d4c2fb7d3"
+    },
+    "packages": {
+      "ffsim": null,
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "timestamp": "2026-09-01T16:38:41.795156+09:00"
+  },
+  "finished_at": "2026-09-01T16:51:04.871230+09:00",
+  "h_chain": 10,
+  "initialization": {
+    "clique_conversion_seconds": 0.10926346099950024,
+    "cpu_processes_for_clique_conversion": 4,
+    "environment_seconds": 0.1110551050005597,
+    "grouping_seconds": 41.64952305499901,
+    "hamiltonian_seconds": 3.4529055210005026,
+    "total_seconds": 45.32274714199957
+  },
+  "label": "4th(m5_best)",
+  "max_successful_r": 2,
+  "measurement_repeats": 1,
+  "pf_single_step": {
+    "pauli_rotations": 192160,
+    "rz_layer_depth": 34632
+  },
+  "precision": "double",
+  "r16_policy": {
+    "executed": false,
+    "threshold_seconds": 60.0
+  },
+  "requested_r_values": [
+    2
+  ],
+  "results": [
+    {
+      "actual_merged_pauli_rotations": 310146,
+      "assembly_seconds": 2.758801666001091,
+      "check": {
+        "initial_state_overlap_probability": 0.8172130440585834,
+        "norm": 0.9999999999673399
+      },
+      "error": null,
+      "finished_at": "2026-09-01T16:51:03.496210+09:00",
+      "gpu_memory": {
+        "baseline_mib": 1,
+        "errors": [],
+        "peak_delta_mib": 442,
+        "peak_used_mib": 443,
+        "sample_count": 3476,
+        "sampling_interval_ms": 200
+      },
+      "high_level_pf_instruction_count": 5501,
+      "maximum_wall_clock_seconds": 284.505995194002,
+      "measurements": [
+        {
+          "aer_experiment_time_taken_seconds": 82.288237187,
+          "aer_metadata": {
+            "active_input_qubits": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "batched_shots_optimization": false,
+            "cuStateVec_enable": false,
+            "device": "GPU",
+            "fusion": {
+              "enabled": false
+            },
+            "input_qubit_map": [
+              [
+                19,
+                19
+              ],
+              [
+                18,
+                18
+              ],
+              [
+                17,
+                17
+              ],
+              [
+                16,
+                16
+              ],
+              [
+                15,
+                15
+              ],
+              [
+                14,
+                14
+              ],
+              [
+                13,
+                13
+              ],
+              [
+                0,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                4,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                6,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                8,
+                8
+              ],
+              [
+                9,
+                9
+              ],
+              [
+                10,
+                10
+              ],
+              [
+                11,
+                11
+              ],
+              [
+                12,
+                12
+              ]
+            ],
+            "max_gpu_memory_mb": 40444,
+            "max_memory_mb": 1031845,
+            "measure_sampling": true,
+            "method": "statevector",
+            "noise": "ideal",
+            "num_bind_params": 1,
+            "num_clbits": 0,
+            "num_qubits": 20,
+            "parallel_shots": 1,
+            "parallel_state_update": 4,
+            "remapped_qubits": false,
+            "required_memory_mb": 16,
+            "result_subtypes": {
+              "initial_amplitude": "single",
+              "norm_check": "average"
+            },
+            "result_types": {
+              "initial_amplitude": "save_amplitudes",
+              "norm_check": "save_expval"
+            },
+            "runtime_parameter_bind": false,
+            "target_gpus": [
+              0
+            ],
+            "time_taken": 82.288237187
+          },
+          "aer_result_time_taken_seconds": 281.7329897880554,
+          "host_submission_and_scalar_result_overhead_seconds": 202.21775800700203,
+          "initial_state_amplitude": {
+            "imag": -0.14052999784003453,
+            "real": -0.8930086022909652
+          },
+          "initial_state_overlap_probability": 0.8172130440585834,
+          "norm_check": 0.9999999999673399,
+          "wall_clock_seconds": 284.505995194002
+        }
+      ],
+      "median_wall_clock_seconds": 284.505995194002,
+      "minimum_wall_clock_seconds": 284.505995194002,
+      "nominal_pauli_rotations_r_times_single_step": 384320,
+      "pf_single_step_pauli_rotations": 192160,
+      "pf_step_count": 2,
+      "r": 2,
+      "s2_block_count": 22,
+      "started_at": "2026-09-01T16:39:27.118954+09:00",
+      "substep_time": 0.5,
+      "success": true,
+      "transpile_seconds": 111.95960405000005,
+      "transpiled_instruction_count": 8020206,
+      "warmup": {
+        "aer_experiment_time_taken_seconds": 82.893913335,
+        "aer_metadata": {
+          "active_input_qubits": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "batched_shots_optimization": false,
+          "cuStateVec_enable": false,
+          "device": "GPU",
+          "fusion": {
+            "enabled": false
+          },
+          "input_qubit_map": [
+            [
+              19,
+              19
+            ],
+            [
+              18,
+              18
+            ],
+            [
+              17,
+              17
+            ],
+            [
+              16,
+              16
+            ],
+            [
+              15,
+              15
+            ],
+            [
+              14,
+              14
+            ],
+            [
+              13,
+              13
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              4,
+              4
+            ],
+            [
+              5,
+              5
+            ],
+            [
+              6,
+              6
+            ],
+            [
+              7,
+              7
+            ],
+            [
+              8,
+              8
+            ],
+            [
+              9,
+              9
+            ],
+            [
+              10,
+              10
+            ],
+            [
+              11,
+              11
+            ],
+            [
+              12,
+              12
+            ]
+          ],
+          "max_gpu_memory_mb": 40444,
+          "max_memory_mb": 1031845,
+          "measure_sampling": true,
+          "method": "statevector",
+          "noise": "ideal",
+          "num_bind_params": 1,
+          "num_clbits": 0,
+          "num_qubits": 20,
+          "parallel_shots": 1,
+          "parallel_state_update": 4,
+          "remapped_qubits": false,
+          "required_memory_mb": 16,
+          "result_subtypes": {
+            "initial_amplitude": "single",
+            "norm_check": "average"
+          },
+          "result_types": {
+            "initial_amplitude": "save_amplitudes",
+            "norm_check": "save_expval"
+          },
+          "runtime_parameter_bind": false,
+          "target_gpus": [
+            0
+          ],
+          "time_taken": 82.893913335
+        },
+        "aer_result_time_taken_seconds": 279.31097292900085,
+        "host_submission_and_scalar_result_overhead_seconds": 199.1330763439978,
+        "initial_state_amplitude": {
+          "imag": -0.14052999784003453,
+          "real": -0.8930086022909652
+        },
+        "initial_state_overlap_probability": 0.8172130440585834,
+        "norm_check": 0.9999999999673399,
+        "wall_clock_seconds": 282.0269896789978
+      }
+    }
+  ],
+  "schema_version": 1,
+  "started_at": "2026-09-01T16:38:41.795048+09:00",
+  "state_transfer_policy": {
+    "full_statevector_host_transfer": false,
+    "input": "Hartree-Fock basis state prepared with X gates in the Aer circuit",
+    "output": "only overlap amplitude and identity expectation scalar"
+  },
+  "status": "complete",
+  "system": {
+    "basis": "sto-3g",
+    "commuting_group_count": 126,
+    "distance_angstrom": 1.0,
+    "electron_count": 10,
+    "grouping_name": "H10_sto-3g_singlet_distance_100_charge_0_grouping",
+    "hamiltonian_name": "H10_sto-3g_singlet_distance_100_charge_0",
+    "hamiltonian_term_count": 7151,
+    "hf_energy_hartree": -5.214068803028271,
+    "initial_basis_index": 1023,
+    "initial_state": "Hartree-Fock computational basis state",
+    "num_qubits": 20,
+    "occupied_qubits": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "one_complex128_statevector_bytes": 16777216,
+    "one_complex128_statevector_gib": 0.015625,
+    "state_dimension": 1048576
+  },
+  "time": 1.0,
+  "time_source": "representative t=1.0 matching the H12 runtime benchmark"
+}
