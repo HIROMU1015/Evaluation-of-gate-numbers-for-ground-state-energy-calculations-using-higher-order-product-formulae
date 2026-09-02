@@ -1,0 +1,863 @@
+{
+  "current_target_error_kcal_per_mol": 0.1,
+  "current_target_records": [
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": false,
+      "direct_to_model_cost_ratio_at_t_use": 0.9980137325789445,
+      "h_chain": 2,
+      "label": "4th(m5_best)",
+      "model_cost_penalty_from_t_use_cap": 1.3889022110331801,
+      "t_ana": 3.396384428208593,
+      "t_ana_over_t_valid": 1.6939580046742648,
+      "t_valid": 2.004999190556493,
+      "target_error_kcal_per_mol": 0.1
+    },
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": false,
+      "direct_to_model_cost_ratio_at_t_use": 0.9999998956317251,
+      "h_chain": 2,
+      "label": "8th(Morales-Y8m10b)",
+      "model_cost_penalty_from_t_use_cap": 3.3166342697898594,
+      "t_ana": 6.087465438060093,
+      "t_ana_over_t_valid": 3.731202517378122,
+      "t_valid": 1.6315022863829147,
+      "target_error_kcal_per_mol": 0.1
+    },
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": false,
+      "direct_to_model_cost_ratio_at_t_use": 0.9978782697473428,
+      "h_chain": 4,
+      "label": "4th(m5_best)",
+      "model_cost_penalty_from_t_use_cap": 1.4040379299110723,
+      "t_ana": 2.310360393326797,
+      "t_ana_over_t_valid": 1.7144168180177475,
+      "t_valid": 1.347607168248673,
+      "target_error_kcal_per_mol": 0.1
+    },
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": false,
+      "direct_to_model_cost_ratio_at_t_use": 0.9999993068085992,
+      "h_chain": 4,
+      "label": "8th(Morales-Y8m10b)",
+      "model_cost_penalty_from_t_use_cap": 2.8030266378599777,
+      "t_ana": 4.624051831549583,
+      "t_ana_over_t_valid": 3.1533691300068294,
+      "t_valid": 1.4663845686659487,
+      "target_error_kcal_per_mol": 0.1
+    },
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": false,
+      "direct_to_model_cost_ratio_at_t_use": 0.9994389645067374,
+      "h_chain": 5,
+      "label": "4th(m5_best)",
+      "model_cost_penalty_from_t_use_cap": 1.8114402153188802,
+      "t_ana": 2.5939955339024836,
+      "t_ana_over_t_valid": 2.2465206542244998,
+      "t_valid": 1.154672461623965,
+      "target_error_kcal_per_mol": 0.1
+    },
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": false,
+      "direct_to_model_cost_ratio_at_t_use": 0.9999990165522393,
+      "h_chain": 5,
+      "label": "8th(Morales-Y8m10b)",
+      "model_cost_penalty_from_t_use_cap": 2.7830261852439486,
+      "t_ana": 5.100347034826394,
+      "t_ana_over_t_valid": 3.130866778425055,
+      "t_valid": 1.6290527179160472,
+      "target_error_kcal_per_mol": 0.1
+    },
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": false,
+      "direct_to_model_cost_ratio_at_t_use": 0.9990666674519924,
+      "h_chain": 6,
+      "label": "4th(m5_best)",
+      "model_cost_penalty_from_t_use_cap": 1.620253600256684,
+      "t_ana": 2.084651261955204,
+      "t_ana_over_t_valid": 2.0000005665003964,
+      "t_valid": 1.042325335738744,
+      "target_error_kcal_per_mol": 0.1
+    },
+    {
+      "analytic_schedule_is_direct_valid": false,
+      "dense_boundary_override_used": true,
+      "direct_to_model_cost_ratio_at_t_use": 1.000006843754375,
+      "h_chain": 6,
+      "label": "8th(Morales-Y8m10b)",
+      "model_cost_penalty_from_t_use_cap": 1.8718843773225875,
+      "t_ana": 3.811546793058564,
+      "t_ana_over_t_valid": 2.1052635551195427,
+      "t_valid": 1.8104843850973964,
+      "target_error_kcal_per_mol": 0.1
+    }
+  ],
+  "decision_rules": {
+    "analytic_schedule": "Require t_ana <= t_valid",
+    "direct_validity": "Starting from the short-time regime, require abs(e_direct/(alpha*t^p)-1) <= 0.10 continuously",
+    "expanded_model": "Report whether p,p+2 and p,p+2,p+4 short-time models remain within 10% through t_ana",
+    "holdout_cap": "A claimed conservative cap must not exceed held-out direct t_valid",
+    "same_rules_for_all_formulae": true
+  },
+  "decision_summary": {
+    "4th(m5_best)": {
+      "all_rolling_size_holdouts_pass": false,
+      "legacy_h7_combined_cap_holdout_passes": true,
+      "legacy_h7_combined_cap_over_actual": 0.8528348409775776,
+      "num_direct_valid_target_schedules": 6,
+      "num_systems_where_three_term_expansion_reaches_t_ana": 2,
+      "num_systems_with_remainder_test": 4,
+      "num_target_schedules": 24,
+      "recommended_current_role": "short-time/asymptotic reference until the common cap rule passes",
+      "unqualified_C_model_at_t_ana_supported_at_0p1": false
+    },
+    "8th(Morales-Y8m10b)": {
+      "all_rolling_size_holdouts_pass": false,
+      "legacy_h7_combined_cap_holdout_passes": false,
+      "legacy_h7_combined_cap_over_actual": 1.389012214182127,
+      "num_direct_valid_target_schedules": 0,
+      "num_systems_where_three_term_expansion_reaches_t_ana": 0,
+      "num_systems_with_remainder_test": 4,
+      "num_target_schedules": 24,
+      "recommended_current_role": "short-time/asymptotic reference until the common cap rule passes",
+      "unqualified_C_model_at_t_ana_supported_at_0p1": false
+    }
+  },
+  "integrated_direct_boundary_overrides": [
+    {
+      "fail_ratio": 0.6834678027776284,
+      "h_chain": 6,
+      "label": "8th(Morales-Y8m10b)",
+      "pass_ratio": 1.0237607781896705,
+      "previous_direct_t_valid": 1.3340414925593596,
+      "source": "artifacts/server_cost_validity/direct_scaling_boundary_H6_Y8.json",
+      "t_fail": 1.905773036944628,
+      "t_pass": 1.8104843850973964
+    },
+    {
+      "fail_ratio": 1.350807106429455,
+      "h_chain": 7,
+      "label": "8th(Morales-Y8m10b)",
+      "pass_ratio": 0.9555697294192822,
+      "previous_direct_t_valid": 0.8758387901793343,
+      "source": "artifacts/server_cost_validity/direct_scaling_boundary_H7_Y8_tmux.json",
+      "t_fail": 1.5327283692596645,
+      "t_pass": 1.4232477714554028
+    }
+  ],
+  "legacy_h7_combined_cap_holdout_before_dense_overrides": {
+    "4th(m5_best)": {
+      "actual_direct_cost_at_t_valid": 302986413.9195108,
+      "actual_direct_t_valid": 1.08711344435804,
+      "observed_proxy_t_valid": 1.08711344435804,
+      "predicted_final_cap": 0.9271282214436756,
+      "predicted_over_actual": 0.8528348409775776,
+      "predicted_robust_model_cost": 353735077.75904274,
+      "prediction_covers_actual": true,
+      "proxy_based_cap": 1.08711344435804,
+      "proxy_safety_factor": 1.0,
+      "size_based_cap": 0.9271282214436756,
+      "size_law": {
+        "exponent": -0.5972502581388708,
+        "prediction": 0.9521279763789706,
+        "prefactor": 3.0438997766802003
+      },
+      "size_safety": {
+        "factor": 0.9737432828826527,
+        "records": [
+          {
+            "actual": 1.154672461623965,
+            "actual_over_prediction": 0.9737432828826527,
+            "prediction": 1.1858078837840018,
+            "target_h_chain": 5
+          },
+          {
+            "actual": 1.042325335738744,
+            "actual_over_prediction": 0.9968522843870803,
+            "prediction": 1.0456166395602164,
+            "target_h_chain": 6
+          }
+        ]
+      },
+      "training_h_chains": [
+        2,
+        4,
+        5,
+        6
+      ]
+    },
+    "8th(Morales-Y8m10b)": {
+      "actual_direct_cost_at_t_valid": 708838729.4030002,
+      "actual_direct_t_valid": 0.8758387901793343,
+      "observed_proxy_t_valid": 1.532717882813835,
+      "predicted_final_cap": 1.2165507772135926,
+      "predicted_over_actual": 1.389012214182127,
+      "predicted_robust_model_cost": 510320634.99339986,
+      "prediction_covers_actual": false,
+      "proxy_based_cap": 1.532717882813835,
+      "proxy_safety_factor": 1.0,
+      "size_based_cap": 1.2165507772135926,
+      "size_law": {
+        "exponent": -0.1253508073598188,
+        "prediction": 1.4048877957636927,
+        "prefactor": 1.7929796541214833
+      },
+      "size_safety": {
+        "factor": 0.8659415939706981,
+        "records": [
+          {
+            "actual": 1.6290527179160472,
+            "actual_over_prediction": 1.1497550934664007,
+            "prediction": 1.416869320408584,
+            "target_h_chain": 5
+          },
+          {
+            "actual": 1.3340414925593596,
+            "actual_over_prediction": 0.8659415939706981,
+            "prediction": 1.54056751846534,
+            "target_h_chain": 6
+          }
+        ]
+      },
+      "training_h_chains": [
+        2,
+        4,
+        5,
+        6
+      ]
+    }
+  },
+  "local_order_near_analytic_time": [
+    {
+      "direct_to_model_error_ratio_at_t_ana": 0.7228073624205504,
+      "formal_order": 4,
+      "h_chain": 2,
+      "label": "4th(m5_best)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": 1.051339173755957,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 3.3999547780799113,
+      "local_order_median": 2.9785968941351637,
+      "local_order_minimum": 2.065832025348976,
+      "num_local_order_intervals": 8,
+      "signed_error_changes_sign_in_local_intervals": 0
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 0.02350493484706352,
+      "formal_order": 8,
+      "h_chain": 2,
+      "label": "8th(Morales-Y8m10b)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": 1.1031388030895732,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 34.91323549372662,
+      "local_order_median": 19.132747429741038,
+      "local_order_minimum": -52.94391154351409,
+      "num_local_order_intervals": 8,
+      "signed_error_changes_sign_in_local_intervals": 1
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 0.5831907279651137,
+      "formal_order": 4,
+      "h_chain": 4,
+      "label": "4th(m5_best)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": 1.0946084855637415,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 43.50401189693217,
+      "local_order_median": 1.1320816954602537,
+      "local_order_minimum": -21.029393415511873,
+      "num_local_order_intervals": 8,
+      "signed_error_changes_sign_in_local_intervals": 0
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 1.2652062001161106,
+      "formal_order": 8,
+      "h_chain": 4,
+      "label": "8th(Morales-Y8m10b)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": 1.1826304563784678,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 116.46448559136127,
+      "local_order_median": 16.9714143401916,
+      "local_order_minimum": -92.34672009947106,
+      "num_local_order_intervals": 8,
+      "signed_error_changes_sign_in_local_intervals": 6
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 0.8515991122415726,
+      "formal_order": 4,
+      "h_chain": 5,
+      "label": "4th(m5_best)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": 1.581762972020178,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 80.37055362664124,
+      "local_order_median": 0.5984970687023424,
+      "local_order_minimum": -31.552975514928207,
+      "num_local_order_intervals": 8,
+      "signed_error_changes_sign_in_local_intervals": 4
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 1.8830093780645671,
+      "formal_order": 8,
+      "h_chain": 5,
+      "label": "8th(Morales-Y8m10b)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": 1.8590107183955393,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 68.58491244353814,
+      "local_order_median": 3.0820312151189624,
+      "local_order_minimum": -33.765912139761404,
+      "num_local_order_intervals": 8,
+      "signed_error_changes_sign_in_local_intervals": 2
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 0.37730945466596727,
+      "formal_order": 4,
+      "h_chain": 6,
+      "label": "4th(m5_best)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": null,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 8.034855245671407,
+      "local_order_median": 2.856020402104175,
+      "local_order_minimum": -2.322814441463057,
+      "num_local_order_intervals": 2,
+      "signed_error_changes_sign_in_local_intervals": 0
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 3.355406516836459,
+      "formal_order": 8,
+      "h_chain": 6,
+      "label": "8th(Morales-Y8m10b)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": null,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 16.713823283548532,
+      "local_order_median": 5.506026853069324,
+      "local_order_minimum": -5.701769577409884,
+      "num_local_order_intervals": 2,
+      "signed_error_changes_sign_in_local_intervals": 2
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 0.49531312023416485,
+      "formal_order": 4,
+      "h_chain": 7,
+      "label": "4th(m5_best)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": null,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 1.9153379396479082,
+      "local_order_median": 1.7729055654427244,
+      "local_order_minimum": 1.6304731912375405,
+      "num_local_order_intervals": 2,
+      "signed_error_changes_sign_in_local_intervals": 0
+    },
+    {
+      "direct_to_model_error_ratio_at_t_ana": 0.14137054249363754,
+      "formal_order": 8,
+      "h_chain": 7,
+      "label": "8th(Morales-Y8m10b)",
+      "local_cost_max_over_min_0p95_to_1p05_t_ana": null,
+      "local_order_interval_relative_to_t_ana": [
+        0.85,
+        1.15
+      ],
+      "local_order_maximum": 26.09007711036083,
+      "local_order_median": 11.104808593575031,
+      "local_order_minimum": -3.8804599232107684,
+      "num_local_order_intervals": 2,
+      "signed_error_changes_sign_in_local_intervals": 0
+    }
+  ],
+  "next_order_remainder_checks": [
+    {
+      "h_chain": 2,
+      "label": "4th(m5_best)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H2_H4_H5.json",
+      "three_term_reaches_t_ana": true,
+      "two_term_reaches_t_ana": true,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.65,
+        "three_term": 1.2,
+        "two_term": 1.1
+      }
+    },
+    {
+      "h_chain": 2,
+      "label": "8th(Morales-Y8m10b)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H2_H4_H5.json",
+      "three_term_reaches_t_ana": false,
+      "two_term_reaches_t_ana": false,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.35000000000000003,
+        "three_term": 0.8500000000000001,
+        "two_term": 0.65
+      }
+    },
+    {
+      "h_chain": 4,
+      "label": "4th(m5_best)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H2_H4_H5.json",
+      "three_term_reaches_t_ana": true,
+      "two_term_reaches_t_ana": false,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.6000000000000001,
+        "three_term": 1.0,
+        "two_term": 0.95
+      }
+    },
+    {
+      "h_chain": 4,
+      "label": "8th(Morales-Y8m10b)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H2_H4_H5.json",
+      "three_term_reaches_t_ana": false,
+      "two_term_reaches_t_ana": false,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.35000000000000003,
+        "three_term": 0.6000000000000001,
+        "two_term": 0.55
+      }
+    },
+    {
+      "h_chain": 5,
+      "label": "4th(m5_best)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H2_H4_H5.json",
+      "three_term_reaches_t_ana": false,
+      "two_term_reaches_t_ana": false,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.5,
+        "three_term": 0.8,
+        "two_term": 0.75
+      }
+    },
+    {
+      "h_chain": 5,
+      "label": "8th(Morales-Y8m10b)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H2_H4_H5.json",
+      "three_term_reaches_t_ana": false,
+      "two_term_reaches_t_ana": false,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.30000000000000004,
+        "three_term": 0.65,
+        "two_term": 0.55
+      }
+    },
+    {
+      "h_chain": 6,
+      "label": "4th(m5_best)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H6.json",
+      "three_term_reaches_t_ana": false,
+      "two_term_reaches_t_ana": false,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.55,
+        "three_term": 0.8,
+        "two_term": 0.8
+      }
+    },
+    {
+      "h_chain": 6,
+      "label": "8th(Morales-Y8m10b)",
+      "leading_reaches_t_ana": false,
+      "source": "artifacts/server_cost_validity/next_order_remainder_validation_H6.json",
+      "three_term_reaches_t_ana": false,
+      "two_term_reaches_t_ana": false,
+      "valid_until_relative_to_t_ana": {
+        "leading": 0.45,
+        "three_term": 0.45,
+        "two_term": 0.45
+      }
+    }
+  ],
+  "purpose": "Apply common falsification criteria to finite-time PF cost estimates for m5 and Y8m10b",
+  "rolling_size_holdouts": {
+    "4th(m5_best)": [
+      {
+        "actual_direct_t_valid": 1.154672461623965,
+        "cap_covers_actual": false,
+        "cap_over_actual": 1.0269647222003087,
+        "cap_status": "unresolved_bracket",
+        "first_direct_t_fail": 1.4157841377498583,
+        "prior_only_safety_factor": 1.0,
+        "safety_adjusted_cap": 1.1858078837840018,
+        "size_law": {
+          "exponent": -0.5732016466092975,
+          "prediction": 1.1858078837840018,
+          "prefactor": 2.9830813080020504
+        },
+        "target_h_chain": 5,
+        "training_h_chains": [
+          2,
+          4
+        ]
+      },
+      {
+        "actual_direct_t_valid": 1.042325335738744,
+        "cap_covers_actual": true,
+        "cap_over_actual": 0.9768180282411287,
+        "cap_status": "verified_safe",
+        "first_direct_t_fail": 1.4592554700342417,
+        "prior_only_safety_factor": 0.9737432828826527,
+        "safety_adjusted_cap": 1.0181621792420925,
+        "size_law": {
+          "exponent": -0.5953339429019452,
+          "prediction": 1.0456166395602164,
+          "prefactor": 3.0383117830374804
+        },
+        "target_h_chain": 6,
+        "training_h_chains": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "actual_direct_t_valid": 1.08711344435804,
+        "cap_covers_actual": true,
+        "cap_over_actual": 0.8528348409775776,
+        "cap_status": "verified_safe",
+        "first_direct_t_fail": 1.5219588221012559,
+        "prior_only_safety_factor": 0.9737432828826527,
+        "safety_adjusted_cap": 0.9271282214436756,
+        "size_law": {
+          "exponent": -0.5972502581388708,
+          "prediction": 0.9521279763789706,
+          "prefactor": 3.0438997766802003
+        },
+        "target_h_chain": 7,
+        "training_h_chains": [
+          2,
+          4,
+          5,
+          6
+        ]
+      }
+    ],
+    "8th(Morales-Y8m10b)": [
+      {
+        "actual_direct_t_valid": 1.6290527179160472,
+        "cap_covers_actual": true,
+        "cap_over_actual": 0.8697504413614698,
+        "cap_status": "verified_safe",
+        "first_direct_t_fail": 1.8340422273944945,
+        "prior_only_safety_factor": 1.0,
+        "safety_adjusted_cap": 1.416869320408584,
+        "size_law": {
+          "exponent": -0.15393750018977806,
+          "prediction": 1.416869320408584,
+          "prefactor": 1.815212576121327
+        },
+        "target_h_chain": 5,
+        "training_h_chains": [
+          2,
+          4
+        ]
+      },
+      {
+        "actual_direct_t_valid": 1.8104843850973964,
+        "cap_covers_actual": true,
+        "cap_over_actual": 0.850914556980542,
+        "cap_status": "verified_safe",
+        "first_direct_t_fail": 1.905773036944628,
+        "prior_only_safety_factor": 1.0,
+        "safety_adjusted_cap": 1.54056751846534,
+        "size_law": {
+          "exponent": -0.03786009395061641,
+          "prediction": 1.54056751846534,
+          "prefactor": 1.6486999180268869
+        },
+        "target_h_chain": 6,
+        "training_h_chains": [
+          2,
+          4,
+          5
+        ]
+      },
+      {
+        "actual_direct_t_valid": 1.4232477714554028,
+        "cap_covers_actual": false,
+        "cap_over_actual": 1.1855814623753747,
+        "cap_status": "failed",
+        "first_direct_t_fail": 1.5327283692596645,
+        "prior_only_safety_factor": 1.0,
+        "safety_adjusted_cap": 1.6873761742045896,
+        "size_law": {
+          "exponent": 0.06027125532993057,
+          "prediction": 1.6873761742045896,
+          "prefactor": 1.5006409478072138
+        },
+        "target_h_chain": 7,
+        "training_h_chains": [
+          2,
+          4,
+          5,
+          6
+        ]
+      }
+    ]
+  },
+  "schema_version": 1,
+  "sources": {
+    "asymptotic_direct": "artifacts/server_cost_validity/asymptotic_cost_small_system_validation.json",
+    "constrained_tuse": "artifacts/server_cost_validity/constrained_tuse_cost_validation_H2_H6.json",
+    "direct_boundary_overrides": [
+      "artifacts/server_cost_validity/direct_scaling_boundary_H6_Y8.json",
+      "artifacts/server_cost_validity/direct_scaling_boundary_H7_Y8_tmux.json"
+    ],
+    "direct_h6_h7": "artifacts/server_cost_validity/direct_scaling_sweep_H6_H7.json",
+    "holdout": "artifacts/server_cost_validity/h7_h8_pf_holdout_validation.json",
+    "remainder": [
+      "artifacts/server_cost_validity/next_order_remainder_validation_H2_H4_H5.json",
+      "artifacts/server_cost_validity/next_order_remainder_validation_H6.json"
+    ],
+    "subdivided_reference": "artifacts/server_cost_validity/subdivided_reference_small_system_validation.json",
+    "wide_time_direct": "artifacts/server_cost_validity/wide_time_cost_analysis.json"
+  },
+  "subdivided_reference_proxy_checks": [
+    {
+      "direct_to_model_error_ratio": 0.9200528987937182,
+      "h_chain": 2,
+      "label": "4th(m5_best)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 1.6646323294133997e-05,
+      "largest_r_relative_magnitude_error_from_direct": 0.002783224512033722,
+      "one_overlap_relative_magnitude_error_from_direct": 0.002766578179092205,
+      "time": 2.004999190556493,
+      "time_kind": "t_use"
+    },
+    {
+      "direct_to_model_error_ratio": 0.7228073624218807,
+      "h_chain": 2,
+      "label": "4th(m5_best)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 2.1177476157778917e-05,
+      "largest_r_relative_magnitude_error_from_direct": 0.032280298052069334,
+      "one_overlap_relative_magnitude_error_from_direct": 0.03230147565132602,
+      "time": 3.396384428208593,
+      "time_kind": "t_ana"
+    },
+    {
+      "direct_to_model_error_ratio": 0.9647142027795397,
+      "h_chain": 2,
+      "label": "8th(Morales-Y8m10b)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 5.836361881373404e-06,
+      "largest_r_relative_magnitude_error_from_direct": 3.7319045229633474e-06,
+      "one_overlap_relative_magnitude_error_from_direct": 2.1699294190380414e-06,
+      "time": 1.6315022863829147,
+      "time_kind": "t_use"
+    },
+    {
+      "direct_to_model_error_ratio": 0.02350493484663638,
+      "h_chain": 2,
+      "label": "8th(Morales-Y8m10b)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 1.532093117947476e-08,
+      "largest_r_relative_magnitude_error_from_direct": 5.567397927829324,
+      "one_overlap_relative_magnitude_error_from_direct": 5.567397943110452,
+      "time": 6.087465438060093,
+      "time_kind": "t_ana"
+    },
+    {
+      "direct_to_model_error_ratio": 0.91028277261595,
+      "h_chain": 4,
+      "label": "4th(m5_best)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 1.6937062283104225e-05,
+      "largest_r_relative_magnitude_error_from_direct": 0.0018404538140179838,
+      "one_overlap_relative_magnitude_error_from_direct": 0.0018235168851638006,
+      "time": 1.347607168248673,
+      "time_kind": "t_use"
+    },
+    {
+      "direct_to_model_error_ratio": 0.5831919601880782,
+      "h_chain": 4,
+      "label": "4th(m5_best)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 2.6417275188191595e-05,
+      "largest_r_relative_magnitude_error_from_direct": 0.2219739080351315,
+      "one_overlap_relative_magnitude_error_from_direct": 0.2220003253321512,
+      "time": 2.310360393326797,
+      "time_kind": "t_ana"
+    },
+    {
+      "direct_to_model_error_ratio": 0.9390050344265055,
+      "h_chain": 4,
+      "label": "8th(Morales-Y8m10b)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 2.8938061729535576e-07,
+      "largest_r_relative_magnitude_error_from_direct": 8.492207987864653e-05,
+      "one_overlap_relative_magnitude_error_from_direct": 8.478852032312023e-05,
+      "time": 1.4663845686659487,
+      "time_kind": "t_use"
+    },
+    {
+      "direct_to_model_error_ratio": 1.2652421044335052,
+      "h_chain": 4,
+      "label": "8th(Morales-Y8m10b)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 1.0341996212444818e-10,
+      "largest_r_relative_magnitude_error_from_direct": 0.9290100920908149,
+      "one_overlap_relative_magnitude_error_from_direct": 0.9290100919767218,
+      "time": 4.624051831549583,
+      "time_kind": "t_ana"
+    },
+    {
+      "direct_to_model_error_ratio": 0.9290712763958033,
+      "h_chain": 5,
+      "label": "4th(m5_best)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 1.661935146706641e-05,
+      "largest_r_relative_magnitude_error_from_direct": 0.002335300736856949,
+      "one_overlap_relative_magnitude_error_from_direct": 0.0023186832042246808,
+      "time": 1.154672461623965,
+      "time_kind": "t_use"
+    },
+    {
+      "direct_to_model_error_ratio": 0.8516041440310641,
+      "h_chain": 5,
+      "label": "4th(m5_best)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 1.8111493952721746e-05,
+      "largest_r_relative_magnitude_error_from_direct": 0.2842847865617849,
+      "one_overlap_relative_magnitude_error_from_direct": 0.28426667497148805,
+      "time": 2.5939955339024836,
+      "time_kind": "t_ana"
+    },
+    {
+      "direct_to_model_error_ratio": 0.9182862926449448,
+      "h_chain": 5,
+      "label": "8th(Morales-Y8m10b)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 1.1754201819987432e-06,
+      "largest_r_relative_magnitude_error_from_direct": 2.6347793416592324e-05,
+      "one_overlap_relative_magnitude_error_from_direct": 2.536102035022303e-05,
+      "time": 1.6290527179160472,
+      "time_kind": "t_use"
+    },
+    {
+      "direct_to_model_error_ratio": 1.8801709101468251,
+      "h_chain": 5,
+      "label": "8th(Morales-Y8m10b)",
+      "largest_r": 16,
+      "largest_r_reference_error_over_coarse": 2.7347163292928484e-10,
+      "largest_r_relative_magnitude_error_from_direct": 0.7453075451180724,
+      "one_overlap_relative_magnitude_error_from_direct": 0.7453075448513075,
+      "time": 5.100347034826394,
+      "time_kind": "t_ana"
+    }
+  ],
+  "target_error_domain": {
+    "4th(m5_best)": {
+      "direct_valid_cases": [
+        {
+          "analytic_schedule_is_direct_valid": true,
+          "dense_boundary_override_used": false,
+          "direct_to_model_cost_ratio_at_t_use": 0.9909668364690077,
+          "h_chain": 2,
+          "model_cost_penalty_from_t_use_cap": 1.0,
+          "t_ana": 1.4135043675209198,
+          "t_ana_over_t_valid": 0.7049899940999965,
+          "t_valid": 2.004999190556493,
+          "target_error_kcal_per_mol": 0.003
+        },
+        {
+          "analytic_schedule_is_direct_valid": true,
+          "dense_boundary_override_used": false,
+          "direct_to_model_cost_ratio_at_t_use": 0.9823834285584487,
+          "h_chain": 2,
+          "model_cost_penalty_from_t_use_cap": 1.0,
+          "t_ana": 1.909927320214686,
+          "t_ana_over_t_valid": 0.9525825891653256,
+          "t_valid": 2.004999190556493,
+          "target_error_kcal_per_mol": 0.01
+        },
+        {
+          "analytic_schedule_is_direct_valid": true,
+          "dense_boundary_override_used": false,
+          "direct_to_model_cost_ratio_at_t_use": 0.9905360911193773,
+          "h_chain": 4,
+          "model_cost_penalty_from_t_use_cap": 1.0,
+          "t_ana": 0.9615238132031063,
+          "t_ana_over_t_valid": 0.7135045255455906,
+          "t_valid": 1.347607168248673,
+          "target_error_kcal_per_mol": 0.003
+        },
+        {
+          "analytic_schedule_is_direct_valid": true,
+          "dense_boundary_override_used": false,
+          "direct_to_model_cost_ratio_at_t_use": 0.9799142256275444,
+          "h_chain": 4,
+          "model_cost_penalty_from_t_use_cap": 1.0,
+          "t_ana": 1.2992111252506873,
+          "t_ana_over_t_valid": 0.9640874253727216,
+          "t_valid": 1.347607168248673,
+          "target_error_kcal_per_mol": 0.01
+        },
+        {
+          "analytic_schedule_is_direct_valid": true,
+          "dense_boundary_override_used": false,
+          "direct_to_model_cost_ratio_at_t_use": 0.9852824310147394,
+          "h_chain": 5,
+          "model_cost_penalty_from_t_use_cap": 1.0,
+          "t_ana": 1.0795668435080137,
+          "t_ana_over_t_valid": 0.9349550451646517,
+          "t_valid": 1.154672461623965,
+          "target_error_kcal_per_mol": 0.003
+        },
+        {
+          "analytic_schedule_is_direct_valid": true,
+          "dense_boundary_override_used": false,
+          "direct_to_model_cost_ratio_at_t_use": 0.9890001545099782,
+          "h_chain": 6,
+          "model_cost_penalty_from_t_use_cap": 1.0,
+          "t_ana": 0.8675883798836875,
+          "t_ana_over_t_valid": 0.8323585258232139,
+          "t_valid": 1.042325335738744,
+          "target_error_kcal_per_mol": 0.003
+        }
+      ],
+      "direct_valid_fraction": 0.25,
+      "num_direct_valid": 6,
+      "num_schedules": 24
+    },
+    "8th(Morales-Y8m10b)": {
+      "direct_valid_cases": [],
+      "direct_valid_fraction": 0.0,
+      "num_direct_valid": 0,
+      "num_schedules": 24
+    }
+  }
+}
