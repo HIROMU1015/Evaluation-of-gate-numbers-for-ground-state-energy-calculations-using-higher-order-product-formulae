@@ -1,23 +1,15 @@
-# Global-phase hold-out validation: partial results
+# Global-phase hold-out validation: superseded partial snapshot
 
-This snapshot contains 15 completed same-template GPU sweeps.  Each JSON in
-`same_template_sweeps/` evaluates `t=0` and all diagnostic times with the same
-transpiled parameterized circuit, and records both raw and global-phase-
-corrected overlaps.
+The partial snapshot is now complete: all 16 same-template GPU sweeps finished.
+Each JSON in `same_template_sweeps/` evaluates `t=0` and all diagnostic times
+with the same transpiled parameterized circuit, and records both raw and
+global-phase-corrected overlaps.
 
-Completed systems and product formulas:
+Use `GLOBAL_PHASE_HOLDOUT_VALIDATION.md` for the human-readable final report
+and `global_phase_holdout_validation.json` for the complete machine-readable
+aggregation.  The final status is `complete with failed/not validated
+prerequisites`; both PFs are classified as `short-time/asymptotic reference
+only`.
 
-- H2, H4, H5, H6, H7, and H9: `4th(m5_best)` and
-  `8th(Morales-Y8m10b)`
-- H10: `4th(m5_best)` and `8th(Morales-Y8m10b)`
-- H11: `4th(m5_best)`
-
-Not included in this partial snapshot:
-
-- H11 `8th(Morales-Y8m10b)`, which was still running
-- the final hold-out aggregation and finite-time-support classification
-- server execution logs and separately-transpiled `t=0` diagnostic results
-
-Consequently, these files are raw validation inputs rather than a completed
-scientific conclusion.  The final aggregation must be generated after both H11
-sweeps finish.
+Server execution logs and the earlier separately-transpiled `t=0` diagnostics
+are intentionally excluded from the committed result set.
