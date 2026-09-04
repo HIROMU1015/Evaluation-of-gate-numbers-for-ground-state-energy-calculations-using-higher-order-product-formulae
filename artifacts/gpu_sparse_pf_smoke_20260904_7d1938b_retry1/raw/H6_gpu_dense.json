@@ -1,0 +1,159 @@
+{
+  "checks": {
+    "final_state_norm": 0.9999999999994585,
+    "input_output_overlap": {
+      "imag": -0.11304552588855281,
+      "real": -0.9935897945785929
+    }
+  },
+  "completed_at": "2026-09-04T21:24:39.178673+09:00",
+  "configuration": {
+    "h_chain": 6,
+    "iterative_eigensolver_used": false,
+    "label": "4th(m5_best)",
+    "measurement_repeats": 1,
+    "relative_time_factor": 0.5,
+    "t_ana": 2.08043234194074,
+    "t_ana_source": "artifacts/server_cost_validity/h6_h7_analytic_schedule/H6_analytic_direct_validation.json; reused for H8 runtime-only smoke because no H8-specific saved t_ana exists",
+    "time": 1.04021617097037
+  },
+  "environment": {
+    "aer_available_devices": [
+      "CPU",
+      "GPU"
+    ],
+    "created_at": "2026-09-04T21:24:37.259491+09:00",
+    "cuda_visible_devices": "2",
+    "git_commit": "7d1938bacb3b392643295819daa135ad16ac17fe",
+    "gpu_before_run": {
+      "driver_version": "560.35.05",
+      "memory_total_mib": 40960,
+      "memory_used_mib": 1,
+      "name": "NVIDIA A100-SXM4-40GB",
+      "physical_gpu_id": 2,
+      "utilization_percent": 0,
+      "uuid": "GPU-43a18e74-6ec8-53f9-43a4-b97d4c2fb7d3"
+    },
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "4",
+      "OMP_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "4"
+    }
+  },
+  "external_gpu_memory": {
+    "baseline_device_used_mib": 1,
+    "measurement_scope": "whole physical GPU during this worker",
+    "peak_device_delta_mib": 702,
+    "peak_device_used_mib": 703,
+    "physical_gpu_id": 2,
+    "sample_count": 24,
+    "samples_artifact": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/logs/H6_gpu_dense_memory.csv",
+    "sampling_interval_ms": 200,
+    "sampling_started_before_python": true,
+    "shared_device_caveat": "The assigned GPU was required to have at least half its memory free. Device-wide samples can include a process that starts after assignment.",
+    "total_device_memory_mib": 40960
+  },
+  "gpu_memory": {
+    "baseline_device_used_mib": 435,
+    "cupy_pool_peak_reserved_mib": 163.78369140625,
+    "device_sample_count": 1,
+    "errors": [],
+    "peak_current_process_used_mib": 458,
+    "peak_device_delta_mib": 36,
+    "peak_device_used_mib": 471,
+    "physical_gpu_id": 2,
+    "process_sample_count": 1,
+    "sampling_interval_ms": 250,
+    "shared_device_caveat": "device-wide delta may include unrelated processes; the current-PID peak is preferred when available"
+  },
+  "method": "gpu_dense_sector_s2_cache",
+  "peak_cpu_rss_kib": 831448,
+  "pf": {
+    "applications": 1,
+    "input_spectra_transfer_seconds": 0.15756920096464455,
+    "pauli_rotations_per_application": 22496,
+    "s2_stage_count": 11,
+    "seconds": 0.09867831796873361,
+    "unique_s2_stage_count": 6
+  },
+  "purpose": "single PF application dense-versus-matrix-free smoke benchmark",
+  "schema_version": 1,
+  "shared_input": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/shared/H6_shared_input.json",
+  "started_at": "2026-09-04T21:24:37.259453+09:00",
+  "state_artifact": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/states/H6_gpu_dense_state.npz",
+  "status": "complete",
+  "system": {
+    "full_state_dimension": 4096,
+    "ground_state_diagnostics": {
+      "ci_dimension": 400,
+      "davidson_attempts": [
+        {
+          "attempt": 1,
+          "energy_hartree": -3.2360662798923414,
+          "fci_converged": true,
+          "fci_residual_norm": 2.0489594813108665e-15,
+          "initial_guess": "pyscf_default",
+          "lindep": 1e-14
+        }
+      ],
+      "davidson_retry_lindep": 1e-20,
+      "davidson_retry_performed": false,
+      "fci_converged": true,
+      "fci_residual_norm": 2.0489594813108665e-15,
+      "fci_residual_tolerance": 1e-10,
+      "full_pspace_dense_matrix_bytes": 1280000,
+      "full_pspace_dimension_limit": 1024,
+      "method": "pyscf_full_pspace_lapack_eigh",
+      "n_alpha": 3,
+      "n_beta": 3,
+      "n_orbitals": 6,
+      "scf_converged": true,
+      "source": "PySCF FCI",
+      "used_scipy_eigsh": false
+    },
+    "num_commuting_groups": 57,
+    "num_qubits": 12,
+    "sector": {
+      "dense_complex_matrix_gib": 0.002384185791015625,
+      "dimension": 400,
+      "ground_state_eigenpair_residual": 8.197996737198895e-15,
+      "ground_state_outside_norm": 0.0,
+      "kind": "fixed_half_populations",
+      "maximum_group_leakage_frobenius_norm": 4.8074067159589095e-17,
+      "population_counts": [
+        3,
+        3
+      ]
+    },
+    "used_scipy_eigsh": false
+  },
+  "timing_seconds": {
+    "chemistry_and_fci": null,
+    "data_transfer": 0.15778719098307192,
+    "local_shared_input_load": 0.14963502704631537,
+    "measurement_without_preprocessing": 0.2565493389265612,
+    "pf_application_matvec": 8.38299747556448e-05,
+    "pf_unitary_construction": 0.09867831796873361,
+    "preprocessing": 0.14963502704631537,
+    "result_d2h": 7.675000233575702e-05,
+    "sector_and_group_spectra": null,
+    "shared_preparation_once": 7.962688319035806,
+    "spectra_h2d": 0.15756920096464455,
+    "state_h2d": 0.00014124001609161496,
+    "total": 1.8220254670013674,
+    "warmup_excluded": 0.9948703040136024
+  }
+}

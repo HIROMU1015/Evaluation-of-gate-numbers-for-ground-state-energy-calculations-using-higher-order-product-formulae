@@ -1,0 +1,194 @@
+{
+  "aer_run_profile": {
+    "bind_seconds": 1.6820717810187489,
+    "device": "GPU",
+    "execution_strategy": "pretranspiled_parameterized_body",
+    "parameter_value": -1.04021617097037,
+    "simulator_run_seconds": 42.588863605982624,
+    "target_gpus": [],
+    "total_seconds": 44.27114346699091
+  },
+  "checks": {
+    "final_state_norm": 0.9999999999960778,
+    "input_output_overlap": {
+      "imag": 0.8460100948474311,
+      "real": -0.5331668327818002
+    }
+  },
+  "completed_at": "2026-09-04T21:26:19.351497+09:00",
+  "configuration": {
+    "h_chain": 8,
+    "iterative_eigensolver_used": false,
+    "label": "4th(m5_best)",
+    "measurement_repeats": 1,
+    "relative_time_factor": 0.5,
+    "t_ana": 2.08043234194074,
+    "t_ana_source": "artifacts/server_cost_validity/h6_h7_analytic_schedule/H6_analytic_direct_validation.json; reused for H8 runtime-only smoke because no H8-specific saved t_ana exists",
+    "time": 1.04021617097037
+  },
+  "environment": {
+    "aer_available_devices": [
+      "CPU",
+      "GPU"
+    ],
+    "created_at": "2026-09-04T21:25:04.068985+09:00",
+    "cuda_visible_devices": "2",
+    "git_commit": "7d1938bacb3b392643295819daa135ad16ac17fe",
+    "gpu_before_run": {
+      "driver_version": "560.35.05",
+      "memory_total_mib": 40960,
+      "memory_used_mib": 1,
+      "name": "NVIDIA A100-SXM4-40GB",
+      "physical_gpu_id": 2,
+      "utilization_percent": 0,
+      "uuid": "GPU-43a18e74-6ec8-53f9-43a4-b97d4c2fb7d3"
+    },
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "4",
+      "OMP_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "4"
+    }
+  },
+  "external_gpu_memory": {
+    "baseline_device_used_mib": 1,
+    "measurement_scope": "whole physical GPU during this worker",
+    "peak_device_delta_mib": 426,
+    "peak_device_used_mib": 427,
+    "physical_gpu_id": 2,
+    "sample_count": 391,
+    "samples_artifact": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/logs/H8_aer_matrix_free_memory.csv",
+    "sampling_interval_ms": 200,
+    "sampling_started_before_python": true,
+    "shared_device_caveat": "The assigned GPU was required to have at least half its memory free. Device-wide samples can include a process that starts after assignment.",
+    "total_device_memory_mib": 40960
+  },
+  "gpu_memory": {
+    "baseline_device_used_mib": 425,
+    "device_sample_count": 177,
+    "errors": [],
+    "peak_current_process_used_mib": null,
+    "peak_device_delta_mib": 2,
+    "peak_device_used_mib": 427,
+    "physical_gpu_id": 2,
+    "process_sample_count": 0,
+    "sampling_interval_ms": 250,
+    "shared_device_caveat": "device-wide delta may include unrelated processes; the current-PID peak is preferred when available"
+  },
+  "method": "qiskit_aer_gpu_matrix_free_full_statevector",
+  "peak_cpu_rss_kib": 3664912,
+  "pf": {
+    "applications": 1,
+    "dense_group_exponentials_built": 0,
+    "dense_pf_unitaries_built": 0,
+    "input_circuit_instructions": 2289,
+    "pauli_rotations_per_application": 75244,
+    "transpiled_circuit_instructions": 1400588
+  },
+  "purpose": "single PF application dense-versus-matrix-free smoke benchmark",
+  "schema_version": 1,
+  "shared_input": null,
+  "started_at": "2026-09-04T21:25:04.068949+09:00",
+  "state_artifact": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/states/H8_aer_matrix_free_state.npz",
+  "status": "complete",
+  "system": {
+    "full_state_dimension": 65536,
+    "ground_state_diagnostics": {
+      "ci_dimension": 4900,
+      "davidson_attempts": [
+        {
+          "attempt": 1,
+          "energy_hartree": -4.307571602006761,
+          "fci_converged": false,
+          "fci_residual_norm": 4.0910433049949814e-08,
+          "initial_guess": "pyscf_default",
+          "lindep": 1e-14
+        },
+        {
+          "attempt": 2,
+          "energy_change_hartree": -1.2434497875801753e-14,
+          "energy_hartree": -4.307571602006774,
+          "fci_converged": true,
+          "fci_residual_norm": 4.3372006134121775e-11,
+          "initial_guess": "previous_ci_vector",
+          "lindep": 1e-20
+        }
+      ],
+      "davidson_retry_lindep": 1e-20,
+      "davidson_retry_performed": true,
+      "fci_converged": true,
+      "fci_residual_norm": 4.3372006134121775e-11,
+      "fci_residual_tolerance": 1e-10,
+      "full_pspace_dense_matrix_bytes": null,
+      "full_pspace_dimension_limit": 1024,
+      "method": "pyscf_davidson",
+      "n_alpha": 4,
+      "n_beta": 4,
+      "n_orbitals": 8,
+      "scf_converged": true,
+      "source": "PySCF FCI",
+      "used_scipy_eigsh": false
+    },
+    "num_commuting_groups": 105,
+    "num_qubits": 16,
+    "used_scipy_eigsh": false
+  },
+  "template_profile": {
+    "device": "GPU",
+    "execution_strategy": "pretranspiled_parameterized_body",
+    "input_num_instructions": 2289,
+    "optimization_level": 0,
+    "total_seconds": 21.373265623988118,
+    "transpile_seconds": 19.752834975952283,
+    "transpiled_num_instructions": 1400588
+  },
+  "timing_seconds": {
+    "chemistry_and_fci": 7.627871770993806,
+    "clique_precompute": 0.13616697798715904,
+    "data_transfer": null,
+    "host_bind_and_result_overhead": 1.6822798610082828,
+    "local_shared_input_load": 0.0,
+    "measurement_without_preprocessing": 44.27114346699091,
+    "parameterized_circuit_build": 0.8424777699983679,
+    "pf_application_aer_run_including_device_io": 42.588863605982624,
+    "pf_unitary_construction": null,
+    "preprocessing": 29.97978214296745,
+    "shared_preparation_once": null,
+    "total": 75.18734070000937,
+    "transpile": 19.752834975952283,
+    "warmup_excluded": 0.6218427189742215
+  },
+  "transfer_measurement_note": "Aer 0.15.1 does not expose H2D/kernel/D2H separately. The Aer run includes device I/O; host bind/result overhead is reported separately.",
+  "warmup_profile": {
+    "run": {
+      "bind_seconds": 0.0010500859934836626,
+      "device": "GPU",
+      "execution_strategy": "pretranspiled_parameterized_body",
+      "parameter_value": 0.125,
+      "simulator_run_seconds": 0.6112720730016008,
+      "target_gpus": [],
+      "total_seconds": 0.6126502890256234
+    },
+    "template": {
+      "device": "GPU",
+      "execution_strategy": "pretranspiled_parameterized_body",
+      "input_num_instructions": 1,
+      "optimization_level": 0,
+      "total_seconds": 0.0087613919749856,
+      "transpile_seconds": 0.008701982966158539,
+      "transpiled_num_instructions": 1
+    }
+  }
+}

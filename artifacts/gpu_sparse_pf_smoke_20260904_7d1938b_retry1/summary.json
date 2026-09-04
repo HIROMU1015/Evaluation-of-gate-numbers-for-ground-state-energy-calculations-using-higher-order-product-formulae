@@ -1,0 +1,81 @@
+{
+  "created_at": "2026-09-04T21:30:57.123582+09:00",
+  "git_commit": "7d1938bacb3b392643295819daa135ad16ac17fe",
+  "h6_agreement": {
+    "comparisons": {
+      "gpu_dense_vs_cpu_dense": {
+        "passes_1e-10": true,
+        "raw_overlap": {
+          "imag": 1.124100812432971e-15,
+          "real": 0.9999999999989126
+        },
+        "relative_2_norm_difference": 9.003882574867705e-15,
+        "removed_global_phase_rad": 1.1241008124341933e-15
+      },
+      "gpu_matrix_free_vs_cpu_dense": {
+        "passes_1e-10": true,
+        "raw_overlap": {
+          "imag": 4.465414149557034e-12,
+          "real": -0.9999999999983434
+        },
+        "relative_2_norm_difference": 1.509394243488845e-12,
+        "removed_global_phase_rad": 3.141592653585328
+      }
+    },
+    "completed_at": "2026-09-04T21:25:01.630547+09:00",
+    "created_at": "2026-09-04T21:25:01.627157+09:00",
+    "gpu_matrix_free_sector_leakage_2_norm": 3.1697149333791286e-13,
+    "input_files": [
+      "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/raw/H6_cpu_dense.json",
+      "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/raw/H6_gpu_dense.json",
+      "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/raw/H6_aer_matrix_free.json"
+    ],
+    "passed": true,
+    "purpose": "H6 state agreement after global-phase alignment",
+    "schema_version": 1,
+    "status": "complete",
+    "tolerance": 1e-10
+  },
+  "h6_fastest_cold_action": "GPU dense build + matvec",
+  "h6_fastest_reused_action": "GPU dense reused matvec",
+  "h6_shared_preparation": {
+    "commit_policy": "The 146 MB shared spectra cache is a server-local intermediate and is intentionally excluded from version control.",
+    "h_chain": 6,
+    "num_groups": 57,
+    "num_qubits": 12,
+    "peak_cpu_rss_kib": 609336,
+    "sector": {
+      "dense_complex_matrix_gib": 0.002384185791015625,
+      "dimension": 400,
+      "ground_state_eigenpair_residual": 8.197996737198895e-15,
+      "ground_state_outside_norm": 0.0,
+      "kind": "fixed_half_populations",
+      "maximum_group_leakage_frobenius_norm": 4.8074067159589095e-17,
+      "population_counts": [
+        3,
+        3
+      ]
+    },
+    "status": "complete",
+    "timing_seconds": {
+      "chemistry_and_fci": 1.819386688992381,
+      "sector_and_group_spectra": 6.019920180027839,
+      "shared_preparation_total": 7.962688319035806
+    }
+  },
+  "raw_files": {
+    "H6 CPU dense": "artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/raw/H6_cpu_dense.json",
+    "H6 GPU dense": "artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/raw/H6_gpu_dense.json",
+    "H6 GPU matrix-free": "artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/raw/H6_aer_matrix_free.json",
+    "H8 GPU matrix-free": "artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/raw/H8_aer_matrix_free.json"
+  },
+  "schema_version": 1,
+  "speed_ratios": {
+    "cpu_dense_build_plus_matvec_over_matrix_free_run": 0.48563566875388736,
+    "cpu_dense_cold_total_over_matrix_free_total": 0.284955284113997,
+    "cpu_dense_reused_matvec_over_matrix_free_run": 1.3398338781351083e-05,
+    "gpu_dense_build_plus_matvec_over_matrix_free_run": 0.008828778669865856,
+    "gpu_dense_reused_matvec_over_matrix_free_run": 7.493926655397546e-06
+  },
+  "status": "complete"
+}

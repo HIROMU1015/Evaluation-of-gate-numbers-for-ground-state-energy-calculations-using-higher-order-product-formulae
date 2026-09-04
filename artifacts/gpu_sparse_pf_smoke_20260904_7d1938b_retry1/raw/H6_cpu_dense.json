@@ -1,0 +1,118 @@
+{
+  "checks": {
+    "final_state_norm": 0.9999999999994541,
+    "input_output_overlap": {
+      "imag": -0.11304552588855118,
+      "real": -0.9935897945785885
+    }
+  },
+  "completed_at": "2026-09-04T21:24:42.538393+09:00",
+  "configuration": {
+    "h_chain": 6,
+    "iterative_eigensolver_used": false,
+    "label": "4th(m5_best)",
+    "measurement_repeats": 1,
+    "relative_time_factor": 0.5,
+    "t_ana": 2.08043234194074,
+    "t_ana_source": "artifacts/server_cost_validity/h6_h7_analytic_schedule/H6_analytic_direct_validation.json; reused for H8 runtime-only smoke because no H8-specific saved t_ana exists",
+    "time": 1.04021617097037
+  },
+  "environment": {
+    "aer_available_devices": null,
+    "created_at": "2026-09-04T21:24:36.964368+09:00",
+    "cuda_visible_devices": null,
+    "git_commit": "7d1938bacb3b392643295819daa135ad16ac17fe",
+    "gpu_before_run": null,
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "8",
+      "OMP_NUM_THREADS": "8",
+      "OPENBLAS_NUM_THREADS": "8"
+    }
+  },
+  "method": "cpu_dense_sector_s2_cache",
+  "peak_cpu_rss_kib": 600164,
+  "pf": {
+    "applications": 1,
+    "pauli_rotations_per_application": 22496,
+    "s2_stage_count": 11,
+    "seconds": 5.432359368016478,
+    "unique_s2_stage_count": 6
+  },
+  "purpose": "single PF application dense-versus-matrix-free smoke benchmark",
+  "schema_version": 1,
+  "shared_input": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/shared/H6_shared_input.json",
+  "started_at": "2026-09-04T21:24:36.964324+09:00",
+  "state_artifact": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/gpu_sparse_pf_smoke_20260904_7d1938b_retry1/states/H6_cpu_dense_state.npz",
+  "status": "complete",
+  "system": {
+    "full_state_dimension": 4096,
+    "ground_state_diagnostics": {
+      "ci_dimension": 400,
+      "davidson_attempts": [
+        {
+          "attempt": 1,
+          "energy_hartree": -3.2360662798923414,
+          "fci_converged": true,
+          "fci_residual_norm": 2.0489594813108665e-15,
+          "initial_guess": "pyscf_default",
+          "lindep": 1e-14
+        }
+      ],
+      "davidson_retry_lindep": 1e-20,
+      "davidson_retry_performed": false,
+      "fci_converged": true,
+      "fci_residual_norm": 2.0489594813108665e-15,
+      "fci_residual_tolerance": 1e-10,
+      "full_pspace_dense_matrix_bytes": 1280000,
+      "full_pspace_dimension_limit": 1024,
+      "method": "pyscf_full_pspace_lapack_eigh",
+      "n_alpha": 3,
+      "n_beta": 3,
+      "n_orbitals": 6,
+      "scf_converged": true,
+      "source": "PySCF FCI",
+      "used_scipy_eigsh": false
+    },
+    "num_commuting_groups": 57,
+    "num_qubits": 12,
+    "sector": {
+      "dense_complex_matrix_gib": 0.002384185791015625,
+      "dimension": 400,
+      "ground_state_eigenpair_residual": 8.197996737198895e-15,
+      "ground_state_outside_norm": 0.0,
+      "kind": "fixed_half_populations",
+      "maximum_group_leakage_frobenius_norm": 4.8074067159589095e-17,
+      "population_counts": [
+        3,
+        3
+      ]
+    },
+    "used_scipy_eigsh": false
+  },
+  "timing_seconds": {
+    "chemistry_and_fci": null,
+    "data_transfer": 0.0,
+    "local_shared_input_load": 0.12390709802275524,
+    "measurement_without_preprocessing": 5.432509247038979,
+    "pf_application_matvec": 0.00014987902250140905,
+    "pf_unitary_construction": 5.432359368016478,
+    "preprocessing": 0.12390709802275524,
+    "sector_and_group_spectra": null,
+    "shared_preparation_once": 7.962688319035806,
+    "total": 5.562390146951657,
+    "warmup_excluded": 8.002901449799538e-05
+  }
+}

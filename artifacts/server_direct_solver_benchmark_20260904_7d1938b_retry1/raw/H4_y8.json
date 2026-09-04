@@ -1,0 +1,3147 @@
+{
+  "completed_at": "2026-09-04T13:08:57.467689+09:00",
+  "configuration": {
+    "batch_sizes": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "beta": 1.2,
+    "epsilon_E_hartree": 0.00015936001019904,
+    "gram_cutoffs": [
+      1e-10,
+      1e-12,
+      1e-14
+    ],
+    "h_chain": 4,
+    "k_values": [
+      8,
+      16,
+      32,
+      64,
+      96
+    ],
+    "label": "8th(Morales-Y8m10b)",
+    "relative_time_factors": [
+      0.5,
+      0.7,
+      1.0
+    ],
+    "repeats": 3,
+    "t_ana": 5.130858254277709,
+    "t_ana_source": "artifacts/server_cost_validity/wide_gpu/H4_y8m10b_wide_refined.json fixed-order alpha",
+    "times": [
+      2.5654291271388545,
+      3.591600777994396,
+      5.130858254277709
+    ]
+  },
+  "environment": {
+    "aer_available_devices": [
+      "CPU",
+      "GPU"
+    ],
+    "created_at": "2026-09-04T12:18:40.846695+09:00",
+    "cuda_visible_devices": "1",
+    "git_commit": "7d1938bacb3b392643295819daa135ad16ac17fe",
+    "gpu": {
+      "driver_version": "560.35.05",
+      "memory_total_mib": 40960,
+      "memory_used_mib": 9523,
+      "name": "NVIDIA A100-SXM4-40GB",
+      "physical_gpu_id": 1,
+      "utilization_percent": 100,
+      "uuid": "GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d"
+    },
+    "nvidia_smi_header": "| NVIDIA-SMI 560.35.05              Driver Version: 560.35.05      CUDA Version: 12.6     |",
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/usr/bin/python3.12",
+    "thread_environment": {
+      "MKL_NUM_THREADS": "4",
+      "OMP_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "4"
+    }
+  },
+  "methods": {
+    "cpu_dense_sequential": {
+      "algorithm": "sequential_pf_construction_scipy_schur",
+      "backend": "cpu_dense",
+      "measurement_repeats": 3,
+      "peak_cpu_rss_kib": 476036,
+      "points": [
+        {
+          "construction": {
+            "s2_stage_count": 21,
+            "stage_build_seconds": 0.0421926699928008,
+            "stages_built": 21,
+            "unique_s2_stage_count": 11,
+            "wall_seconds": 0.04278910899301991
+          },
+          "construction_seconds_median": 0.04400533402804285,
+          "direct_cost": 22310150.48376933,
+          "direct_error_hartree": 1.0112140147455762e-07,
+          "effective_energy_hartree": -1.8349095340965527,
+          "eigenpair_residual_2_norm": 6.786242452547375e-14,
+          "end_to_end_seconds_median": 0.04502492002211511,
+          "maximum_ground_state_overlap_probability": 0.9999999725007864,
+          "phase_branch_integer": -1,
+          "previous_or_reference_vector_overlap_probability": 0.9999999725007864,
+          "raw_eigenphase_rad": 1.575854942743505,
+          "schur_seconds": 0.0010330159566365182,
+          "schur_seconds_median": 0.0010322160087525845,
+          "selected_ground_state_overlap_probability": 0.9999999725007864,
+          "signed_eigenvalue_shift_hartree": 1.0112140147455762e-07,
+          "time": 2.5654291271388545,
+          "unitarity_residual_frobenius_norm": 5.345993681732656e-12
+        },
+        {
+          "construction": {
+            "s2_stage_count": 21,
+            "stage_build_seconds": 0.04614269605372101,
+            "stages_built": 21,
+            "unique_s2_stage_count": 11,
+            "wall_seconds": 0.047044092032592744
+          },
+          "construction_seconds_median": 0.04347278497880325,
+          "direct_cost": 16055200.00668324,
+          "direct_error_hartree": 1.2852888149339492e-06,
+          "effective_energy_hartree": -1.8349083499291392,
+          "eigenpair_residual_2_norm": 8.786377093697682e-14,
+          "end_to_end_seconds_median": 0.04454562097089365,
+          "maximum_ground_state_overlap_probability": 0.999995682212096,
+          "phase_branch_integer": -1,
+          "previous_or_reference_vector_overlap_probability": 0.999995844388135,
+          "raw_eigenphase_rad": -0.30707294997432405,
+          "schur_seconds": 0.0010622559930197895,
+          "schur_seconds_median": 0.0010622559930197895,
+          "selected_ground_state_overlap_probability": 0.999995682212096,
+          "signed_eigenvalue_shift_hartree": 1.2852888149339492e-06,
+          "time": 3.591600777994396,
+          "unitarity_residual_frobenius_norm": 4.853795042430087e-12
+        },
+        {
+          "construction": {
+            "s2_stage_count": 21,
+            "stage_build_seconds": 0.042165452148765326,
+            "stages_built": 21,
+            "unique_s2_stage_count": 11,
+            "wall_seconds": 0.04275289905490354
+          },
+          "construction_seconds_median": 0.04503780999220908,
+          "direct_cost": null,
+          "direct_error_hartree": 0.00021503322280147508,
+          "effective_energy_hartree": -1.8346946019951527,
+          "eigenpair_residual_2_norm": 2.1742650710212577e-13,
+          "end_to_end_seconds_median": 0.04604579700389877,
+          "maximum_ground_state_overlap_probability": 0.9051257954197816,
+          "phase_branch_integer": -1,
+          "previous_or_reference_vector_overlap_probability": 0.9051903794007272,
+          "raw_eigenphase_rad": -3.1303726355459993,
+          "schur_seconds": 0.001019106013700366,
+          "schur_seconds_median": 0.001019106013700366,
+          "selected_ground_state_overlap_probability": 0.9051257954197816,
+          "signed_eigenvalue_shift_hartree": 0.00021503322280147508,
+          "time": 5.130858254277709,
+          "unitarity_residual_frobenius_norm": 4.206056930651525e-12
+        }
+      ],
+      "precision": "complex128",
+      "status": "complete",
+      "warmup_count": 1
+    },
+    "cpu_dense_stage_reuse": {
+      "algorithm": "palindromic_s2_stage_reuse_scipy_schur",
+      "backend": "cpu_dense",
+      "measurement_repeats": 3,
+      "peak_cpu_rss_kib": 476036,
+      "points": [
+        {
+          "construction": {
+            "s2_stage_count": 21,
+            "stage_build_seconds": 0.022587143874261528,
+            "stages_built": 11,
+            "unique_s2_stage_count": 11,
+            "wall_seconds": 0.023182812961749732
+          },
+          "construction_seconds_median": 0.023567421012558043,
+          "cost_relative_difference_vs_cpu_sequential": 0.0,
+          "direct_cost": 22310150.48376933,
+          "direct_error_hartree": 1.0112140147455762e-07,
+          "effective_energy_hartree": -1.8349095340965527,
+          "eigenpair_residual_2_norm": 6.786242452547375e-14,
+          "end_to_end_seconds_median": 0.024603057012427598,
+          "maximum_ground_state_overlap_probability": 0.9999999725007864,
+          "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 0.0,
+          "phase_branch_integer": -1,
+          "previous_or_reference_vector_overlap_probability": 1.0,
+          "raw_eigenphase_rad": 1.575854942743505,
+          "schur_seconds": 0.0013294150121510029,
+          "schur_seconds_median": 0.0010356359998695552,
+          "selected_ground_state_overlap_probability": 0.9999999725007864,
+          "signed_eigenvalue_shift_hartree": 1.0112140147455762e-07,
+          "signed_shift_absolute_difference_vs_cpu_sequential_hartree": 0.0,
+          "time": 2.5654291271388545,
+          "unitarity_residual_frobenius_norm": 5.345993681732656e-12
+        },
+        {
+          "construction": {
+            "s2_stage_count": 21,
+            "stage_build_seconds": 0.02501669299090281,
+            "stages_built": 11,
+            "unique_s2_stage_count": 11,
+            "wall_seconds": 0.025663133012130857
+          },
+          "construction_seconds_median": 0.02401423896662891,
+          "cost_relative_difference_vs_cpu_sequential": 0.0,
+          "direct_cost": 16055200.00668324,
+          "direct_error_hartree": 1.2852888149339492e-06,
+          "effective_energy_hartree": -1.8349083499291392,
+          "eigenpair_residual_2_norm": 8.786377093697682e-14,
+          "end_to_end_seconds_median": 0.02507805498316884,
+          "maximum_ground_state_overlap_probability": 0.999995682212096,
+          "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 0.0,
+          "phase_branch_integer": -1,
+          "previous_or_reference_vector_overlap_probability": 1.0,
+          "raw_eigenphase_rad": -0.30707294997432405,
+          "schur_seconds": 0.0010601860121823847,
+          "schur_seconds_median": 0.0010601860121823847,
+          "selected_ground_state_overlap_probability": 0.999995682212096,
+          "signed_eigenvalue_shift_hartree": 1.2852888149339492e-06,
+          "signed_shift_absolute_difference_vs_cpu_sequential_hartree": 0.0,
+          "time": 3.591600777994396,
+          "unitarity_residual_frobenius_norm": 4.853795042430087e-12
+        },
+        {
+          "construction": {
+            "s2_stage_count": 21,
+            "stage_build_seconds": 0.022974052000790834,
+            "stages_built": 11,
+            "unique_s2_stage_count": 11,
+            "wall_seconds": 0.02360214095097035
+          },
+          "construction_seconds_median": 0.02360214095097035,
+          "cost_relative_difference_vs_cpu_sequential": null,
+          "direct_cost": null,
+          "direct_error_hartree": 0.00021503322280147508,
+          "effective_energy_hartree": -1.8346946019951527,
+          "eigenpair_residual_2_norm": 2.1742650710212577e-13,
+          "end_to_end_seconds_median": 0.024625626916531473,
+          "maximum_ground_state_overlap_probability": 0.9051257954197816,
+          "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 0.0,
+          "phase_branch_integer": -1,
+          "previous_or_reference_vector_overlap_probability": 1.0,
+          "raw_eigenphase_rad": -3.1303726355459993,
+          "schur_seconds": 0.0010234859655611217,
+          "schur_seconds_median": 0.0010212070192210376,
+          "selected_ground_state_overlap_probability": 0.9051257954197816,
+          "signed_eigenvalue_shift_hartree": 0.00021503322280147508,
+          "signed_shift_absolute_difference_vs_cpu_sequential_hartree": 0.0,
+          "time": 5.130858254277709,
+          "unitarity_residual_frobenius_norm": 4.206056930651525e-12
+        }
+      ],
+      "precision": "complex128",
+      "status": "complete",
+      "warmup_count": 1
+    },
+    "gpu_dense": {
+      "1": {
+        "actual_maximum_batch_size": 1,
+        "algorithm": "cupy_palindromic_s2_stage_reuse_then_scipy_schur",
+        "backend": "gpu_dense_cpu_schur",
+        "batch_size_limited_by_three_scientific_times": false,
+        "gpu_memory": {
+          "baseline_mib": 9523,
+          "errors": [],
+          "peak_delta_mib": 432,
+          "peak_used_mib": 9955,
+          "sample_count": 14,
+          "sampling_interval_ms": 200
+        },
+        "measurement_repeats": 3,
+        "peak_cpu_rss_kib": 696060,
+        "points": [
+          {
+            "batch_profile": {
+              "batch_size": 1,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.07272010500309989,
+              "input_transfer_seconds": 0.002235241001471877,
+              "output_transfer_seconds": 3.701000241562724e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 4.182654222972815e-12,
+            "cpu_schur_seconds_median": 0.0010338469874113798,
+            "direct_cost": 22310150.483676016,
+            "direct_error_hartree": 1.011214008084238e-07,
+            "effective_energy_hartree": -1.8349095340965533,
+            "eigenpair_residual_2_norm": 6.901384580380263e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.0737424130202271,
+            "gpu_construction_seconds_per_item_median": 0.07270744600100443,
+            "maximum_ground_state_overlap_probability": 0.9999999725007869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.6431707283740903e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0000000000000004,
+            "raw_eigenphase_rad": 1.5758549427435034,
+            "schur_seconds": 0.0010338469874113798,
+            "selected_ground_state_overlap_probability": 0.9999999725007869,
+            "signed_eigenvalue_shift_hartree": 1.011214008084238e-07,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 6.661338147750939e-16,
+            "time": 2.5654291271388545,
+            "unitarity_residual_frobenius_norm": 5.346033900900002e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 1,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.0729564749635756,
+              "input_transfer_seconds": 0.0012507750070653856,
+              "output_transfer_seconds": 3.9668986573815346e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 1.404432126150823e-12,
+            "cpu_schur_seconds_median": 0.0010629559983499348,
+            "direct_cost": 16055200.00666069,
+            "direct_error_hartree": 1.2852888147119046e-06,
+            "effective_energy_hartree": -1.8349083499291394,
+            "eigenpair_residual_2_norm": 8.703903627086872e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.07401943096192554,
+            "gpu_construction_seconds_per_item_median": 0.07290284498594701,
+            "maximum_ground_state_overlap_probability": 0.9999956822120967,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7946421776051184e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -0.3070729499743248,
+            "schur_seconds": 0.0010629559983499348,
+            "selected_ground_state_overlap_probability": 0.9999956822120967,
+            "signed_eigenvalue_shift_hartree": 1.2852888147119046e-06,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 2.220446049250313e-16,
+            "time": 3.591600777994396,
+            "unitarity_residual_frobenius_norm": 4.854256234146145e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 1,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.07261546602239832,
+              "input_transfer_seconds": 0.0009902159799821675,
+              "output_transfer_seconds": 3.593997098505497e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": null,
+            "cpu_schur_seconds_median": 0.001021346019115299,
+            "direct_cost": null,
+            "direct_error_hartree": 0.00021503322280147508,
+            "effective_energy_hartree": -1.8346946019951527,
+            "eigenpair_residual_2_norm": 2.173967167048034e-13,
+            "end_to_end_compute_seconds_per_item_median": 0.07359032199019566,
+            "gpu_construction_seconds_per_item_median": 0.07256897597108036,
+            "maximum_ground_state_overlap_probability": 0.9051257954197869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7709902476797348e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -3.130372635545999,
+            "schur_seconds": 0.0010196859948337078,
+            "selected_ground_state_overlap_probability": 0.9051257954197869,
+            "signed_eigenvalue_shift_hartree": 0.00021503322280147508,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 0.0,
+            "time": 5.130858254277709,
+            "unitarity_residual_frobenius_norm": 4.206431993682002e-12
+          }
+        ],
+        "precision": "complex128",
+        "requested_batch_size": 1,
+        "status": "complete",
+        "warmup_count": 1
+      },
+      "2": {
+        "actual_maximum_batch_size": 2,
+        "algorithm": "cupy_palindromic_s2_stage_reuse_then_scipy_schur",
+        "backend": "gpu_dense_cpu_schur",
+        "batch_size_limited_by_three_scientific_times": false,
+        "gpu_memory": {
+          "baseline_mib": 9955,
+          "errors": [],
+          "peak_delta_mib": 0,
+          "peak_used_mib": 9955,
+          "sample_count": 3,
+          "sampling_interval_ms": 200
+        },
+        "measurement_repeats": 3,
+        "peak_cpu_rss_kib": 696060,
+        "points": [
+          {
+            "batch_profile": {
+              "batch_size": 2,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.09451662399806082,
+              "input_transfer_seconds": 0.001163815031759441,
+              "output_transfer_seconds": 3.950903192162514e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 4.182654222972815e-12,
+            "cpu_schur_seconds_median": 0.0010280960123054683,
+            "direct_cost": 22310150.483676016,
+            "direct_error_hartree": 1.011214008084238e-07,
+            "effective_energy_hartree": -1.8349095340965533,
+            "eigenpair_residual_2_norm": 6.901384580380263e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.04458448151126504,
+            "gpu_construction_seconds_per_item_median": 0.04355962050613016,
+            "maximum_ground_state_overlap_probability": 0.9999999725007869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.6431707283740903e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0000000000000004,
+            "raw_eigenphase_rad": 1.5758549427435034,
+            "schur_seconds": 0.0010489759733900428,
+            "selected_ground_state_overlap_probability": 0.9999999725007869,
+            "signed_eigenvalue_shift_hartree": 1.011214008084238e-07,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 6.661338147750939e-16,
+            "time": 2.5654291271388545,
+            "unitarity_residual_frobenius_norm": 5.346033900900002e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 2,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.09451662399806082,
+              "input_transfer_seconds": 0.001163815031759441,
+              "output_transfer_seconds": 3.950903192162514e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 1.404432126150823e-12,
+            "cpu_schur_seconds_median": 0.0010227159946225584,
+            "direct_cost": 16055200.00666069,
+            "direct_error_hartree": 1.2852888147119046e-06,
+            "effective_energy_hartree": -1.8349083499291394,
+            "eigenpair_residual_2_norm": 8.703903627086872e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.04458176653133705,
+            "gpu_construction_seconds_per_item_median": 0.04355962050613016,
+            "maximum_ground_state_overlap_probability": 0.9999956822120967,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7946421776051184e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -0.3070729499743248,
+            "schur_seconds": 0.0010238360264338553,
+            "selected_ground_state_overlap_probability": 0.9999956822120967,
+            "signed_eigenvalue_shift_hartree": 1.2852888147119046e-06,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 2.220446049250313e-16,
+            "time": 3.591600777994396,
+            "unitarity_residual_frobenius_norm": 4.854256234146145e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 1,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.0703546050353907,
+              "input_transfer_seconds": 0.0022816709824837744,
+              "output_transfer_seconds": 3.575999289751053e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": null,
+            "cpu_schur_seconds_median": 0.0010222159908153117,
+            "direct_cost": null,
+            "direct_error_hartree": 0.00021503322280147508,
+            "effective_energy_hartree": -1.8346946019951527,
+            "eigenpair_residual_2_norm": 2.173967167048034e-13,
+            "end_to_end_compute_seconds_per_item_median": 0.0728999349521473,
+            "gpu_construction_seconds_per_item_median": 0.07187256898032501,
+            "maximum_ground_state_overlap_probability": 0.9051257954197869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7709902476797348e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -3.130372635545999,
+            "schur_seconds": 0.0010147870052605867,
+            "selected_ground_state_overlap_probability": 0.9051257954197869,
+            "signed_eigenvalue_shift_hartree": 0.00021503322280147508,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 0.0,
+            "time": 5.130858254277709,
+            "unitarity_residual_frobenius_norm": 4.206431993682002e-12
+          }
+        ],
+        "precision": "complex128",
+        "requested_batch_size": 2,
+        "status": "complete",
+        "warmup_count": 1
+      },
+      "4": {
+        "actual_maximum_batch_size": 3,
+        "algorithm": "cupy_palindromic_s2_stage_reuse_then_scipy_schur",
+        "backend": "gpu_dense_cpu_schur",
+        "batch_size_limited_by_three_scientific_times": true,
+        "gpu_memory": {
+          "baseline_mib": 9955,
+          "errors": [],
+          "peak_delta_mib": 0,
+          "peak_used_mib": 9955,
+          "sample_count": 2,
+          "sampling_interval_ms": 200
+        },
+        "measurement_repeats": 3,
+        "peak_cpu_rss_kib": 696060,
+        "points": [
+          {
+            "batch_profile": {
+              "batch_size": 3,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.08677685295697302,
+              "input_transfer_seconds": 0.001068875950295478,
+              "output_transfer_seconds": 4.1579012759029865e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 4.182654222972815e-12,
+            "cpu_schur_seconds_median": 0.0010334569960832596,
+            "direct_cost": 22310150.483676016,
+            "direct_error_hartree": 1.011214008084238e-07,
+            "effective_energy_hartree": -1.8349095340965533,
+            "eigenpair_residual_2_norm": 6.901384580380263e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.030048593995161355,
+            "gpu_construction_seconds_per_item_median": 0.029015136999078095,
+            "maximum_ground_state_overlap_probability": 0.9999999725007869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.6431707283740903e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0000000000000004,
+            "raw_eigenphase_rad": 1.5758549427435034,
+            "schur_seconds": 0.0010286460164934397,
+            "selected_ground_state_overlap_probability": 0.9999999725007869,
+            "signed_eigenvalue_shift_hartree": 1.011214008084238e-07,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 6.661338147750939e-16,
+            "time": 2.5654291271388545,
+            "unitarity_residual_frobenius_norm": 5.346033900900002e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 3,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.08677685295697302,
+              "input_transfer_seconds": 0.001068875950295478,
+              "output_transfer_seconds": 4.1579012759029865e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 1.404432126150823e-12,
+            "cpu_schur_seconds_median": 0.0010250870254822075,
+            "direct_cost": 16055200.00666069,
+            "direct_error_hartree": 1.2852888147119046e-06,
+            "effective_energy_hartree": -1.8349083499291394,
+            "eigenpair_residual_2_norm": 8.703903627086872e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.030031292990315706,
+            "gpu_construction_seconds_per_item_median": 0.029015136999078095,
+            "maximum_ground_state_overlap_probability": 0.9999956822120967,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7946421776051184e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -0.3070729499743248,
+            "schur_seconds": 0.0010267460020259023,
+            "selected_ground_state_overlap_probability": 0.9999956822120967,
+            "signed_eigenvalue_shift_hartree": 1.2852888147119046e-06,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 2.220446049250313e-16,
+            "time": 3.591600777994396,
+            "unitarity_residual_frobenius_norm": 4.854256234146145e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 3,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.08677685295697302,
+              "input_transfer_seconds": 0.001068875950295478,
+              "output_transfer_seconds": 4.1579012759029865e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": null,
+            "cpu_schur_seconds_median": 0.0009706870187073946,
+            "direct_cost": null,
+            "direct_error_hartree": 0.00021503322280147508,
+            "effective_energy_hartree": -1.8346946019951527,
+            "eigenpair_residual_2_norm": 2.173967167048034e-13,
+            "end_to_end_compute_seconds_per_item_median": 0.029981833009514958,
+            "gpu_construction_seconds_per_item_median": 0.029015136999078095,
+            "maximum_ground_state_overlap_probability": 0.9051257954197869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7709902476797348e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -3.130372635545999,
+            "schur_seconds": 0.0009761960245668888,
+            "selected_ground_state_overlap_probability": 0.9051257954197869,
+            "signed_eigenvalue_shift_hartree": 0.00021503322280147508,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 0.0,
+            "time": 5.130858254277709,
+            "unitarity_residual_frobenius_norm": 4.206431993682002e-12
+          }
+        ],
+        "precision": "complex128",
+        "requested_batch_size": 4,
+        "status": "complete",
+        "warmup_count": 1
+      },
+      "8": {
+        "actual_maximum_batch_size": 3,
+        "algorithm": "cupy_palindromic_s2_stage_reuse_then_scipy_schur",
+        "backend": "gpu_dense_cpu_schur",
+        "batch_size_limited_by_three_scientific_times": true,
+        "gpu_memory": {
+          "baseline_mib": 9955,
+          "errors": [],
+          "peak_delta_mib": 0,
+          "peak_used_mib": 9955,
+          "sample_count": 2,
+          "sampling_interval_ms": 200
+        },
+        "measurement_repeats": 3,
+        "peak_cpu_rss_kib": 696060,
+        "points": [
+          {
+            "batch_profile": {
+              "batch_size": 3,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.08690183202270418,
+              "input_transfer_seconds": 0.001228615001309663,
+              "output_transfer_seconds": 4.116003401577473e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 4.182654222972815e-12,
+            "cpu_schur_seconds_median": 0.001036916975863278,
+            "direct_cost": 22310150.483676016,
+            "direct_error_hartree": 1.011214008084238e-07,
+            "effective_energy_hartree": -1.8349095340965533,
+            "eigenpair_residual_2_norm": 6.901384580380263e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.03018867364153266,
+            "gpu_construction_seconds_per_item_median": 0.02915175666566938,
+            "maximum_ground_state_overlap_probability": 0.9999999725007869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.6431707283740903e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0000000000000004,
+            "raw_eigenphase_rad": 1.5758549427435034,
+            "schur_seconds": 0.0010212960187345743,
+            "selected_ground_state_overlap_probability": 0.9999999725007869,
+            "signed_eigenvalue_shift_hartree": 1.011214008084238e-07,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 6.661338147750939e-16,
+            "time": 2.5654291271388545,
+            "unitarity_residual_frobenius_norm": 5.346033900900002e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 3,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.08690183202270418,
+              "input_transfer_seconds": 0.001228615001309663,
+              "output_transfer_seconds": 4.116003401577473e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": 1.404432126150823e-12,
+            "cpu_schur_seconds_median": 0.0010232260101474822,
+            "direct_cost": 16055200.00666069,
+            "direct_error_hartree": 1.2852888147119046e-06,
+            "effective_energy_hartree": -1.8349083499291394,
+            "eigenpair_residual_2_norm": 8.703903627086872e-14,
+            "end_to_end_compute_seconds_per_item_median": 0.030177552660461515,
+            "gpu_construction_seconds_per_item_median": 0.02915175666566938,
+            "maximum_ground_state_overlap_probability": 0.9999956822120967,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7946421776051184e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -0.3070729499743248,
+            "schur_seconds": 0.0010232260101474822,
+            "selected_ground_state_overlap_probability": 0.9999956822120967,
+            "signed_eigenvalue_shift_hartree": 1.2852888147119046e-06,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 2.220446049250313e-16,
+            "time": 3.591600777994396,
+            "unitarity_residual_frobenius_norm": 4.854256234146145e-12
+          },
+          {
+            "batch_profile": {
+              "batch_size": 3,
+              "cupy_general_eig_available": false,
+              "cupy_general_eig_decision": "unavailable in this CuPy build; SciPy complex Schur retained",
+              "gpu_build_seconds": 0.08690183202270418,
+              "input_transfer_seconds": 0.001228615001309663,
+              "output_transfer_seconds": 4.116003401577473e-05,
+              "s2_stage_count": 21,
+              "unique_s2_stage_count": 11
+            },
+            "cost_relative_difference_vs_cpu": null,
+            "cpu_schur_seconds_median": 0.000978226016741246,
+            "direct_cost": null,
+            "direct_error_hartree": 0.00021503322280147508,
+            "effective_energy_hartree": -1.8346946019951527,
+            "eigenpair_residual_2_norm": 2.173967167048034e-13,
+            "end_to_end_compute_seconds_per_item_median": 0.030136452696751803,
+            "gpu_construction_seconds_per_item_median": 0.02915175666566938,
+            "maximum_ground_state_overlap_probability": 0.9051257954197869,
+            "pf_unitary_relative_frobenius_difference_vs_cpu_sequential": 1.7709902476797348e-15,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 1.0,
+            "raw_eigenphase_rad": -3.130372635545999,
+            "schur_seconds": 0.000978226016741246,
+            "selected_ground_state_overlap_probability": 0.9051257954197869,
+            "signed_eigenvalue_shift_hartree": 0.00021503322280147508,
+            "signed_shift_absolute_difference_vs_cpu_hartree": 0.0,
+            "time": 5.130858254277709,
+            "unitarity_residual_frobenius_norm": 4.206431993682002e-12
+          }
+        ],
+        "precision": "complex128",
+        "requested_batch_size": 8,
+        "status": "complete",
+        "warmup_count": 1
+      }
+    },
+    "gpu_matrix_free": {
+      "algorithm": "aer_overlap_moments_unitary_krylov_ritz",
+      "backend": "gpu_matrix_free",
+      "clique_precompute_seconds": 0.006230326020158827,
+      "gpu_memory": {
+        "baseline_mib": 9955,
+        "errors": [],
+        "peak_delta_mib": 0,
+        "peak_used_mib": 9955,
+        "sample_count": 15011,
+        "sampling_interval_ms": 200
+      },
+      "gram_cutoffs": [
+        1e-10,
+        1e-12,
+        1e-14
+      ],
+      "k_values": [
+        8,
+        16,
+        32,
+        64,
+        96
+      ],
+      "measurement_repeats": 3,
+      "moment_reuse": "one mu_0..mu_Kmax sequence reused for every K and cutoff",
+      "pauli_rotations_per_pf_application": 7596,
+      "peak_cpu_rss_kib": 1464016,
+      "points": [
+        {
+          "K_max": 96,
+          "aer_simulator_seconds_sum": 322.42583735409426,
+          "cpu_direct_reference": {
+            "construction": {
+              "s2_stage_count": 21,
+              "stage_build_seconds": 0.0421926699928008,
+              "stages_built": 21,
+              "unique_s2_stage_count": 11,
+              "wall_seconds": 0.04278910899301991
+            },
+            "construction_seconds_median": 0.04400533402804285,
+            "direct_cost": 22310150.48376933,
+            "direct_error_hartree": 1.0112140147455762e-07,
+            "effective_energy_hartree": -1.8349095340965527,
+            "eigenpair_residual_2_norm": 6.786242452547375e-14,
+            "end_to_end_seconds_median": 0.04502492002211511,
+            "maximum_ground_state_overlap_probability": 0.9999999725007864,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 0.9999999725007864,
+            "raw_eigenphase_rad": 1.575854942743505,
+            "schur_seconds": 0.0010330159566365182,
+            "schur_seconds_median": 0.0010322160087525845,
+            "selected_ground_state_overlap_probability": 0.9999999725007864,
+            "signed_eigenvalue_shift_hartree": 1.0112140147455762e-07,
+            "time": 2.5654291271388545,
+            "unitarity_residual_frobenius_norm": 5.345993681732656e-12
+          },
+          "full_moment_chain_seconds": [
+            337.4311692250194,
+            338.62311612197664,
+            338.609717327985
+          ],
+          "full_moment_chain_seconds_median": 338.609717327985,
+          "host_bind_transfer_and_result_seconds_sum": 14.99842992174672,
+          "moments": [
+            {
+              "imag": 0.0,
+              "real": 1.0
+            },
+            {
+              "imag": 0.9999871977602743,
+              "real": -0.005058603268529239
+            },
+            {
+              "imag": -0.010117070176064705,
+              "real": -0.9999488004752098
+            },
+            {
+              "imag": -0.9998848210200637,
+              "real": 0.015175269680394851
+            },
+            {
+              "imag": 0.02023308070689865,
+              "real": 0.9997952633381908
+            },
+            {
+              "imag": 0.9996801242850526,
+              "real": -0.025290379375055457
+            },
+            {
+              "imag": -0.030347030585912153,
+              "real": -0.9995393998931044
+            },
+            {
+              "imag": -0.9993730937004501,
+              "real": 0.03540290077026932
+            },
+            {
+              "imag": 0.040457863946978374,
+              "real": 0.9991812200062316
+            },
+            {
+              "imag": 0.9989637857969151,
+              "real": -0.04551179716530976
+            },
+            {
+              "imag": -0.05056457576004973,
+              "real": -0.9987207869151843
+            },
+            {
+              "imag": -0.9984522208251049,
+              "real": 0.05561606488297096
+            },
+            {
+              "imag": 0.06066612318318438,
+              "real": 0.9981580956879853
+            },
+            {
+              "imag": 0.9978384279717394,
+              "real": -0.06571461845769042
+            },
+            {
+              "imag": -0.07076142887993607,
+              "real": -0.9974932351167363
+            },
+            {
+              "imag": -0.9971225224727726,
+              "real": 0.07580643261962541
+            },
+            {
+              "imag": 0.08084950135071942,
+              "real": 0.9967262911703096
+            },
+            {
+              "imag": 0.9963045502515584,
+              "real": -0.08589049994206774
+            },
+            {
+              "imag": -0.09092929620914023,
+              "real": -0.9958573172071984
+            },
+            {
+              "imag": -0.9953846084164067,
+              "real": 0.0959657675316616
+            },
+            {
+              "imag": 0.1009997912767671,
+              "real": 0.9948864316635831
+            },
+            {
+              "imag": 0.9943627870315603,
+              "real": -0.10603123684450184
+            },
+            {
+              "imag": -0.1110599673000777,
+              "real": -0.9938136846680526
+            },
+            {
+              "imag": -0.9932391478705367,
+              "real": 0.11608584594255683
+            },
+            {
+              "imag": 0.12110874691058823,
+              "real": 0.9926392019568515
+            },
+            {
+              "imag": 0.9920138645192822,
+              "real": -0.12612855131870893
+            },
+            {
+              "imag": -0.13114513259007385,
+              "real": -0.991363144582616
+            },
+            {
+              "imag": -0.9906870493940237,
+              "real": 0.13615835778029
+            },
+            {
+              "imag": 0.14116809625069318,
+              "real": 0.9899856004804041
+            },
+            {
+              "imag": 0.989258824890222,
+              "real": -0.14617422159921029
+            },
+            {
+              "imag": -0.15117661289754558,
+              "real": -0.9885067402596114
+            },
+            {
+              "imag": -0.9877293573398086,
+              "real": 0.15617514562926718
+            },
+            {
+              "imag": 0.16116968164314815,
+              "real": 0.986926689340563
+            },
+            {
+              "imag": 0.9860987567054085,
+              "real": -0.16616008276372046
+            },
+            {
+              "imag": -0.17114622338450627,
+              "real": -0.9852455927065266
+            },
+            {
+              "imag": -0.9843672276165791,
+              "real": 0.17612798333748386
+            },
+            {
+              "imag": 0.18110524190775124,
+              "real": 0.9834636781009133
+            },
+            {
+              "imag": 0.9825349591618985,
+              "real": -0.18607787166909356
+            },
+            {
+              "imag": -0.19104573692540605,
+              "real": -0.9815810952132825
+            },
+            {
+              "imag": -0.9806021145706146,
+              "real": 0.1960087084641435
+            },
+            {
+              "imag": 0.2009666681122517,
+              "real": 0.9795980467418675
+            },
+            {
+              "imag": 0.9785689127575437,
+              "real": -0.205919493959266
+            },
+            {
+              "imag": -0.21086705474292688,
+              "real": -0.9775147280554383
+            },
+            {
+              "imag": -0.97643551828741,
+              "real": 0.21580921487132237
+            },
+            {
+              "imag": 0.22074584150074741,
+              "real": 0.9753313222231111
+            },
+            {
+              "imag": 0.9742021767987952,
+              "real": -0.22567681321148314
+            },
+            {
+              "imag": -0.2306020141952707,
+              "real": -0.9730481111687532
+            },
+            {
+              "imag": -0.9718691459304902,
+              "real": 0.23552131998234427
+            },
+            {
+              "imag": 0.24043459927163377,
+              "real": 0.9706653048188659
+            },
+            {
+              "imag": 0.9694366229872277,
+              "real": -0.2453417228052306
+            },
+            {
+              "imag": -0.25024256829622205,
+              "real": -0.9681831396123621
+            },
+            {
+              "imag": -0.9669048851350711,
+              "real": 0.2551370176837359
+            },
+            {
+              "imag": 0.26002494521656894,
+              "real": 0.9656018842734699
+            },
+            {
+              "imag": 0.9642741627876532,
+              "real": -0.2649062153736763
+            },
+            {
+              "imag": -0.2697806959740499,
+              "real": -0.9629217590969018
+            },
+            {
+              "imag": -0.9615447203306787,
+              "real": 0.2746482648275722
+            },
+            {
+              "imag": 0.27950880671113737,
+              "real": 0.9601430866945002
+            },
+            {
+              "imag": 0.9587168877369432,
+              "real": -0.2843622047231593
+            },
+            {
+              "imag": -0.2892083300480024,
+              "real": -0.9572661536819688
+            },
+            {
+              "imag": -0.955790919044015,
+              "real": 0.29404704959584327
+            },
+            {
+              "imag": 0.29887824166422783,
+              "real": 0.9542912269871385
+            },
+            {
+              "imag": 0.9527671205007516,
+              "real": -0.30370179030120426
+            },
+            {
+              "imag": -0.3085175751398215,
+              "real": -0.9512186318879392
+            },
+            {
+              "imag": -0.9496457918567478,
+              "real": 0.31332546881117507
+            },
+            {
+              "imag": 0.3181253368732359,
+              "real": 0.9480486442977525
+            },
+            {
+              "imag": 0.9464272383359601,
+              "real": -0.3229170510254363
+            },
+            {
+              "imag": -0.3277004987813934,
+              "real": -0.9447816227118178
+            },
+            {
+              "imag": -0.9431118390773751,
+              "real": 0.33247556788507754
+            },
+            {
+              "imag": 0.33724213518920687,
+              "real": 0.9414179202204052
+            },
+            {
+              "imag": 0.9396999037316959,
+              "real": -0.3420000734463411
+            },
+            {
+              "imag": -0.34674925684042396,
+              "real": -0.9379578409954555
+            },
+            {
+              "imag": -0.9361917813197461,
+              "real": 0.3514895662723039
+            },
+            {
+              "imag": 0.3562208885986316,
+              "real": 0.9344017666750285
+            },
+            {
+              "imag": 0.9325878355055821,
+              "real": -0.36094310115960115
+            },
+            {
+              "imag": -0.3656560716026501,
+              "real": -0.9307500297388032
+            },
+            {
+              "imag": -0.9288884020638963,
+              "real": 0.37035967385941665
+            },
+            {
+              "imag": 0.3750537925637117,
+              "real": 0.9270030130053005
+            },
+            {
+              "imag": 0.9250939130008347,
+              "real": -0.3797383174969375
+            },
+            {
+              "imag": -0.3844131343302931,
+              "real": -0.9231611434113655
+            },
+            {
+              "imag": -0.921204746179879,
+              "real": 0.3890781172964749
+            },
+            {
+              "imag": 0.3937331389751812,
+              "real": 0.9192247710251961
+            },
+            {
+              "imag": 0.9172212742323493,
+              "real": -0.3983780824337682
+            },
+            {
+              "imag": -0.4030128367659886,
+              "real": -0.915194310028847
+            },
+            {
+              "imag": -0.9131439235111796,
+              "real": 0.40763728635668667
+            },
+            {
+              "imag": 0.4122513055920535,
+              "real": 0.9110701621517814
+            },
+            {
+              "imag": 0.9089730816829834,
+              "real": -0.41685476445591185
+            },
+            {
+              "imag": -0.4214475445569435,
+              "real": -0.9068527446099552
+            },
+            {
+              "imag": -0.9047092117007828,
+              "real": 0.42602953977263514
+            },
+            {
+              "imag": 0.43060064163127454,
+              "real": 0.902542534041178
+            },
+            {
+              "imag": 0.9003527566463384,
+              "real": -0.435160732844622
+            },
+            {
+              "imag": -0.43970968886496603,
+              "real": -0.8981399348233045
+            },
+            {
+              "imag": -0.8959041303026207,
+              "real": 0.44424738690917603
+            },
+            {
+              "imag": 0.4487737168310157,
+              "real": 0.8936454030407539
+            },
+            {
+              "imag": 0.8913638084633095,
+              "real": -0.45328857051478666
+            },
+            {
+              "imag": -0.457791827857465,
+              "real": -0.8890593978069085
+            },
+            {
+              "imag": -0.8867322265546637,
+              "real": 0.4622833643222874
+            },
+            {
+              "imag": 0.46676306110348165,
+              "real": 0.8843823652055577
+            }
+          ],
+          "ritz_results": [
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": 1.9464637296406906e-06,
+              "direct_like_cost": 22310107.05787061,
+              "direct_like_error_hartree": 1.0081140922046927e-07,
+              "effective_energy_hartree": -1.834909534406545,
+              "equivalent_eigenpair_residual_2_norm": 1.3050269891658508e-05,
+              "error_difference_over_epsilon_E": 1.9452323936297666e-06,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 7.999999858757666,
+              "gram_rank": 6,
+              "gram_smallest_retained_eigenvalue": 1.119849129574468e-09,
+              "ground_state_overlap_probability": 0.99999998052669,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.575854941948242,
+              "ritz_value": {
+                "imag": 0.9999872051484961,
+                "real": -0.0050585935782964464
+              },
+              "ritz_value_magnitude": 0.9999999999148454,
+              "signed_eigenvalue_shift_hartree": 1.0081140922046927e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.0999225408834263e-10
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": 1.1735708094207098e-07,
+              "direct_like_cost": 22310147.865515195,
+              "direct_like_error_hartree": 1.0110271131402726e-07,
+              "effective_energy_hartree": -1.8349095341152428,
+              "equivalent_eigenpair_residual_2_norm": 9.753387703079727e-06,
+              "error_difference_over_epsilon_E": 1.1728262634402901e-07,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 15.999999691735194,
+              "gram_rank": 7,
+              "gram_smallest_retained_eigenvalue": 5.633109089965692e-09,
+              "ground_state_overlap_probability": 0.9999999728232558,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549426955568,
+              "ritz_value": {
+                "imag": 0.9999872051823055,
+                "real": -0.005058594325792043
+              },
+              "ritz_value_magnitude": 0.9999999999524357,
+              "signed_eigenvalue_shift_hartree": 1.0110271131402726e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.869016053035466e-11
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": 2.7215502074184883e-09,
+              "direct_like_cost": 22310150.423051137,
+              "direct_like_error_hartree": 1.011209680434888e-07,
+              "effective_energy_hartree": -1.834909534096986,
+              "equivalent_eigenpair_residual_2_norm": 8.13035539728626e-07,
+              "error_difference_over_epsilon_E": 2.719823299912616e-09,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 31.999999272859558,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 5.654530074136091e-09,
+              "ground_state_overlap_probability": 0.9999999724852708,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427423931,
+              "ritz_value": {
+                "imag": 0.9999872052293012,
+                "real": -0.005058594372866536
+              },
+              "ritz_value_magnitude": 0.9999999999996688,
+              "signed_eigenvalue_shift_hartree": 1.011209680434888e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.334310688136611e-13
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": 3.4130915871344314e-09,
+              "direct_like_cost": 22310150.407622743,
+              "direct_like_error_hartree": 1.0112085790936476e-07,
+              "effective_energy_hartree": -1.8349095340970962,
+              "equivalent_eigenpair_residual_2_norm": 2.2598729860936256e-07,
+              "error_difference_over_epsilon_E": 3.4109259416936904e-09,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 63.99999825559197,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 1.1341027138079551e-08,
+              "ground_state_overlap_probability": 0.9999999724866797,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427421107,
+              "ritz_value": {
+                "imag": 0.9999872052296084,
+                "real": -0.005058594372585743
+              },
+              "ritz_value_magnitude": 0.9999999999999746,
+              "signed_eigenvalue_shift_hartree": 1.0112085790936476e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 5.435651928564766e-13
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": 3.4521302483270233e-09,
+              "direct_like_cost": 22310150.406751785,
+              "direct_like_error_hartree": 1.0112085169211582e-07,
+              "effective_energy_hartree": -1.8349095340971024,
+              "equivalent_eigenpair_residual_2_norm": 1.3738191809196602e-07,
+              "error_difference_over_epsilon_E": 3.4499398005039123e-09,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 95.99999739273085,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 1.7014891283145038e-08,
+              "ground_state_overlap_probability": 0.9999999724796944,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.575854942742095,
+              "ritz_value": {
+                "imag": 0.9999872052296228,
+                "real": -0.005058594372570042
+              },
+              "ritz_value_magnitude": 0.999999999999989,
+              "signed_eigenvalue_shift_hartree": 1.0112085169211582e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 5.497824417943775e-13
+            },
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": 1.9426463241378755e-06,
+              "direct_like_cost": 22310107.1430375,
+              "direct_like_error_hartree": 1.0081201717859756e-07,
+              "effective_energy_hartree": -1.834909534405937,
+              "equivalent_eigenpair_residual_2_norm": 1.418106018644329e-05,
+              "error_difference_over_epsilon_E": 1.941417395578967e-06,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 7.999999858757666,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 9.088549635843868e-11,
+              "ground_state_overlap_probability": 0.999999980382123,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549419498014,
+              "ritz_value": {
+                "imag": 0.9999872051330917,
+                "real": -0.005058593579777909
+              },
+              "ritz_value_magnitude": 0.9999999998994487,
+              "signed_eigenvalue_shift_hartree": 1.0081201717859756e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.093842959600579e-10
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": 1.185099796074951e-10,
+              "direct_like_cost": 22310150.481125355,
+              "direct_like_error_hartree": 1.011213826007662e-07,
+              "effective_energy_hartree": -1.8349095340965715,
+              "equivalent_eigenpair_residual_2_norm": 1.7383339806909233e-06,
+              "error_difference_over_epsilon_E": 1.184349285310309e-10,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 15.999999691735194,
+              "gram_rank": 13,
+              "gram_smallest_retained_eigenvalue": 2.8880282878906587e-11,
+              "ground_state_overlap_probability": 0.9999999724505638,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427434563,
+              "ritz_value": {
+                "imag": 0.999987205228116,
+                "real": -0.005058594373923807
+              },
+              "ritz_value_magnitude": 0.9999999999984891,
+              "signed_eigenvalue_shift_hartree": 1.011213826007662e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.887379141862766e-14
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": 2.5974629114244863e-09,
+              "direct_like_cost": 22310150.425819542,
+              "direct_like_error_hartree": 1.0112098780545864e-07,
+              "effective_energy_hartree": -1.8349095340969663,
+              "equivalent_eigenpair_residual_2_norm": 2.425733297482089e-07,
+              "error_difference_over_epsilon_E": 2.5958149629801247e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 31.999999272859558,
+              "gram_rank": 13,
+              "gram_smallest_retained_eigenvalue": 6.810542401387879e-11,
+              "ground_state_overlap_probability": 0.9999999724906863,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427424442,
+              "ritz_value": {
+                "imag": 0.9999872052296023,
+                "real": -0.005058594372919194
+              },
+              "ritz_value_magnitude": 0.9999999999999702,
+              "signed_eigenvalue_shift_hartree": 1.0112098780545864e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.1366909897533333e-13
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": 3.903862788590118e-09,
+              "direct_like_cost": 22310150.396673564,
+              "direct_like_error_hartree": 1.0112077974966382e-07,
+              "effective_energy_hartree": -1.8349095340971744,
+              "equivalent_eigenpair_residual_2_norm": 2.2843047554427223e-07,
+              "error_difference_over_epsilon_E": 3.901385881022195e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 63.99999825559197,
+              "gram_rank": 14,
+              "gram_smallest_retained_eigenvalue": 1.3746242214106177e-10,
+              "ground_state_overlap_probability": 0.9999999724826905,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427419102,
+              "ritz_value": {
+                "imag": 0.999987205229608,
+                "real": -0.0050585943723852
+              },
+              "ritz_value_magnitude": 0.9999999999999732,
+              "signed_eigenvalue_shift_hartree": 1.0112077974966382e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 6.217248937900877e-13
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": 1.4458233499325956e-09,
+              "direct_like_cost": 22310150.451512795,
+              "direct_like_error_hartree": 1.0112117121430231e-07,
+              "effective_energy_hartree": -1.834909534096783,
+              "equivalent_eigenpair_residual_2_norm": 5.642800399291958e-07,
+              "error_difference_over_epsilon_E": 1.4449061280785772e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 95.99999739273085,
+              "gram_rank": 15,
+              "gram_smallest_retained_eigenvalue": 1.1301706620672479e-10,
+              "ground_state_overlap_probability": 0.9999999723749134,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427429145,
+              "ritz_value": {
+                "imag": 0.99998720522947,
+                "real": -0.0050585943733887605
+              },
+              "ritz_value_magnitude": 0.9999999999998403,
+              "signed_eigenvalue_shift_hartree": 1.0112117121430231e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 2.3026025530725747e-13
+            },
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": 1.9426463241378755e-06,
+              "direct_like_cost": 22310107.1430375,
+              "direct_like_error_hartree": 1.0081201717859756e-07,
+              "effective_energy_hartree": -1.834909534405937,
+              "equivalent_eigenpair_residual_2_norm": 1.418106018644329e-05,
+              "error_difference_over_epsilon_E": 1.941417395578967e-06,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 7.999999858757666,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 9.088549635843868e-11,
+              "ground_state_overlap_probability": 0.999999980382123,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549419498014,
+              "ritz_value": {
+                "imag": 0.9999872051330917,
+                "real": -0.005058593579777909
+              },
+              "ritz_value_magnitude": 0.9999999998994487,
+              "signed_eigenvalue_shift_hartree": 1.0081201717859756e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.093842959600579e-10
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": 5.224205512632807e-09,
+              "direct_like_cost": 22310150.600322142,
+              "direct_like_error_hartree": 1.0112223347569227e-07,
+              "effective_energy_hartree": -1.8349095340957207,
+              "equivalent_eigenpair_residual_2_norm": 1.745726840773222e-06,
+              "error_difference_over_epsilon_E": 5.220890320067916e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 15.999999691735194,
+              "gram_rank": 16,
+              "gram_smallest_retained_eigenvalue": 5.022098199653158e-13,
+              "ground_state_overlap_probability": 0.9999999723927641,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427456392,
+              "ritz_value": {
+                "imag": 0.9999872052280931,
+                "real": -0.005058594376106644
+              },
+              "ritz_value_magnitude": 0.9999999999984772,
+              "signed_eigenvalue_shift_hartree": 1.0112223347569227e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 8.320011346540923e-13
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": 2.9906378484767515e-09,
+              "direct_like_cost": 22310150.41704775,
+              "direct_like_error_hartree": 1.0112092518888005e-07,
+              "effective_energy_hartree": -1.834909534097029,
+              "equivalent_eigenpair_residual_2_norm": 7.340996227713586e-07,
+              "error_difference_over_epsilon_E": 2.988740255283074e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 31.999999272859558,
+              "gram_rank": 26,
+              "gram_smallest_retained_eigenvalue": 3.2492242266063087e-13,
+              "ground_state_overlap_probability": 0.9999999724849349,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427422828,
+              "ritz_value": {
+                "imag": 0.9999872052293637,
+                "real": -0.005058594372756512
+              },
+              "ritz_value_magnitude": 0.9999999999997308,
+              "signed_eigenvalue_shift_hartree": 1.0112092518888005e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.762856775641922e-13
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": 3.677996573969722e-09,
+              "direct_like_cost": 22310150.401712675,
+              "direct_like_error_hartree": 1.0112081572088982e-07,
+              "effective_energy_hartree": -1.8349095340971384,
+              "equivalent_eigenpair_residual_2_norm": 7.290917529299895e-07,
+              "error_difference_over_epsilon_E": 3.6756628407630534e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 63.99999825559197,
+              "gram_rank": 36,
+              "gram_smallest_retained_eigenvalue": 6.772983212051742e-13,
+              "ground_state_overlap_probability": 0.9999999724653093,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427420023,
+              "ritz_value": {
+                "imag": 0.9999872052293608,
+                "real": -0.005058594372476133
+              },
+              "ritz_value_magnitude": 0.9999999999997266,
+              "signed_eigenvalue_shift_hartree": 1.0112081572088982e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 5.857536677922326e-13
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": 3.0631380765200333e-09,
+              "direct_like_cost": 22310150.41543026,
+              "direct_like_error_hartree": 1.011209136425606e-07,
+              "effective_energy_hartree": -1.8349095340970405,
+              "equivalent_eigenpair_residual_2_norm": 9.330792548926633e-07,
+              "error_difference_over_epsilon_E": 3.0611945645020578e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 95.99999739273085,
+              "gram_rank": 41,
+              "gram_smallest_retained_eigenvalue": 9.988870858359785e-13,
+              "ground_state_overlap_probability": 0.9999999724135307,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": 1.5758549427422535,
+              "ritz_value": {
+                "imag": 0.9999872052291855,
+                "real": -0.005058594372726407
+              },
+              "ritz_value_magnitude": 0.9999999999995525,
+              "signed_eigenvalue_shift_hartree": 1.011209136425606e-07,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.878319970202938e-13
+            }
+          ],
+          "statevector_host_round_trips": 96,
+          "time": 2.5654291271388545
+        },
+        {
+          "K_max": 96,
+          "aer_simulator_seconds_sum": 319.65280828403775,
+          "cpu_direct_reference": {
+            "construction": {
+              "s2_stage_count": 21,
+              "stage_build_seconds": 0.04614269605372101,
+              "stages_built": 21,
+              "unique_s2_stage_count": 11,
+              "wall_seconds": 0.047044092032592744
+            },
+            "construction_seconds_median": 0.04347278497880325,
+            "direct_cost": 16055200.00668324,
+            "direct_error_hartree": 1.2852888149339492e-06,
+            "effective_energy_hartree": -1.8349083499291392,
+            "eigenpair_residual_2_norm": 8.786377093697682e-14,
+            "end_to_end_seconds_median": 0.04454562097089365,
+            "maximum_ground_state_overlap_probability": 0.999995682212096,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 0.999995844388135,
+            "raw_eigenphase_rad": -0.30707294997432405,
+            "schur_seconds": 0.0010622559930197895,
+            "schur_seconds_median": 0.0010622559930197895,
+            "selected_ground_state_overlap_probability": 0.999995682212096,
+            "signed_eigenvalue_shift_hartree": 1.2852888149339492e-06,
+            "time": 3.591600777994396,
+            "unitarity_residual_frobenius_norm": 4.853795042430087e-12
+          },
+          "full_moment_chain_seconds": [
+            334.4493958920357,
+            330.5311568279867,
+            330.0176879140199
+          ],
+          "full_moment_chain_seconds_median": 330.5311568279867,
+          "host_bind_transfer_and_result_seconds_sum": 14.790397809818387,
+          "moments": [
+            {
+              "imag": 0.0,
+              "real": 1.0
+            },
+            {
+              "imag": -0.30227039769474917,
+              "real": 0.9532207707270153
+            },
+            {
+              "imag": -0.5762604122723342,
+              "real": 0.8172639521132326
+            },
+            {
+              "imag": -0.7963390468304751,
+              "real": 0.6048469097764541
+            },
+            {
+              "imag": -0.9419143329542892,
+              "real": 0.33584319666505713
+            },
+            {
+              "imag": -0.9993684015742218,
+              "real": 0.03542128836194217
+            },
+            {
+              "imag": -0.963327549913186,
+              "real": -0.26831442939713074
+            },
+            {
+              "imag": -0.8371609096158171,
+              "real": -0.5469478270045626
+            },
+            {
+              "imag": -0.6326757155479074,
+              "real": -0.7744099642959981
+            },
+            {
+              "imag": -0.368999864299136,
+              "real": -0.9294242233155126
+            },
+            {
+              "imag": -0.07080199109660015,
+              "real": -0.997484490871032
+            },
+            {
+              "imag": 0.23401878184856717,
+              "real": -0.9722260565750144
+            },
+            {
+              "imag": 0.5169469458026319,
+              "real": -0.8560110039901477
+            },
+            {
+              "imag": 0.7515118780047259,
+              "real": -0.6597107878763238
+            },
+            {
+              "imag": 0.9157677841633728,
+              "real": -0.40169247613695286
+            },
+            {
+              "imag": 0.9943507124753348,
+              "real": -0.10609353795745932
+            },
+            {
+              "imag": 0.9799049557904352,
+              "real": 0.19943110267456102
+            },
+            {
+              "imag": 0.8737858124310374,
+              "real": 0.486296357002877
+            },
+            {
+              "imag": 0.6859195773048922,
+              "real": 0.7276679074788978
+            },
+            {
+              "imag": 0.43388202354330646,
+              "real": 0.9009617489241485
+            },
+            {
+              "imag": 0.14125354795733064,
+              "real": 0.9899667215748169
+            },
+            {
+              "imag": -0.16459059056242717,
+              "real": 0.9863569637398182
+            },
+            {
+              "imag": -0.45503764006512626,
+              "real": 0.8904669583406964
+            },
+            {
+              "imag": -0.7029128007665539,
+              "real": 0.7112702319615584
+            },
+            {
+              "imag": -0.8850295060700709,
+              "real": 0.4655294106479474
+            },
+            {
+              "imag": -0.9843452778705839,
+              "real": 0.17623434505788427
+            },
+            {
+              "imag": -0.9915710427945389,
+              "real": -0.12954767645268755
+            },
+            {
+              "imag": -0.9060296692203826,
+              "real": -0.4232110321324108
+            },
+            {
+              "imag": -0.7357228775687901,
+              "real": -0.6772804797484381
+            },
+            {
+              "imag": -0.49658605535680994,
+              "real": -0.8679851510658908
+            },
+            {
+              "imag": -0.2109909431109917,
+              "real": -0.9774866343773758
+            },
+            {
+              "imag": 0.09434418693893037,
+              "real": -0.9955369065282245
+            },
+            {
+              "imag": 0.3908506419269648,
+              "real": -0.9204506211054528
+            },
+            {
+              "imag": 0.6507927443145162,
+              "real": -0.7592514263211876
+            },
+            {
+              "imag": 0.8498487435283217,
+              "real": -0.5270197217414911
+            },
+            {
+              "imag": 0.9693968494894903,
+              "real": -0.2454836388281695
+            },
+            {
+              "imag": 0.9982540111528866,
+              "real": 0.05901894610902534
+            },
+            {
+              "imag": 0.9337177108016048,
+              "real": 0.3580007766762779
+            },
+            {
+              "imag": 0.7818277543658907,
+              "real": 0.6234876895564976
+            },
+            {
+              "imag": 0.5567938334947242,
+              "real": 0.8306460554551449
+            },
+            {
+              "imag": 0.2796679325815629,
+              "real": 0.9600910771123181
+            },
+            {
+              "imag": -0.023620406197236186,
+              "real": 0.9997150277496938
+            },
+            {
+              "imag": -0.32469917535830417,
+              "real": 0.945811067974393
+            },
+            {
+              "imag": -0.5954001151809277,
+              "real": 0.803421090742733
+            },
+            {
+              "imag": -0.8103970096778161,
+              "real": 0.5858681914712657
+            },
+            {
+              "imag": -0.9495791517731402,
+              "real": 0.3135053774710833
+            },
+            {
+              "imag": -0.9999224503051896,
+              "real": 0.011811286341769558
+            },
+            {
+              "imag": -0.9567193961817504,
+              "real": -0.2909859516486618
+            },
+            {
+              "imag": -0.8240111377811126,
+              "real": -0.5665623868001783
+            },
+            {
+              "imag": -0.6142113697228017,
+              "real": -0.7891338676024771
+            },
+            {
+              "imag": -0.34694952406567364,
+              "real": -0.9378782495267401
+            },
+            {
+              "imag": -0.04722796635168622,
+              "real": -0.9988804028071262
+            },
+            {
+              "imag": 0.25691362120427863,
+              "real": -0.9664308756213527
+            },
+            {
+              "imag": 0.5370179004857969,
+              "real": -0.8435665799438608
+            },
+            {
+              "imag": 0.7668834801437373,
+              "real": -0.6417823209030034
+            },
+            {
+              "imag": 0.9250015221927962,
+              "real": -0.37995421159298665
+            },
+            {
+              "imag": 0.9965810056805269,
+              "real": -0.0825810825960267
+            },
+            {
+              "imag": 0.9749257538543666,
+              "real": 0.22251893534019368
+            },
+            {
+              "imag": 0.8620602206211346,
+              "real": 0.5068010067988338
+            },
+            {
+              "imag": 0.6685447650506261,
+              "real": 0.7436680463662952
+            },
+            {
+              "imag": 0.4124839778308553,
+              "real": 0.910962840118647
+            },
+            {
+              "imag": 0.1178310881028739,
+              "real": 0.9930310937914977
+            },
+            {
+              "imag": -0.1878436803728377,
+              "real": 0.982196221711357
+            },
+            {
+              "imag": -0.4759466505188174,
+              "real": 0.8794723370984602
+            },
+            {
+              "imag": -0.719521267369674,
+              "real": 0.6944673213440298
+            },
+            {
+              "imag": -0.8957800745083946,
+              "real": 0.4444919908816208
+            },
+            {
+              "imag": -0.988234245558716,
+              "real": 0.152932257583594
+            },
+            {
+              "imag": -0.9882325880859945,
+              "real": -0.15293586687324617
+            },
+            {
+              "imag": -0.8957764590854522,
+              "real": -0.44449330567324485
+            },
+            {
+              "imag": -0.719517355580363,
+              "real": -0.6944671760083972
+            },
+            {
+              "imag": -0.4759424183779375,
+              "real": -0.8794687916668189
+            },
+            {
+              "imag": -0.18784331123656442,
+              "real": -0.9821916365617294
+            },
+            {
+              "imag": 0.1178299647760704,
+              "real": -0.9930268683875166
+            },
+            {
+              "imag": 0.4124797702582561,
+              "real": -0.9109592399407408
+            },
+            {
+              "imag": 0.6685390928769344,
+              "real": -0.7436673279281647
+            },
+            {
+              "imag": 0.8620550053893298,
+              "real": -0.5068025474423554
+            },
+            {
+              "imag": 0.9749211233712961,
+              "real": -0.2225216271171137
+            },
+            {
+              "imag": 0.9965782153621979,
+              "real": 0.08257566831879197
+            },
+            {
+              "imag": 0.9250016371545519,
+              "real": 0.37994957761413506
+            },
+            {
+              "imag": 0.766884769514472,
+              "real": 0.6417768020972274
+            },
+            {
+              "imag": 0.5370226274804563,
+              "real": 0.8435619663425246
+            },
+            {
+              "imag": 0.2569192674468278,
+              "real": 0.9664283812115297
+            },
+            {
+              "imag": -0.04722140198129657,
+              "real": 0.9988798924394809
+            },
+            {
+              "imag": -0.3469427071199808,
+              "real": 0.9378807196373108
+            },
+            {
+              "imag": -0.6142074008444803,
+              "real": 0.7891397630726453
+            },
+            {
+              "imag": -0.8240095804380974,
+              "real": 0.5665685798976174
+            },
+            {
+              "imag": -0.9567213855919128,
+              "real": 0.29099359171470596
+            },
+            {
+              "imag": -0.9999281998054698,
+              "real": -0.011806765876200161
+            },
+            {
+              "imag": -0.9495853523168256,
+              "real": -0.31350340137316496
+            },
+            {
+              "imag": -0.8104034078612039,
+              "real": -0.5858695002643599
+            },
+            {
+              "imag": -0.5954043217820714,
+              "real": -0.803425362049764
+            },
+            {
+              "imag": -0.3246993969529165,
+              "real": -0.9458158922021247
+            },
+            {
+              "imag": -0.023619079925131972,
+              "real": -0.9997188445717067
+            },
+            {
+              "imag": 0.2796719378482869,
+              "real": -0.96009391242533
+            },
+            {
+              "imag": 0.5567972719905644,
+              "real": -0.8306452026466429
+            },
+            {
+              "imag": 0.7818296380750497,
+              "real": -0.623486572593545
+            },
+            {
+              "imag": 0.9337181878925663,
+              "real": -0.35799818488548224
+            }
+          ],
+          "ritz_results": [
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": 0.0002631546903775206,
+              "direct_like_cost": 16050975.005496532,
+              "direct_like_error_hartree": 1.243679760953853e-06,
+              "effective_energy_hartree": -1.8349083915381932,
+              "equivalent_eigenpair_residual_2_norm": 0.0004027528858716414,
+              "error_difference_over_epsilon_E": 0.00026110097463050256,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 7.999982710852909,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 4.8991875784786775e-08,
+              "ground_state_overlap_probability": 0.9999961828163214,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.3070730994174339,
+              "ritz_value": {
+                "imag": -0.30226992354801296,
+                "real": 0.9532222884030725
+              },
+              "ritz_value_magnitude": 0.9999999188950527,
+              "signed_eigenvalue_shift_hartree": 1.243679760953853e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.160905398009618e-08
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": 5.796697977178411e-08,
+              "direct_like_cost": 16055199.076011786,
+              "direct_like_error_hartree": 1.2852796518192378e-06,
+              "effective_energy_hartree": -1.8349083499383023,
+              "equivalent_eigenpair_residual_2_norm": 5.695324396086532e-06,
+              "error_difference_over_epsilon_E": 5.7499461125765323e-08,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 15.999945232096477,
+              "gram_rank": 14,
+              "gram_smallest_retained_eigenvalue": 2.8548697058930005e-09,
+              "ground_state_overlap_probability": 0.9999956822996418,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.30707295000723434,
+              "ritz_value": {
+                "imag": -0.3022698056375515,
+                "real": 0.953222410860865
+              },
+              "ritz_value_magnitude": 0.9999999999837814,
+              "signed_eigenvalue_shift_hartree": 1.2852796518192378e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 9.163114711441267e-12
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": 2.4764530426324427e-09,
+              "direct_like_cost": 16055199.96692329,
+              "direct_like_error_hartree": 1.2852884234693107e-06,
+              "effective_energy_hartree": -1.8349083499295307,
+              "equivalent_eigenpair_residual_2_norm": 6.217553032942136e-07,
+              "error_difference_over_epsilon_E": 2.456479752943618e-09,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 31.99986266755867,
+              "gram_rank": 14,
+              "gram_smallest_retained_eigenvalue": 6.971818407422776e-09,
+              "ground_state_overlap_probability": 0.9999956822121178,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.3070729499757303,
+              "ritz_value": {
+                "imag": -0.302269805612365,
+                "real": 0.953222410885663
+              },
+              "ritz_value_magnitude": 0.9999999999998063,
+              "signed_eigenvalue_shift_hartree": 1.2852884234693107e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.914646384828302e-13
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": 2.459596748494164e-09,
+              "direct_like_cost": 16055199.967193922,
+              "direct_like_error_hartree": 1.285288426133846e-06,
+              "effective_energy_hartree": -1.834908349929528,
+              "equivalent_eigenpair_residual_2_norm": 1.812804499357408e-07,
+              "error_difference_over_epsilon_E": 2.439759527739237e-09,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 63.99972433332893,
+              "gram_rank": 15,
+              "gram_smallest_retained_eigenvalue": 7.53885550039092e-09,
+              "ground_state_overlap_probability": 0.9999956822019004,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.3070729499757198,
+              "ritz_value": {
+                "imag": -0.30226980561240846,
+                "real": 0.9532224108858346
+              },
+              "ritz_value_magnitude": 0.999999999999983,
+              "signed_eigenvalue_shift_hartree": 1.285288426133846e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.888001032237298e-13
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": 2.453978131811141e-09,
+              "direct_like_cost": 16055199.96728413,
+              "direct_like_error_hartree": 1.2852884270220244e-06,
+              "effective_energy_hartree": -1.8349083499295271,
+              "equivalent_eigenpair_residual_2_norm": 1.548574096771071e-07,
+              "error_difference_over_epsilon_E": 2.4341861193377765e-09,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 95.99958650609155,
+              "gram_rank": 15,
+              "gram_smallest_retained_eigenvalue": 1.7653829412985623e-08,
+              "ground_state_overlap_probability": 0.9999956821949011,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.3070729499757176,
+              "ritz_value": {
+                "imag": -0.3022698056124076,
+                "real": 0.9532224108858394
+              },
+              "ritz_value_magnitude": 0.9999999999999873,
+              "signed_eigenvalue_shift_hartree": 1.2852884270220244e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.879119248040297e-13
+            },
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": 0.0002631546903775206,
+              "direct_like_cost": 16050975.005496532,
+              "direct_like_error_hartree": 1.243679760953853e-06,
+              "effective_energy_hartree": -1.8349083915381932,
+              "equivalent_eigenpair_residual_2_norm": 0.0004027528858716414,
+              "error_difference_over_epsilon_E": 0.00026110097463050256,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 7.999982710852909,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 4.8991875784786775e-08,
+              "ground_state_overlap_probability": 0.9999961828163214,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.3070730994174339,
+              "ritz_value": {
+                "imag": -0.30226992354801296,
+                "real": 0.9532222884030725
+              },
+              "ritz_value_magnitude": 0.9999999188950527,
+              "signed_eigenvalue_shift_hartree": 1.243679760953853e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.160905398009618e-08
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": 7.165279147791637e-09,
+              "direct_like_cost": 16055199.89164325,
+              "direct_like_error_hartree": 1.2852876822844195e-06,
+              "effective_energy_hartree": -1.8349083499302719,
+              "equivalent_eigenpair_residual_2_norm": 3.883060769810225e-06,
+              "error_difference_over_epsilon_E": 7.10748906396222e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 15.999945232096477,
+              "gram_rank": 16,
+              "gram_smallest_retained_eigenvalue": 1.273046413664202e-10,
+              "ground_state_overlap_probability": 0.9999956821316277,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.30707294997839146,
+              "ritz_value": {
+                "imag": -0.3022698056126814,
+                "real": 0.9532224108778568
+              },
+              "ritz_value_magnitude": 0.9999999999924609,
+              "signed_eigenvalue_shift_hartree": 1.2852876822844195e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.1326495297225847e-12
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": 2.8599309587207244e-09,
+              "direct_like_cost": 16055199.960766476,
+              "direct_like_error_hartree": 1.2852883628511336e-06,
+              "effective_energy_hartree": -1.8349083499295913,
+              "equivalent_eigenpair_residual_2_norm": 6.591974604307015e-07,
+              "error_difference_over_epsilon_E": 2.8368648763432817e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 31.99986266755867,
+              "gram_rank": 20,
+              "gram_smallest_retained_eigenvalue": 4.7686403084119897e-11,
+              "ground_state_overlap_probability": 0.9999956821945682,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.3070729499759477,
+              "ritz_value": {
+                "imag": -0.30226980561256506,
+                "real": 0.9532224108855746
+              },
+              "ritz_value_magnitude": 0.9999999999997825,
+              "signed_eigenvalue_shift_hartree": 1.2852883628511336e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.5208281562736374e-13
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": 2.477857585780896e-09,
+              "direct_like_cost": 16055199.96690074,
+              "direct_like_error_hartree": 1.2852884232472661e-06,
+              "effective_energy_hartree": -1.834908349929531,
+              "equivalent_eigenpair_residual_2_norm": 4.497584185834697e-07,
+              "error_difference_over_epsilon_E": 2.457873105043983e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 63.99972433332893,
+              "gram_rank": 21,
+              "gram_smallest_retained_eigenvalue": 6.571167964464715e-11,
+              "ground_state_overlap_probability": 0.9999956821940065,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.30707294997573054,
+              "ritz_value": {
+                "imag": -0.302269805612393,
+                "real": 0.9532224108857505
+              },
+              "ritz_value_magnitude": 0.9999999999998983,
+              "signed_eigenvalue_shift_hartree": 1.2852884232472661e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.9168668308775523e-13
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": 2.4581922053457106e-09,
+              "direct_like_cost": 16055199.967216473,
+              "direct_like_error_hartree": 1.2852884263558906e-06,
+              "effective_energy_hartree": -1.8349083499295278,
+              "equivalent_eigenpair_residual_2_norm": 2.4485106356672917e-07,
+              "error_difference_over_epsilon_E": 2.438366175638872e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 95.99958650609155,
+              "gram_rank": 21,
+              "gram_smallest_retained_eigenvalue": 1.4785311219454169e-10,
+              "ground_state_overlap_probability": 0.9999956821918446,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.30707294997571966,
+              "ritz_value": {
+                "imag": -0.30226980561240435,
+                "real": 0.9532224108858223
+              },
+              "ritz_value_magnitude": 0.99999999999997,
+              "signed_eigenvalue_shift_hartree": 1.2852884263558906e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.885780586188048e-13
+            },
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": 0.0002631546903775206,
+              "direct_like_cost": 16050975.005496532,
+              "direct_like_error_hartree": 1.243679760953853e-06,
+              "effective_energy_hartree": -1.8349083915381932,
+              "equivalent_eigenpair_residual_2_norm": 0.0004027528858716414,
+              "error_difference_over_epsilon_E": 0.00026110097463050256,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 7.999982710852909,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 4.8991875784786775e-08,
+              "ground_state_overlap_probability": 0.9999961828163214,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.3070730994174339,
+              "ritz_value": {
+                "imag": -0.30226992354801296,
+                "real": 0.9532222884030725
+              },
+              "ritz_value_magnitude": 0.9999999188950527,
+              "signed_eigenvalue_shift_hartree": 1.243679760953853e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.160905398009618e-08
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": 7.165279147791637e-09,
+              "direct_like_cost": 16055199.89164325,
+              "direct_like_error_hartree": 1.2852876822844195e-06,
+              "effective_energy_hartree": -1.8349083499302719,
+              "equivalent_eigenpair_residual_2_norm": 3.883060769810225e-06,
+              "error_difference_over_epsilon_E": 7.10748906396222e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 15.999945232096477,
+              "gram_rank": 16,
+              "gram_smallest_retained_eigenvalue": 1.273046413664202e-10,
+              "ground_state_overlap_probability": 0.9999956821316277,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.30707294997839146,
+              "ritz_value": {
+                "imag": -0.3022698056126814,
+                "real": 0.9532224108778568
+              },
+              "ritz_value_magnitude": 0.9999999999924609,
+              "signed_eigenvalue_shift_hartree": 1.2852876822844195e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.1326495297225847e-12
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": 2.350031724773771e-09,
+              "direct_like_cost": 16055199.96895301,
+              "direct_like_error_hartree": 1.2852884434533252e-06,
+              "effective_energy_hartree": -1.8349083499295107,
+              "equivalent_eigenpair_residual_2_norm": 7.914466693931521e-07,
+              "error_difference_over_epsilon_E": 2.3310780639107613e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 31.99986266755867,
+              "gram_rank": 27,
+              "gram_smallest_retained_eigenvalue": 3.318979004417443e-13,
+              "ground_state_overlap_probability": 0.999995682193327,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.30707294997565826,
+              "ritz_value": {
+                "imag": -0.3022698056122603,
+                "real": 0.9532224108855711
+              },
+              "ritz_value_magnitude": 0.9999999999996871,
+              "signed_eigenvalue_shift_hartree": 1.2852884434533252e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.714806240395774e-13
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": 2.701201928800856e-09,
+              "direct_like_cost": 16055199.963314902,
+              "direct_like_error_hartree": 1.285288387942174e-06,
+              "effective_energy_hartree": -1.8349083499295662,
+              "equivalent_eigenpair_residual_2_norm": 7.542401990201333e-07,
+              "error_difference_over_epsilon_E": 2.679416089002029e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 63.99972433332893,
+              "gram_rank": 36,
+              "gram_smallest_retained_eigenvalue": 6.76664766345694e-13,
+              "ground_state_overlap_probability": 0.9999956821731255,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.30707294997585816,
+              "ritz_value": {
+                "imag": -0.3022698056124571,
+                "real": 0.9532224108855303
+              },
+              "ritz_value_magnitude": 0.9999999999997077,
+              "signed_eigenvalue_shift_hartree": 1.285288387942174e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 4.269917752708352e-13
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": 2.0676909073813476e-09,
+              "direct_like_cost": 16055199.97348605,
+              "direct_like_error_hartree": 1.2852884880842907e-06,
+              "effective_energy_hartree": -1.834908349929466,
+              "equivalent_eigenpair_residual_2_norm": 8.563955453336842e-07,
+              "error_difference_over_epsilon_E": 2.0510142917373823e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 95.99958650609155,
+              "gram_rank": 41,
+              "gram_smallest_retained_eigenvalue": 1.0924702231289092e-12,
+              "ground_state_overlap_probability": 0.999995682135218,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -0.307072949975498,
+              "ritz_value": {
+                "imag": -0.30226980561209066,
+                "real": 0.9532224108855663
+              },
+              "ritz_value_magnitude": 0.9999999999996312,
+              "signed_eigenvalue_shift_hartree": 1.2852884880842907e-06,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.268496584496461e-13
+            }
+          ],
+          "statevector_host_round_trips": 96,
+          "time": 3.591600777994396
+        },
+        {
+          "K_max": 96,
+          "aer_simulator_seconds_sum": 315.6536583938869,
+          "cpu_direct_reference": {
+            "construction": {
+              "s2_stage_count": 21,
+              "stage_build_seconds": 0.042165452148765326,
+              "stages_built": 21,
+              "unique_s2_stage_count": 11,
+              "wall_seconds": 0.04275289905490354
+            },
+            "construction_seconds_median": 0.04503780999220908,
+            "direct_cost": null,
+            "direct_error_hartree": 0.00021503322280147508,
+            "effective_energy_hartree": -1.8346946019951527,
+            "eigenpair_residual_2_norm": 2.1742650710212577e-13,
+            "end_to_end_seconds_median": 0.04604579700389877,
+            "maximum_ground_state_overlap_probability": 0.9051257954197816,
+            "phase_branch_integer": -1,
+            "previous_or_reference_vector_overlap_probability": 0.9051903794007272,
+            "raw_eigenphase_rad": -3.1303726355459993,
+            "schur_seconds": 0.001019106013700366,
+            "schur_seconds_median": 0.001019106013700366,
+            "selected_ground_state_overlap_probability": 0.9051257954197816,
+            "signed_eigenvalue_shift_hartree": 0.00021503322280147508,
+            "time": 5.130858254277709,
+            "unitarity_residual_frobenius_norm": 4.206056930651525e-12
+          },
+          "full_moment_chain_seconds": [
+            330.25302950898185,
+            330.33538537996355,
+            330.6211411849945
+          ],
+          "full_moment_chain_seconds_median": 330.33538537996355,
+          "host_bind_transfer_and_result_seconds_sum": 14.59325623116456,
+          "moments": [
+            {
+              "imag": 0.0,
+              "real": 1.0
+            },
+            {
+              "imag": -0.010086292736237406,
+              "real": -0.9998191507287606
+            },
+            {
+              "imag": 0.020063142234873363,
+              "real": 0.9995600054432239
+            },
+            {
+              "imag": -0.030108060457703506,
+              "real": -0.9991893475690702
+            },
+            {
+              "imag": 0.04014068278975231,
+              "real": 0.9986143132562082
+            },
+            {
+              "imag": -0.0502491295569695,
+              "real": -0.9980004746998947
+            },
+            {
+              "imag": 0.060430931546825814,
+              "real": 0.997103107350892
+            },
+            {
+              "imag": -0.07053767545024249,
+              "real": -0.9960521255510864
+            },
+            {
+              "imag": 0.08069169212968255,
+              "real": 0.9949540413301888
+            },
+            {
+              "imag": -0.09086690650389201,
+              "real": -0.9936897369583982
+            },
+            {
+              "imag": 0.1011363362629424,
+              "real": 0.9923948651832064
+            },
+            {
+              "imag": -0.11148773120884127,
+              "real": -0.9908744818420071
+            },
+            {
+              "imag": 0.12174989566249794,
+              "real": 0.9892124145960897
+            },
+            {
+              "imag": -0.1320777660860172,
+              "real": -0.987567767973053
+            },
+            {
+              "imag": 0.1424130619189758,
+              "real": 0.9857550478877575
+            },
+            {
+              "imag": -0.1527788790864401,
+              "real": -0.9839553200452984
+            },
+            {
+              "imag": 0.16327628395601232,
+              "real": 0.9820282802792296
+            },
+            {
+              "imag": -0.1736442903179641,
+              "real": -0.9798942580110626
+            },
+            {
+              "imag": 0.1839942548354759,
+              "real": 0.9778498871575265
+            },
+            {
+              "imag": -0.19438792762063226,
+              "real": -0.9757021388955054
+            },
+            {
+              "imag": 0.20473108182117433,
+              "real": 0.9734898596574201
+            },
+            {
+              "imag": -0.21515262918390926,
+              "real": -0.9712474985146344
+            },
+            {
+              "imag": 0.22546506772975,
+              "real": 0.9688013028814012
+            },
+            {
+              "imag": -0.2356749000518231,
+              "real": -0.9663794357459723
+            },
+            {
+              "imag": 0.2458843633124731,
+              "real": 0.963919872055524
+            },
+            {
+              "imag": -0.25600965891371086,
+              "real": -0.9613705509552685
+            },
+            {
+              "imag": 0.26617809632262285,
+              "real": 0.9587673938318316
+            },
+            {
+              "imag": -0.2762067318318678,
+              "real": -0.9559511460547149
+            },
+            {
+              "imag": 0.286076452037503,
+              "real": 0.9531286435369005
+            },
+            {
+              "imag": -0.29596247748496823,
+              "real": -0.9502560229906156
+            },
+            {
+              "imag": 0.30569821892115934,
+              "real": 0.9472299739242511
+            },
+            {
+              "imag": -0.31544301801914465,
+              "real": -0.944168135020536
+            },
+            {
+              "imag": 0.32511952780309633,
+              "real": 0.9408540829872123
+            },
+            {
+              "imag": -0.33454873983489536,
+              "real": -0.937430629973566
+            },
+            {
+              "imag": 0.34400358746456167,
+              "real": 0.9340083570723992
+            },
+            {
+              "imag": -0.3533722172547192,
+              "real": -0.9303720132993383
+            },
+            {
+              "imag": 0.36267297847709573,
+              "real": 0.9266299381063966
+            },
+            {
+              "imag": -0.3719715836016376,
+              "real": -0.9226903353666267
+            },
+            {
+              "imag": 0.38105857094762924,
+              "real": 0.9185575298064157
+            },
+            {
+              "imag": -0.3901380205196646,
+              "real": -0.914390599624298
+            },
+            {
+              "imag": 0.39919527963895235,
+              "real": 0.910050870426001
+            },
+            {
+              "imag": -0.4081994817885224,
+              "real": -0.9055696913984786
+            },
+            {
+              "imag": 0.41724558074836265,
+              "real": 0.900884216624292
+            },
+            {
+              "imag": -0.4260987460983472,
+              "real": -0.8960113048131195
+            },
+            {
+              "imag": 0.4349580582635143,
+              "real": 0.8911207656818675
+            },
+            {
+              "imag": -0.44386985021290737,
+              "real": -0.886051238554312
+            },
+            {
+              "imag": 0.45268848337679357,
+              "real": 0.8808591304594924
+            },
+            {
+              "imag": -0.46161591923227263,
+              "real": -0.8755359778146378
+            },
+            {
+              "imag": 0.4704109684309253,
+              "real": 0.8699910440108615
+            },
+            {
+              "imag": -0.47912154293899295,
+              "real": -0.8644654912730555
+            },
+            {
+              "imag": 0.4879747830401463,
+              "real": 0.858855112697429
+            },
+            {
+              "imag": -0.4967410509735854,
+              "real": -0.8530906789673854
+            },
+            {
+              "imag": 0.5055482575531454,
+              "real": 0.8472607979352229
+            },
+            {
+              "imag": -0.5143097262777828,
+              "real": -0.8412797693107169
+            },
+            {
+              "imag": 0.522928117791576,
+              "real": 0.8352973487603136
+            },
+            {
+              "imag": -0.5316460560137091,
+              "real": -0.8292950808454758
+            },
+            {
+              "imag": 0.5403033911780672,
+              "real": 0.8231954921909975
+            },
+            {
+              "imag": -0.5489471908844353,
+              "real": -0.8170410901480168
+            },
+            {
+              "imag": 0.5575394168924407,
+              "real": 0.8107517646979218
+            },
+            {
+              "imag": -0.5659290850215715,
+              "real": -0.8045038318596494
+            },
+            {
+              "imag": 0.5743905140167054,
+              "real": 0.7982660376408361
+            },
+            {
+              "imag": -0.5827691994125476,
+              "real": -0.7919061466126439
+            },
+            {
+              "imag": 0.5910355679671383,
+              "real": 0.7855470891119563
+            },
+            {
+              "imag": -0.5992906574424035,
+              "real": -0.7790535060246991
+            },
+            {
+              "imag": 0.6072727763095428,
+              "real": 0.772531669246801
+            },
+            {
+              "imag": -0.6152254287381065,
+              "real": -0.7660864414826638
+            },
+            {
+              "imag": 0.6231637855387233,
+              "real": 0.759497780332024
+            },
+            {
+              "imag": -0.630889492570898,
+              "real": -0.7528465196098255
+            },
+            {
+              "imag": 0.6385637678079726,
+              "real": 0.7460960951729388
+            },
+            {
+              "imag": -0.6460169982705384,
+              "real": -0.7392595151626862
+            },
+            {
+              "imag": 0.653338306905992,
+              "real": 0.7324563809270165
+            },
+            {
+              "imag": -0.6606537854402906,
+              "real": -0.7255142521500416
+            },
+            {
+              "imag": 0.6677772645714802,
+              "real": 0.7184766495618267
+            },
+            {
+              "imag": -0.6748154462932254,
+              "real": -0.7112982040261279
+            },
+            {
+              "imag": 0.6816510051532546,
+              "real": 0.7039798882217102
+            },
+            {
+              "imag": -0.6883393514795214,
+              "real": -0.6967060114267943
+            },
+            {
+              "imag": 0.6950641566176307,
+              "real": 0.689248590472292
+            },
+            {
+              "imag": -0.7015968530309044,
+              "real": -0.6816458269297232
+            },
+            {
+              "imag": 0.7080531913757603,
+              "real": 0.6739568487379037
+            },
+            {
+              "imag": -0.7143968082333234,
+              "real": -0.666045120413654
+            },
+            {
+              "imag": 0.7205388672294394,
+              "real": 0.6581557364653452
+            },
+            {
+              "imag": -0.7267629217142905,
+              "real": -0.6501610745789449
+            },
+            {
+              "imag": 0.732895776600504,
+              "real": 0.6419452378112751
+            },
+            {
+              "imag": -0.7388966384395153,
+              "real": -0.6336690317811033
+            },
+            {
+              "imag": 0.7448632222151286,
+              "real": 0.6252186598062975
+            },
+            {
+              "imag": -0.7506769682712879,
+              "real": -0.6167491571287215
+            },
+            {
+              "imag": 0.7565280506855022,
+              "real": 0.6082328264332916
+            },
+            {
+              "imag": -0.762365323906167,
+              "real": -0.5995257521119397
+            },
+            {
+              "imag": 0.7680966336985117,
+              "real": 0.5907843943297262
+            },
+            {
+              "imag": -0.7737886302178424,
+              "real": -0.5818966174039737
+            },
+            {
+              "imag": 0.7793397156521854,
+              "real": 0.5730133802064035
+            },
+            {
+              "imag": -0.7849321042372306,
+              "real": -0.5641759821434844
+            },
+            {
+              "imag": 0.7905268077529432,
+              "real": 0.5551335106346202
+            },
+            {
+              "imag": -0.7959766540103604,
+              "real": -0.5461108877871993
+            },
+            {
+              "imag": 0.8014151418982395,
+              "real": 0.5370343064677026
+            },
+            {
+              "imag": -0.8067020317029423,
+              "real": -0.5279003865080097
+            },
+            {
+              "imag": 0.8119385552299461,
+              "real": 0.5189172173829818
+            }
+          ],
+          "ritz_results": [
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": 18432269.12005802,
+              "direct_like_error_hartree": 6.297768874397036e-05,
+              "effective_energy_hartree": -1.8348466575292102,
+              "equivalent_eigenpair_residual_2_norm": 0.0039448489568591,
+              "error_difference_over_epsilon_E": 0.9541636817642517,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 7.996940487907774,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 2.502222826347296e-06,
+              "ground_state_overlap_probability": 0.9970293931907676,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1311528109380267,
+              "ritz_value": {
+                "imag": -0.01043957178212474,
+                "real": -0.9999377248147575
+              },
+              "ritz_value_magnitude": 0.9999922190530823,
+              "signed_eigenvalue_shift_hartree": 6.297768874397036e-05,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 0.00015205553405750472
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.0002163776526598049,
+              "effective_energy_hartree": -1.8346932575652943,
+              "equivalent_eigenpair_residual_2_norm": 0.0032439909039539633,
+              "error_difference_over_epsilon_E": 0.008436431804005563,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 15.982031826884954,
+              "gram_rank": 16,
+              "gram_smallest_retained_eigenvalue": 1.6538957578472542e-09,
+              "ground_state_overlap_probability": 0.9036469875528078,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1303657374669633,
+              "ritz_value": {
+                "imag": -0.011226621205401043,
+                "real": -0.9999317174185922
+              },
+              "ritz_value_magnitude": 0.9999947382478495,
+              "signed_eigenvalue_shift_hartree": 0.0002163776526598049,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.344429858329832e-06
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.0002150332953871903,
+              "effective_energy_hartree": -1.834694601922567,
+              "equivalent_eigenpair_residual_2_norm": 4.095041352105089e-05,
+              "error_difference_over_epsilon_E": 4.554826215530402e-07,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 31.919354276651553,
+              "gram_rank": 19,
+              "gram_smallest_retained_eigenvalue": 5.59773035884546e-09,
+              "ground_state_overlap_probability": 0.9051257004233275,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.130372635173571,
+              "ritz_value": {
+                "imag": -0.01121978299582907,
+                "real": -0.9999370554152693
+              },
+              "ritz_value_magnitude": 0.9999999991615165,
+              "signed_eigenvalue_shift_hartree": 0.0002150332953871903,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 7.258571521617796e-11
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.0002150332227757179,
+              "effective_energy_hartree": -1.8346946019951784,
+              "equivalent_eigenpair_residual_2_norm": 6.351811136587594e-07,
+              "error_difference_over_epsilon_E": 1.6162884364234806e-10,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 63.71653781873838,
+              "gram_rank": 20,
+              "gram_smallest_retained_eigenvalue": 1.689244661723436e-08,
+              "ground_state_overlap_probability": 0.9051257952554566,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1303726355461317,
+              "ritz_value": {
+                "imag": -0.011219782632697217,
+                "real": -0.9999370562576767
+              },
+              "ritz_value_magnitude": 0.9999999999997965,
+              "signed_eigenvalue_shift_hartree": 0.0002150332227757179,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 2.5757174171303632e-14
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.00021503322273552783,
+              "effective_energy_hartree": -1.8346946019952186,
+              "equivalent_eigenpair_residual_2_norm": 3.41103170581448e-07,
+              "error_difference_over_epsilon_E": 4.138255738084257e-10,
+              "gram_cutoff": 1e-10,
+              "gram_largest_eigenvalue": 95.27549784235222,
+              "gram_rank": 20,
+              "gram_smallest_retained_eigenvalue": 2.557270919401254e-08,
+              "ground_state_overlap_probability": 0.9051257952671797,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.130372635546336,
+              "ritz_value": {
+                "imag": -0.011219782632494584,
+                "real": -0.9999370562578258
+              },
+              "ritz_value_magnitude": 0.9999999999999434,
+              "signed_eigenvalue_shift_hartree": 0.00021503322273552783,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 6.59472476627343e-14
+            },
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": 18432269.12005802,
+              "direct_like_error_hartree": 6.297768874397036e-05,
+              "effective_energy_hartree": -1.8348466575292102,
+              "equivalent_eigenpair_residual_2_norm": 0.0039448489568591,
+              "error_difference_over_epsilon_E": 0.9541636817642517,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 7.996940487907774,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 2.502222826347296e-06,
+              "ground_state_overlap_probability": 0.9970293931907676,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1311528109380267,
+              "ritz_value": {
+                "imag": -0.01043957178212474,
+                "real": -0.9999377248147575
+              },
+              "ritz_value_magnitude": 0.9999922190530823,
+              "signed_eigenvalue_shift_hartree": 6.297768874397036e-05,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 0.00015205553405750472
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.0002163776526598049,
+              "effective_energy_hartree": -1.8346932575652943,
+              "equivalent_eigenpair_residual_2_norm": 0.0032439909039539633,
+              "error_difference_over_epsilon_E": 0.008436431804005563,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 15.982031826884954,
+              "gram_rank": 16,
+              "gram_smallest_retained_eigenvalue": 1.6538957578472542e-09,
+              "ground_state_overlap_probability": 0.9036469875528078,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1303657374669633,
+              "ritz_value": {
+                "imag": -0.011226621205401043,
+                "real": -0.9999317174185922
+              },
+              "ritz_value_magnitude": 0.9999947382478495,
+              "signed_eigenvalue_shift_hartree": 0.0002163776526598049,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.344429858329832e-06
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.00021503322632177024,
+              "effective_energy_hartree": -1.8346946019916324,
+              "equivalent_eigenpair_residual_2_norm": 2.631901118059202e-06,
+              "error_difference_over_epsilon_E": 2.2090204199187815e-08,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 31.919354276651553,
+              "gram_rank": 20,
+              "gram_smallest_retained_eigenvalue": 1.4481329714935813e-09,
+              "ground_state_overlap_probability": 0.9051257917290989,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1303726355279373,
+              "ritz_value": {
+                "imag": -0.011219782650854012,
+                "real": -0.9999370562541998
+              },
+              "ritz_value_magnitude": 0.9999999999965236,
+              "signed_eigenvalue_shift_hartree": 0.00021503322632177024,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 3.5202951664814464e-12
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.00021503322155402849,
+              "effective_energy_hartree": -1.8346946019964,
+              "equivalent_eigenpair_residual_2_norm": 1.4284921838291723e-06,
+              "error_difference_over_epsilon_E": 7.82785209985096e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 63.71653781873838,
+              "gram_rank": 21,
+              "gram_smallest_retained_eigenvalue": 6.480131447414023e-11,
+              "ground_state_overlap_probability": 0.9051257962828515,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.130372635552399,
+              "ritz_value": {
+                "imag": -0.01121978262642107,
+                "real": -0.9999370562569372
+              },
+              "ritz_value_magnitude": 0.9999999999989867,
+              "signed_eigenvalue_shift_hartree": 0.00021503322155402849,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.2474465904688259e-12
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.00021503322195459695,
+              "effective_energy_hartree": -1.8346946019959995,
+              "equivalent_eigenpair_residual_2_norm": 1.0925711858167266e-06,
+              "error_difference_over_epsilon_E": 5.314244910792375e-09,
+              "gram_cutoff": 1e-12,
+              "gram_largest_eigenvalue": 95.27549784235222,
+              "gram_rank": 21,
+              "gram_smallest_retained_eigenvalue": 1.5375304884813166e-10,
+              "ground_state_overlap_probability": 0.9051257957671138,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.130372635550345,
+              "ritz_value": {
+                "imag": -0.011219782628479598,
+                "real": -0.9999370562573299
+              },
+              "ritz_value_magnitude": 0.9999999999994024,
+              "signed_eigenvalue_shift_hartree": 0.00021503322195459695,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 8.468781231840694e-13
+            },
+            {
+              "K": 8,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": 18432269.12005802,
+              "direct_like_error_hartree": 6.297768874397036e-05,
+              "effective_energy_hartree": -1.8348466575292102,
+              "equivalent_eigenpair_residual_2_norm": 0.0039448489568591,
+              "error_difference_over_epsilon_E": 0.9541636817642517,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 7.996940487907774,
+              "gram_rank": 8,
+              "gram_smallest_retained_eigenvalue": 2.502222826347296e-06,
+              "ground_state_overlap_probability": 0.9970293931907676,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1311528109380267,
+              "ritz_value": {
+                "imag": -0.01043957178212474,
+                "real": -0.9999377248147575
+              },
+              "ritz_value_magnitude": 0.9999922190530823,
+              "signed_eigenvalue_shift_hartree": 6.297768874397036e-05,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 0.00015205553405750472
+            },
+            {
+              "K": 16,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.0002163776526598049,
+              "effective_energy_hartree": -1.8346932575652943,
+              "equivalent_eigenpair_residual_2_norm": 0.0032439909039539633,
+              "error_difference_over_epsilon_E": 0.008436431804005563,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 15.982031826884954,
+              "gram_rank": 16,
+              "gram_smallest_retained_eigenvalue": 1.6538957578472542e-09,
+              "ground_state_overlap_probability": 0.9036469875528078,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.1303657374669633,
+              "ritz_value": {
+                "imag": -0.011226621205401043,
+                "real": -0.9999317174185922
+              },
+              "ritz_value_magnitude": 0.9999947382478495,
+              "signed_eigenvalue_shift_hartree": 0.0002163776526598049,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.344429858329832e-06
+            },
+            {
+              "K": 32,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.00021503322491533972,
+              "effective_energy_hartree": -1.8346946019930388,
+              "equivalent_eigenpair_residual_2_norm": 7.269017978130206e-06,
+              "error_difference_over_epsilon_E": 1.3264711995475462e-08,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 31.919354276651553,
+              "gram_rank": 27,
+              "gram_smallest_retained_eigenvalue": 3.339065130504389e-13,
+              "ground_state_overlap_probability": 0.9051257924835122,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.130372635535153,
+              "ritz_value": {
+                "imag": -0.011219782643381072,
+                "real": -0.999937056231311
+              },
+              "ritz_value_magnitude": 0.9999999999735524,
+              "signed_eigenvalue_shift_hartree": 0.00021503322491533972,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 2.113864638886298e-12
+            },
+            {
+              "K": 64,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.00021503322263738411,
+              "effective_energy_hartree": -1.8346946019953168,
+              "equivalent_eigenpair_residual_2_norm": 3.1735625391962217e-06,
+              "error_difference_over_epsilon_E": 1.0296872021697865e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 63.71653781873838,
+              "gram_rank": 36,
+              "gram_smallest_retained_eigenvalue": 7.239596782835308e-13,
+              "ground_state_overlap_probability": 0.9051257950907218,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.130372635546842,
+              "ritz_value": {
+                "imag": -0.01121978263193397,
+                "real": -0.9999370562529634
+              },
+              "ritz_value_magnitude": 0.9999999999950749,
+              "signed_eigenvalue_shift_hartree": 0.00021503322263738411,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 1.6409096303959814e-13
+            },
+            {
+              "K": 96,
+              "cost_relative_difference_vs_cpu": null,
+              "direct_like_cost": null,
+              "direct_like_error_hartree": 0.00021503322257143687,
+              "effective_energy_hartree": -1.8346946019953827,
+              "equivalent_eigenpair_residual_2_norm": 2.3431809460605573e-06,
+              "error_difference_over_epsilon_E": 1.4435127759782122e-09,
+              "gram_cutoff": 1e-14,
+              "gram_largest_eigenvalue": 95.27549784235222,
+              "gram_rank": 42,
+              "gram_smallest_retained_eigenvalue": 9.77448127673044e-13,
+              "ground_state_overlap_probability": 0.9051257951431246,
+              "phase_branch_integer": -1,
+              "raw_eigenphase_rad": -3.130372635547179,
+              "ritz_value": {
+                "imag": -0.011219782631621808,
+                "real": -0.999937056255149
+              },
+              "ritz_value_magnitude": 0.9999999999972569,
+              "signed_eigenvalue_shift_hartree": 0.00021503322257143687,
+              "signed_shift_absolute_difference_vs_cpu_hartree": 2.3003821070233244e-13
+            }
+          ],
+          "statevector_host_round_trips": 96,
+          "time": 5.130858254277709
+        }
+      ],
+      "precision": "complex128/double",
+      "state_transfer_limitation": "Aer 0.15.1 returns each full statevector to the host; transfer/host overhead and round-trip count are recorded separately",
+      "status": "complete",
+      "template_prepare": {
+        "device": "GPU",
+        "execution_strategy": "pretranspiled_parameterized_body",
+        "input_num_instructions": 505,
+        "optimization_level": 0,
+        "total_seconds": 1.701247372024227,
+        "transpile_seconds": 1.5645036270143464,
+        "transpiled_num_instructions": 100220
+      },
+      "warmup_pf_applications": 1
+    }
+  },
+  "peak_cpu_rss_kib": 1464016,
+  "purpose": "direct PF eigenvalue solver method comparison",
+  "schema_version": 1,
+  "started_at": "2026-09-04T12:18:44.308578+09:00",
+  "status": "complete",
+  "system": {
+    "full_state_dimension": 256,
+    "ground_energy_without_constant_hartree": -1.8349096352179541,
+    "ground_state_diagnostics": {
+      "ci_dimension": 36,
+      "davidson_attempts": [
+        {
+          "attempt": 1,
+          "energy_hartree": -2.1663874486347625,
+          "fci_converged": true,
+          "fci_residual_norm": 1.0478386776288089e-15,
+          "initial_guess": "pyscf_default",
+          "lindep": 1e-14
+        }
+      ],
+      "davidson_retry_lindep": 1e-20,
+      "davidson_retry_performed": false,
+      "fci_converged": true,
+      "fci_residual_norm": 1.0478386776288089e-15,
+      "fci_residual_tolerance": 1e-10,
+      "full_pspace_dense_matrix_bytes": 10368,
+      "full_pspace_dimension_limit": 1024,
+      "method": "pyscf_full_pspace_lapack_eigh",
+      "n_alpha": 2,
+      "n_beta": 2,
+      "n_orbitals": 4,
+      "scf_converged": true,
+      "source": "PySCF FCI",
+      "used_scipy_eigsh": false
+    },
+    "h_chain": 4,
+    "num_commuting_groups": 13,
+    "num_qubits": 8,
+    "one_sector_complex128_matrix_gib": 1.9311904907226562e-05,
+    "sector": {
+      "dense_complex_matrix_bytes": 20736,
+      "dense_complex_matrix_gib": 1.9311904907226562e-05,
+      "dimension": 36,
+      "ground_state_eigenpair_residual": 3.493258079825435e-15,
+      "ground_state_outside_norm": 0.0,
+      "group_diagonalization_seconds": 0.0030396379879675806,
+      "kind": "fixed_half_populations",
+      "max_group_leakage_frobenius_norm": 1.2018516789897274e-17,
+      "population_counts": [
+        2,
+        2
+      ],
+      "retained_group_spectra_estimated_bytes": 273312
+    },
+    "used_scipy_eigsh": false
+  }
+}
