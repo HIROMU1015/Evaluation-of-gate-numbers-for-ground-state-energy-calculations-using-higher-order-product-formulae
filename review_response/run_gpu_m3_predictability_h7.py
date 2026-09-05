@@ -705,14 +705,24 @@ def h7_candidate(args: argparse.Namespace) -> int:
         if int(system["h_chain"]) != 7:
             raise ValueError("candidate worker requires an H7 compact system")
         fit = _fit_candidate(system, candidate["weights"])
-        if args.candidate == "m3_local_c1_r2_s007":
+        saved_h7 = candidate["holdout_systems"].get("H7")
+        if saved_h7 is not None:
             saved_alpha = float(
-                candidate["holdout_systems"]["H7"]["short_time_fit"]
+                saved_h7["short_time_fit"]
                 ["selected_window"]["fixed_order_alpha"]
             )
+            computed_alpha = float(fit["fixed_order_alpha"])
+            fit["component_cross_check_fixed_order_alpha"] = computed_alpha
             fit["saved_cpu_fixed_order_alpha"] = saved_alpha
             fit["saved_cpu_alpha_relative_difference"] = abs(
-                float(fit["fixed_order_alpha"]) / saved_alpha - 1.0
+                computed_alpha / saved_alpha - 1.0
+            )
+            fit["fixed_order_alpha"] = saved_alpha
+            fit["fixed_order_alpha_source"] = "saved_frozen_CPU_short_time_fit"
+            fit["analytic_optimal_time"] = _analytic_time(saved_alpha)
+        else:
+            fit["fixed_order_alpha_source"] = (
+                "new_exact_component_matrix_free_short_time_fit"
             )
         alpha = float(fit["fixed_order_alpha"])
         analytic_time = float(fit["analytic_optimal_time"])
@@ -815,10 +825,23 @@ def summarize(args: argparse.Namespace) -> int:
             {
                 "candidate": item["candidate"], "weights": item["weights"],
                 "fixed_order_alpha": item.get("short_time_fit", {}).get("fixed_order_alpha"),
+                "fixed_order_alpha_source": item.get("short_time_fit", {}).get("fixed_order_alpha_source"),
                 "analytic_optimal_time": item.get("short_time_fit", {}).get("analytic_optimal_time"),
                 "analytic_model_cost": item.get("analytic_model_cost"),
                 "summary": item.get("summary"), "elapsed_seconds": item.get("elapsed_seconds"),
                 "gpu_memory": item.get("gpu_memory"),
+                "timing_seconds": {
+                    "short_time_fit": item.get("short_time_fit", {}).get("elapsed_seconds"),
+                    "direct_grid": item.get("elapsed_seconds"),
+                    "gpu_unitary_build_sum": sum(
+                        float(point["timing_seconds"]["gpu_total_build_seconds"])
+                        for point in item.get("points", [])
+                    ),
+                    "cpu_schur_sum": sum(
+                        float(point["timing_seconds"]["cpu_schur"])
+                        for point in item.get("points", [])
+                    ),
+                },
                 "points": item.get("points"),
             }
             for item in candidates
@@ -862,6 +885,23 @@ def summarize(args: argparse.Namespace) -> int:
             f"min adjacent overlap {reliability.get('minimum_adjacent_time_overlap_probability', float('nan')):.12f}, "
             f"max eigenpair residual {reliability.get('maximum_eigenpair_residual_2_norm', float('nan')):.3e}."
         )
+    lines.extend(["", "## Timing breakdown", ""])
+    for item in candidates:
+        points = item.get("points", [])
+        build_sum = sum(
+            float(point["timing_seconds"]["gpu_total_build_seconds"])
+            for point in points
+        )
+        schur_sum = sum(
+            float(point["timing_seconds"]["cpu_schur"]) for point in points
+        )
+        lines.append(
+            f"- `{item['candidate']}`: short-time fit "
+            f"{item.get('short_time_fit', {}).get('elapsed_seconds', float('nan')):.2f} s, "
+            f"nine-point direct grid {item.get('elapsed_seconds', float('nan')):.2f} s "
+            f"(GPU unitary builds {build_sum:.2f} s, CPU Schur {schur_sum:.2f} s), "
+            f"peak GPU use {item.get('gpu_memory', {}).get('peak_used_mib')} MiB."
+        )
     lines.extend(
         [
             "", "## Scope and next estimate", "",
@@ -869,7 +909,10 @@ def summarize(args: argparse.Namespace) -> int:
             "change coefficients or thresholds, run H8+, or use an approximate eigensolver.",
             "For another H7 candidate on the same nine-point grid, the observed candidate "
             "elapsed time is the relevant estimate; independent candidates can occupy "
-            "different GPUs. Any optimum refinement or H8 run requires confirmation.", "",
+            "different GPUs. From cubic scaling of the exact block operations, an H8 "
+            "representative point should be budgeted at roughly 0.5--2 minutes and a "
+            "nine-point candidate grid at roughly 5--15 minutes, pending an H8 timing "
+            "probe. Any optimum refinement or H8 run requires confirmation.", "",
         ]
     )
     args.report.write_text("\n".join(lines), encoding="utf-8")
