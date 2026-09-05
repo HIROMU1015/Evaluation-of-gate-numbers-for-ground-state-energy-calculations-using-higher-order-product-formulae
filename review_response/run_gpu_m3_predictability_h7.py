@@ -802,6 +802,11 @@ def h7_candidate(args: argparse.Namespace) -> int:
 def summarize(args: argparse.Namespace) -> int:
     gate = json.loads(args.h6_gate.read_text(encoding="utf-8"))
     candidates = [json.loads(path.read_text(encoding="utf-8")) for path in args.candidates]
+    system_metadata = {}
+    for h_chain in (6, 7):
+        path = args.h6_gate.parent / f"H{h_chain}_system.json"
+        if path.exists():
+            system_metadata[f"H{h_chain}"] = json.loads(path.read_text(encoding="utf-8"))
     complete = gate.get("status") == "complete" and gate.get("passed") and all(
         item.get("status") == "complete" for item in candidates
     )
@@ -816,6 +821,7 @@ def summarize(args: argparse.Namespace) -> int:
             "eigensolver": "complete CPU complex Schur decomposition",
             "iterative_or_projected_method_used": False,
         },
+        "system_preparation": system_metadata,
         "h6_gate": {
             "passed": gate.get("passed"), "differences": gate.get("differences"),
             "gpu_result": gate.get("gpu_result"), "cpu_baseline": gate.get("cpu_baseline"),
@@ -886,6 +892,15 @@ def summarize(args: argparse.Namespace) -> int:
             f"max eigenpair residual {reliability.get('maximum_eigenpair_residual_2_norm', float('nan')):.3e}."
         )
     lines.extend(["", "## Timing breakdown", ""])
+    for name, metadata in system_metadata.items():
+        timing = metadata.get("timing_seconds", {})
+        system = metadata.get("system", {})
+        symmetry = system.get("diagonal_z2_symmetry", {})
+        lines.append(
+            f"- {name} preparation: {timing.get('total_preparation', float('nan')):.2f} s; "
+            f"population sector {symmetry.get('population_sector_dimension')}, "
+            f"exact Z2 block {symmetry.get('restricted_dimension')}."
+        )
     for item in candidates:
         points = item.get("points", [])
         build_sum = sum(
@@ -900,7 +915,10 @@ def summarize(args: argparse.Namespace) -> int:
             f"{item.get('short_time_fit', {}).get('elapsed_seconds', float('nan')):.2f} s, "
             f"nine-point direct grid {item.get('elapsed_seconds', float('nan')):.2f} s "
             f"(GPU unitary builds {build_sum:.2f} s, CPU Schur {schur_sum:.2f} s), "
-            f"peak GPU use {item.get('gpu_memory', {}).get('peak_used_mib')} MiB."
+            f"GPU baseline/peak/delta "
+            f"{item.get('gpu_memory', {}).get('baseline_mib')}/"
+            f"{item.get('gpu_memory', {}).get('peak_used_mib')}/"
+            f"{item.get('gpu_memory', {}).get('peak_delta_mib')} MiB."
         )
     lines.extend(
         [
@@ -908,8 +926,10 @@ def summarize(args: argparse.Namespace) -> int:
             "This run stops at the fixed H7 grid. It does not refine the optimum, "
             "change coefficients or thresholds, run H8+, or use an approximate eigensolver.",
             "For another H7 candidate on the same nine-point grid, the observed candidate "
-            "elapsed time is the relevant estimate; independent candidates can occupy "
-            "different GPUs. From cubic scaling of the exact block operations, an H8 "
+            "elapsed time is the relevant estimate. The three candidates were assigned "
+            "to physical GPUs 0--2 concurrently; GPUs 1 and 2 acquired other-process "
+            "loads during the final run, and no process was stopped. From cubic scaling "
+            "of the exact block operations, an H8 "
             "representative point should be budgeted at roughly 0.5--2 minutes and a "
             "nine-point candidate grid at roughly 5--15 minutes, pending an H8 timing "
             "probe. Any optimum refinement or H8 run requires confirmation.", "",
