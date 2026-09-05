@@ -1,0 +1,127 @@
+{
+  "candidate": "m3_local_c1_r2_s007",
+  "checks": {
+    "direct_cost_relative_difference_within_tolerance": true,
+    "signed_branch_matches": true,
+    "signed_shift_absolute_difference_within_tolerance": true
+  },
+  "completed_at": "2026-09-05T23:28:05.933374+09:00",
+  "cpu_baseline": {
+    "direct_cost": 117452786.35676333,
+    "direct_error_hartree": 2.9706499869980084e-05,
+    "direct_to_model_ratio": 0.9320562866705643,
+    "ground_overlap_probability": 0.9999998920317503,
+    "model_error_hartree": 3.187200203980799e-05,
+    "overlap_with_previous_probability": 0.9999999801361809,
+    "relative_time": 1.0,
+    "signed_direct_shift_hartree": -2.9706499869980084e-05,
+    "time": 1.130326524186802
+  },
+  "differences": {
+    "direct_cost_relative": 6.387335105273451e-12,
+    "signed_shift_absolute_hartree": 8.281339481351624e-16
+  },
+  "environment": {
+    "cuda_visible_devices": "0",
+    "gpu": {
+      "driver_version": "560.35.05",
+      "memory_total_mib": 40960,
+      "memory_used_mib": 1,
+      "name": "NVIDIA A100-SXM4-40GB",
+      "physical_gpu_id": 0,
+      "utilization_percent": 0,
+      "uuid": "GPU-7b7753f3-d258-9e61-9349-e64d2fa59a08"
+    },
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "python": "3.12.3",
+    "python_executable": "/usr/bin/python3.12"
+  },
+  "gate_tolerances": {
+    "direct_cost_relative": 1e-06,
+    "signed_shift_absolute_hartree": 1e-10
+  },
+  "git": {
+    "commit": "aadbc63a56d9006d3920b579d7f67c636860f72a",
+    "dirty": true,
+    "status": [
+      "?? artifacts/gpu_m3_predictability_h7_20260905_aadbc63/"
+    ]
+  },
+  "gpu_memory": {
+    "baseline_mib": 1,
+    "errors": [],
+    "peak_delta_mib": 430,
+    "peak_used_mib": 431,
+    "sample_count": 6,
+    "sampling_interval_ms": 200
+  },
+  "gpu_result": {
+    "direct_cost": 117452786.35751355,
+    "direct_error_hartree": 2.970649987080822e-05,
+    "direct_to_model_ratio": 0.9320562866965474,
+    "eigenpair_residual_2_norm": 3.2586934125346506e-15,
+    "ground_overlap_probability": 0.9999998920317577,
+    "maximum_ground_overlap_branch": {
+      "ground_overlap_probability": 0.9999998920317577,
+      "same_as_selected": true,
+      "schur_index": 1,
+      "signed_shift_hartree": -2.970649987080822e-05
+    },
+    "model_error_hartree": 3.187200203980799e-05,
+    "overlap_with_previous_probability": null,
+    "phase_unwrap_winding": 0,
+    "principal_signed_shift_hartree": -2.970649987080822e-05,
+    "relative_time": 1.0,
+    "schur_off_diagonal_residual_frobenius_norm": 9.018805689816585e-13,
+    "selected_eigenvalue": {
+      "imag": 0.1485239204840335,
+      "real": -0.9889088153332876
+    },
+    "selected_eigenvalue_magnitude": 0.9999999999999168,
+    "selected_schur_index": 1,
+    "selection_rule": "maximum_ground_state_overlap",
+    "signed_direct_shift_hartree": -2.970649987080822e-05,
+    "time": 1.130326524186802,
+    "timing_seconds": {
+      "cpu_diagnostics": 0.0014556849491782486,
+      "cpu_schur": 0.06649612297769636,
+      "cupy_memory_pool_reserved_bytes_before_release": 4487168,
+      "dense_stage_assembly_seconds": 0.0503913729917258,
+      "gpu_to_cpu_transfer_seconds": 0.00038354797288775444,
+      "gpu_total_build_seconds": 0.8714633610215969,
+      "s2_stage_count": 7,
+      "unique_s2_stage_build_seconds": {
+        "-0.4737318199452465": 0.03455100196879357,
+        "0.19602944070083841": 0.717322823998984,
+        "0.20922466907827963": 0.03448888199636713,
+        "0.3316118001935053": 0.03429728205082938
+      },
+      "unique_s2_stage_count": 4
+    },
+    "unitarity_residual_frobenius_norm": 2.113224722790456e-12
+  },
+  "passed": true,
+  "started_at": "2026-09-05T23:28:04.530723+09:00",
+  "status": "complete",
+  "system": {
+    "h_chain": 6,
+    "num_qubits": 12,
+    "pauli_rotations_per_step": 14344,
+    "symmetry_block_dimension": 200
+  },
+  "total_seconds": 1.3435500570340082,
+  "weights": [
+    -0.4737318199452465,
+    0.3316118001935053,
+    0.20922466907827963,
+    0.19602944070083841
+  ]
+}
