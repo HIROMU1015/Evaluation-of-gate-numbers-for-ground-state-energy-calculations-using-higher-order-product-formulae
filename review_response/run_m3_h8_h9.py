@@ -157,7 +157,16 @@ def launch(args):
             code = subprocess.call(cmd, env=env, stdout=log, stderr=subprocess.STDOUT)
         return code, target
     def chain(h, gpus):
-        code = base.prepare_system(argparse.Namespace(h_chain=h, processes=4, output=out/f'H{h}.pkl', metadata=out/f'H{h}_system.json'))
+        # Each chemistry preparation needs its own interpreter: PySCF/BLAS
+        # and fork-based pools must not be initialized from concurrent threads.
+        cmd = [sys.executable, '-u', str(Path(base.__file__).resolve()),
+               'prepare', '--h-chain', str(h), '--processes', '1',
+               '--output', str(out/f'H{h}.pkl'),
+               '--metadata', str(out/f'H{h}_system.json')]
+        print(f'H{h}: starting isolated preparation', flush=True)
+        with (out/f'H{h}_preparation.log').open('x') as log:
+            code = subprocess.call(cmd, stdout=log, stderr=subprocess.STDOUT)
+        print(f'H{h}: preparation exit={code}', flush=True)
         if code:
             return False
         code, target = run(h, gpus[0], names[0], True)
