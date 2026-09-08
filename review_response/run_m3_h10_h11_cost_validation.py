@@ -569,14 +569,15 @@ def launch(args: argparse.Namespace) -> int:
     return 0 if complete else 1
 
 
-def launch_h12(args: argparse.Namespace) -> int:
-    """Run H12 alone and distribute independent time points over all GPUs."""
+def launch_large_system(args: argparse.Namespace) -> int:
+    """Run one H-chain and distribute independent time points over all GPUs."""
     output_dir = args.output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=False)
+    h_chain = int(args.h_chain)
     gpu_ids = tuple(range(8))
     launch_record = {
         "status": "running", "started_at": _now(), "git": _git_state(),
-        "workers": {"H12": {"physical_gpu_ids": list(gpu_ids)}},
+        "workers": {f"H{h_chain}": {"physical_gpu_ids": list(gpu_ids)}},
         "parallelism_note": (
             "At most one GPU process per independent time point; unused GPUs "
             "are not given duplicate work."
@@ -596,10 +597,10 @@ def launch_h12(args: argparse.Namespace) -> int:
     )
     command = [
         sys.executable, "-u", str(Path(__file__).resolve()), "worker",
-        "--h-chain", "12", "--gpu-ids", *map(str, gpu_ids),
-        "--output", str(output_dir / "H12_m3.json"),
+        "--h-chain", str(h_chain), "--gpu-ids", *map(str, gpu_ids),
+        "--output", str(output_dir / f"H{h_chain}_m3.json"),
     ]
-    log_path = output_dir / "H12_m3.log"
+    log_path = output_dir / f"H{h_chain}_m3.log"
     with log_path.open("x", encoding="utf-8") as log:
         process = subprocess.Popen(
             command, cwd=Path(__file__).resolve().parents[1], env=env,
@@ -607,14 +608,14 @@ def launch_h12(args: argparse.Namespace) -> int:
         )
         launch_record["worker_pid"] = int(process.pid)
         _atomic_json(output_dir / "launch_state.json", launch_record)
-        print(f"H12 worker pid={process.pid}, GPUs={gpu_ids}", flush=True)
+        print(f"H{h_chain} worker pid={process.pid}, GPUs={gpu_ids}", flush=True)
         exit_code = process.wait()
     complete = exit_code == 0 and aggregate(
-        output_dir, args.direct_root.resolve(), (12,)
+        output_dir, args.direct_root.resolve(), (h_chain,)
     )
     launch_record.update(
         status="complete" if complete else "incomplete", completed_at=_now(),
-        worker_exit_codes={"H12": int(exit_code)},
+        worker_exit_codes={f"H{h_chain}": int(exit_code)},
     )
     _atomic_json(output_dir / "launch_state.json", launch_record)
     return 0 if complete else 1
@@ -629,17 +630,22 @@ def main() -> int:
     h12_parser = subparsers.add_parser("launch-h12")
     h12_parser.add_argument("--output-dir", type=Path, required=True)
     h12_parser.add_argument("--direct-root", type=Path, default=DIRECT_ROOT)
+    h12_parser.set_defaults(h_chain=12)
+    h13_parser = subparsers.add_parser("launch-h13")
+    h13_parser.add_argument("--output-dir", type=Path, required=True)
+    h13_parser.add_argument("--direct-root", type=Path, default=DIRECT_ROOT)
+    h13_parser.set_defaults(h_chain=13)
     worker_parser = subparsers.add_parser("worker")
     worker_parser.add_argument(
-        "--h-chain", type=int, choices=[10, 11, 12], required=True
+        "--h-chain", type=int, choices=[10, 11, 12, 13], required=True
     )
     worker_parser.add_argument("--gpu-ids", type=int, nargs="+", required=True)
     worker_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.mode == "launch":
         return launch(args)
-    if args.mode == "launch-h12":
-        return launch_h12(args)
+    if args.mode in {"launch-h12", "launch-h13"}:
+        return launch_large_system(args)
     return worker(args)
 
 
