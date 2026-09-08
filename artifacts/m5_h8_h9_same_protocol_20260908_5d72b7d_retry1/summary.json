@@ -1,0 +1,488 @@
+{
+  "created_at": "2026-09-08T13:16:51.739669+09:00",
+  "git": {
+    "commit": "5d72b7d12f52059389b6c6f249e608f4fd234469",
+    "dirty": true,
+    "status": [
+      "?? artifacts/h8_prep_diagnostic_qx5txs6c/",
+      "?? artifacts/m3_h8_h9_20260908_355948d/",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H8.pkl",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H8_m3_local_c1_r2_s007.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H8_m3_local_c1_r2_s007_pilot.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H8_m3_local_c2_r0_s000.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H8_m3_local_c3_r2_s000.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H8_preparation.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H9.pkl",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H9_m3_local_c1_r2_s007.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H9_m3_local_c1_r2_s007_pilot.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H9_m3_local_c2_r0_s000.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H9_m3_local_c3_r2_s000.log",
+      "?? artifacts/m3_h8_h9_20260908_a5f9512/H9_preparation.log",
+      "?? artifacts/m3_h8_h9_20260908_launcher.log",
+      "?? artifacts/m3_h8_h9_retry_a5f9512.log",
+      "?? artifacts/m5_h8_h9_same_protocol_20260908_5d72b7d/",
+      "?? artifacts/m5_h8_h9_same_protocol_20260908_5d72b7d_launcher.log",
+      "?? artifacts/m5_h8_h9_same_protocol_20260908_5d72b7d_retry1/",
+      "?? artifacts/m5_h8_h9_same_protocol_20260908_5d72b7d_retry1_launcher.log",
+      "?? review_response/run_m5_h8_h9_same_protocol.py",
+      "?? review_response/run_m5_h8_h9_same_protocol.sh"
+    ]
+  },
+  "m3_comparisons": {
+    "H8": {
+      "m3_candidate": "m3_local_c1_r2_s007",
+      "m3_validity_constrained_minimum": {
+        "cost": 419188151.3908644,
+        "definition": "Minimum direct cost over the contiguous prefix satisfying abs(e_direct/e_model - 1) <= 0.10",
+        "num_contiguous_valid_points": 7,
+        "relative_time": 1.0,
+        "time": 1.0561796833271406
+      },
+      "m5_validity_constrained_minimum": {
+        "cost": 590773022.2680103,
+        "definition": "Minimum direct cost over the contiguous prefix satisfying abs(e_direct/e_model - 1) <= 0.10",
+        "num_contiguous_valid_points": 3,
+        "relative_time": 0.5,
+        "time": 0.970097097977156
+      },
+      "ratio_definition": "m3 cost-priority / m5; below 1 favors m3",
+      "values": {
+        "at_t_ana_direct_cost": {
+          "m3": 419188151.3908644,
+          "m3_over_m5": 1.2854969394995235,
+          "m5": 326090353.4737818,
+          "m5_over_m3": 0.7779092810515171
+        },
+        "nine_point_grid_minimum_cost": {
+          "m3": 419188151.3908644,
+          "m3_over_m5": 1.6288145557863076,
+          "m5": 257357812.71214265,
+          "m5_over_m3": 0.6139434329387188
+        },
+        "ten_percent_valid_range_minimum_cost": {
+          "m3": 419188151.3908644,
+          "m3_over_m5": 0.7095587232158603,
+          "m5": 590773022.2680103,
+          "m5_over_m3": 1.409326624113368
+        }
+      }
+    },
+    "H9": {
+      "m3_candidate": "m3_local_c1_r2_s007",
+      "m3_validity_constrained_minimum": {
+        "cost": 669237302.8218873,
+        "definition": "Minimum direct cost over the contiguous prefix satisfying abs(e_direct/e_model - 1) <= 0.10",
+        "num_contiguous_valid_points": 7,
+        "relative_time": 1.0,
+        "time": 1.095966029123711
+      },
+      "m5_validity_constrained_minimum": {
+        "cost": 943665213.4544492,
+        "definition": "Minimum direct cost over the contiguous prefix satisfying abs(e_direct/e_model - 1) <= 0.10",
+        "num_contiguous_valid_points": 3,
+        "relative_time": 0.5,
+        "time": 1.0066603053364214
+      },
+      "ratio_definition": "m3 cost-priority / m5; below 1 favors m3",
+      "values": {
+        "at_t_ana_direct_cost": {
+          "m3": 669237302.8218873,
+          "m3_over_m5": 1.3192728858529195,
+          "m5": 507277387.41421986,
+          "m5_over_m3": 0.7579932936721373
+        },
+        "nine_point_grid_minimum_cost": {
+          "m3": 669237302.8218873,
+          "m3_over_m5": 1.9140724988886544,
+          "m5": 349640519.47377056,
+          "m5_over_m3": 0.5224462503800762
+        },
+        "ten_percent_valid_range_minimum_cost": {
+          "m3": 669237302.8218873,
+          "m3_over_m5": 0.7091893324879792,
+          "m5": 943665213.4544492,
+          "m5_over_m3": 1.4100606906928483
+        }
+      }
+    }
+  },
+  "m5_results": {
+    "H8": {
+      "alpha": 2.24920241041249e-06,
+      "analytic_model_cost": 365038426.6053545,
+      "gpu_memory": {
+        "baseline_mib": 31461,
+        "errors": [],
+        "peak_delta_mib": 1184,
+        "peak_used_mib": 32645,
+        "sample_count": 1156,
+        "sampling_interval_ms": 200
+      },
+      "short_time_fit": {
+        "elapsed_seconds": 2.7836549829225987,
+        "error_definition": "abs(imag(exp(-i*E0*t)*<psi0|U_PF(t)|psi0>)/t)",
+        "errors_hartree": [
+          2.9169259600318284e-11,
+          6.112229332625749e-11,
+          1.280801544981991e-10,
+          2.683714490229491e-10,
+          5.622574061960602e-10
+        ],
+        "evaluated_windows": [
+          {
+            "fixed_order_alpha": 2.24920241041249e-06,
+            "free_alpha": 2.2385960248982484e-06,
+            "free_order": 3.9980654712898156,
+            "num_points": 5,
+            "order_deviation": 0.0019345287101844022,
+            "r2": 0.9999999974035674,
+            "start_index": 0,
+            "stop_index_exclusive": 5,
+            "t_start": 0.06,
+            "t_stop": 0.12576573057683554
+          }
+        ],
+        "minimum_r2": 0.999,
+        "noise_floor": 5e-13,
+        "order_tolerance": 0.2,
+        "points": [
+          {
+            "elapsed_seconds": 0.6205685349414125,
+            "evolved_state_norm": 0.9999999999999712,
+            "perturbative_error_hartree": 2.9169259600318284e-11,
+            "phase_rotated_overlap": {
+              "imag": -1.7501555760190968e-12,
+              "real": 0.9999999999999712
+            },
+            "survival_probability": 0.9999999999999425,
+            "time": 0.06
+          },
+          {
+            "elapsed_seconds": 0.5373627579538152,
+            "evolved_state_norm": 0.9999999999999731,
+            "perturbative_error_hartree": 6.112229332625749e-11,
+            "phase_rotated_overlap": {
+              "imag": -4.412692433675147e-12,
+              "real": 0.9999999999999734
+            },
+            "survival_probability": 0.9999999999999467,
+            "time": 0.07219448409962559
+          },
+          {
+            "elapsed_seconds": 0.5472534390864894,
+            "evolved_state_norm": 0.9999999999999732,
+            "perturbative_error_hartree": 1.280801544981991e-10,
+            "phase_rotated_overlap": {
+              "imag": -1.1125989018978544e-11,
+              "real": 0.9999999999999735
+            },
+            "survival_probability": 0.9999999999999469,
+            "time": 0.0868673922401849
+          },
+          {
+            "elapsed_seconds": 0.5340980989858508,
+            "evolved_state_norm": 0.9999999999999757,
+            "perturbative_error_hartree": 2.683714490229491e-10,
+            "phase_rotated_overlap": {
+              "imag": -2.8050839429027974e-11,
+              "real": 0.9999999999999758
+            },
+            "survival_probability": 0.9999999999999516,
+            "time": 0.10452244279766615
+          },
+          {
+            "elapsed_seconds": 0.543531103990972,
+            "evolved_state_norm": 0.999999999999971,
+            "perturbative_error_hartree": 5.622574061960602e-10,
+            "phase_rotated_overlap": {
+              "imag": -7.071271346248409e-11,
+              "real": 0.9999999999999711
+            },
+            "survival_probability": 0.9999999999999423,
+            "time": 0.12576573057683554
+          }
+        ],
+        "qualified": true,
+        "selected_window": {
+          "fixed_order_alpha": 2.24920241041249e-06,
+          "free_alpha": 2.2385960248982484e-06,
+          "free_order": 3.9980654712898156,
+          "num_points": 5,
+          "order_deviation": 0.0019345287101844022,
+          "r2": 0.9999999974035674,
+          "start_index": 0,
+          "stop_index_exclusive": 5,
+          "t_start": 0.06,
+          "t_stop": 0.12576573057683554
+        },
+        "times": [
+          0.06,
+          0.07219448409962559,
+          0.0868673922401849,
+          0.10452244279766615,
+          0.12576573057683554
+        ],
+        "uncomputed_time_count": 10
+      },
+      "source": "artifacts/m5_h8_h9_same_protocol_20260908_5d72b7d_retry1/H8_m5.json",
+      "summary": {
+        "branch_reliability": {
+          "all_selected_branches_are_maximum_ground_overlap": true,
+          "maximum_eigenpair_residual_2_norm": 1.6184274178587098e-13,
+          "minimum_adjacent_time_overlap_probability": 0.8645246198583516,
+          "minimum_ground_overlap_probability": 0.8741074196329356
+        },
+        "eta_choice": 0.2670699600579728,
+        "eta_grid": 0.4184081794853211,
+        "eta_schedule": 0.11943951336390621,
+        "frozen_predictability_checks": {
+          "confirmed_scaling_through_1p1_t_ana": false,
+          "direct_optimum_time_within_15_percent": false,
+          "minimum_cost_prediction_within_10_percent": false,
+          "no_signed_error_zero_crossing_near_schedule": true,
+          "short_time_fit_qualified": true
+        },
+        "grid_minimum_cost": {
+          "cost": 257357812.71214265,
+          "model_cost_relative_difference": 0.29498432506018357,
+          "relative_time": 1.4,
+          "time": 2.716271874336037
+        },
+        "passed": false,
+        "ten_percent_validity": {
+          "num_contiguous_passed_points": 3,
+          "right_censored": false,
+          "t_fail_over_t_ana": 0.7,
+          "t_pass_over_t_ana": 0.5
+        },
+        "validity_constrained_minimum_cost": {
+          "cost": 590773022.2680103,
+          "definition": "Minimum direct cost over the contiguous prefix satisfying abs(e_direct/e_model - 1) <= 0.10",
+          "num_contiguous_valid_points": 3,
+          "relative_time": 0.5,
+          "time": 0.970097097977156
+        }
+      },
+      "t_ana": 1.940194195954312,
+      "total_seconds": 234.2947820579866
+    },
+    "H9": {
+      "alpha": 1.939802820857681e-06,
+      "analytic_model_cost": 583108001.9628195,
+      "gpu_memory": {
+        "baseline_mib": 31461,
+        "errors": [],
+        "peak_delta_mib": 3872,
+        "peak_used_mib": 35333,
+        "sample_count": 7609,
+        "sampling_interval_ms": 200
+      },
+      "short_time_fit": {
+        "elapsed_seconds": 7.175426034023985,
+        "error_definition": "abs(imag(exp(-i*E0*t)*<psi0|U_PF(t)|psi0>)/t)",
+        "errors_hartree": [
+          2.515256521580985e-11,
+          5.271424877431986e-11,
+          1.1045625673488343e-10,
+          2.3147906479362235e-10,
+          4.849659758622774e-10
+        ],
+        "evaluated_windows": [
+          {
+            "fixed_order_alpha": 1.939802820857681e-06,
+            "free_alpha": 1.9323319340812293e-06,
+            "free_order": 3.998420707635227,
+            "num_points": 5,
+            "order_deviation": 0.001579292364772833,
+            "r2": 0.9999999946433511,
+            "start_index": 0,
+            "stop_index_exclusive": 5,
+            "t_start": 0.06,
+            "t_stop": 0.12576573057683554
+          }
+        ],
+        "minimum_r2": 0.999,
+        "noise_floor": 5e-13,
+        "order_tolerance": 0.2,
+        "points": [
+          {
+            "elapsed_seconds": 1.5550995259545743,
+            "evolved_state_norm": 0.9999999999997198,
+            "perturbative_error_hartree": 2.515256521580985e-11,
+            "phase_rotated_overlap": {
+              "imag": -1.509153912948591e-12,
+              "real": 0.9999999999997198
+            },
+            "survival_probability": 0.9999999999994396,
+            "time": 0.06
+          },
+          {
+            "elapsed_seconds": 1.4688051990233362,
+            "evolved_state_norm": 0.9999999999997102,
+            "perturbative_error_hartree": 5.271424877431986e-11,
+            "phase_rotated_overlap": {
+              "imag": -3.805677994961343e-12,
+              "real": 0.9999999999997102
+            },
+            "survival_probability": 0.9999999999994205,
+            "time": 0.07219448409962559
+          },
+          {
+            "elapsed_seconds": 1.3860196080058813,
+            "evolved_state_norm": 0.9999999999997161,
+            "perturbative_error_hartree": 1.1045625673488343e-10,
+            "phase_rotated_overlap": {
+              "imag": -9.595046979171684e-12,
+              "real": 0.9999999999997162
+            },
+            "survival_probability": 0.9999999999994325,
+            "time": 0.0868673922401849
+          },
+          {
+            "elapsed_seconds": 1.3860256380867213,
+            "evolved_state_norm": 0.9999999999996959,
+            "perturbative_error_hartree": 2.3147906479362235e-10,
+            "phase_rotated_overlap": {
+              "imag": -2.419475730874865e-11,
+              "real": 0.9999999999996958
+            },
+            "survival_probability": 0.9999999999993916,
+            "time": 0.10452244279766615
+          },
+          {
+            "elapsed_seconds": 1.3786523169837892,
+            "evolved_state_norm": 0.9999999999997062,
+            "perturbative_error_hartree": 4.849659758622774e-10,
+            "phase_rotated_overlap": {
+              "imag": -6.09921002592273e-11,
+              "real": 0.9999999999997061
+            },
+            "survival_probability": 0.9999999999994122,
+            "time": 0.12576573057683554
+          }
+        ],
+        "qualified": true,
+        "selected_window": {
+          "fixed_order_alpha": 1.939802820857681e-06,
+          "free_alpha": 1.9323319340812293e-06,
+          "free_order": 3.998420707635227,
+          "num_points": 5,
+          "order_deviation": 0.001579292364772833,
+          "r2": 0.9999999946433511,
+          "start_index": 0,
+          "stop_index_exclusive": 5,
+          "t_start": 0.06,
+          "t_stop": 0.12576573057683554
+        },
+        "times": [
+          0.06,
+          0.07219448409962559,
+          0.0868673922401849,
+          0.10452244279766615,
+          0.12576573057683554
+        ],
+        "uncomputed_time_count": 10
+      },
+      "source": "artifacts/m5_h8_h9_same_protocol_20260908_5d72b7d_retry1/H9_m5.json",
+      "summary": {
+        "branch_reliability": {
+          "all_selected_branches_are_maximum_ground_overlap": true,
+          "maximum_eigenpair_residual_2_norm": 2.0187885605346924e-13,
+          "minimum_adjacent_time_overlap_probability": 0.7067574059654107,
+          "minimum_ground_overlap_probability": 0.787912323050509
+        },
+        "eta_choice": 0.4508541177598695,
+        "eta_grid": 0.6677357728458678,
+        "eta_schedule": 0.14948550128586696,
+        "frozen_predictability_checks": {
+          "confirmed_scaling_through_1p1_t_ana": false,
+          "direct_optimum_time_within_15_percent": false,
+          "minimum_cost_prediction_within_10_percent": false,
+          "no_signed_error_zero_crossing_near_schedule": true,
+          "short_time_fit_qualified": true
+        },
+        "grid_minimum_cost": {
+          "cost": 349640519.47377056,
+          "model_cost_relative_difference": 0.40038463149736614,
+          "relative_time": 1.4,
+          "time": 2.8186488549419795
+        },
+        "passed": false,
+        "ten_percent_validity": {
+          "num_contiguous_passed_points": 3,
+          "right_censored": false,
+          "t_fail_over_t_ana": 0.7,
+          "t_pass_over_t_ana": 0.5
+        },
+        "validity_constrained_minimum_cost": {
+          "cost": 943665213.4544492,
+          "definition": "Minimum direct cost over the contiguous prefix satisfying abs(e_direct/e_model - 1) <= 0.10",
+          "num_contiguous_valid_points": 3,
+          "relative_time": 0.5,
+          "time": 1.0066603053364214
+        }
+      },
+      "t_ana": 2.0133206106728427,
+      "total_seconds": 1530.416161044035
+    }
+  },
+  "protocol": {
+    "direct_relative_times": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9,
+      1.0,
+      1.1,
+      1.2,
+      1.4
+    ],
+    "fit_rule": {
+      "formal_order": 4,
+      "free_order_tolerance": 0.2,
+      "minimum_r2": 0.999,
+      "noise_floor_hartree": 5e-13,
+      "select_earliest_eligible_window": true,
+      "window_size": 5
+    },
+    "label": "4th(m5_best)",
+    "short_time_grid": [
+      0.06,
+      0.07219448409962559,
+      0.0868673922401849,
+      0.10452244279766615,
+      0.12576573057683554,
+      0.15132653394011922,
+      0.18208235080652319,
+      0.21908902300206642,
+      0.2636169831254199,
+      0.3171948682773233,
+      0.3816619979055008,
+      0.4592315173203337,
+      0.5525663745871628,
+      0.6648707390686781,
+      0.8
+    ]
+  },
+  "status": "complete",
+  "wide_time_sensitivity": {
+    "H9": {
+      "absolute_time": 2.500277132669203,
+      "direct_cost": 400917966.19039726,
+      "direct_error_hartree": 1.0050452420529155e-05,
+      "eigenpair_residual_2_norm": 1.1208225909623288e-13,
+      "ground_state_overlap_probability": 0.983962227602321,
+      "included_in_common_nine_point_comparison": false,
+      "interpretation": "Previously observed narrow cancellation point on a different, older t_model scale. It is excluded from the common nine-point comparison.",
+      "old_scale_relative_time": 1.24,
+      "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/artifacts/server_direct_cost_landscape_20260905_4058e84/fine_H9_d/direct_1p24.json",
+      "source_git": {
+        "commit": "5e9ccfa481b31b5a50b05c4cce78a0375ad0c122",
+        "dirty": false,
+        "status": []
+      },
+      "status": "complete"
+    }
+  }
+}
