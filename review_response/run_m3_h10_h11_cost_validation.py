@@ -430,15 +430,19 @@ def _direct_calibration(root: Path) -> dict[str, Any]:
         "passed": all(check["passed"] for check in holdout_checks),
         "scope": (
             "Calibrates a cost extrapolation, not a direct PF eigenvalue "
-            "calculation for H10/H11."
+            "calculation for larger systems."
         ),
     }
 
 
-def aggregate(output_dir: Path, direct_root: Path) -> bool:
+def aggregate(
+    output_dir: Path,
+    direct_root: Path,
+    h_chains: Sequence[int] = (10, 11),
+) -> bool:
     calibration = _direct_calibration(direct_root)
     workers = []
-    for h_chain in (10, 11):
+    for h_chain in h_chains:
         path = output_dir / f"H{h_chain}_m3.json"
         workers.append(json.loads(path.read_text(encoding="utf-8")))
     complete = calibration["passed"] and all(
@@ -476,17 +480,21 @@ def aggregate(output_dir: Path, direct_root: Path) -> bool:
                 "not_direct_eigenvalue_error": True,
             }
         )
+    system_label = "/".join(f"H{value}" for value in h_chains)
     payload = {
         "status": "complete" if complete else "incomplete",
         "created_at": _now(), "git": _git_state(),
-        "direct_calibration": calibration, "h10_h11_estimates": estimates,
+        "systems": [int(value) for value in h_chains],
+        "direct_calibration": calibration, "estimates": estimates,
     }
+    if tuple(h_chains) == (10, 11):
+        payload["h10_h11_estimates"] = estimates
     _atomic_json(output_dir / "summary.json", payload)
     lines = [
-        "# H10/H11 fixed-m3 cost validation", "",
-        "H10/H11 do not use dense PF unitaries. Values below distinguish the "
+        f"# {system_label} fixed-m3 cost validation", "",
+        f"{system_label} does not use dense PF unitaries. Values below distinguish the "
         "analytic model, the H2-H7-calibrated extrapolation, and GPU overlap "
-        "proxies; none is labelled as a direct H10/H11 eigenvalue error.", "",
+        f"proxies; none is labelled as a direct {system_label} eigenvalue error.", "",
         f"H8/H9 hold-out calibration: **{'PASS' if calibration['passed'] else 'FAIL'}**", "",
         "| System | alpha | t_ana | C_model | C_extrapolated | e_pert/e_model at 1.03 | e_ov/e_model at 1.03 |",
         "|---|---:|---:|---:|---:|---:|---:|",
@@ -561,19 +569,77 @@ def launch(args: argparse.Namespace) -> int:
     return 0 if complete else 1
 
 
+def launch_h12(args: argparse.Namespace) -> int:
+    """Run H12 alone and distribute independent time points over all GPUs."""
+    output_dir = args.output_dir.resolve()
+    output_dir.mkdir(parents=True, exist_ok=False)
+    gpu_ids = tuple(range(8))
+    launch_record = {
+        "status": "running", "started_at": _now(), "git": _git_state(),
+        "workers": {"H12": {"physical_gpu_ids": list(gpu_ids)}},
+        "parallelism_note": (
+            "At most one GPU process per independent time point; unused GPUs "
+            "are not given duplicate work."
+        ),
+        "safety": "No other process is stopped; the worker checks free memory.",
+    }
+    _atomic_json(output_dir / "launch_state.json", launch_record)
+    env = dict(os.environ)
+    env.update(
+        CUDA_VISIBLE_DEVICES=",".join(str(value) for value in gpu_ids),
+        TROTTER_QISKIT_DEVICE="GPU",
+        TROTTER_QISKIT_AER_METHOD="statevector",
+        TROTTER_QISKIT_AER_PRECISION="double",
+        TROTTER_POOL_PROCESSES=str(len(gpu_ids)),
+        TROTTER_QISKIT_TARGET_GPUS=",".join(str(i) for i in range(len(gpu_ids))),
+        OMP_NUM_THREADS="32", MKL_NUM_THREADS="32", OPENBLAS_NUM_THREADS="32",
+    )
+    command = [
+        sys.executable, "-u", str(Path(__file__).resolve()), "worker",
+        "--h-chain", "12", "--gpu-ids", *map(str, gpu_ids),
+        "--output", str(output_dir / "H12_m3.json"),
+    ]
+    log_path = output_dir / "H12_m3.log"
+    with log_path.open("x", encoding="utf-8") as log:
+        process = subprocess.Popen(
+            command, cwd=Path(__file__).resolve().parents[1], env=env,
+            stdout=log, stderr=subprocess.STDOUT, text=True,
+        )
+        launch_record["worker_pid"] = int(process.pid)
+        _atomic_json(output_dir / "launch_state.json", launch_record)
+        print(f"H12 worker pid={process.pid}, GPUs={gpu_ids}", flush=True)
+        exit_code = process.wait()
+    complete = exit_code == 0 and aggregate(
+        output_dir, args.direct_root.resolve(), (12,)
+    )
+    launch_record.update(
+        status="complete" if complete else "incomplete", completed_at=_now(),
+        worker_exit_codes={"H12": int(exit_code)},
+    )
+    _atomic_json(output_dir / "launch_state.json", launch_record)
+    return 0 if complete else 1
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="mode", required=True)
     launch_parser = subparsers.add_parser("launch")
     launch_parser.add_argument("--output-dir", type=Path, required=True)
     launch_parser.add_argument("--direct-root", type=Path, default=DIRECT_ROOT)
+    h12_parser = subparsers.add_parser("launch-h12")
+    h12_parser.add_argument("--output-dir", type=Path, required=True)
+    h12_parser.add_argument("--direct-root", type=Path, default=DIRECT_ROOT)
     worker_parser = subparsers.add_parser("worker")
-    worker_parser.add_argument("--h-chain", type=int, choices=[10, 11], required=True)
+    worker_parser.add_argument(
+        "--h-chain", type=int, choices=[10, 11, 12], required=True
+    )
     worker_parser.add_argument("--gpu-ids", type=int, nargs="+", required=True)
     worker_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.mode == "launch":
         return launch(args)
+    if args.mode == "launch-h12":
+        return launch_h12(args)
     return worker(args)
 
 
