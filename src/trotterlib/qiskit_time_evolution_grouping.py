@@ -183,9 +183,21 @@ def w_trotter_grouper_precomputed(
     time: float | ParameterExpression,
     num_qubits: int,
     pf_label: PFLabel,
+    *,
+    s2_sequence: Sequence[float] | None = None,
 ) -> int:
-    """Append a PF sequence while reusing precomputed clique Hamiltonians."""
-    sequence = _get_s2_sequence(pf_label)
+    """Append a PF sequence while reusing precomputed clique Hamiltonians.
+
+    ``s2_sequence`` permits a frozen, externally selected coefficient set to
+    use the same parameterized GPU path as registered product formulas.  The
+    registered label remains the default and all existing callers are
+    unchanged.
+    """
+    sequence = (
+        [float(value) for value in s2_sequence]
+        if s2_sequence is not None
+        else _get_s2_sequence(pf_label)
+    )
     exp_term_count = 0
     for term_idx, weight in iter_s2_sequence_steps(
         len(clique_hamiltonians), sequence
@@ -321,6 +333,7 @@ def tEvolution_vectors_grouper_optimized(
     target_gpus: Sequence[int] | None = None,
     processes: int | None = None,
     optimization_level: int = 0,
+    s2_sequence: Sequence[float] | None = None,
 ) -> tuple[list[Tuple[float, Statevector, int]], dict[str, object]]:
     """Evaluate a time grid with reusable cliques and one GPU transpilation.
 
@@ -365,6 +378,7 @@ def tEvolution_vectors_grouper_optimized(
                 float(time_value),
                 int(num_qubits),
                 pf_label,
+                s2_sequence=s2_sequence,
             )
             evolved = Statevector(state_flat).evolve(circuit)
             results.append((float(time_value), evolved, int(rotation_count)))
@@ -385,6 +399,7 @@ def tEvolution_vectors_grouper_optimized(
         parameter,
         int(num_qubits),
         pf_label,
+        s2_sequence=s2_sequence,
     )
     template = build_parameterized_aer_template(
         template_circuit,
@@ -464,6 +479,12 @@ def tEvolution_vectors_grouper_optimized(
         ],
         "num_cliques": len(clique_hamiltonians),
         "pauli_rotations_per_step": int(rotation_count),
+        "s2_sequence_override": s2_sequence is not None,
+        "s2_stage_count": (
+            len(s2_sequence)
+            if s2_sequence is not None
+            else len(_get_s2_sequence(pf_label))
+        ),
         "clique_precompute_seconds": float(clique_precompute_seconds),
         "template_prepare": dict(template.prepare_profile),
         "simulation_seconds": float(perf_counter() - simulation_started),

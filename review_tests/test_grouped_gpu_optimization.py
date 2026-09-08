@@ -102,6 +102,42 @@ def test_optimized_cpu_time_grid_matches_concrete_circuits() -> None:
         )
 
 
+def test_optimized_grid_accepts_frozen_s2_sequence_override() -> None:
+    cliques = _example_cliques()
+    state = _example_state()
+    sequence = [0.31, -0.17, 0.31]
+    time_value = -0.23
+
+    results, profile = tEvolution_vectors_grouper_optimized(
+        cliques,
+        [time_value],
+        2,
+        state,
+        "2nd",
+        device="CPU",
+        processes=1,
+        s2_sequence=sequence,
+    )
+    precomputed = build_clique_hamiltonians(cliques, 2)
+    circuit = QuantumCircuit(2)
+    expected_count = w_trotter_grouper_precomputed(
+        circuit,
+        precomputed,
+        time_value,
+        2,
+        "2nd",
+        s2_sequence=sequence,
+    )
+
+    assert results[0][2] == expected_count
+    np.testing.assert_allclose(
+        results[0][1].data,
+        Statevector(state).evolve(circuit).data,
+        rtol=1e-12,
+        atol=1e-12,
+    )
+
+
 def test_parameterized_aer_cpu_template_matches_qiskit_statevector() -> None:
     cliques = _example_cliques()
     state = _example_state()
