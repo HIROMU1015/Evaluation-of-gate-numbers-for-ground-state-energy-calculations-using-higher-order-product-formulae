@@ -15,6 +15,7 @@ import math
 import os
 from pathlib import Path
 import pickle
+import resource
 import sys
 import time
 import traceback
@@ -26,6 +27,10 @@ from scipy.linalg import schur
 import run_gpu_m3_predictability_h7 as base
 import run_m3_h8_h9 as protocol
 from trotterlib.config import DECOMPO_NUM
+from trotterlib.component_sector_pf import (
+    find_balanced_z2_symmetry,
+    prepare_component_spectra,
+)
 from trotterlib.product_formula import _get_s2_sequence
 
 
@@ -35,6 +40,106 @@ BOUNDARY_TOLERANCE = 0.01
 INITIAL_M3_RATIOS = (0.96, 0.98, 1.0, 1.02, 1.04)
 M3_OPTIMUM_STEP = 0.01
 M3_SEARCH_LIMITS = (0.90, 1.10)
+
+
+def prepare_h2(args: argparse.Namespace) -> int:
+    """Prepare H2 exactly without assuming one half-population sector.
+
+    The PySCF H2 state in this repository spans two half-population sectors.
+    Restricting to either one would discard Hamiltonian couplings, so H2 uses
+    the full 16-dimensional basis before applying only an exact diagonal-Z2
+    symmetry restriction.
+    """
+
+    metadata: dict[str, Any] = {
+        "status": "running",
+        "started_at": base._now(),
+        "git": base._git_state(),
+        "configuration": {"h_chain": 2, "processes": args.processes},
+    }
+    base._atomic_json(args.metadata, metadata)
+    try:
+        started = time.perf_counter()
+        source = base._prepare_system(2)
+        groups = source["groups"]
+        num_qubits = int(source["num_qubits"])
+        full_state = np.asarray(source["state"], dtype=np.complex128).reshape(-1)
+        full_state /= np.linalg.norm(full_state)
+        full_basis = np.arange(1 << num_qubits, dtype=np.int64)
+        mask, target, selected, symmetry = find_balanced_z2_symmetry(
+            groups, num_qubits, full_basis, full_state
+        )
+        restricted_basis = full_basis[selected]
+        restricted_state = full_state[selected].copy()
+        restricted_state /= np.linalg.norm(restricted_state)
+        spectra, compact = prepare_component_spectra(
+            groups,
+            num_qubits,
+            restricted_basis,
+            validation_state=restricted_state,
+            processes=int(args.processes),
+        )
+        summed_action = np.asarray(compact.pop("summed_group_action"))
+        energy = float(source["energy_without_constant"])
+        residual = float(np.linalg.norm(summed_action - energy * restricted_state))
+        if residual > 1e-8:
+            raise RuntimeError(f"H2 full-basis Z2 residual is {residual}")
+        system = {
+            "h_chain": 2,
+            "ham_name": source["ham_name"],
+            "num_qubits": num_qubits,
+            "restricted_basis": restricted_basis,
+            "state": restricted_state,
+            "energy": energy,
+            "component_spectra": spectra,
+        }
+        with args.output.open("wb") as handle:
+            pickle.dump(system, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        metadata.update(
+            {
+                "status": "complete",
+                "completed_at": base._now(),
+                "system": {
+                    "h_chain": 2,
+                    "num_qubits": num_qubits,
+                    "group_count": len(groups),
+                    "ground_energy_without_constant_hartree": energy,
+                    "basis_strategy": (
+                        "full_Hilbert_basis_then_exact_diagonal_Z2; "
+                        "no invalid half-population projection"
+                    ),
+                    "full_basis_dimension": int(full_basis.size),
+                    "diagonal_z2_symmetry": symmetry,
+                    "symmetry_mask": int(mask),
+                    "symmetry_target_bit": int(target),
+                    "restricted_ground_state_residual": residual,
+                    "component_representation": compact,
+                },
+                "timing_seconds": {
+                    "total_preparation": float(time.perf_counter() - started)
+                },
+                "temporary_pickle": str(args.output),
+                "peak_cpu_rss_kib": int(
+                    resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                ),
+            }
+        )
+        base._atomic_json(args.metadata, metadata)
+        print(
+            f"prepared H2: full={full_basis.size}, exact Z2 block="
+            f"{restricted_state.size}, groups={len(groups)}",
+            flush=True,
+        )
+        return 0
+    except Exception:
+        metadata.update(
+            status="failed",
+            completed_at=base._now(),
+            traceback=traceback.format_exc(),
+        )
+        base._atomic_json(args.metadata, metadata)
+        traceback.print_exc()
+        return 1
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -654,6 +759,10 @@ def build_parser() -> argparse.ArgumentParser:
     worker_parser.add_argument("--system", type=Path, required=True)
     worker_parser.add_argument("--baseline", type=Path)
     worker_parser.add_argument("--output", type=Path, required=True)
+    prepare_parser = subparsers.add_parser("prepare-h2")
+    prepare_parser.add_argument("--processes", type=int, default=1)
+    prepare_parser.add_argument("--output", type=Path, required=True)
+    prepare_parser.add_argument("--metadata", type=Path, required=True)
     aggregate_parser = subparsers.add_parser("aggregate")
     aggregate_parser.add_argument("--inputs", type=Path, nargs="+", required=True)
     aggregate_parser.add_argument("--output", type=Path, required=True)
@@ -664,6 +773,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 if __name__ == "__main__":
     arguments = build_parser().parse_args()
+    if arguments.mode == "prepare-h2":
+        sys.exit(prepare_h2(arguments))
     if arguments.mode == "worker":
         sys.exit(worker(arguments))
     sys.exit(aggregate(arguments))

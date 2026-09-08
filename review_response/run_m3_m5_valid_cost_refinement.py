@@ -21,20 +21,34 @@ def _run_preparations(output: Path, python: str, env: dict[str, str]) -> None:
     processes: list[tuple[int, subprocess.Popen[bytes], object]] = []
     for h_chain in (2, 4, 5, 6, 7):
         log = (output / f"H{h_chain}_preparation.log").open("xb")
-        command = [
-            python,
-            "-u",
-            "review_response/run_gpu_m3_predictability_h7.py",
-            "prepare",
-            "--h-chain",
-            str(h_chain),
-            "--processes",
-            "1",
-            "--output",
-            str(output / f"H{h_chain}.pkl"),
-            "--metadata",
-            str(output / f"H{h_chain}_system.json"),
-        ]
+        if h_chain == 2:
+            command = [
+                python,
+                "-u",
+                "review_response/refine_m3_m5_valid_cost.py",
+                "prepare-h2",
+                "--processes",
+                "1",
+                "--output",
+                str(output / "H2.pkl"),
+                "--metadata",
+                str(output / "H2_system.json"),
+            ]
+        else:
+            command = [
+                python,
+                "-u",
+                "review_response/run_gpu_m3_predictability_h7.py",
+                "prepare",
+                "--h-chain",
+                str(h_chain),
+                "--processes",
+                "1",
+                "--output",
+                str(output / f"H{h_chain}.pkl"),
+                "--metadata",
+                str(output / f"H{h_chain}_system.json"),
+            ]
         process = subprocess.Popen(command, env=env, stdout=log, stderr=subprocess.STDOUT)
         processes.append((h_chain, process, log))
         print(f"H{h_chain}: preparation started pid={process.pid}", flush=True)
