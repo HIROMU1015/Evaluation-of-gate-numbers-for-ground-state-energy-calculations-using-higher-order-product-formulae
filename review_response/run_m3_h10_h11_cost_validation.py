@@ -635,16 +635,20 @@ def main() -> int:
     h13_parser.add_argument("--output-dir", type=Path, required=True)
     h13_parser.add_argument("--direct-root", type=Path, default=DIRECT_ROOT)
     h13_parser.set_defaults(h_chain=13)
+    h14_parser = subparsers.add_parser("launch-h14")
+    h14_parser.add_argument("--output-dir", type=Path, required=True)
+    h14_parser.add_argument("--direct-root", type=Path, default=DIRECT_ROOT)
+    h14_parser.set_defaults(h_chain=14)
     worker_parser = subparsers.add_parser("worker")
     worker_parser.add_argument(
-        "--h-chain", type=int, choices=[10, 11, 12, 13], required=True
+        "--h-chain", type=int, choices=[10, 11, 12, 13, 14], required=True
     )
     worker_parser.add_argument("--gpu-ids", type=int, nargs="+", required=True)
     worker_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.mode == "launch":
         return launch(args)
-    if args.mode in {"launch-h12", "launch-h13"}:
+    if args.mode in {"launch-h12", "launch-h13", "launch-h14"}:
         return launch_large_system(args)
     return worker(args)
 
