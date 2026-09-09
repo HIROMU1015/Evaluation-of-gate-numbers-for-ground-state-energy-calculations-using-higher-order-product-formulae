@@ -1,0 +1,1283 @@
+{
+  "completed_at": "2026-09-10T01:08:11.758769+09:00",
+  "condition_status": {
+    "H6": "complete",
+    "H7": "complete",
+    "NH3_631g": "complete",
+    "NH3_ccpvdz": "complete",
+    "NH3_sto3g": "complete"
+  },
+  "git": {
+    "branch": "m3-two-term-refinement-holdout",
+    "commit": "d2360f49f9a754d1850eab60cd483f684bd8bffb",
+    "dirty": true,
+    "status": [
+      "?? artifacts/two_term_pf_m3_holdout_server2_20260910_d2360f4_cpu/",
+      "?? artifacts/two_term_pf_m3_holdout_server2_20260910_d2360f4_cpu_launcher.log",
+      "?? review_response/run_two_term_pf_m3_holdout_server2.py",
+      "?? src/trotterlib/component_sector_pf.py"
+    ]
+  },
+  "new_candidate_all_five_conditions_passed": true,
+  "new_candidate_checks": {
+    "H6": {
+      "eta_min": true,
+      "eta_star": true,
+      "eta_t": true,
+      "maximum_unseen_residual_over_epsilon": true
+    },
+    "H7": {
+      "eta_min": true,
+      "eta_star": true,
+      "eta_t": true,
+      "maximum_unseen_residual_over_epsilon": true
+    },
+    "NH3_631g": {
+      "eta_min": true,
+      "eta_star": true,
+      "eta_t": true,
+      "maximum_unseen_residual_over_epsilon": true
+    },
+    "NH3_ccpvdz": {
+      "eta_min": true,
+      "eta_star": true,
+      "eta_t": true,
+      "maximum_unseen_residual_over_epsilon": true
+    },
+    "NH3_sto3g": {
+      "eta_min": true,
+      "eta_star": true,
+      "eta_t": true,
+      "maximum_unseen_residual_over_epsilon": true
+    }
+  },
+  "records": {
+    "H6": {
+      "comparison": {
+        "cost_and_prediction_are_reported_separately": true,
+        "direct_cost_at_each_formulas_own_predicted_optimum_ratio_new_over_current": 1.1512747225633688,
+        "prediction_metrics": {
+          "current_m3": {
+            "eta_min": 0.0,
+            "eta_star": 0.0010199955732605977,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 7.423384174303829e-15,
+            "maximum_unseen_residual_over_epsilon": 0.0015156556211767345,
+            "minimum_ground_overlap_probability": 0.9999988121506816
+          },
+          "two_term_center": {
+            "eta_min": 0.0,
+            "eta_star": 2.586860688362409e-05,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 5.475974876920417e-15,
+            "maximum_unseen_residual_over_epsilon": 7.013925243696833e-05,
+            "minimum_ground_overlap_probability": 0.9999999504651389
+          }
+        }
+      },
+      "formula_summaries": {
+        "current_m3": {
+          "alpha": 1.9524968888670854e-05,
+          "analytic_time": 1.130328683486731,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 0.0010199955732605977,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 7.423384174303829e-15,
+            "maximum_unseen_residual_over_epsilon": 0.0015156556211767345,
+            "minimum_ground_overlap_probability": 0.9999988121506816
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -1.9533722472415597e-05,
+            "a6": 9.966951538520686e-07,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0004483276667253,
+            "normalized_b2": -0.06522010491535926,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 117375558.99761124,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.283578988223308e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.025405,
+            "signed_shift_hartree": -3.283578988223308e-05,
+            "time": 1.1590446836907113
+          },
+          "weights": [
+            -0.4737318199452465,
+            0.3316118001935053,
+            0.2092246690782796,
+            0.1960294407008384
+          ]
+        },
+        "two_term_center": {
+          "alpha": 3.32007713979616e-05,
+          "analytic_time": 0.9898406669487186,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 2.586860688362409e-05,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 5.475974876920417e-15,
+            "maximum_unseen_residual_over_epsilon": 7.013925243696833e-05,
+            "minimum_ground_overlap_probability": 0.9999999504651389
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -3.3212402350924855e-05,
+            "a6": 1.3509337014853776e-06,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.000350321768848,
+            "normalized_b2": -0.03986726535497209,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 134997313.12292412,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.2426477477160624e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.01481,
+            "signed_shift_hartree": -3.2426477477160624e-05,
+            "time": 1.0045002072262292
+          },
+          "weights": [
+            -0.5479746372736223,
+            0.4130665734843169,
+            0.186467922898885,
+            0.1744528222536092
+          ]
+        }
+      },
+      "system": {
+        "active_electron_count": 6,
+        "active_orbital_selection_rule": "ascending canonical RHF/ROHF MO index after frozen core",
+        "active_spatial_orbital_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "active_spatial_orbitals": 6,
+        "basis": "sto-3g",
+        "charge": 0,
+        "component_representation": {
+          "compression_ratio": 0.02171249018067557,
+          "dense_group_spectra_estimated_bytes": 36662400,
+          "dimension": 200,
+          "group_count": 57,
+          "maximum_component_count": 200,
+          "maximum_component_size": 32,
+          "median_component_count": 113.0,
+          "minimum_component_count": 49,
+          "retained_estimated_bytes": 796032,
+          "total_retained_complex_elements": 49752,
+          "total_source_nnz": 16784
+        },
+        "frozen_core_spatial_orbitals": 0,
+        "geometry_angstrom": [
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              -2.5
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              -1.5
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              -0.5
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              0.5
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              1.5
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              2.5
+            ]
+          ]
+        ],
+        "ground_energy_without_constant_hartree": -2.9112247438296124,
+        "ground_residual_2_norm": 5.9381337290078996e-15,
+        "group_count": 57,
+        "hamiltonian_term_order_sha256": "c0498d974439cc65b9b8a2229163c4a8e153d184d2f533280165e6cb086c1956",
+        "locked_core_spatial_orbitals": 0,
+        "multiplicity": 1,
+        "n_alpha": 3,
+        "n_beta": 3,
+        "name": "H6",
+        "nonidentity_pauli_term_count": 918,
+        "num_qubits": 12,
+        "numerical_hermitization": {
+          "maximum_removed_imaginary_pauli_coefficient": 0.0,
+          "removed_imaginary_coefficients_l2": 0.0
+        },
+        "ordered_grouping_structure_sha256": "857d6fcd77cfcf4a31cd435011268c80c4f3764c47b1300eba97c9f0ce91bad6",
+        "population_sector_dimension": 400,
+        "preparation_seconds": 2.4191380385309458,
+        "removed_constant_hartree": -0.3248415360627355,
+        "restricted_dimension": 200,
+        "restricted_ground_residual_2_norm": 5.545722957945034e-15,
+        "scf_converged": true,
+        "scf_energy_hartree": -3.1355322139663206,
+        "total_electron_count": 6,
+        "unordered_grouping_structure_sha256": "7060fe4e2b06aa10dcf006161c5a6f0f3554807e4cb64818c250d56a4451ff5b",
+        "z2_mask": 1365,
+        "z2_symmetry": {
+          "ground_state_outside_norm": 3.725999653382641e-16,
+          "kind": "automatically_discovered_diagonal_Z2",
+          "nullspace_dimension": 3,
+          "other_dimension": 200,
+          "pauli_z_mask_integer": 1365,
+          "pauli_z_qubits": [
+            11,
+            9,
+            7,
+            5,
+            3,
+            1
+          ],
+          "population_sector_dimension": 400,
+          "restricted_dimension": 200,
+          "restricted_ground_state_norm": 0.9999999999999999,
+          "target_eigenvalue": 1
+        },
+        "z2_target": 0
+      }
+    },
+    "H7": {
+      "comparison": {
+        "cost_and_prediction_are_reported_separately": true,
+        "direct_cost_at_each_formulas_own_predicted_optimum_ratio_new_over_current": 1.151257977613777,
+        "prediction_metrics": {
+          "current_m3": {
+            "eta_min": 0.0,
+            "eta_star": 0.0010589037451604875,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 1.3172384508096974e-14,
+            "maximum_unseen_residual_over_epsilon": 0.002100229960590563,
+            "minimum_ground_overlap_probability": 0.9999984021067879
+          },
+          "two_term_center": {
+            "eta_min": 0.0,
+            "eta_star": 5.89683827412002e-06,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 6.632617589425118e-15,
+            "maximum_unseen_residual_over_epsilon": 4.148046075863533e-05,
+            "minimum_ground_overlap_probability": 0.999999947978101
+          }
+        }
+      },
+      "formula_summaries": {
+        "current_m3": {
+          "alpha": 1.647845806679241e-05,
+          "analytic_time": 1.1792969989068247,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 0.0010589037451604875,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 1.3172384508096974e-14,
+            "maximum_unseen_residual_over_epsilon": 0.002100229960590563,
+            "minimum_ground_overlap_probability": 0.9999984021067879
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -1.6485005984104937e-05,
+            "a6": 7.769662848141243e-07,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0003973622584095,
+            "normalized_b2": -0.0655740472410685,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 216068208.85193098,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.284492900610913e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.0255999999999998,
+            "signed_shift_hartree": -3.284492900610913e-05,
+            "time": 1.2094870020788393
+          },
+          "weights": [
+            -0.4737318199452465,
+            0.3316118001935053,
+            0.2092246690782796,
+            0.1960294407008384
+          ]
+        },
+        "two_term_center": {
+          "alpha": 2.8019865123861296e-05,
+          "analytic_time": 1.0327277003004793,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 5.89683827412002e-06,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 6.632617589425118e-15,
+            "maximum_unseen_residual_over_epsilon": 4.148046075863533e-05,
+            "minimum_ground_overlap_probability": 0.999999947978101
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -2.802916907150346e-05,
+            "a6": 1.0647794784388e-06,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.000332048266508,
+            "normalized_b2": -0.04052894361023396,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 248488590.49039522,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.243532217091613e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.01507,
+            "signed_shift_hartree": -3.243532217091613e-05,
+            "time": 1.0482909067440074
+          },
+          "weights": [
+            -0.5479746372736223,
+            0.4130665734843169,
+            0.186467922898885,
+            0.1744528222536092
+          ]
+        }
+      },
+      "system": {
+        "active_electron_count": 6,
+        "active_orbital_selection_rule": "ascending canonical RHF/ROHF MO index after frozen core",
+        "active_spatial_orbital_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "active_spatial_orbitals": 7,
+        "basis": "sto-3g",
+        "charge": 1,
+        "component_representation": {
+          "compression_ratio": 0.008983498268285954,
+          "dense_group_spectra_estimated_bytes": 233110080,
+          "dimension": 372,
+          "group_count": 105,
+          "maximum_component_count": 372,
+          "maximum_component_size": 16,
+          "median_component_count": 214.0,
+          "minimum_component_count": 96,
+          "retained_estimated_bytes": 2094144,
+          "total_retained_complex_elements": 130884,
+          "total_source_nnz": 44700
+        },
+        "frozen_core_spatial_orbitals": 0,
+        "geometry_angstrom": [
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              -3.0
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              -2.0
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              -1.0
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              1.0
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              2.0
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0,
+              0.0,
+              3.0
+            ]
+          ]
+        ],
+        "ground_energy_without_constant_hartree": -3.0358162650235556,
+        "ground_residual_2_norm": 3.4228661900421372e-15,
+        "group_count": 105,
+        "hamiltonian_term_order_sha256": "a29087d0823340c047beb1ee2b1a0bc5bf9337fe7298b9bb28f17e8d090acadd",
+        "locked_core_spatial_orbitals": 0,
+        "multiplicity": 3,
+        "n_alpha": 4,
+        "n_beta": 2,
+        "name": "H7",
+        "nonidentity_pauli_term_count": 1701,
+        "num_qubits": 14,
+        "numerical_hermitization": {
+          "maximum_removed_imaginary_pauli_coefficient": 0.0,
+          "removed_imaginary_coefficients_l2": 0.0
+        },
+        "ordered_grouping_structure_sha256": "324b380caa59dc87ab8eaec9ddf2a681bda47f257f8063debf0db24e3d8dd529",
+        "population_sector_dimension": 735,
+        "preparation_seconds": 7.089049832895398,
+        "removed_constant_hartree": -0.321411390579062,
+        "restricted_dimension": 372,
+        "restricted_ground_residual_2_norm": 2.9515833732476665e-15,
+        "scf_converged": true,
+        "scf_energy_hartree": -3.281163720329925,
+        "total_electron_count": 6,
+        "unordered_grouping_structure_sha256": "d9005b89834d8dc81668fe32085fc8c4a91c3754daf1f61737ca501a6021f8fc",
+        "z2_mask": 5418,
+        "z2_symmetry": {
+          "ground_state_outside_norm": 4.805297736146694e-16,
+          "kind": "automatically_discovered_diagonal_Z2",
+          "nullspace_dimension": 3,
+          "other_dimension": 363,
+          "pauli_z_mask_integer": 5418,
+          "pauli_z_qubits": [
+            12,
+            10,
+            8,
+            5,
+            3,
+            1
+          ],
+          "population_sector_dimension": 735,
+          "restricted_dimension": 372,
+          "restricted_ground_state_norm": 1.0,
+          "target_eigenvalue": -1
+        },
+        "z2_target": 1
+      }
+    },
+    "NH3_631g": {
+      "comparison": {
+        "cost_and_prediction_are_reported_separately": true,
+        "direct_cost_at_each_formulas_own_predicted_optimum_ratio_new_over_current": 1.1547130916704504,
+        "prediction_metrics": {
+          "current_m3": {
+            "eta_min": 0.0,
+            "eta_star": 0.0027051123439396692,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 4.673974886632044e-14,
+            "maximum_unseen_residual_over_epsilon": 0.005063230659501993,
+            "minimum_ground_overlap_probability": 0.9999915703135765
+          },
+          "two_term_center": {
+            "eta_min": 0.0,
+            "eta_star": 0.00037852809129513144,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 3.5410243657430296e-14,
+            "maximum_unseen_residual_over_epsilon": 0.0007467436360333587,
+            "minimum_ground_overlap_probability": 0.9981901603084454
+          }
+        }
+      },
+      "formula_summaries": {
+        "current_m3": {
+          "alpha": 6.7761139793325166e-06,
+          "analytic_time": 1.472675834722534,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 0.0027051123439396692,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 4.673974886632044e-14,
+            "maximum_unseen_residual_over_epsilon": 0.005063230659501993,
+            "minimum_ground_overlap_probability": 0.9999915703135765
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -6.7774263987883615e-06,
+            "a6": 1.5573842813288952e-07,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0001936832024738,
+            "normalized_b2": -0.04984589582572172,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 313683714.02719384,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.258039959762939e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.018905,
+            "signed_shift_hartree": -3.258039959762939e-05,
+            "time": 1.5005167713779635
+          },
+          "weights": [
+            -0.4737318199452465,
+            0.3316118001935053,
+            0.2092246690782796,
+            0.1960294407008384
+          ]
+        },
+        "two_term_center": {
+          "alpha": 1.152234875789649e-05,
+          "analytic_time": 1.289635804500467,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 0.00037852809129513144,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 3.5410243657430296e-14,
+            "maximum_unseen_residual_over_epsilon": 0.0007467436360333587,
+            "minimum_ground_overlap_probability": 0.9981901603084454
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -1.1523518252308174e-05,
+            "a6": 1.1892063219152718e-07,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0001014979181986,
+            "normalized_b2": -0.017165258857615714,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 361374241.744596,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.210093663833021e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.006165,
+            "signed_shift_hartree": -3.210093663833021e-05,
+            "time": 1.2975864092352123
+          },
+          "weights": [
+            -0.5479746372736223,
+            0.4130665734843169,
+            0.186467922898885,
+            0.1744528222536092
+          ]
+        }
+      },
+      "system": {
+        "active_electron_count": 8,
+        "active_orbital_selection_rule": "ascending canonical RHF/ROHF MO index after frozen core",
+        "active_spatial_orbital_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "active_spatial_orbitals": 7,
+        "basis": "6-31g",
+        "charge": 0,
+        "component_representation": {
+          "compression_ratio": 0.005589148015382798,
+          "dense_group_spectra_estimated_bytes": 2715344800,
+          "dimension": 1225,
+          "group_count": 113,
+          "maximum_component_count": 1225,
+          "maximum_component_size": 64,
+          "median_component_count": 455.0,
+          "minimum_component_count": 256,
+          "retained_estimated_bytes": 15176464,
+          "total_retained_complex_elements": 948529,
+          "total_source_nnz": 323725
+        },
+        "frozen_core_spatial_orbitals": 1,
+        "geometry_angstrom": [
+          [
+            "N",
+            [
+              -0.0404260543,
+              1.0241077531,
+              0.0625637998
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0172574639,
+              0.0125452063,
+              -0.0273771593
+            ]
+          ],
+          [
+            "H",
+            [
+              0.9157893661,
+              1.3587451948,
+              -0.0287577581
+            ]
+          ],
+          [
+            "H",
+            [
+              -0.5202777357,
+              1.3435321258,
+              -0.7755426124
+            ]
+          ]
+        ],
+        "ground_energy_without_constant_hartree": -4.240900443190182,
+        "ground_residual_2_norm": 6.512864621211376e-15,
+        "group_count": 113,
+        "hamiltonian_term_order_sha256": "9453a6ab028ded208ebb33aa83bddd91028b309552b04faea3b3ed7cb93fd5fc",
+        "locked_core_spatial_orbitals": 0,
+        "multiplicity": 1,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "name": "NH3_631g",
+        "nonidentity_pauli_term_count": 3025,
+        "num_qubits": 14,
+        "numerical_hermitization": {
+          "maximum_removed_imaginary_pauli_coefficient": 0.0,
+          "removed_imaginary_coefficients_l2": 0.0
+        },
+        "ordered_grouping_structure_sha256": "f7e6066fa7f888e8d9e3f00bf95bf6107cf5811ba45d450f1c386edbfe664bae",
+        "population_sector_dimension": 1225,
+        "preparation_seconds": 15.88870120421052,
+        "removed_constant_hartree": -51.93719854368079,
+        "restricted_dimension": 1225,
+        "restricted_ground_residual_2_norm": 6.523199838627374e-15,
+        "scf_converged": true,
+        "scf_energy_hartree": -56.159587410372836,
+        "total_electron_count": 10,
+        "unordered_grouping_structure_sha256": "6e0b976635512e943f7168e6cb15e38edc741a075f812bb0749d2870fb237d12",
+        "z2_mask": 0,
+        "z2_symmetry": {
+          "fallback": "fixed_alpha_beta_population_sector",
+          "ground_state_outside_norm": 0.0,
+          "kind": "no_nonconstant_exact_diagonal_Z2",
+          "population_sector_dimension": 1225,
+          "restricted_dimension": 1225,
+          "restricted_ground_state_norm": 1.0
+        },
+        "z2_target": 0
+      }
+    },
+    "NH3_ccpvdz": {
+      "comparison": {
+        "cost_and_prediction_are_reported_separately": true,
+        "direct_cost_at_each_formulas_own_predicted_optimum_ratio_new_over_current": 1.1562103260130214,
+        "prediction_metrics": {
+          "current_m3": {
+            "eta_min": 0.0,
+            "eta_star": 0.0034606662979446484,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 8.926909803385331e-14,
+            "maximum_unseen_residual_over_epsilon": 0.020607519614708802,
+            "minimum_ground_overlap_probability": 0.9996633746618987
+          },
+          "two_term_center": {
+            "eta_min": 0.0,
+            "eta_star": 0.0004991348746208787,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 6.437490432527378e-14,
+            "maximum_unseen_residual_over_epsilon": 0.000862127034312337,
+            "minimum_ground_overlap_probability": 0.9999943523543259
+          }
+        }
+      },
+      "formula_summaries": {
+        "current_m3": {
+          "alpha": 4.567994812696987e-06,
+          "analytic_time": 1.6252528475272714,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 0.0034606662979446484,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 8.926909803385331e-14,
+            "maximum_unseen_residual_over_epsilon": 0.020607519614708802,
+            "minimum_ground_overlap_probability": 0.9996633746618987
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -4.568820772766364e-06,
+            "a6": 8.540916968484846e-08,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0001808145812865,
+            "normalized_b2": -0.049387923755685285,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 268905030.8878178,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.257201734083294e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.01871,
+            "signed_shift_hartree": -3.257201734083294e-05,
+            "time": 1.6556613283045067
+          },
+          "weights": [
+            -0.4737318199452465,
+            0.3316118001935053,
+            0.2092246690782796,
+            0.1960294407008384
+          ]
+        },
+        "two_term_center": {
+          "alpha": 7.767655257414231e-06,
+          "analytic_time": 1.4232456021074709,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 0.0004991348746208787,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 6.437490432527378e-14,
+            "maximum_unseen_residual_over_epsilon": 0.000862127034312337,
+            "minimum_ground_overlap_probability": 0.9999943523543259
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -7.768143499148712e-06,
+            "a6": 5.40348196088432e-08,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0000628557419582,
+            "normalized_b2": -0.01409105351879032,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 309993176.8993709,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.206112960189181e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.00506,
+            "signed_shift_hartree": -3.206112960189181e-05,
+            "time": 1.4304472248541347
+          },
+          "weights": [
+            -0.5479746372736223,
+            0.4130665734843169,
+            0.186467922898885,
+            0.1744528222536092
+          ]
+        }
+      },
+      "system": {
+        "active_electron_count": 8,
+        "active_orbital_selection_rule": "ascending canonical RHF/ROHF MO index after frozen core",
+        "active_spatial_orbital_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "active_spatial_orbitals": 7,
+        "basis": "cc-pvdz",
+        "charge": 0,
+        "component_representation": {
+          "compression_ratio": 0.005379188676148974,
+          "dense_group_spectra_estimated_bytes": 2715344800,
+          "dimension": 1225,
+          "group_count": 113,
+          "maximum_component_count": 1225,
+          "maximum_component_size": 64,
+          "median_component_count": 467.0,
+          "minimum_component_count": 256,
+          "retained_estimated_bytes": 14606352,
+          "total_retained_complex_elements": 912897,
+          "total_source_nnz": 306365
+        },
+        "frozen_core_spatial_orbitals": 1,
+        "geometry_angstrom": [
+          [
+            "N",
+            [
+              -0.0404260543,
+              1.0241077531,
+              0.0625637998
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0172574639,
+              0.0125452063,
+              -0.0273771593
+            ]
+          ],
+          [
+            "H",
+            [
+              0.9157893661,
+              1.3587451948,
+              -0.0287577581
+            ]
+          ],
+          [
+            "H",
+            [
+              -0.5202777357,
+              1.3435321258,
+              -0.7755426124
+            ]
+          ]
+        ],
+        "ground_energy_without_constant_hartree": -4.399679685705341,
+        "ground_residual_2_norm": 1.376458525892506e-14,
+        "group_count": 113,
+        "hamiltonian_term_order_sha256": "52f0b7fa697374ede3957646d27c9bf85d098b79edae843b9cf8fab3f7b99d47",
+        "locked_core_spatial_orbitals": 0,
+        "multiplicity": 1,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "name": "NH3_ccpvdz",
+        "nonidentity_pauli_term_count": 2861,
+        "num_qubits": 14,
+        "numerical_hermitization": {
+          "maximum_removed_imaginary_pauli_coefficient": 0.0,
+          "removed_imaginary_coefficients_l2": 0.0
+        },
+        "ordered_grouping_structure_sha256": "1149cac8eebec157f115637cba0b13551ce8c823fade420e5764c5cafc468870",
+        "population_sector_dimension": 1225,
+        "preparation_seconds": 15.69581856392324,
+        "removed_constant_hartree": -51.807184865549445,
+        "restricted_dimension": 1225,
+        "restricted_ground_residual_2_norm": 1.4190098148797126e-14,
+        "scf_converged": true,
+        "scf_energy_hartree": -56.19550776498818,
+        "total_electron_count": 10,
+        "unordered_grouping_structure_sha256": "87e8d8d4e83e6a3195658bd312dc912476906458e73001c4181666605ec661a4",
+        "z2_mask": 0,
+        "z2_symmetry": {
+          "fallback": "fixed_alpha_beta_population_sector",
+          "ground_state_outside_norm": 0.0,
+          "kind": "no_nonconstant_exact_diagonal_Z2",
+          "population_sector_dimension": 1225,
+          "restricted_dimension": 1225,
+          "restricted_ground_state_norm": 1.0
+        },
+        "z2_target": 0
+      }
+    },
+    "NH3_sto3g": {
+      "comparison": {
+        "cost_and_prediction_are_reported_separately": true,
+        "direct_cost_at_each_formulas_own_predicted_optimum_ratio_new_over_current": 1.1480496599638446,
+        "prediction_metrics": {
+          "current_m3": {
+            "eta_min": 0.0,
+            "eta_star": 0.00046093009933234706,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 7.656630144319872e-15,
+            "maximum_unseen_residual_over_epsilon": 0.000853922249470825,
+            "minimum_ground_overlap_probability": 0.9999998953343879
+          },
+          "two_term_center": {
+            "eta_min": 0.0,
+            "eta_star": 6.473583199774073e-05,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 1.1838395641604217e-14,
+            "maximum_unseen_residual_over_epsilon": 0.00011995440247842493,
+            "minimum_ground_overlap_probability": 0.999999982008016
+          }
+        }
+      },
+      "formula_summaries": {
+        "current_m3": {
+          "alpha": 5.258453429476278e-05,
+          "analytic_time": 0.882343779206989,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 0.00046093009933234706,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 7.656630144319872e-15,
+            "maximum_unseen_residual_over_epsilon": 0.000853922249470825,
+            "minimum_ground_overlap_probability": 0.9999998953343879
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -5.2607234104507426e-05,
+            "a6": 2.5879399581567216e-06,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0004316822436308,
+            "normalized_b2": -0.03831526383773558,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 562528774.0322038,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.240181426547184e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.01416,
+            "signed_shift_hartree": -3.240181426547184e-05,
+            "time": 0.89483776712056
+          },
+          "weights": [
+            -0.4737318199452465,
+            0.3316118001935053,
+            0.2092246690782796,
+            0.1960294407008384
+          ]
+        },
+        "two_term_center": {
+          "alpha": 8.941997865509555e-05,
+          "analytic_time": 0.7726693687451571,
+          "metrics": {
+            "eta_min": 0.0,
+            "eta_star": 6.473583199774073e-05,
+            "eta_t": 0.0,
+            "eta_t_interpretation": "grid-resolved reference; not a continuous optimum",
+            "maximum_eigenpair_residual_2_norm": 1.1838395641604217e-14,
+            "maximum_unseen_residual_over_epsilon": 0.00011995440247842493,
+            "minimum_ground_overlap_probability": 0.999999982008016
+          },
+          "passed": true,
+          "threshold_checks": {
+            "eta_min": true,
+            "eta_star": true,
+            "eta_t": true,
+            "maximum_unseen_residual_over_epsilon": true
+          },
+          "two_term_model": {
+            "a4": -8.944568327953904e-05,
+            "a6": 2.9488713526563414e-06,
+            "cost_model": "beta*N_exp / (t*(epsilon_E - abs(a4*t^4+a6*t^6)))",
+            "fit_rule": "least squares after normalization by sign*alpha*t^4, as in committed two-term analysis",
+            "leading_sign": -1.0,
+            "model": "delta_E_2term(t) = a4*t^4 + a6*t^6",
+            "normalized_b0": 1.0002874595233648,
+            "normalized_b2": -0.019688319839402307,
+            "training_relative_to_t_ana": [
+              0.1,
+              0.2,
+              0.3
+            ]
+          },
+          "two_term_model_optimum": {
+            "cost": 645555219.0266299,
+            "dense_grid_points": 20001,
+            "error_hartree": 3.2130189693374126e-05,
+            "optimization_domain_relative_to_t_ana": [
+              0.1,
+              1.4
+            ],
+            "relative_to_t_ana": 1.00701,
+            "signed_shift_hartree": -3.2130189693374126e-05,
+            "time": 0.7780857810200607
+          },
+          "weights": [
+            -0.5479746372736223,
+            0.4130665734843169,
+            0.186467922898885,
+            0.1744528222536092
+          ]
+        }
+      },
+      "system": {
+        "active_electron_count": 8,
+        "active_orbital_selection_rule": "ascending canonical RHF/ROHF MO index after frozen core",
+        "active_spatial_orbital_indices": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "active_spatial_orbitals": 7,
+        "basis": "sto-3g",
+        "charge": 0,
+        "component_representation": {
+          "compression_ratio": 0.005755267618314993,
+          "dense_group_spectra_estimated_bytes": 2715344800,
+          "dimension": 1225,
+          "group_count": 113,
+          "maximum_component_count": 1225,
+          "maximum_component_size": 64,
+          "median_component_count": 433.0,
+          "minimum_component_count": 256,
+          "retained_estimated_bytes": 15627536,
+          "total_retained_complex_elements": 976721,
+          "total_source_nnz": 348885
+        },
+        "frozen_core_spatial_orbitals": 1,
+        "geometry_angstrom": [
+          [
+            "N",
+            [
+              -0.0404260543,
+              1.0241077531,
+              0.0625637998
+            ]
+          ],
+          [
+            "H",
+            [
+              0.0172574639,
+              0.0125452063,
+              -0.0273771593
+            ]
+          ],
+          [
+            "H",
+            [
+              0.9157893661,
+              1.3587451948,
+              -0.0287577581
+            ]
+          ],
+          [
+            "H",
+            [
+              -0.5202777357,
+              1.3435321258,
+              -0.7755426124
+            ]
+          ]
+        ],
+        "ground_energy_without_constant_hartree": -4.245834532761404,
+        "ground_residual_2_norm": 6.847801656006117e-15,
+        "group_count": 113,
+        "hamiltonian_term_order_sha256": "c835639f8de4830eaec163bb82ff1e4c0dc2904a2686ead405f8c2c7feb4fd30",
+        "locked_core_spatial_orbitals": 0,
+        "multiplicity": 1,
+        "n_alpha": 4,
+        "n_beta": 4,
+        "name": "NH3_sto3g",
+        "nonidentity_pauli_term_count": 3193,
+        "num_qubits": 14,
+        "numerical_hermitization": {
+          "maximum_removed_imaginary_pauli_coefficient": 0.0,
+          "removed_imaginary_coefficients_l2": 0.0
+        },
+        "ordered_grouping_structure_sha256": "4ada4dda6db6903955a7329279341a3323f818542a40ba76d29cac886a7da8d1",
+        "population_sector_dimension": 1225,
+        "preparation_seconds": 16.15461170487106,
+        "removed_constant_hartree": -51.2750328059323,
+        "restricted_dimension": 1225,
+        "restricted_ground_residual_2_norm": 6.730104239663833e-15,
+        "scf_converged": true,
+        "scf_energy_hartree": -55.45474162941707,
+        "total_electron_count": 10,
+        "unordered_grouping_structure_sha256": "c0b2f3ebf4642020e0fcc245c7518aad2577efc85d0df0b3f8224356d840c5b2",
+        "z2_mask": 0,
+        "z2_symmetry": {
+          "fallback": "fixed_alpha_beta_population_sector",
+          "ground_state_outside_norm": 0.0,
+          "kind": "no_nonconstant_exact_diagonal_Z2",
+          "population_sector_dimension": 1225,
+          "restricted_dimension": 1225,
+          "restricted_ground_state_norm": 1.0
+        },
+        "z2_target": 0
+      }
+    }
+  },
+  "status": "complete"
+}
