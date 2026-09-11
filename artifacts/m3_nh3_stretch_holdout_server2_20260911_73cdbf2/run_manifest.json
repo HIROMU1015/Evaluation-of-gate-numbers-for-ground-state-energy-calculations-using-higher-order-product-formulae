@@ -1,0 +1,182 @@
+{
+  "benchmark": {
+    "cpu_point": {
+      "backend": "cpu",
+      "direct_cost": 352129154.234458,
+      "direct_error_hartree": 3.124241499282257e-05,
+      "eigenpair_residual_2_norm": 6.99222526380785e-15,
+      "ground_overlap_probability": 0.9999999501685379,
+      "peak_cpu_rss_kib_after": 657332,
+      "peak_cpu_rss_kib_before": 567740,
+      "principal_signed_shift_hartree": -3.124241499282257e-05,
+      "schur_off_diagonal_residual_frobenius_norm": 4.551124470341537e-12,
+      "selected_eigenvalue": {
+        "imag": 0.964578294561695,
+        "real": -0.263796727918428
+      },
+      "selected_eigenvalue_magnitude": 1.0000000000000087,
+      "selected_schur_index": 2,
+      "selection_rule": "maximum exact-ground-state overlap",
+      "signed_direct_shift_hartree": -3.124241499282257e-05,
+      "time": 1.3257099560213421,
+      "timing_seconds": {
+        "component_gate_materialization_seconds": 0.4152763206511736,
+        "cpu_schur": 2.89862341620028,
+        "cpu_total_build_seconds": 20.86220394447446,
+        "sparse_dense_multiplication_seconds": 20.428860200569034,
+        "total": 23.79665237478912,
+        "unique_component_gate_count": 452
+      }
+    },
+    "estimated_direct_points_per_condition": 24,
+    "feasible": true,
+    "feasible_limit_seconds": 7200.0,
+    "gpu_attempt": {
+      "reason": "All allowed GPUs exceeded the predeclared idle utilization or memory-use threshold; no existing process was touched.",
+      "status": "skipped_no_idle_gpu"
+    },
+    "gpu_idle_gate": {
+      "decisions": {
+        "0": {
+          "eligible": false,
+          "rejection_reasons": [
+            "utilization_above_idle_limit",
+            "memory_use_above_idle_limit"
+          ]
+        },
+        "1": {
+          "eligible": false,
+          "rejection_reasons": [
+            "utilization_above_idle_limit",
+            "memory_use_above_idle_limit"
+          ]
+        },
+        "2": {
+          "eligible": false,
+          "rejection_reasons": [
+            "utilization_above_idle_limit",
+            "memory_use_above_idle_limit"
+          ]
+        },
+        "3": {
+          "eligible": false,
+          "rejection_reasons": [
+            "utilization_above_idle_limit",
+            "memory_use_above_idle_limit"
+          ]
+        }
+      },
+      "maximum_memory_used_mib": 1024,
+      "maximum_utilization_percent": 5
+    },
+    "gpu_implementation_reference": "a8df777",
+    "gpu_snapshot_before": [
+      {
+        "driver_version": "560.35.05",
+        "memory_free_mib": 35918,
+        "memory_total_mib": 40960,
+        "memory_used_mib": 4527,
+        "name": "NVIDIA A100-PCIE-40GB",
+        "physical_gpu_id": 0,
+        "utilization_percent": 100,
+        "uuid": "GPU-3fac7503-bb55-35cd-f566-c919eaa55798"
+      },
+      {
+        "driver_version": "560.35.05",
+        "memory_free_mib": 35918,
+        "memory_total_mib": 40960,
+        "memory_used_mib": 4527,
+        "name": "NVIDIA A100-PCIE-40GB",
+        "physical_gpu_id": 1,
+        "utilization_percent": 100,
+        "uuid": "GPU-bf03abcd-ef36-6733-da57-460c8eb9cab4"
+      },
+      {
+        "driver_version": "560.35.05",
+        "memory_free_mib": 31480,
+        "memory_total_mib": 40960,
+        "memory_used_mib": 8965,
+        "name": "NVIDIA A100-PCIE-40GB",
+        "physical_gpu_id": 2,
+        "utilization_percent": 67,
+        "uuid": "GPU-bc01f8f3-0939-f2c0-6998-dd49d0360463"
+      },
+      {
+        "driver_version": "560.35.05",
+        "memory_free_mib": 31480,
+        "memory_total_mib": 40960,
+        "memory_used_mib": 8965,
+        "name": "NVIDIA A100-PCIE-40GB",
+        "physical_gpu_id": 3,
+        "utilization_percent": 62,
+        "uuid": "GPU-b7aeac00-b332-1045-eebc-bb5653ac8402"
+      }
+    ],
+    "projected_all_conditions_wall_seconds": 1760.8640791308135,
+    "representative_condition": "NH3_r125_631g",
+    "representative_formula": "two_term_center",
+    "representative_time": 1.3257099560213421,
+    "selected_backend": "cpu",
+    "selected_physical_gpu_id": null,
+    "selected_point_seconds": 23.79665237478912,
+    "status": "complete"
+  },
+  "ch4_started": false,
+  "completed_at": "2026-09-11T12:54:27.416626+09:00",
+  "conditions": [
+    "NH3_r125_631g",
+    "NH3_r125_ccpvdz",
+    "NH3_r150_631g",
+    "NH3_r150_ccpvdz"
+  ],
+  "elapsed_seconds": 1681.526080802083,
+  "execution_strategy": {
+    "blas_threads_per_worker": 2,
+    "component_processes_per_condition": 1,
+    "condition_workers_if_cpu": 2,
+    "gpu_policy": "benchmark/use only an idle GPU 0-3; never stop or displace an existing process",
+    "pilot_then_remaining": true
+  },
+  "existing_json_overwritten": false,
+  "failures": {},
+  "git": {
+    "branch": "gpu-m3-nh3-stretch-holdout",
+    "commit": "73cdbf200d348cc610d4c20f45a3208ce7ad2e7e",
+    "dirty": true,
+    "status": [
+      "?? artifacts/m3_nh3_stretch_holdout_server2_20260911_73cdbf2_launcher.log",
+      "?? review_response/run_m3_nh3_stretch_holdout.py"
+    ]
+  },
+  "main_merged": false,
+  "pilot_condition": "NH3_r125_631g",
+  "report": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae-two-term-holdout/artifacts/m3_nh3_stretch_holdout_server2_20260911_73cdbf2/report.md",
+  "resource_snapshot": {
+    "free": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "               total        used        free      shared  buff/cache   available\nMem:           503Gi       132Gi       119Gi       109Mi       254Gi       370Gi\nSwap:           15Gi       4.4Gi        11Gi\n"
+    },
+    "lscpu": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Architecture:                         x86_64\nCPU op-mode(s):                       32-bit, 64-bit\nAddress sizes:                        43 bits physical, 48 bits virtual\nByte Order:                           Little Endian\nCPU(s):                               64\nOn-line CPU(s) list:                  0-63\nVendor ID:                            AuthenticAMD\nModel name:                           AMD EPYC 7532 32-Core Processor\nCPU family:                           23\nModel:                                49\nThread(s) per core:                   1\nCore(s) per socket:                   32\nSocket(s):                            2\nStepping:                             0\nFrequency boost:                      enabled\nCPU(s) scaling MHz:                   84%\nCPU max MHz:                          2400.0000\nCPU min MHz:                          1500.0000\nBogoMIPS:                             4799.66\nFlags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr rdpru wbnoinvd arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif v_spec_ctrl umip rdpid overflow_recov succor smca sev sev_es\nVirtualization:                       AMD-V\nL1d cache:                            2 MiB (64 instances)\nL1i cache:                            2 MiB (64 instances)\nL2 cache:                             32 MiB (64 instances)\nL3 cache:                             512 MiB (32 instances)\nNUMA node(s):                         8\nNUMA node0 CPU(s):                    0-7\nNUMA node1 CPU(s):                    8-15\nNUMA node2 CPU(s):                    16-23\nNUMA node3 CPU(s):                    24-31\nNUMA node4 CPU(s):                    32-39\nNUMA node5 CPU(s):                    40-47\nNUMA node6 CPU(s):                    48-55\nNUMA node7 CPU(s):                    56-63\nVulnerability Gather data sampling:   Not affected\nVulnerability Itlb multihit:          Not affected\nVulnerability L1tf:                   Not affected\nVulnerability Mds:                    Not affected\nVulnerability Meltdown:               Not affected\nVulnerability Mmio stale data:        Not affected\nVulnerability Reg file data sampling: Not affected\nVulnerability Retbleed:               Mitigation; untrained return thunk; SMT disabled\nVulnerability Spec rstack overflow:   Mitigation; SMT disabled\nVulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:             Mitigation; Retpolines; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                  Not affected\nVulnerability Tsx async abort:        Not affected\n"
+    },
+    "nvidia_smi": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "0, NVIDIA A100-PCIE-40GB, 4527 MiB, 40960 MiB, 100 %\n1, NVIDIA A100-PCIE-40GB, 4527 MiB, 40960 MiB, 100 %\n2, NVIDIA A100-PCIE-40GB, 8965 MiB, 40960 MiB, 59 %\n3, NVIDIA A100-PCIE-40GB, 8965 MiB, 40960 MiB, 62 %\n"
+    },
+    "uptime": {
+      "returncode": 0,
+      "stderr": "",
+      "stdout": " 12:26:25 up 116 days,  3:28, 30 users,  load average: 8.99, 9.06, 9.06\n"
+    }
+  },
+  "selected_backend": "cpu",
+  "selected_physical_gpu_id": null,
+  "source_commit": "73cdbf200d348cc610d4c20f45a3208ce7ad2e7e",
+  "started_at": "2026-09-11T12:26:25.890603+09:00",
+  "status": "complete",
+  "summary": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae-two-term-holdout/artifacts/m3_nh3_stretch_holdout_server2_20260911_73cdbf2/summary.json"
+}
