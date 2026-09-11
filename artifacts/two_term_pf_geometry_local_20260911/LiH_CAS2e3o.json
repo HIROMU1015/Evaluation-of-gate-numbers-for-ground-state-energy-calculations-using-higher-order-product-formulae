@@ -1,0 +1,88 @@
+{
+  "completed_at": "2026-09-11T11:46:34.366980+09:00",
+  "condition": "LiH_CAS2e3o",
+  "elapsed_seconds": 0.025887390016578138,
+  "environment": {
+    "blas_threads": 4,
+    "component_processes": 4,
+    "cuda_visible_devices": null,
+    "packages": {
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "openfermionpyscf": "0.5",
+      "pyscf": "2.7.0",
+      "scipy": "1.14.1"
+    },
+    "python": "3.11.1",
+    "python_executable": "/home/abe/.pyenv/versions/3.11.1/bin/python3.11"
+  },
+  "error": "AssertionError: ",
+  "formulas": {},
+  "git": {
+    "branch": null,
+    "commit": "73cdbf200d348cc610d4c20f45a3208ce7ad2e7e",
+    "dirty": false,
+    "status": []
+  },
+  "peak_cpu_rss_kib": 260324,
+  "protocol": {
+    "beta": 1.2,
+    "direct_label": "ground-connected maximum-ground-overlap PF eigenbranch",
+    "epsilon_E_hartree": 0.00015936001019904,
+    "model_optimization_interval_relative_to_t_ana": [
+      0.1,
+      1.4
+    ],
+    "pass_thresholds": {
+      "eta_min": 0.01,
+      "eta_star": 0.01,
+      "eta_t": 0.05,
+      "maximum_unseen_residual_over_epsilon": 0.05
+    },
+    "short_time_fit_grid": [
+      0.06,
+      0.07219448409962559,
+      0.0868673922401849,
+      0.10452244279766615,
+      0.12576573057683554,
+      0.15132653394011922,
+      0.18208235080652319,
+      0.21908902300206642,
+      0.2636169831254199,
+      0.3171948682773233,
+      0.3816619979055008,
+      0.4592315173203337,
+      0.5525663745871628,
+      0.6648707390686781,
+      0.8
+    ],
+    "signed_quantity": "delta_E_direct(t) = E_tilde_g(t) - E0",
+    "training_relative_to_t_ana": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "unsigned_quantity": "e_direct(t) = abs(delta_E_direct(t))"
+  },
+  "selection_provenance": {
+    "candidate_narrowing": [
+      "H2",
+      "H4",
+      "H5"
+    ],
+    "final_selection": [
+      "LiH x 3 bases",
+      "BeH2 x 3 bases",
+      "H2O x 3 bases"
+    ],
+    "unused_holdouts": [
+      "H6",
+      "H7",
+      "NH3 x 3 bases"
+    ]
+  },
+  "started_at": "2026-09-11T11:46:34.331272+09:00",
+  "status": "failed",
+  "system": null,
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/pf-two-term-holdout-73cdbf2/review_response/run_two_term_pf_m3_holdout_server2.py\", line 1081, in worker\n    system, metadata = _prepare_system(\n                       ^^^^^^^^^^^^^^^^\n  File \"/tmp/pf-two-term-holdout-73cdbf2/review_response/run_two_term_pf_m3_holdout_server2.py\", line 297, in _prepare_system\n    grouper = Almost_optimal_grouper(\n              ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pf-two-term-holdout-73cdbf2/src/trotterlib/Almost_optimal_grouping.py\", line 242, in __init__\n    self.group_term_list = self.generate_group_nakagawa(validation, fermion_qubit_mapping)\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pf-two-term-holdout-73cdbf2/src/trotterlib/Almost_optimal_grouping.py\", line 404, in generate_group_nakagawa\n    clique_list = make_clique_by_finite_projective_plane(n_orb)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/pf-two-term-holdout-73cdbf2/src/trotterlib/Almost_optimal_grouping.py\", line 124, in make_clique_by_finite_projective_plane\n    assert n >= 4\n           ^^^^^^\nAssertionError\n"
+}
