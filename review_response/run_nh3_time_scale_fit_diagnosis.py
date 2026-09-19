@@ -194,6 +194,7 @@ def energy_scales(system: dict[str, Any]) -> dict[str, Any]:
 
 
 def command_prepare(args: argparse.Namespace) -> int:
+    args.work_dir.mkdir(parents=True, exist_ok=True)
     spec = condition_spec(args.condition)
     started = time.perf_counter()
     system, metadata = active._prepare_system(
