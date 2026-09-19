@@ -102,11 +102,16 @@ def main() -> int:
     fourth_order_others = {
         "yoshida4", "paper_new4", "m5_best", "two_term_center"
     }
+    all_three_term_evaluated = all(
+        formula_records[geometry][formula]["status"] == "complete"
+        for geometry in GEOMETRIES
+        for formula in FORMULAE
+    )
     if (
         "joint_refine_r0_s0046" in three_term
         and not fourth_order_others.intersection(three_term)
     ):
-        category = 4
+        category: int | str = 4
         conclusion = (
             "Only the joint full-electron/frozen-core candidate improves enough "
             "to pass both geometries with the three-term model."
@@ -123,11 +128,21 @@ def main() -> int:
             "Only a subset of fixed PFs passes both geometries; finite-time "
             "predictability depends strongly on the PF coefficients."
         )
-    else:
+    elif all_three_term_evaluated:
         category = 3
         conclusion = (
-            "No PF passes both geometries even with the three-term model; "
-            "the low-order polynomial model or coefficient search must be revisited."
+            "Every fixed PF was evaluated on both geometries and none passed with "
+            "the three-term model; the low-order polynomial model or coefficient "
+            "search must be revisited."
+        )
+    else:
+        category = "inconclusive_under_current_protocol"
+        conclusion = (
+            "No PF formally passes both geometries under the fixed protocol, but "
+            "several PF/geometry pairs did not reach model validation because the "
+            "shared short-time fit failed. The evidence supports strong dependence "
+            "on both PF coefficients and the short-time window, not a blanket failure "
+            "of all three-term models."
         )
 
     payload = {

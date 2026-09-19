@@ -4,7 +4,7 @@ Status: complete
 
 ## Main conclusion
 
-Category 3: No PF passes both geometries even with the three-term model; the low-order polynomial model or coefficient search must be revisited.
+Category inconclusive_under_current_protocol: No PF formally passes both geometries under the fixed protocol, but several PF/geometry pairs did not reach model validation because the shared short-time fit failed. The evidence supports strong dependence on both PF coefficients and the short-time window, not a blanket failure of all three-term models.
 
 ## Passes on both geometries
 
