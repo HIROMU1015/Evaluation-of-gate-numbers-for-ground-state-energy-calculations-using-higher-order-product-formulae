@@ -61,3 +61,74 @@ def test_three_term_fit_recovers_signed_coefficients():
         points.append({"time": time_value, "signed_direct_shift_hartree": shift})
     fitted = diagnosis._fit_model(points, 4, analytic_time, powers, "three_term")
     assert np.allclose(fitted["coefficient_values"], expected, atol=1e-16, rtol=1e-10)
+
+
+def test_model_validation_records_invalid_direct_cost_without_crashing(monkeypatch):
+    optimum = {
+        "time": 1.0,
+        "cost": 100.0,
+        "at_optimization_boundary": False,
+    }
+    monkeypatch.setattr(diagnosis, "_model_optimum", lambda *args: optimum)
+
+    def fake_direct_point(
+        system, sequence, time_value, rotations, backend, gpu_id, previous_vector
+    ):
+        direct_cost = None if np.isclose(time_value, 1.0) else 105.0
+        return {
+            "time": time_value,
+            "direct_cost": direct_cost,
+            "signed_direct_shift_hartree": 0.0,
+            "ground_overlap_probability": 1.0,
+            "adjacent_selected_vector_overlap_probability": 1.0,
+            "eigenpair_residual_2_norm": 1e-14,
+        }, np.ones(1)
+
+    monkeypatch.setattr(diagnosis, "_direct_point", fake_direct_point)
+    model = {
+        "name": "one_term",
+        "coefficient_powers": [4],
+        "coefficient_values": [0.0],
+    }
+    result = diagnosis._validate_model({}, [], 1, model, 1.0, "cpu", 5)
+
+    assert result["invalid_cost_at_model_optimum"]
+    assert result["metrics"]["eta_star"] is None
+    assert result["metrics"]["eta_min"] is None
+    assert not result["checks"]["eta_star"]
+    assert not result["passed"]
+    assert result["direct_grid_minimum"]["direct_cost"] == 105.0
+
+
+def test_model_validation_handles_no_finite_direct_cost(monkeypatch):
+    optimum = {
+        "time": 1.0,
+        "cost": 100.0,
+        "at_optimization_boundary": False,
+    }
+    monkeypatch.setattr(diagnosis, "_model_optimum", lambda *args: optimum)
+
+    def fake_direct_point(
+        system, sequence, time_value, rotations, backend, gpu_id, previous_vector
+    ):
+        return {
+            "time": time_value,
+            "direct_cost": None,
+            "signed_direct_shift_hartree": 0.0,
+            "ground_overlap_probability": 1.0,
+            "adjacent_selected_vector_overlap_probability": 1.0,
+            "eigenpair_residual_2_norm": 1e-14,
+        }, np.ones(1)
+
+    monkeypatch.setattr(diagnosis, "_direct_point", fake_direct_point)
+    model = {
+        "name": "one_term",
+        "coefficient_powers": [4],
+        "coefficient_values": [0.0],
+    }
+    result = diagnosis._validate_model({}, [], 1, model, 1.0, "cpu", 5)
+
+    assert result["direct_grid_minimum"] is None
+    assert result["metrics"]["eta_t"] is None
+    assert not result["checks"]["direct_local_minimum_bracketed"]
+    assert not result["passed"]

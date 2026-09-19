@@ -125,6 +125,10 @@ def _jsonable(value: Any) -> Any:
     return str(value)
 
 
+def _display(value: Any, format_spec: str = ".6g") -> str:
+    return "n/a" if value is None else format(float(value), format_spec)
+
+
 def _atomic_json(path: Path, payload: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -785,12 +789,25 @@ def _validate_model(
         previous = vector
     at_star = next(point for point in points if point["relative_to_t_star"] == 1.0)
     finite = [point for point in points if point["direct_cost"] is not None]
-    direct_minimum = min(finite, key=lambda point: float(point["direct_cost"]))
-    minimum_index = points.index(direct_minimum)
+    direct_minimum = (
+        min(finite, key=lambda point: float(point["direct_cost"]))
+        if finite else None
+    )
+    minimum_index = points.index(direct_minimum) if direct_minimum is not None else None
+    direct_cost_at_star = at_star["direct_cost"]
     metrics = {
-        "eta_star": float(abs(optimum["cost"] - at_star["direct_cost"]) / at_star["direct_cost"]),
-        "eta_min": float(at_star["direct_cost"] / direct_minimum["direct_cost"] - 1.0),
-        "eta_t": float(abs(optimum["time"] / direct_minimum["time"] - 1.0)),
+        "eta_star": (
+            float(abs(optimum["cost"] - direct_cost_at_star) / direct_cost_at_star)
+            if direct_cost_at_star is not None else None
+        ),
+        "eta_min": (
+            float(direct_cost_at_star / direct_minimum["direct_cost"] - 1.0)
+            if direct_cost_at_star is not None and direct_minimum is not None else None
+        ),
+        "eta_t": (
+            float(abs(optimum["time"] / direct_minimum["time"] - 1.0))
+            if direct_minimum is not None else None
+        ),
         "maximum_unseen_residual_over_epsilon": max(point["residual_over_epsilon"] for point in points),
         "minimum_ground_overlap_probability": min(point["ground_overlap_probability"] for point in points),
         "minimum_adjacent_vector_overlap_probability": min(
@@ -798,10 +815,13 @@ def _validate_model(
             for point in points[1:]
         ),
         "maximum_eigenpair_residual_2_norm": max(point["eigenpair_residual_2_norm"] for point in points),
-        "local_minimum_bracketed": 0 < minimum_index < len(points) - 1,
+        "local_minimum_bracketed": (
+            minimum_index is not None and 0 < minimum_index < len(points) - 1
+        ),
     }
     checks = {
-        key: metrics[key] <= threshold for key, threshold in PASS_THRESHOLDS.items()
+        key: metrics[key] is not None and metrics[key] <= threshold
+        for key, threshold in PASS_THRESHOLDS.items()
     }
     checks["model_optimum_interior"] = not optimum["at_optimization_boundary"]
     checks["direct_local_minimum_bracketed"] = metrics["local_minimum_bracketed"]
@@ -810,6 +830,11 @@ def _validate_model(
         "model_optimum": optimum,
         "direct_validation_points": points,
         "direct_grid_minimum": direct_minimum,
+        "invalid_cost_at_model_optimum": direct_cost_at_star is None,
+        "invalid_cost_reason": (
+            "direct error is not below epsilon_E, so the cost denominator is non-positive"
+            if direct_cost_at_star is None else None
+        ),
         "metrics": metrics,
         "checks": checks,
         "passed": all(checks.values()),
@@ -1055,9 +1080,10 @@ def command_aggregate(args: argparse.Namespace) -> int:
         else:
             report.append(
                 f"| {row['formula']} | {row['model']} | {row['passed']} | "
-                f"{row['eta_star']:.6g} | {row['eta_min']:.6g} | {row['eta_t']:.6g} | "
+                f"{_display(row['eta_star'])} | {_display(row['eta_min'])} | "
+                f"{_display(row['eta_t'])} | "
                 f"{row['maximum_unseen_residual_over_epsilon']:.6g} | "
-                f"{row['direct_cost_at_prediction']:.8g} |"
+                f"{_display(row['direct_cost_at_prediction'], '.8g')} |"
             )
     output.with_suffix(".md").write_text("\n".join(report) + "\n", encoding="utf-8")
     return 0 if complete_set and healthy else 3

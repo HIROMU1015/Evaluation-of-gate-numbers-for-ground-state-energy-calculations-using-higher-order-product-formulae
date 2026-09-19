@@ -30,6 +30,10 @@ def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def display(value: Any, format_spec: str = ".6g") -> str:
+    return "n/a" if value is None else format(float(value), format_spec)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -55,6 +59,7 @@ def main() -> int:
                 continue
             for model in MODELS:
                 result = record["models"][model]
+                direct_minimum = result["direct_grid_minimum"]
                 at_star = next(
                     point for point in result["direct_validation_points"]
                     if point["relative_to_t_star"] == 1.0
@@ -72,7 +77,9 @@ def main() -> int:
                     "predicted_time": result["model_optimum"]["time"],
                     "predicted_cost": result["model_optimum"]["cost"],
                     "direct_cost_at_prediction": at_star["direct_cost"],
-                    "direct_local_grid_minimum_cost": result["direct_grid_minimum"]["direct_cost"],
+                    "direct_local_grid_minimum_cost": (
+                        direct_minimum["direct_cost"] if direct_minimum is not None else None
+                    ),
                     **result["metrics"],
                 })
 
@@ -176,10 +183,12 @@ def main() -> int:
             )
             continue
         lines.append(
-            "| {geometry} | {formula} | {model} | {passed} | {eta_star:.6g} | "
-            "{eta_min:.6g} | {eta_t:.6g} | "
-            "{maximum_unseen_residual_over_epsilon:.6g} | "
-            "{direct_cost_at_prediction:.8g} | {s2_stage_count} | {rotations} |".format(**row)
+            f"| {row['geometry']} | {row['formula']} | {row['model']} | "
+            f"{row['passed']} | {display(row['eta_star'])} | "
+            f"{display(row['eta_min'])} | {display(row['eta_t'])} | "
+            f"{row['maximum_unseen_residual_over_epsilon']:.6g} | "
+            f"{display(row['direct_cost_at_prediction'], '.8g')} | "
+            f"{row['s2_stage_count']} | {row['rotations']} |"
         )
     lines.extend([
         "",
