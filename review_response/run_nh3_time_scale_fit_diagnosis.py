@@ -537,6 +537,7 @@ def command_condition(args: argparse.Namespace) -> int:
             fit = proxy_protocol(
                 system,
                 sequence,
+                int(formula["formal_order"]),
                 protocol,
                 selected_backend,
                 args.gpu_id,

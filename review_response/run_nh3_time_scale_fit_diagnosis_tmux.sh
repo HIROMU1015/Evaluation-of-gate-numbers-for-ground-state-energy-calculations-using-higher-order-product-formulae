@@ -14,9 +14,10 @@ export MKL_NUM_THREADS=8
 
 SCRIPT="$ROOT/review_response/run_nh3_time_scale_fit_diagnosis.py"
 STAMP="${1:-$(date +%Y%m%d_%H%M%S)}"
+RESUME_CACHE_DIR="${2:-}"
 SHORT="$(git rev-parse --short HEAD)"
 OUT_DIR="$ROOT/artifacts/server_time_scale_fit_diagnosis_${STAMP}_${SHORT}"
-CACHE_DIR="$OUT_DIR/runtime/cache"
+CACHE_DIR="${RESUME_CACHE_DIR:-$OUT_DIR/runtime/cache}"
 WORK_DIR="$OUT_DIR/runtime/work"
 RAW_DIR="$OUT_DIR/raw"
 FINE_DIR="$OUT_DIR/fine_raw"
@@ -24,7 +25,7 @@ VECTOR_DIR="$OUT_DIR/runtime/vectors"
 LOG_DIR="$OUT_DIR/logs"
 mkdir -p "$CACHE_DIR" "$WORK_DIR" "$RAW_DIR" "$FINE_DIR" "$VECTOR_DIR" "$LOG_DIR"
 
-"$PYTHON_BIN" - "$OUT_DIR/manifest.json" "$STAMP" "$SHORT" <<'PY'
+"$PYTHON_BIN" - "$OUT_DIR/manifest.json" "$STAMP" "$SHORT" "$RESUME_CACHE_DIR" <<'PY'
 import json
 import pathlib
 import subprocess
@@ -36,6 +37,7 @@ payload = {
     "started_at": datetime.now().astimezone().isoformat(),
     "stamp": sys.argv[2],
     "source_commit": sys.argv[3],
+    "resumed_from_cache_dir": sys.argv[4] or None,
     "branch": subprocess.run(
         ["git", "branch", "--show-current"], text=True,
         capture_output=True, check=False
@@ -58,6 +60,7 @@ PY
 conditions=(active_equilibrium active_stretch150 full_equilibrium full_stretch150)
 gpus=(0 1 2 3)
 
+if [[ -z "$RESUME_CACHE_DIR" ]]; then
 echo "[$(date --iso-8601=seconds)] preparing four NH3 Hamiltonians in parallel" | tee -a "$LOG_DIR/master.log"
 prepare_pids=()
 for condition in "${conditions[@]}"; do
@@ -72,6 +75,9 @@ done
 for pid in "${prepare_pids[@]}"; do
   wait "$pid"
 done
+else
+  echo "[$(date --iso-8601=seconds)] reusing prepared caches from $RESUME_CACHE_DIR" | tee -a "$LOG_DIR/master.log"
+fi
 
 echo "[$(date --iso-8601=seconds)] running four Hamiltonian conditions on GPUs 0-3" | tee -a "$LOG_DIR/master.log"
 condition_pids=()
