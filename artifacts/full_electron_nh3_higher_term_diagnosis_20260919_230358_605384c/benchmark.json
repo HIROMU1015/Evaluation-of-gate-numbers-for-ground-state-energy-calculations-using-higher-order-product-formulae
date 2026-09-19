@@ -1,0 +1,113 @@
+{
+  "agreement_passed": true,
+  "agreement_tolerance": 1e-10,
+  "chosen_backend": "gpu",
+  "completed_at": "2026-09-19T23:06:55.806872+09:00",
+  "cpu": {
+    "direct": {
+      "adjacent_selected_vector_overlap_probability": null,
+      "direct_cost": null,
+      "direct_error_hartree": 0.013876316649763677,
+      "eigenpair_residual_2_norm": 1.7066427723928735e-14,
+      "ground_overlap_probability": 0.9751343142267342,
+      "schur_seconds": 25.86223091580905,
+      "selected_eigenvalue": {
+        "imag": -0.7406014306633932,
+        "real": -0.6719445817173201
+      },
+      "selected_eigenvalue_magnitude": 0.9999999999999646,
+      "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+      "signed_direct_shift_hartree": -0.013876316649763677,
+      "time": 0.4
+    },
+    "profile": {
+      "backend": "cpu_component_sector_dense_final",
+      "build_seconds": 92.64242845890112,
+      "component_gate_materialization_seconds": 0.6356847558636218,
+      "multiplication_seconds": 91.99303916213103,
+      "unique_s2_stage_count": 2
+    }
+  },
+  "environment": {
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-full-electron-nh3/venv/bin/python"
+  },
+  "exact_sector_state_action": {
+    "note": "Exact PF state action, but not a direct eigenphase solver.",
+    "relative_2_norm_difference_vs_cpu_dense_final": 3.8187436050163866e-15,
+    "seconds": 0.3224727250635624
+  },
+  "formula": {
+    "display_name": "Yoshida 4th",
+    "formal_order": 4,
+    "provenance": "src/trotterlib/product_formula.py:yoshida_4th_list",
+    "weights": [
+      -1.7024143839193153,
+      1.3512071919596578
+    ]
+  },
+  "git": {
+    "branch": "gpu-full-electron-nh3-higher-term-diagnosis",
+    "commit": "605384c7ff7a87c9dc3004a768cd197c380866fd",
+    "dirty": true,
+    "status": [
+      "?? artifacts/full_electron_nh3_higher_term_diagnosis_20260919_012802_a78ff87/",
+      "?? artifacts/full_electron_nh3_higher_term_diagnosis_20260919_230358_605384c/"
+    ]
+  },
+  "gpu": {
+    "direct": {
+      "adjacent_selected_vector_overlap_probability": null,
+      "direct_cost": null,
+      "direct_error_hartree": 0.013876316649768171,
+      "eigenpair_residual_2_norm": 1.9123484976334995e-14,
+      "ground_overlap_probability": 0.9751343142267489,
+      "schur_seconds": 25.94493348780088,
+      "selected_eigenvalue": {
+        "imag": -0.7406014306633891,
+        "real": -0.6719445817173187
+      },
+      "selected_eigenvalue_magnitude": 0.9999999999999606,
+      "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+      "signed_direct_shift_hartree": -0.013876316649768171,
+      "time": 0.4
+    },
+    "profile": {
+      "backend": "gpu_component_sector_dense_final_cpu_schur",
+      "build_seconds": 2.0544894009362906,
+      "cpu_component_gate_materialization_seconds": 0.4731256349477917,
+      "cupy_pool_peak_reserved_mib": 750.38916015625,
+      "gpu_dense_multiply_seconds": 0.08832552703097463,
+      "gpu_memory": {
+        "maximum_used_mib": 1195,
+        "minimum_used_mib": 21,
+        "peak_increment_mib": 1174,
+        "physical_gpu_id": 5,
+        "samples": 7
+      },
+      "gpu_transfer_sparse_multiply_seconds": 0.8752378986682743,
+      "output_transfer_seconds": 0.03843977092765272,
+      "physical_gpu_id": 5,
+      "unique_s2_stage_count": 2
+    }
+  },
+  "gpu_vs_cpu_state_action_relative_2_norm_difference": 3.327235269106936e-15,
+  "gpu_vs_cpu_unitary_relative_frobenius_difference": 4.8545463928669515e-15,
+  "legacy_full_group_dense_note": "Not separately retained: the exact component-sector representation builds the same dense final PF unitary without retaining one dense eigenvector matrix per Hamiltonian group.",
+  "physical_gpu_id": 5,
+  "rotations": 36892,
+  "started_at": "2026-09-19T23:04:28.434785+09:00",
+  "status": "complete",
+  "time": 0.4
+}
