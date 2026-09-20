@@ -49,6 +49,7 @@ from trotterlib.pf_decomposition import (
 )
 from trotterlib.product_formula import (
     actual_circuit_optimized_4th_m5_list,
+    morales_2025_y8m10b_list,
     yoshida_4th_list,
 )
 
@@ -100,6 +101,12 @@ YOSHIDA6_M3 = (
     -1.177679984178871,
     0.235573213359357,
     0.78451361047756,
+)
+CURRENT_M3 = (
+    -0.4737318199452465,
+    0.3316118001935053,
+    0.2092246690782796,
+    0.1960294407008384,
 )
 
 
@@ -214,6 +221,15 @@ def _formulae() -> dict[str, dict[str, Any]]:
                 "actual_circuit_optimized_4th_m5_list"
             ),
         },
+        "current_m3": {
+            "display_name": "current_m3",
+            "formal_order": 4,
+            "weights": CURRENT_M3,
+            "provenance": (
+                "fixed comparison coefficient vector supplied for the "
+                "unified NH3 comparison"
+            ),
+        },
         "two_term_center": {
             "display_name": "two_term_center",
             "formal_order": 4,
@@ -237,7 +253,22 @@ def _formulae() -> dict[str, dict[str, Any]]:
                 "Yoshida 1990 Table 1 Solution A; committed comparison constant"
             ),
         },
+        "morales_y8m10b": {
+            "display_name": "Morales 8th Y8m10b",
+            "formal_order": 8,
+            "weights": tuple(map(float, morales_2025_y8m10b_list())),
+            "provenance": (
+                "src/trotterlib/product_formula.py:"
+                "morales_2025_y8m10b_list"
+            ),
+        },
     }
+
+
+def _formula_s2_sequence(formula_name: str) -> list[float]:
+    """Return the exact S2 sequence used by this runner for one named PF."""
+    formula = _formulae()[formula_name]
+    return list(map(float, symmetric_s2_sequence(formula["weights"])))
 
 
 def _verify_joint_candidate(root: Path) -> dict[str, Any]:
@@ -870,7 +901,7 @@ def _load_system(path: Path) -> dict[str, Any]:
 def command_benchmark(args: argparse.Namespace) -> int:
     system = _load_system(Path(args.system_cache))
     formula = _formulae()[args.formula]
-    sequence = symmetric_s2_sequence(formula["weights"])
+    sequence = _formula_s2_sequence(args.formula)
     rotations = _rotation_count(system, sequence)
     payload: dict[str, Any] = {
         "status": "running", "started_at": _now(), "git": _git_state(),
@@ -935,7 +966,7 @@ def command_formula(args: argparse.Namespace) -> int:
     joint = _verify_joint_candidate(root)
     system = _load_system(Path(args.system_cache))
     formula = _formulae()[args.formula]
-    sequence = symmetric_s2_sequence(formula["weights"])
+    sequence = _formula_s2_sequence(args.formula)
     rotations = _rotation_count(system, sequence)
     output = Path(args.output)
     payload: dict[str, Any] = {

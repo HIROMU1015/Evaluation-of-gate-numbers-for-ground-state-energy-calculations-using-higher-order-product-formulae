@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import math
 
+import run_full_electron_nh3_higher_term_diagnosis as nh3_runner
+
 from trotterlib.config import DECOMPO_NUM, PF_RZ_LAYER, normalize_pf_label, pf_order
 from trotterlib.pf_decomposition import (
     inverse_s2_sequence,
     iter_pf_steps,
     iter_s2_sequence_steps,
+    symmetric_s2_sequence,
 )
 from trotterlib.product_formula import (
     _get_kernel_s2_sequence,
@@ -32,6 +35,17 @@ def test_y8m10b_uses_published_m10_coefficients() -> None:
     assert weights != morales_8th_list()
     assert weights == _get_w_list(LABEL)
     assert math.isclose(weights[0] + 2 * sum(weights[1:]), 1.0, abs_tol=1e-15)
+
+
+def test_nh3_runner_uses_exact_requested_s2_sequences() -> None:
+    current = nh3_runner._formula_s2_sequence("current_m3")
+    y8m10b = nh3_runner._formula_s2_sequence("morales_y8m10b")
+
+    assert current == symmetric_s2_sequence(nh3_runner.CURRENT_M3)
+    assert len(current) == 7
+    assert y8m10b == _get_s2_sequence(LABEL)
+    assert y8m10b == symmetric_s2_sequence(morales_2025_y8m10b_list())
+    assert len(y8m10b) == 21
 
 
 def test_y8m10b_satisfies_necessary_eighth_order_moments() -> None:
