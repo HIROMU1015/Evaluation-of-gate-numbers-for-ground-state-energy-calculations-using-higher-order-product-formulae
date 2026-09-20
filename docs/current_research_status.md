@@ -1,10 +1,10 @@
 # 現在の研究方針と検証状況
 
-最終更新：2026-09-19
+最終更新：2026-09-21
 
-対象ブランチ：`gpu-m3-two-term-geometry-active-space-holdout`
+安定版の基点：`origin/main`の`3254f79`
 
-この文書作成前の確認済みHEAD：`5584167`
+最新の確認済み結果：ブランチ`gpu-existing-pf-unified-nh3`、コミット`46a7ed1`
 
 この文書は、GitHubから本リポジトリを読む人やAIエージェントが、古い実行指示や途中結果を現在の結論と誤認しないための入口である。数値を引用するときは、ここからリンクしたGit管理済み報告書も確認する。
 
@@ -42,7 +42,7 @@ $$
 
 `e_direct` は、保存則セクター内のPFユニタリを構築・対角化し、厳密基底状態につながる固有位相から求めた誤差を指す。重なり位相だけから得た値は代理診断であり、`e_direct` と呼ばない。
 
-## 固定中の暫定候補
+## 候補の現在位置
 
 現在の予測性優先4次 $m=3$ 候補 `two_term_center` は
 
@@ -56,20 +56,26 @@ $$
 
 である。LiH、BeH2、H2Oと3種類の基底からなる9条件で選ばれ、その後のH-chain、NH3、構造・active-space変更では係数を固定して検証した。
 
-これは最終採用係数ではない。現在の位置付けは、一定のコスト増を許容すると有限時間のコスト予測性を改善できるかを調べるための概念実証候補である。
+これは最終採用係数ではない。一定のコスト増を許容すると有限時間のコスト予測性を改善できるかを調べるための概念実証候補である。
 
-## 固定している主判定
+2026-09-20の既存PF統一比較では、Yoshida 4次＋二項モデルがactive-space/full-electron NH3の平衡・1.5倍伸長4条件を4/4合格した。Yoshida 6次m=3＋三項モデルも4/4合格した。一方、`two_term_center`、`current_m3`、`m5_best`は固定した同一モデルで全電子2構造を通さなかった。
 
-分子系の短時間フィットでは、特記がない限り次を用いる。
+したがって現在の主質問は「`two_term_center`をさらに微調整すること」ではなく、**既存のYoshida 4次＋二項モデルが未使用分子にも移るか、それとも予測性を目的とした新しい係数設計が必要か**である。
 
-- 絶対時刻格子：`geomspace(0.06, 0.80, 15)`。
+## 現在の開発用規則と主判定
+
+以前の共通規則は`geomspace(0.06, 0.80, 15)`だった。全電子NH3の監査により、合格数の改善は雑音床ではなく時刻格子の変更に由来した。直近のNH3統一比較では、開発用規則を次へ固定した。
+
+- 絶対時刻格子：`geomspace(0.02, 1.8, 34)`。
 - rolling window：5点。
 - 数値雑音床：$5\times10^{-13}$ Hartree。
 - 形式次数からの許容差：0.2。
 - 最小 $R^2$：0.999。
 - 条件を満たす最初の窓を採用する。合格窓がなければ規則を変更せず不合格とする。
 
-二項モデルの従来プロトコルは $0.1,0.2,0.3t_{\mathrm{ana}}$ を学習点とし、モデルが予測した $t_*$ 周辺の未使用時刻で検証する。主な合格条件は次である。
+直近の統一比較では、一項・二項・三項モデルを公平に比べるため、$0.1,0.2,0.3,0.4,0.5t_{\mathrm{ana}}$の5個の符号付き直接固有値点を用いた。これはNH3で選んだ**開発用規則**であり、未使用分子で一般性を確認済みの正式規則ではない。従来の3点二項フィットは、情報量を減らす診断として併記する。
+
+主な合格条件は次である。
 
 - $t_*$ におけるモデルコスト相対誤差：1%以下。
 - 局所格子最小に対する直接コスト損失：1%以下。
@@ -83,40 +89,48 @@ $$
 | H6、H7、凍結内殻active-space NH3/STO-3G・6-31G・cc-pVDZ | `two_term_center`＋二項モデルは5/5合格。一項モデルは4/5。比較対象 `current_m3` は二項で5/5、一項で1/5。新候補の直接コストは約1.148～1.156倍。 | 二項化が複数の未使用条件で予測範囲を広げたが、新候補は最小コストではない。 | [`artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/report.md`](../artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/report.md) |
 | BeH2・H2Oの伸長、基底、入れ子active-space変更12条件 | `two_term_center`＋二項モデルは12/12合格。比較対象は11/12。 | 係数を固定したまま、分子構造・基底・active-spaceの変更へある程度移せた。 | [`artifacts/two_term_pf_geometry_local_20260911/report.md`](../artifacts/two_term_pf_geometry_local_20260911/report.md) |
 | 全電子・凍結内殻の共同 $m=3$ 係数探索 | 最良候補 `joint_refine_r0_s0046` でも訓練7条件中6条件合格で、全条件合格候補は得られていない。 | 現在の $m=3$ 探索空間と二項モデルだけで、full-electronを含む全対象を解決できたとは言えない。 | [`artifacts/m3_joint_full_frozen_refinement_20260913/report.md`](../artifacts/m3_joint_full_frozen_refinement_20260913/report.md) |
+| active-space/full-electron NH3、平衡・1.5倍伸長の4条件 | Yoshida 4次＋二項/三項、Yoshida 6次m=3＋三項は固定モデルで4/4合格。Yoshida 4次＋二項の最悪コスト誤差は0.0845%。ただし直接コストは`m5_best`の平均3.155倍、最大3.672倍。 | 既存PFでも予測性を得られる。NH3は時刻格子とモデル選択に用いた開発集合であり、独立ホールドアウトではない。 | ブランチ`gpu-existing-pf-unified-nh3`、コミット`46a7ed1`の`aggregate/report.md` |
 
 ## 現時点の結論
 
-1. `two_term_center` は、現在調べた**凍結内殻active-space**の範囲では有望な暫定候補である。
-2. $t^6$ 項はすべての条件で必須ではないが、複数Hamiltonianに対する合格範囲を一項モデルより安定させている。
-3. 既存PFでも二項化によって改善する場合があるため、「二項モデルだけの効果」と「係数設計の効果」は必ず分けて比較する。
-4. `two_term_center` は比較対象よりおおむね15%前後高コストであり、「最小コストPF」ではない。
-5. full-electron系への一般性は未確立である。現在の結果から、任意の分子・基底・全電子Hamiltonianに使えるとは主張しない。
+1. 二項化によるモデル改善が、既存の$m=3$係数変更より大きな効果を示す条件が多い。
+2. `two_term_center`は凍結内殻active-spaceの蓄積17条件で二項モデル17/17だが、`current_m3`も16/17であり、新係数の増分は限定的である。
+3. 保存済み17条件の凍結QPE予算では`current_m3`＋二項モデルが17/17で安全側かつ`two_term_center`より低コストだった。ただしこれは相関した開発条件上のoracle-assisted校正である。
+4. NH3統一比較ではYoshida 4次＋二項モデルがactive-spaceと全電子の4条件を通ったため、新しい係数探索の前に未使用分子へ固定して移す必要がある。
+5. 予測性にはコスト増がある。Yoshida 4次のNH3直接コストは低コスト`m5_best`基準で平均約3.16倍だった。
+6. 現在の学習点は厳密基底状態と直接PF固有値を使う。したがって、現状は低次モデルの表現力とPF選択を調べるoracle-assisted上限であり、安価な実用校正法は未確立である。
 
-## 現在進行中または未確定の作業
+## 次に固定して行う検証
 
-- 全電子NH3/STO-3Gの平衡・1.5倍伸長構造について、既存4次PF、新しい$m=3$候補、Yoshida 6次を、一項・二項・三項モデルで比較する診断をGPU側へ依頼している。指示書は [`review_response/gpu_full_electron_nh3_higher_term_diagnosis_prompt.md`](../review_response/gpu_full_electron_nh3_higher_term_diagnosis_prompt.md) にある。結果コミットが追加されるまでは「計画」であり、完了結果として引用しない。
-- ローカルでは、凍結内殻NH3における既存PF比較の例外処理を修正して再計算中である。この実行中・未コミット結果はGitHub上の確定結果に含めない。
-- full-electronでの破綻が $t^8$ 以上の項不足なのか、PF係数に依存するのか、または現在の係数探索空間自体が不足するのかは未確定である。
+次はHF、N2、COを数値的に未使用の分子集合として固定し、次を比較する。
+
+- 主候補：Yoshida 4次＋二項モデル。
+- 運用基準：`current_m3`＋二項モデル。
+- 係数設計候補：`two_term_center`＋二項モデル。
+- 低コスト対照：`m5_best`＋二項モデル。
+- 高次対照：Yoshida 6次m=3＋三項モデル。
+
+N2/COの凍結内殻CAS(10e,8o)を主ホールドアウト、全電子HF/STO-3Gを補助ホールドアウトとする。詳細は[`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)と[`review_response/gpu_unused_molecule_frozen_holdout_prompt.md`](../review_response/gpu_unused_molecule_frozen_holdout_prompt.md)に固定する。
+
+この結果を見る前にPF係数、モデル次数、5点学習規則、検証格子、4基準、1%の凍結予算余裕を変更しない。
 
 ## 次の判断
 
-全電子NH3診断では、次を切り分ける。
-
-1. 多くのPFが三項化で合格するなら、高次項不足を主因とみなす。
-2. 特定PFだけが二項または三項で合格するなら、係数依存の予測可能性を支持する。
-3. 全PFが三項でも不合格なら、低次多項式モデル、固有枝挙動、または係数探索空間を見直す。
-4. 全電子を含めた共同候補だけが改善するなら、full-electron条件を探索集合へ含める効果を支持する。
-
-この診断の前に、`two_term_center` を最終PFと確定したり、full-electron用とactive-space用のPFを分離したりはしない。
+1. Yoshida 4次＋二項モデルが未使用N2/COを通るなら、直ちに新係数を探索せず、直接固有値5点をより安価な情報へ置き換える研究を優先する。
+2. Yoshida 4次が落ち、`two_term_center`が通るなら、予測性を目的とする係数設計の独自価値を支持する。
+3. 両方が落ちるなら、Hamiltonian構造と高次項を診断し、結果に合わせて無制限にモデル次数を増やさない。
+4. 両方が通るがYoshida 4次のコスト増が大きいなら、予測性制約下のPareto係数探索を検討する。
+5. いずれの場合も、4つの対称な予測指標だけでなく、凍結QPE予算の精度達成、誤差方向、校正点数と古典時間を併記する。
 
 ## ファイルの読み順
 
 1. 本書：現在の結論と状態。
-2. [`review_response/m3_short_time_fit_protocol.md`](../review_response/m3_short_time_fit_protocol.md)：短時間フィット規則。
-3. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：有限時間で一項モデルが崩れる場合の対応案。
-4. 上表のGit管理済み報告書：結論の数値根拠。
-5. [`review_response/pf_cost_predictability_handoff.md`](../review_response/pf_cost_predictability_handoff.md)：2026-09-13頃までの詳細な経緯。現在状態と競合する場合は本書を優先する。
-6. [`docs/repository_guide.md`](repository_guide.md)：実装・検証・資料の所在。
+2. [`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)：探索・開発・完全未使用条件の区別。
+3. [`review_response/m3_short_time_fit_protocol.md`](../review_response/m3_short_time_fit_protocol.md)：短時間フィット規則の履歴。
+4. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：有限時間で一項モデルが崩れる場合の対応案。
+5. 上表のGit管理済み報告書と結果commit：結論の数値根拠。
+6. [`review_response/pf_cost_predictability_handoff.md`](../review_response/pf_cost_predictability_handoff.md)：2026-09-13頃までの詳細な経緯。現在状態と競合する場合は本書を優先する。
+7. [`docs/repository_guide.md`](repository_guide.md)：実装・検証・資料の所在。
 
 ## 状態の読み方
 

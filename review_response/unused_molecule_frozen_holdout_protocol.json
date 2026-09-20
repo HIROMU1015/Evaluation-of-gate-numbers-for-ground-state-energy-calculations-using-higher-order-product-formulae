@@ -1,0 +1,106 @@
+{
+  "protocol_id": "unused_molecule_frozen_holdout_v1",
+  "frozen_on": "2026-09-21",
+  "base_result_branch": "gpu-existing-pf-unified-nh3",
+  "base_result_commit": "46a7ed165650cb80506be14d997380e0bf333680",
+  "target_error_hartree": 0.00015936001019904,
+  "conditions": [
+    {
+      "name": "N2_active_eq_sto3g",
+      "geometry_angstrom": [["N", [0.0, 0.0, -0.55]], ["N", [0.0, 0.0, 0.55]]],
+      "basis": "sto-3g",
+      "charge": 0,
+      "multiplicity": 1,
+      "frozen_core_spatial_orbitals": 2,
+      "active_electrons": 10,
+      "active_spatial_orbitals": 8
+    },
+    {
+      "name": "N2_active_stretch150_sto3g",
+      "geometry_angstrom": [["N", [0.0, 0.0, -0.825]], ["N", [0.0, 0.0, 0.825]]],
+      "basis": "sto-3g",
+      "charge": 0,
+      "multiplicity": 1,
+      "frozen_core_spatial_orbitals": 2,
+      "active_electrons": 10,
+      "active_spatial_orbitals": 8
+    },
+    {
+      "name": "CO_active_eq_sto3g",
+      "geometry_angstrom": [["C", [0.0, 0.0, -0.564]], ["O", [0.0, 0.0, 0.564]]],
+      "basis": "sto-3g",
+      "charge": 0,
+      "multiplicity": 1,
+      "frozen_core_spatial_orbitals": 2,
+      "active_electrons": 10,
+      "active_spatial_orbitals": 8
+    },
+    {
+      "name": "CO_active_stretch150_sto3g",
+      "geometry_angstrom": [["C", [0.0, 0.0, -0.846]], ["O", [0.0, 0.0, 0.846]]],
+      "basis": "sto-3g",
+      "charge": 0,
+      "multiplicity": 1,
+      "frozen_core_spatial_orbitals": 2,
+      "active_electrons": 10,
+      "active_spatial_orbitals": 8
+    },
+    {
+      "name": "HF_full_eq_sto3g",
+      "geometry_angstrom": [["H", [0.0, 0.0, -0.4585]], ["F", [0.0, 0.0, 0.4585]]],
+      "basis": "sto-3g",
+      "charge": 0,
+      "multiplicity": 1,
+      "frozen_core_spatial_orbitals": 0,
+      "active_electrons": 10,
+      "active_spatial_orbitals": 6
+    },
+    {
+      "name": "HF_full_stretch150_sto3g",
+      "geometry_angstrom": [["H", [0.0, 0.0, -0.68775]], ["F", [0.0, 0.0, 0.68775]]],
+      "basis": "sto-3g",
+      "charge": 0,
+      "multiplicity": 1,
+      "frozen_core_spatial_orbitals": 0,
+      "active_electrons": 10,
+      "active_spatial_orbitals": 6
+    }
+  ],
+  "primary_pf_model_pairs": [
+    {"pf": "yoshida4", "powers": [4, 6], "role": "primary_candidate"},
+    {"pf": "current_m3", "powers": [4, 6], "role": "operational_baseline"},
+    {"pf": "two_term_center", "powers": [4, 6], "role": "coefficient_design_candidate"},
+    {"pf": "m5_best", "powers": [4, 6], "role": "low_cost_control"},
+    {"pf": "yoshida6_m3", "powers": [6, 8, 10], "role": "higher_order_control"}
+  ],
+  "diagnostic_models": [
+    {"pf": "yoshida4", "powers": [4, 6, 8], "role": "fixed_three_term_cross_check"},
+    {"pf": "yoshida4", "powers": [4, 6], "training_relative_times": [0.1, 0.2, 0.3], "role": "three_point_information_ablation"},
+    {"pf": "current_m3", "powers": [4, 6], "training_relative_times": [0.1, 0.2, 0.3], "role": "three_point_information_ablation"},
+    {"pf": "two_term_center", "powers": [4, 6], "training_relative_times": [0.1, 0.2, 0.3], "role": "three_point_information_ablation"},
+    {"pf": "m5_best", "powers": [4, 6], "training_relative_times": [0.1, 0.2, 0.3], "role": "three_point_information_ablation"}
+  ],
+  "short_time_fit": {
+    "grid": {"kind": "geomspace", "minimum": 0.02, "maximum": 1.8, "count": 34},
+    "rolling_window_points": 5,
+    "noise_floor_hartree": 5e-13,
+    "formal_order_tolerance": 0.2,
+    "minimum_r_squared": 0.999,
+    "window_selection": "earliest_qualifying"
+  },
+  "primary_training_relative_to_t_ana": [0.1, 0.2, 0.3, 0.4, 0.5],
+  "stage1_validation_relative_to_t_star": [0.85, 0.9, 0.95, 1.0, 1.05, 1.1, 1.15],
+  "stage2_validation": {"minimum_relative_to_t_star": 0.9, "maximum_relative_to_t_star": 1.1, "step": 0.01},
+  "pass_thresholds": {
+    "eta_star": 0.01,
+    "eta_min": 0.01,
+    "eta_t": 0.05,
+    "maximum_unseen_residual_over_epsilon": 0.05
+  },
+  "frozen_budget_cost_multipliers": [1.0, 1.01],
+  "scope": {
+    "primary_conditions": ["N2_active_eq_sto3g", "N2_active_stretch150_sto3g", "CO_active_eq_sto3g", "CO_active_stretch150_sto3g"],
+    "auxiliary_conditions": ["HF_full_eq_sto3g", "HF_full_stretch150_sto3g"],
+    "forbidden_adaptation": ["pf_coefficients", "model_powers", "training_times", "short_time_grid", "pass_thresholds", "budget_multipliers", "additional_molecules"]
+  }
+}
