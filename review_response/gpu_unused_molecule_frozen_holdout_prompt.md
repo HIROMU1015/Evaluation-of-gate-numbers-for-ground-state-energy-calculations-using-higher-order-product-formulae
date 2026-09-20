@@ -15,7 +15,7 @@ GPUの使用自体は目的ではありません。サーバーのCPU、GPU、�
 - 研究方針：`docs/current_research_status.md`
 - データ使用履歴：`docs/pf_data_use_ledger.md`
 - 機械可読な固定条件：`review_response/unused_molecule_frozen_holdout_protocol.json`
-- 統一比較の指示：`review_response/gpu_existing_pf_unified_nh3_model_comparison_prompt.md`
+- 統一比較の実装：コミット`46a7ed1`の`review_response/run_full_electron_nh3_higher_term_diagnosis.py`および`review_response/run_existing_pf_unified_nh3_stage2.py`
 
 新しい作業ブランチは`46a7ed1`から作成してください。研究方針、データ使用履歴、指示書、固定JSONは計画ブランチから読み、必要な実装ファイルだけを作業ブランチへ取り込んでください。例えば`git show origin/gpu-unused-molecule-frozen-holdout-plan:<path>`で内容を確認できます。計画ブランチ全体を結果ブランチへmergeする必要はありません。既存成果物は上書きせず、mainへは統合しません。
 
