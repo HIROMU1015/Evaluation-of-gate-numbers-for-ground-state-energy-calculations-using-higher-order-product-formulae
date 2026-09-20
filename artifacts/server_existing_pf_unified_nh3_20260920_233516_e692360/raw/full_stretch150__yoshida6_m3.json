@@ -1,0 +1,2145 @@
+{
+  "alpha": 3.1270114842614776,
+  "analytic_time": 0.13921690422675845,
+  "backend": "gpu",
+  "completed_at": "2026-09-21T00:12:48.995990+09:00",
+  "environment": {
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-full-electron-nh3/venv/bin/python"
+  },
+  "formula": {
+    "display_name": "Yoshida 6th m=3",
+    "formal_order": 6,
+    "provenance": "Yoshida 1990 Table 1 Solution A; committed comparison constant",
+    "rotations": 82792,
+    "s2_sequence": [
+      0.78451361047756,
+      0.235573213359357,
+      -1.177679984178871,
+      1.315186320683908,
+      -1.177679984178871,
+      0.235573213359357,
+      0.78451361047756
+    ],
+    "s2_stage_count": 7,
+    "weights": [
+      1.315186320683908,
+      -1.177679984178871,
+      0.235573213359357,
+      0.78451361047756
+    ]
+  },
+  "formula_name": "yoshida6_m3",
+  "geometry": "stretch150",
+  "git": {
+    "branch": "gpu-existing-pf-unified-nh3",
+    "commit": "e692360191e5dc2f499409eb3eb9afa60a36ca35",
+    "dirty": true,
+    "status": [
+      "?? artifacts/full_electron_nh3_followup_diagnostics_20260920_014548_b26159c/",
+      "?? artifacts/full_electron_nh3_higher_term_diagnosis_20260919_012802_a78ff87/",
+      "?? artifacts/full_electron_nh3_higher_term_diagnosis_20260919_230358_605384c/cache/",
+      "?? artifacts/full_electron_nh3_higher_term_diagnosis_20260919_230358_605384c/logs/",
+      "?? artifacts/server_existing_pf_unified_nh3_20260920_232120_00249e5/",
+      "?? artifacts/server_existing_pf_unified_nh3_20260920_233516_e692360/",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_021216_6b98069/",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_021411_80219a6/",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/aggregate.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/condition_active_equilibrium_gpu0.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/condition_active_stretch150_gpu1.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/condition_full_equilibrium_gpu2.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/condition_full_stretch150_gpu3.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/fine_r091_gpu0.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/fine_r103_gpu1.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/logs/fine_r104_gpu2.log",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_022258_e4509cb/runtime/",
+      "?? artifacts/server_time_scale_fit_diagnosis_20260920_retry_80219a6/"
+    ]
+  },
+  "joint_candidate_verification": {
+    "name": "joint_refine_r0_s0046",
+    "source": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-full-electron-nh3/artifacts/m3_joint_full_frozen_refinement_20260913/refinement_results.json.gz",
+    "weights": [
+      -1.0873996519284317,
+      0.8623983814720917,
+      0.08656065765564214,
+      0.09474078683648192
+    ]
+  },
+  "models": {
+    "direct_refit_one_term": {
+      "checks": {
+        "direct_local_minimum_bracketed": true,
+        "eta_min": false,
+        "eta_star": false,
+        "eta_t": false,
+        "maximum_unseen_residual_over_epsilon": false,
+        "model_optimum_interior": true
+      },
+      "diagnostics": {
+        "direct_local_minimum_bracketed": true,
+        "model_optimum_interior": true
+      },
+      "direct_grid_minimum": {
+        "adjacent_selected_vector_overlap_probability": 0.9999999997926157,
+        "direct_cost": 4753337825.887904,
+        "direct_error_hartree": 2.504379056599082e-05,
+        "eigenpair_residual_2_norm": 3.863289155727944e-14,
+        "ground_overlap_probability": 0.9999999954673393,
+        "model_cost": 5363714438.200885,
+        "model_signed_shift_hartree": 4.032862350460007e-05,
+        "peak_cpu_rss_kib": 2630264,
+        "relative_to_t_ana": 1.1177650000000003,
+        "relative_to_t_star": 1.1,
+        "residual_over_epsilon": 0.09591385517306732,
+        "selected_eigenvalue": {
+          "imag": -0.024696137530099138,
+          "real": -0.9996950038841983
+        },
+        "selected_eigenvalue_magnitude": 0.9999999999999664,
+        "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+        "signed_direct_shift_hartree": 2.504379056599082e-05,
+        "signed_residual_hartree": -1.5284832938609254e-05,
+        "time": 0.1556117829530227,
+        "timing_seconds": {
+          "backend": "gpu_component_sector_dense_final_cpu_schur",
+          "build_seconds": 2.685886192135513,
+          "cpu_component_gate_materialization_seconds": 0.9413337465375662,
+          "cupy_pool_peak_reserved_mib": 1050.51416015625,
+          "gpu_dense_multiply_seconds": 0.09025797504000366,
+          "gpu_memory": {
+            "maximum_used_mib": 1499,
+            "minimum_used_mib": 1043,
+            "peak_increment_mib": 456,
+            "physical_gpu_id": 6,
+            "samples": 12
+          },
+          "gpu_transfer_sparse_multiply_seconds": 1.6086394474841654,
+          "output_transfer_seconds": 0.03395262616686523,
+          "physical_gpu_id": 6,
+          "schur": 24.407712067943066,
+          "total": 27.139007774880156,
+          "unique_s2_stage_count": 4
+        }
+      },
+      "direct_validation_points": [
+        {
+          "adjacent_selected_vector_overlap_probability": null,
+          "direct_cost": 5414871888.974313,
+          "direct_error_hartree": 6.7747036248496055e-06,
+          "eigenpair_residual_2_norm": 3.915256600785563e-14,
+          "ground_overlap_probability": 0.9999999996807687,
+          "model_cost": 5479908075.051469,
+          "model_signed_shift_hartree": 8.585603781401204e-06,
+          "peak_cpu_rss_kib": 2629132,
+          "relative_to_t_ana": 0.8637275000000001,
+          "relative_to_t_star": 0.85,
+          "residual_over_epsilon": 0.01136357957237698,
+          "selected_eigenvalue": {
+            "imag": -0.669162685146014,
+            "real": -0.743115940353958
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999853,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 6.7747036248496055e-06,
+          "signed_residual_hartree": -1.810900156551598e-06,
+          "time": 0.12024546864551752,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6972149659413844,
+            "cpu_component_gate_materialization_seconds": 0.9457046880852431,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09006964042782784,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 11
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6132999632973224,
+            "output_transfer_seconds": 0.03670996194705367,
+            "physical_gpu_id": 6,
+            "schur": 23.39743831800297,
+            "total": 26.138535102130845,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999999604712,
+          "direct_cost": 5194769067.495058,
+          "direct_error_hartree": 9.145781866996764e-06,
+          "eigenpair_residual_2_norm": 3.724924972677867e-14,
+          "ground_overlap_probability": 0.9999999994169173,
+          "model_cost": 5298909361.639632,
+          "model_signed_shift_hartree": 1.2097965581714746e-05,
+          "peak_cpu_rss_kib": 2630180,
+          "relative_to_t_ana": 0.9145350000000001,
+          "relative_to_t_star": 0.9,
+          "residual_over_epsilon": 0.018525248028226884,
+          "selected_eigenvalue": {
+            "imag": -0.5575276340498181,
+            "real": -0.8301583808351045
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999751,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 9.145781866996764e-06,
+          "signed_residual_hartree": -2.952183714717982e-06,
+          "time": 0.12731873150701856,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.7493432769551873,
+            "cpu_component_gate_materialization_seconds": 0.9749896957073361,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09047762583941221,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.611051449086517,
+            "output_transfer_seconds": 0.06057783286087215,
+            "physical_gpu_id": 6,
+            "schur": 22.90632568486035,
+            "total": 25.73655201611109,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999999385123,
+          "direct_cost": 5019724420.308791,
+          "direct_error_hartree": 1.2089311996879762e-05,
+          "eigenpair_residual_2_norm": 3.596227253028291e-14,
+          "ground_overlap_probability": 0.9999999989777839,
+          "model_cost": 5183193096.290007,
+          "model_signed_shift_hartree": 1.6733967443571106e-05,
+          "peak_cpu_rss_kib": 2630180,
+          "relative_to_t_ana": 0.9653425000000002,
+          "relative_to_t_star": 0.95,
+          "residual_over_epsilon": 0.029145677393532972,
+          "selected_eigenvalue": {
+            "imag": -0.43472051381554744,
+            "real": -0.9005654195381412
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999809,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.2089311996879762e-05,
+          "signed_residual_hartree": -4.644655446691344e-06,
+          "time": 0.1343919943685196,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.9038903140462935,
+            "cpu_component_gate_materialization_seconds": 1.1147655851673335,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09065179293975234,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6276832597795874,
+            "output_transfer_seconds": 0.05725316097959876,
+            "physical_gpu_id": 6,
+            "schur": 25.634295508963987,
+            "total": 28.577682852046564,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999999070914,
+          "direct_cost": 4887802364.546716,
+          "direct_error_hartree": 1.5676744842959348e-05,
+          "eigenpair_residual_2_norm": 3.450171839828817e-14,
+          "ground_overlap_probability": 0.9999999982717291,
+          "model_cost": 5141422144.909045,
+          "model_signed_shift_hartree": 2.276445660330074e-05,
+          "peak_cpu_rss_kib": 2630180,
+          "relative_to_t_ana": 1.01615,
+          "relative_to_t_star": 1.0,
+          "residual_over_epsilon": 0.04447610006731845,
+          "selected_eigenvalue": {
+            "imag": -0.3032022687672516,
+            "real": -0.9529262218106851
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999979,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.5676744842959348e-05,
+          "signed_residual_hartree": -7.087711760341392e-06,
+          "time": 0.14146525723002062,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6785148601047695,
+            "cpu_component_gate_materialization_seconds": 0.9389790454879403,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09018202126026154,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6080600258428603,
+            "output_transfer_seconds": 0.030004780972376466,
+            "physical_gpu_id": 6,
+            "schur": 21.810708697885275,
+            "total": 24.52730132988654,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999998619582,
+          "direct_cost": 4798598931.36899,
+          "direct_error_hartree": 1.9974998985065547e-05,
+          "eigenpair_residual_2_norm": 3.419337841913633e-14,
+          "ground_overlap_probability": 0.9999999971676194,
+          "model_cost": 5190801705.466061,
+          "model_signed_shift_hartree": 3.0506549055280325e-05,
+          "peak_cpu_rss_kib": 2630180,
+          "relative_to_t_ana": 1.0669575000000002,
+          "relative_to_t_star": 1.05,
+          "residual_over_epsilon": 0.06608652984560502,
+          "selected_eigenvalue": {
+            "imag": -0.16560839786489825,
+            "real": -0.9861915932295168
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999756,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.9974998985065547e-05,
+          "signed_residual_hartree": -1.0531550070214778e-05,
+          "time": 0.14853852009152166,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.670105207944289,
+            "cpu_component_gate_materialization_seconds": 0.9316446101292968,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09005928714759648,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6059688017703593,
+            "output_transfer_seconds": 0.03120874590240419,
+            "physical_gpu_id": 6,
+            "schur": 23.547146680066362,
+            "total": 26.25426330207847,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999997926157,
+          "direct_cost": 4753337825.887904,
+          "direct_error_hartree": 2.504379056599082e-05,
+          "eigenpair_residual_2_norm": 3.863289155727944e-14,
+          "ground_overlap_probability": 0.9999999954673393,
+          "model_cost": 5363714438.200885,
+          "model_signed_shift_hartree": 4.032862350460007e-05,
+          "peak_cpu_rss_kib": 2630264,
+          "relative_to_t_ana": 1.1177650000000003,
+          "relative_to_t_star": 1.1,
+          "residual_over_epsilon": 0.09591385517306732,
+          "selected_eigenvalue": {
+            "imag": -0.024696137530099138,
+            "real": -0.9996950038841983
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999664,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 2.504379056599082e-05,
+          "signed_residual_hartree": -1.5284832938609254e-05,
+          "time": 0.1556117829530227,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.685886192135513,
+            "cpu_component_gate_materialization_seconds": 0.9413337465375662,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09025797504000366,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6086394474841654,
+            "output_transfer_seconds": 0.03395262616686523,
+            "physical_gpu_id": 6,
+            "schur": 24.407712067943066,
+            "total": 27.139007774880156,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999996564721,
+          "direct_cost": 4755169335.571643,
+          "direct_error_hartree": 3.0933110400314857e-05,
+          "eigenpair_residual_2_norm": 4.639764741337573e-14,
+          "ground_overlap_probability": 0.999999992803833,
+          "model_cost": 5723207607.59797,
+          "model_signed_shift_hartree": 5.265557141986787e-05,
+          "peak_cpu_rss_kib": 2630264,
+          "relative_to_t_ana": 1.1685725,
+          "relative_to_t_star": 1.15,
+          "residual_over_epsilon": 0.13631061514379764,
+          "selected_eigenvalue": {
+            "imag": 0.11671079521315986,
+            "real": -0.9931659429726336
+          },
+          "selected_eigenvalue_magnitude": 1.0000000000000042,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 3.0933110400314857e-05,
+          "signed_residual_hartree": -2.172246101955301e-05,
+          "time": 0.1626850458145237,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6826423730235547,
+            "cpu_component_gate_materialization_seconds": 0.9483280561398715,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09007389354519546,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.5991417409386486,
+            "output_transfer_seconds": 0.03073361492715776,
+            "physical_gpu_id": 6,
+            "schur": 22.6227560560219,
+            "total": 25.343770598061383,
+            "unique_s2_stage_count": 4
+          }
+        }
+      ],
+      "invalid_cost_at_model_optimum": false,
+      "invalid_cost_reason": null,
+      "metrics": {
+        "eta_min": 0.028288445632137282,
+        "eta_star": 0.05188830510045584,
+        "eta_t": 0.09090909090909094,
+        "local_minimum_bracketed": true,
+        "maximum_eigenpair_residual_2_norm": 4.639764741337573e-14,
+        "maximum_unseen_residual_over_epsilon": 0.13631061514379764,
+        "minimum_adjacent_vector_overlap_probability": 0.9999999996564721,
+        "minimum_ground_overlap_probability": 0.999999992803833
+      },
+      "model": {
+        "coefficient_powers": [
+          6
+        ],
+        "coefficient_signs": [
+          1
+        ],
+        "coefficient_source": "least-squares fit to the same five signed direct points",
+        "coefficient_values": [
+          2.8402628043849596
+        ],
+        "formal_order": 6,
+        "name": "direct_refit_one_term",
+        "training_design_condition_number": 1.0,
+        "training_maximum_absolute_residual_hartree": 3.3930487386392905e-09,
+        "training_relative_to_t_ana": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5
+        ]
+      },
+      "model_optimum": {
+        "at_optimization_boundary": false,
+        "cost": 5141422144.909045,
+        "error_hartree": 2.276445660330074e-05,
+        "grid_points": 35001,
+        "relative_interval": [
+          0.05,
+          1.8
+        ],
+        "relative_to_t_ana": 1.01615,
+        "signed_shift_hartree": 2.276445660330074e-05,
+        "time": 0.14146525723002062
+      },
+      "passed": false,
+      "term_contributions_at_t_star": [
+        {
+          "coefficient": 2.8402628043849596,
+          "power": 6,
+          "signed_contribution_hartree": 2.276445660330074e-05
+        }
+      ]
+    },
+    "short_time_asymptotic_one_term": {
+      "checks": {
+        "direct_local_minimum_bracketed": false,
+        "eta_min": false,
+        "eta_star": false,
+        "eta_t": false,
+        "maximum_unseen_residual_over_epsilon": false,
+        "model_optimum_interior": true
+      },
+      "diagnostics": {
+        "direct_local_minimum_bracketed": false,
+        "model_optimum_interior": true
+      },
+      "direct_grid_minimum": {
+        "adjacent_selected_vector_overlap_probability": 0.9999999997287057,
+        "direct_cost": 4748744479.4251175,
+        "direct_error_hartree": 2.868245348588351e-05,
+        "eigenpair_residual_2_norm": 5.6406690531117094e-14,
+        "ground_overlap_probability": 0.999999993928687,
+        "model_cost": 5815796150.890629,
+        "model_signed_shift_hartree": 5.2658483885857046e-05,
+        "peak_cpu_rss_kib": 2629132,
+        "relative_to_t_ana": 1.15,
+        "relative_to_t_star": 1.15,
+        "residual_over_epsilon": 0.15045198836287454,
+        "selected_eigenvalue": {
+          "imag": 0.06514208827909407,
+          "real": -0.9978759984760535
+        },
+        "selected_eigenvalue_magnitude": 0.9999999999999709,
+        "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+        "signed_direct_shift_hartree": 2.868245348588351e-05,
+        "signed_residual_hartree": -2.3976030399973536e-05,
+        "time": 0.1600994398607722,
+        "timing_seconds": {
+          "backend": "gpu_component_sector_dense_final_cpu_schur",
+          "build_seconds": 2.6935888561420143,
+          "cpu_component_gate_materialization_seconds": 0.9568097195588052,
+          "cupy_pool_peak_reserved_mib": 1050.51416015625,
+          "gpu_dense_multiply_seconds": 0.0901386917103082,
+          "gpu_memory": {
+            "maximum_used_mib": 1499,
+            "minimum_used_mib": 1043,
+            "peak_increment_mib": 456,
+            "physical_gpu_id": 6,
+            "samples": 12
+          },
+          "gpu_transfer_sparse_multiply_seconds": 1.602577612735331,
+          "output_transfer_seconds": 0.03264635498635471,
+          "physical_gpu_id": 6,
+          "schur": 22.168025403050706,
+          "total": 24.90266902698204,
+          "unique_s2_stage_count": 4
+        }
+      },
+      "direct_validation_points": [
+        {
+          "adjacent_selected_vector_overlap_probability": null,
+          "direct_cost": 5482491069.9679575,
+          "direct_error_hartree": 6.222779476121664e-06,
+          "eigenpair_residual_2_norm": 3.952175475015547e-14,
+          "ground_overlap_probability": 0.9999999997307785,
+          "model_cost": 5568426128.953975,
+          "model_signed_shift_hartree": 8.586078665223287e-06,
+          "peak_cpu_rss_kib": 2474964,
+          "relative_to_t_ana": 0.85,
+          "relative_to_t_star": 0.85,
+          "residual_over_epsilon": 0.014829938741531655,
+          "selected_eigenvalue": {
+            "imag": -0.6971114073888476,
+            "real": -0.7169628202970427
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999747,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 6.222779476121664e-06,
+          "signed_residual_hartree": -2.363299189101623e-06,
+          "time": 0.11833436859274468,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.7221899200230837,
+            "cpu_component_gate_materialization_seconds": 0.9728510351851583,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09033394884318113,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6037070585880429,
+            "output_transfer_seconds": 0.043215594021603465,
+            "physical_gpu_id": 6,
+            "schur": 34.431142241926864,
+            "total": 37.204838268924505,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999999663569,
+          "direct_cost": 5253011262.321534,
+          "direct_error_hartree": 8.412203673697753e-06,
+          "eigenpair_residual_2_norm": 3.7492829873720176e-14,
+          "ground_overlap_probability": 0.9999999995070681,
+          "model_cost": 5384511215.033768,
+          "model_signed_shift_hartree": 1.2098634740026856e-05,
+          "peak_cpu_rss_kib": 2628632,
+          "relative_to_t_ana": 0.8999999999999999,
+          "relative_to_t_star": 0.9,
+          "residual_over_epsilon": 0.023132723584321845,
+          "selected_eigenvalue": {
+            "imag": -0.5907075867288145,
+            "real": -0.8068857087475041
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999709,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 8.412203673697753e-06,
+          "signed_residual_hartree": -3.6864310663291026e-06,
+          "time": 0.1252952138040826,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.7426056500989944,
+            "cpu_component_gate_materialization_seconds": 0.9753299569711089,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09017998352646828,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6224347506649792,
+            "output_transfer_seconds": 0.04241246380843222,
+            "physical_gpu_id": 6,
+            "schur": 30.2156743099913,
+            "total": 33.00213151611388,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999999475448,
+          "direct_cost": 5067979596.125484,
+          "direct_error_hartree": 1.1135786367078991e-05,
+          "eigenpair_residual_2_norm": 3.6230544448534936e-14,
+          "ground_overlap_probability": 0.999999999133701,
+          "model_cost": 5266935844.998892,
+          "model_signed_shift_hartree": 1.673489302674736e-05,
+          "peak_cpu_rss_kib": 2629128,
+          "relative_to_t_ana": 0.9499999999999998,
+          "relative_to_t_star": 0.95,
+          "residual_over_epsilon": 0.03513495420008513,
+          "selected_eigenvalue": {
+            "imag": -0.4728394620424637,
+            "real": -0.8811485931075161
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999808,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.1135786367078991e-05,
+          "signed_residual_hartree": -5.59910665966837e-06,
+          "time": 0.1322560590154205,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.707623187918216,
+            "cpu_component_gate_materialization_seconds": 0.9576646373607218,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09052672632969916,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6122547870036215,
+            "output_transfer_seconds": 0.03374467813409865,
+            "physical_gpu_id": 6,
+            "schur": 26.374527723062783,
+            "total": 29.13441206002608,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.999999999920629,
+          "direct_cost": 4925116407.91603,
+          "direct_error_hartree": 1.4462424878354845e-05,
+          "eigenpair_residual_2_norm": 3.361466498768617e-14,
+          "ground_overlap_probability": 0.9999999985320871,
+          "model_cost": 5224504272.091142,
+          "model_signed_shift_hartree": 2.2765715742720005e-05,
+          "peak_cpu_rss_kib": 2629128,
+          "relative_to_t_ana": 1.0,
+          "relative_to_t_star": 1.0,
+          "residual_over_epsilon": 0.05210398050297803,
+          "selected_eigenvalue": {
+            "imag": -0.3457946445168138,
+            "real": -0.9383102172647616
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999769,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.4462424878354845e-05,
+          "signed_residual_hartree": -8.30329086436516e-06,
+          "time": 0.13921690422675845,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.761993691092357,
+            "cpu_component_gate_materialization_seconds": 0.9976012762635946,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09035026165656745,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.624676843173802,
+            "output_transfer_seconds": 0.03603993891738355,
+            "physical_gpu_id": 6,
+            "schur": 27.131716497940943,
+            "total": 29.964044279884547,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999998824061,
+          "direct_cost": 4823582132.317604,
+          "direct_error_hartree": 1.8457519190284392e-05,
+          "eigenpair_residual_2_norm": 3.6946556782120686e-14,
+          "ground_overlap_probability": 0.9999999975907095,
+          "model_cost": 5274702226.511084,
+          "model_signed_shift_hartree": 3.0508236422527033e-05,
+          "peak_cpu_rss_kib": 2629128,
+          "relative_to_t_ana": 1.05,
+          "relative_to_t_star": 1.05,
+          "residual_over_epsilon": 0.0756194557040461,
+          "selected_eigenvalue": {
+            "imag": -0.21203884166772596,
+            "real": -0.9772612391905056
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999767,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.8457519190284392e-05,
+          "signed_residual_hartree": -1.205071723224264e-05,
+          "time": 0.1461777494380964,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6899817979428917,
+            "cpu_component_gate_materialization_seconds": 0.9552767106797546,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09061428671702743,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6012865900993347,
+            "output_transfer_seconds": 0.03042300487868488,
+            "physical_gpu_id": 6,
+            "schur": 25.522839976940304,
+            "total": 28.255350311053917,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.999999999826042,
+          "direct_cost": 4764016013.807783,
+          "direct_error_hartree": 2.3180505561480495e-05,
+          "eigenpair_residual_2_norm": 3.801928765568149e-14,
+          "ground_overlap_probability": 0.9999999961466586,
+          "model_cost": 5450440567.363998,
+          "model_signed_shift_hartree": 4.0330854146888806e-05,
+          "peak_cpu_rss_kib": 2629132,
+          "relative_to_t_ana": 1.1,
+          "relative_to_t_star": 1.1,
+          "residual_over_epsilon": 0.10762015240829613,
+          "selected_eigenvalue": {
+            "imag": -0.0741679986702472,
+            "real": -0.9972457610705746
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999897,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 2.3180505561480495e-05,
+          "signed_residual_hartree": -1.715034858540831e-05,
+          "time": 0.1531385946494343,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.752555459039286,
+            "cpu_component_gate_materialization_seconds": 1.0099362053442746,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09033893514424562,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6039682610426098,
+            "output_transfer_seconds": 0.03477219003252685,
+            "physical_gpu_id": 6,
+            "schur": 23.79858377482742,
+            "total": 26.600335127906874,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999997287057,
+          "direct_cost": 4748744479.4251175,
+          "direct_error_hartree": 2.868245348588351e-05,
+          "eigenpair_residual_2_norm": 5.6406690531117094e-14,
+          "ground_overlap_probability": 0.999999993928687,
+          "model_cost": 5815796150.890629,
+          "model_signed_shift_hartree": 5.2658483885857046e-05,
+          "peak_cpu_rss_kib": 2629132,
+          "relative_to_t_ana": 1.15,
+          "relative_to_t_star": 1.15,
+          "residual_over_epsilon": 0.15045198836287454,
+          "selected_eigenvalue": {
+            "imag": 0.06514208827909407,
+            "real": -0.9978759984760535
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999709,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 2.868245348588351e-05,
+          "signed_residual_hartree": -2.3976030399973536e-05,
+          "time": 0.1600994398607722,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6935888561420143,
+            "cpu_component_gate_materialization_seconds": 0.9568097195588052,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.0901386917103082,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.602577612735331,
+            "output_transfer_seconds": 0.03264635498635471,
+            "physical_gpu_id": 6,
+            "schur": 22.168025403050706,
+            "total": 24.90266902698204,
+            "unique_s2_stage_count": 4
+          }
+        }
+      ],
+      "invalid_cost_at_model_optimum": false,
+      "invalid_cost_reason": null,
+      "metrics": {
+        "eta_min": 0.037140749361242564,
+        "eta_star": 0.06078797725347412,
+        "eta_t": 0.13043478260869568,
+        "local_minimum_bracketed": false,
+        "maximum_eigenpair_residual_2_norm": 5.6406690531117094e-14,
+        "maximum_unseen_residual_over_epsilon": 0.15045198836287454,
+        "minimum_adjacent_vector_overlap_probability": 0.9999999997287057,
+        "minimum_ground_overlap_probability": 0.999999993928687
+      },
+      "model": {
+        "coefficient_powers": [
+          6
+        ],
+        "coefficient_signs": [
+          1
+        ],
+        "coefficient_source": "fixed-order alpha from the selected proxy window; sign from direct training points",
+        "coefficient_values": [
+          3.1270114842614776
+        ],
+        "formal_order": 6,
+        "name": "short_time_asymptotic_one_term",
+        "training_design_condition_number": 1.0,
+        "training_maximum_absolute_residual_hartree": 3.356174472722751e-08,
+        "training_relative_to_t_ana": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5
+        ]
+      },
+      "model_optimum": {
+        "at_optimization_boundary": false,
+        "cost": 5224504272.091142,
+        "error_hartree": 2.2765715742720005e-05,
+        "grid_points": 35001,
+        "relative_interval": [
+          0.05,
+          1.8
+        ],
+        "relative_to_t_ana": 1.0,
+        "signed_shift_hartree": 2.2765715742720005e-05,
+        "time": 0.13921690422675845
+      },
+      "passed": false,
+      "term_contributions_at_t_star": [
+        {
+          "coefficient": 3.1270114842614776,
+          "power": 6,
+          "signed_contribution_hartree": 2.2765715742720005e-05
+        }
+      ]
+    },
+    "three_term": {
+      "checks": {
+        "direct_local_minimum_bracketed": true,
+        "eta_min": true,
+        "eta_star": true,
+        "eta_t": true,
+        "maximum_unseen_residual_over_epsilon": true,
+        "model_optimum_interior": true
+      },
+      "diagnostics": {
+        "direct_local_minimum_bracketed": true,
+        "model_optimum_interior": true
+      },
+      "direct_grid_minimum": {
+        "adjacent_selected_vector_overlap_probability": 0.9999999997362634,
+        "direct_cost": 4750715682.147685,
+        "direct_error_hartree": 2.5798317972705728e-05,
+        "eigenpair_residual_2_norm": 4.489646319837673e-14,
+        "ground_overlap_probability": 0.9999999951726524,
+        "model_cost": 4776538636.941371,
+        "model_signed_shift_hartree": 2.652038007722946e-05,
+        "peak_cpu_rss_kib": 2631392,
+        "relative_to_t_ana": 1.1247,
+        "relative_to_t_star": 1.0,
+        "residual_over_epsilon": 0.00453101191209688,
+        "selected_eigenvalue": {
+          "imag": -0.005360454445356155,
+          "real": -0.9999856326608547
+        },
+        "selected_eigenvalue_magnitude": 0.9999999999999953,
+        "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+        "signed_direct_shift_hartree": 2.5798317972705728e-05,
+        "signed_residual_hartree": -7.220621045237306e-07,
+        "time": 0.15657725218383522,
+        "timing_seconds": {
+          "backend": "gpu_component_sector_dense_final_cpu_schur",
+          "build_seconds": 2.864658477017656,
+          "cpu_component_gate_materialization_seconds": 1.0707862006966025,
+          "cupy_pool_peak_reserved_mib": 1050.51416015625,
+          "gpu_dense_multiply_seconds": 0.09078448172658682,
+          "gpu_memory": {
+            "maximum_used_mib": 1499,
+            "minimum_used_mib": 1043,
+            "peak_increment_mib": 456,
+            "physical_gpu_id": 6,
+            "samples": 12
+          },
+          "gpu_transfer_sparse_multiply_seconds": 1.6377721189055592,
+          "output_transfer_seconds": 0.04919829196296632,
+          "physical_gpu_id": 6,
+          "schur": 22.00728760799393,
+          "total": 24.916858992073685,
+          "unique_s2_stage_count": 4
+        }
+      },
+      "direct_validation_points": [
+        {
+          "adjacent_selected_vector_overlap_probability": null,
+          "direct_cost": 5048655141.157499,
+          "direct_error_hartree": 1.150150180232092e-05,
+          "eigenpair_residual_2_norm": 3.761661972345913e-14,
+          "ground_overlap_probability": 0.9999999990754336,
+          "model_cost": 5051628504.075087,
+          "model_signed_shift_hartree": 1.1588530570481916e-05,
+          "peak_cpu_rss_kib": 2630432,
+          "relative_to_t_ana": 0.9559949999999999,
+          "relative_to_t_star": 0.85,
+          "residual_over_epsilon": 0.0005461142230870676,
+          "selected_eigenvalue": {
+            "imag": -0.45804387099837807,
+            "real": -0.8889295878981411
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999689,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.150150180232092e-05,
+          "signed_residual_hartree": -8.70287681609959e-08,
+          "time": 0.13309066435625994,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.7229134179651737,
+            "cpu_component_gate_materialization_seconds": 0.9641235461458564,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09030929813161492,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6250724499113858,
+            "output_transfer_seconds": 0.03180160606279969,
+            "physical_gpu_id": 6,
+            "schur": 22.446621811948717,
+            "total": 25.22140027419664,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999998919507,
+          "direct_cost": 4896464233.959604,
+          "direct_error_hartree": 1.537547236023319e-05,
+          "eigenpair_residual_2_norm": 3.6745660958927805e-14,
+          "ground_overlap_probability": 0.9999999983384076,
+          "model_cost": 4902767066.194501,
+          "model_signed_shift_hartree": 1.5560574033260745e-05,
+          "peak_cpu_rss_kib": 2631324,
+          "relative_to_t_ana": 1.01223,
+          "relative_to_t_star": 0.9,
+          "residual_over_epsilon": 0.0011615315084152072,
+          "selected_eigenvalue": {
+            "imag": -0.3136002932772428,
+            "real": -0.9495550832133954
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999856,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 1.537547236023319e-05,
+          "signed_residual_hartree": -1.8510167302755373e-07,
+          "time": 0.1409195269654517,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.729035404045135,
+            "cpu_component_gate_materialization_seconds": 0.961989932693541,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09043970587663352,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6165906840469688,
+            "output_transfer_seconds": 0.04713282105512917,
+            "physical_gpu_id": 6,
+            "schur": 22.64403236680664,
+            "total": 25.442437150981277,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999998323721,
+          "direct_cost": 4796612975.897632,
+          "direct_error_hartree": 2.0114029099640155e-05,
+          "eigenpair_residual_2_norm": 3.6207384257657984e-14,
+          "ground_overlap_probability": 0.9999999971269766,
+          "model_cost": 4809525845.417269,
+          "model_signed_shift_hartree": 2.0487884078875505e-05,
+          "peak_cpu_rss_kib": 2631392,
+          "relative_to_t_ana": 1.068465,
+          "relative_to_t_star": 0.95,
+          "residual_over_epsilon": 0.002345977380199754,
+          "selected_eigenvalue": {
+            "imag": -0.1614613399807272,
+            "real": -0.9868790380242062
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999772,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 2.0114029099640155e-05,
+          "signed_residual_hartree": -3.7385497923535e-07,
+          "time": 0.14874838957464345,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.770387595053762,
+            "cpu_component_gate_materialization_seconds": 1.0080201111268252,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09028490795753896,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6113484683446586,
+            "output_transfer_seconds": 0.04735161899589002,
+            "physical_gpu_id": 6,
+            "schur": 21.91352097899653,
+            "total": 24.73975440301001,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999997362634,
+          "direct_cost": 4750715682.147685,
+          "direct_error_hartree": 2.5798317972705728e-05,
+          "eigenpair_residual_2_norm": 4.489646319837673e-14,
+          "ground_overlap_probability": 0.9999999951726524,
+          "model_cost": 4776538636.941371,
+          "model_signed_shift_hartree": 2.652038007722946e-05,
+          "peak_cpu_rss_kib": 2631392,
+          "relative_to_t_ana": 1.1247,
+          "relative_to_t_star": 1.0,
+          "residual_over_epsilon": 0.00453101191209688,
+          "selected_eigenvalue": {
+            "imag": -0.005360454445356155,
+            "real": -0.9999856326608547
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999953,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 2.5798317972705728e-05,
+          "signed_residual_hartree": -7.220621045237306e-07,
+          "time": 0.15657725218383522,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.864658477017656,
+            "cpu_component_gate_materialization_seconds": 1.0707862006966025,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09078448172658682,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6377721189055592,
+            "output_transfer_seconds": 0.04919829196296632,
+            "physical_gpu_id": 6,
+            "schur": 22.00728760799393,
+            "total": 24.916858992073685,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999995183195,
+          "direct_cost": 4763313639.482051,
+          "direct_error_hartree": 3.249481991987805e-05,
+          "eigenpair_residual_2_norm": 5.51318674981054e-14,
+          "ground_overlap_probability": 0.9999999919187166,
+          "model_cost": 4814196414.844652,
+          "model_signed_shift_hartree": 3.3835698525994605e-05,
+          "peak_cpu_rss_kib": 2631392,
+          "relative_to_t_ana": 1.180935,
+          "relative_to_t_star": 1.05,
+          "residual_over_epsilon": 0.008414147341242033,
+          "selected_eigenvalue": {
+            "imag": 0.15087172023177822,
+            "real": -0.9885533491088194
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999797,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 3.249481991987805e-05,
+          "signed_residual_hartree": -1.3408786061165558e-06,
+          "time": 0.164406114793027,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6770972299855202,
+            "cpu_component_gate_materialization_seconds": 0.9326243503019214,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.0900853534694761,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6022892803885043,
+            "output_transfer_seconds": 0.03975523612461984,
+            "physical_gpu_id": 6,
+            "schur": 22.383017423097044,
+            "total": 25.100462045986205,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.999999905117466,
+          "direct_cost": 4843028785.766385,
+          "direct_error_hartree": 4.025467458782493e-05,
+          "eigenpair_residual_2_norm": 6.397604870709925e-14,
+          "ground_overlap_probability": 0.9999998899592563,
+          "model_cost": 4942700034.85415,
+          "model_signed_shift_hartree": 4.2656474715219784e-05,
+          "peak_cpu_rss_kib": 2631392,
+          "relative_to_t_ana": 1.23717,
+          "relative_to_t_star": 1.1,
+          "residual_over_epsilon": 0.015071535979415511,
+          "selected_eigenvalue": {
+            "imag": 0.30340135075112956,
+            "real": -0.9528628549599032
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999737,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 4.025467458782493e-05,
+          "signed_residual_hartree": -2.4018001273948543e-06,
+          "time": 0.17223497740221877,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6912400249857455,
+            "cpu_component_gate_materialization_seconds": 0.9319831666070968,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09007700183428824,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 587,
+              "peak_increment_mib": 912,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6078132167458534,
+            "output_transfer_seconds": 0.03082371805794537,
+            "physical_gpu_id": 6,
+            "schur": 21.795026534004137,
+            "total": 24.525823923991993,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999991222976848,
+          "direct_cost": 5002545122.996751,
+          "direct_error_hartree": 4.906595679515351e-05,
+          "eigenpair_residual_2_norm": 6.331341125825655e-14,
+          "ground_overlap_probability": 0.9999992332956344,
+          "model_cost": 5201108705.68959,
+          "model_signed_shift_hartree": 5.327667101645672e-05,
+          "peak_cpu_rss_kib": 2631392,
+          "relative_to_t_ana": 1.293405,
+          "relative_to_t_star": 1.15,
+          "residual_over_epsilon": 0.026422652810099874,
+          "selected_eigenvalue": {
+            "imag": 0.4484855075051195,
+            "real": -0.8937901037479925
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999859,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 4.906595679515351e-05,
+          "signed_residual_hartree": -4.210714221303209e-06,
+          "time": 0.1800638400114105,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.670574438991025,
+            "cpu_component_gate_materialization_seconds": 0.9268106815870851,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09024370182305574,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6099478595424443,
+            "output_transfer_seconds": 0.03227468184195459,
+            "physical_gpu_id": 6,
+            "schur": 23.75717977900058,
+            "total": 26.473636549897492,
+            "unique_s2_stage_count": 4
+          }
+        }
+      ],
+      "invalid_cost_at_model_optimum": false,
+      "invalid_cost_reason": null,
+      "metrics": {
+        "eta_min": 0.0,
+        "eta_star": 0.005435592555185701,
+        "eta_t": 0.0,
+        "local_minimum_bracketed": true,
+        "maximum_eigenpair_residual_2_norm": 6.397604870709925e-14,
+        "maximum_unseen_residual_over_epsilon": 0.026422652810099874,
+        "minimum_adjacent_vector_overlap_probability": 0.9999991222976848,
+        "minimum_ground_overlap_probability": 0.9999992332956344
+      },
+      "model": {
+        "coefficient_powers": [
+          6,
+          8,
+          10
+        ],
+        "coefficient_signs": [
+          1,
+          -1,
+          1
+        ],
+        "coefficient_source": "least-squares fit to the same five signed direct points",
+        "coefficient_values": [
+          3.1833396678672687,
+          -76.47632867126534,
+          817.4267252752862
+        ],
+        "formal_order": 6,
+        "name": "three_term",
+        "training_design_condition_number": 2269.047884079149,
+        "training_maximum_absolute_residual_hartree": 4.893580284553143e-13,
+        "training_relative_to_t_ana": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5
+        ]
+      },
+      "model_optimum": {
+        "at_optimization_boundary": false,
+        "cost": 4776538636.941371,
+        "error_hartree": 2.652038007722946e-05,
+        "grid_points": 35001,
+        "relative_interval": [
+          0.05,
+          1.8
+        ],
+        "relative_to_t_ana": 1.1247,
+        "signed_shift_hartree": 2.652038007722946e-05,
+        "time": 0.15657725218383522
+      },
+      "passed": true,
+      "term_contributions_at_t_star": [
+        {
+          "coefficient": 3.1833396678672687,
+          "power": 6,
+          "signed_contribution_hartree": 4.6908871436563805e-05
+        },
+        {
+          "coefficient": -76.47632867126534,
+          "power": 8,
+          "signed_contribution_hartree": -2.762844032812789e-05
+        },
+        {
+          "coefficient": 817.4267252752862,
+          "power": 10,
+          "signed_contribution_hartree": 7.239948968793543e-06
+        }
+      ]
+    },
+    "two_term": {
+      "checks": {
+        "direct_local_minimum_bracketed": false,
+        "eta_min": false,
+        "eta_star": false,
+        "eta_t": false,
+        "maximum_unseen_residual_over_epsilon": false,
+        "model_optimum_interior": true
+      },
+      "diagnostics": {
+        "direct_local_minimum_bracketed": false,
+        "model_optimum_interior": true
+      },
+      "direct_grid_minimum": {
+        "adjacent_selected_vector_overlap_probability": null,
+        "direct_cost": 5024377924.954633,
+        "direct_error_hartree": 5.000137814312238e-05,
+        "eigenpair_residual_2_norm": 6.520582233977496e-14,
+        "ground_overlap_probability": 0.9999998901836001,
+        "model_cost": 4272557279.4047246,
+        "model_signed_shift_hartree": 3.0758083794546666e-05,
+        "peak_cpu_rss_kib": 2630264,
+        "relative_to_t_ana": 1.2988,
+        "relative_to_t_star": 0.85,
+        "residual_over_epsilon": 0.12075359636674797,
+        "selected_eigenvalue": {
+          "imag": 0.46188025180754755,
+          "real": -0.8869422940587437
+        },
+        "selected_eigenvalue_magnitude": 0.9999999999999952,
+        "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+        "signed_direct_shift_hartree": 5.000137814312238e-05,
+        "signed_residual_hartree": 1.9243294348575718e-05,
+        "time": 0.18081491520971388,
+        "timing_seconds": {
+          "backend": "gpu_component_sector_dense_final_cpu_schur",
+          "build_seconds": 2.683106658048928,
+          "cpu_component_gate_materialization_seconds": 0.9488460081629455,
+          "cupy_pool_peak_reserved_mib": 1050.51416015625,
+          "gpu_dense_multiply_seconds": 0.09044646099209785,
+          "gpu_memory": {
+            "maximum_used_mib": 1499,
+            "minimum_used_mib": 1043,
+            "peak_increment_mib": 456,
+            "physical_gpu_id": 6,
+            "samples": 12
+          },
+          "gpu_transfer_sparse_multiply_seconds": 1.600229874253273,
+          "output_transfer_seconds": 0.03215561993420124,
+          "physical_gpu_id": 6,
+          "schur": 23.171035861829296,
+          "total": 25.89253022801131,
+          "unique_s2_stage_count": 4
+        }
+      },
+      "direct_validation_points": [
+        {
+          "adjacent_selected_vector_overlap_probability": null,
+          "direct_cost": 5024377924.954633,
+          "direct_error_hartree": 5.000137814312238e-05,
+          "eigenpair_residual_2_norm": 6.520582233977496e-14,
+          "ground_overlap_probability": 0.9999998901836001,
+          "model_cost": 4272557279.4047246,
+          "model_signed_shift_hartree": 3.0758083794546666e-05,
+          "peak_cpu_rss_kib": 2630264,
+          "relative_to_t_ana": 1.2988,
+          "relative_to_t_star": 0.85,
+          "residual_over_epsilon": 0.12075359636674797,
+          "selected_eigenvalue": {
+            "imag": 0.46188025180754755,
+            "real": -0.8869422940587437
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999952,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 5.000137814312238e-05,
+          "signed_residual_hartree": 1.9243294348575718e-05,
+          "time": 0.18081491520971388,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.683106658048928,
+            "cpu_component_gate_materialization_seconds": 0.9488460081629455,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09044646099209785,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.600229874253273,
+            "output_transfer_seconds": 0.03215561993420124,
+            "physical_gpu_id": 6,
+            "schur": 23.171035861829296,
+            "total": 25.89253022801131,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.999998018984512,
+          "direct_cost": 5418127245.477314,
+          "direct_error_hartree": 6.358271152815622e-05,
+          "eigenpair_residual_2_norm": 4.7174815234080596e-14,
+          "ground_overlap_probability": 0.9999983121348736,
+          "model_cost": 4001516735.657613,
+          "model_signed_shift_hartree": 2.967578651387988e-05,
+          "peak_cpu_rss_kib": 2630416,
+          "relative_to_t_ana": 1.3752000000000002,
+          "relative_to_t_star": 0.9,
+          "residual_over_epsilon": 0.21276934515708631,
+          "selected_eigenvalue": {
+            "imag": 0.6389656929567263,
+            "real": -0.769235232698226
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999817,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 6.358271152815622e-05,
+          "signed_residual_hartree": 3.390692501427634e-05,
+          "time": 0.19145108669263824,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 3.508783840108663,
+            "cpu_component_gate_materialization_seconds": 1.4070253206882626,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09102154592983425,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 15
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.9112756534013897,
+            "output_transfer_seconds": 0.08187046786770225,
+            "physical_gpu_id": 6,
+            "schur": 22.856901643099263,
+            "total": 26.465512417024,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999986657514496,
+          "direct_cost": 6158750527.705231,
+          "direct_error_hartree": 7.953516668090431e-05,
+          "eigenpair_residual_2_norm": 2.356949337149358e-14,
+          "ground_overlap_probability": 0.9999999290983071,
+          "model_cost": 3554887430.635701,
+          "model_signed_shift_hartree": 2.1065533444429623e-05,
+          "peak_cpu_rss_kib": 2630416,
+          "relative_to_t_ana": 1.4516,
+          "relative_to_t_star": 0.95,
+          "residual_over_epsilon": 0.3669027955222038,
+          "selected_eigenvalue": {
+            "imag": 0.787160334078199,
+            "real": -0.6167484158503037
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999805,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 7.953516668090431e-05,
+          "signed_residual_hartree": 5.846963323647469e-05,
+          "time": 0.20208725817556256,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.8656107550486922,
+            "cpu_component_gate_materialization_seconds": 1.0740556186065078,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09060948388651013,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6252501348499209,
+            "output_transfer_seconds": 0.06121347704902291,
+            "physical_gpu_id": 6,
+            "schur": 29.95108145987615,
+            "total": 32.85456716315821,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999963076769,
+          "direct_cost": 7487197462.8014965,
+          "direct_error_hartree": 9.698149879946392e-05,
+          "eigenpair_residual_2_norm": 1.2527915199280721e-14,
+          "ground_overlap_probability": 0.9999999177625504,
+          "model_cost": 2930805502.859336,
+          "model_signed_shift_hartree": 4.422860136346716e-09,
+          "peak_cpu_rss_kib": 2630416,
+          "relative_to_t_ana": 1.528,
+          "relative_to_t_star": 1.0,
+          "residual_over_epsilon": 0.6085408492268769,
+          "selected_eigenvalue": {
+            "imag": 0.8997641147953112,
+            "real": -0.4363766008009169
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999764,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 9.698149879946392e-05,
+          "signed_residual_hartree": 9.697707593932757e-05,
+          "time": 0.21272342965848692,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6607114679645747,
+            "cpu_component_gate_materialization_seconds": 0.9290509151760489,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.090210234047845,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.599040056578815,
+            "output_transfer_seconds": 0.031028092140331864,
+            "physical_gpu_id": 6,
+            "schur": 23.42993149999529,
+            "total": 26.166687291115522,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999972246325,
+          "direct_cost": 10218519292.442022,
+          "direct_error_hartree": 0.000115831177058599,
+          "eigenpair_residual_2_norm": 2.263048858598351e-14,
+          "ground_overlap_probability": 0.9999998897649861,
+          "model_cost": 3737828077.9813194,
+          "model_signed_shift_hartree": -4.036036336046517e-05,
+          "peak_cpu_rss_kib": 2630428,
+          "relative_to_t_ana": 1.6044000000000003,
+          "relative_to_t_star": 1.05,
+          "residual_over_epsilon": 0.9801175352836736,
+          "selected_eigenvalue": {
+            "imag": 0.9716861561980873,
+            "real": -0.23627529251483803
+          },
+          "selected_eigenvalue_magnitude": 0.999999999999993,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 0.000115831177058599,
+          "signed_residual_hartree": 0.00015619154041906418,
+          "time": 0.2233596011414113,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.744579862104729,
+            "cpu_component_gate_materialization_seconds": 0.9744101159740239,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09056873014196754,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6312164613045752,
+            "output_transfer_seconds": 0.03491896716877818,
+            "physical_gpu_id": 6,
+            "schur": 22.7640113288071,
+            "total": 25.545727578923106,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.9999999966559583,
+          "direct_cost": 17968965391.483135,
+          "direct_error_hartree": 0.00013573138049782465,
+          "eigenpair_residual_2_norm": 2.367629986101829e-14,
+          "ground_overlap_probability": 0.9999998505573549,
+          "model_cost": 8485014756.896703,
+          "model_signed_shift_hartree": -0.00010932096589399564,
+          "peak_cpu_rss_kib": 2630432,
+          "relative_to_t_ana": 1.6808000000000003,
+          "relative_to_t_star": 1.1,
+          "residual_over_epsilon": 1.5377279788433176,
+          "selected_eigenvalue": {
+            "imag": 0.9996750301952381,
+            "real": -0.02549184191333704
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999923,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 0.00013573138049782465,
+          "signed_residual_hartree": 0.0002450523463918203,
+          "time": 0.23399577262433563,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.6942809498868883,
+            "cpu_component_gate_materialization_seconds": 0.9498244884889573,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09038708102889359,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6126134893856943,
+            "output_transfer_seconds": 0.0297882747836411,
+            "physical_gpu_id": 6,
+            "schur": 21.900995841948316,
+            "total": 24.63410411402583,
+            "unique_s2_stage_count": 4
+          }
+        },
+        {
+          "adjacent_selected_vector_overlap_probability": 0.999999995843379,
+          "direct_cost": 131580275655.63756,
+          "direct_error_hartree": 0.00015627351460467293,
+          "eigenpair_residual_2_norm": 2.1979131265816473e-14,
+          "ground_overlap_probability": 0.999999799501942,
+          "model_cost": null,
+          "model_signed_shift_hartree": -0.0002192076336143562,
+          "peak_cpu_rss_kib": 2630432,
+          "relative_to_t_ana": 1.7571999999999999,
+          "relative_to_t_star": 1.15,
+          "residual_over_epsilon": 2.3561817531892393,
+          "selected_eigenvalue": {
+            "imag": 0.9824656651547923,
+            "real": 0.18644360217476574
+          },
+          "selected_eigenvalue_magnitude": 0.9999999999999754,
+          "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+          "signed_direct_shift_hartree": 0.00015627351460467293,
+          "signed_residual_hartree": 0.00037548114821902916,
+          "time": 0.24463194410725994,
+          "timing_seconds": {
+            "backend": "gpu_component_sector_dense_final_cpu_schur",
+            "build_seconds": 2.706149373203516,
+            "cpu_component_gate_materialization_seconds": 0.961283469805494,
+            "cupy_pool_peak_reserved_mib": 1050.51416015625,
+            "gpu_dense_multiply_seconds": 0.09032849036157131,
+            "gpu_memory": {
+              "maximum_used_mib": 1499,
+              "minimum_used_mib": 1043,
+              "peak_increment_mib": 456,
+              "physical_gpu_id": 6,
+              "samples": 12
+            },
+            "gpu_transfer_sparse_multiply_seconds": 1.6079353149980307,
+            "output_transfer_seconds": 0.033875929890200496,
+            "physical_gpu_id": 6,
+            "schur": 23.80366724403575,
+            "total": 26.547809562878683,
+            "unique_s2_stage_count": 4
+          }
+        }
+      ],
+      "invalid_cost_at_model_optimum": false,
+      "invalid_cost_reason": null,
+      "metrics": {
+        "eta_min": 0.4901740224625124,
+        "eta_star": 0.6085577390712076,
+        "eta_t": 0.17647058823529416,
+        "local_minimum_bracketed": false,
+        "maximum_eigenpair_residual_2_norm": 6.520582233977496e-14,
+        "maximum_unseen_residual_over_epsilon": 2.3561817531892393,
+        "minimum_adjacent_vector_overlap_probability": 0.999998018984512,
+        "minimum_ground_overlap_probability": 0.9999983121348736
+      },
+      "model": {
+        "coefficient_powers": [
+          6,
+          8
+        ],
+        "coefficient_signs": [
+          1,
+          -1
+        ],
+        "coefficient_source": "least-squares fit to the same five signed direct points",
+        "coefficient_values": [
+          3.1715660386153486,
+          -70.08685459489541
+        ],
+        "formal_order": 6,
+        "name": "two_term",
+        "training_design_condition_number": 45.796552584992625,
+        "training_maximum_absolute_residual_hartree": 1.6526753738909248e-11,
+        "training_relative_to_t_ana": [
+          0.1,
+          0.2,
+          0.3,
+          0.4,
+          0.5
+        ]
+      },
+      "model_optimum": {
+        "at_optimization_boundary": false,
+        "cost": 2930805502.859336,
+        "error_hartree": 4.422860136346716e-09,
+        "grid_points": 35001,
+        "relative_interval": [
+          0.05,
+          1.8
+        ],
+        "relative_to_t_ana": 1.528,
+        "signed_shift_hartree": 4.422860136346716e-09,
+        "time": 0.21272342965848692
+      },
+      "passed": false,
+      "term_contributions_at_t_star": [
+        {
+          "coefficient": 3.1715660386153486,
+          "power": 6,
+          "signed_contribution_hartree": 0.00029387708055344613
+        },
+        {
+          "coefficient": -70.08685459489541,
+          "power": 8,
+          "signed_contribution_hartree": -0.0002938726576933098
+        }
+      ]
+    }
+  },
+  "physical_gpu_id": 6,
+  "protocol": {
+    "fit_grid": [
+      0.02,
+      0.02292183941538839,
+      0.026270536109242643,
+      0.030108450502611094,
+      0.034507053373351075,
+      0.039548256806109475,
+      0.0453259395834091,
+      0.051947695424124994,
+      0.059536836625564964,
+      0.06823469042157068,
+      0.07820323082009921,
+      0.08962809493114333,
+      0.10272203995594266,
+      0.11772890521456138,
+      0.1349281529938828,
+      0.1546400727770369,
+      0.1772317457689607,
+      0.20312388079125288,
+      0.2327986488463796,
+      0.26680866224880534,
+      0.3057872655350857,
+      0.3504603297932982,
+      0.40165977004930176,
+      0.46033903743459603,
+      0.5275908746355139,
+      0.6046676652709777,
+      0.6930047561509587,
+      0.7942471867296331,
+      0.9102803235170321,
+      1.0432649699322605,
+      1.1956776054243634,
+      1.3703565032056693,
+      1.5705545854156755,
+      1.8
+    ],
+    "fit_minimum_r2": 0.999,
+    "fit_noise_floor": 5e-13,
+    "fit_order_tolerance": 0.2,
+    "fit_window": 5,
+    "legacy_training_relative_times": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "pass_thresholds": {
+      "eta_min": 0.01,
+      "eta_star": 0.01,
+      "eta_t": 0.05,
+      "maximum_unseen_residual_over_epsilon": 0.05
+    },
+    "training_relative_times": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ],
+    "validation_relative_to_t_star": [
+      0.85,
+      0.9,
+      0.95,
+      1.0,
+      1.05,
+      1.1,
+      1.15
+    ]
+  },
+  "short_time_fit": {
+    "error_definition": "abs(imag(exp(-i*E0*t)*<psi0|U_PF(t)|psi0>)/t)",
+    "errors_hartree": [
+      2.0177193249537595e-10,
+      4.559322965824763e-10,
+      1.0292111032708838e-09,
+      2.3203638518467994e-09,
+      5.222684432779267e-09
+    ],
+    "evaluated_windows": [
+      {
+        "fixed_order_alpha": 3.1270114842614776,
+        "free_alpha": 2.7577779523070487,
+        "free_order": 5.965473515669766,
+        "num_points": 5,
+        "order_deviation": 0.0345264843302342,
+        "r2": 0.9999990979258697,
+        "start_index": 0,
+        "stop_index_exclusive": 5,
+        "t_start": 0.02,
+        "t_stop": 0.034507053373351075
+      }
+    ],
+    "formal_order": 6,
+    "grid": [
+      0.02,
+      0.02292183941538839,
+      0.026270536109242643,
+      0.030108450502611094,
+      0.034507053373351075,
+      0.039548256806109475,
+      0.0453259395834091,
+      0.051947695424124994,
+      0.059536836625564964,
+      0.06823469042157068,
+      0.07820323082009921,
+      0.08962809493114333,
+      0.10272203995594266,
+      0.11772890521456138,
+      0.1349281529938828,
+      0.1546400727770369,
+      0.1772317457689607,
+      0.20312388079125288,
+      0.2327986488463796,
+      0.26680866224880534,
+      0.3057872655350857,
+      0.3504603297932982,
+      0.40165977004930176,
+      0.46033903743459603,
+      0.5275908746355139,
+      0.6046676652709777,
+      0.6930047561509587,
+      0.7942471867296331,
+      0.9102803235170321,
+      1.0432649699322605,
+      1.1956776054243634,
+      1.3703565032056693,
+      1.5705545854156755,
+      1.8
+    ],
+    "minimum_r2": 0.999,
+    "noise_floor": 5e-13,
+    "order_tolerance": 0.2,
+    "points": [
+      {
+        "elapsed_seconds": 0.7037402908317745,
+        "evolved_state_norm": 0.9999999999999793,
+        "perturbative_error_hartree": 2.0177193249537595e-10,
+        "phase_rotated_overlap": {
+          "imag": 4.035438649907519e-12,
+          "real": 0.9999999999999796
+        },
+        "survival_probability": 0.9999999999999591,
+        "time": 0.02
+      },
+      {
+        "elapsed_seconds": 0.5918123030569404,
+        "evolved_state_norm": 0.9999999999999767,
+        "perturbative_error_hartree": 4.559322965824763e-10,
+        "phase_rotated_overlap": {
+          "imag": 1.0450806886552755e-11,
+          "real": 0.9999999999999769
+        },
+        "survival_probability": 0.9999999999999538,
+        "time": 0.02292183941538839
+      },
+      {
+        "elapsed_seconds": 0.6084433211944997,
+        "evolved_state_norm": 0.9999999999999876,
+        "perturbative_error_hartree": 1.0292111032708838e-09,
+        "phase_rotated_overlap": {
+          "imag": 2.7037927452511212e-11,
+          "real": 0.9999999999999878
+        },
+        "survival_probability": 0.9999999999999756,
+        "time": 0.026270536109242643
+      },
+      {
+        "elapsed_seconds": 0.592595708090812,
+        "evolved_state_norm": 0.9999999999999792,
+        "perturbative_error_hartree": 2.3203638518467994e-09,
+        "phase_rotated_overlap": {
+          "imag": 6.986256018137738e-11,
+          "real": 0.9999999999999793
+        },
+        "survival_probability": 0.9999999999999587,
+        "time": 0.030108450502611094
+      },
+      {
+        "elapsed_seconds": 0.5951991120819002,
+        "evolved_state_norm": 0.9999999999999802,
+        "perturbative_error_hartree": 5.222684432779267e-09,
+        "phase_rotated_overlap": {
+          "imag": 1.8021945047408394e-10,
+          "real": 0.9999999999999803
+        },
+        "survival_probability": 0.9999999999999607,
+        "time": 0.034507053373351075
+      }
+    ],
+    "qualified": true,
+    "selected_window": {
+      "fixed_order_alpha": 3.1270114842614776,
+      "free_alpha": 2.7577779523070487,
+      "free_order": 5.965473515669766,
+      "num_points": 5,
+      "order_deviation": 0.0345264843302342,
+      "r2": 0.9999990979258697,
+      "start_index": 0,
+      "stop_index_exclusive": 5,
+      "t_start": 0.02,
+      "t_stop": 0.034507053373351075
+    },
+    "selection_rule": "earliest qualifying consecutive five-point window",
+    "times_computed": [
+      0.02,
+      0.02292183941538839,
+      0.026270536109242643,
+      0.030108450502611094,
+      0.034507053373351075
+    ],
+    "window_size": 5
+  },
+  "started_at": "2026-09-20T23:57:00.596226+09:00",
+  "status": "complete",
+  "training_direct_points": [
+    {
+      "adjacent_selected_vector_overlap_probability": null,
+      "direct_cost": 44781471809.19676,
+      "direct_error_hartree": 2.3557475530420647e-11,
+      "eigenpair_residual_2_norm": 5.527704258167524e-14,
+      "ground_overlap_probability": 0.9999999999999956,
+      "peak_cpu_rss_kib": 1703864,
+      "relative_to_t_ana": 0.1,
+      "selected_eigenvalue": {
+        "imag": -0.2752511295668414,
+        "real": 0.9613723605721867
+      },
+      "selected_eigenvalue_magnitude": 0.9999999999999803,
+      "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+      "signed_direct_shift_hartree": 2.3557475530420647e-11,
+      "time": 0.013921690422675846,
+      "timing_seconds": {
+        "backend": "gpu_component_sector_dense_final_cpu_schur",
+        "build_seconds": 3.511952548986301,
+        "cpu_component_gate_materialization_seconds": 0.945238730404526,
+        "cupy_pool_peak_reserved_mib": 1050.51416015625,
+        "gpu_dense_multiply_seconds": 0.12698101857677102,
+        "gpu_memory": {
+          "maximum_used_mib": 1499,
+          "minimum_used_mib": 21,
+          "peak_increment_mib": 1478,
+          "physical_gpu_id": 6,
+          "samples": 13
+        },
+        "gpu_transfer_sparse_multiply_seconds": 1.6604286790825427,
+        "output_transfer_seconds": 0.03490613400936127,
+        "physical_gpu_id": 6,
+        "schur": 32.87437312095426,
+        "total": 36.71918545011431,
+        "unique_s2_stage_count": 4
+      },
+      "used_for_direct_model_fit": true
+    },
+    {
+      "adjacent_selected_vector_overlap_probability": 0.9999999999999956,
+      "direct_cost": 22390937154.51629,
+      "direct_error_hartree": 1.455886279298197e-09,
+      "eigenpair_residual_2_norm": 5.4717144434362405e-14,
+      "ground_overlap_probability": 1.0000000000000004,
+      "peak_cpu_rss_kib": 1858156,
+      "relative_to_t_ana": 0.2,
+      "selected_eigenvalue": {
+        "imag": -0.5292376563298447,
+        "real": 0.8484736313654426
+      },
+      "selected_eigenvalue_magnitude": 0.9999999999999839,
+      "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+      "signed_direct_shift_hartree": 1.455886279298197e-09,
+      "time": 0.027843380845351692,
+      "timing_seconds": {
+        "backend": "gpu_component_sector_dense_final_cpu_schur",
+        "build_seconds": 2.6987437158823013,
+        "cpu_component_gate_materialization_seconds": 0.959472170099616,
+        "cupy_pool_peak_reserved_mib": 1050.51416015625,
+        "gpu_dense_multiply_seconds": 0.09025884862057865,
+        "gpu_memory": {
+          "maximum_used_mib": 1499,
+          "minimum_used_mib": 1043,
+          "peak_increment_mib": 456,
+          "physical_gpu_id": 6,
+          "samples": 12
+        },
+        "gpu_transfer_sparse_multiply_seconds": 1.6030974723398685,
+        "output_transfer_seconds": 0.03419216303154826,
+        "physical_gpu_id": 6,
+        "schur": 33.80442987708375,
+        "total": 36.56603440805338,
+        "unique_s2_stage_count": 4
+      },
+      "used_for_direct_model_fit": true
+    },
+    {
+      "adjacent_selected_vector_overlap_probability": 0.9999999999999902,
+      "direct_cost": 14928672694.67852,
+      "direct_error_hartree": 1.62003539082637e-08,
+      "eigenpair_residual_2_norm": 5.278551744777259e-14,
+      "ground_overlap_probability": 0.9999999999999898,
+      "peak_cpu_rss_kib": 2011836,
+      "relative_to_t_ana": 0.3,
+      "selected_eigenvalue": {
+        "imag": -0.7423377799845765,
+        "real": 0.6700258356268989
+      },
+      "selected_eigenvalue_magnitude": 0.9999999999999768,
+      "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+      "signed_direct_shift_hartree": 1.62003539082637e-08,
+      "time": 0.04176507126802753,
+      "timing_seconds": {
+        "backend": "gpu_component_sector_dense_final_cpu_schur",
+        "build_seconds": 2.803745779907331,
+        "cpu_component_gate_materialization_seconds": 1.009189304197207,
+        "cupy_pool_peak_reserved_mib": 1050.51416015625,
+        "gpu_dense_multiply_seconds": 0.09021483222022653,
+        "gpu_memory": {
+          "maximum_used_mib": 1499,
+          "minimum_used_mib": 587,
+          "peak_increment_mib": 912,
+          "physical_gpu_id": 6,
+          "samples": 10
+        },
+        "gpu_transfer_sparse_multiply_seconds": 1.6349372267723083,
+        "output_transfer_seconds": 0.04882882093079388,
+        "physical_gpu_id": 6,
+        "schur": 35.40987968002446,
+        "total": 38.26801552204415,
+        "unique_s2_stage_count": 4
+      },
+      "used_for_direct_model_fit": true
+    },
+    {
+      "adjacent_selected_vector_overlap_probability": 0.9999999999999503,
+      "direct_cost": 11201558257.232977,
+      "direct_error_hartree": 8.809049324479977e-08,
+      "eigenpair_residual_2_norm": 5.016134664952969e-14,
+      "ground_overlap_probability": 0.9999999999999412,
+      "peak_cpu_rss_kib": 2165524,
+      "relative_to_t_ana": 0.4,
+      "selected_eigenvalue": {
+        "imag": -0.8980883901212056,
+        "real": 0.4398150105776977
+      },
+      "selected_eigenvalue_magnitude": 0.9999999999999795,
+      "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+      "signed_direct_shift_hartree": 8.809049324479977e-08,
+      "time": 0.055686761690703385,
+      "timing_seconds": {
+        "backend": "gpu_component_sector_dense_final_cpu_schur",
+        "build_seconds": 2.6972793811000884,
+        "cpu_component_gate_materialization_seconds": 0.9618931727018207,
+        "cupy_pool_peak_reserved_mib": 1050.51416015625,
+        "gpu_dense_multiply_seconds": 0.09023922099731863,
+        "gpu_memory": {
+          "maximum_used_mib": 1499,
+          "minimum_used_mib": 1043,
+          "peak_increment_mib": 456,
+          "physical_gpu_id": 6,
+          "samples": 12
+        },
+        "gpu_transfer_sparse_multiply_seconds": 1.5984731672797352,
+        "output_transfer_seconds": 0.03524070396088064,
+        "physical_gpu_id": 6,
+        "schur": 40.22743813507259,
+        "total": 42.998257930157706,
+        "unique_s2_stage_count": 4
+      },
+      "used_for_direct_model_fit": true
+    },
+    {
+      "adjacent_selected_vector_overlap_probability": 0.9999999999996296,
+      "direct_cost": 8974435213.618948,
+      "direct_error_hartree": 3.2215256375277257e-07,
+      "eigenpair_residual_2_norm": 4.91481300145389e-14,
+      "ground_overlap_probability": 0.9999999999992966,
+      "peak_cpu_rss_kib": 2319208,
+      "relative_to_t_ana": 0.5,
+      "selected_eigenvalue": {
+        "imag": -0.9844569309985267,
+        "real": 0.1756261683488812
+      },
+      "selected_eigenvalue_magnitude": 0.9999999999999738,
+      "selection_rule": "maximum exact-ground-state overlap in exact invariant sector",
+      "signed_direct_shift_hartree": 3.2215256375277257e-07,
+      "time": 0.06960845211337922,
+      "timing_seconds": {
+        "backend": "gpu_component_sector_dense_final_cpu_schur",
+        "build_seconds": 2.7337050680071115,
+        "cpu_component_gate_materialization_seconds": 0.9750374548602849,
+        "cupy_pool_peak_reserved_mib": 1050.51416015625,
+        "gpu_dense_multiply_seconds": 0.09028608608059585,
+        "gpu_memory": {
+          "maximum_used_mib": 1499,
+          "minimum_used_mib": 1043,
+          "peak_increment_mib": 456,
+          "physical_gpu_id": 6,
+          "samples": 12
+        },
+        "gpu_transfer_sparse_multiply_seconds": 1.6149989052210003,
+        "output_transfer_seconds": 0.041962130926549435,
+        "physical_gpu_id": 6,
+        "schur": 30.569631889928132,
+        "total": 33.353282663971186,
+        "unique_s2_stage_count": 4
+      },
+      "used_for_direct_model_fit": true
+    }
+  ]
+}
