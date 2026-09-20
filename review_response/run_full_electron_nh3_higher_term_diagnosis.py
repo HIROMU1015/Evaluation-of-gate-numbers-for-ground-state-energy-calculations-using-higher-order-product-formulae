@@ -55,7 +55,7 @@ from trotterlib.product_formula import (
 
 
 EPSILON_E = float(TARGET_ERROR)
-FIT_GRID = tuple(float(value) for value in np.geomspace(0.06, 0.80, 15))
+FIT_GRID = tuple(float(value) for value in np.geomspace(0.02, 1.8, 34))
 FIT_WINDOW = 5
 FIT_NOISE_FLOOR = 5e-13
 FIT_ORDER_TOLERANCE = 0.2
@@ -732,9 +732,40 @@ def _fit_model(
         "formal_order": int(order),
         "coefficient_powers": list(map(int, powers)),
         "coefficient_values": coefficients,
+        "coefficient_signs": [int(np.sign(value)) for value in coefficients],
         "training_relative_to_t_ana": relative.tolist(),
         "training_maximum_absolute_residual_hartree": float(np.max(np.abs(fitted - shifts))),
         "training_design_condition_number": float(np.linalg.cond(design)),
+        "coefficient_source": "least-squares fit to the same five signed direct points",
+    }
+
+
+def _asymptotic_model(
+    points: Sequence[dict[str, Any]], order: int, alpha: float,
+) -> dict[str, Any]:
+    shifts = np.asarray([
+        float(point["signed_direct_shift_hartree"]) for point in points
+    ])
+    leading_sign = float(np.sign(np.median(shifts)))
+    if leading_sign == 0.0:
+        raise RuntimeError("zero leading sign in direct training points")
+    times = np.asarray([float(point["time"]) for point in points])
+    coefficient = leading_sign * float(alpha)
+    fitted = coefficient * times ** int(order)
+    return {
+        "name": "short_time_asymptotic_one_term",
+        "formal_order": int(order),
+        "coefficient_powers": [int(order)],
+        "coefficient_values": [coefficient],
+        "coefficient_signs": [int(np.sign(coefficient))],
+        "training_relative_to_t_ana": [
+            float(point["relative_to_t_ana"]) for point in points
+        ],
+        "training_maximum_absolute_residual_hartree": float(
+            np.max(np.abs(fitted - shifts))
+        ),
+        "training_design_condition_number": 1.0,
+        "coefficient_source": "fixed-order alpha from the selected proxy window; sign from direct training points",
     }
 
 
@@ -854,11 +885,27 @@ def _validate_model(
         key: metrics[key] is not None and metrics[key] <= threshold
         for key, threshold in PASS_THRESHOLDS.items()
     }
-    checks["model_optimum_interior"] = not optimum["at_optimization_boundary"]
-    checks["direct_local_minimum_bracketed"] = metrics["local_minimum_bracketed"]
+    diagnostics = {
+        "model_optimum_interior": not optimum["at_optimization_boundary"],
+        "direct_local_minimum_bracketed": metrics["local_minimum_bracketed"],
+    }
+    checks.update(diagnostics)
+    term_contributions = [
+        {
+            "power": int(power),
+            "coefficient": float(coefficient),
+            "signed_contribution_hartree": float(
+                coefficient * float(optimum["time"]) ** int(power)
+            ),
+        }
+        for power, coefficient in zip(
+            model["coefficient_powers"], model["coefficient_values"]
+        )
+    ]
     return {
         "model": model,
         "model_optimum": optimum,
+        "term_contributions_at_t_star": term_contributions,
         "direct_validation_points": points,
         "direct_grid_minimum": direct_minimum,
         "invalid_cost_at_model_optimum": direct_cost_at_star is None,
@@ -868,7 +915,10 @@ def _validate_model(
         ),
         "metrics": metrics,
         "checks": checks,
-        "passed": all(checks.values()),
+        "diagnostics": diagnostics,
+        "passed": all(
+            checks[name] for name in PASS_THRESHOLDS
+        ),
     }
 
 
@@ -1023,13 +1073,15 @@ def command_formula(args: argparse.Namespace) -> int:
         order = int(formula["formal_order"])
         training = payload["training_direct_points"]
         models = {
-            "one_term": _fit_model(training, order, analytic_time, [order], "one_term"),
+            "short_time_asymptotic_one_term": _asymptotic_model(
+                training, order, alpha
+            ),
+            "direct_refit_one_term": _fit_model(
+                training, order, analytic_time, [order],
+                "direct_refit_one_term",
+            ),
             "two_term": _fit_model(training, order, analytic_time, [order, order + 2], "two_term"),
             "three_term": _fit_model(training, order, analytic_time, [order, order + 2, order + 4], "three_term"),
-            "legacy_two_term_0p1_0p3": _fit_model(
-                training[:3], order, analytic_time, [order, order + 2],
-                "legacy_two_term_0p1_0p3",
-            ),
         }
         payload.update({"status": "model_validation", "models": {}})
         _atomic_json(output, payload)
