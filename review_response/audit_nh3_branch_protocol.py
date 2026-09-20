@@ -831,6 +831,15 @@ def report(
     out: Path, a: dict[str, Any], b: dict[str, Any], c: dict[str, Any]
 ) -> None:
     counts = a["qualified_counts_of_24"]
+    grid_changes = [
+        item for item in a["causal_contrast_rows"]
+        if item["grid_effect_at_low_floor"] != 0
+    ]
+    floor_changes = [
+        item for item in a["causal_contrast_rows"]
+        if item["floor_effect_on_old_grid"] != 0
+        or item["floor_effect_on_short_grid"] != 0
+    ]
     rows = [
         "# NH3 branch and short-time protocol audit",
         "",
@@ -844,6 +853,11 @@ def report(
         f"| Shorter 0.02-1.8 | {counts['legacy_molecular_sensitivity__5e-13']}/24 | {counts['legacy_molecular_sensitivity__5e-12']}/24 |",
         "",
         "Both grids use the same overlap-derived error, rolling window, order tolerance, and R2 criterion.",
+        f"Changing only the grid changes {len(grid_changes)}/24 fit statuses; changing only the floor changes {len(floor_changes)}/24.",
+        "The grid-only changes are: " + "; ".join(
+            f"{item['condition']}/{item['formula']}" for item in grid_changes
+        ) + ".",
+        "The improvement is due to the time grid in this 2x2 audit, not to raising the noise floor.",
         "The alternate grid/floor is a development sensitivity check only.",
         "",
         "## B. Direct effective-order intervals",
@@ -859,6 +873,16 @@ def report(
         rows.append(
             f"Full four-condition scale comparisons available: {len(coverage)}."
         )
+        for item in coverage:
+            rows.append(
+                f"{item['formula']}, {item['scale']}: log-center variance "
+                f"{item['log_center_variance']:.6g}; common interval "
+                f"{item['common_intersection']}."
+            )
+        rows.append(
+            "Only Yoshida 4 has four-condition plateau coverage; these data "
+            "do not establish a generally transferable dimensionless-time scale."
+        )
     else:
         rows.append(
             "No scale has four-condition plateau coverage; dimensionless-time scale selection remains undecided."
@@ -869,8 +893,10 @@ def report(
         "",
         f"Independent PF builds at 0.97 and 1.01 t* passed: {c['repeat_passed']}.",
         f"Continuous paths choose the maximum-ground branch at 1.01 t*: {c['same_connected_branch_at_1p01']}.",
+        f"Minimum adjacent selected-branch overlap probability: {min(item['max_ground_edge_probability'] for item in c['adjacent_overlap_audits']):.6f}.",
         f"Branch differences elsewhere on the cost grid: {len(c['branch_differences_on_cost_grid'])}.",
         f"Isolated 1.01 t* dip remains a physical finite-time candidate: {c['dip_physical_candidate']}.",
+        "The dip is a reproducible same-branch grid-local result, not proof of a smooth or global optimum.",
         "",
     ]
     for name, curve in c["curves"].items():
@@ -888,6 +914,9 @@ def report(
                 "",
             ]
     rows += [
+        "All three branch rules agree on this grid. The three-term model fails "
+        "the cost-loss and unseen-residual thresholds.",
+        "",
         "All other PF coefficients and Hamiltonians were unchanged.",
         "No coefficient search or new molecule was run.",
     ]
