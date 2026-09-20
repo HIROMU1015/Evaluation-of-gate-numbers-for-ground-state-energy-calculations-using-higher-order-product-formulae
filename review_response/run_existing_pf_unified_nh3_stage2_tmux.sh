@@ -86,4 +86,7 @@ PYTHONPATH="src:review_response:/home/AbeHiromu/venvs/trotter-common/lib/python3
     --plan "$PLAN" \
     --fine-dir "$FINE" \
     --output-dir "$OUT/aggregate" >"$LOGS/aggregate.log" 2>&1
+PYTHONPATH="src:review_response:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages" \
+  "$PYTHON" review_response/enrich_existing_pf_unified_nh3_report.py \
+    --artifact-dir "$OUT" >>"$LOGS/aggregate.log" 2>&1
 touch "$OUT/COMPLETE"
