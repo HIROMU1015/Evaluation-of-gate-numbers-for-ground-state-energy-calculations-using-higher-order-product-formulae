@@ -1,5 +1,9 @@
 {
   "base_result_commit": "46a7ed165650cb80506be14d997380e0bf333680",
+  "implementation_commit": "d288797a544c5e0ffac7bf1c46d7308de90fd9fb",
+  "numerical_result_commit": "33a761d44a24022ad61192c41a196dd4cb3afbca",
+  "plan_commit": "b2e0c49f1873b44ef7021afe60e02d6b0750713e",
+  "prevalidation_audit_commit": "2ba6174b6f9617d51766579c775a77132f3c7f57",
   "conditions": [
     "N2_active_eq_sto3g",
     "N2_active_stretch150_sto3g",
@@ -63,6 +67,23 @@
     "search_log": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-unused-molecule-holdout/artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/independence_search.log"
   },
   "protocol_id": "unused_molecule_frozen_holdout_v1",
+  "instruction_sha256": "6b8e66042e79edc91b3cd159073eed60d515c8beedcea7af29ed655bac1175ac",
   "protocol_sha256": "b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56",
-  "status": "preflight_complete"
+  "post_run_audit": {
+    "audited_on": "2026-09-22",
+    "aggregate_reproduction": "matched committed summary except four floating-point residual values differing by at most 4.3e-17",
+    "all_review_tests": "82 passed independently on numerical result commit",
+    "dedicated_tests": "5 passed independently on numerical result commit",
+    "execution_span_seconds_from_committed_timestamps": 965.975216,
+    "maximum_cpu_rss_kib_from_raw": 994836,
+    "maximum_gpu_memory_increment_mib_from_raw": 773,
+    "numerical_raw_modified_by_audit": false,
+    "known_protocol_deviations": [
+      "direct eigenpair selection maximized exact-ground overlap independently at each time; adjacent overlap was measured but not used to choose the branch",
+      "the pilot artifact contains the GPU-build plus CPU-Schur path but not the requested CPU-only comparison",
+      "the original run did not include every requested runner-specific test or a portable content-validated resume key",
+      "stage2 source paths are absolute paths from the execution server"
+    ]
+  },
+  "status": "complete_with_post_run_audit"
 }

@@ -1,6 +1,31 @@
 # Unused-molecule frozen hold-out
 
-Status: complete
+Status: numerical calculation complete; post-run audit complete on 2026-09-22
+
+Unfinished or nonconforming items from the original execution protocol are listed in **Post-run audit and limitations** below. The audit did not change any numerical raw JSON.
+
+## Provenance and fixed specification
+
+- Base result commit: `46a7ed165650cb80506be14d997380e0bf333680`
+- Hold-out plan commit: `b2e0c49f1873b44ef7021afe60e02d6b0750713e`
+- Prevalidation audit commit: `2ba6174b6f9617d51766579c775a77132f3c7f57`
+- Runner implementation commit: `d288797a544c5e0ffac7bf1c46d7308de90fd9fb`
+- Numerical result commit: `33a761d44a24022ad61192c41a196dd4cb3afbca`
+- Instruction SHA-256: `6b8e66042e79edc91b3cd159073eed60d515c8beedcea7af29ed655bac1175ac`
+- Protocol SHA-256: `b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56`
+- Independence audit: no prior HF/N2/CO PF-error or QPE-cost numerical result was identified before this run; the recorded matches were planning and protocol references.
+
+The six Hamiltonians passed the frozen metadata checks. N2 and CO used STO-3G, two frozen core spatial orbitals, CAS(10e,8o), `n_alpha=n_beta=5`, and population-sector dimension 3136 before an additional exact diagonal-Z2 restriction. HF used all 10 electrons in 6 spatial orbitals, `n_alpha=n_beta=5`, and population-sector dimension 36 before the same type of exact restriction. Equilibrium and uniformly 1.5-times-stretched geometries were evaluated for each molecule.
+
+## Execution and resource summary
+
+- Recorded execution span: 965.98 s (about 16.1 min), based on the earliest and latest committed timestamps.
+- Maximum recorded CPU RSS: 994836 KiB (about 0.95 GiB).
+- Maximum recorded GPU-memory increment: 773 MiB.
+- Executed direct-point backend: GPU dense PF construction followed by CPU Schur decomposition.
+- Direct calibration: five signed PF-eigenvalue points per Hamiltonian/PF for the primary models; the fixed three-point ablation was retained separately.
+
+The required CPU-only versus GPU pilot comparison was not saved. Therefore the selected backend is documented as the executed route, not as a demonstrated fastest route.
 
 The five-point direct calibration is oracle-assisted; this does not validate a cheap practical estimator.
 
@@ -13,6 +38,10 @@ The five-point direct calibration is oracle-assisted; this does not validate a c
 | two_term_center | 4/4 | True | 2/4 | 4/4 |
 | m5_best | 0/4 | False | 1/4 | 1/4 |
 | yoshida6_m3 | 4/4 | True | 3/4 | 4/4 |
+
+Among the PF/model pairs that passed all four primary conditions, `current_m3` had the lowest direct grid-minimum cost. Relative to `current_m3`, the observed ranges over the four primary conditions were 1.148--1.161 for `two_term_center`, 1.900--1.936 for Yoshida 4th order, and 1.587--1.770 for Yoshida 6th order. The fixed 1% cost margin repaired all frozen-budget misses for these four passing PFs. The largest required margin inferred for Yoshida 4th order or `two_term_center` was only about 0.032%.
+
+For the auxiliary full-electron HF conditions, Yoshida 4th order plus the primary two-term model passed the four model criteria at equilibrium. No fixed primary PF/model pair passed all four criteria at the 1.5-times-stretched HF geometry. Thus the main conclusion is restricted to the frozen-core active-space N2/CO conditions and does not establish full-electron universality.
 
 ## Per-condition metrics
 
@@ -81,3 +110,13 @@ The five-point direct calibration is oracle-assisted; this does not validate a c
 
 Local-grid minima are minima over calculated points, not exact continuous-time minima.
 The run stops after the six frozen conditions; no coefficient or molecule adaptation was performed.
+
+## Post-run audit and limitations
+
+An independent checkout of result commit `33a761d` passed the five dedicated tests and all 82 `review_tests`. Re-aggregation from the committed raw JSON reproduced every status, pass/fail result, budget decision, and displayed metric. Four residual values differed at the last floating-point digits only; the maximum absolute difference was `4.3e-17`.
+
+The direct eigensolver selected, at each time independently, the eigenvector having maximum overlap with the exact Hamiltonian ground state. The previous-time selected vector was used to record adjacent overlap but did not determine the selected branch. This is not a literal implementation of continuous tracking from `t -> 0`. For the four passing active-space primary pairs, the minimum recorded adjacent overlap was at least 0.99997 and the maximum eigenpair residual was below `2.9e-14`, so no branch-switch symptom affects their reported pass result. This caveat remains part of the method definition and must be corrected in future runners.
+
+The original result package also lacked the requested CPU-only pilot, some runner-specific preflight tests, content-validated resume keys, and portable stage-2 source paths. These are provenance and restartability limitations. They do not change the preserved raw numerical result, but this branch should not be used as a template for a new computation without addressing them.
+
+After these results were inspected, N2, CO, and HF became development/diagnostic systems. Any HF/CISD proxy rule, model rule, or safety margin selected using this result requires a newly frozen molecule-level hold-out for its final evaluation.

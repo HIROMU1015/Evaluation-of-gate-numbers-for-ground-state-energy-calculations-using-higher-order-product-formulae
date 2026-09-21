@@ -1,0 +1,63 @@
+{
+  "audit_date": "2026-09-22",
+  "numerical_result_commit": "33a761d44a24022ad61192c41a196dd4cb3afbca",
+  "implementation_commit": "d288797a544c5e0ffac7bf1c46d7308de90fd9fb",
+  "numerical_raw_modified": false,
+  "hashes": {
+    "instruction_sha256": "6b8e66042e79edc91b3cd159073eed60d515c8beedcea7af29ed655bac1175ac",
+    "instruction_matches_frozen_value": true,
+    "protocol_sha256": "b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56",
+    "protocol_matches_frozen_value": true
+  },
+  "tests": {
+    "dedicated": {
+      "passed": 5,
+      "failed": 0
+    },
+    "all_review_tests": {
+      "passed": 82,
+      "failed": 0
+    }
+  },
+  "aggregate_reproduction": {
+    "statuses_match": true,
+    "pass_fail_results_match": true,
+    "budget_results_match": true,
+    "primary_summary_matches": true,
+    "rows_compared": 60,
+    "floating_values_differing_only_at_roundoff": 4,
+    "maximum_absolute_difference": 4.3e-17
+  },
+  "resources_recovered_from_committed_raw": {
+    "execution_span_seconds": 965.975216,
+    "maximum_cpu_rss_kib": 994836,
+    "maximum_gpu_memory_increment_mib": 773,
+    "executed_direct_backend": "gpu_component_sector_dense_final_cpu_schur"
+  },
+  "primary_numerical_health": {
+    "minimum_adjacent_selected_vector_overlap_probability_over_passing_primary_pairs": 0.9999765177879926,
+    "maximum_eigenpair_residual_2_norm_over_passing_primary_pairs": 2.896860335977896e-14
+  },
+  "known_protocol_deviations": [
+    {
+      "id": "branch_selection",
+      "description": "The selected eigenvector independently maximized exact-ground overlap at each time. Adjacent overlap was diagnostic and did not choose the branch.",
+      "impact_on_primary_conclusion": "No observed branch-switch symptom in passing primary rows, but the fixed continuous-tracking rule was not implemented literally."
+    },
+    {
+      "id": "pilot_comparison",
+      "description": "Only the GPU-build plus CPU-Schur pilot was saved; the requested CPU-only comparison was absent.",
+      "impact_on_primary_conclusion": "No numerical-result impact; fastest-backend selection was not demonstrated."
+    },
+    {
+      "id": "test_scope",
+      "description": "The original run did not add every runner-specific preflight test requested by the execution prompt.",
+      "impact_on_primary_conclusion": "Independent existing tests passed, but requested coverage was incomplete."
+    },
+    {
+      "id": "resume_portability",
+      "description": "Resume checks were status-oriented and stage-2 planning retained execution-server absolute paths.",
+      "impact_on_primary_conclusion": "The committed raw can be re-aggregated, but recomputation is not portable without path repair."
+    }
+  ]
+}
