@@ -16,7 +16,7 @@ export OMP_NUM_THREADS=4
 export MKL_NUM_THREADS=4
 
 mkdir -p "$ARTIFACT"/{cache,echo,truth,logs,aggregate,tests}
-exec > >(tee -a "$ARTIFACT/logs/run.log") 2>&1
+exec >> "$ARTIFACT/logs/run.log" 2>&1
 
 echo "[$(date --iso-8601=seconds)] H01 start: $ARTIFACT"
 cd "$ROOT"
