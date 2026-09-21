@@ -1,0 +1,70 @@
+{
+  "aggregate": "aggregate/summary.json",
+  "conditions": [
+    "N2_active_eq_sto3g",
+    "N2_active_stretch150_sto3g",
+    "CO_active_eq_sto3g",
+    "CO_active_stretch150_sto3g",
+    "HF_full_eq_sto3g",
+    "HF_full_stretch150_sto3g"
+  ],
+  "environment": {
+    "packages": {
+      "cupy-cuda12x": "13.6.0",
+      "numpy": "1.26.4",
+      "openfermion": "1.6.1",
+      "pyscf": "2.7.0",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1",
+      "qiskit-aer-gpu": "0.15.1",
+      "scipy": "1.14.1"
+    },
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "python_executable": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/bin/python"
+  },
+  "final_implementation_commit": "29dfb13",
+  "formulae": [
+    "current_m3",
+    "yoshida4"
+  ],
+  "git": {
+    "branch": "gpu-h01-approximate-state-calibration-results",
+    "commit": "e0692a83b06cd2660804f70618b142bc39b6209b",
+    "dirty": true,
+    "status": [
+      "?? artifacts/server_h01_approximate_state_calibration_20260922_010828_3dd640e/",
+      "?? artifacts/server_h01_approximate_state_calibration_20260922_011006_0eaace0/",
+      "?? artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/"
+    ]
+  },
+  "known_incomplete": [
+    "H05 end-to-end time-scale determination is outside H01 scope",
+    "exact analytic_time is deliberately reused as an oracle query scale"
+  ],
+  "post_run_audit": "post_run_audit.json",
+  "protocol_expected_sha256": "e0e2649db1f8d109779ab1db26822f45c92c2a660569caa643f5f363e3ce27a6",
+  "protocol_hash_matches": true,
+  "protocol_id": "h01_approximate_state_calibration_v1",
+  "protocol_sha256": "e0e2649db1f8d109779ab1db26822f45c92c2a660569caa643f5f363e3ce27a6",
+  "server_only_excluded_from_git": [
+    "cache/*.pkl",
+    "cache/*_work/",
+    "truth/checkpoints/"
+  ],
+  "source": {
+    "audit_base_commit": "3fb7974",
+    "numerical_artifact": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797",
+    "numerical_result_branch": "gpu-unused-molecule-frozen-holdout-results",
+    "numerical_result_commit": "33a761d44a24022ad61192c41a196dd4cb3afbca",
+    "oracle_protocol_sha256": "b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56",
+    "post_run_audit_path": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/post_run_audit.json",
+    "post_run_audit_sha256": "a2e588a7d117f8ab1d0bdad44ccad0a41d806859a5027ceabb7f47d3255bd84f"
+  },
+  "state_methods": [
+    "exact_ground",
+    "rhf_determinant",
+    "cisd"
+  ],
+  "status": "complete"
+}
