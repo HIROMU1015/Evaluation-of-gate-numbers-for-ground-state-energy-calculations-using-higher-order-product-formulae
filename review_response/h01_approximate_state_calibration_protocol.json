@@ -1,0 +1,152 @@
+{
+  "protocol_id": "h01_approximate_state_calibration_v1",
+  "frozen_on": "2026-09-22",
+  "research_question": "Can the exact ground state used by the finite-time PF calibration be replaced by RHF or CISD states while preserving PF feasibility, QPE cost prediction, and PF ranking?",
+  "source": {
+    "audit_base_commit": "3fb7974",
+    "numerical_result_branch": "gpu-unused-molecule-frozen-holdout-results",
+    "numerical_result_commit": "33a761d44a24022ad61192c41a196dd4cb3afbca",
+    "numerical_artifact": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797",
+    "oracle_protocol_sha256": "b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56"
+  },
+  "information_access": {
+    "mode": "development_state_substitution_diagnostic",
+    "exact_ground_state_allowed_for": [
+      "oracle reference data already recorded in the source artifact",
+      "post hoc state overlap and error evaluation",
+      "direct validation at newly required absolute times"
+    ],
+    "exact_ground_state_forbidden_for": [
+      "RHF state construction",
+      "CISD state construction",
+      "proxy coefficient fitting",
+      "proxy model selection"
+    ],
+    "oracle_analytic_time_use": "The source run's analytic time fixes the query locations in this H01 controlled diagnostic. End-to-end cheap determination of alpha and the time scale is deferred to H05."
+  },
+  "conditions": {
+    "primary_development": [
+      "N2_active_eq_sto3g",
+      "N2_active_stretch150_sto3g",
+      "CO_active_eq_sto3g",
+      "CO_active_stretch150_sto3g"
+    ],
+    "auxiliary_failure_diagnostic": [
+      "HF_full_eq_sto3g",
+      "HF_full_stretch150_sto3g"
+    ]
+  },
+  "formulae": [
+    {
+      "pf": "current_m3",
+      "formal_order": 4,
+      "model_powers": [4, 6],
+      "role": "low_cost_primary"
+    },
+    {
+      "pf": "yoshida4",
+      "formal_order": 4,
+      "model_powers": [4, 6],
+      "role": "predictability_reference"
+    }
+  ],
+  "state_methods": [
+    {
+      "id": "exact_ground",
+      "role": "proxy_upper_bound_and_oracle_state_control"
+    },
+    {
+      "id": "rhf_determinant",
+      "role": "low_cost_approximate_state"
+    },
+    {
+      "id": "cisd",
+      "role": "correlated_approximate_state",
+      "frozen_core_and_orbital_space": "must exactly match the Hamiltonian condition"
+    }
+  ],
+  "proxy": {
+    "echo_amplitude": "z_echo(t)=<phi|exp(-i H t) U_PF(t)|phi>, using the sign convention of the source runner",
+    "primary_signed_quantity": "continuous_unwrapped_arg(z_echo(t))/t",
+    "diagnostic_signed_quantity": "imag(z_echo(t))/t",
+    "legacy_energy_rotated_overlap": "diagnostic_only",
+    "direct_eigenvalue_shift_label_forbidden": true,
+    "phase_unwrap": "start at the smallest positive time and choose the continuous phase branch"
+  },
+  "calibration": {
+    "time_scale": "reuse each source PF/Hamiltonian analytic_time only to isolate state substitution",
+    "primary_relative_to_source_t_ana": [0.1, 0.2, 0.3, 0.4, 0.5],
+    "information_ablation_relative_to_source_t_ana": [0.1, 0.2, 0.3],
+    "fit": "unweighted signed least squares with fixed powers [4,6]",
+    "primary_model": "echo_phase_5point",
+    "diagnostic_models": [
+      "echo_phase_3point",
+      "echo_imag_5point",
+      "echo_imag_3point"
+    ]
+  },
+  "direct_validation": {
+    "source_raw_reuse_required": true,
+    "coarse_relative_to_proxy_t_star": [0.85, 0.9, 0.95, 1.0, 1.05, 1.1, 1.15],
+    "fine_relative_to_proxy_t_star": {
+      "start": 0.9,
+      "stop": 1.1,
+      "step": 0.01
+    },
+    "fine_candidate_rule": "same fixed rule as the source hold-out: all four pass, one near-threshold failure, or a conclusion-changing isolated minimum",
+    "absolute_time_deduplication": true,
+    "new_direct_points": "compute only absolute times not already present in source raw/fine data and only when needed for the fixed proxy-model assessment",
+    "branch_rule": "track the eigenbranch continuously from sufficiently small time; compare against maximum exact-ground overlap and flag any disagreement",
+    "primary_minimum": "minimum over directly calculated grid points, not a continuous-time minimum"
+  },
+  "target_error_hartree": 0.00015936001019904,
+  "pass_thresholds": {
+    "eta_star": 0.01,
+    "eta_min": 0.01,
+    "eta_t": 0.05,
+    "maximum_unseen_residual_over_epsilon": 0.05
+  },
+  "frozen_budget_cost_multipliers": [1.0, 1.01],
+  "primary_success": {
+    "unit": "one fixed state method, PF, proxy definition, point count, and four-condition active-space set",
+    "exact_ground_echo_sanity": "echo_phase_5point must reproduce the source oracle conclusion or the proxy definition is rejected before interpreting approximate states",
+    "cisd_transfer": "CISD echo_phase_5point passes all four primary conditions and the 1.01 frozen budget in all four",
+    "rhf_transfer": "reported with the same criteria but not required for CISD success",
+    "pf_selection": "among proxy-feasible PFs, the proxy must identify the same lowest-direct-cost PF as the exact source result",
+    "auxiliary_hf": "reported separately; it cannot change the primary active-space success decision"
+  },
+  "state_diagnostics": [
+    "normalization",
+    "energy_expectation_hartree",
+    "energy_error_hartree",
+    "energy_variance_hartree2",
+    "hamiltonian_residual_2_norm",
+    "overlap_probability_with_exact_ground_for_evaluation_only",
+    "state_generation_wall_seconds",
+    "state_generation_peak_memory_bytes"
+  ],
+  "comparison_outputs": [
+    "proxy a4 and a6 versus direct-fit a4 and a6",
+    "proxy t_star versus oracle-model and direct-grid times",
+    "the four existing cost-prediction metrics",
+    "frozen-budget target achievement at multipliers 1.0 and 1.01",
+    "PF feasibility and lowest-cost PF selection",
+    "classical calibration time and memory including state preparation and exact-reference evolution"
+  ],
+  "scope": {
+    "allowed": [
+      "reuse source raw truth and server-local Hamiltonian caches after hash validation",
+      "rebuild caches when hashes or required fields are absent",
+      "compute only missing direct truth points required by the fixed validation grids",
+      "compare CPU and GPU implementations in a representative pilot"
+    ],
+    "forbidden": [
+      "change PF coefficients",
+      "add model powers or rational models",
+      "tune time points, thresholds, or safety margin after seeing results",
+      "add molecules or bases",
+      "claim end-to-end cheap calibration",
+      "perform F01, F02, F05, H02, H03, H04, H05, or new PF searches"
+    ]
+  }
+}
