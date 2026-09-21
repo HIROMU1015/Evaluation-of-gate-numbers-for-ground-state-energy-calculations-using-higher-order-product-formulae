@@ -4,8 +4,8 @@
   },
   "final_implementation_commit": "29dfb13",
   "git_policy": {
-    "exclude": "rebuildable *.pkl, selected-vector *.npy, checkpoint cache tree, PySCF scratch",
-    "include": "final JSON/CSV/report/figures/tests/logs/cache metadata"
+    "exclude": "rebuildable *.pkl, selected-vector *.npy, checkpoint cache tree, PySCF scratch, globally ignored test logs, self-referential manifests",
+    "include": "final JSON/CSV/report/figures/logs/cache metadata"
   },
   "protocol_sha256": "e0e2649db1f8d109779ab1db26822f45c92c2a660569caa643f5f363e3ce27a6",
   "recovery": {
@@ -24,7 +24,7 @@
     "echo_json": 12,
     "formulae": 2,
     "new_direct_truth_points": 783,
-    "time_level_checkpoints_server_only": 783,
+    "time_level_checkpoints_server_only": 0,
     "truth_json": 12
   },
   "run_start_commit": "e0692a83b06cd2660804f70618b142bc39b6209b",
@@ -85,19 +85,9 @@
       "sha256": "3fb75498d33459df45a857c4c8aefbb6aa058925a1767c9e2678e10f1f8f42c5"
     },
     {
-      "bytes": 15390,
-      "path": "aggregate/tracked_files.json",
-      "sha256": "d1e77d780c9b49544ed9c922cde1e1960d414ad175d93b33c736fcb7cf8088be"
-    },
-    {
       "bytes": 15271,
       "path": "cache/CO_active_eq_sto3g.metadata.json",
       "sha256": "506ec1abd784982c00dcd6cd817e63126d6c696994cbdcf66eef130b6f977aa5"
-    },
-    {
-      "bytes": 101,
-      "path": "cache/CO_active_eq_sto3g_work/pyscf.log",
-      "sha256": "8aedd9315f160113c936de7bf0fe84dddf2ecf51e8b2007bbce89bb6f9a21cd7"
     },
     {
       "bytes": 15093,
@@ -105,19 +95,9 @@
       "sha256": "1be954c99c251695f20877669a6ebab5b5b9dfdb1ea54c6b5418a88e6871b19a"
     },
     {
-      "bytes": 101,
-      "path": "cache/CO_active_stretch150_sto3g_work/pyscf.log",
-      "sha256": "35ef54198bfe43c62dcdf8ea04263e197a9d75fc6b06f9697fd79234235373d2"
-    },
-    {
       "bytes": 10950,
       "path": "cache/HF_full_eq_sto3g.metadata.json",
       "sha256": "1cc7f3aff1d97de8e1bd54128fcbdeda96d7444b76fc093389103992e7c3f3cf"
-    },
-    {
-      "bytes": 102,
-      "path": "cache/HF_full_eq_sto3g_work/pyscf.log",
-      "sha256": "70fba31b70c6fa5e4560fb47577cf5893af43f82b59a5a4c954b1670f30996b5"
     },
     {
       "bytes": 10913,
@@ -125,29 +105,14 @@
       "sha256": "83f38addb1ae55c62cee9bb395bd4ddf688ee2eec7d099baf5638544ed423354"
     },
     {
-      "bytes": 102,
-      "path": "cache/HF_full_stretch150_sto3g_work/pyscf.log",
-      "sha256": "8e277fea9f1bc9073d6fc604694ea0c66af34e31e6b5f2be751ad3060488c5aa"
-    },
-    {
       "bytes": 13711,
       "path": "cache/N2_active_eq_sto3g.metadata.json",
       "sha256": "f853f118703e892873a4deb49612318577fb18b4555484e423ced4f17d4a9c8f"
     },
     {
-      "bytes": 101,
-      "path": "cache/N2_active_eq_sto3g_work/pyscf.log",
-      "sha256": "55dee2ec02a3d3ac23efd4a98c72be31407aa4c088fc5718182af2faf8746823"
-    },
-    {
       "bytes": 13894,
       "path": "cache/N2_active_stretch150_sto3g.metadata.json",
       "sha256": "5ff9bdbbbbb4bfa2a63255a068c9f1211e8fb10598a341ae2b106f4d7715a725"
-    },
-    {
-      "bytes": 101,
-      "path": "cache/N2_active_stretch150_sto3g_work/pyscf.log",
-      "sha256": "feb99c3e46b5e5efccd11bb5273646f81a9656110fb1ec7f307a0f8f2d2ca98c"
     },
     {
       "bytes": 28413,
@@ -415,39 +380,9 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "bytes": 2622,
-      "path": "manifest.json",
-      "sha256": "ad1292f90e861e9a995d02a35d56a9fc1e7ed4fbedd4095293f71cd12cddf824"
-    },
-    {
       "bytes": 2018,
       "path": "pilot.json",
       "sha256": "5edae23f73fef12c7e1005f7f87abeab94a1ead3394f924ce786fbae7fd4c1c1"
-    },
-    {
-      "bytes": 17157,
-      "path": "post_run_audit.json",
-      "sha256": "11e5f411c873941d7e361d074ed900a5ba5c505c81ee8a32b0d512ba785234ba"
-    },
-    {
-      "bytes": 98,
-      "path": "tests/focused.log",
-      "sha256": "21c5fc0b50f69414b6518567671a543d1624974559c7ef835d2ec36c15a00adb"
-    },
-    {
-      "bytes": 179,
-      "path": "tests/review_tests.log",
-      "sha256": "aaf02f990c0c23d75e8a49b0805abecd02a55497489ed99d41b5a8f881018e62"
-    },
-    {
-      "bytes": 179,
-      "path": "tests/review_tests_final.log",
-      "sha256": "adee2298472f5bdf98b6eabe18b548a0c57e2e1c644f12757336338bb2631bc1"
-    },
-    {
-      "bytes": 179,
-      "path": "tests/review_tests_retry1.log",
-      "sha256": "f551e6c7790f8d87be826eb8b1f5b9e3278b084cee417009ebbafb0943f487d7"
     },
     {
       "bytes": 631527,

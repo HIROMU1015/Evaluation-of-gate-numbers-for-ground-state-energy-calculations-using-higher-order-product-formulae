@@ -261,16 +261,40 @@ def main() -> int:
     ]
     (root / "aggregate/report.md").write_text("\n".join(reports) + "\n", encoding="utf-8")
 
+    # Keep this inventory reproducible after a fresh clone.  Server-only
+    # scratch, globally ignored test logs, and the self-referential inventory
+    # files cannot have stable hashes in the JSON that contains those hashes.
+    inventory_exclusions = {
+        "aggregate/tracked_files.json",
+        "manifest.json",
+        "post_run_audit.json",
+    }
     tracked_candidates = []
     for path in sorted(root.rglob("*")):
         if not path.is_file():
             continue
         relative = path.relative_to(root)
-        if path.suffix in {".pkl", ".npy"} or "_work" in relative.parts or "checkpoints" in relative.parts:
+        if (
+            str(relative) in inventory_exclusions
+            or path.suffix in {".pkl", ".npy"}
+            or any(part.endswith("_work") for part in relative.parts)
+            or "checkpoints" in relative.parts
+            or "tests" in relative.parts
+        ):
             continue
         tracked_candidates.append({
             "path": str(relative), "bytes": path.stat().st_size, "sha256": sha256(path)
         })
+    dump(root / "aggregate/tracked_files.json", {
+        "status": "complete",
+        "policy": (
+            "fresh-clone-stable inventory; excludes rebuildable caches, scratch, "
+            "globally ignored test logs, and self-referential manifests"
+        ),
+        "file_count": len(tracked_candidates),
+        "total_bytes": sum(int(item["bytes"]) for item in tracked_candidates),
+        "files": tracked_candidates,
+    })
     log_text = (root / "logs/run.log").read_text(encoding="utf-8") + (root / "logs/recovery_duplicate_truth.log").read_text(encoding="utf-8")
     stamps = re.findall(r"\[(\d{4}-\d{2}-\d{2}T[^]]+)\]", log_text)
     audit = {
@@ -298,8 +322,11 @@ def main() -> int:
             "numerical_points_lost": 0,
         },
         "git_policy": {
-            "include": "final JSON/CSV/report/figures/tests/logs/cache metadata",
-            "exclude": "rebuildable *.pkl, selected-vector *.npy, checkpoint cache tree, PySCF scratch",
+            "include": "final JSON/CSV/report/figures/logs/cache metadata",
+            "exclude": (
+                "rebuildable *.pkl, selected-vector *.npy, checkpoint cache tree, "
+                "PySCF scratch, globally ignored test logs, self-referential manifests"
+            ),
         },
         "tracked_candidate_files": tracked_candidates,
         "timestamps": {"first": stamps[0] if stamps else None, "last": stamps[-1] if stamps else None},

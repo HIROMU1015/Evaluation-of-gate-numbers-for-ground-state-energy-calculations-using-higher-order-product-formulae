@@ -1,0 +1,83 @@
+{
+  "protocol_id": "h02_finite_time_controlled_state_diagnosis_v1",
+  "purpose": "Diagnose whether scalar approximate-state quality metrics are sufficient for finite-time two-term PF cost calibration.",
+  "source": {
+    "h01_result_branch": "gpu-h01-approximate-state-calibration-results",
+    "h01_result_commit": "568f00249abb5b89ae3e6bb39cb4af87ed8581bd",
+    "h01_artifact": "artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8",
+    "h01_protocol_sha256": "e0e2649db1f8d109779ab1db26822f45c92c2a660569caa643f5f363e3ce27a6",
+    "direct_truth_policy": "Reuse H01 exact-ground direct costs and branch audit; add no direct PF eigenvalue calculations."
+  },
+  "conditions": [
+    "N2_active_eq_sto3g",
+    "N2_active_stretch150_sto3g",
+    "CO_active_eq_sto3g",
+    "CO_active_stretch150_sto3g"
+  ],
+  "formulae": [
+    "current_m3",
+    "yoshida4"
+  ],
+  "controlled_state_construction": {
+    "directions": [
+      "cisd_orthogonal_component",
+      "rhf_orthogonal_component"
+    ],
+    "target_energy_errors_hartree": [
+      0.001,
+      0.005,
+      0.01,
+      0.05
+    ],
+    "relative_phases_radians": [
+      0.0,
+      1.5707963267948966,
+      3.141592653589793,
+      4.71238898038469
+    ],
+    "maximum_excited_weight": 0.25,
+    "definition": "sqrt(1-q)|psi0> + exp(i phi)sqrt(q)|chi>, q=target_energy_error/(<chi|H|chi>-E0), with chi the normalized component of the named approximate state orthogonal to psi0"
+  },
+  "calibration": {
+    "oracle_time_source": "H01 exact-state analytic_time",
+    "relative_times": [
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ],
+    "proxy": "arg(<phi|exp(-iHt)U_PF(t)|phi>)/t with continuous unwrap",
+    "model_powers": [
+      4,
+      6
+    ],
+    "fit": "unweighted signed least squares",
+    "backend": "cpu_complex128_sparse_state_action"
+  },
+  "evaluation": {
+    "exact_proxy_reference": "H01 exact_ground echo_phase_5point",
+    "direct_pf_reference": "H01 exact-ground direct grid minimum cost",
+    "state_scalar_invariance_absolute_tolerance": 1e-10,
+    "reconstruction_metadata_absolute_tolerance_hartree": 1e-9,
+    "reconstruction_state_diagnostic_absolute_tolerance": 1e-6,
+    "exact_echo_reproduction_absolute_tolerance_hartree": 1e-9,
+    "meaningful_relative_optimum_time_spread": 0.01,
+    "meaningful_relative_model_cost_spread": 0.01,
+    "constructive_counterexample": "A phase quartet with invariant energy error, variance, residual norm, and exact overlap that changes PF choice or exceeds either meaningful spread threshold.",
+    "primary_outputs": [
+      "two-term coefficient error relative to exact-state echo",
+      "predicted optimum-time and model-cost error",
+      "PF choice and direct-cost regret",
+      "phase-quartet scalar invariance and response spread",
+      "descriptive correlations of scalar diagnostics with calibration error"
+    ]
+  },
+  "scope_limits": [
+    "Development-only oracle diagnostic, not an independent holdout.",
+    "Exact ground state is used to construct controlled states and only to diagnose mechanism.",
+    "No new direct PF eigenvalue points are computed.",
+    "No PF coefficients, model powers, thresholds, molecules, bases, or target precision are changed.",
+    "This does not establish an operational cheap calibration method."
+  ]
+}
