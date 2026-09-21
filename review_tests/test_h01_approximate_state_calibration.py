@@ -78,3 +78,21 @@ def test_proxy_fit_does_not_clip_infeasible_error_budget() -> None:
     epsilon = h01._protocol()["target_error_hartree"]
     assert h01.diagnosis._cost(1.0, epsilon, 10) is None
 
+
+
+def test_truth_lookup_deduplicates_identical_reused_points() -> None:
+    points = [
+        {"time": 0.25, "signed_direct_shift_hartree": -1.2e-5, "truth_provenance": "audited_source_artifact"},
+        {"time": 0.25, "signed_direct_shift_hartree": -1.2e-5, "truth_provenance": "audited_source_artifact"},
+    ]
+    assert h01._truth_at(points, 0.25)["signed_direct_shift_hartree"] == -1.2e-5
+
+
+def test_truth_lookup_rejects_inconsistent_duplicates() -> None:
+    points = [
+        {"time": 0.25, "signed_direct_shift_hartree": -1.2e-5},
+        {"time": 0.25, "signed_direct_shift_hartree": -1.1e-5},
+    ]
+    import pytest
+    with pytest.raises(RuntimeError, match="inconsistent duplicate truth"):
+        h01._truth_at(points, 0.25)

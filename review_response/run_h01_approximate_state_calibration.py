@@ -919,9 +919,30 @@ def _compute_truth(
 
 def _truth_at(points: Sequence[dict[str, Any]], time_value: float) -> dict[str, Any]:
     matches = [point for point in points if _same_time(point["time"], time_value)]
-    if len(matches) != 1:
-        raise RuntimeError(f"expected one truth point at {time_value}, found {len(matches)}")
-    return dict(matches[0])
+    if not matches:
+        raise RuntimeError(f"expected a truth point at {time_value}, found none")
+    reference = matches[0]
+    for duplicate in matches[1:]:
+        shift_difference = abs(
+            float(duplicate["signed_direct_shift_hartree"])
+            - float(reference["signed_direct_shift_hartree"])
+        )
+        if shift_difference > 1e-11:
+            raise RuntimeError(
+                f"inconsistent duplicate truth at {time_value}: "
+                f"signed-shift difference {shift_difference}"
+            )
+    # Reuse can make the same audited point appear in the source, coarse, and
+    # fine collections.  Identical duplicates are one physical truth point.
+    preferred = next(
+        (
+            point for point in reversed(matches)
+            if point.get("truth_provenance")
+            == "new_h01_continuous_branch_calculation"
+        ),
+        matches[-1],
+    )
+    return dict(preferred)
 
 
 def _model_metrics(
