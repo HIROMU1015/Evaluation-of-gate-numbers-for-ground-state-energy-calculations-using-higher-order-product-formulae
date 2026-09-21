@@ -25,6 +25,7 @@ from .io_cache import load_data, label_replace
 from .chemistry_hamiltonian import jw_hamiltonian_maker
 from .product_formula import _get_w_list
 from .analysis_utils import loglog_fit
+from .cost_validation import analytic_optimal_time
 from .plot_utils import set_loglog_axes, unique_legend_entries
 
 
@@ -196,6 +197,11 @@ def _qpe_iteration_factor(alpha: float, p: float, epsilon_e: float) -> float:
         * ((1.0 + p) / (p * epsilon_e))
         * ((alpha * (1.0 + p) / epsilon_e) ** (1.0 / p))
     )
+
+
+def _t_depth_optimal_time(alpha: float, order: int, epsilon_e: float) -> float:
+    """Return the validated power-law optimum used for rotation synthesis."""
+    return analytic_optimal_time(float(alpha), int(order), float(epsilon_e))
 
 
 def _apply_loglog_fit_with_bands(
@@ -560,7 +566,7 @@ def t_depth_extrapolation(
             # L_Z RZ のレイヤー数
             pf_layer_rz = PF_RZ_LAYER[mol][n_w]
 
-            t = (target_error / coeff * (expo + 1))**(1/expo)
+            t = _t_depth_optimal_time(coeff, expo, target_error)
             M_qpe = _qpe_iteration_factor(
                 float(coeff),
                 float(expo),
@@ -687,7 +693,7 @@ def t_depth_extrapolation_diff(
             # L_Z RZ のレイヤー数
             pf_layer_rz = PF_RZ_LAYER[mol][n_w]
 
-            t = (target_error / coeff * (expo + 1))**(1/expo)
+            t = _t_depth_optimal_time(coeff, expo, target_error)
             M_qpe = _qpe_iteration_factor(
                 float(coeff),
                 float(expo),

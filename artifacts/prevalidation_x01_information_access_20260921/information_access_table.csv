@@ -1,0 +1,16 @@
+information_id,information,pipeline_role,saved_stage,current_access_class,used_for_model_fit,used_for_pf_or_time_selection,used_only_for_scoring,available_in_oracle_evaluation,available_in_practical_target_calibration_without_exact_state,available_in_transfer_only,evidence
+I01,"geometry, basis, charge, multiplicity, active-space definition",defines the target Hamiltonian,input,declared public input,False,False,False,True,True,True,raw system metadata
+I02,ordered grouped Hamiltonian and conservation sector,builds every PF action,input/construction,target-specific constructed input,True,True,False,True,True,True,raw system metadata and component spectra
+I03,"PF weights, S2 sequence, rotations per step",defines candidate and quantum step cost,input,declared candidate data,True,True,False,True,True,True,raw formula record
+I04,target epsilon_E and beta,defines analytic time and QPE cost,input,declared protocol input,False,True,False,True,True,True,runner constants and cost formula
+I05,exact ground energy E0,rotates short-time overlap and unwraps direct PF phase,calibration and scoring,exact oracle truth,True,True,False,True,False,False,exp(-i*system['energy']*t) in runner
+I06,exact ground-state vector |psi0>,short-time overlap and PF eigenbranch identification,calibration and scoring,exact oracle truth,True,True,False,True,False,False,"np.vdot(state,evolved) and vectors^dagger@state"
+I07,short-time leading coefficient alpha,sets t_ana and normalizes direct fit,target-specific calibration,derived from exact E0 and exact |psi0>,True,True,False,True,False,False,abs(imag(exp(-i*E0*t)*<psi0|U_PF(t)|psi0>)/t)
+I08,"three signed direct PF shifts at 0.1,0.2,0.3 t_ana",fits a4 and a6,target-specific calibration,exact PF eigensolver truth,True,True,False,True,False,False,training_direct_points
+I09,target PF eigenbranch identity,chooses the signed direct shift,calibration and validation,maximum overlap with exact ground state,True,True,False,True,False,False,maximum exact-ground-state overlap; overlap phase is diagnostic only
+I10,"fitted a4,a6 and model-selected t_star/cost",sets the QPE schedule and nominal budget,selection,derived from oracle-assisted target calibration,False,True,False,True,False,False,two_term_model and two_term_model_optimum
+I11,direct PF error and cost at model-selected t_star,scores cost prediction and frozen budget,evaluation,held-out oracle truth,False,False,True,True,False,False,predicted_time_direct_point
+I12,direct local-grid minimum,scores eta_min and eta_t,evaluation,held-out oracle truth,False,False,True,True,False,False,saved_local_direct_minimum
+I13,unseen-grid direct residuals,scores extrapolation residual,evaluation,held-out oracle truth,False,False,True,True,False,False,saved_unseen_predictions/local_direct_points
+I14,A05 empirical uniform safety margin,repairs strict frozen-budget misses on saved conditions,post-hoc development analysis,uses all 17 development truths,False,False,True,True,False,False,A05 maximum required/frozen cost ratio
+I15,mapping from cheap descriptors to PF/model/time on a new system,would enable transfer-only selection,not implemented,missing,False,False,False,False,False,False,no saved cross-system selector

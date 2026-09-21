@@ -1,0 +1,138 @@
+{
+  "calibrated_selector_choice_count": 17,
+  "calibrated_selector_current_m3_count": 17,
+  "calibrated_selector_oracle_agreement_count": 17,
+  "calibrated_selector_strict_frozen_pass_count": 17,
+  "condition_count": 17,
+  "created_at": "2026-09-21T00:35:30.846685+09:00",
+  "dependency_audit": {
+    "all_direct_branch_rules_match": true,
+    "all_short_time_definitions_match": true,
+    "evaluated_short_time_point_count": 171,
+    "exact_ground_overlap_selection_rule_count": 338,
+    "formula_condition_count": 34,
+    "local_validation_direct_point_count": 236,
+    "raw_condition_count": 17,
+    "runner_exact_energy_phase_rotation_dependency_confirmed": true,
+    "runner_exact_state_overlap_dependency_confirmed": true,
+    "runner_path": "review_response/run_two_term_pf_m3_holdout_server2.py",
+    "runner_sha256": "0d1f89735656690dc3d5fb44a8c3b64aafb56c4c4cc26eb92b2b4d82a94c079e",
+    "selected_short_time_window_point_count": 170,
+    "short_time_error_definition_match_count": 34,
+    "training_direct_point_count": 102
+  },
+  "git": {
+    "branch": "gpu-m3-two-term-geometry-active-space-holdout",
+    "commit": "3254f79825cfbcc2af91b6c07d01de469d3e4eb6",
+    "dirty": true,
+    "status_entry_count": 139
+  },
+  "information_item_count": 15,
+  "maximum_calibrated_selection_regret": 0.0,
+  "performance_tier_row_count": 5,
+  "performance_tier_rows": [
+    {
+      "agreement_with_oracle_choice": 17,
+      "calibration_points": null,
+      "calibration_seconds": null,
+      "conditions_scored": 17,
+      "current_m3_choice_count": 17,
+      "eligible_as_practical_selector": false,
+      "exact_ground_state_required": true,
+      "maximum_selection_regret": 0.0,
+      "method": "minimum direct required cost over the two model-selected schedules",
+      "pf_choices_produced": 17,
+      "scope_note": "oracle over two saved predicted schedules, not continuous optimum",
+      "status": "measured evaluation upper bound",
+      "strict_frozen_budget_passed": null,
+      "tier": "1_oracle_evaluation"
+    },
+    {
+      "agreement_with_oracle_choice": 17,
+      "calibration_points": 273,
+      "calibration_seconds": 424.14484319696203,
+      "conditions_scored": 17,
+      "current_m3_choice_count": 17,
+      "eligible_as_practical_selector": false,
+      "exact_ground_state_required": true,
+      "maximum_selection_regret": 0.0,
+      "method": "fit both PFs on each target and choose smaller predicted two-term cost",
+      "pf_choices_produced": 17,
+      "scope_note": "uses exact E0, exact |psi0>, exact PF branches and shifts",
+      "status": "measured but not cheap-state-independent calibration",
+      "strict_frozen_budget_passed": 17,
+      "tier": "2_oracle_assisted_target_calibration"
+    },
+    {
+      "agreement_with_oracle_choice": 17,
+      "calibration_points": 137,
+      "calibration_seconds": 211.53492418600945,
+      "conditions_scored": 17,
+      "current_m3_choice_count": 17,
+      "eligible_as_practical_selector": false,
+      "exact_ground_state_required": true,
+      "maximum_selection_regret": 0.0,
+      "method": "pre-fix current_m3 and calibrate only its two-term model",
+      "pf_choices_produced": 0,
+      "scope_note": "same development conditions; PF choice is pre-fixed",
+      "status": "measured fixed-PF strategy",
+      "strict_frozen_budget_passed": 17,
+      "tier": "2_oracle_assisted_target_calibration"
+    },
+    {
+      "agreement_with_oracle_choice": null,
+      "calibration_points": null,
+      "calibration_seconds": null,
+      "conditions_scored": 0,
+      "current_m3_choice_count": null,
+      "eligible_as_practical_selector": null,
+      "exact_ground_state_required": false,
+      "maximum_selection_regret": null,
+      "method": "few target-specific evaluations without exact E0 or exact ground-state vector",
+      "pf_choices_produced": 0,
+      "scope_note": "requires an approximate-state or measurable surrogate study",
+      "status": "not implemented / not evaluated",
+      "strict_frozen_budget_passed": null,
+      "tier": "2_practical_target_calibration"
+    },
+    {
+      "agreement_with_oracle_choice": null,
+      "calibration_points": 0,
+      "calibration_seconds": 0.0,
+      "conditions_scored": 0,
+      "current_m3_choice_count": null,
+      "eligible_as_practical_selector": null,
+      "exact_ground_state_required": false,
+      "maximum_selection_regret": null,
+      "method": "choose PF/model/time from cheap descriptors on an unused system",
+      "pf_choices_produced": 0,
+      "scope_note": "no frozen cross-system mapping or independent test exists",
+      "status": "not implemented / not evaluated",
+      "strict_frozen_budget_passed": null,
+      "tier": "3_transfer_only"
+    }
+  ],
+  "practical_target_calibration_status": "not implemented / not evaluated",
+  "raw_source_count": 17,
+  "runner": {
+    "path": "review_response/run_two_term_pf_m3_holdout_server2.py",
+    "sha256": "0d1f89735656690dc3d5fb44a8c3b64aafb56c4c4cc26eb92b2b4d82a94c079e"
+  },
+  "scope": "X01 A06 information-access separation",
+  "source_records": [
+    {
+      "path": "artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/summary.json",
+      "role": "five-condition coefficient-fixed holdout",
+      "sha256": "79df529b0ae331af206d1936f49f446224b260eaac957850856b370654ca0be6",
+      "status": "complete"
+    },
+    {
+      "path": "artifacts/two_term_pf_geometry_local_20260911_ablation/summary.json",
+      "role": "twelve-condition coefficient-fixed holdout ablation",
+      "sha256": "de812215a9a163f99d3605f7911746c8186ee494e593952705382381d1e8677a",
+      "status": "complete"
+    }
+  ],
+  "status": "complete",
+  "transfer_only_status": "not implemented / not evaluated"
+}
