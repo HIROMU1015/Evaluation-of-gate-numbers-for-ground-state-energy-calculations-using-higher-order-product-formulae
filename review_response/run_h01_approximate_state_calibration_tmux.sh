@@ -36,18 +36,21 @@ formulae=(current_m3 yoshida4)
 
 echo "[$(date --iso-8601=seconds)] rebuild H01 state/Hamiltonian caches"
 active=0
+pids=()
 for condition in "${conditions[@]}"; do
   "$PYTHON" "$RUNNER" prepare \
     --project-root "$ROOT" --condition "$condition" \
     --component-processes 4 --output "$ARTIFACT/cache/${condition}.pkl" \
     > "$ARTIFACT/logs/prepare_${condition}.log" 2>&1 &
+  pids+=("$!")
   active=$((active + 1))
   if (( active == 2 )); then
-    wait
+    for pid in "${pids[@]}"; do wait "$pid"; done
+    pids=()
     active=0
   fi
 done
-wait
+for pid in "${pids[@]}"; do wait "$pid"; done
 
 for condition in "${conditions[@]}"; do
   test "$(jq -r .status "$ARTIFACT/cache/${condition}.metadata.json")" = complete
