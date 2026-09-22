@@ -5,6 +5,7 @@ import json
 
 import numpy as np
 import pytest
+from scipy.linalg import expm
 
 from review_response.audit_f02_tau8_state_mixing import decompose_a8_state_mixing
 from review_response.run_f_hf_mechanism_bridge import (
@@ -13,14 +14,20 @@ from review_response.run_f_hf_mechanism_bridge import (
     NEW_DIRECT_TRUTH_POINT_COUNT,
     PROTOCOL_PATH,
     SourceIdentityError,
+    _finite_log_record,
+    _frobenius,
     _relative,
+    center_group_identity_components,
     circular_phase_gap,
     diagnostic_annotations,
+    effective_hamiltonian_series_arb,
     effective_hamiltonian_series_dtype,
     reconstruct_component_spectrum,
     require_checks,
 )
 from trotterlib.component_sector_pf import ComponentBatch, ComponentSpectrum
+from trotterlib.pf_decomposition import iter_s2_sequence_steps, symmetric_s2_sequence
+from trotterlib.product_formula import yoshida_4th_list
 
 
 def test_component_spectrum_reconstruction() -> None:
@@ -65,6 +72,70 @@ def test_complex128_and_clongdouble_formal_series_agree() -> None:
     assert _relative(value_128[0], value_long[0]) < 1e-14
     for order in (4, 6, 8):
         assert _relative(value_128[order], value_long[order]) < 1e-8
+
+
+def test_arb_formal_series_is_invariant_to_large_group_identity_shifts() -> None:
+    x = np.asarray([[0.2, 0.3], [0.3, -0.1]], dtype=np.complex128)
+    y = np.asarray([[0.0, -0.2j], [0.2j, 0.4]], dtype=np.complex128)
+    sequence = symmetric_s2_sequence(yoshida_4th_list())
+    steps = list(iter_s2_sequence_steps(2, sequence))
+    reference, _ = effective_hamiltonian_series_arb(
+        [x, y], steps, 8, precision_bits=256
+    )
+    identity = np.eye(2, dtype=np.complex128)
+    shifted, _ = effective_hamiltonian_series_arb(
+        [x + 1000.0 * identity, y - 300.0 * identity],
+        steps,
+        8,
+        precision_bits=256,
+    )
+    for order in (4, 6, 8):
+        assert _relative(shifted[order], reference[order]) < 1e-11
+    hamiltonian = x + y
+    forbidden = max(
+        _frobenius(reference[order]) / _frobenius(hamiltonian)
+        for order in (1, 2, 3, 5, 7)
+    )
+    assert forbidden < 1e-12
+
+
+def test_midpoint_identity_gauge_preserves_group_sum() -> None:
+    groups = [
+        np.diag([-10.0, 3.0]).astype(np.complex128),
+        np.asarray([[1.0, 0.2], [0.2, 7.0]], dtype=np.complex128),
+    ]
+    centered, shifts, total = center_group_identity_components(groups)
+    identity = np.eye(2, dtype=np.complex128)
+    assert np.allclose(sum(centered) + total * identity, sum(groups), atol=1e-14)
+    assert total == pytest.approx(sum(shifts))
+
+
+def test_reference_unwrapped_log_is_energy_origin_invariant() -> None:
+    hamiltonian = np.diag([-31.4, 4.0]).astype(np.complex128)
+    time_value = 0.1
+    unitary = expm(1j * time_value * hamiltonian)
+    energies, vectors = np.linalg.eigh(hamiltonian)
+    record = _finite_log_record(unitary, time_value, energies, vectors)
+    assert _relative(record["effective_hamiltonian"], hamiltonian) < 1e-13
+    assert record["principal_branch_cut_margin_radians"] < 0.01
+    assert record["branch_cut_margin_radians"] > 3.0
+
+    energy_shift = 20.0
+    shifted_hamiltonian = hamiltonian + energy_shift * np.eye(2)
+    shifted_unitary = np.exp(1j * energy_shift * time_value) * unitary
+    shifted_energies, shifted_vectors = np.linalg.eigh(shifted_hamiltonian)
+    shifted_record = _finite_log_record(
+        shifted_unitary,
+        time_value,
+        shifted_energies,
+        shifted_vectors,
+    )
+    assert _relative(
+        shifted_record["effective_hamiltonian"], shifted_hamiltonian
+    ) < 1e-13
+    assert shifted_record["branch_cut_margin_radians"] == pytest.approx(
+        record["branch_cut_margin_radians"], abs=1e-13
+    )
 
 
 def test_a8_state_mixing_identity() -> None:

@@ -27,7 +27,9 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from flint import acb, acb_mat, ctx as flint_ctx
 from scipy.linalg import expm, logm, schur
+from scipy.optimize import linear_sum_assignment
 
 from review_response.audit_f01_effective_hamiltonian_pilot import (
     _atomic_json,
@@ -57,6 +59,9 @@ FIT_ORDERS = (4, 6, 8, 10, 12)
 FORMAL_MAXIMUM_ORDER = 8
 TIME_RTOL = 1e-12
 NEW_DIRECT_TRUTH_POINT_COUNT = 0
+ARB_PRECISION_BITS = 128
+FORMAL_IDENTITY_GAUGE = "per_group_spectral_midpoint"
+FINITE_LOG_BRANCH_METHOD = "exact_hamiltonian_reference_unwrap"
 
 
 class SourceIdentityError(RuntimeError):
@@ -88,6 +93,7 @@ def _versions() -> dict[str, Any]:
         "scipy",
         "matplotlib",
         "mpmath",
+        "python-flint",
         "openfermion",
         "pyscf",
     ):
@@ -196,6 +202,138 @@ def effective_hamiltonian_series_dtype(
         if exponent != maximum_degree:
             power = _multiply_series(power, x_series, maximum_degree, requested_dtype)
     return [logarithm[degree + 1] / imaginary for degree in range(maximum_degree)]
+
+
+def center_group_identity_components(
+    group_matrices: Sequence[np.ndarray],
+) -> tuple[list[np.ndarray], list[float], float]:
+    """Remove a deterministic scalar identity gauge from every Hermitian group.
+
+    Product-formula error operators are invariant under independent scalar
+    shifts of the grouped Hamiltonians.  Using each group's spectral midpoint
+    minimizes its operator norm and prevents those irrelevant identity phases
+    from consuming the precision of the complex128/clongdouble cross-check.
+    """
+
+    if not group_matrices:
+        raise ValueError("group_matrices must not be empty")
+    dimension = int(np.asarray(group_matrices[0]).shape[0])
+    identity = np.eye(dimension, dtype=np.complex128)
+    centered: list[np.ndarray] = []
+    shifts: list[float] = []
+    for raw_matrix in group_matrices:
+        matrix = np.asarray(raw_matrix, dtype=np.complex128)
+        eigenvalues = np.linalg.eigvalsh(matrix)
+        shift = float((eigenvalues[0] + eigenvalues[-1]) / 2.0)
+        centered.append(matrix - shift * identity)
+        shifts.append(shift)
+    return centered, shifts, float(sum(shifts))
+
+
+def _acb_matrix_from_numpy(matrix: np.ndarray) -> acb_mat:
+    array = np.asarray(matrix, dtype=np.complex128)
+    return acb_mat([[complex(value) for value in row] for row in array])
+
+
+def _acb_zero(dimension: int) -> acb_mat:
+    return acb_mat(int(dimension), int(dimension))
+
+
+def _acb_identity(dimension: int) -> acb_mat:
+    return acb_mat(
+        [
+            [1 if row == column else 0 for column in range(int(dimension))]
+            for row in range(int(dimension))
+        ]
+    )
+
+
+def _multiply_acb_series(
+    left: Sequence[acb_mat],
+    right: Sequence[acb_mat],
+    maximum_degree: int,
+    dimension: int,
+) -> list[acb_mat]:
+    result = [_acb_zero(dimension) for _ in range(maximum_degree + 1)]
+    for degree in range(maximum_degree + 1):
+        for left_degree in range(degree + 1):
+            result[degree] += left[left_degree] * right[degree - left_degree]
+    return result
+
+
+def effective_hamiltonian_series_arb(
+    group_matrices: Sequence[np.ndarray],
+    steps: Sequence[tuple[int, float]],
+    maximum_effective_order: int,
+    *,
+    precision_bits: int = ARB_PRECISION_BITS,
+) -> tuple[list[np.ndarray], list[float]]:
+    """Return an Arb-ball reference for the formal PF logarithm.
+
+    The required forbidden coefficients vanish through cancellations between
+    matrices as large as the allowed D8 coefficient.  IEEE extended precision
+    is therefore retained as a portability cross-check, while this independent
+    ball-arithmetic evaluation supplies the numerical reference.
+    """
+
+    if not group_matrices or not steps:
+        raise ValueError("group_matrices and steps must not be empty")
+    dimension = int(np.asarray(group_matrices[0]).shape[0])
+    maximum_degree = int(maximum_effective_order) + 1
+    with flint_ctx.workprec(int(precision_bits)):
+        matrices = [_acb_matrix_from_numpy(matrix) for matrix in group_matrices]
+        identity = _acb_identity(dimension)
+        product = [_acb_zero(dimension) for _ in range(maximum_degree + 1)]
+        product[0] = identity
+        exponential_cache: dict[tuple[int, float], list[acb_mat]] = {}
+        for group_index, raw_weight in steps:
+            key = (int(group_index), float(raw_weight))
+            exponential = exponential_cache.get(key)
+            if exponential is None:
+                generator = matrices[key[0]] * acb(0, key[1])
+                exponential = [
+                    _acb_zero(dimension) for _ in range(maximum_degree + 1)
+                ]
+                exponential[0] = identity
+                for degree in range(1, maximum_degree + 1):
+                    exponential[degree] = (
+                        exponential[degree - 1] * generator / degree
+                    )
+                exponential_cache[key] = exponential
+            product = _multiply_acb_series(
+                exponential, product, maximum_degree, dimension
+            )
+
+        x_series = [acb_mat(value) for value in product]
+        x_series[0] -= identity
+        logarithm = [_acb_zero(dimension) for _ in range(maximum_degree + 1)]
+        power = [acb_mat(value) for value in x_series]
+        for exponent in range(1, maximum_degree + 1):
+            scale = acb(1 if exponent % 2 else -1) / exponent
+            for degree in range(1, maximum_degree + 1):
+                logarithm[degree] += power[degree] * scale
+            if exponent != maximum_degree:
+                power = _multiply_acb_series(
+                    power, x_series, maximum_degree, dimension
+                )
+
+        effective = [
+            logarithm[degree + 1] / acb(0, 1)
+            for degree in range(maximum_degree)
+        ]
+        midpoint_matrices: list[np.ndarray] = []
+        maximum_radii: list[float] = []
+        for matrix in effective:
+            midpoint = np.empty((dimension, dimension), dtype=np.complex128)
+            radius = 0.0
+            for row in range(dimension):
+                for column in range(dimension):
+                    value = matrix[row, column]
+                    midpoint[row, column] = complex(value.mid())
+                    radius = max(radius, float(value.rad()))
+            midpoint_matrices.append(midpoint)
+            maximum_radii.append(radius)
+    return midpoint_matrices, maximum_radii
 
 
 def _phase_cut_margin(unitary: np.ndarray) -> float:
@@ -365,15 +503,66 @@ def _build_unitary(
     return diagnosis._build_cpu(system, sequence, float(time_value))
 
 
-def _finite_log_record(unitary: np.ndarray, time_value: float) -> dict[str, Any]:
-    logarithm, estimate = logm(unitary, disp=False)
-    raw = logarithm / (1j * float(time_value))
-    effective = (raw + raw.conj().T) / 2.0
+def _finite_log_record(
+    unitary: np.ndarray,
+    time_value: float,
+    exact_energies: np.ndarray,
+    exact_vectors: np.ndarray,
+) -> dict[str, Any]:
+    """Recover a gauge-invariant continuous logarithm using exact-H branches.
+
+    A principal matrix logarithm is not invariant under an energy-origin shift
+    and necessarily encounters its cut once the full spectral width spans the
+    circle.  Here the exact Hamiltonian is used only to choose the integer
+    unwrap for each PF eigenphase.  The PF unitary supplies every finite-time
+    value fitted below.
+    """
+
+    triangular, vectors = schur(unitary, output="complex", check_finite=False)
+    eigenvalues = np.diag(triangular)
+    phases = np.angle(eigenvalues)
+    overlaps = np.abs(np.asarray(exact_vectors).conj().T @ vectors) ** 2
+    exact_indices, pf_indices = linear_sum_assignment(-overlaps)
+    exact_for_pf = np.empty(len(exact_energies), dtype=int)
+    exact_for_pf[pf_indices] = exact_indices
+    reference_phases = np.asarray(exact_energies)[exact_for_pf] * float(time_value)
+    relative_phases = np.angle(np.exp(1j * (phases - reference_phases)))
+    unwrap_integers = np.rint(
+        (reference_phases - phases) / (2.0 * np.pi)
+    ).astype(int)
+    unwrapped_phases = phases + 2.0 * np.pi * unwrap_integers
+    unwrapped_energies = unwrapped_phases / float(time_value)
+    effective = (vectors * unwrapped_energies[None, :]) @ vectors.conj().T
+    effective = (effective + effective.conj().T) / 2.0
+
+    principal_logarithm, principal_estimate = logm(unitary, disp=False)
+    principal_raw = principal_logarithm / (1j * float(time_value))
+    principal_effective = (principal_raw + principal_raw.conj().T) / 2.0
     return {
         "effective_hamiltonian": effective,
-        "branch_cut_margin_radians": _phase_cut_margin(unitary),
-        "raw_hermiticity_residual_frobenius": _frobenius(raw - raw.conj().T),
-        "logm_error_estimate": float(estimate),
+        "branch_method": FINITE_LOG_BRANCH_METHOD,
+        "branch_cut_margin_radians": float(
+            np.min(np.pi - np.abs(relative_phases))
+        ),
+        "principal_branch_cut_margin_radians": _phase_cut_margin(unitary),
+        "minimum_reference_assignment_overlap_probability": float(
+            np.min(overlaps[exact_indices, pf_indices])
+        ),
+        "maximum_reference_relative_phase_radians": float(
+            np.max(np.abs(relative_phases))
+        ),
+        "minimum_phase_unwrap_integer": int(np.min(unwrap_integers)),
+        "maximum_phase_unwrap_integer": int(np.max(unwrap_integers)),
+        "raw_hermiticity_residual_frobenius": _frobenius(
+            effective - effective.conj().T
+        ),
+        "principal_logm_error_estimate": float(principal_estimate),
+        "principal_log_hermiticity_residual_frobenius": _frobenius(
+            principal_raw - principal_raw.conj().T
+        ),
+        "principal_log_unitary_reconstruction_residual_frobenius": _frobenius(
+            expm(1j * float(time_value) * principal_effective) - unitary
+        ),
         "unitary_reconstruction_residual_frobenius": _frobenius(
             expm(1j * float(time_value) * effective) - unitary
         ),
@@ -554,6 +743,7 @@ def _plot_phase(path: Path, rows: Sequence[dict[str, Any]]) -> None:
 
 def _write_report(path: Path, audit: dict[str, Any]) -> None:
     comparison = audit["condition_comparison"]
+    finite_log_rows = audit["finite_log_diagnostics"]
     primary = [row for row in comparison if row["formula"] == "yoshida4"]
     eq = next(row for row in primary if row["condition"].endswith("eq_sto3g"))
     stretch = next(
@@ -569,6 +759,17 @@ def _write_report(path: Path, audit: dict[str, Any]) -> None:
         "The new matrix-log and eigendecomposition work is predeclared, "
         "diagnostic-only mechanism computation.",
         "",
+        "## Retry-1 numerical remediation",
+        "",
+        "- Formal D4/D6/D8 operators use 128-bit Arb ball arithmetic. The "
+        "required complex128/clongdouble comparison is evaluated after removing "
+        "each group's scalar spectral midpoint; the scalar sum is restored to H0.",
+        "- Finite-time matrix logarithms use exact-H eigenbranches only to choose "
+        "phase unwrap integers. This convention is invariant under a global "
+        "energy-origin shift; principal-log margins remain diagnostic fields.",
+        "- Frozen PFs, time grids, thresholds, committed labels, and truth points "
+        "are unchanged from the original protocol.",
+        "",
         "## Source identity",
         "",
         f"- H01 artifact: `{audit['source_identity']['absolute_path']}`",
@@ -577,15 +778,18 @@ def _write_report(path: Path, audit: dict[str, Any]) -> None:
         "",
         "## Controlled Yoshida-4 comparison",
         "",
-        "| condition | committed label | |a4|/||D4|| | ||QD4|0>||/||D4|| | "
-        "mixing fraction | a8 cancellation | minimum phase compression |",
-        "|---|---|---:|---:|---:|---:|---:|",
+        "| condition | committed label | t_ana | |a4|/||D4|| | "
+        "||QD4|0>||/||D4|| | mixing fraction | |t8/(t4+t6)| at t_ana | "
+        "minimum phase compression |",
+        "|---|---|---:|---:|---:|---:|---:|---:|",
     ]
     for row in primary:
         lines.append(
-            "| {condition} | {label} | {leading_diagonal_ratio:.4e} | "
+            "| {condition} | {label} | {analytic_time:.4e} | "
+            "{leading_diagonal_ratio:.4e} | "
             "{leading_coupling_ratio:.4e} | {mixing_fraction:.4e} | "
-            "{a8_cancellation_ratio:.4e} | {phase_compression_ratio:.4e} |".format(
+            "{absolute_t8_over_t4_plus_t6_at_t_ana:.4e} | "
+            "{phase_compression_ratio:.4e} |".format(
                 **row,
                 label="pass" if row["committed_passed"] else "fail",
             )
@@ -597,15 +801,23 @@ def _write_report(path: Path, audit: dict[str, Any]) -> None:
         "D8 direct": abs(stretch["a8_diag"] / max(abs(eq["a8_diag"]), 1e-300)),
         "D4 mixing": abs(stretch["a8_mix"] / max(abs(eq["a8_mix"]), 1e-300)),
     }
-    dominant = max(changes, key=changes.get)
+    change_factors = {
+        name: max(ratio, 1.0 / max(ratio, 1e-300))
+        for name, ratio in changes.items()
+    }
+    dominant = max(change_factors, key=change_factors.get)
     lines.extend(
         [
             "",
             "## Predeclared mechanism reading",
             "",
-            f"- The largest equilibrium-to-stretch magnitude ratio among the four "
-            f"requested Yoshida-4 components is **{dominant}** "
-            f"({changes[dominant]:.4g}x).",
+            f"- The largest multiplicative equilibrium-to-stretch change among "
+            f"the four requested Yoshida-4 components is **{dominant}** "
+            f"(stretch/equilibrium={changes[dominant]:.4g}, "
+            f"change factor={change_factors[dominant]:.4g}x).",
+            "- Stretch/equilibrium component ratios: "
+            + ", ".join(f"{name}={ratio:.4g}" for name, ratio in changes.items())
+            + ".",
             f"- State-mixing flag at stretch: `{stretch['substantial_state_mixing']}`; "
             f"strong-a8-cancellation flag: `{stretch['strong_a8_cancellation']}`.",
             f"- The physical gap changes by a factor of "
@@ -613,11 +825,37 @@ def _write_report(path: Path, audit: dict[str, Any]) -> None:
             f"the minimum normalized phase-gap ratio changes from "
             f"{eq['phase_compression_ratio']:.4g} to "
             f"{stretch['phase_compression_ratio']:.4g}.",
+            f"- The smaller stretched a4 increases t_ana by "
+            f"{stretch['analytic_time']/eq['analytic_time']:.4g}x. At t_ana, "
+            f"the formal |t8/(t4+t6)| ratio changes from "
+            f"{eq['absolute_t8_over_t4_plus_t6_at_t_ana']:.4g} to "
+            f"{stretch['absolute_t8_over_t4_plus_t6_at_t_ana']:.4g}.",
             "- These flags are controlled-pair explanatory candidates, not a proof "
             "of a unique cause. Physical gap, PF phase gap, and polynomial order "
             "are not interpreted alone.",
             "- current_m3 is diagnostic control only. N2/CO rows are external "
             "success context; no dense N2/CO D8 operator was constructed.",
+            "",
+            "## Finite-log window audit",
+            "",
+            "All three frozen windows are shown; no favorable window is selected "
+            "post hoc. Large recovery errors mark finite-window instability and "
+            "do not replace the Arb formal operators.",
+            "",
+            "| condition | PF | window | D4 rel. error | D6 rel. error | "
+            "D8 rel. error | fit residual | unwrap margin |",
+            "|---|---|---|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for row in finite_log_rows:
+        lines.append(
+            "| {condition} | {formula} | {window_id} | {relative_error_d4:.4e} | "
+            "{relative_error_d6:.4e} | {relative_error_d8:.4e} | "
+            "{training_residual_frobenius_max:.4e} | "
+            "{minimum_branch_cut_margin_radians:.4e} |".format(**row)
+        )
+    lines.extend(
+        [
             "",
             "## Numerical gates",
             "",
@@ -736,24 +974,42 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
         groups = system["bridge_group_matrices"]
         hamiltonian = np.asarray(system["hamiltonian"].toarray(), dtype=np.complex128)
         state = np.asarray(system["state"], dtype=np.complex128)
+        exact_energies, exact_vectors = np.linalg.eigh(hamiltonian)
+        centered_groups, identity_shifts, total_identity_shift = (
+            center_group_identity_components(groups)
+        )
+        identity_128 = np.eye(hamiltonian.shape[0], dtype=np.complex128)
+        identity_long = np.eye(hamiltonian.shape[0], dtype=np.clongdouble)
         for formula in FORMULAE:
             sequence = diagnosis._formula_s2_sequence(formula)
             steps = list(iter_s2_sequence_steps(len(groups), sequence))
             formal_128 = effective_hamiltonian_series_dtype(
-                groups, steps, FORMAL_MAXIMUM_ORDER, np.complex128
+                centered_groups, steps, FORMAL_MAXIMUM_ORDER, np.complex128
             )
             formal_long = effective_hamiltonian_series_dtype(
-                groups, steps, FORMAL_MAXIMUM_ORDER, np.clongdouble
+                centered_groups, steps, FORMAL_MAXIMUM_ORDER, np.clongdouble
+            )
+            formal_128[0] += total_identity_shift * identity_128
+            formal_long[0] += np.clongdouble(total_identity_shift) * identity_long
+            formal_arb, formal_arb_radii = effective_hamiltonian_series_arb(
+                groups,
+                steps,
+                FORMAL_MAXIMUM_ORDER,
+                precision_bits=ARB_PRECISION_BITS,
             )
             formal = [
                 (np.asarray(value, dtype=np.complex128)
                  + np.asarray(value, dtype=np.complex128).conj().T)
                 / 2.0
-                for value in formal_long
+                for value in formal_arb
             ]
-            h0_error = _relative(formal_long[0], hamiltonian.astype(np.clongdouble))
+            h0_error = max(
+                _relative(formal_long[0], hamiltonian.astype(np.clongdouble)),
+                _relative(formal_arb[0], hamiltonian),
+            )
             forbidden = max(
-                _frobenius(formal_long[order]) / max(_frobenius(hamiltonian), 1e-300)
+                _frobenius(formal_arb[order])
+                / max(_frobenius(hamiltonian), 1e-300)
                 for order in (1, 2, 3, 5, 7)
             )
             numeric_checks.extend(
@@ -776,15 +1032,27 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
             )
             for order in REQUIRED_ORDERS:
                 difference = _relative(formal_128[order], formal_long[order])
+                arb_difference = _relative(formal_long[order], formal_arb[order])
                 threshold = gates[f"precision_relative_difference_d{order}"]
-                numeric_checks.append(
-                    {
-                        "check_id": f"{condition}:{formula}:precision_d{order}",
-                        "measured": difference,
-                        "threshold": threshold,
-                        "comparison": "<=",
-                        "passed": difference <= threshold,
-                    }
+                numeric_checks.extend(
+                    [
+                        {
+                            "check_id": f"{condition}:{formula}:precision_d{order}",
+                            "measured": difference,
+                            "threshold": threshold,
+                            "comparison": "<=",
+                            "passed": difference <= threshold,
+                        },
+                        {
+                            "check_id": (
+                                f"{condition}:{formula}:arb_reference_d{order}"
+                            ),
+                            "measured": arb_difference,
+                            "threshold": threshold,
+                            "comparison": "<=",
+                            "passed": arb_difference <= threshold,
+                        },
+                    ]
                 )
                 operators[(condition, formula, order)] = formal[order]
                 row = operator_decomposition(
@@ -794,10 +1062,19 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
                     {
                         "condition": condition,
                         "formula": formula,
+                        "formal_reference": "python-flint Arb ball arithmetic",
+                        "formal_reference_precision_bits": ARB_PRECISION_BITS,
+                        "formal_identity_gauge": FORMAL_IDENTITY_GAUGE,
+                        "total_removed_identity_hartree": total_identity_shift,
+                        "maximum_group_identity_shift_hartree": max(
+                            abs(value) for value in identity_shifts
+                        ),
+                        "arb_maximum_entry_radius": formal_arb_radii[order],
                         "hermiticity_relative_residual": _relative(
-                            formal_long[order], np.asarray(formal_long[order]).conj().T
+                            formal_arb[order], np.asarray(formal_arb[order]).conj().T
                         ),
                         "complex128_vs_clongdouble_relative_difference": difference,
+                        "clongdouble_vs_arb_relative_difference": arb_difference,
                         "h0_relative_frobenius": h0_error,
                         "forbidden_order_max_relative_frobenius": forbidden,
                     }
@@ -823,14 +1100,27 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
                 times = relatives * t_ana
                 corrections = []
                 margins = []
+                principal_margins = []
+                assignment_overlaps = []
                 reconstruction = []
                 for relative_time, time_value in zip(relatives, times, strict=True):
                     unitary, _ = _build_unitary(system, sequence, float(time_value))
                     finite_log_unitary_count += 1
                     unitary_cache[float(time_value)] = unitary
-                    finite = _finite_log_record(unitary, float(time_value))
+                    finite = _finite_log_record(
+                        unitary,
+                        float(time_value),
+                        exact_energies,
+                        exact_vectors,
+                    )
                     corrections.append(finite["effective_hamiltonian"] - hamiltonian)
                     margins.append(finite["branch_cut_margin_radians"])
+                    principal_margins.append(
+                        finite["principal_branch_cut_margin_radians"]
+                    )
+                    assignment_overlaps.append(
+                        finite["minimum_reference_assignment_overlap_probability"]
+                    )
                     reconstruction.append(
                         finite["unitary_reconstruction_residual_frobenius"]
                     )
@@ -848,7 +1138,14 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
                     "training_residual_frobenius_max": fit[
                         "training_residual_frobenius_max"
                     ],
+                    "branch_method": FINITE_LOG_BRANCH_METHOD,
                     "minimum_branch_cut_margin_radians": min(margins),
+                    "minimum_principal_branch_cut_margin_radians": min(
+                        principal_margins
+                    ),
+                    "minimum_reference_assignment_overlap_probability": min(
+                        assignment_overlaps
+                    ),
                     "maximum_unitary_reconstruction_residual_frobenius": max(
                         reconstruction
                     ),
@@ -1093,6 +1390,12 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
             phase_ratio = min(
                 row["normalized_phase_gap_over_physical_gap"] for row in points
             )
+            t_ana = float(formula_records[(condition, formula)]["analytic_time"])
+            energy_coefficients = formal_energy[(condition, formula)]
+            formal_contributions = {
+                order: float(np.real(energy_coefficients[order])) * t_ana**order
+                for order in (4, 6, 8)
+            }
             condition_rows.append(
                 {
                     "condition": condition,
@@ -1109,6 +1412,18 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
                     "a8_diag": mix["a8_diag"],
                     "a8_mix": mix["a8_mix"],
                     "a8_total": mix["a8_total"],
+                    "formal_a6": float(np.real(energy_coefficients[6])),
+                    "analytic_time": t_ana,
+                    "formal_t4_contribution_at_t_ana": formal_contributions[4],
+                    "formal_t6_contribution_at_t_ana": formal_contributions[6],
+                    "formal_t8_contribution_at_t_ana": formal_contributions[8],
+                    "absolute_t8_over_t4_plus_t6_at_t_ana": abs(
+                        formal_contributions[8]
+                    )
+                    / max(
+                        abs(formal_contributions[4] + formal_contributions[6]),
+                        1e-300,
+                    ),
                     "mixing_fraction": mix["mixing_fraction"],
                     "a8_cancellation_ratio": mix["cancellation_ratio"],
                     "physical_gap_hartree": mix["physical_gap_hartree"],
@@ -1146,9 +1461,19 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
     passed = all(check["passed"] for check in numeric_checks)
     status = "complete_with_findings" if passed else "failed_numerical_validation"
     audit = {
-        "schema": "f_hf_mechanism_bridge_v1",
+        "schema": "f_hf_mechanism_bridge_v1_retry1",
         "created_at": datetime.now().astimezone().isoformat(),
         "status": status,
+        "numerical_remediation": {
+            "formal_reference": "python-flint Arb ball arithmetic",
+            "formal_reference_precision_bits": ARB_PRECISION_BITS,
+            "formal_identity_gauge": FORMAL_IDENTITY_GAUGE,
+            "finite_log_branch_method": FINITE_LOG_BRANCH_METHOD,
+            "thresholds_changed": False,
+            "time_grids_changed": False,
+            "pf_coefficients_changed": False,
+            "committed_labels_changed": False,
+        },
         "source_identity": source_identity,
         "committed_labels": labels,
         "checks": numeric_checks,
@@ -1192,6 +1517,7 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
     manifest = {
         "status": status,
         "protocol_sha256": EXPECTED_PROTOCOL_SHA256,
+        "numerical_remediation": audit["numerical_remediation"],
         "base_commit": _git("rev-parse", "HEAD"),
         "source_commits": protocol["source"],
         "source_identity": source_identity,
