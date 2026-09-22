@@ -25,7 +25,7 @@ from trotterlib.analysis_utils import loglog_average_coeff, loglog_fit
 from trotterlib.config import BETA, DECOMPO_NUM, TARGET_ERROR
 from trotterlib.cost_validation import analytic_minimum_cost, analytic_optimal_time
 from trotterlib.fit_window import rolling_loglog_fits
-from trotterlib.optimal_trotter import (
+from trotterlib.fourth_order_projection import (
     fourth_order_moment_residual_float64,
     solve_nonprocessed_4th_moment_coefficients,
 )

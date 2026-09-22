@@ -31,7 +31,7 @@ from explore_m5_predictability_path import (
 from sweep_direct_scaling_h6_h7 import _write_json
 from trotterlib.config import BETA, DECOMPO_NUM, TARGET_ERROR
 from trotterlib.cost_validation import analytic_minimum_cost, analytic_optimal_time
-from trotterlib.optimal_trotter import (
+from trotterlib.fourth_order_projection import (
     fourth_order_moment_residual_float64,
     solve_nonprocessed_4th_moment_coefficients,
 )

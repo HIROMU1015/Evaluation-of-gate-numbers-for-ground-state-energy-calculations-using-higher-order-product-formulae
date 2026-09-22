@@ -68,6 +68,44 @@ def _basis_indices(
         )
         candidates.append(("fixed_half_populations", counts, indices))
 
+    # OpenFermion uses interleaved alpha/beta spin-orbital indices for the
+    # directly JW-transformed H2/H3 Hamiltonians.  The larger-system PySCF
+    # path above is already caught by fixed_half_populations.
+    support_interleaved_counts = {
+        (
+            sum(
+                (int(index) >> (num_qubits - 1 - qubit)) & 1
+                for qubit in range(0, num_qubits, 2)
+            ),
+            sum(
+                (int(index) >> (num_qubits - 1 - qubit)) & 1
+                for qubit in range(1, num_qubits, 2)
+            ),
+        )
+        for index in support
+    }
+    if len(support_interleaved_counts) == 1:
+        counts = next(iter(support_interleaved_counts))
+        indices = np.asarray(
+            [
+                index
+                for index in all_indices
+                if (
+                    sum(
+                        (int(index) >> (num_qubits - 1 - qubit)) & 1
+                        for qubit in range(0, num_qubits, 2)
+                    ),
+                    sum(
+                        (int(index) >> (num_qubits - 1 - qubit)) & 1
+                        for qubit in range(1, num_qubits, 2)
+                    ),
+                )
+                == counts
+            ],
+            dtype=int,
+        )
+        candidates.append(("fixed_interleaved_spin_populations", counts, indices))
+
     support_total_counts = {
         bitstrings[int(index)].count("1") for index in support
     }
