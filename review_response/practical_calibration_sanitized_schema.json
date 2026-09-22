@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "practical_calibration_sanitized_input_v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "condition", "protocol_sha256", "source_pickle_sha256", "hamiltonian_sha256", "hamiltonian", "component_spectra", "term_counts", "cisd_state"],
+  "properties": {
+    "schema": {"const": "practical_calibration_sanitized_input_v1"},
+    "condition": {"type": "string"},
+    "protocol_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "source_pickle_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "hamiltonian_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "hamiltonian": {"description": "SciPy sparse Hamiltonian; runtime pickle only"},
+    "component_spectra": {"description": "Existing exact component spectra; runtime pickle only"},
+    "term_counts": {"description": "Existing grouped-term counts"},
+    "cisd_state": {"description": "Normalized CISD state; exact state is forbidden"}
+  },
+  "forbidden_field_names": ["state", "states", "energy", "exact_ground", "gap", "overlap", "direct", "truth", "pass", "fail", "label", "optimum", "minimum_cost"]
+}
