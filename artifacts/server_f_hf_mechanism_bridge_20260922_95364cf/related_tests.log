@@ -1,0 +1,42 @@
+.......................F........                                         [100%]
+=================================== FAILURES ===================================
+_________________ test_f05_manifest_hashes_and_csv_rows_match __________________
+
+    def test_f05_manifest_hashes_and_csv_rows_match() -> None:
+        audit = json.loads((ARTIFACT / "audit.json").read_text(encoding="utf-8"))
+        manifest = json.loads((ARTIFACT / "manifest.json").read_text(encoding="utf-8"))
+        assert manifest["status"] == audit["status"]
+        for group in ("source_sha256", "input_sha256", "artifact_sha256"):
+            for path_text, expected_hash in manifest[group].items():
+>               assert _sha256(Path(path_text)) == expected_hash
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+
+review_tests/test_f05_energy_phase_gap.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+review_tests/test_f05_energy_phase_gap.py:19: in _sha256
+    digest.update(path.read_bytes())
+                  ^^^^^^^^^^^^^^^^^
+/usr/lib/python3.12/pathlib.py:1021: in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json'
+
+/usr/lib/python3.12/pathlib.py:1015: FileNotFoundError
+=========================== short test summary info ============================
+FAILED review_tests/test_f05_energy_phase_gap.py::test_f05_manifest_hashes_and_csv_rows_match
+1 failed, 31 passed in 2.43s
