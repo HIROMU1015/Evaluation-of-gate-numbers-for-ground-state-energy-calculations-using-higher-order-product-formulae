@@ -985,7 +985,8 @@ def run(source_root: Path, holdout_root: Path, output_dir: Path) -> dict[str, An
                 time_value = float(relative_time) * t_ana
                 committed = _find_committed_point(committed_points, time_value)
                 unitary, build = _build_unitary(system, sequence, time_value)
-                f05_eigendecomposition_count += 1
+                if committed is None:
+                    f05_eigendecomposition_count += 1
                 point, previous = _f05_point(
                     unitary,
                     system,

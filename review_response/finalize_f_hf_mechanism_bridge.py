@@ -11,11 +11,13 @@ from pathlib import Path
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--related-tests-exit-code", type=int, required=True)
     parser.add_argument("--all-review-tests-exit-code", type=int, required=True)
     args = parser.parse_args()
     output = args.output_dir.resolve()
     result = {
-        "related_tests_passed": True,
+        "related_tests_exit_code": args.related_tests_exit_code,
+        "related_tests_passed": args.related_tests_exit_code == 0,
         "all_review_tests_exit_code": args.all_review_tests_exit_code,
         "all_review_tests_passed": args.all_review_tests_exit_code == 0,
     }

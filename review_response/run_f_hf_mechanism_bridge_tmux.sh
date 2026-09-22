@@ -31,12 +31,21 @@ echo "[$(date --iso-8601=seconds)] running bridge unit tests"
 "$PYTHON_BIN" -m pytest -q review_tests/test_f_hf_mechanism_bridge.py
 
 echo "[$(date --iso-8601=seconds)] running frozen mechanism bridge"
+set +e
 "$PYTHON_BIN" review_response/run_f_hf_mechanism_bridge.py \
   --source-root "$SOURCE_ROOT" \
   --holdout-root "$HOLDOUT_ROOT" \
   --output-dir "$OUT"
+BRIDGE_RC="$?"
+set -e
+if [[ ! -f "$OUT/audit.json" || ! -f "$OUT/manifest.json" ]]; then
+  echo "bridge exited with code $BRIDGE_RC without auditable artifacts" >&2
+  exit "$BRIDGE_RC"
+fi
+echo "bridge exit code=$BRIDGE_RC; continuing with tests and result preservation"
 
 echo "[$(date --iso-8601=seconds)] running related tests"
+set +e
 "$PYTHON_BIN" -m pytest -q \
   review_tests/test_f_hf_mechanism_bridge.py \
   review_tests/test_bch_matrix_series.py \
@@ -46,23 +55,26 @@ echo "[$(date --iso-8601=seconds)] running related tests"
   review_tests/test_f05_energy_phase_gap.py \
   review_tests/test_h01_approximate_state_calibration.py \
   | tee "$OUT/related_tests.log"
+RELATED_TEST_RC="${PIPESTATUS[0]}"
+set -e
 
 echo "[$(date --iso-8601=seconds)] running all review_tests"
 set +e
 "$PYTHON_BIN" -m pytest -q review_tests | tee "$OUT/all_review_tests.log"
-FULL_TEST_RC="$?"
+FULL_TEST_RC="${PIPESTATUS[0]}"
 set -e
 
 "$PYTHON_BIN" review_response/finalize_f_hf_mechanism_bridge.py \
   --output-dir "$OUT" \
+  --related-tests-exit-code "$RELATED_TEST_RC" \
   --all-review-tests-exit-code "$FULL_TEST_RC"
 
 STATUS="$(jq -r .status "$OUT/audit.json")"
 if [[ "$STATUS" != "complete_with_findings" ]]; then
   echo "numerical status is $STATUS; COMPLETE will not be created" >&2
-  exit 2
+else
+  touch "$OUT/COMPLETE"
 fi
-touch "$OUT/COMPLETE"
 
 git -C "$ROOT" add "$OUT"
 if ! git -C "$ROOT" diff --cached --quiet; then
@@ -79,3 +91,6 @@ if [[ "$PUSH_RC" -ne 0 ]]; then
   echo "push failed with exit code $PUSH_RC; local commit and artifacts retained" >&2
 fi
 echo "[$(date --iso-8601=seconds)] bridge driver finished; push_rc=$PUSH_RC"
+if [[ "$STATUS" != "complete_with_findings" || "$RELATED_TEST_RC" -ne 0 ]]; then
+  exit 2
+fi
