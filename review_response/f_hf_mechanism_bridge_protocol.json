@@ -1,0 +1,89 @@
+{
+  "protocol_id": "f_hf_mechanism_bridge_v1",
+  "frozen_at": "2026-09-22",
+  "scope": {
+    "catalog_items": ["F01", "F02", "F05"],
+    "purpose": "Explain one controlled success-to-failure transition without changing PF coefficients or fitting rules.",
+    "forbidden": [
+      "new_pf_coefficient_search",
+      "new_molecules",
+      "basis_changes",
+      "target_accuracy_changes",
+      "new_direct_pf_truth_points",
+      "threshold_tuning_after_results"
+    ]
+  },
+  "source": {
+    "integration_base_commit": "828b8a4",
+    "unused_molecule_result_commit": "33a761d44a24022ad61192c41a196dd4cb3afbca",
+    "h01_result_commit": "568f00249abb5b89ae3e6bb39cb4af87ed8581bd",
+    "mechanism_result_commit": "6d13384",
+    "h01_artifact": "artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8",
+    "unused_molecule_artifact": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797"
+  },
+  "primary_controlled_pair": [
+    {
+      "condition": "HF_full_eq_sto3g",
+      "role": "two_term_success",
+      "expected_hamiltonian_sha256": "cd074e4870223646ff51e98a72a679b33019cd96bb013de7536c0ceb3e7456c8"
+    },
+    {
+      "condition": "HF_full_stretch150_sto3g",
+      "role": "two_term_failure",
+      "expected_hamiltonian_sha256": "c68722b3f9f98488e765afb49fa2d1153e41b2a8e84b6df21841400650cec499"
+    }
+  ],
+  "formulae": {
+    "primary": "yoshida4",
+    "diagnostic_control": "current_m3",
+    "model": "two_term_5point",
+    "powers": [4, 6]
+  },
+  "external_success_context": [
+    "N2_active_eq_sto3g",
+    "N2_active_stretch150_sto3g",
+    "CO_active_eq_sto3g",
+    "CO_active_stretch150_sto3g"
+  ],
+  "operator_expansion": {
+    "maximum_effective_order": 8,
+    "required_orders": [4, 6, 8],
+    "numeric_dtypes": ["complex128", "clongdouble"],
+    "finite_log_fit_orders": [4, 6, 8, 10, 12],
+    "finite_log_windows_relative_to_t_ana": [
+      {"window_id": "lower", "minimum": 0.25, "maximum": 0.75, "bins": 11},
+      {"window_id": "middle", "minimum": 0.35, "maximum": 1.0, "bins": 14},
+      {"window_id": "upper", "minimum": 0.5, "maximum": 1.25, "bins": 16}
+    ]
+  },
+  "phase_gap_grid_relative_to_t_ana": [
+    0.1, 0.2, 0.3, 0.4, 0.5,
+    0.75, 0.85, 0.9, 0.95, 1.0, 1.05, 1.1, 1.15, 1.25
+  ],
+  "numerical_gates": {
+    "group_sum_relative_frobenius": 1e-12,
+    "h0_relative_frobenius": 1e-11,
+    "forbidden_order_relative_frobenius": 1e-8,
+    "precision_relative_difference_d4": 1e-10,
+    "precision_relative_difference_d6": 1e-8,
+    "precision_relative_difference_d8": 1e-6,
+    "a8_decomposition_relative_identity": 1e-9,
+    "stored_direct_shift_absolute_hartree": 1e-9,
+    "minimum_log_branch_cut_margin_radians": 0.3,
+    "minimum_selected_branch_overlap_probability": 0.9,
+    "maximum_eigenpair_residual_2_norm": 1e-9
+  },
+  "predeclared_mechanism_flags": {
+    "leading_diagonal_cancellation_max_ratio": 0.05,
+    "leading_coupling_min_ratio": 0.1,
+    "state_mixing_min_fraction": 0.25,
+    "a8_cancellation_min_ratio": 2.0,
+    "phase_compression_max_ratio": 0.25
+  },
+  "interpretation": {
+    "primary_comparison": "HF equilibrium versus the same full-electron HF Hamiltonian construction at 1.5x bond stretch, using Yoshida4.",
+    "current_m3_role": "Diagnostic control only; it is not a second success-to-failure claim.",
+    "n2_co_role": "Existing finite-time success context only; no dense D8 operator is inferred for the 3136-dimensional sectors.",
+    "failure_to_reproduce_cache": "failed_source_identity; do not interpret mechanism outputs"
+  }
+}
