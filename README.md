@@ -8,11 +8,10 @@
 
 - [現在の研究目的・検証状況・次の課題](docs/current_research_status.md)：GitHubから本プロジェクトを確認するときの正本。
 - [役割別のリポジトリ案内](docs/repository_guide.md)：コード、検証、文書、成果物の場所。
+- [分子・Hamiltonianの使用履歴](docs/pf_data_use_ledger.md)：探索・開発・過去のホールドアウトの区別。
 - [短時間フィットの固定規則](review_response/m3_short_time_fit_protocol.md)：係数や候補を比較するときの共通プロトコル。
 
 `main` より先の研究結果が作業ブランチにある場合がある。結果を引用するときは、上記の現在状況に記載されたブランチ・コミットと、各報告書の `Status` を確認すること。
-
-現在の研究目的、確認済み結果、適用範囲、停止判断は[`docs/current_research_status.md`](docs/current_research_status.md)を参照する。ファイル配置は[`docs/repository_guide.md`](docs/repository_guide.md)、分子・Hamiltonianの使用履歴は[`docs/pf_data_use_ledger.md`](docs/pf_data_use_ledger.md)にまとめている。
 
 ## できること
 - 2nd/4th/8th/10thなどの積公式係数に基づく誤差評価
