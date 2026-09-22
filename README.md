@@ -1,6 +1,16 @@
 # Evaluation_numGate_highorder
 
-高次Trotter積公式による時間発展シミュレーションの誤差スケーリングとコスト評価を行う研究用コード。OpenFermion/PySCFで水素鎖のハミルトニアンを生成し、Qiskitで時間発展を実装、誤差を摂動論で計算、log-logフィットと外挿で比較する。積公式構築アルゴリズムの参考文献として `Greatly-improved-higher-order-product-formulae-for-quantum-simulation.pdf` を同梱する。
+高次Trotter積公式による時間発展シミュレーションの誤差スケーリングとコスト評価を行う研究用コード。OpenFermion/PySCFで水素鎖および分子Hamiltonianを生成し、Qiskitによる時間発展、短時間の摂動推定、保存則セクター内の直接PF固有値誤差、log-logフィットと外挿を比較する。積公式構築アルゴリズムの参考文献として `Greatly-improved-higher-order-product-formulae-for-quantum-simulation.pdf` を同梱する。
+
+現在は従来の「誤差係数またはQPEコストが小さいPF」に加えて、短時間の誤差モデルからQPEに使う有限時間のコストを高精度に予測できる、**コスト解析しやすいPF**を検討している。この研究は進行中であり、現在の係数は最終採用PFではない。
+
+## 最初に読む
+
+- [現在の研究目的・検証状況・次の課題](docs/current_research_status.md)：GitHubから本プロジェクトを確認するときの正本。
+- [役割別のリポジトリ案内](docs/repository_guide.md)：コード、検証、文書、成果物の場所。
+- [短時間フィットの固定規則](review_response/m3_short_time_fit_protocol.md)：係数や候補を比較するときの共通プロトコル。
+
+`main` より先の研究結果が作業ブランチにある場合がある。結果を引用するときは、上記の現在状況に記載されたブランチ・コミットと、各報告書の `Status` を確認すること。
 
 現在の研究目的、確認済み結果、適用範囲、停止判断は[`docs/current_research_status.md`](docs/current_research_status.md)を参照する。ファイル配置は[`docs/repository_guide.md`](docs/repository_guide.md)、分子・Hamiltonianの使用履歴は[`docs/pf_data_use_ledger.md`](docs/pf_data_use_ledger.md)にまとめている。
 
@@ -15,9 +25,14 @@
 - パウリ回転数/RZ・T-depth外挿
 
 ## ディレクトリ構成
+
+- [役割別の詳しい案内と整理方針](docs/repository_guide.md)
 - `src/trotterlib/`: 実験用ライブラリ本体
+- `review_response/`: 査読対応・PF予測可能性の検証/探索コード、研究文書、GPU側への指示書
+- `review_tests/`: Git管理されている回帰テスト
 - `abe_trotter_project.ipynb`: 解析の一連の流れをまとめたノートブック
 - `artifacts/`: 生成物（係数、行列キャッシュ、スケーリング結果）
+- `aqis2026/`: AQIS原稿と発表用素材
 - [`artifacts/server_pf_window_validation/`](artifacts/server_pf_window_validation/): H4/H5のGPU時間窓検証、CPU比較、H2直接対角化、系・PF別ノイズ床
 - `Greatly-improved-higher-order-product-formulae-for-quantum-simulation.pdf`: 参照論文
 - `Evaluation of gate numbers for ground state energy calculations using higher-order product formulae`: 本論文
