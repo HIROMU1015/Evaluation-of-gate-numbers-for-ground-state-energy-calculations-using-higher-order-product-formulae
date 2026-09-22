@@ -1,0 +1,142 @@
+...........F......................F..................................... [ 52%]
+..........F........F.............................................        [100%]
+=================================== FAILURES ===================================
+_________________ test_d04_manifest_hashes_and_csv_rows_match __________________
+
+    def test_d04_manifest_hashes_and_csv_rows_match() -> None:
+        audit = json.loads((ARTIFACT / "audit.json").read_text(encoding="utf-8"))
+        manifest = json.loads((ARTIFACT / "manifest.json").read_text(encoding="utf-8"))
+        assert manifest["status"] == audit["status"]
+        for group in ("source_sha256", "input_sha256", "artifact_sha256"):
+            for path_text, expected_hash in manifest[group].items():
+>               assert _sha256(Path(path_text)) == expected_hash
+
+review_tests/test_d04_equal_classical_budget.py:73:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+review_tests/test_d04_equal_classical_budget.py:21: in _sha256
+    digest.update(path.read_bytes())
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = PosixPath('artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json'
+
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_________________ test_f05_manifest_hashes_and_csv_rows_match __________________
+
+    def test_f05_manifest_hashes_and_csv_rows_match() -> None:
+        audit = json.loads((ARTIFACT / "audit.json").read_text(encoding="utf-8"))
+        manifest = json.loads((ARTIFACT / "manifest.json").read_text(encoding="utf-8"))
+        assert manifest["status"] == audit["status"]
+        for group in ("source_sha256", "input_sha256", "artifact_sha256"):
+            for path_text, expected_hash in manifest[group].items():
+>               assert _sha256(Path(path_text)) == expected_hash
+
+review_tests/test_f05_energy_phase_gap.py:70:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+review_tests/test_f05_energy_phase_gap.py:19: in _sha256
+    digest.update(path.read_bytes())
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = PosixPath('artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json'
+
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_______________ test_h01_npz_manifest_hashes_and_csv_rows_match ________________
+
+    def test_h01_npz_manifest_hashes_and_csv_rows_match() -> None:
+        audit = json.loads((ARTIFACT / "audit.json").read_text(encoding="utf-8"))
+        manifest = json.loads((ARTIFACT / "manifest.json").read_text(encoding="utf-8"))
+        assert manifest["status"] == audit["status"]
+        for group in ("source_sha256", "input_sha256", "artifact_sha256"):
+            for path_text, expected_hash in manifest[group].items():
+>               assert _sha256(Path(path_text)) == expected_hash
+
+review_tests/test_h01_approximate_state_pilot.py:104:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+review_tests/test_h01_approximate_state_pilot.py:26: in _sha256
+    digest.update(path.read_bytes())
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = PosixPath('artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json'
+
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_________________ test_h04_manifest_hashes_and_csv_rows_match __________________
+
+    def test_h04_manifest_hashes_and_csv_rows_match() -> None:
+        audit = json.loads((ARTIFACT / "audit.json").read_text(encoding="utf-8"))
+        manifest = json.loads((ARTIFACT / "manifest.json").read_text(encoding="utf-8"))
+        assert manifest["status"] == audit["status"]
+        assert manifest["literature"]["arxiv"] == "2606.30738v1"
+        for group in ("source_sha256", "input_sha256", "artifact_sha256"):
+            for path_text, expected_hash in manifest[group].items():
+>               assert _sha256(Path(path_text)) == expected_hash
+
+review_tests/test_h04_compact_bch_importance.py:109:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+review_tests/test_h04_compact_bch_importance.py:28: in _sha256
+    digest.update(path.read_bytes())
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = PosixPath('artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json')
+mode = 'rb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+E       FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/prevalidation_x02_curve_model_integrity_20260921_retry3/audit.json'
+
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/pathlib.py:1013: FileNotFoundError
+=========================== short test summary info ============================
+FAILED review_tests/test_d04_equal_classical_budget.py::test_d04_manifest_hashes_and_csv_rows_match
+FAILED review_tests/test_f05_energy_phase_gap.py::test_f05_manifest_hashes_and_csv_rows_match
+FAILED review_tests/test_h01_approximate_state_pilot.py::test_h01_npz_manifest_hashes_and_csv_rows_match
+FAILED review_tests/test_h04_compact_bch_importance.py::test_h04_manifest_hashes_and_csv_rows_match
+4 failed, 133 passed, 1 skipped in 2.74s
