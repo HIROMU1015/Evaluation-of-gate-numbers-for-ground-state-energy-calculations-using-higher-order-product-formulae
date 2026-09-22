@@ -2,6 +2,8 @@
 
 高次Trotter積公式による時間発展シミュレーションの誤差スケーリングとコスト評価を行う研究用コード。OpenFermion/PySCFで水素鎖のハミルトニアンを生成し、Qiskitで時間発展を実装、誤差を摂動論で計算、log-logフィットと外挿で比較する。積公式構築アルゴリズムの参考文献として `Greatly-improved-higher-order-product-formulae-for-quantum-simulation.pdf` を同梱する。
 
+現在の研究目的、確認済み結果、適用範囲、停止判断は[`docs/current_research_status.md`](docs/current_research_status.md)を参照する。ファイル配置は[`docs/repository_guide.md`](docs/repository_guide.md)、分子・Hamiltonianの使用履歴は[`docs/pf_data_use_ledger.md`](docs/pf_data_use_ledger.md)にまとめている。
+
 ## できること
 - 2nd/4th/8th/10thなどの積公式係数に基づく誤差評価
 - Morales et al. QIC 2025 の Y8m10b、processed YP8m8、10次m=17
