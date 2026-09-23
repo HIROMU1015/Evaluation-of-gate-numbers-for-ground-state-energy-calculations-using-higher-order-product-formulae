@@ -932,12 +932,21 @@ def _artifact_hashes(output_dir: Path) -> dict[str, str]:
     }
 
 
-def run_all(h01_root: Path, p03_root: Path, output_dir: Path) -> dict[str, Any]:
+def _prepare_output_directory(output_dir: Path) -> None:
+    """Accept only the two logs opened by the frozen tmux driver before run-all."""
     output_dir.mkdir(parents=True, exist_ok=True)
-    disallowed = [path for path in output_dir.iterdir() if path.name != "driver.log"]
+    allowed_bootstrap_files = {"driver.log", "computation.log"}
+    disallowed = [
+        path for path in output_dir.iterdir()
+        if path.name not in allowed_bootstrap_files
+    ]
     if disallowed:
         raise FileExistsError(f"refusing non-empty output: {output_dir}")
     (output_dir / ".gitignore").write_text(".runtime/\ndriver.log\n", encoding="utf-8")
+
+
+def run_all(h01_root: Path, p03_root: Path, output_dir: Path) -> dict[str, Any]:
+    _prepare_output_directory(output_dir)
     shutil.copyfile(PROTOCOL_PATH, output_dir / "protocol.json")
     started = time.perf_counter()
     try:

@@ -149,3 +149,18 @@ def test_new_direct_truth_is_structurally_zero() -> None:
     source = inspect.getsource(pcm.run_scorer)
     assert "_direct_point" not in source
     assert "interpol" not in source.lower()
+
+
+def test_output_bootstrap_accepts_only_driver_logs(tmp_path: Path) -> None:
+    accepted = tmp_path / "accepted"
+    accepted.mkdir()
+    (accepted / "driver.log").write_text("driver started\n")
+    (accepted / "computation.log").write_text("")
+    pcm._prepare_output_directory(accepted)
+    assert (accepted / ".gitignore").read_text() == ".runtime/\ndriver.log\n"
+
+    rejected = tmp_path / "rejected"
+    rejected.mkdir()
+    (rejected / "unexpected.txt").write_text("must be rejected\n")
+    with pytest.raises(FileExistsError, match="refusing non-empty output"):
+        pcm._prepare_output_directory(rejected)
