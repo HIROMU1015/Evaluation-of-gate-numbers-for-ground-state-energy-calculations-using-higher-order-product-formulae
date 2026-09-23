@@ -1,0 +1,37 @@
+{
+  "schema": "d03_target_accuracy_numerical_gates_v1",
+  "protocol_id": "d03_target_accuracy_numerical_gates_v1",
+  "frozen_before_direct_computation": true,
+  "ground_energy_absolute_tolerance_hartree": 1e-12,
+  "hamiltonian_ground_residual_2_norm_maximum": 1e-8,
+  "restricted_ground_residual_2_norm_maximum": 1e-8,
+  "pf_eigenpair_residual_2_norm_maximum": 1e-8,
+  "cpu_gpu_unitary_relative_frobenius_maximum": 1e-10,
+  "cpu_gpu_state_action_relative_2_norm_maximum": 1e-10,
+  "cpu_gpu_signed_shift_absolute_tolerance_hartree": 1e-10,
+  "cpu_gpu_ground_overlap_probability_absolute_tolerance": 1e-6,
+  "phase_unwrap_integer_requires_exact_match": true,
+  "time_match_relative_tolerance": 2e-12,
+  "time_match_absolute_tolerance": 1e-14,
+  "source_hash_requires_exact_match": true,
+  "source_identity_exact_fields": [
+    "condition",
+    "electron_count",
+    "orbital_count",
+    "sector_dimension",
+    "pf_coefficients",
+    "s2_sequence",
+    "rotation_count",
+    "protocol_sha256",
+    "source_json_sha256",
+    "hamiltonian_sha256_when_recorded"
+  ],
+  "pf_coefficients_and_rotation_count_require_exact_match": true,
+  "failure_actions": {
+    "cpu_gpu_mismatch": "reject_gpu_backend_and_continue_cpu_only_if_cpu_passes_all_numeric_gates",
+    "source_identity_mismatch": "failed_source_identity_before_long_running_computation",
+    "pf_eigenpair_residual_failure": "repeat_same_time_on_cpu_without_cache_then_mark_failed_numerical_validation_if_still_above_threshold",
+    "failed_numerical_validation_allows_complete_marker": false
+  },
+  "threshold_changes_after_results_are_forbidden": true
+}
