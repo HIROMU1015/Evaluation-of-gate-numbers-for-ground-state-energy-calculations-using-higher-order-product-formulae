@@ -1,0 +1,87 @@
+{
+  "protocol_id": "d03_target_accuracy_dependence_existing_curve_audit_v1",
+  "frozen_on": "2026-09-23",
+  "base_commit": "4f4374bdf4dbcb7d8e1d14f9682570c221e4c88a",
+  "evaluation_type": "retrospective fixed-model transfer and direct-curve coverage audit; not an independent holdout",
+  "target_errors_hartree": {
+    "CA": 0.0015936001019904,
+    "CA_div_10": 0.00015936001019904,
+    "CA_div_100": 0.000015936001019904
+  },
+  "cost": {
+    "formula": "beta * rotations / (time * (target_error - absolute_pf_error))",
+    "beta": 1.2,
+    "infeasible_when_absolute_error_greater_than_or_equal_to_target": true
+  },
+  "datasets": {
+    "p03": {
+      "root": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797",
+      "conditions": [
+        "N2_active_eq_sto3g",
+        "N2_active_stretch150_sto3g",
+        "CO_active_eq_sto3g",
+        "CO_active_stretch150_sto3g",
+        "HF_full_eq_sto3g",
+        "HF_full_stretch150_sto3g"
+      ],
+      "formulas": ["current_m3", "yoshida4", "two_term_center", "yoshida6_m3"],
+      "model_mapping": {
+        "current_m3": "two_term_5point",
+        "yoshida4": "two_term_5point",
+        "two_term_center": "two_term_5point",
+        "yoshida6_m3": "three_term_5point"
+      }
+    },
+    "nh3": {
+      "root": "artifacts/server_existing_pf_unified_nh3_20260920_233516_e692360",
+      "conditions": ["active_equilibrium", "active_stretch150", "full_equilibrium", "full_stretch150"],
+      "formulas": ["current_m3", "yoshida4", "yoshida6_m3", "morales_y8m10b"],
+      "model_mapping": {
+        "current_m3": "two_term",
+        "yoshida4": "two_term",
+        "yoshida6_m3": "three_term",
+        "morales_y8m10b": "three_term"
+      }
+    }
+  },
+  "fixed_model_transfer": {
+    "coefficient_source": "the model fitted at CA/10 in the source artifact",
+    "refit_at_new_target_errors": false,
+    "leading_analytic_time_formula": "(target_error / ((formal_order + 1) * alpha)) ** (1 / formal_order)",
+    "optimization_relative_to_target_analytic_time": [0.05, 1.8],
+    "optimization_grid_points": 35001
+  },
+  "direct_curve_coverage": {
+    "model_time_nearest_point_relative_tolerance": 0.005,
+    "validation_band_relative_to_model_time": [0.85, 1.15],
+    "minimum_validation_points": 3,
+    "direct_minimum_maximum_neighbor_gap_fraction": 0.03,
+    "coarse_relative_grid": [0.85, 0.9, 0.95, 1.0, 1.05, 1.1, 1.15],
+    "fine_grid_deferred_until_coarse_results": true,
+    "interpolation_forbidden": true
+  },
+  "pass_thresholds": {
+    "eta_star": 0.01,
+    "eta_min": 0.01,
+    "eta_t": 0.05,
+    "maximum_local_unseen_residual_over_target_error": 0.05
+  },
+  "optional_target_specific_refit_audit": {
+    "training_relative_to_target_analytic_time": [0.1, 0.2, 0.3, 0.4, 0.5],
+    "points_are_inventory_only": true,
+    "do_not_refit_in_existing_curve_audit": true
+  },
+  "recommended_additional_point_subset": {
+    "p03_conditions": ["N2_active_eq_sto3g", "N2_active_stretch150_sto3g", "HF_full_stretch150_sto3g"],
+    "p03_formulas": ["current_m3", "yoshida4", "yoshida6_m3"],
+    "nh3_conditions": ["active_stretch150", "full_equilibrium"],
+    "nh3_formulas": ["morales_y8m10b"]
+  },
+  "scope_limits": {
+    "new_direct_points_in_this_local_audit": 0,
+    "no_new_molecules": true,
+    "no_pf_coefficient_changes": true,
+    "no_new_basis_sets": true,
+    "do_not_call_sparse_grid_minimum_a_continuous_global_minimum": true
+  }
+}
