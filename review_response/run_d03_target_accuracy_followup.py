@@ -604,6 +604,7 @@ def compute_items(
             "started_at": now(),
             "cache_key": expected_key,
             "stage": stage,
+            "physical_id": item["physical_id"],
             "point_role": "direct_coarse_validation" if stage == "stage1" else "direct_fine_validation",
             "used_for_model_fit": False,
             "used_for_model_refit": False,
