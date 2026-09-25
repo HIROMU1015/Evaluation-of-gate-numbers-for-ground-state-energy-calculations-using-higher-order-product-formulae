@@ -691,6 +691,7 @@ def artifact_hashes(output: Path) -> dict[str, str]:
 def report_lines(
     rows: Sequence[dict[str, Any]],
     summaries: Sequence[dict[str, Any]],
+    eligible_summaries: Sequence[dict[str, Any]],
     audit: dict[str, Any],
 ) -> list[str]:
     lines = [
@@ -711,6 +712,23 @@ def report_lines(
             "{best_total_rz_layer_depth} | {best_total_t_count} | "
             "{best_total_t_depth} | {best_pf_changes_across_metrics} | "
             "{pairwise_inversion_count} |".format(**item)
+        )
+    lines.extend(
+        [
+            "",
+            "## D03固定モデル合格PFに限定した最良PF",
+            "",
+            "この表は資源量だけでなく、D03の固定モデル判定に合格したPFだけを採用候補として比較する。",
+            "",
+            "| condition | target | eligible PFs | rotations | RZ layers | T-count | T-depth |",
+            "|---|---|---|---|---|---|---|",
+        ]
+    )
+    for item in eligible_summaries:
+        lines.append(
+            "| {condition} | {target_name} | {eligible_formulae} | "
+            "{best_total_pauli_rotations} | {best_total_rz_layer_depth} | "
+            "{best_total_t_count} | {best_total_t_depth} |".format(**item)
         )
     lines.extend(
         [
@@ -742,6 +760,7 @@ def report_lines(
             "- T-count/T-depthは1%の合成エネルギー予算と `ceil(3 log2(1/epsilon_rot))` を使う固定proxyである。",
             "- controlled-U、状態準備、QFT、routing、magic-state factoryは含まないため、実行時間とは呼ばない。",
             "- HF stretchは破綻例の診断であり、N2の主判定と混ぜない。",
+            "- HF stretchではraw資源最小の `current_m3` はD03固定モデルに不合格であり、採用可能PF限定では `yoshida6_m3` のみが残る。",
         ]
     )
     return lines
@@ -786,10 +805,25 @@ def run(output: Path) -> int:
         rankings, summaries, inversions = rank_resources(
             rows, float(config["numerical_gates"]["ranking_relative_tie_tolerance"])
         )
+        eligible_rows = [row for row in rows if bool(row["d03_fixed_model_passed"])]
+        eligible_rankings, eligible_summaries, eligible_inversions = rank_resources(
+            eligible_rows,
+            float(config["numerical_gates"]["ranking_relative_tie_tolerance"]),
+        )
+        eligible_formulae = defaultdict(list)
+        for row in eligible_rows:
+            eligible_formulae[(row["condition"], row["target_name"])].append(row["formula"])
+        for item in eligible_summaries:
+            item["eligible_formulae"] = ";".join(
+                sorted(eligible_formulae[(item["condition"], item["target_name"])])
+            )
         write_csv(output / "resource_rows.csv", rows)
         write_csv(output / "resource_rankings.csv", rankings)
         write_csv(output / "ranking_summary.csv", summaries)
         write_csv(output / "rank_inversions.csv", inversions)
+        write_csv(output / "eligible_resource_rankings.csv", eligible_rankings)
+        write_csv(output / "eligible_ranking_summary.csv", eligible_summaries)
+        write_csv(output / "eligible_rank_inversions.csv", eligible_inversions)
         make_plot(output / "resource_metric_ratios.png", rankings)
         primary_summaries = [
             item
@@ -813,6 +847,7 @@ def run(output: Path) -> int:
                 for item in primary_summaries
             ),
             "summary_rows": summaries,
+            "eligible_summary_rows": eligible_summaries,
         }
         atomic_json(output / "analysis.json", analysis)
         audit = {
@@ -834,7 +869,8 @@ def run(output: Path) -> int:
             raise NumericalValidationError("completion gates did not pass")
         atomic_json(output / "audit.json", audit)
         (output / "report.md").write_text(
-            "\n".join(report_lines(rows, summaries, audit)) + "\n", encoding="utf-8"
+            "\n".join(report_lines(rows, summaries, eligible_summaries, audit)) + "\n",
+            encoding="utf-8",
         )
         manifest = {
             "schema": "m01_resource_metric_sensitivity_manifest_v1",
