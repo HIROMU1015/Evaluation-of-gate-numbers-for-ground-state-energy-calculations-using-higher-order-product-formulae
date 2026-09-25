@@ -1,0 +1,117 @@
+{
+  "schema": "m01_resource_metric_sensitivity_protocol_v1",
+  "protocol_id": "m01_resource_metric_sensitivity_20260925_v1",
+  "frozen_before_resource_reconstruction": true,
+  "base_result_branch": "gpu-d03-target-accuracy-followup-results",
+  "base_result_commit": "a8b9a92c9fcdb1b4187d5aa3c239ed8b7443dcfd",
+  "scope": {
+    "primary_conditions": [
+      "N2_active_eq_sto3g",
+      "N2_active_stretch150_sto3g"
+    ],
+    "diagnostic_conditions": [
+      "HF_full_stretch150_sto3g"
+    ],
+    "formulae": [
+      "current_m3",
+      "yoshida4",
+      "yoshida6_m3"
+    ],
+    "primary_targets": [
+      "CA_div_10",
+      "CA_div_100"
+    ],
+    "diagnostic_targets": [
+      "CA_div_100"
+    ],
+    "new_direct_pf_eigenvalue_point_count": 0,
+    "new_pf_coefficient_search": false,
+    "new_molecule_or_basis": false,
+    "controlled_pf_compilation": false,
+    "routing_or_hardware_runtime_model": false
+  },
+  "sources": {
+    "d03_artifact": "artifacts/server_d03_target_accuracy_followup_20260923_748b3d4",
+    "d03_protocol_sha256": "68c738b7b7a335f75505d39ac846734564b75593ce8b04ec265726db04c9c87c",
+    "multi_accuracy_metrics_csv_sha256": "5ff972646b67f02417ed87c22c65aa9f2731fc0c2c260f278c376885225d43c1",
+    "final_allowed_metrics_json_sha256": "9579a751d0c59ba67e598482c02bdbdd87144023731abc011b839764c526fdb6",
+    "condition_rankings_csv_sha256": "3bba74ee557cb05915348398fdc5e5b06f65a5c03c2410c436682df58c4a420d",
+    "d03_manifest_sha256": "600006099d03094b1e38e6fa978264cac6449e27efcf2b70543acb35d30e03be",
+    "holdout_protocol": "review_response/unused_molecule_frozen_holdout_protocol.json",
+    "holdout_protocol_sha256": "b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56",
+    "condition_metadata": {
+      "N2_active_eq_sto3g": {
+        "path": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/cache/N2_active_eq_sto3g.metadata.json",
+        "sha256": "833ac5857b51b20d637234c0eabfc29d804f299c1e70ea258c585cee756a34e9"
+      },
+      "N2_active_stretch150_sto3g": {
+        "path": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/cache/N2_active_stretch150_sto3g.metadata.json",
+        "sha256": "67558eff6e4c05bfe1f08bf1a35b1ab2f39107d8694ede8f942a7d585d044c53"
+      },
+      "HF_full_stretch150_sto3g": {
+        "path": "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/cache/HF_full_stretch150_sto3g.metadata.json",
+        "sha256": "13748647ea5e359ced081d0d61011f80f423e1d9e3c91707a205dcb30ae85dfa"
+      }
+    }
+  },
+  "time_and_qpe_rule": {
+    "time_source": "D03 two_term_5point model_time",
+    "direct_error_source": "D03 direct point exactly at model_time",
+    "require_model_time_direct_point_covered": true,
+    "maximum_nearest_direct_time_relative_mismatch": 2e-12,
+    "qpe_use_factor": "beta / (time * (target_error - absolute_direct_error))",
+    "beta": 1.2,
+    "infeasible_error_budget_is_not_clipped": true,
+    "continuous_use_factor_is_primary_for_comparison": true,
+    "ceiling_use_count_is_saved_as_diagnostic": true,
+    "time_is_not_reoptimized_per_resource_metric": true
+  },
+  "circuit_resource_rule": {
+    "pf_step_expansion": "iter_s2_sequence_steps with adjacent equal group exponentials merged",
+    "pauli_rotation_model": "count nonidentity Pauli exponentials before the grouping-specific diagonalizing Clifford transform",
+    "compiled_rz_gate_model": "count nonidentity Z-string exponentials after the repository grouping-specific diagonalizing transform; this is saved separately from the Pauli-rotation proxy",
+    "rz_layer_parallelism": "within each ordered Hamiltonian group, greedily layer transformed Z supports that are qubit-disjoint; distinct group exponentials and PF steps remain sequential",
+    "pauli_evolution_rz_angle_radians": "2 * time * merged_step_weight * real_pauli_coefficient",
+    "zero_angle_absolute_tolerance_radians": 1e-14,
+    "clifford_angle_distance_tolerance_radians": 1e-10,
+    "clifford_angle_grid_radians": "integer multiples of pi/2 modulo 2pi",
+    "all_rz_and_nonclifford_rz_are_saved_separately": true,
+    "synthesis_energy_budget_fraction": 0.01,
+    "per_nonclifford_rotation_phase_error": "time * synthesis_energy_budget_fraction * target_error / (nonclifford_compiled_rz_per_pf_unitary * continuous_qpe_use_factor)",
+    "per_rotation_t_count": "ceil(3 * log2(1 / per_nonclifford_rotation_phase_error))",
+    "total_t_count": "continuous_qpe_use_factor * nonclifford_compiled_rz_per_pf_unitary * per_rotation_t_count",
+    "total_t_depth": "continuous_qpe_use_factor * nonclifford_rz_layer_depth_per_pf_unitary * per_rotation_t_count",
+    "controlled_u_overhead_included": false,
+    "state_preparation_included": false,
+    "qft_and_readout_included": false,
+    "routing_included": false,
+    "magic_state_factory_included": false
+  },
+  "numerical_gates": {
+    "source_sha256_requires_exact_match": true,
+    "condition_geometry_basis_charge_multiplicity_active_space_require_exact_match": true,
+    "reconstructed_group_count_requires_metadata_exact_match": true,
+    "reconstructed_nonidentity_pauli_term_count_requires_metadata_exact_match": true,
+    "reconstructed_scf_energy_absolute_tolerance_hartree": 1e-9,
+    "reconstructed_removed_constant_absolute_tolerance_hartree": 1e-9,
+    "reconstructed_pf_rotation_count_requires_d03_exact_match": true,
+    "compiled_rz_count_is_not_assumed_equal_to_pauli_rotation_count": true,
+    "maximum_removed_imaginary_pauli_coefficient": 1e-12,
+    "qpe_rotation_total_relative_tolerance": 1e-12,
+    "ranking_relative_tie_tolerance": 1e-9,
+    "all_primary_rows_must_be_scorable": true,
+    "all_diagnostic_rows_must_be_scorable": true,
+    "failed_numerical_validation_allows_complete_marker": false
+  },
+  "primary_questions": [
+    "Does the best PF change between total Pauli rotations, total RZ-layer depth, total T-count, and total T-depth?",
+    "Are pairwise PF orderings preserved across resource metrics for both N2 geometries and both target accuracies?",
+    "Does the HF-stretch failure example show a different resource-metric ordering from the N2 primary cases?"
+  ],
+  "interpretation_limits": [
+    "This is a representative logical-resource proxy comparison, not a controlled-U compilation.",
+    "RZ-layer depth is not hardware execution time.",
+    "The T-count and T-depth use the frozen synthesis proxy and one-percent synthesis-energy budget; they do not include a magic-state factory or routing.",
+    "No claim is made outside the declared molecules, PFs, target accuracies, and selected D03 times."
+  ]
+}
