@@ -38,13 +38,28 @@ H01は、GPUサーバーに残る次の元成果物を直接使います。
 `aggregate/summary.json`、`truth/`、`manifest.json`、`COMPLETE`が揃う唯一の候補を
 使ってください。Hamiltonianを再生成しません。
 
-commit収録の次も使います。
+practical成果物はcommit収録の次を使います。
 
 - practical：`artifacts/server_practical_calibration_minimal_20260923_79035cc/`
-- P03：`artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/`
 
-source hash、Hamiltonian hash、H01/P03 protocol hashのいずれかが合わない場合は、
-計算を始めず停止してください。
+P03については、commit収録コピーの`manifest.json`が`843a3d69...`であり、practical
+固定protocolが要求する`25e0f759...`と一致しません。したがってcommit収録コピーを
+Phase A/Bのsourceとして使わず、S0 v1.1成功runでも使用したGPUサーバー上の元成果物を
+読み取り専用で使ってください。
+
+`/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-unused-molecule-holdout/artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/`
+
+P03元成果物について、計算前に次を照合します。
+
+- `COMPLETE`が存在する。
+- `manifest.json` SHA-256：`25e0f759e9b6eca995da5056fea22a12290cb237b4c400d895ca39923df819f6`
+- `aggregate/summary.json` SHA-256：`0f0b2590faa278e7c96f7797b81b557544d4d4469b3f13a9079b71548054ce45`
+- P03 protocol SHA-256：`b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56`
+
+この元成果物をコピー、修正、再manifest化しないでください。実際に使った絶対パスと
+3 hashをPhase A/Bのsource manifestと最終報告へ記録します。上記P03またはH01の
+source hash、Hamiltonian hash、protocol hashのいずれかが合わない場合は、計算を
+始めず停止してください。
 
 ## 計算前ゲート
 
@@ -81,7 +96,7 @@ python -u review_response/run_pf_first_study_s4_state_convergence.py phase-a \
   --project-root "$PWD" \
   --practical-root artifacts/server_practical_calibration_minimal_20260923_79035cc \
   --h01-root /absolute/path/to/server_h01_approximate_state_calibration_20260922_011228_e0692a8 \
-  --p03-root artifacts/server_unused_molecule_frozen_holdout_20260921_d288797 \
+  --p03-root /home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-unused-molecule-holdout/artifacts/server_unused_molecule_frozen_holdout_20260921_d288797 \
   --output artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f
 ```
 
@@ -119,7 +134,7 @@ python -u review_response/run_pf_first_study_s4_state_convergence.py phase-b \
   --project-root "$PWD" \
   --phase-a-root artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f \
   --h01-root /absolute/path/to/server_h01_approximate_state_calibration_20260922_011228_e0692a8 \
-  --p03-root artifacts/server_unused_molecule_frozen_holdout_20260921_d288797 \
+  --p03-root /home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-unused-molecule-holdout/artifacts/server_unused_molecule_frozen_holdout_20260921_d288797 \
   --backend gpu \
   --gpu-id 0 \
   --output artifacts/server_pf_first_study_s4_state_convergence_20260925_<phaseA-short>
