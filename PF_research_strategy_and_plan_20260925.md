@@ -533,6 +533,21 @@ $$
 | S4 | 支配誤差に応じた改善法を一つ固定 | 強い基準法との開発比較とアブレーション | 実益があれば独立評価へ。なければAを完成させる |
 | S5 | 必要な範囲の独立評価・論文・再現パッケージ | 凍結プロトコルの評価、図、主張台帳、原稿 | 主張を支える比較がそろい、残る限界を明記できる |
 
+### S3実行記録（2026年9月25日）
+
+S3は追加計算を行わない回顧的証拠統合として完了した。第一研究の三分解、H01、HF
+mechanism bridge、S0 exact-time採点をsource identity付きで接続し、状態置換軸と
+exact-state有限時間演算子軸を同一原因へ潰さず整理した。
+
+- 統合報告：[`PF_first_study_s3_hf_connection_20260925.md`](PF_first_study_s3_hf_connection_20260925.md)
+- 機械可読判断：[`decision.json`](artifacts/pf_first_study_s3_hf_connection_20260925/decision.json)
+- status：`complete_retrospective_synthesis`
+- 新direct truth点、新Hamiltonian、新fit：すべて0。
+
+S3の結果、S4候補はoperator-sensitiveな二状態収束診断と事前固定fallbackの一方式へ
+限定した。S4はまだ開始しておらず、別protocolでthreshold、fallback、費用、baseline、
+ablationをtruth前に固定する。
+
 ### 第1回の進捗共有
 
 S0/S1と、H4の代表PFのS2が一通りそろった時点。持ってくるものは、追加の長い検証一覧ではなく、三分解図、real/complex対照、実際の固定予算、どの説明が有力かの一枚の判断表とする。
