@@ -53,6 +53,26 @@ D03では、代表N2のCA/10・CA/100で`current_m3`がYoshida 4次・6次より
 5. 主判定は1%余裕付き予算の安全率、coverage、oracle最良に対するregretとし、従来の4つの厳しいモデル再現指標は機構・参照診断として分離する。
 6. 全電子一般性、CA/100全域、完全fault-tolerant runtimeのいずれかを新しい主題に選ばない限り、追加の大規模計算へ進まない。
 
+## 2026-09-25時点の第一研究終了判断
+
+上記の事前検証後、第一研究S0--S4を実行した。S1/S2では校正誤差を状態置換、
+exact-state proxy--PF固有値差、有限時間model fit誤差へ分解し、固定128 case中79 caseで
+状態置換誤差が支配した。S0では1%余裕付き予算が6/6安全だった一方、最大joint regretは
+114.15%だった。従って精度上の安全性と資源効率は別である。
+
+S3でHF成功・破綻対へ限定接続した後、S4ではoperator-sensitive二状態収束診断と
+fallbackを一方式だけ事前固定した。6条件×7 strategyの比較は全数値gateを通過したが、
+targeted fallbackの平均主regretはpractical baselineと同じ`42.8416%`で、改善率は
+`0%`だった。equal-cost 7点fitも平均`42.3828%`で、相対改善は約`1.07%`に留まった。
+
+この`complete_no_benefit`は有効なnegative resultであり、上節「現在の決定」の第4項を
+実行する条件は成立しなかった。従ってS5の未使用active-space分子評価には進まず、同じ
+development集合で診断・閾値・fallbackを調整しない。現在の作業は中核の機構・信頼性
+成果を論文、図、主張台帳、再現パッケージへ統合することである。確定結果は
+[`PF_first_study_final_synthesis_20260925.md`](../PF_first_study_final_synthesis_20260925.md)と
+[`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)
+を参照する。
+
 ## 案1：直接PF固有値誤差によるコスト最適化
 
 直接対角化できる系では、各時刻の直接PF固有値誤差 $e_{\mathrm{direct}}(t)$ を用いて

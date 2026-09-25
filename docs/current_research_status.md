@@ -2,7 +2,7 @@
 
 最終更新：2026-09-25
 
-最新の確認済み結果：ブランチ`resource-metric-sensitivity-20260925`、コミット`b5af699`
+最新の確認済み数値結果：ブランチ`gpu-first-study-s4-state-convergence-v1-1-results-20260925`、コミット`4d831b5`
 
 この文書は、古い実行指示や途中結果を現在の結論と誤認しないための入口である。数値を引用するときは、ここからリンクしたGit管理済み報告書も確認する。
 
@@ -79,6 +79,24 @@ M01では、N2平衡・伸長とCA/10・CA/100の4比較群について、合格
 
 HF伸長では生の資源量が安くても予測モデルが不合格のPFがある。したがって、資源指標感度は予測適格性を先に判定した後の比較であり、回路全体のruntime評価ではない。
 
+### 9. 第一研究は機構成果を確定し、改善法はno-benefitで終了
+
+第一研究S0--S4は完了した。S1/S2の固定128 caseでは状態置換誤差が79 caseで支配し、
+残る49 caseはmixedだった。S0 exact-time採点では1%余裕付き予算が6/6安全だった一方、
+joint regretは最大114.15%であり、安全性と資源効率が異なることを再確認した。
+
+S3は新規計算なしでHF成功・破綻対へ限定接続し、状態置換軸とexact-state有限時間
+演算子軸を一つの原因へ還元しなかった。S4ではoperator-sensitive二状態収束診断と
+fallbackを事前固定し、6条件×7 strategyを比較した。72個の新規direct座標を含む全
+数値gateは合格したが、targeted fallbackの平均regretはbaselineと同じ`42.8416%`で、
+改善率は`0%`だった。固定判定は`complete_no_benefit`である。
+
+従って中核の機構・信頼性成果は完成とし、同じ集合で診断を調整しない。S4のbenefit
+条件が成立しなかったためS5の独立分子評価には進まず、次は論文・図・再現パッケージを
+統合する。機械可読な最終判断は
+[`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)
+に固定した。
+
 ## 機構診断・近似状態診断の停止判断
 
 H01/H02により、exact-ground校正の数値再現と、通常の状態品質スカラーだけでは有限時間校正精度を保証できないことを確認した。F01/F02/F03/F05により、先頭対角係数、演算子ノルム、非対角結合、状態混合、高次寄与、位相gapを分離して比較できた。したがって、状態品質スカラーの閾値調整とF領域の追加分解はここで停止する。
@@ -128,9 +146,12 @@ H01/H02により、exact-ground校正の数値再現と、通常の状態品質�
 - 高次数：代表N2で順位逆転は見つからなかったが、coverage外へ一般化しない。高精度域を論文の主題にする場合だけ、事前登録した不足点を限定補完する。
 - 資源量：総rotationだけに依存した順位ではなかった。より完全なfault-tolerant costは、QPE回路設計を次テーマに選ぶ場合だけ評価する。
 
-### 次に行うなら1件だけ
+### 事前検証後に実施した第一研究
 
-practical selectorのコード、候補PF、proxy、時刻候補、安全余裕、棄却規則、採点式を結果を見る前に固定し、数値的に未使用のactive-space分子群で1回だけ独立評価する。この試験ではtruthを選択段階から隔離し、主判定を1%余裕付き予算の安全率、coverage、oracle最良に対するregretとする。分子を結果に応じて交換せず、成功・失敗にかかわらず一度停止する。
+事前検証後は、直ちに未使用分子へ拡張せず、S0--S4で校正誤差の三分解、HFへの限定
+接続、一方式の改善比較を行った。S4が`complete_no_benefit`だったため、計画していた
+S5の一度限りの独立active-space評価は開始しない。この非実施は欠落ではなく、事前に
+固定した分岐条件に従った停止である。
 
 ### 現在は行わない
 
@@ -159,14 +180,21 @@ practical selectorのコード、候補PF、proxy、時刻候補、安全余裕�
 | oracle-free selector開発評価 | practical calibration最小版 | `4f4374b` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/4f4374bdf4dbcb7d8e1d14f9682570c221e4c88a/artifacts/server_practical_calibration_minimal_20260923_79035cc/report.md) |
 | reuse/coverage感度 | D03目標精度依存 | `a8b9a92` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/a8b9a92c9fcdb1b4187d5aa3c239ed8b7443dcfd/artifacts/server_d03_target_accuracy_followup_20260923_748b3d4/report.md) |
 | reuse/coverage感度 | M01資源指標感度 | `b5af699` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/b5af6996159b3dfbd6e5bb3cc2467cb23155906d/artifacts/prevalidation_m01_resource_metric_sensitivity_20260925_3b6e5f0/report.md) |
+| 第一研究S0 | exact selected time採点v1.1 | `cc3626a` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/cc3626a8135b647fe283fc60c963de70c5f6b2a5/artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/report.md) |
+| 第一研究S1/S2 | 三分解と凍結資源への伝播 | `d13f49d` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/d13f49dc8923b0553f8c8596de3c44c8a7a6f14f/artifacts/pf_first_study_phase_b_20260925_5a2f0a2/report.md) |
+| 第一研究S3 | HF成功・破綻対への限定接続 | `e768aaf` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/e768aaff19aa0a1a57c4ccf2563258f860c5b3ec/artifacts/pf_first_study_s3_hf_connection_20260925/report.md) |
+| 第一研究S4 | 二状態診断の固定比較、no-benefit | `4d831b5` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/4d831b52475a7399b74a048a7471eaba6c4527c0/artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df/report.md) |
 
 ## ファイルの読み順
 
 1. 本書：現在の結論、適用範囲、停止判断。
-2. [`docs/prevalidation_results_index.md`](prevalidation_results_index.md)：実行済み最終結果の固定commitと報告書。
-3. [`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)：探索・開発・過去のホールドアウトの区別。
-4. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：直接有限時間評価と縮約校正の位置付け。
-5. 上表のGit管理済み報告書：数値根拠。
-6. [repository_guide.md](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/20d64c2fea1ed2d2188777df4f3d962ee94df486/docs/repository_guide.md)：実装・検証・資料の所在。
+2. [`PF_first_study_final_synthesis_20260925.md`](../PF_first_study_final_synthesis_20260925.md)：第一研究S0--S4の最終統合結果。
+3. [`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)：第一研究の機械可読な最終分岐。
+4. [`PF_first_study_results_20260925.md`](../PF_first_study_results_20260925.md)：S3がhash固定したS0--S2時点の歴史的統合報告。
+5. [`docs/prevalidation_results_index.md`](prevalidation_results_index.md)：実行済み最終結果の固定commitと報告書。
+6. [`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)：探索・開発・過去のホールドアウトの区別。
+7. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：直接有限時間評価と縮約校正の位置付け。
+8. 上表のGit管理済み報告書：数値根拠。
+9. [repository_guide.md](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/20d64c2fea1ed2d2188777df4f3d962ee94df486/docs/repository_guide.md)：実装・検証・資料の所在。
 
 指示書やrunnerが存在するだけでは検証完了を意味しない。成果物の`Status`、commit、条件数、manifestを確認する。未コミットのローカルpilotは確定証拠として扱わない。

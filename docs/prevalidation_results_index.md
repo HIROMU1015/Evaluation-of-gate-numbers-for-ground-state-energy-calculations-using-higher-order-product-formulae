@@ -60,6 +60,27 @@ D04、F01/F02/F05、H01 pilot、H03/H04/H05の固定commitは`6d13384ef327e5b248
 | D03 | 目標精度依存 | `a8b9a92` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/a8b9a92c9fcdb1b4187d5aa3c239ed8b7443dcfd/artifacts/server_d03_target_accuracy_followup_20260923_748b3d4/report.md) |
 | M01 | 資源指標感度 | `b5af699` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/b5af6996159b3dfbd6e5bb3cc2467cb23155906d/artifacts/prevalidation_m01_resource_metric_sensitivity_20260925_3b6e5f0/report.md) |
 
+## 事前検証後の第一研究（別枠）
+
+次表はカタログ128項目の追加消化ではなく、上記の事前検証から選んだ研究課題を
+S0--S4として実行した結果である。統合結論は
+[`PF_first_study_final_synthesis_20260925.md`](../PF_first_study_final_synthesis_20260925.md)、最終分岐は
+[`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)
+を参照する。
+
+| Stage | 内容 | 状態 | 固定commit・報告書 |
+|---|---|---|---|
+| S0 v1.1 | 凍結selectorのexact selected time採点 | `complete_exact_time_scoring` | [`cc3626a` report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/cc3626a8135b647fe283fc60c963de70c5f6b2a5/artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/report.md) |
+| S1/S2 | 校正誤差の三分解と凍結資源への伝播 | `complete_with_findings` | [`d13f49d` report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/d13f49dc8923b0553f8c8596de3c44c8a7a6f14f/artifacts/pf_first_study_phase_b_20260925_5a2f0a2/report.md) |
+| S3 | HF成功・破綻対への限定接続 | `complete_retrospective_synthesis` | [`e768aaf` report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/e768aaff19aa0a1a57c4ccf2563258f860c5b3ec/artifacts/pf_first_study_s3_hf_connection_20260925/report.md) |
+| S4 Phase A | 6条件×7 strategyのtruth前固定 | `selection_frozen` | [`95ed24c` artifact](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/tree/95ed24c74bb29d883bbaf76d4578ff7af08ed995/artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f) |
+| S4 Phase B v1.1 | 二状態収束診断とfallbackの固定比較 | `complete_no_benefit` | [`4d831b5` report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/4d831b52475a7399b74a048a7471eaba6c4527c0/artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df/report.md) |
+| S5 | 未使用active-space分子での独立評価 | `not_started_by_frozen_stop_rule` | S4 benefit条件が不成立のため非実施 |
+
+S4初回Phase Bは下側anchor不足をdirect計算前に検出して停止した。v1.1はPhase A予測を
+変えず、全12群へ一様な新規anchor規則を適用して完了した。初回停止成果物は成功結果に
+数えず、S4の科学的正本は`4d831b5`だけとする。
+
 ## 保存範囲
 
 - 上表の結果は報告書に加え、各commit内のJSON、CSV、audit、manifest、軽量図、関連testで確認する。

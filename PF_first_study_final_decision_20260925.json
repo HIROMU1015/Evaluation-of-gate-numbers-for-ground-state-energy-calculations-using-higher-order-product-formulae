@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "decision_date": "2026-09-25",
+  "status": "complete_mechanism_study_no_method_benefit",
+  "first_study_protocol_sha256": "410367f7ff1093fb5f171bb00ca8c22b292de34c19ff03553c600a0313565565",
+  "stages": {
+    "s0_exact_time_v1_1": {
+      "status": "complete_exact_time_scoring",
+      "result_commit": "cc3626a8135b647fe283fc60c963de70c5f6b2a5",
+      "artifact": "artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201",
+      "new_direct_truth_coordinate_count": 18,
+      "anchor_recomputation_count": 6,
+      "gamma_1_01_safe_condition_count": 6,
+      "condition_count": 6
+    },
+    "s1_s2_mechanism": {
+      "status": "complete_with_findings",
+      "result_commit": "d13f49dc8923b0553f8c8596de3c44c8a7a6f14f",
+      "artifact": "artifacts/pf_first_study_phase_b_20260925_5a2f0a2",
+      "dominant_state_substitution_case_count": 79,
+      "mixed_case_count": 49,
+      "case_count": 128
+    },
+    "s3_hf_connection": {
+      "status": "complete_retrospective_synthesis",
+      "result_commit": "e768aaff19aa0a1a57c4ccf2563258f860c5b3ec",
+      "artifact": "artifacts/pf_first_study_s3_hf_connection_20260925",
+      "new_direct_truth_coordinate_count": 0
+    },
+    "s4_state_convergence": {
+      "status": "complete_no_benefit",
+      "result_commit": "4d831b52475a7399b74a048a7471eaba6c4527c0",
+      "artifact": "artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df",
+      "parent_protocol_sha256": "5c3c33fab6752b5ccf0ec9ee415e115bdf2134256e5a956f6b0e9b639f554c40",
+      "anchor_amendment_sha256": "9ce996b2732e02a7bb2fa4f1d6f8a4e09fd503896a4eda7a9a4496be0f402150",
+      "prediction_sha256": "47cdef9b52ea73feef0c005229cb9a482ee8e95afff87f038ff8461549f1c729",
+      "unique_selected_coordinate_count": 20,
+      "inserted_direct_coordinate_count": 60,
+      "uniform_anchor_coordinate_count": 12,
+      "new_direct_truth_coordinate_count": 72,
+      "targeted_fallback_gamma_1_01_safe_condition_count": 6,
+      "condition_count": 6,
+      "baseline_mean_regret": 0.4284159472315503,
+      "targeted_fallback_mean_regret": 0.4284159472315503,
+      "equal_cost_mean_regret": 0.4238279683497665,
+      "baseline_relative_mean_regret_gain": 0.0,
+      "minimum_safety_passed": true,
+      "efficiency_gain_passed": false,
+      "diagnostic_specificity_passed": true,
+      "outcome": "no_benefit"
+    }
+  },
+  "research_decision": {
+    "core_mechanism_result_complete": true,
+    "method_extension_supported": false,
+    "proceed_to_s5": false,
+    "additional_selector_tuning_in_current_study": false,
+    "next_action": "paper_and_reproducibility_synthesis"
+  },
+  "scope_limits": [
+    "The S4 comparison is a six-condition development evaluation, not an independent molecular holdout.",
+    "Safety at gamma=1.01 does not imply low resource regret.",
+    "The tested two-state diagnostic must not be described as a beneficial practical selector improvement.",
+    "No claim is made for new molecules, basis sets, target accuracies, or product-formula coefficients."
+  ]
+}

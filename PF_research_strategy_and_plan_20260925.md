@@ -6,6 +6,15 @@
 
 本書は、新しい実験が成功したという報告ではない。保存済みの証拠、標準的な数理関係、本書で提案する仮説・手順を区別して記す。指定リポジトリへの変更・新規分子計算は行っていない。実験条件や数値目標は、ユーザーから与えられた制約ではなく、以下で理由を付けて提案する研究設計である。
 
+> **実行結果追記（2026年9月25日）**：本書のS0--S4は完了した。S1/S2で状態置換誤差が
+> 固定case集合の主要成分となり、S3でHF成功・破綻対への条件付き接続を確定した。
+> S4のoperator-sensitive二状態診断は全数値gateを通過したが、baseline比の平均regret
+> 改善が`0%`で、固定判定は`complete_no_benefit`だった。従って中核成果Aを完成形とし、
+> 発展成果Bの独立評価S5には進まない。確定値と適用範囲は
+> [`PF_first_study_final_synthesis_20260925.md`](PF_first_study_final_synthesis_20260925.md)および
+> [`PF_first_study_final_decision_20260925.json`](PF_first_study_final_decision_20260925.json)
+> を正本とする。以下の将来形は、結果を見る前に定めた設計履歴として残す。
+
 ---
 
 ## 0. 推奨方針の要約
@@ -545,8 +554,25 @@ exact-state有限時間演算子軸を同一原因へ潰さず整理した。
 - 新direct truth点、新Hamiltonian、新fit：すべて0。
 
 S3の結果、S4候補はoperator-sensitiveな二状態収束診断と事前固定fallbackの一方式へ
-限定した。S4はまだ開始しておらず、別protocolでthreshold、fallback、費用、baseline、
-ablationをtruth前に固定する。
+限定した。この方式は後述のS4専用protocolでthreshold、fallback、費用、baseline、
+ablationをtruth前に固定して実行した。
+
+### S4実行記録（2026年9月25日）
+
+S4は6条件×7 strategyをPhase Aで固定し、Phase B v1.1で20 unique selection、60挿入
+direct点、12 uniform anchorを採点した。全source/numerical gateは合格した。
+
+- S4 Phase A commit：`95ed24c74bb29d883bbaf76d4578ff7af08ed995`
+- S4 Phase B v1.1結果commit：`4d831b52475a7399b74a048a7471eaba6c4527c0`
+- status：`complete_no_benefit`
+- targeted fallback：$\gamma=1.01$で6/6安全、平均主regret`42.8416%`。
+- practical baseline：$\gamma=1.01$で6/6安全、平均主regret`42.8416%`。
+- baseline比平均regret改善：`0%`（固定必要条件10%以上に不合格）。
+- equal-cost 7点fit：平均主regret`42.3828%`で、相対改善は約`1.07%`。
+
+診断はHFの`current_m3`でstate riskを記録したが、targeted fallbackの選択結果を改善
+しなかった。従って同じdevelopment集合で閾値や診断を調整せず、S5の独立評価には
+進まない。これは無効runではなく、事前固定基準による有効なnegative resultである。
 
 ### 第1回の進捗共有
 
@@ -558,7 +584,9 @@ S2/S3の完了時。ここで中核成果Aの論文構成を確定する。改�
 
 ### 最終の進捗共有
 
-S4/S5で方式・主張を凍結した後。新しい分子結果を見て設計へ戻った場合、その集合は以後開発集合へ移す。一度の失敗を避けるためにholdoutを交換しない。
+S4は`complete_no_benefit`で終了したため、S5を開かずに方式・主張を凍結した。今後
+別研究として独立評価を設計する場合も、新しい分子結果を見て方式へ戻らず、一度見た
+集合を以後の開発集合として扱う。
 
 ### 並行化
 
@@ -760,23 +788,27 @@ report.md                  証拠、反例、採否、次に行う工程
 4. **未確定の因果関係**：相関、数理予測、介入結果を区別する。
 5. **次の一工程と終了条件**：カタログから新項目を無制限に追加しない。
 
-現在の推奨初期状態は以下である。
+第一研究終了時の状態は以下である。
 
-- 主張候補：対称4次PFの校正には、状態・proxy・外挿の三つのずれがあり、相殺はそれぞれの感度と資源配分に影響する可能性がある。
-- 支持：F02/F03、H01/H02、固定ホールドアウト、practical開発評価。
-- 例外：相殺があるのに直接誤差が改善する例、PF選択が変わらないH02、近似状態でも予算達成する例。
-- 未確定：相殺から凍結予算までの同一条件因果接続、proxyの奇数次がH02の差に占める量、診断の実運用上の価値。
-- 次：S0/S1とH4のS2。これが最初の本研究の一区切りである。
+- 現在の主張：対称4次PFの有限時間校正では状態置換が主要誤差軸になり得るが、精度上の安全性と資源効率は別であり、通常の状態品質量や今回の二状態診断だけでは低regretな選択を保証できない。
+- 支持：S1/S2の79/128状態置換誤差支配、S0の$\gamma=1.01$安全6/6と最大regret 114%、S3のHF限定接続、S4の固定7-strategy比較。
+- 反対・例外：状態置換誤差が全caseで支配するわけではなく、S4ではdiagnosticがriskを検出してもtargeted fallbackの平均regret改善は`0%`だった。
+- 未確定：別の安価な演算子感度情報で安全性と効率を同時改善できるか、また独立分子で1%余裕が維持されるか。ただし本研究内では追試しない。
+- 次：追加計算ではなく、中核成果Aの論文、図、主張台帳、再現パッケージを完成させる。
 
 ---
 
 ## 16. 最終的な推奨
 
-**主題はここで決めてよい。** 「対称4次PFの有限時間固有値誤差校正を、資源配分にどこまで信頼して使えるか」を中心にする。
+**主題は確定した。** 「対称4次PFの有限時間固有値誤差校正を、資源配分にどこまで信頼して使えるか」を中心にする。
 
-その第一成果を、相殺を含む機構の同一条件解析と、配分に必要な精度・情報の理解に置く。改善法はその結果から一つ選び、低コストな校正が本当に可能な場合に限って方法論の主張へ進む。新しいPFはさらにその先の条件付き課題とする。
+第一成果は、相殺を含む機構の同一条件解析と、配分に必要な精度・情報の理解に置く。
+S4で選んだ一つの改善法は固定benefit基準を満たさなかったため、方法論上の成功や
+独立transferを主張しない。negative resultを含めて中核成果Aを完成させ、新しいPF、
+S5、追加diagnosticは別研究の条件付き課題とする。
 
-これにより、今後は「何を調べればよいかを探す事前検証」ではなく、「既に決めた問いに答える本研究」として進められる。
+これにより、今後は探索的な検証を増やす段階ではなく、確定した問いと結果を論文・
+再現パッケージへまとめる段階である。
 
 ---
 
@@ -800,6 +832,7 @@ report.md                  証拠、反例、採否、次に行う工程
 - **[R12]** [M01：資源指標感度](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/b5af6996159b3dfbd6e5bb3cc2467cb23155906d/artifacts/prevalidation_m01_resource_metric_sensitivity_20260925_3b6e5f0/report.md)。
 - **[R13]** [D03：精度別coverage](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/a8b9a92c9fcdb1b4187d5aa3c239ed8b7443dcfd/artifacts/server_d03_target_accuracy_followup_20260923_748b3d4/coverage_summary.csv)。
 - **[R14]** [完了結果の総合索引](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/e820f653a5916f27233ab4674a89d288cf969e37/docs/prevalidation_results_index.md)。
+- **[R15]** [第一研究S4固定比較](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/4d831b52475a7399b74a048a7471eaba6c4527c0/artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df/report.md)。
 
 [R3] の定義・数値を確認する補助資料：
 
