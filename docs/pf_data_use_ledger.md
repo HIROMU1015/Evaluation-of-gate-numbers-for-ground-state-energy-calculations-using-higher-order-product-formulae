@@ -44,6 +44,7 @@ H01ではN2/COを主開発集合、HFを補助診断集合としてRHF・CISD校
 | 検証 | 使用した数値条件 | データの役割 | 独立性への影響 |
 |---|---|---|---|
 | F01/F02/F05 HF mechanism bridge | HF平衡・伸長、Yoshida 4次を主比較、`current_m3`を診断対照 | H01 cacheと保存済みdirect truthを用いたoracle機構診断 | HFは演算子特徴量、状態混合、高次寄与、棄却境界の開発にも使用済み |
+| F03 a4/operator cancellation | H2/H4×4 PF、exact/HF/CISD状態、人工二準位族 | 保存済みF01演算子・H01状態と人工族による構成的機構診断 | H-chainは先頭係数・演算子ノルム・近似状態診断にも使用済み。人工族は分子ホールドアウトではない |
 | practical calibration最小版 | N2/CO主4条件、HF stress 2条件 | truthを選択器から遮断したdevelopment評価。採点時だけ既存truthを使用 | N2/CO/HFはselector、1%安全余裕、sentinel、regret判断のホールドアウトではない |
 | D03目標精度依存 | NH3、N2/CO/HFの保存済み曲線と限定follow-up | CA、CA/10、CA/100のcoverage・順位診断 | 使用条件は精度域選択の開発集合。coverage外へ一般化しない |
 | M01資源指標感度 | N2平衡・伸長のCA/10・CA/100、HF伸長診断 | 合格PFについてrotation、RZ depth、T-count、T-depthを再集計 | N2/HFは資源指標選択の開発集合。新規PF固有値点は0 |

@@ -57,6 +57,8 @@ H02では、状態エネルギー誤差、分散、Hamiltonian残差、厳密基
 
 F01/F02/F05のHF平衡・1.5倍伸長比較では、Yoshida 4次＋五点二項モデルの成功例と破綻例を、同一Hamiltonianキャッシュ上の有効Hamiltonian係数と固有枝診断で比較した。伸長時には`|a4|/||D4||`が`2.43e-3`から`7.02e-4`へ低下した一方、`D4`の非対角結合と状態混合は消えず、解析最適時刻は1.384倍へ伸び、`t_ana`での8次寄与比は`0.00767`から`0.0371`へ増えた。正規化PF位相gapの圧縮は観測されなかった。
 
+F03のH2/H4×4 PFと人工二準位族でも、小さい`a4`と小さい`D4`は一致しなかった。`m5_best`では中心化した`D4`作用が`|a4|`の40--67倍であり、人工族で`a4`の零点へ近づくと`D4`ノルムを保ったまま一項解析時刻の直接誤差が100倍以上の目標誤差へ増大した。連続枝追跡に警告はなく、この破綻を枝選択だけでは説明できない。
+
 したがって、全電子伸長条件の破綻は、小さい対角先頭係数を「誤差演算子全体が小さい」と解釈して長い時刻を選ぶことと、高次寄与・状態混合が組み合わさる境界として扱う。これは候補機構の切り分けであり、単一原因の厳密証明ではない。
 
 ### 6. oracle-free最小selectorは安全性候補を得たが、低regretではない
@@ -79,7 +81,7 @@ HF伸長では生の資源量が安くても予測モデルが不合格のPFが�
 
 ## 機構診断・近似状態診断の停止判断
 
-H01/H02により、exact-ground校正の数値再現と、通常の状態品質スカラーだけでは有限時間校正精度を保証できないことを確認した。F01/F02/F05により、全電子破綻例では先頭対角係数、非対角結合、状態混合、高次寄与、位相gapを分離して比較できた。したがって、状態品質スカラーの閾値調整とF領域の追加分解はここで停止する。
+H01/H02により、exact-ground校正の数値再現と、通常の状態品質スカラーだけでは有限時間校正精度を保証できないことを確認した。F01/F02/F03/F05により、先頭対角係数、演算子ノルム、非対角結合、状態混合、高次寄与、位相gapを分離して比較できた。したがって、状態品質スカラーの閾値調整とF領域の追加分解はここで停止する。
 
 今後F/H領域を再開するのは、固定したoracle-free selectorの棄却規則または安全余裕を事前に改善する具体的仮説がある場合に限る。既存のF結果を見て同じHF条件へ特徴量を後付けし、その条件を検証集合と呼ぶことはしない。
 
@@ -146,6 +148,10 @@ practical selectorのコード、候補PF、proxy、時刻候補、安全余裕�
 | 証拠の役割 | 内容 | 結果commit | 固定報告書 |
 |---|---|---|---|
 | 開発比較 | NH3既存PF統一比較 | `46a7ed1` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/46a7ed165650cb80506be14d997380e0bf333680/artifacts/server_existing_pf_unified_nh3_20260920_233516_e692360/aggregate/report.md) |
+| 総合索引 | カタログから実行した固定結果 | 本ブランチ | [index](prevalidation_results_index.md) |
+| 基盤監査 | B01--B08、C02/C03、X01/X02 | `2ba6174` | [artifact tree](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/tree/2ba6174b6f9617d51766579c775a77132f3c7f57/artifacts) |
+| 古典予算・小系機構 | D04、F01/F02/F05、H01 pilot、H03/H04/H05 | `6d13384` | [artifact tree](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/tree/6d13384ef327e5b248c2ce93ae29ad4e7686b2e5/artifacts) |
+| 機構診断 | F03：小さいa4と小さいD4の区別 | 本ブランチ | [report](../artifacts/prevalidation_f03_a4_operator_cancellation_20260922_retry2/report.md) |
 | 当時の固定ホールドアウト | N2/CO主・HF補助 | `33a761d` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/33a761d44a24022ad61192c41a196dd4cb3afbca/artifacts/server_unused_molecule_frozen_holdout_20260921_d288797/aggregate/report.md) |
 | oracle近似状態診断 | H01 | `568f002` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/568f00249abb5b89ae3e6bb39cb4af87ed8581bd/artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/aggregate/report.md) |
 | oracle機構反例 | H02 | `16bd6c2` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/16bd6c264e0e2de6d86b0a785c9bc449ebbd4dfe/artifacts/server_h02_finite_time_controlled_state_20260922_a228b5f/report.md) |
@@ -157,9 +163,10 @@ practical selectorのコード、候補PF、proxy、時刻候補、安全余裕�
 ## ファイルの読み順
 
 1. 本書：現在の結論、適用範囲、停止判断。
-2. [`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)：探索・開発・過去のホールドアウトの区別。
-3. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：直接有限時間評価と縮約校正の位置付け。
-4. 上表のGit管理済み報告書：数値根拠。
-5. [repository_guide.md](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/20d64c2fea1ed2d2188777df4f3d962ee94df486/docs/repository_guide.md)：実装・検証・資料の所在。
+2. [`docs/prevalidation_results_index.md`](prevalidation_results_index.md)：実行済み最終結果の固定commitと報告書。
+3. [`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)：探索・開発・過去のホールドアウトの区別。
+4. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：直接有限時間評価と縮約校正の位置付け。
+5. 上表のGit管理済み報告書：数値根拠。
+6. [repository_guide.md](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/20d64c2fea1ed2d2188777df4f3d962ee94df486/docs/repository_guide.md)：実装・検証・資料の所在。
 
 指示書やrunnerが存在するだけでは検証完了を意味しない。成果物の`Status`、commit、条件数、manifestを確認する。未コミットのローカルpilotは確定証拠として扱わない。
