@@ -22,7 +22,7 @@ ANCHOR_PROTOCOL = Path(
     "review_response/pf_first_study_s0_anchor_protocol_v1_1.json"
 )
 EXPECTED_ANCHOR_PROTOCOL_SHA256 = (
-    "e06074b7a019ccd6158cbd8908947d3ed3dbdfcead6646943befe328ed7e2c58"
+    "8f776ded65e42b7657d5c014cf525421b95cbbfb40aa0744c69d2c11f00204b1"
 )
 REQUIRED_TRUTH_PROVENANCE = "new_h01_continuous_branch_calculation"
 _ORIGINAL_POINT_CACHE_KEY = _base._point_cache_key
