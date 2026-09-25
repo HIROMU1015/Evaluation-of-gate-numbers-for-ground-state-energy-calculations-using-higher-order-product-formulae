@@ -1,0 +1,480 @@
+{
+  "protocol_id": "pf_first_study_mechanism_decision_v1_0",
+  "protocol_version": "1.0",
+  "frozen_at": "2026-09-25",
+  "status": "preregistered_before_formal_execution",
+  "normative": true,
+  "title": "Calibration-error decomposition and propagation to frozen QPE resources",
+  "evaluation_type": "mechanism and decision-sensitivity development study on previously observed H-chain systems; not an independent molecular holdout",
+  "strategy_document": "PF_research_strategy_and_plan_20260925.md",
+  "explanatory_document": "PF_first_study_protocol_20260925.md",
+  "conflict_rule": "This JSON is normative. Stop before scientific computation if code, prose, or inherited artifacts conflict with it.",
+  "scope": {
+    "stages": ["S0", "S1", "S2"],
+    "experiments": {
+      "A": "mathematical and numerical validation on fixed 2x2 systems and stored H2",
+      "B": "controlled H4 mechanism and decision-sensitivity study",
+      "C": "fixed-H two-level cancellation study"
+    },
+    "included_formula_ids": [
+      "yoshida4",
+      "current_m3",
+      "two_term_center",
+      "m5_best"
+    ],
+    "excluded": [
+      "new product-formula coefficient search",
+      "new molecular holdout",
+      "automatic H5, H6, N2, or CO expansion",
+      "basis-set expansion",
+      "target-accuracy sweep",
+      "claim of an operationally validated new selector"
+    ]
+  },
+  "fixed_commits": {
+    "results_index": "e820f653a5916f27233ab4674a89d288cf969e37",
+    "initial_audit_x01_x02": "2ba6174b6f9617d51766579c775a77132f3c7f57",
+    "f01_f02_f05_h01pilot_h03_h04_h05_d04": "6d13384ef327e5b248c2ce93ae29ad4e7686b2e5",
+    "f03": "e820f653a5916f27233ab4674a89d288cf969e37",
+    "h02_controlled_state": "16bd6c264e0e2de6d86b0a785c9bc449ebbd4dfe",
+    "practical_minimal_result": "4f4374bdf4dbcb7d8e1d14f9682570c221e4c88a",
+    "practical_minimal_phase_a": "79035cc7c414c04cafe8b9f8bdc779a17ec57302"
+  },
+  "source_identity": {
+    "array_hash_algorithm": "sha256-numpy-v1: SHA256(dtype.str + newline + compact JSON shape + newline + C-contiguous raw bytes)",
+    "f01_bundle": {
+      "path": "artifacts/prevalidation_f01_effective_hamiltonian_multipf_20260921_retry1/effective_operators.npz",
+      "sha256": "a4a6ddc5572faaadd73e6853c32bfd7110c1f838abd4f1946376f64d8db070fc",
+      "publication_commit": "6d13384ef327e5b248c2ce93ae29ad4e7686b2e5",
+      "generation_worktree_head_recorded_by_manifest": "2ba6174b6f9617d51766579c775a77132f3c7f57",
+      "generation_worktree_was_dirty": true,
+      "identity_policy": "Use the committed bundle byte-for-byte. Do not regenerate an equivalent Hamiltonian."
+    },
+    "h01_state_bundle": {
+      "path": "artifacts/prevalidation_h01_approximate_state_pilot_20260922/states.npz",
+      "sha256": "aa5286b2394c26015d9b3dbc69c5466ed9d35a4ec4274de7d58bf08d58ac5a2a",
+      "publication_commit": "6d13384ef327e5b248c2ce93ae29ad4e7686b2e5",
+      "generation_worktree_head_recorded_by_manifest": "2ba6174b6f9617d51766579c775a77132f3c7f57",
+      "generation_worktree_was_dirty": true,
+      "identity_policy": "Use the committed bundle byte-for-byte. Do not rediagonalize to replace stored states."
+    },
+    "molecular_metadata": {
+      "basis": "sto-3g",
+      "distance_angstrom": 1.0,
+      "geometry_rule": "linear H chain on z with z_i = (i-(n-1)/2)*distance",
+      "h4_geometry_angstrom": [
+        ["H", 0.0, 0.0, -1.5],
+        ["H", 0.0, 0.0, -0.5],
+        ["H", 0.0, 0.0, 0.5],
+        ["H", 0.0, 0.0, 1.5]
+      ],
+      "charge": 0,
+      "multiplicity": 1,
+      "fermion_to_qubit_mapping": "Jordan-Wigner",
+      "constant_policy": "remove the scalar identity contribution from every stored group and energy",
+      "h4_num_qubits": 8,
+      "h4_electron_numbers": {"n_alpha": 2, "n_beta": 2},
+      "h4_sector_kind": "fixed_half_populations",
+      "h4_qubit_ordering": "first four positions alpha spatial orbitals, last four positions beta spatial orbitals; bit-string position 0 is the most-significant bit",
+      "h4_sector_basis_order": "ascending full-basis integer index",
+      "h4_sector_dimension": 36,
+      "h4_sector_full_indices": [51, 53, 54, 57, 58, 60, 83, 85, 86, 89, 90, 92, 99, 101, 102, 105, 106, 108, 147, 149, 150, 153, 154, 156, 163, 165, 166, 169, 170, 172, 195, 197, 198, 201, 202, 204],
+      "h4_hf_full_basis_index": 204,
+      "h4_cisd_sector_positions": [5, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
+    },
+    "h4_arrays": {
+      "experiment_hamiltonian_key": "H4_hamiltonian",
+      "experiment_hamiltonian_sha256": "88d0c1ed0fed1c5be1034afdbc23d6cde31c2d920b7d788ec6aa5492d3c5f172",
+      "restricted_sector_hamiltonian_sha256": "88d0c1ed0fed1c5be1034afdbc23d6cde31c2d920b7d788ec6aa5492d3c5f172",
+      "separate_full_fock_space_hamiltonian_sha256": null,
+      "separate_full_fock_space_hamiltonian_used": false,
+      "full_space_note": "The archived and normative experiment Hamiltonian is the 36x36 restricted-sector matrix. No separate full-space matrix is used or regenerated.",
+      "ground_energy_without_constant_hartree": -1.8349096352179555,
+      "ground_energy_array_sha256": "1b4394ab2aa5f6f8d3ca2f27b2daa3a70aa507fe3bfb07af62eb765f0e8796f0",
+      "group_count": 13,
+      "ordered_group_keys": [
+        "H4_group_000", "H4_group_001", "H4_group_002", "H4_group_003",
+        "H4_group_004", "H4_group_005", "H4_group_006", "H4_group_007",
+        "H4_group_008", "H4_group_009", "H4_group_010", "H4_group_011",
+        "H4_group_012"
+      ],
+      "ordered_group_sha256": [
+        "384682fb40543f3293a0de5bb4ab2787ea64cf7508e605ebec6b3aa34044bc0a",
+        "686a072f6426e16388b300ca96fb07f4ea25c0fe20c1f8c4e9acb26eb755054b",
+        "80abff77dc46e84b17fe45beb53e1636dce1f6bd64e8ef1677a2a29352da1e6b",
+        "bdcbff92c96e01f0c180ed2fa96b0223ef6c08cc05841c5edb57e7c1bf95e6ab",
+        "b723e32bd2e860f4f8774252d300148193b728091bcb829e92a1c85ca82bf770",
+        "0cef65fd959f5900c3a1f1c2a4f83311a49b762845a20cdce6f9758545411055",
+        "a352400a28a93c483709c61d06f45634d7c8eefa75eb316c3cc76a906079c667",
+        "4758fed84f32643d887838ce8650c40c975b0158df6eb6f2137f1a3c82aefaed",
+        "7d7286c622cb623943a5b8d07df66927861cdeecdccd2caa3028a6662fb49edf",
+        "18a86d71dae41fc6c208e142243b20a7e719f7d7a122ad496c1765b9debe449a",
+        "936dbd0b03ae24a634d039344d4df87e44a24e4083f22b24aa474f79179d70f2",
+        "470aac9c49cba8bf4a58d773e4f2ed4277523baf3d1e4e46dc2bcb548388b73f",
+        "70587697e8416eef10cb6390ecbe894900cb4659d7c7e5832fe45af4b762d7c7"
+      ],
+      "ordered_group_sequence_sha256": "8edb08b8dbfe152578fdcfcc2b6f06a229f31b8a4f2b96eb485a34ddd8a58e9b",
+      "sector_indices_sha256": "5f9fc0a6e77c1eec53b2109052e0e830750ce75044a36592f8c18de6f9b4ff2d",
+      "group_sum_to_hamiltonian_frobenius_residual_expected": 0.0
+    },
+    "h4_states": {
+      "exact": {"key": "H4_exact_state", "sha256": "3c3a4aed3068c250959c3bd1910e9f6e3d3ee34cbe2019d745415fe8164d8a7a"},
+      "rhf": {"key": "H4_hf_state", "sha256": "45a16db8e1b4f6a1459597303144907f14264826c903ed1c8ee5e2dc852fa917"},
+      "cisd": {"key": "H4_cisd_state", "sha256": "bce356423ac4e5f550ce99117f6fa15de11f72372565b2ee061342cdcd433872"},
+      "phase_convention": "Keep the stored exact-state phase. Multiply each approximate state by exp(-i arg(<exact|approx>)) so its overlap with exact is real and nonnegative. Do not alter raw-source hashes.",
+      "stored_largest_component_index": 35,
+      "stored_largest_components_are_real_positive": true
+    },
+    "h2_arrays_for_experiment_a": {
+      "hamiltonian_key": "H2_hamiltonian",
+      "hamiltonian_sha256": "fa275e11bfeba2d3631fbf6b731583bcd10ff92d84f06ab3cfe936b4e9678a0e",
+      "ground_state_sha256": "22bef00ba25384941653c7c587b4da5443593c7d663d1645d896c42cbb48455b",
+      "ground_energy_without_constant_hartree": -0.7735421405578118,
+      "ground_energy_array_sha256": "c5592a30395ddfbcd930f548d75c4dd96ebf197b5eb2eccb1c66b0c64c2c10d1",
+      "ordered_group_keys": ["H2_group_000", "H2_group_001"],
+      "ordered_group_sha256": [
+        "5af396aaa7573cfc173fba8a2ec999823164ae4d76c7c2aeb0a780714b574bfb",
+        "cdbe8773d4bcb5f0c69a657345657a20bfdf423269a0ec3f736bbf8fe4e2bf27"
+      ],
+      "sector_dimension": 4,
+      "sector_indices_sha256": "c3d58da27a0482ff97d091ee4e1dd6df75d74bc35ce800bc6de743dd04beece9"
+    }
+  },
+  "formulae": {
+    "yoshida4": {
+      "formal_order": 4,
+      "s2_sequence": [1.3512071919596578, -1.7024143839193153, 1.3512071919596578],
+      "h4_expanded_step_count": 73,
+      "h4_pauli_rotations_per_pf_step": 1116,
+      "provenance": "src/trotterlib/product_formula.py:yoshida_4th_list"
+    },
+    "current_m3": {
+      "formal_order": 4,
+      "s2_sequence": [0.1960294407008384, 0.2092246690782796, 0.3316118001935053, -0.4737318199452465, 0.3316118001935053, 0.2092246690782796, 0.1960294407008384],
+      "h4_expanded_step_count": 169,
+      "h4_pauli_rotations_per_pf_step": 2556,
+      "provenance": "review_response/compare_existing_pf_low_order_models_local.py:CURRENT_M3_WEIGHTS"
+    },
+    "two_term_center": {
+      "formal_order": 4,
+      "s2_sequence": [0.1744528222536092, 0.186467922898885, 0.4130665734843169, -0.5479746372736223, 0.4130665734843169, 0.186467922898885, 0.1744528222536092],
+      "h4_expanded_step_count": 169,
+      "h4_pauli_rotations_per_pf_step": 2556,
+      "provenance": "review_response/compare_existing_pf_low_order_models_local.py:TWO_TERM_CENTER_WEIGHTS"
+    },
+    "m5_best": {
+      "formal_order": 4,
+      "s2_sequence": [0.12547397927357543, 0.13781643533753404, 0.1211920365713068, 0.14181961643121604, 0.11225428783206336, -0.27711271089139133, 0.11225428783206336, 0.14181961643121604, 0.1211920365713068, 0.13781643533753404, 0.12547397927357543],
+      "h4_expanded_step_count": 265,
+      "h4_pauli_rotations_per_pf_step": 3996,
+      "provenance": "src/trotterlib/product_formula.py:actual_circuit_optimized_4th_m5_list"
+    }
+  },
+  "constants": {
+    "target_error_hartree": 0.00015936001019904,
+    "qpe_beta": 1.2,
+    "budget_multipliers": [1.0, 1.01],
+    "pf_sign_convention": "U_P(t) approximates exp(+i H t)",
+    "echo_operator": "W(t)=exp(-i H t) U_P(t)",
+    "resource_cost": "C=beta*K/[t*(epsilon_E-|model_shift(t)|)] when the denominator is positive",
+    "direct_resource_cost": "C_direct=beta*K/[t*(epsilon_E-|direct_shift(t)|)] when the denominator is positive",
+    "infeasible_status": "infeasible_error_budget"
+  },
+  "S0_existing_practical_exact_time_scoring": {
+    "source_artifact": "artifacts/server_practical_calibration_minimal_20260923_79035cc",
+    "source_protocol_sha256": "7bbe9958837a881f0247b6e72f5e80e2331e0cfe50dea18addd13a2748467d55",
+    "source_predictions_sha256": "fd354e0c0d161dae86bee1e220e36958a450659ea2ed5409d10cf4c13674477e",
+    "source_phase_a_commit": "79035cc7c414c04cafe8b9f8bdc779a17ec57302",
+    "conditions": [
+      "N2_active_eq_sto3g",
+      "N2_active_stretch150_sto3g",
+      "CO_active_eq_sto3g",
+      "CO_active_stretch150_sto3g",
+      "HF_full_eq_sto3g",
+      "HF_full_stretch150_sto3g"
+    ],
+    "immutability": ["selected_formula", "selected_time", "predicted_cost", "frozen_budget"],
+    "inserted_time_factors": [0.99, 1.0, 1.01],
+    "branch_connection_rule": "Connect the inserted triplet to the nearest lower reliable point on the saved continuous branch; compute additional bracketing points only if required and count every new point.",
+    "new_direct_truth_point_count_policy": "Record the actual positive count. Do not retain the old zero count after inserting exact-time or branch-diagnostic truth points.",
+    "reference_scope": "The primary regret reference remains the original saved grid and the original two allowed formulae. Report any extended-grid reference separately.",
+    "scoring": [
+      "same-formula time-selection regret",
+      "joint formula-and-time direct regret",
+      "frozen-budget margin at gamma=1.0",
+      "frozen-budget margin at gamma=1.01"
+    ]
+  },
+  "experiment_A": {
+    "purpose": "validate definitions, signs, parity, and three-way closure; do not treat this as a scientific generality result",
+    "two_level_systems": {
+      "commuting": {
+        "H": "X+Z",
+        "A": "0.4*(X+Z)",
+        "B": "0.6*(X+Z)"
+      },
+      "noncommuting": {
+        "H": "X+Z",
+        "A": "X",
+        "B": "Z"
+      }
+    },
+    "two_level_states": [
+      {"id": "exact_ground", "definition": "lowest eigenvector of H"},
+      {"id": "real_q001", "definition": "sqrt(0.99)|0>+sqrt(0.01)|1> in the H eigenbasis"},
+      {"id": "complex_q001", "definition": "sqrt(0.99)|0>+i*sqrt(0.01)|1> in the H eigenbasis"}
+    ],
+    "h2_source": "source_identity.h2_arrays_for_experiment_a",
+    "h2_formula_ids": ["yoshida4", "current_m3", "two_term_center", "m5_best"],
+    "absolute_time_magnitudes_hartree_inverse": [0.05, 0.08, 0.12, 0.18, 0.27, 0.4],
+    "signs": [-1, 1],
+    "high_precision_decimal_digits": 80,
+    "required_checks": [
+      "commuting PF is exact within the high-precision gate",
+      "complex128 unitary agrees with an independent high-precision matrix exponential",
+      "three-way decomposition closes",
+      "positive and negative time branches are continued independently from zero",
+      "even and odd components obey the derived leading powers",
+      "coefficient rounding does not create a false lower-order term"
+    ]
+  },
+  "experiment_B_h4": {
+    "source": "source_identity.h4_arrays",
+    "state_ids": ["exact", "rhf", "cisd", "controlled_cisd_direction"],
+    "controlled_state": {
+      "definition": "sqrt(1-q)|exact> + exp(i*phi)*sqrt(q)|chi_cisd>",
+      "chi_construction": "First phase-align CISD so <exact|CISD> is real and nonnegative. Set chi_raw=CISD_aligned-exact*<exact|CISD_aligned>, then chi=chi_raw/||chi_raw||. The inherited phase is fixed and no PF-dependent rephasing is allowed.",
+      "q_values": [0.001, 0.01, 0.05],
+      "phase_values_radians": [0.0, 1.5707963267948966, 3.141592653589793, 4.71238898038469],
+      "same_direction_for_all_formulae": true,
+      "pf_specific_qd4_direction_in_primary_comparison": false
+    },
+    "fixed_time_mechanism_track": {
+      "training_time_magnitudes_hartree_inverse": [0.1, 0.15, 0.2, 0.25, 0.3],
+      "evaluation_time_magnitudes_hartree_inverse": [0.125, 0.175, 0.225, 0.275, 0.35, 0.4],
+      "signs": [-1, 1],
+      "training_and_evaluation_disjoint": true,
+      "model_fits": {
+        "raw_positive_even_two_term": {"powers": [4, 6], "input": "positive-time proxy"},
+        "evenized_two_term": {"powers": [4, 6], "input": "(g(+t)+g(-t))/2"},
+        "odd_diagnostic": {"powers": [5, 7], "input": "(g(+t)-g(-t))/2", "selection_active": false}
+      },
+      "fit_intercept": false,
+      "fit_weighting": "unweighted ordinary least squares",
+      "design_matrix_scaling": "divide each column by its 2-norm before least squares and transform coefficients back",
+      "maximum_scaled_design_condition_number": 100000000.0
+    },
+    "decision_track": {
+      "primary_operational_state": "cisd",
+      "diagnostic_states": ["rhf", "controlled_cisd_direction"],
+      "exact_state_is_oracle_comparator_only": true,
+      "short_time_leading_fit": {
+        "grid_kind": "geomspace",
+        "minimum_hartree_inverse": 0.02,
+        "maximum_hartree_inverse": 1.8,
+        "count": 34,
+        "rolling_window_points": 5,
+        "noise_floor_hartree": 5e-13,
+        "formal_order_tolerance": 0.2,
+        "minimum_r_squared": 0.999,
+        "selection_rule": "earliest_qualifying_window",
+        "failure_rule": "abstain; do not change the grid for one formula or state"
+      },
+      "proxy_time_scale": "t_proxy_ana=(epsilon_E/(5*abs(a4_proxy)))^(1/4), using only the designated approximate-state proxy leading coefficient",
+      "training_relative_to_proxy_t_ana": [0.1, 0.2, 0.3, 0.4, 0.5],
+      "reduced_ablation_relative_to_proxy_t_ana": [0.1, 0.2, 0.3],
+      "reduced_ablation_selection_active": false,
+      "selection_grid": {
+        "kind": "geomspace",
+        "minimum_relative_to_proxy_t_ana": 0.25,
+        "maximum_relative_to_proxy_t_ana": 2.0,
+        "count": 401
+      },
+      "selection_model": {"powers": [4, 6], "signed": true, "cost_uses_absolute_value": true},
+      "choice_rule": "minimum predicted feasible cost over the four fixed formulae and their fixed 401-point grids; abstain if no formula is valid and feasible",
+      "truth_reference": "In Phase B, evaluate direct costs on the Phase-A-frozen union of all four formula-specific grids and use the minimum as C_ref_grid. Do not expand the grid after seeing truth.",
+      "report_grid_resolved_not_continuous_optimum": true
+    }
+  },
+  "experiment_C_fixed_h_two_level": {
+    "H": "X+Z",
+    "splitting": "A(lambda)=X+lambda*Z; B(lambda)=(1-lambda)*Z",
+    "formula_id": "yoshida4",
+    "s2_sequence_source": "formulae.yoshida4.s2_sequence",
+    "nontrivial_root": 1.8729833462074169,
+    "lambda_values": [1.0, 1.7729833462074168, 1.8429833462074168, 1.8729833462074169, 1.902983346207417, 1.972983346207417],
+    "lambda_one_role": "commuting B=0 control",
+    "states": "exact ground and the same q/phase controlled family, with chi equal to the excited eigenstate of fixed H and its phase anchored by its largest component",
+    "q_values": [0.001, 0.01, 0.05],
+    "phase_values_radians": [0.0, 1.5707963267948966, 3.141592653589793, 4.71238898038469],
+    "absolute_time_magnitudes_hartree_inverse": [0.05, 0.08, 0.12, 0.18, 0.27, 0.4],
+    "signs": [-1, 1],
+    "resource_step_cost": 7,
+    "resource_step_cost_unit": "expanded group exponentials for two groups; not a molecular Pauli-rotation count",
+    "claim_boundary": "constructive mechanism and decision-sensitivity example only; not molecular prevalence or transfer evidence"
+  },
+  "observables_and_decomposition": {
+    "proxy_definitions": {
+      "imag": "Im(<psi|W(t)|psi>)/t",
+      "arg": "continuous_unwrapped_arg(<psi|W(t)|psi>)/t"
+    },
+    "primary_proxy_for_decision_track": "imag",
+    "arg_proxy_role": "diagnostic comparison with H02; never pool it with imag rows",
+    "components": {
+      "E_fit_signed": "fhat_approx-g_approx",
+      "E_state_signed": "g_approx-g_exact",
+      "E_proxy_signed": "g_exact-delta_direct",
+      "E_total_signed": "fhat_approx-delta_direct",
+      "E_fit": "abs(E_fit_signed)",
+      "E_state": "abs(E_state_signed)",
+      "E_proxy": "abs(E_proxy_signed)",
+      "E_total": "abs(E_total_signed)"
+    },
+    "closure": "E_fit_signed+E_state_signed+E_proxy_signed=E_total_signed"
+  },
+  "phase_and_branch_policy": {
+    "positive_continuation": "0 -> +t1 -> +t2 -> ... in increasing magnitude",
+    "negative_continuation": "0 -> -t1 -> -t2 -> ... in increasing magnitude",
+    "never_unwrap_concatenated_signed_times": true,
+    "save": [
+      "principal_phase_radians",
+      "unwrapped_phase_radians",
+      "unwrap_integer",
+      "echo_overlap_magnitude",
+      "selected_eigenbranch_id",
+      "ground_state_overlap_probability",
+      "previous_branch_overlap_probability",
+      "degenerate_subspace_projector_overlap_probability",
+      "eigenpair_residual_2_norm",
+      "unitarity_residual",
+      "U_minus_t_minus_U_t_dagger_residual"
+    ],
+    "degenerate_phase_gap_radians": 1e-8,
+    "branch_warning_ground_overlap_below": 0.9,
+    "branch_warning_previous_overlap_below": 0.9,
+    "selection_rule": "continuous branch from zero; use projector continuity for a phase cluster within the fixed degeneracy gap; maximum-ground-overlap is a diagnostic comparator only"
+  },
+  "signal_quality": {
+    "signal_hartree": "abs(measured_proxy_hartree)",
+    "proxy_noise_hartree": "max(unitarity_residual/abs(t), repeatability_error_hartree, 50*machine_epsilon*max(spectral_norm_H_hartree,1/abs(t)))",
+    "truth_noise_hartree": "max(proxy_noise_hartree, eigenpair_residual_2_norm/abs(t))",
+    "rho": "signal_hartree/noise_hartree",
+    "classes": {
+      "resolved": {"minimum_inclusive": 100.0},
+      "marginal": {"minimum_inclusive": 10.0, "maximum_exclusive": 100.0},
+      "unresolved": {"maximum_exclusive": 10.0}
+    },
+    "repeatability": "independent cold recomputation with caches disabled and identical complex128 method",
+    "fit_gate": "all five primary training points must be at least marginal and at least three must be resolved; otherwise mark not_identifiable and do not adapt a formula-specific window",
+    "reporting": "retain every row and quality class; unresolved is a scientific outcome of this fixed protocol, not a numerical exception"
+  },
+  "numerical_gates": {
+    "source_file_sha256_exact_match": true,
+    "source_array_sha256_exact_match": true,
+    "state_normalization_absolute": 1e-12,
+    "stored_ground_energy_reproduction_hartree": 1e-10,
+    "hamiltonian_relative_hermiticity": 1e-12,
+    "group_sum_frobenius": 1e-12,
+    "pf_unitarity_frobenius": 1e-10,
+    "direct_eigenpair_residual_2_norm": 1e-10,
+    "U_minus_t_minus_U_t_dagger_relative_frobenius": 1e-10,
+    "cpu_gpu_proxy_absolute_hartree_if_both_used": 1e-11,
+    "high_precision_two_level_absolute": 1e-12,
+    "three_way_closure_hartree": "max(1e-12,1e-8*target_error_hartree)",
+    "controlled_state_scalar_quartet_width_absolute": 1e-10,
+    "failure_policy": "Stop the affected experiment before interpretation. Do not relax a gate after inspecting scientific results."
+  },
+  "phase_boundary": {
+    "phase_A_name": "selector_freeze",
+    "phase_A_allowed": [
+      "verified source Hamiltonian and ordered groups",
+      "designated input state vector",
+      "approximate-state training proxy",
+      "PF coefficients and expanded cost",
+      "target error",
+      "predeclared numerical-quality diagnostics"
+    ],
+    "phase_A_forbidden": [
+      "exact-ground proxy as selector input",
+      "direct PF eigenvalue shift",
+      "direct optimum or minimum cost",
+      "truth-grid values",
+      "past H4 pass/fail labels",
+      "Phase-B result files"
+    ],
+    "oracle_diagnostic_exception": "Controlled states may have been constructed from exact information, but must be labelled oracle mechanism diagnostics and cannot support a practical-selector claim.",
+    "phase_A_required_outputs": [
+      "protocol.json",
+      "source_manifest.json",
+      "predictions.json",
+      "prediction.sha256",
+      "focused_tests.log",
+      "git_commit"
+    ],
+    "commit_boundary_required": true,
+    "phase_B_name": "truth_scoring",
+    "phase_B_rule": "Load the immutable Phase-A predictions and scorer. Add direct truth and oracle comparators without changing selection, budgets, grids, code, or thresholds.",
+    "post_truth_bug_policy": "Preserve the run as invalidated, fix under a new protocol version, and repeat Phase A before reopening truth."
+  },
+  "resource_metrics": {
+    "selected_time_shift": "abs(t_selected/t_direct_grid_best-1)",
+    "same_formula_time_regret": "C_direct(selected_formula,t_selected)/min_t C_direct(selected_formula,t)-1",
+    "joint_selection_regret": "C_direct(selected_formula,t_selected)/C_ref_grid-1",
+    "frozen_budget": "B_gamma=gamma*C_predicted",
+    "phase_estimation_error": "epsilon_PE=beta*K/(t_selected*B_gamma)",
+    "energy_margin": "S_E=epsilon_E-abs(delta_direct(t_selected))-epsilon_PE",
+    "success": "S_E>=0",
+    "reference_policy": "Include every fixed formula with branch-reliable feasible direct points even when its model fit fails. Exclude branch-unstable points, not model-failing formulae."
+  },
+  "stopping_rules": {
+    "complete_after": [
+      "S0 exact-time scoring is closed or explicitly reported as failed without altering old predictions",
+      "Experiment A passes all implementation gates",
+      "Experiments B and C produce the fixed decomposition and resource tables",
+      "one of outcomes A, B, or C below is identified, or none is identified and that null result is reported"
+    ],
+    "outcomes": {
+      "A": "one error component clearly dominates on the fixed normalized comparisons",
+      "B": "the dominant component changes across the fixed PF/state/intervention conditions",
+      "C": "proxy or model error is material while the frozen resource decision remains robust"
+    },
+    "dominance_rule": "A component is dominant only when it is at least 3 times each other component at a majority of resolved evaluation points for the same fixed case; otherwise classify as mixed.",
+    "resource_robust_rule": "joint selection regret<=0.10 and S_E>=0 at gamma=1.01 despite max(E_fit,E_state,E_proxy)>=0.05*epsilon_E at the selected or nearest fixed evaluation point",
+    "must_stop_before": [
+      "adding molecules",
+      "searching PF coefficients",
+      "selecting an improved calibration method",
+      "claiming molecular transfer",
+      "starting strategy stage S3"
+    ]
+  },
+  "required_outputs": [
+    "protocol.json",
+    "source_manifest.json",
+    "observables.csv",
+    "error_decomposition.csv",
+    "state_diagnostics.csv",
+    "operator_diagnostics.csv",
+    "signal_quality.csv",
+    "predictions.json",
+    "prediction.sha256",
+    "allocation_scoring.csv",
+    "branch_audit.csv",
+    "resources.csv",
+    "audit.json",
+    "manifest.json",
+    "report.md"
+  ],
+  "completion_policy": {
+    "complete_marker": "COMPLETE",
+    "complete_allowed_only_if": [
+      "source identity passes",
+      "Experiment A numerical validation passes",
+      "Phase A and Phase B commits are distinct and recorded",
+      "all required rows and hashes reconcile",
+      "no post-truth selector or scorer modification occurred"
+    ],
+    "scientific_failure_is_reportable": true,
+    "numerical_validation_failure_is_not_a_scientific_result": true
+  }
+}
