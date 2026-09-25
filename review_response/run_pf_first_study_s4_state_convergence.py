@@ -803,8 +803,9 @@ def _direct_cache_key(
     time_value: float,
     backend: str,
     system: dict[str, Any],
+    amendment_protocol_sha256: str | None = None,
 ) -> dict[str, Any]:
-    return {
+    key = {
         "s4_protocol_sha256": EXPECTED_PROTOCOL_SHA256,
         "s4_prediction_sha256": prediction_sha256,
         "condition": condition,
@@ -813,6 +814,9 @@ def _direct_cache_key(
         "backend": backend,
         "hamiltonian_sha256": system["hamiltonian_sha256"],
     }
+    if amendment_protocol_sha256 is not None:
+        key["s4_phase_b_amendment_sha256"] = amendment_protocol_sha256
+    return key
 
 
 def _compute_direct_point(
@@ -829,9 +833,11 @@ def _compute_direct_point(
     epsilon: float,
     previous_vector: np.ndarray | None,
     degeneracy_gap: float,
+    amendment_protocol_sha256: str | None = None,
 ) -> tuple[dict[str, Any], np.ndarray, bool]:
     key = _direct_cache_key(
-        prediction_sha256, condition, formula, time_value, backend, system
+        prediction_sha256, condition, formula, time_value, backend, system,
+        amendment_protocol_sha256,
     )
     digest = hashlib.sha256(
         json.dumps(key, sort_keys=True, separators=(",", ":")).encode()
@@ -1002,12 +1008,28 @@ def run_phase_b(
     output_dir: Path,
     backend: str,
     gpu_id: int,
+    phase_b_amendment: dict[str, Any] | None = None,
+    phase_b_amendment_path: Path | None = None,
+    phase_b_amendment_sha256: str | None = None,
+    defer_complete_marker: bool = False,
 ) -> dict[str, Any]:
     started = time.perf_counter()
     protocol = _protocol()
     marker, predictions = verify_phase_a_freeze(phase_a_root)
+    uniform_anchor = phase_b_amendment is not None
+    if uniform_anchor:
+        if phase_b_amendment_path is None or phase_b_amendment_sha256 is None:
+            raise S4ValidationError("uniform anchor requires a frozen amendment path/hash")
+        if _sha256(phase_b_amendment_path) != phase_b_amendment_sha256:
+            raise S4ValidationError("Phase-B amendment hash mismatch")
+        if phase_b_amendment.get("parent_s4_protocol_sha256") != EXPECTED_PROTOCOL_SHA256:
+            raise S4ValidationError("Phase-B amendment parent mismatch")
     _prepare_output(output_dir)
     shutil.copyfile(PROTOCOL_PATH, output_dir / "protocol.json")
+    if uniform_anchor:
+        shutil.copyfile(
+            phase_b_amendment_path, output_dir / "s4_anchor_protocol.json"
+        )
     shutil.copyfile(phase_a_root / "predictions.json", output_dir / "predictions.json")
     shutil.copyfile(phase_a_root / "prediction.sha256", output_dir / "prediction.sha256")
     shutil.copyfile(phase_a_root / "PHASE_A_FROZEN", output_dir / "PHASE_A_FROZEN")
@@ -1019,10 +1041,19 @@ def run_phase_b(
     gamma = float(protocol["resource_accounting"]["budget_multiplier"])
     gates = protocol["numerical_gates"]
     coordinates = unique_selected_coordinates(predictions)
-    if sum(len(values) for values in coordinates.values()) > int(
+    unique_coordinate_count = sum(len(values) for values in coordinates.values())
+    if unique_coordinate_count > int(
         protocol["phase_b"]["maximum_unique_selected_coordinates"]
     ):
         raise S4ValidationError("unique selected-coordinate cap exceeded")
+    if uniform_anchor:
+        accounting = phase_b_amendment["fixed_accounting"]
+        if unique_coordinate_count != int(
+            accounting["expected_unique_selected_coordinate_count"]
+        ):
+            raise S4ValidationError("frozen unique selected-coordinate count mismatch")
+        if len(coordinates) != int(accounting["condition_formula_group_count"]):
+            raise S4ValidationError("frozen condition/formula group count mismatch")
     branch_rows: list[dict[str, Any]] = []
     exact_lookup: dict[tuple[str, str], list[dict[str, Any]]] = {}
     source_manifest: list[dict[str, Any]] = []
@@ -1044,26 +1075,50 @@ def run_phase_b(
                 if not any(_same_time(value, old) for old in inserted_times):
                     inserted_times.append(value)
         inserted_times.sort()
-        anchor = s0_v1_1.nearest_lower_h01_native_anchor(
-            source_points, inserted_times[0], gates
-        )
+        if uniform_anchor:
+            anchor_factor = float(
+                phase_b_amendment["uniform_anchor_rule"][
+                    "anchor_time_factor_of_minimum_inserted_coordinate"
+                ]
+            )
+            anchor_time = anchor_factor * inserted_times[0]
+            anchor = None
+        else:
+            anchor = s0_v1_1.nearest_lower_h01_native_anchor(
+                source_points, inserted_times[0], gates
+            )
+            anchor_time = float(anchor["time"])
         anchor_point, previous, reused = _compute_direct_point(
-            output_dir, prediction_hash, condition, formula,
-            float(anchor["time"]), backend, gpu_id, system, sequence,
-            rotations, epsilon, None, float(gates["degenerate_phase_gap_radians"]),
+            output_dir, prediction_hash, condition, formula, anchor_time,
+            backend, gpu_id, system, sequence, rotations, epsilon, None,
+            float(gates["degenerate_phase_gap_radians"]),
+            phase_b_amendment_sha256,
         )
         cache_reuse_count += int(reused)
-        anchor_difference = abs(
-            float(anchor_point["signed_direct_shift_hartree"])
-            - float(anchor["signed_direct_shift_hartree"])
+        if uniform_anchor:
+            anchor_point["selection_rule"] = (
+                "maximum exact-ground overlap at preregistered new uniform lower anchor"
+            )
+        anchor_difference = (
+            None if uniform_anchor else abs(
+                float(anchor_point["signed_direct_shift_hartree"])
+                - float(anchor["signed_direct_shift_hartree"])
+            )
         )
         branch_rows.append({
             "condition": condition,
             "formula": formula,
-            "point_role": "h01_native_anchor_recomputation",
-            "new_direct_truth_coordinate": False,
-            "source_truth_provenance": anchor.get("truth_provenance"),
-            "source_signed_direct_shift_hartree": float(anchor["signed_direct_shift_hartree"]),
+            "point_role": (
+                "new_uniform_lower_anchor" if uniform_anchor
+                else "h01_native_anchor_recomputation"
+            ),
+            "new_direct_truth_coordinate": bool(uniform_anchor),
+            "minimum_inserted_time": inserted_times[0],
+            "uniform_anchor_time_factor": (anchor_factor if uniform_anchor else None),
+            "source_truth_provenance": (None if uniform_anchor else anchor.get("truth_provenance")),
+            "source_signed_direct_shift_hartree": (
+                None if uniform_anchor else float(anchor["signed_direct_shift_hartree"])
+            ),
             "source_reproduction_absolute_difference_hartree": anchor_difference,
             **anchor_point,
         })
@@ -1072,6 +1127,7 @@ def run_phase_b(
                 output_dir, prediction_hash, condition, formula, time_value,
                 backend, gpu_id, system, sequence, rotations, epsilon, previous,
                 float(gates["degenerate_phase_gap_radians"]),
+                phase_b_amendment_sha256,
             )
             cache_reuse_count += int(reused)
             branch_rows.append({
@@ -1179,22 +1235,54 @@ def run_phase_b(
                 "energy_margin_gamma_1_01_hartree": margin,
                 "success_gamma_1_01": margin >= 0.0,
             })
-    anchor_rows = [row for row in branch_rows if row["point_role"] == "h01_native_anchor_recomputation"]
+    anchor_roles = {
+        "new_uniform_lower_anchor" if uniform_anchor
+        else "h01_native_anchor_recomputation"
+    }
+    anchor_rows = [row for row in branch_rows if row["point_role"] in anchor_roles]
     inserted_rows = [row for row in branch_rows if row["point_role"] == "inserted_exact_time_triplet"]
+    total_new_direct = sum(bool(row["new_direct_truth_coordinate"]) for row in branch_rows)
     checks = {
         "protocol_hash_match": _sha256(output_dir / "protocol.json") == EXPECTED_PROTOCOL_SHA256,
         "prediction_hash_unchanged": _sha256(output_dir / "predictions.json") == prediction_hash,
         "all_six_conditions_scored_for_all_strategies": len(scoring_rows) == 6 * len(STRATEGIES),
-        "new_direct_coordinate_cap": len(inserted_rows) <= int(protocol["phase_b"]["maximum_new_direct_truth_coordinates"]),
-        "anchor_recomputation_cap": len(anchor_rows) <= int(protocol["phase_b"]["maximum_anchor_recomputations"]),
-        "all_anchors_h01_native": all(row["source_truth_provenance"] == protocol["source_identity"]["required_h01_truth_provenance_for_anchor"] for row in anchor_rows),
-        "anchor_shift_reproduction_passed": max(row["source_reproduction_absolute_difference_hartree"] for row in anchor_rows) <= float(gates["anchor_shift_absolute_tolerance_hartree"]),
         "all_eigenpair_residuals_passed": max(row["eigenpair_residual_2_norm"] for row in branch_rows) <= float(gates["direct_eigenpair_residual_2_norm"]),
         "all_unitarity_residuals_passed": max(row["unitarity_residual_frobenius"] for row in branch_rows) <= float(gates["pf_unitarity_frobenius"]),
         "all_inserted_previous_overlaps_passed": min(row["previous_branch_overlap_probability"] for row in inserted_rows) >= float(gates["branch_warning_previous_overlap_below"]),
         "all_inserted_ground_overlaps_passed": min(row["ground_state_overlap_probability"] for row in inserted_rows) >= float(gates["branch_warning_ground_overlap_below"]),
         "all_inserted_phase_gaps_resolved": min(row["minimum_selected_phase_gap_radians"] for row in inserted_rows) > float(gates["degenerate_phase_gap_radians"]),
     }
+    if uniform_anchor:
+        amendment_gates = phase_b_amendment["numerical_gates"]
+        accounting = phase_b_amendment["fixed_accounting"]
+        anchor_factor = float(
+            phase_b_amendment["uniform_anchor_rule"][
+                "anchor_time_factor_of_minimum_inserted_coordinate"
+            ]
+        )
+        checks.update({
+            "amendment_hash_match": _sha256(output_dir / "s4_anchor_protocol.json") == phase_b_amendment_sha256,
+            "uniform_anchor_count_exact": len(anchor_rows) == int(accounting["new_uniform_anchor_coordinates"]),
+            "saved_anchor_recomputation_count_zero": not any(row["point_role"] == "h01_native_anchor_recomputation" for row in branch_rows),
+            "uniform_anchor_times_exact": all(
+                math.isclose(
+                    float(row["time"]),
+                    anchor_factor * float(row["minimum_inserted_time"]),
+                    rel_tol=2e-12, abs_tol=1e-14,
+                )
+                for row in anchor_rows
+            ),
+            "total_new_direct_coordinate_cap": total_new_direct <= int(accounting["maximum_total_new_direct_coordinates"]),
+            "all_anchor_ground_overlaps_passed": min(row["ground_state_overlap_probability"] for row in anchor_rows) >= float(amendment_gates["anchor_ground_overlap_probability"]),
+            "all_anchor_phase_gaps_resolved": min(row["minimum_selected_phase_gap_radians"] for row in anchor_rows) > float(amendment_gates["anchor_phase_gap_radians"]),
+        })
+    else:
+        checks.update({
+            "new_direct_coordinate_cap": len(inserted_rows) <= int(protocol["phase_b"]["maximum_new_direct_truth_coordinates"]),
+            "anchor_recomputation_cap": len(anchor_rows) <= int(protocol["phase_b"]["maximum_anchor_recomputations"]),
+            "all_anchors_h01_native": all(row["source_truth_provenance"] == protocol["source_identity"]["required_h01_truth_provenance_for_anchor"] for row in anchor_rows),
+            "anchor_shift_reproduction_passed": max(row["source_reproduction_absolute_difference_hartree"] for row in anchor_rows) <= float(gates["anchor_shift_absolute_tolerance_hartree"]),
+        })
     decision = evaluate_benefit(scoring_rows) if all(checks.values()) else {
         "outcome": "inconclusive", "outcome_benefit": False,
     }
@@ -1211,6 +1299,8 @@ def run_phase_b(
         "protocol_sha256": EXPECTED_PROTOCOL_SHA256,
         "prediction_sha256": prediction_hash,
         "phase_a_commit": marker["phase_a_commit"],
+        "phase_b_amendment_sha256": phase_b_amendment_sha256,
+        "uniform_new_anchor_policy": uniform_anchor,
         "h01_root_absolute": str(h01_root.resolve()),
         "p03_root_absolute": str(p03_root.resolve()),
         "source_checks": validation["checks"],
@@ -1226,15 +1316,30 @@ def run_phase_b(
         "gpu_id": int(gpu_id) if backend == "gpu" else None,
         "checks": checks,
         "decision": decision,
+        "phase_b_amendment_sha256": phase_b_amendment_sha256,
+        "uniform_new_anchor_policy": uniform_anchor,
         "accounting": {
-            "unique_selected_coordinate_count": sum(len(values) for values in coordinates.values()),
-            "new_direct_truth_coordinate_count": len(inserted_rows),
-            "anchor_recomputation_count": len(anchor_rows),
+            "unique_selected_coordinate_count": unique_coordinate_count,
+            "new_direct_truth_coordinate_count": total_new_direct,
+            "inserted_direct_coordinate_count": len(inserted_rows),
+            "new_uniform_anchor_coordinate_count": len(anchor_rows) if uniform_anchor else 0,
+            "saved_anchor_recomputation_count": 0 if uniform_anchor else len(anchor_rows),
             "cache_reuse_count": cache_reuse_count,
             "strategy_scoring_row_count": len(scoring_rows),
         },
         "extrema": {
-            "maximum_anchor_difference_hartree": max(row["source_reproduction_absolute_difference_hartree"] for row in anchor_rows),
+            "maximum_anchor_difference_hartree": (
+                None if uniform_anchor else max(
+                    row["source_reproduction_absolute_difference_hartree"]
+                    for row in anchor_rows
+                )
+            ),
+            "minimum_anchor_ground_state_overlap": min(
+                row["ground_state_overlap_probability"] for row in anchor_rows
+            ),
+            "minimum_anchor_phase_gap_radians": min(
+                row["minimum_selected_phase_gap_radians"] for row in anchor_rows
+            ),
             "maximum_eigenpair_residual_2_norm": max(row["eigenpair_residual_2_norm"] for row in branch_rows),
             "maximum_unitarity_residual_frobenius": max(row["unitarity_residual_frobenius"] for row in branch_rows),
             "minimum_previous_branch_overlap": min(row["previous_branch_overlap_probability"] for row in inserted_rows),
@@ -1257,8 +1362,10 @@ def run_phase_b(
         "The truncated/full-CISD disagreement is a local CISD-tail diagnostic and not a rigorous exact-state error bound.",
         "",
         f"- Frozen prediction SHA-256: `{prediction_hash}`.",
-        f"- New direct truth coordinates: {len(inserted_rows)}.",
-        f"- H01-native anchor recomputations: {len(anchor_rows)}.",
+        f"- New direct truth coordinates: {total_new_direct}.",
+        f"- Inserted direct coordinates: {len(inserted_rows)}.",
+        f"- New uniform anchor coordinates: {len(anchor_rows) if uniform_anchor else 0}.",
+        f"- Saved-anchor recomputations: {0 if uniform_anchor else len(anchor_rows)}.",
         f"- Decision: **{decision.get('outcome')}**.",
         f"- Targeted gamma=1.01 unsafe count: {targeted.get('unsafe_gamma_1_01_count')}.",
         f"- Targeted mean original-grid regret: {targeted.get('mean_regret')}.",
@@ -1271,12 +1378,13 @@ def run_phase_b(
         "created_at": _now(),
         "execution_commit": _git_head(),
         "protocol_sha256": EXPECTED_PROTOCOL_SHA256,
+        "phase_b_amendment_sha256": phase_b_amendment_sha256,
         "prediction_sha256": prediction_hash,
         "environment": {"python": platform.python_version(), "platform": platform.platform()},
         "artifact_sha256": _artifact_hashes(output_dir),
     }
     _write_json(output_dir / "manifest.json", manifest)
-    if status.startswith("complete_"):
+    if status.startswith("complete_") and not defer_complete_marker:
         (output_dir / "COMPLETE").touch(exist_ok=False)
     return audit
 
