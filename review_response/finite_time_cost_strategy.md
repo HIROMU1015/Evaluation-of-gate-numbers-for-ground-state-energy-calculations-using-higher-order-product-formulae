@@ -73,6 +73,19 @@ development集合で診断・閾値・fallbackを調整しない。現在の作�
 [`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)
 を参照する。
 
+### 終了後のregret因子再解析
+
+S0のexact selected-time採点を再利用し、追加direct計算なしで凍結予算を
+calibration/budget、時刻選択、PF選択へ乗法分解した。全6条件でPF選択因子は`1.0`だった。
+HF equilibrium/stretchは時刻選択因子が`2.141534`/`2.076361`で支配した。主4条件では
+3条件がcalibration/budget支配、N2 stretchが時刻選択支配だった。
+
+従って、現状の大きなHF regretを新PF選択だけで解消する根拠はない。将来の方式研究は、
+HFのfinite-time optimum予測と、active-spaceの誤差量校正・予算保守性を別の仮説として
+事前固定する。詳細は
+[`regret decomposition report`](../artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d/report.md)
+を参照する。
+
 ## 案1：直接PF固有値誤差によるコスト最適化
 
 直接対角化できる系では、各時刻の直接PF固有値誤差 $e_{\mathrm{direct}}(t)$ を用いて

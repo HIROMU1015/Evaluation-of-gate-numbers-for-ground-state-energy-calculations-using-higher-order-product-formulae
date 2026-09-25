@@ -1,4 +1,4 @@
-# 第一研究 最終統合：S0--S4と停止判断
+# 第一研究 最終統合：S0--S4、regret因子分解と停止判断
 
 **確定日：2026年9月25日**  
 **状態：`complete_mechanism_study_no_method_benefit`**  
@@ -37,6 +37,7 @@ source identityとして固定している。そのため同ファイルは変�
 | S3 HF限定接続 | `complete_retrospective_synthesis` | `e768aaff19aa0a1a57c4ccf2563258f860c5b3ec` | `artifacts/pf_first_study_s3_hf_connection_20260925/` |
 | S4 Phase A | `selection_frozen` | `95ed24c74bb29d883bbaf76d4578ff7af08ed995` | `artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f/` |
 | S4 Phase B v1.1 | `complete_no_benefit` | `4d831b52475a7399b74a048a7471eaba6c4527c0` | `artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df/` |
+| S0 regret因子再解析 | `complete_regret_decomposition` | 本ブランチ | `artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d/` |
 
 固定hashは次である。
 
@@ -44,6 +45,7 @@ source identityとして固定している。そのため同ファイルは変�
 - S4 parent protocol：`5c3c33fab6752b5ccf0ec9ee415e115bdf2134256e5a956f6b0e9b639f554c40`
 - S4 uniform-anchor amendment：`9ce996b2732e02a7bb2fa4f1d6f8a4e09fd503896a4eda7a9a4496be0f402150`
 - S4 frozen prediction：`47cdef9b52ea73feef0c005229cb9a482ee8e95afff87f038ff8461549f1c729`
+- regret因子分解protocol：`b33f1b5088e5bd07ec7bff9499b4a91c3082124e291ccd0b3bfa2ddacc58832a`
 
 ## 3. S0--S3で確定した機構
 
@@ -109,7 +111,35 @@ equal-cost 7点fitの平均regret改善は相対約`1.07%`に留まり、targete
 増分価値を示す根拠にもならなかった。fixed Yoshida4とuniversal fallbackは安全だったが
 資源効率を悪化させた。
 
-## 6. 主張範囲
+## 6. practical baselineのregret因子分解
+
+S0の保存済みexact-time採点だけを使い、新規direct truth点0で、1%余裕付き凍結予算を
+
+$$
+\frac{B_{\rm frozen}}{C^*}
+=\frac{B_{\rm frozen}}{C_{\rm req}(\hat P,\hat t)}
+ \frac{C_{\rm req}(\hat P,\hat t)}{C^*_{\hat P}}
+ \frac{C^*_{\hat P}}{C^*}
+$$
+
+へ分解した。積の最大閉包誤差は`2.220e-16`で、6条件すべてに必要な保存truthがあった。
+全条件でselectorの`current_m3`が元2 PF保存grid上のoracle最良PFと一致し、PF選択因子は
+`1.0`だった。
+
+HF 2条件の総費用因子は`2.150313`と`2.102857`で、時刻選択因子`2.141534`と
+`2.076361`が支配した。主4 active-space条件では、N2 equilibrium、CO equilibrium、
+CO stretchの3条件がcalibration/budget支配、N2 stretchだけが時刻選択支配だった。
+1% safety marginは全条件共通の`1.01`であり、HF equilibriumのmodel単体の小さな不足を
+安全側へ戻したが、HFの約2.1倍の総費用は説明しない。
+
+従って、今回の6条件からPF再設計を優先する根拠はない。将来別研究を設計するなら、
+HF側ではfinite-time optimum予測、active-space側では校正・予算保守性と時刻選択の双方を
+区別する。ただし、このdevelopment再解析を新方式の訓練や独立一般化とみなさない。
+詳細は
+[`report.md`](artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d/report.md)
+に固定した。
+
+## 7. 主張範囲
 
 主張できるのは次である。
 
@@ -117,6 +147,7 @@ equal-cost 7点fitの平均regret改善は相対約`1.07%`に留まり、targete
 - 1%余裕は今回の6 development条件で安全だったが、低regretを保証しなかった。
 - 今回固定した二状態診断はriskを記録できても、baselineの資源効率を改善しなかった。
 - 改善しなかったS4も、事前固定判定に従う有効なnegative resultである。
+- 今回の6条件では総regretのPF選択成分は0で、HFでは時刻選択が支配した。
 
 次は主張しない。
 
@@ -126,7 +157,7 @@ equal-cost 7点fitの平均regret改善は相対約`1.07%`に留まり、targete
 - S4が独立holdout、または方法論上の成功である。
 - 新PF、別基底、別精度、完全fault-tolerant runtimeへ一般化できる。
 
-## 7. 終了後の作業
+## 8. 終了後の作業
 
 S5、追加分子、閾値調整、追加diagnostic、新PF探索は開始しない。論文では
 `complete_no_benefit`を隠さず、方法論拡張版ではなく中核の機構・信頼性成果として

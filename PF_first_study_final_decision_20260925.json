@@ -48,6 +48,26 @@
       "efficiency_gain_passed": false,
       "diagnostic_specificity_passed": true,
       "outcome": "no_benefit"
+    },
+    "regret_decomposition": {
+      "status": "complete_regret_decomposition",
+      "source_result_commit": "cc3626a8135b647fe283fc60c963de70c5f6b2a5",
+      "source_integration_commit": "7f0b30d215e8094c95ae895b9469a04180e2385e",
+      "artifact": "artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d",
+      "protocol_sha256": "b33f1b5088e5bd07ec7bff9499b4a91c3082124e291ccd0b3bfa2ddacc58832a",
+      "condition_count": 6,
+      "coverage_complete": true,
+      "new_direct_truth_coordinate_count": 0,
+      "gamma_1_01_safe_condition_count": 6,
+      "pf_selection_loss_condition_count": 0,
+      "dominance_counts": {
+        "calibration": 3,
+        "time_selection": 3
+      },
+      "primary_mean_total_regret": 0.20968319639061822,
+      "stress_test_mean_total_regret": 1.1265846922936869,
+      "max_total_regret": 1.1503125962499605,
+      "max_factor_closure_absolute_error": 2.220446049250313e-16
     }
   },
   "research_decision": {
@@ -61,6 +81,7 @@
     "The S4 comparison is a six-condition development evaluation, not an independent molecular holdout.",
     "Safety at gamma=1.01 does not imply low resource regret.",
     "The tested two-state diagnostic must not be described as a beneficial practical selector improvement.",
-    "No claim is made for new molecules, basis sets, target accuracies, or product-formula coefficients."
+    "No claim is made for new molecules, basis sets, target accuracies, or product-formula coefficients.",
+    "The regret decomposition reuses the six development conditions and is not an independent transfer test."
   ]
 }

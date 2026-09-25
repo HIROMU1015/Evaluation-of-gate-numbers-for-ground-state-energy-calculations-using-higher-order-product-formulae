@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "protocol_id": "pf_first_study_regret_decomposition_v1",
+  "analysis_date": "2026-09-25",
+  "scope": {
+    "selector": "practical_baseline",
+    "condition_count": 6,
+    "new_direct_truth_coordinate_count": 0,
+    "new_hamiltonian_count": 0,
+    "new_fit_count": 0,
+    "coverage_policy": "report_coverage_insufficient_without_new_calculation"
+  },
+  "source": {
+    "artifact": "artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201",
+    "result_commit": "cc3626a8135b647fe283fc60c963de70c5f6b2a5",
+    "status": "complete_exact_time_scoring",
+    "manifest_sha256": "7cc54d0b795dd08a96bf55cbc900d8f3fa4731f6eb843c915e6617f39160a32c",
+    "scoring_sha256": "7d4ed0244076eb13259b926730b056a0f9460e63154dd7377b58dad34a95ae78"
+  },
+  "conditions": [
+    {
+      "name": "N2_active_eq_sto3g",
+      "evaluation_group": "primary"
+    },
+    {
+      "name": "N2_active_stretch150_sto3g",
+      "evaluation_group": "primary"
+    },
+    {
+      "name": "CO_active_eq_sto3g",
+      "evaluation_group": "primary"
+    },
+    {
+      "name": "CO_active_stretch150_sto3g",
+      "evaluation_group": "primary"
+    },
+    {
+      "name": "HF_full_eq_sto3g",
+      "evaluation_group": "stress_test"
+    },
+    {
+      "name": "HF_full_stretch150_sto3g",
+      "evaluation_group": "stress_test"
+    }
+  ],
+  "cost_field_mapping": {
+    "C_star": "original_joint_grid_best_cost",
+    "C_selected_formula_star": "original_same_formula_grid_best_cost",
+    "C_required_selected_time": "exact_time_direct_cost",
+    "C_hat": "predicted_cost",
+    "B_frozen": "frozen_budget_gamma_1_01"
+  },
+  "factor_definitions": {
+    "F_model": "C_hat / C_required_selected_time",
+    "F_margin": "B_frozen / C_hat",
+    "F_calibration": "B_frozen / C_required_selected_time",
+    "F_time_selection": "C_required_selected_time / C_selected_formula_star",
+    "F_pf_selection": "C_selected_formula_star / C_star",
+    "F_total": "B_frozen / C_star",
+    "excess_regret": "r_component = F_component - 1",
+    "multiplicative_closure": "F_total = F_calibration * F_time_selection * F_pf_selection",
+    "log_attribution": "log(F_total) = log(F_calibration) + log(F_time_selection) + log(F_pf_selection)"
+  },
+  "fixed_margin_multiplier": 1.01,
+  "dominance_rule": {
+    "metric": "largest_positive_log_factor",
+    "components": [
+      "calibration",
+      "time_selection",
+      "pf_selection"
+    ],
+    "tie_absolute_log_tolerance": 1e-12
+  },
+  "numerical_gates": {
+    "factor_closure_absolute_tolerance": 1e-12,
+    "source_ratio_relative_tolerance": 1e-12,
+    "cost_positivity_required": true,
+    "all_rows_required": true,
+    "source_complete_marker_required": true
+  },
+  "status_if_complete": "complete_regret_decomposition"
+}

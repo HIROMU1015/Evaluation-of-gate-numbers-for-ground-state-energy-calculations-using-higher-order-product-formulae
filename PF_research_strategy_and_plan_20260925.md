@@ -14,6 +14,11 @@
 > [`PF_first_study_final_synthesis_20260925.md`](PF_first_study_final_synthesis_20260925.md)および
 > [`PF_first_study_final_decision_20260925.json`](PF_first_study_final_decision_20260925.json)
 > を正本とする。以下の将来形は、結果を見る前に定めた設計履歴として残す。
+>
+> 終了後に保存済みS0の6条件だけを再解析し、総regretをcalibration/budget、時刻選択、
+> PF選択へ分解した。PF選択損失は6/6で0、HF 2条件は時刻選択支配、主4条件は
+> calibration支配3・時刻選択支配1だった。この再解析は新規truth点0で、停止判断を
+> 変更しない。
 
 ---
 

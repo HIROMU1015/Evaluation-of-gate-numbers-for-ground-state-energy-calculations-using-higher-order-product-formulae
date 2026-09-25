@@ -75,6 +75,7 @@ S0--S4として実行した結果である。統合結論は
 | S3 | HF成功・破綻対への限定接続 | `complete_retrospective_synthesis` | [`e768aaf` report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/e768aaff19aa0a1a57c4ccf2563258f860c5b3ec/artifacts/pf_first_study_s3_hf_connection_20260925/report.md) |
 | S4 Phase A | 6条件×7 strategyのtruth前固定 | `selection_frozen` | [`95ed24c` artifact](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/tree/95ed24c74bb29d883bbaf76d4578ff7af08ed995/artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f) |
 | S4 Phase B v1.1 | 二状態収束診断とfallbackの固定比較 | `complete_no_benefit` | [`4d831b5` report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/4d831b52475a7399b74a048a7471eaba6c4527c0/artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df/report.md) |
+| S0 regret因子再解析 | calibration/budget・時刻・PF選択への分解 | `complete_regret_decomposition` | [report](../artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d/report.md) |
 | S5 | 未使用active-space分子での独立評価 | `not_started_by_frozen_stop_rule` | S4 benefit条件が不成立のため非実施 |
 
 S4初回Phase Bは下側anchor不足をdirect計算前に検出して停止した。v1.1はPhase A予測を

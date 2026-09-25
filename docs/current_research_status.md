@@ -2,7 +2,7 @@
 
 最終更新：2026-09-25
 
-最新の確認済み数値結果：ブランチ`gpu-first-study-s4-state-convergence-v1-1-results-20260925`、コミット`4d831b5`
+最新の確認済み数値結果：ブランチ`first-study-regret-decomposition-20260925`（保存済みS0の再解析、本ブランチ）
 
 この文書は、古い実行指示や途中結果を現在の結論と誤認しないための入口である。数値を引用するときは、ここからリンクしたGit管理済み報告書も確認する。
 
@@ -97,6 +97,13 @@ fallbackを事前固定し、6条件×7 strategyを比較した。72個の新規
 [`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)
 に固定した。
 
+その後、S0の保存済み6条件を追加計算なしで因子分解した。元2 PF保存grid上では
+PF選択損失が6/6で0だった。HF 2条件の約2.1倍の総費用は時刻選択が支配し、主4条件は
+calibration/budget支配3、時刻選択支配1だった。1%余裕はHF equilibriumのmodel単体の
+小さな不足を補ったが、HFの大きなregretの原因ではない。このため新PF探索へ戻らず、
+将来の別研究ではHFのfinite-time optimum予測とactive-spaceの校正・予算保守性を分けて
+設計する。
+
 ## 機構診断・近似状態診断の停止判断
 
 H01/H02により、exact-ground校正の数値再現と、通常の状態品質スカラーだけでは有限時間校正精度を保証できないことを確認した。F01/F02/F03/F05により、先頭対角係数、演算子ノルム、非対角結合、状態混合、高次寄与、位相gapを分離して比較できた。したがって、状態品質スカラーの閾値調整とF領域の追加分解はここで停止する。
@@ -184,6 +191,7 @@ S5の一度限りの独立active-space評価は開始しない。この非実施
 | 第一研究S1/S2 | 三分解と凍結資源への伝播 | `d13f49d` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/d13f49dc8923b0553f8c8596de3c44c8a7a6f14f/artifacts/pf_first_study_phase_b_20260925_5a2f0a2/report.md) |
 | 第一研究S3 | HF成功・破綻対への限定接続 | `e768aaf` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/e768aaff19aa0a1a57c4ccf2563258f860c5b3ec/artifacts/pf_first_study_s3_hf_connection_20260925/report.md) |
 | 第一研究S4 | 二状態診断の固定比較、no-benefit | `4d831b5` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/4d831b52475a7399b74a048a7471eaba6c4527c0/artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df/report.md) |
+| 第一研究・regret再解析 | practical baselineの校正・時刻・PF選択因子分解 | 本ブランチ | [report](../artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d/report.md) |
 
 ## ファイルの読み順
 
