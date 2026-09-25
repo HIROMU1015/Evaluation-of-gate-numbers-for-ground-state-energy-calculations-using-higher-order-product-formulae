@@ -1,0 +1,48 @@
+{
+  "protocol_id": "pf-first-study-s0-anchor-source-v1.1-20260925",
+  "status": "frozen_before_corrective_truth_rerun",
+  "scope": "S0 saved-lower-anchor source identity only",
+  "parent_first_study_protocol": "PF_first_study_protocol_20260925.json",
+  "parent_first_study_protocol_sha256": "410367f7ff1093fb5f171bb00ca8c22b292de34c19ff03553c600a0313565565",
+  "frozen_practical_predictions_sha256": "fd354e0c0d161dae86bee1e220e36958a450659ea2ed5409d10cf4c13674477e",
+  "superseded_s0_result": {
+    "branch": "gpu-first-study-s0-exact-time-results-20260925",
+    "commit": "0ee4cc4c2567d7bda25d8e2e93d2ba051d2a0678",
+    "artifact": "artifacts/server_pf_first_study_s0_exact_time_20260925_b3a079f",
+    "status": "failed_numerical_validation",
+    "failure": "CO_active_eq_sto3g selected a P03 truth coordinate as an anchor and recomputed it with the H01 cache, producing a 1.0414120648186197e-07 Hartree cross-source difference above the frozen 1e-9 Hartree gate"
+  },
+  "post_truth_change_classification": "source-identity bug correction; no scientific selection, selected time, predicted cost, budget, numerical threshold, truth triplet, formula, or reference grid is changed",
+  "anchor_source_rule": {
+    "compute_source": "H01 source pickle validated by the practical source-identity checks",
+    "eligible_saved_truth_source": "the H01 truth file for the same condition and formula",
+    "required_truth_provenance": "new_h01_continuous_branch_calculation",
+    "selection": "nearest lower reliable eligible point below 0.99 times the frozen selected time",
+    "forbidden": [
+      "using a P03-only point as the branch-vector anchor while constructing the unitary from the H01 pickle",
+      "relaxing the anchor reproduction tolerance",
+      "changing any frozen practical prediction"
+    ]
+  },
+  "unchanged_rules": {
+    "conditions": 6,
+    "selected_formula": "byte-identical frozen prediction",
+    "selected_time": "byte-identical frozen prediction",
+    "predicted_cost": "byte-identical frozen prediction",
+    "budget": "byte-identical frozen prediction",
+    "inserted_time_factors": [0.99, 1.0, 1.01],
+    "new_direct_truth_point_count": 18,
+    "anchor_recomputation_count": 6,
+    "anchor_shift_absolute_tolerance_hartree": 1e-9,
+    "eigenpair_residual_2_norm_max": 1e-10,
+    "unitarity_residual_frobenius_max": 1e-10,
+    "branch_overlap_warning_below": 0.9,
+    "ground_overlap_warning_below": 0.9,
+    "resolved_phase_gap_radians_above": 1e-8,
+    "primary_regret_reference": "original two-formula saved grid",
+    "extended_grid_reference": "reported separately"
+  },
+  "cache_policy": "Every v1.1 direct-cache key must include the SHA-256 of this amendment. The failed v1.0 cache must not be accepted as a v1.1 cache hit.",
+  "completion_rule": "Permit complete_exact_time_scoring and COMPLETE only when the parent gates and the H01-native-anchor source gate all pass for all six conditions.",
+  "conflict_rule": "This amendment changes only the S0 anchor source identity. The parent protocol remains normative for every other field. Stop before computation if the implementation changes any other frozen rule."
+}
