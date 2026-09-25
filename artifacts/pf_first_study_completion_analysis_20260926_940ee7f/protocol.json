@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "protocol_id": "pf_first_study_completion_analysis_w0_w1_v1",
+  "analysis_date": "2026-09-26",
+  "base_commit": "940ee7f58bc1b3db54049f7decb69b48e7dfbd7e",
+  "scope": {
+    "purpose": "paper-and-reproducibility analysis of the completed first study",
+    "condition_count": 6,
+    "formula_count": 2,
+    "new_direct_truth_coordinate_count": 0,
+    "new_hamiltonian_count": 0,
+    "new_state_generation_count": 0,
+    "new_fit_count": 0,
+    "selector_changes": 0,
+    "coverage_policy": "emit exact_saved_grid, analytic_bound, or coverage_insufficient; never interpolate missing truth"
+  },
+  "sources": {
+    "practical": {
+      "artifact": "artifacts/server_practical_calibration_minimal_20260923_79035cc",
+      "result_commit": "4f4374bdf4dbcb7d8e1d14f9682570c221e4c88a",
+      "manifest_sha256": "3f82375fc9c0655bdfeba67f6c5a74caad8068bad560911266ce6b5c7b7e8533",
+      "protocol_sha256": "7bbe9958837a881f0247b6e72f5e80e2331e0cfe50dea18addd13a2748467d55",
+      "predictions_sha256": "fd354e0c0d161dae86bee1e220e36958a450659ea2ed5409d10cf4c13674477e"
+    },
+    "s0": {
+      "artifact": "artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201",
+      "result_commit": "cc3626a8135b647fe283fc60c963de70c5f6b2a5",
+      "manifest_sha256": "7cc54d0b795dd08a96bf55cbc900d8f3fa4731f6eb843c915e6617f39160a32c",
+      "protocol_sha256": "410367f7ff1093fb5f171bb00ca8c22b292de34c19ff03553c600a0313565565",
+      "scoring_sha256": "7d4ed0244076eb13259b926730b056a0f9460e63154dd7377b58dad34a95ae78"
+    },
+    "s4": {
+      "artifact": "artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df",
+      "result_commit": "4d831b52475a7399b74a048a7471eaba6c4527c0",
+      "manifest_sha256": "7f304b1c3dbd35975c5ee6e1d70132ce1912a08262652e6e5fbd740b78e05a50",
+      "protocol_sha256": "5c3c33fab6752b5ccf0ec9ee415e115bdf2134256e5a956f6b0e9b639f554c40",
+      "predictions_sha256": "47cdef9b52ea73feef0c005229cb9a482ee8e95afff87f038ff8461549f1c729",
+      "strategy_scoring_sha256": "25323aeb13d0b2b5361a574dace8aba35a0c76eed4ee5924d7d774c44bb79314",
+      "decision_sha256": "22a87ed9ec4d71a15c8a6a428485f3f60e06a2b2ff0e998cce7b0f60fc15d89c"
+    },
+    "regret": {
+      "artifact": "artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d",
+      "result_commit": "940ee7f58bc1b3db54049f7decb69b48e7dfbd7e",
+      "manifest_sha256": "2480c3ba32e943a5a21ff936b6ed098888b6be12571d642ca5a5b7c11558d96c",
+      "protocol_sha256": "b33f1b5088e5bd07ec7bff9499b4a91c3082124e291ccd0b3bfa2ddacc58832a",
+      "regret_decomposition_sha256": "8d689637ca2bde58c7073a6cb58ff858bc768c4a0a50727ce3a9d2e0f64e8b55"
+    },
+    "implementation": {
+      "src/trotterlib/config.py": "30a6d2afa5b94e7a8d5f2cef222b92c3490ffe58686b49256f5c3b3628111787",
+      "review_response/run_practical_calibration_minimal.py": "713f1d2f95ddd69b890759de47e40e4382ad5be4f1005447408117c037dd80db",
+      "review_response/run_pf_first_study_s4_state_convergence.py": "7e3237005ba7382a79817ad8d8736e27b9c55e5c52c3380042691d3a84badefc",
+      "review_response/run_pf_first_study_s4_state_convergence_v1_1.py": "2561de2d8222b0c5523054ba5854648e6311adc20330315be63d8017c4a319c1"
+    }
+  },
+  "fixed_values": {
+    "target_error_hartree": 0.00015936001019904,
+    "budget_multiplier": 1.01,
+    "practical_cost_beta": 1.2,
+    "s4_saved_scoring_beta": 0.105,
+    "original_relative_time_interval": [0.05, 1.8],
+    "fallback_maximum_relative_time": 0.5
+  },
+  "factor_definitions": {
+    "F_model": "C_hat / C_required(selected_formula, selected_time)",
+    "F_margin": "B_frozen / C_hat = gamma",
+    "F_calibration": "F_model * F_margin",
+    "F_within": "C_required(selected_formula, selected_time) / C_star(admissible_domain, selected_formula)",
+    "F_domain": "C_star(admissible_domain, selected_formula) / C_star(reference_grid, selected_formula)",
+    "F_P": "C_star(reference_grid, selected_formula) / C_star(reference_grid, all_formulae)",
+    "F_total": "F_model * F_margin * F_within * F_domain * F_P",
+    "saved_F_time": "F_within * F_domain"
+  },
+  "domain_accounting": {
+    "no_fallback": "if the saved-grid selected-formula oracle time is admissible, set F_domain=1 and F_within=saved_F_time with status exact_saved_grid_only",
+    "selected_at_cap": "with r=e_direct(t_cap)/epsilon, report F_within <= 1/(1-r) and F_domain >= saved_F_time*(1-r)",
+    "otherwise": "coverage_insufficient"
+  },
+  "s4_definition_audit": {
+    "preserve_original_artifact": true,
+    "recomputed_phase_error": "practical_cost_beta * rotations / (selected_time * gamma * predicted_cost)",
+    "identity_crosscheck": "(epsilon - predicted_error) / gamma",
+    "recomputed_margin": "epsilon - direct_error - recomputed_phase_error",
+    "scientific_policy": "record corrected diagnostic values without changing frozen predictions, regret, decision thresholds, or direct truth"
+  },
+  "numerical_gates": {
+    "relative_tolerance": 1e-11,
+    "absolute_tolerance": 1e-13,
+    "factor_closure_absolute_tolerance": 1e-12,
+    "expected_decision_trace_rows": 12,
+    "expected_condition_rows": 6,
+    "expected_s4_rows": 42
+  },
+  "status_if_complete": "complete_first_study_completion_analysis"
+}

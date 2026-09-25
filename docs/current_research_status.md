@@ -1,8 +1,8 @@
 # 現在の研究方針と検証状況
 
-最終更新：2026-09-25
+最終更新：2026-09-26
 
-最新の確認済み数値結果：ブランチ`first-study-regret-decomposition-20260925`（保存済みS0の再解析、本ブランチ）
+最新の確認済み数値結果：ブランチ`first-study-completion-analysis-20260926`（保存済みS0/S4の完了再解析、本ブランチ）
 
 この文書は、古い実行指示や途中結果を現在の結論と誤認しないための入口である。数値を引用するときは、ここからリンクしたGit管理済み報告書も確認する。
 
@@ -104,6 +104,27 @@ calibration/budget支配3、時刻選択支配1だった。1%余裕はHF equilib
 将来の別研究ではHFのfinite-time optimum予測とactive-spaceの校正・予算保守性を分けて
 設計する。
 
+### 10. 資源損失は「安全性」と分け、時刻域の下限を明示する
+
+S0/S4の保存済み結果のみを使い、`F_total = F_calibration * F_time * F_PF`を
+全6条件で再現した。PF選択損失は6/6で0だった。時刻要因はさらに
+`F_time = F_within * F_domain`とし、N2/COは保存grid上の比較に限定して
+`F_domain = 1`、HFはcap境界の数学的上下界として分解した。HF equilibriumで
+`F_within <= 1.01271`かつ`F_domain >= 2.11466`、HF stretchで
+`F_within <= 1.00324`かつ`F_domain >= 2.06966`である。これは連続時間oracleの
+精密分解ではなく、現在の保存truthで主張できる範囲のみを数値化したものである。
+
+また、S4 protocolの保存`qpe_beta=0.105`と、practical/S0およびdirect費用の
+`beta=1.2`が一致していないことを確認した。保存artifactは変更せず、正式な
+`beta=1.2`で全42 strategy-conditionを再監査し、42/42で安全性を維持した。
+最小energy marginは`6.4239e-7 Ha`、成否変更は0で、S4の`no_benefit`判定は
+不変だった。ただし、元S4報告の絶対phase-error・energy-margin数値は、正式betaで
+再算定した監査表を引用する。
+
+この完了再解析は新規direct truth、Hamiltonian、状態、fitのいずれも0件である。
+結果は、安全性と資源効率を分け、active-spaceの校正保守性とHFの時刻域制約を
+別の設計課題として論文化することを支持する。S5、追加分子、新diagnosticには進まない。
+
 ## 機構診断・近似状態診断の停止判断
 
 H01/H02により、exact-ground校正の数値再現と、通常の状態品質スカラーだけでは有限時間校正精度を保証できないことを確認した。F01/F02/F03/F05により、先頭対角係数、演算子ノルム、非対角結合、状態混合、高次寄与、位相gapを分離して比較できた。したがって、状態品質スカラーの閾値調整とF領域の追加分解はここで停止する。
@@ -192,17 +213,20 @@ S5の一度限りの独立active-space評価は開始しない。この非実施
 | 第一研究S3 | HF成功・破綻対への限定接続 | `e768aaf` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/e768aaff19aa0a1a57c4ccf2563258f860c5b3ec/artifacts/pf_first_study_s3_hf_connection_20260925/report.md) |
 | 第一研究S4 | 二状態診断の固定比較、no-benefit | `4d831b5` | [report](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/4d831b52475a7399b74a048a7471eaba6c4527c0/artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df/report.md) |
 | 第一研究・regret再解析 | practical baselineの校正・時刻・PF選択因子分解 | 本ブランチ | [report](../artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d/report.md) |
+| 第一研究・完了再解析 | decision trace、時刻域下限、資源側校正精度、S4 beta監査 | 本ブランチ | [report](../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/report.md) |
 
 ## ファイルの読み順
 
 1. 本書：現在の結論、適用範囲、停止判断。
-2. [`PF_first_study_final_synthesis_20260925.md`](../PF_first_study_final_synthesis_20260925.md)：第一研究S0--S4の最終統合結果。
-3. [`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)：第一研究の機械可読な最終分岐。
-4. [`PF_first_study_results_20260925.md`](../PF_first_study_results_20260925.md)：S3がhash固定したS0--S2時点の歴史的統合報告。
-5. [`docs/prevalidation_results_index.md`](prevalidation_results_index.md)：実行済み最終結果の固定commitと報告書。
-6. [`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)：探索・開発・過去のホールドアウトの区別。
-7. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：直接有限時間評価と縮約校正の位置付け。
-8. 上表のGit管理済み報告書：数値根拠。
-9. [repository_guide.md](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/20d64c2fea1ed2d2188777df4f3d962ee94df486/docs/repository_guide.md)：実装・検証・資料の所在。
+2. [`PF_first_study_paper_claim_ledger_20260926.md`](../PF_first_study_paper_claim_ledger_20260926.md)：論文で主張すること、しないこと、図表と構成。
+3. [第一研究・完了再解析](../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/report.md)：decision trace、資源損失分解、S4 beta監査。
+4. [`PF_first_study_final_synthesis_20260925.md`](../PF_first_study_final_synthesis_20260925.md)：第一研究S0--S4の最終統合結果。
+5. [`PF_first_study_final_decision_20260925.json`](../PF_first_study_final_decision_20260925.json)：第一研究の機械可読な最終分岐。
+6. [`PF_first_study_results_20260925.md`](../PF_first_study_results_20260925.md)：S3がhash固定したS0--S2時点の歴史的統合報告。
+7. [`docs/prevalidation_results_index.md`](prevalidation_results_index.md)：実行済み最終結果の固定commitと報告書。
+8. [`docs/pf_data_use_ledger.md`](pf_data_use_ledger.md)：探索・開発・過去のホールドアウトの区別。
+9. [`review_response/finite_time_cost_strategy.md`](../review_response/finite_time_cost_strategy.md)：直接有限時間評価と縮約校正の位置付け。
+10. 上表のGit管理済み報告書：数値根拠。
+11. [repository_guide.md](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/20d64c2fea1ed2d2188777df4f3d962ee94df486/docs/repository_guide.md)：実装・検証・資料の所在。
 
 指示書やrunnerが存在するだけでは検証完了を意味しない。成果物の`Status`、commit、条件数、manifestを確認する。未コミットのローカルpilotは確定証拠として扱わない。
