@@ -1,0 +1,102 @@
+{
+  "protocol_id": "pf_first_study_s4_uniform_anchor_v1_1",
+  "frozen_at": "2026-09-25",
+  "amendment_scope": "Phase-B branch initialization and direct-point accounting only",
+  "parent_s4_protocol_sha256": "5c3c33fab6752b5ccf0ec9ee415e115bdf2134256e5a956f6b0e9b639f554c40",
+  "parent_s4_implementation_commit": "f66e86f05473dc00790f47cf4ce493d9f64f5a57",
+  "frozen_phase_a": {
+    "result_branch": "gpu-first-study-s4-state-convergence-results-20260925",
+    "result_commit": "95ed24c74bb29d883bbaf76d4578ff7af08ed995",
+    "prediction_sha256": "47cdef9b52ea73feef0c005229cb9a482ee8e95afff87f038ff8461549f1c729",
+    "condition_count": 6,
+    "strategy_count": 7,
+    "unique_selected_coordinate_count": 20,
+    "oracle_information_used": false,
+    "truth_opened_during_phase_a": false,
+    "new_direct_truth_point_count": 0,
+    "reuse_without_rerun": true
+  },
+  "failed_phase_b_preflight": {
+    "failure_class": "anchor_availability_preflight_failure",
+    "direct_pf_calculation_started": false,
+    "new_direct_truth_point_count": 0,
+    "runtime_direct_cache_created": false,
+    "scientific_result_exists": false,
+    "complete_marker_exists": false,
+    "observed_missing_lower_h01_native_groups": [
+      "CO_active_eq_sto3g/current_m3",
+      "CO_active_stretch150_sto3g/current_m3",
+      "N2_active_eq_sto3g/current_m3",
+      "N2_active_stretch150_sto3g/current_m3",
+      "HF_full_eq_sto3g/yoshida4",
+      "HF_full_stretch150_sto3g/yoshida4"
+    ],
+    "interpretation": "The saved-anchor availability rule did not cover the frozen predictions; no scientific values were observed."
+  },
+  "uniform_anchor_rule": {
+    "applies_to": "all 12 condition/formula groups, including groups with an available saved lower point",
+    "group_count": 12,
+    "anchor_time_definition": "0.5 times the minimum inserted direct coordinate in the condition/formula group",
+    "anchor_time_factor_of_minimum_inserted_coordinate": 0.5,
+    "inputs": [
+      "frozen Phase-A selected times",
+      "fixed exact-time factors 0.99, 1.00, 1.01"
+    ],
+    "truth_or_saved_grid_used_to_choose_time": false,
+    "anchor_branch_initialization": "maximum exact-ground-state overlap at the newly computed anchor",
+    "continuation_after_anchor": "maximum previous-selected-vector overlap through all sorted inserted coordinates",
+    "saved_h01_native_anchor_used": false,
+    "saved_shift_reproduction_gate_applies": false,
+    "new_direct_truth_coordinate": true,
+    "cache_key_must_include_this_protocol_sha256": true
+  },
+  "fixed_accounting": {
+    "condition_formula_group_count": 12,
+    "expected_unique_selected_coordinate_count": 20,
+    "maximum_inserted_direct_coordinates": 60,
+    "new_uniform_anchor_coordinates": 12,
+    "maximum_total_new_direct_coordinates": 72,
+    "saved_anchor_recomputation_count": 0
+  },
+  "numerical_gates": {
+    "direct_eigenpair_residual_2_norm": 1e-10,
+    "pf_unitarity_frobenius": 1e-10,
+    "anchor_ground_overlap_probability": 0.9,
+    "anchor_phase_gap_radians": 1e-8,
+    "inserted_previous_overlap_probability": 0.9,
+    "inserted_ground_overlap_probability": 0.9,
+    "inserted_phase_gap_radians": 1e-8
+  },
+  "unchanged_from_parent": [
+    "all Phase-A predictions and their SHA-256",
+    "six conditions",
+    "seven strategies",
+    "PF coefficients and rotation counts",
+    "state truncation rule and risk threshold",
+    "selected formulae, times, predicted errors, predicted costs, and budgets",
+    "0.99, 1.00, 1.01 exact-time factors",
+    "original two-PF saved-grid primary regret reference",
+    "gamma=1.01 safety rule",
+    "benefit/no-benefit decision thresholds"
+  ],
+  "phase_boundary": {
+    "parent_phase_a_artifacts_must_be_committed_and_byte_identical": true,
+    "prediction_sha256_must_match": true,
+    "parent_incomplete_phase_b_must_be_preserved": true,
+    "post_truth_prediction_or_selector_change_forbidden": true,
+    "v1_direct_cache_reuse_forbidden": true
+  },
+  "status_rule": {
+    "all_source_and_numerical_gates_pass": [
+      "complete_with_benefit",
+      "complete_no_benefit"
+    ],
+    "any_gate_fails": "failed_numerical_validation",
+    "complete_marker_only_for_complete_status": true
+  },
+  "scope_limits": [
+    "This amendment was introduced after an anchor-availability preflight failure and before any S4 direct calculation.",
+    "The uniform rule is applied to all groups and was not chosen from direct numerical results.",
+    "No S5, new molecule, basis, precision, PF, diagnostic, or threshold change is allowed."
+  ]
+}
