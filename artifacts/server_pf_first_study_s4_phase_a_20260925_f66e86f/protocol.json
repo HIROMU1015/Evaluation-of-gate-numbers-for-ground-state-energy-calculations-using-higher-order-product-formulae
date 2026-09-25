@@ -1,0 +1,242 @@
+{
+  "protocol_id": "pf_first_study_s4_state_convergence_v1",
+  "frozen_at": "2026-09-25",
+  "evaluation_type": "fixed development comparison on previously observed conditions; not an independent holdout",
+  "purpose": "Test whether an operator-sensitive two-state disagreement diagnostic can target a conservative fallback more efficiently than universal fallback or equal-cost extra time points.",
+  "source_identity": {
+    "s3_result_commit": "e768aaff19aa0a1a57c4ccf2563258f860c5b3ec",
+    "s3_decision_path": "artifacts/pf_first_study_s3_hf_connection_20260925/decision.json",
+    "s3_decision_sha256": "8a614a5722acfb4d1e5a3343e2c6aad309f6f2a56db7fb0d7e2270f15af9ce61",
+    "practical_phase_a_commit": "79035cc7c414c04cafe8b9f8bdc779a17ec57302",
+    "practical_protocol_sha256": "7bbe9958837a881f0247b6e72f5e80e2331e0cfe50dea18addd13a2748467d55",
+    "h01_result_commit": "568f00249abb5b89ae3e6bb39cb4af87ed8581bd",
+    "h01_protocol_sha256": "e0e2649db1f8d109779ab1db26822f45c92c2a660569caa643f5f363e3ce27a6",
+    "p03_result_commit": "33a761d44a24022ad61192c41a196dd4cb3afbca",
+    "p03_protocol_sha256": "b0fc69d3ef89fcae28172ae1bd89ca0b192154ff86eed34410f73cdc2a770a56",
+    "s0_v1_1_result_commit": "cc3626a8135b647fe283fc60c963de70c5f6b2a5",
+    "required_h01_truth_provenance_for_anchor": "new_h01_continuous_branch_calculation"
+  },
+  "target_error_hartree": 0.00015936001019904,
+  "conditions": {
+    "primary": [
+      "N2_active_eq_sto3g",
+      "N2_active_stretch150_sto3g",
+      "CO_active_eq_sto3g",
+      "CO_active_stretch150_sto3g"
+    ],
+    "stress_test": [
+      "HF_full_eq_sto3g",
+      "HF_full_stretch150_sto3g"
+    ]
+  },
+  "formulae": [
+    "current_m3",
+    "yoshida4"
+  ],
+  "base_selector": {
+    "definition": "byte-equivalent scientific rules to practical_calibration_minimal_v1_1",
+    "state": "full_cisd",
+    "proxy": "signed imag(<psi|exp(+iHt) U_PF(t)|psi>)/t",
+    "model_powers": [
+      4,
+      6
+    ],
+    "training_relative_to_full_cisd_t_ana": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "sentinel_relative_to_full_cisd_t_ana": 0.5,
+    "optimization_relative_interval": [
+      0.05,
+      1.8
+    ],
+    "optimization_grid_points": 35001,
+    "existing_fallback_maximum_relative_time": 0.5,
+    "choice_rule": "minimum predicted cost among eligible PFs; abstain if none"
+  },
+  "state_pair": {
+    "fine_state": "normalized full CISD state stored in the hash-validated H01 pickle",
+    "coarse_state": "deterministic coefficient-truncated version of the same full CISD vector",
+    "retained_squared_norm": 0.99,
+    "construction": "Sort coefficients by descending absolute magnitude with restricted-basis index as the stable tie-break; retain the shortest prefix whose squared norm reaches 0.99; renormalize; do not use H, exact state, overlap, energy, gap, or truth.",
+    "minimum_retained_coefficients": 1,
+    "interpretation": "A local CISD-tail stability diagnostic, not a rigorous state-error bound and not proof of convergence to the exact ground state."
+  },
+  "operator_sensitive_diagnostic": {
+    "relative_times_to_full_cisd_t_ana": [
+      0.1,
+      0.2,
+      0.3,
+      0.5
+    ],
+    "signed_proxy_difference": "g_full(t)-g_truncated(t)",
+    "primary_score": "max_t abs(g_full(t)-g_truncated(t))/target_error_hartree",
+    "risk_threshold": 0.05,
+    "sign_noise_floor_hartree": {
+      "absolute_minimum": 1e-12,
+      "target_error_multiplier": 1e-6
+    },
+    "sign_disagreement_triggers_risk": true,
+    "one_additional_proxy_action_per_state_formula_time": true,
+    "additional_proxy_actions_per_condition_formula": 4
+  },
+  "strategies": {
+    "practical_baseline": {
+      "formula_choice": "base_selector",
+      "state_risk_action": "none",
+      "additional_proxy_actions_per_condition_formula": 0
+    },
+    "fixed_current_m3": {
+      "formula_choice": "current_m3_only",
+      "state_risk_action": "none",
+      "additional_proxy_actions_per_condition_formula": 0
+    },
+    "fixed_yoshida4": {
+      "formula_choice": "yoshida4_only",
+      "state_risk_action": "none",
+      "additional_proxy_actions_per_condition_formula": 0
+    },
+    "diagnostic_record_only": {
+      "formula_choice": "base_selector",
+      "state_risk_action": "record_only",
+      "additional_proxy_actions_per_condition_formula": 4
+    },
+    "universal_fallback": {
+      "formula_choice": "minimum predicted cost after capping every PF at 0.5 full-CISD t_ana",
+      "state_risk_action": "not_used",
+      "additional_proxy_actions_per_condition_formula": 0
+    },
+    "state_targeted_fallback": {
+      "formula_choice": "minimum predicted cost after applying the 0.5 t_ana cap when either the original fallback or state-risk flag is true",
+      "state_risk_action": "PF-specific fixed time cap",
+      "additional_proxy_actions_per_condition_formula": 4
+    },
+    "equal_cost_extra_points": {
+      "formula_choice": "base selector with a seven-point full-CISD fit and the original fallback",
+      "additional_training_relative_times": [
+        0.15,
+        0.25,
+        0.4,
+        0.7
+      ],
+      "fit_relative_times": [
+        0.1,
+        0.15,
+        0.2,
+        0.25,
+        0.3,
+        0.4,
+        0.7
+      ],
+      "model_powers": [
+        4,
+        6
+      ],
+      "additional_proxy_actions_per_condition_formula": 4
+    }
+  },
+  "resource_accounting": {
+    "qpe_beta": 0.105,
+    "budget_multiplier": 1.01,
+    "quantum_cost_metric": "Pauli rotations using the existing expanded-and-adjacent-merged PF sequence",
+    "classical_metrics": [
+      "state generation seconds",
+      "PF action seconds",
+      "Hamiltonian evolution seconds",
+      "selector wall seconds",
+      "peak CPU RSS",
+      "additional proxy action count"
+    ],
+    "do_not_combine": "Do not add classical seconds and Pauli rotations without a preregistered conversion."
+  },
+  "phase_a": {
+    "selector_allowed": [
+      "sanitized Hamiltonian",
+      "component spectra",
+      "term counts",
+      "full CISD state",
+      "deterministically truncated CISD state",
+      "PF coefficients",
+      "target error",
+      "proxy actions"
+    ],
+    "selector_forbidden": [
+      "exact ground state",
+      "exact overlap",
+      "exact gap",
+      "direct PF shift",
+      "direct optimum",
+      "direct minimum cost",
+      "past pass/fail label",
+      "truth coordinate",
+      "truth file path"
+    ],
+    "freeze_includes": [
+      "protocol",
+      "sanitizer",
+      "all strategy predictions",
+      "scorer implementation",
+      "decision rules",
+      "prediction hash",
+      "unit tests"
+    ],
+    "post_truth_code_change_forbidden": true,
+    "bug_policy": "Preserve the run as INVALIDATED_RUN and create a new protocol version."
+  },
+  "phase_b": {
+    "truth_policy": "Open direct truth only after Phase-A predictions are committed and hash-frozen.",
+    "exact_time_factors": [
+      0.99,
+      1.0,
+      1.01
+    ],
+    "deduplicate_identical_condition_formula_time_coordinates": true,
+    "maximum_unique_selected_coordinates": 36,
+    "maximum_new_direct_truth_coordinates": 108,
+    "maximum_anchor_recomputations": 12,
+    "anchor_policy": "For each condition/formula, select a lower reliable H01-native point with required provenance, recompute it from the same H01 pickle, then track continuously through sorted inserted times.",
+    "reference_regret": "exact selected-time direct cost divided by the original two-PF saved-grid minimum cost minus one",
+    "expanded_reference": "Report separately after adding inserted points; never replace the primary reference.",
+    "new_truth_is_evaluation_only": true
+  },
+  "numerical_gates": {
+    "anchor_shift_absolute_tolerance_hartree": 1e-9,
+    "direct_eigenpair_residual_2_norm": 1e-10,
+    "pf_unitarity_frobenius": 1e-10,
+    "branch_warning_previous_overlap_below": 0.9,
+    "branch_warning_ground_overlap_below": 0.9,
+    "degenerate_phase_gap_radians": 1e-8,
+    "prediction_hash_must_be_unchanged": true,
+    "all_source_hashes_must_match": true
+  },
+  "primary_metrics": [
+    "gamma=1.01 safety by condition and strategy",
+    "original-grid joint regret by condition and strategy",
+    "expanded-grid regret as secondary",
+    "formula and time changes",
+    "diagnostic trigger matrix",
+    "classical wall time, memory, and proxy-action count"
+  ],
+  "decision": {
+    "inconclusive_if": [
+      "any source or numerical gate fails",
+      "any of the six conditions lacks exact-time scoring",
+      "Phase-A prediction hash changes"
+    ],
+    "minimum_safety": "state_targeted_fallback has zero unsafe executions at gamma=1.01 and primary coverage 4/4",
+    "efficiency_gain": "mean original-grid joint regret across six conditions is at least 10% relatively lower than practical_baseline, and no condition regret increases by more than 0.10 absolute",
+    "diagnostic_specificity": "state_targeted_fallback beats universal_fallback or equal_cost_extra_points by at least 5% relatively in mean regret or 10% relatively in maximum regret",
+    "outcome_benefit": "minimum_safety and efficiency_gain and diagnostic_specificity all hold",
+    "outcome_no_benefit": "all gates pass but outcome_benefit is false",
+    "next_step_if_benefit": "Freeze one S5 unused-active-space molecular evaluation; do not tune on it.",
+    "next_step_if_no_benefit": "Do not add diagnostics post hoc; complete the mechanism-centered study."
+  },
+  "scope_limits": [
+    "Development comparison on previously observed molecules and truth; not an independent holdout.",
+    "The truncated/full CISD disagreement is not a rigorous upper bound on exact-state substitution error.",
+    "The four extra coarse-state actions are counted even if cached or vectorized.",
+    "No new PF coefficients, molecule, basis, target precision, or error-model powers may be introduced.",
+    "S5 is forbidden unless the frozen S4 benefit outcome is met."
+  ]
+}
