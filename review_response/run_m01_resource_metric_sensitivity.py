@@ -733,7 +733,7 @@ def report_lines(
     lines.extend(
         [
             "",
-            "## 選択時刻での資源比",
+            "## 選択時刻での回路資源内訳",
             "",
             "| condition | target | PF | direct pass | rotations/PF | compiled RZ/PF | RZ layers/PF | T/RZ |",
             "|---|---|---|---:|---:|---:|---:|---:|",
@@ -756,6 +756,7 @@ def report_lines(
             "",
             f"- N2主判定4組のうち、最良PFが資源指標で変わった組は `{primary_changes}`。",
             f"- N2主判定におけるpairwise順位反転は合計 `{primary_inversions}`。",
+            "- N2主判定では `current_m3` が4資源指標すべてで最良だった。",
             "- Pauli rotations、compiled RZ、RZ layerは別の単位として保存した。",
             "- T-count/T-depthは1%の合成エネルギー予算と `ceil(3 log2(1/epsilon_rot))` を使う固定proxyである。",
             "- controlled-U、状態準備、QFT、routing、magic-state factoryは含まないため、実行時間とは呼ばない。",
