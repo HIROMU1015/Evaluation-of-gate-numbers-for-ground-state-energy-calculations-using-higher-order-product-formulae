@@ -362,19 +362,33 @@ def _build_numbers(
         )
     decision_trace = _read_csv(roots["completion"] / "decision_trace.csv")
     trace_fields = (
-        ("proxy_analytic_time", "hartree^-1"),
-        ("allowed_time_cap", "hartree^-1"),
-        ("formula_optimum_time", "hartree^-1"),
-        ("formula_optimum_predicted_cost", "continuous_cost_proxy"),
-        ("fallback_triggered", "boolean"),
-        ("selected_formula", "boolean"),
+        ("rotations", "rotations", "int"),
+        ("proxy_analytic_time", "hartree^-1", "float"),
+        ("original_relative_time_min", "relative_time", "float"),
+        ("original_relative_time_max", "relative_time", "float"),
+        ("original_time_min", "hartree^-1", "float"),
+        ("original_time_max", "hartree^-1", "float"),
+        ("fallback_triggered", "boolean", "bool"),
+        ("fallback_reasons", "category", "text"),
+        ("allowed_relative_time_max", "relative_time", "float"),
+        ("allowed_time_cap", "hartree^-1", "float"),
+        ("formula_optimum_relative_time", "relative_time", "float"),
+        ("formula_optimum_time", "hartree^-1", "float"),
+        ("formula_optimum_predicted_error_hartree", "hartree", "float"),
+        ("formula_optimum_predicted_cost", "continuous_cost_proxy", "float"),
+        ("at_optimization_boundary", "boolean", "bool"),
+        ("eligible", "boolean", "bool"),
+        ("selected_formula", "boolean", "bool"),
+        ("condition_selection_reason", "category", "text"),
     )
     for row in decision_trace:
-        for field, unit in trace_fields:
+        for field, unit, value_type in trace_fields:
             raw: Any = row[field]
-            if unit not in {"boolean"}:
+            if value_type == "float":
                 raw = float(raw)
-            else:
+            elif value_type == "int":
+                raw = int(raw)
+            elif value_type == "bool":
                 raw = _as_bool(raw)
             add(
                 "C3",
@@ -397,18 +411,31 @@ def _build_numbers(
     )
     c5_limitation = "Only current_m3 and yoshida4 on the original saved truth grid."
     for row in factors:
-        add(
-            "C4",
-            f"resource.{row['condition']}.factor_total",
-            float(row["factor_total"]),
-            "factor",
-            row["condition"],
-            row["evaluation_group"],
-            row["coverage_status"],
-            "completion",
-            "cost_factor_decomposition.csv",
-            c4_limitation,
-        )
+        for field, unit in (
+            ("selected_time", "hartree^-1"),
+            ("c_star_reference_grid", "continuous_cost_proxy"),
+            ("c_selected_formula_star_reference_grid", "continuous_cost_proxy"),
+            ("c_required_selected_time", "continuous_cost_proxy"),
+            ("c_hat", "continuous_cost_proxy"),
+            ("b_frozen", "continuous_cost_proxy"),
+            ("factor_model", "factor"),
+            ("factor_margin", "factor"),
+            ("factor_calibration", "factor"),
+            ("factor_total", "factor"),
+            ("energy_margin_gamma_1_01_hartree", "hartree"),
+        ):
+            add(
+                "C4",
+                f"resource.{row['condition']}.{field}",
+                float(row[field]),
+                unit,
+                row["condition"],
+                row["evaluation_group"],
+                row["coverage_status"],
+                "completion",
+                "cost_factor_decomposition.csv",
+                c4_limitation,
+            )
         add(
             "C5",
             f"resource.{row['condition']}.factor_pf_selection",
@@ -421,6 +448,27 @@ def _build_numbers(
             "cost_factor_decomposition.csv",
             c5_limitation,
         )
+        for field in (
+            "factor_within_lower",
+            "factor_within_upper",
+            "factor_domain_lower",
+            "factor_domain_upper",
+        ):
+            add(
+                "C6",
+                f"domain.{row['condition']}.{field}",
+                float(row[field]),
+                "factor",
+                row["condition"],
+                row["evaluation_group"],
+                row["coverage_status"],
+                "completion",
+                "cost_factor_decomposition.csv",
+                (
+                    "N2/CO are exact only on the saved grid; HF entries are analytic "
+                    "bounds at the frozen cap."
+                ),
+            )
     pf_loss_count = sum(float(row["factor_pf"]) > 1.0 + 1e-12 for row in factors)
     add(
         "C5",
@@ -453,7 +501,7 @@ def _build_numbers(
             unit = "hartree^-1" if field.endswith("time") or field == "t_cap" else "factor"
             add(
                 "C6",
-                f"domain.{row['condition']}.{field}",
+                f"hf_bound_lemma.{row['condition']}.{field}",
                 float(row[field]),
                 unit,
                 row["condition"],

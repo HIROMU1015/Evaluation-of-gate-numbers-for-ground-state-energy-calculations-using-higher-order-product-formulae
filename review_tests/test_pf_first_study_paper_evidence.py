@@ -94,6 +94,26 @@ def test_key_claim_numbers_are_exact() -> None:
     assert float(
         rows["domain.HF_full_stretch150_sto3g.factor_domain_lower"]["value"]
     ) == pytest.approx(2.069663523283636)
+    for condition in (
+        "N2_active_eq_sto3g",
+        "N2_active_stretch150_sto3g",
+        "CO_active_eq_sto3g",
+        "CO_active_stretch150_sto3g",
+        "HF_full_eq_sto3g",
+        "HF_full_stretch150_sto3g",
+    ):
+        assert f"resource.{condition}.energy_margin_gamma_1_01_hartree" in rows
+        assert f"domain.{condition}.factor_within_lower" in rows
+        assert f"domain.{condition}.factor_within_upper" in rows
+        assert f"domain.{condition}.factor_domain_lower" in rows
+        assert f"domain.{condition}.factor_domain_upper" in rows
+    for formula in ("current_m3", "yoshida4"):
+        prefix = f"decision_trace.N2_active_eq_sto3g.{formula}"
+        assert f"{prefix}.rotations" in rows
+        assert f"{prefix}.original_relative_time_min" in rows
+        assert f"{prefix}.original_relative_time_max" in rows
+        assert f"{prefix}.fallback_reasons" in rows
+        assert f"{prefix}.condition_selection_reason" in rows
 
 
 def test_resource_dominance_and_s4_negative_result_are_scoped() -> None:
