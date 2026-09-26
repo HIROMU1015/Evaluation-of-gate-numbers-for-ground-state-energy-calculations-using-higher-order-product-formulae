@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "status": "frozen_paper_figure_package",
+  "base_commit": "cd81018932b9557b7a55e2e1cd8c5e3988245409",
+  "source": {
+    "numbers_path": "paper/evidence/paper_numbers.csv",
+    "numbers_sha256": "8bf1333d6c824a3bc033f81997aac1f63b91c43c12cb032a2778675bbc20b174",
+    "matrix_path": "paper/evidence/paper_evidence_matrix.md",
+    "matrix_sha256": "5a05e46ed3898b06f5e366860370d7bcbfe458fdb81113bfd3589bb2e29c6161",
+    "manifest_path": "paper/evidence/paper_source_manifest.json",
+    "manifest_sha256": "c2d6c84286f9654e2ea5c856d3f7bd9c1a2eb70767f19721b1a9928bc752e632"
+  },
+  "scope": {
+    "conditions": [
+      "N2_active_eq_sto3g",
+      "N2_active_stretch150_sto3g",
+      "CO_active_eq_sto3g",
+      "CO_active_stretch150_sto3g",
+      "HF_full_eq_sto3g",
+      "HF_full_stretch150_sto3g"
+    ],
+    "primary_conditions": [
+      "N2_active_eq_sto3g",
+      "N2_active_stretch150_sto3g",
+      "CO_active_eq_sto3g",
+      "CO_active_stretch150_sto3g"
+    ],
+    "stress_conditions": [
+      "HF_full_eq_sto3g",
+      "HF_full_stretch150_sto3g"
+    ],
+    "formulas": [
+      "current_m3",
+      "yoshida4"
+    ],
+    "strategies": [
+      "practical_baseline",
+      "fixed_current_m3",
+      "fixed_yoshida4",
+      "diagnostic_record_only",
+      "universal_fallback",
+      "state_targeted_fallback",
+      "equal_cost_extra_points"
+    ],
+    "new_direct_truth_coordinate_count": 0,
+    "new_hamiltonian_count": 0,
+    "new_state_generation_count": 0,
+    "new_fit_count": 0,
+    "selector_changes": 0,
+    "manuscript_sections": 0
+  },
+  "figures": [
+    {
+      "number": 1,
+      "slug": "decision_pipeline",
+      "title": "Decision pipeline and truth boundary"
+    },
+    {
+      "number": 2,
+      "slug": "three_error_decomposition",
+      "title": "Three-error decomposition outcomes"
+    },
+    {
+      "number": 3,
+      "slug": "safety_vs_efficiency",
+      "title": "Safety does not imply efficiency"
+    },
+    {
+      "number": 4,
+      "slug": "within_vs_domain_loss",
+      "title": "Within-domain and domain-loss factors"
+    }
+  ],
+  "tables": [
+    "table_1_decision_trace.csv",
+    "table_2_resource_factors.csv",
+    "table_3_s4_strategy_summary.csv"
+  ],
+  "rendering": {
+    "formats": [
+      "png",
+      "pdf",
+      "svg"
+    ],
+    "png_dpi": 240,
+    "font_family": "DejaVu Sans",
+    "svg_hashsalt": "pf-first-study-paper-figures-v1",
+    "primary_color": "#2864a8",
+    "stress_color": "#d46a1f",
+    "mixed_color": "#8c8c8c"
+  },
+  "output": {
+    "figure_directory": "paper/figures",
+    "table_directory": "paper/tables",
+    "captions": "paper/figure_captions.md",
+    "manifest": "paper/figures/paper_figure_manifest.json"
+  }
+}
