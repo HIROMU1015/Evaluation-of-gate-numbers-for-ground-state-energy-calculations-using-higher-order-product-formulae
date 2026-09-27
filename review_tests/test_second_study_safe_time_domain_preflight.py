@@ -32,6 +32,13 @@ ENVIRONMENT_AMENDMENT_PATH = Path(
 EXPECTED_ENVIRONMENT_AMENDMENT_SHA256 = (
     "ab87da7c42aba20658e5f5d4a204cdf761c50f0814d24719a36e72be674da77e"
 )
+OVERLAY_AMENDMENT_PATH = Path(
+    "review_response/"
+    "second_study_safe_time_domain_preflight_environment_overlay_amendment_v1_3.json"
+)
+EXPECTED_OVERLAY_AMENDMENT_SHA256 = (
+    "c8ec1925f2ad8f2dbb0b3e466514cd8fb0d70d39c58ee538e3ea5ff4e8e7d6ac"
+)
 
 
 def test_local_preflight_revalidates_frozen_sources_without_new_computation() -> None:
@@ -146,6 +153,44 @@ def test_v1_2_environment_amendment_is_identity_only_and_frozen() -> None:
         is False
     )
     assert amendment["dependency_gate"]["install_or_update_on_failure"] is False
+    assert not any(amendment["scientific_protocol_changes"].values())
+    assert amendment["retry_rules"]["phase_a_authorized"] is False
+    assert amendment["retry_rules"]["phase_b_authorized"] is False
+
+
+def test_v1_3_overlay_amendment_is_process_only_and_scientifically_frozen() -> None:
+    amendment = json.loads(OVERLAY_AMENDMENT_PATH.read_text(encoding="utf-8"))
+    actual = hashlib.sha256(OVERLAY_AMENDMENT_PATH.read_bytes()).hexdigest()
+    sidecar = Path(str(OVERLAY_AMENDMENT_PATH) + ".sha256").read_text().split()[0]
+    assert actual == sidecar == EXPECTED_OVERLAY_AMENDMENT_SHA256
+    assert amendment["scope"] == "preflight_process_only_environment_overlay"
+    assert amendment["parent_protocol"] == {
+        "commit": preflight.PROTOCOL_COMMIT,
+        "sha256": preflight.EXPECTED_PROTOCOL_SHA256,
+    }
+    attempts = amendment["preserved_preflight_attempts"]
+    assert [row["result_commit"] for row in attempts] == [
+        "e1891dfd24ec5f0064b0598e51eb260073fd2b1e",
+        "b520f9bd8f575456531e7c0b0f2692973b436e21",
+        "fd827f50dcbe64f8e2ea9d931cfdf2dd8eea4480",
+        "ef2dc7443092e93d09ead2fbf717645362fe4189",
+    ]
+    overlay = amendment["process_only_overlay"]
+    assert overlay["environment_scope"] == "child_process_only"
+    assert overlay["append_inherited_pythonpath"] is False
+    assert overlay["append_inherited_ld_library_path"] is False
+    assert overlay["persistent_change"] is False
+    assert overlay["allowed_foreign_distribution"] == {
+        "name": "cupy-cuda12x",
+        "version": "13.6.0",
+        "module": "cupy",
+    }
+    resolution = amendment["module_resolution_gate"]
+    assert resolution["reject_unlisted_foreign_module_resolution"] is True
+    assert resolution["must_resolve_from_cupy_overlay"] == ["cupy"]
+    cuda_gate = amendment["cuda_library_identity_gate"]
+    assert cuda_gate["gpu_device_allocation_permitted"] is False
+    assert cuda_gate["gpu_kernel_permitted"] is False
     assert not any(amendment["scientific_protocol_changes"].values())
     assert amendment["retry_rules"]["phase_a_authorized"] is False
     assert amendment["retry_rules"]["phase_b_authorized"] is False

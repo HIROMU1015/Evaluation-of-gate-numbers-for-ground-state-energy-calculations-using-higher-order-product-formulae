@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "amendment_id": "second_study_safe_time_domain_preflight_environment_overlay_v1_3",
+  "created_on": "2026-09-27",
+  "scope": "preflight_process_only_environment_overlay",
+  "parent_protocol": {
+    "commit": "804331ecc976b83ae880940719706c11999247bc",
+    "sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b"
+  },
+  "parent_environment_amendment": {
+    "commit": "9e2b9b0ba2d068b18ca8fda5b3a346954551938f",
+    "reviewed_bundle_commit": "a23b5beb8c62380b8f873385e37fd0031e265da2",
+    "sha256": "ab87da7c42aba20658e5f5d4a204cdf761c50f0814d24719a36e72be674da77e"
+  },
+  "preserved_preflight_attempts": [
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-20260927",
+      "result_commit": "e1891dfd24ec5f0064b0598e51eb260073fd2b1e",
+      "status": "failed_source_identity"
+    },
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-v1-1-20260927",
+      "result_commit": "b520f9bd8f575456531e7c0b0f2692973b436e21",
+      "status": "failed_environment"
+    },
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-v1-2-20260927",
+      "result_commit": "fd827f50dcbe64f8e2ea9d931cfdf2dd8eea4480",
+      "status": "failed_environment_identity"
+    },
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-v1-2-adapted-20260927",
+      "result_commit": "ef2dc7443092e93d09ead2fbf717645362fe4189",
+      "status": "preflight_pass_phase_a_not_authorized",
+      "classification": "environment_adaptation_evidence_not_formal_v1_2_completion"
+    }
+  ],
+  "cause": {
+    "strict_v1_2_failures": [
+      "CuPy was absent from the primary trotter-common virtual environment",
+      "qiskit_aer could not resolve the CUDA 12.9 nvJitLink symbol through the default system library search order"
+    ],
+    "adapted_preflight_observation": "A read-only process-local PYTHONPATH and LD_LIBRARY_PATH overlay passed every preflight gate without scientific computation or persistent environment mutation.",
+    "scientific_result_used_to_select_overlay": false
+  },
+  "primary_environment": {
+    "python_executable": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "resolved_python": "/usr/bin/python3.12",
+    "python_executable_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "sys_prefix": "/home/AbeHiromu/venvs/trotter-common",
+    "sys_base_prefix": "/usr",
+    "pyvenv_cfg_sha256": "1c6bbb327ae94536cbb3c4bc75dcf21a19ba4bf623f1e96eaf9a9b1dbc797a1e",
+    "requirements_gpu_sha256": "2d4b882eece717f246b528b1c573c59cd70b43aac665faff7057b3c1cf5cb187",
+    "site_packages": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages"
+  },
+  "process_only_overlay": {
+    "pythonpath_order": [
+      "src",
+      "review_response",
+      ".",
+      "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages"
+    ],
+    "cupy_site_packages": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+    "allowed_foreign_distribution": {
+      "name": "cupy-cuda12x",
+      "version": "13.6.0",
+      "module": "cupy"
+    },
+    "ld_library_path_order": [
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib",
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusparse/lib",
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusolver/lib",
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib",
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cuda_runtime/lib"
+    ],
+    "environment_scope": "child_process_only",
+    "append_inherited_pythonpath": false,
+    "append_inherited_ld_library_path": false,
+    "shell_activation": false,
+    "persistent_change": false
+  },
+  "module_resolution_gate": {
+    "must_resolve_from_current_worktree": [
+      "trotterlib"
+    ],
+    "must_resolve_from_primary_environment": [
+      "numpy",
+      "scipy",
+      "matplotlib",
+      "pyscf",
+      "openfermion",
+      "openfermionpyscf",
+      "qiskit",
+      "qiskit_aer",
+      "pytest",
+      "pandas"
+    ],
+    "must_resolve_from_cupy_overlay": [
+      "cupy"
+    ],
+    "primary_exact_versions": {
+      "numpy": "1.26.4",
+      "scipy": "1.14.1",
+      "matplotlib": "3.9.2",
+      "pyscf": "2.7.0",
+      "openfermion": "1.6.1",
+      "openfermionpyscf": "0.5",
+      "qiskit": "1.3.0",
+      "qiskit-aer-gpu": "0.15.1",
+      "pytest": "9.0.3",
+      "pandas": "2.3.3"
+    },
+    "cupy_exact_version": "13.6.0",
+    "reject_unlisted_foreign_module_resolution": true,
+    "record_module_paths_and_distribution_versions": true
+  },
+  "cuda_library_identity_gate": {
+    "require_every_overlay_directory": true,
+    "record_nvidia_distribution_names_and_versions": true,
+    "record_distribution_record_sha256": true,
+    "record_resolved_shared_library_paths": true,
+    "require_qiskit_aer_import": true,
+    "gpu_device_allocation_permitted": false,
+    "gpu_kernel_permitted": false,
+    "freeze_identity_for_later_phase_a": true
+  },
+  "test_policy": {
+    "focused_tests_must_have_zero_failures_and_zero_skips": true,
+    "full_review_tests_must_have_zero_failures": true,
+    "allowed_full_suite_skip": {
+      "file": "review_tests/test_pennylane_bch.py",
+      "reason": "PennyLane is an optional dependency absent from requirements-gpu.txt and guarded by pytest.importorskip.",
+      "maximum_count": 1
+    },
+    "all_other_skips_permitted": false
+  },
+  "scientific_protocol_changes": {
+    "protocol_json": false,
+    "information_source": false,
+    "formula": false,
+    "molecules_or_geometries": false,
+    "candidate_times": false,
+    "thresholds": false,
+    "stopping_rules": false,
+    "gamma_or_beta": false,
+    "phase_a_or_phase_b_authorization": false
+  },
+  "prohibited_actions": [
+    "installing, updating, downgrading, or repairing any package",
+    "changing shell startup files or shared environment configuration",
+    "copying a package or shared library",
+    "using any site-packages directory other than the primary environment and the single CuPy overlay",
+    "launching a GPU kernel or allocating a GPU device array",
+    "creating a Hamiltonian, state, proxy value, PF action, group spectrum, or direct truth value"
+  ],
+  "retry_rules": {
+    "preserve_all_prior_branches_and_outputs": true,
+    "new_branch_required": true,
+    "new_output_required": true,
+    "prior_output_or_cache_reuse": false,
+    "rerun_source_identity": true,
+    "rerun_h01_p03_identity": true,
+    "rerun_full_independence_search": true,
+    "rerun_gpu_memory_check": true,
+    "run_focused_tests": true,
+    "run_full_review_tests": true,
+    "stop_after_preflight_report": true,
+    "phase_a_authorized": false,
+    "phase_b_authorized": false
+  }
+}
