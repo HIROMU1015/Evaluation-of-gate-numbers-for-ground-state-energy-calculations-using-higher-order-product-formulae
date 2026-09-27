@@ -9,6 +9,9 @@ from review_response import run_second_study_safe_time_domain_preflight as prefl
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+GPU_PROMPT = Path(
+    "review_response/gpu_second_study_safe_time_domain_preflight_prompt.md"
+)
 
 
 def test_local_preflight_revalidates_frozen_sources_without_new_computation() -> None:
@@ -60,3 +63,14 @@ def test_gpu_search_is_not_silently_treated_as_complete() -> None:
     assert all(
         row["passed"] for row in report["checks"].values()
     )
+
+
+def test_gpu_prompt_is_preflight_only_and_pins_reviewed_inputs() -> None:
+    prompt = GPU_PROMPT.read_text(encoding="utf-8")
+    assert preflight.PROTOCOL_COMMIT in prompt
+    assert "3a0dd5684abd7039935c02c14b44e3cb24bb149a" in prompt
+    assert preflight.EXPECTED_PROTOCOL_SHA256 in prompt
+    assert "preflight_pass_phase_a_not_authorized" in prompt
+    assert "no_go_independence_contaminated" in prompt
+    assert "Phase A、Phase B、新規分子生成" in prompt
+    assert "PREFLIGHT_ONLY_COMPLETE" in prompt
