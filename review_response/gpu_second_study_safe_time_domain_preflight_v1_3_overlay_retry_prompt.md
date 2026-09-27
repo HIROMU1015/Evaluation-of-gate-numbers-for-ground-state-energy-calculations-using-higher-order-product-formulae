@@ -20,6 +20,8 @@ Phase A、Phase B、新規Hamiltonian、RHF/CISD、group spectrum、proxy、PF a
 - v1.2 review済みbundle commit：`a23b5beb8c62380b8f873385e37fd0031e265da2`
 - v1.3 overlay amendment commit：
   `699774cd23ac0010bde6ee015489ea62aaacf7a1`
+- v1.3 review済みbundle commit：
+  `25a4a415609189ce3333c380e7c55a76d76e401f`
 - v1.1 amendment SHA-256：
   `218d325d2b13eea24196302a52e4a1a3e34ae92973518b61835bf2ad3974759d`
 - v1.2 amendment SHA-256：
@@ -89,16 +91,20 @@ git cat-file -e b520f9bd8f575456531e7c0b0f2692973b436e21^{commit}
 git cat-file -e fd827f50dcbe64f8e2ea9d931cfdf2dd8eea4480^{commit}
 git cat-file -e ef2dc7443092e93d09ead2fbf717645362fe4189^{commit}
 git cat-file -e 699774cd23ac0010bde6ee015489ea62aaacf7a1^{commit}
+git cat-file -e 25a4a415609189ce3333c380e7c55a76d76e401f^{commit}
 git merge-base --is-ancestor \
   804331ecc976b83ae880940719706c11999247bc \
   699774cd23ac0010bde6ee015489ea62aaacf7a1
 git merge-base --is-ancestor \
   a23b5beb8c62380b8f873385e37fd0031e265da2 \
   699774cd23ac0010bde6ee015489ea62aaacf7a1
+git merge-base --is-ancestor \
+  699774cd23ac0010bde6ee015489ea62aaacf7a1 \
+  25a4a415609189ce3333c380e7c55a76d76e401f
 ```
 
-v1.3 review済みbundle commit（固定版へ後から追加されるcommit）から独立worktreeと新規branchを
-作ります。推奨名は
+v1.3 review済みbundle commit `25a4a41...`から独立worktreeと新規branchを作ります。
+推奨名は
 
 `gpu-second-study-safe-time-domain-preflight-v1-3-20260927`
 
