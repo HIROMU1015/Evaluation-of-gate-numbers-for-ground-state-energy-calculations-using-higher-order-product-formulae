@@ -16,6 +16,8 @@ v1.4ではCuPyと、その固定必須依存fastrlockの2 distributionを事前�
 - v1.3 review済みbundle commit：`25a4a415609189ce3333c380e7c55a76d76e401f`
 - v1.3停止commit：`17422078d27bf3fc9e395719d335cd9ffa0e08a8`
 - v1.4 amendment commit：`9e0afa0dda26bc44d94a998739ef0ba103889ac1`
+- v1.4 review済みbundle commit：
+  `648c0b88ed2c0f748a8a42e5de412aff05995eeb`
 - v1.1 amendment SHA-256：
   `218d325d2b13eea24196302a52e4a1a3e34ae92973518b61835bf2ad3974759d`
 - v1.2 amendment SHA-256：
@@ -90,16 +92,20 @@ update、downgrade、修復、コピー、shell設定変更をしません。
 git fetch origin --prune
 git cat-file -e 17422078d27bf3fc9e395719d335cd9ffa0e08a8^{commit}
 git cat-file -e 9e0afa0dda26bc44d94a998739ef0ba103889ac1^{commit}
+git cat-file -e 648c0b88ed2c0f748a8a42e5de412aff05995eeb^{commit}
 git merge-base --is-ancestor \
   804331ecc976b83ae880940719706c11999247bc \
   9e0afa0dda26bc44d94a998739ef0ba103889ac1
 git merge-base --is-ancestor \
   25a4a415609189ce3333c380e7c55a76d76e401f \
   9e0afa0dda26bc44d94a998739ef0ba103889ac1
+git merge-base --is-ancestor \
+  9e0afa0dda26bc44d94a998739ef0ba103889ac1 \
+  648c0b88ed2c0f748a8a42e5de412aff05995eeb
 ```
 
-v1.4 review済みbundle commit（固定版へ後から追加されるcommit）から独立worktreeと新規branchを
-作ります。推奨名は
+v1.4 review済みbundle commit `648c0b8...`から独立worktreeと新規branchを作ります。
+推奨名は
 
 `gpu-second-study-safe-time-domain-preflight-v1-4-20260927`
 

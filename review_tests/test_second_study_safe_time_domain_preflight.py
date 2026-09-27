@@ -377,6 +377,7 @@ def test_gpu_v1_3_retry_freezes_overlay_and_stops_before_phase_a() -> None:
 def test_gpu_v1_4_retry_freezes_cupy_dependency_and_stops() -> None:
     prompt = GPU_CUPY_DEPENDENCY_RETRY_PROMPT.read_text(encoding="utf-8")
     assert "9e0afa0dda26bc44d94a998739ef0ba103889ac1" in prompt
+    assert "648c0b88ed2c0f748a8a42e5de412aff05995eeb" in prompt
     assert EXPECTED_CUPY_DEPENDENCY_AMENDMENT_SHA256 in prompt
     assert "17422078d27bf3fc9e395719d335cd9ffa0e08a8" in prompt
     assert "cupy-cuda12x==13.6.0" in prompt
