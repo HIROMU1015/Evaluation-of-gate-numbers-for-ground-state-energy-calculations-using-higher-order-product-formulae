@@ -729,3 +729,32 @@ def test_committed_phase_a_boundary_audit_authorizes_only_fixed_phase_b() -> Non
         "additional_pf_or_molecule_allowed": False,
     }
     assert not audit["unresolved_blockers"]
+
+
+def test_gpu_phase_b_prompt_pins_one_frozen_evaluation() -> None:
+    prompt = (
+        Path(__file__).parents[1]
+        / "review_response"
+        / "gpu_second_study_safe_time_domain_phase_b_execution_prompt.md"
+    ).read_text(encoding="utf-8")
+    for value in (
+        "804331ecc976b83ae880940719706c11999247bc",
+        "efea5fe0718c2c2623935949460498da066bdec3",
+        "1de4813915cdfb5d74a6813349f58983f9cdf8c8",
+        "d4dd42fd107ac9fb90547a190a0c7080484ee667",
+        "3406d2f69237d95b14be298059f777df3fbd5043446add2c31559bf902a34b83",
+        "4b3de286c350afea2c00e822799edd54b52864bbbd219de3c389eece6639fc1a",
+        "0bfefe181421171395572de8d25f441577bde604c18dcdd5d851def9a86a3d50",
+        "5dbe617f37dcfd4274fa5f89eddf6167ffe62a3816200bec6eb66f9e49e73d91",
+    ):
+        assert value in prompt
+    assert "run_second_study_safe_time_domain_phase_b.py" in prompt
+    assert "--backend gpu" in prompt
+    assert "--gpu-id 0" in prompt
+    assert "--processes 1" in prompt
+    assert "42 coordinates" in prompt
+    assert "uniform new anchor" in prompt
+    assert "complete_no_benefit" in prompt
+    assert "failed_numerical_validation" in prompt
+    assert "Phase A再実行" in prompt
+    assert "run_second_study_safe_time_domain_phase_a.py" not in prompt
