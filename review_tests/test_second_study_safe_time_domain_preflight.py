@@ -239,6 +239,7 @@ def test_gpu_v1_1_retry_prompt_preserves_failure_and_stops_before_phase_a() -> N
 def test_gpu_v1_2_retry_uses_only_existing_environment_and_stops() -> None:
     prompt = GPU_ENVIRONMENT_RETRY_PROMPT.read_text(encoding="utf-8")
     assert "9e2b9b0ba2d068b18ca8fda5b3a346954551938f" in prompt
+    assert "a23b5beb8c62380b8f873385e37fd0031e265da2" in prompt
     assert EXPECTED_ENVIRONMENT_AMENDMENT_SHA256 in prompt
     assert "b520f9bd8f575456531e7c0b0f2692973b436e21" in prompt
     assert "/home/AbeHiromu/venvs/trotter-common/bin/python" in prompt
