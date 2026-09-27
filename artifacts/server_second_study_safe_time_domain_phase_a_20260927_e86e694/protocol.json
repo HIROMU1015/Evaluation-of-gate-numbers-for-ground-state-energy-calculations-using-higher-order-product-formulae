@@ -1,0 +1,562 @@
+{
+  "schema_version": 1,
+  "protocol_id": "second_study_safe_time_domain_v1",
+  "frozen_on": "2026-09-27",
+  "status": "protocol_only_no_phase_a_or_phase_b_executed",
+  "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+  "base": {
+    "branch": "first-study-paper-figures-20260926",
+    "commit": "123c84d459613db109dc23aa3b0872334fa12ddd",
+    "evidence_commit": "cd81018932b9557b7a55e2e1cd8c5e3988245409",
+    "first_study_s0_result_commit": "cc3626a8135b647fe283fc60c963de70c5f6b2a5",
+    "first_study_s4_result_commit": "4d831b52475a7399b74a048a7471eaba6c4527c0"
+  },
+  "research_question": "Can one fixed current_m3 rule use an empirically qualified extension beyond the current fallback cap, using only an approximate state and finitely many calibration observations, while preserving accuracy and classical information cost and reducing frozen quantum budget?",
+  "scope": {
+    "formulae": [
+      "current_m3"
+    ],
+    "pf_selection_enabled": false,
+    "new_pf_search": false,
+    "target_error_hartree": 0.00015936001019904,
+    "budget_multiplier_gamma": 1.01,
+    "qpe_beta": 1.2,
+    "numeric_dtype": "complex128",
+    "processes": 1,
+    "new_direct_truth_in_protocol_preparation": 0,
+    "phase_b_executed_in_protocol_preparation": false,
+    "new_molecule_generation_in_protocol_preparation": 0
+  },
+  "scientific_claim_level": {
+    "method_class": "empirical_multiple_window_consistency_rule",
+    "strict_cap_external_safety_guarantee": false,
+    "forbidden_interpretations": [
+      "agreement of two approximate-state windows is a rigorous error bound",
+      "a small fit residual is a rigorous cap-external safety guarantee",
+      "a small eigenpair residual is a physical safety guarantee",
+      "CISD and another nearby approximate state sharing a result removes common state bias"
+    ]
+  },
+  "source_identity": {
+    "audit_path": "review_response/second_study_safe_time_domain_source_leakage_audit.json",
+    "paper_source_manifest_sha256": "c2d6c84286f9654e2ea5c856d3f7bd9c1a2eb70767f19721b1a9928bc752e632",
+    "paper_numbers_sha256": "8bf1333d6c824a3bc033f81997aac1f63b91c43c12cb032a2778675bbc20b174",
+    "s0_manifest_sha256": "7cc54d0b795dd08a96bf55cbc900d8f3fa4731f6eb843c915e6617f39160a32c",
+    "s4_manifest_sha256": "7f304b1c3dbd35975c5ee6e1d70132ce1912a08262652e6e5fbd740b78e05a50",
+    "completion_summary_sha256": "4378030d99e505c6fa98a2f2081b0158d82cbb6e0df5f8b5d6cea3dd7ab5abc8",
+    "s4_beta_1_2_audit_sha256": "0552da606df8ff83e922f11327393a97ad117836816c2aa7d5d6155a2f61ae2f"
+  },
+  "data_partition": {
+    "development_only": {
+      "molecular_families": [
+        "H-chain",
+        "LiH",
+        "BeH2",
+        "H2O",
+        "NH3",
+        "CH4",
+        "N2",
+        "CO",
+        "HF"
+      ],
+      "rule_development_conditions": [
+        "N2_active_eq_sto3g",
+        "N2_active_stretch150_sto3g",
+        "CO_active_eq_sto3g",
+        "CO_active_stretch150_sto3g",
+        "HF_full_eq_sto3g",
+        "HF_full_stretch150_sto3g"
+      ],
+      "allowed_uses": [
+        "source identity checks",
+        "fixed numerical premise checks",
+        "resource estimation",
+        "rationale for inheriting the existing 0.05 epsilon consistency threshold"
+      ],
+      "forbidden_uses": [
+        "independent evaluation claims",
+        "post-evaluation retuning"
+      ]
+    },
+    "independent_evaluation": {
+      "status_at_protocol_freeze": "no matching condition identifiers or numeric-result references found in the local worktrees or all local Git refs; GPU-server-wide search remains a mandatory preflight gate",
+      "conditions": [
+        {
+          "name": "LiF_active_eq_sto3g",
+          "evaluation_group": "independent_active_space",
+          "geometry_angstrom": [
+            [
+              "Li",
+              [
+                0.0,
+                0.0,
+                -0.78195
+              ]
+            ],
+            [
+              "F",
+              [
+                0.0,
+                0.0,
+                0.78195
+              ]
+            ]
+          ],
+          "bond_length_angstrom": 1.5639,
+          "basis": "sto-3g",
+          "charge": 0,
+          "multiplicity": 1,
+          "frozen_core_spatial_orbitals": 2,
+          "active_electrons": 8,
+          "active_spatial_orbitals": 8
+        },
+        {
+          "name": "LiF_active_stretch150_sto3g",
+          "evaluation_group": "independent_active_space",
+          "geometry_angstrom": [
+            [
+              "Li",
+              [
+                0.0,
+                0.0,
+                -1.172925
+              ]
+            ],
+            [
+              "F",
+              [
+                0.0,
+                0.0,
+                1.172925
+              ]
+            ]
+          ],
+          "bond_length_angstrom": 2.34585,
+          "basis": "sto-3g",
+          "charge": 0,
+          "multiplicity": 1,
+          "frozen_core_spatial_orbitals": 2,
+          "active_electrons": 8,
+          "active_spatial_orbitals": 8
+        },
+        {
+          "name": "HCl_full_eq_sto3g",
+          "evaluation_group": "independent_full_electron_stress",
+          "geometry_angstrom": [
+            [
+              "H",
+              [
+                0.0,
+                0.0,
+                -0.6373
+              ]
+            ],
+            [
+              "Cl",
+              [
+                0.0,
+                0.0,
+                0.6373
+              ]
+            ]
+          ],
+          "bond_length_angstrom": 1.2746,
+          "basis": "sto-3g",
+          "charge": 0,
+          "multiplicity": 1,
+          "frozen_core_spatial_orbitals": 0,
+          "active_electrons": 18,
+          "active_spatial_orbitals": 10
+        },
+        {
+          "name": "HCl_full_stretch150_sto3g",
+          "evaluation_group": "independent_full_electron_stress",
+          "geometry_angstrom": [
+            [
+              "H",
+              [
+                0.0,
+                0.0,
+                -0.95595
+              ]
+            ],
+            [
+              "Cl",
+              [
+                0.0,
+                0.0,
+                0.95595
+              ]
+            ]
+          ],
+          "bond_length_angstrom": 1.9119,
+          "basis": "sto-3g",
+          "charge": 0,
+          "multiplicity": 1,
+          "frozen_core_spatial_orbitals": 0,
+          "active_electrons": 18,
+          "active_spatial_orbitals": 10
+        }
+      ],
+      "replacement_after_preflight_failure": "forbidden; record no_go_independence_contaminated and stop"
+    }
+  },
+  "formula": {
+    "id": "current_m3",
+    "formal_order": 4,
+    "s2_sequence": [
+      0.1960294407008384,
+      0.2092246690782796,
+      0.3316118001935053,
+      -0.4737318199452465,
+      0.3316118001935053,
+      0.2092246690782796,
+      0.1960294407008384
+    ],
+    "coefficient_changes_forbidden": true
+  },
+  "information_source": {
+    "selected": "multiple_window_consistency",
+    "state": "determinant-space CISD in the same frozen-core/orbital space as the Hamiltonian",
+    "proxy": "g(t)=Im(<psi_CISD|exp(-i H t) U_current_m3(t)|psi_CISD>)/t",
+    "model_powers": [
+      4,
+      6
+    ],
+    "fit": "unweighted signed least squares",
+    "other_candidate_sources_enabled": {
+      "proxy_consistency_between_two_states": false,
+      "conservative_error_envelope": false,
+      "operator_sensitive_state_diagnostic": false
+    }
+  },
+  "cost_model": {
+    "required_pauli_rotations": "C(t)=beta*K_current_m3/[t*(epsilon_E-e_direct(t))]",
+    "frozen_pauli_rotations": "B(t)=gamma*beta*K_current_m3/[t*(epsilon_E-e_hat(t))]",
+    "beta": 1.2,
+    "gamma": 1.01,
+    "units": "Pauli rotations under the inherited continuous QPE resource proxy",
+    "classical_seconds_added_to_pauli_rotations": false
+  },
+  "phase_a": {
+    "purpose": "Generate independent Hamiltonian/CISD inputs, acquire only approximate-state proxy information, execute all four frozen strategies, and freeze every selection before opening direct truth.",
+    "truth_access": false,
+    "allowed_selector_inputs": [
+      "condition specification",
+      "Hamiltonian in the frozen particle/symmetry sector",
+      "component spectra",
+      "term counts",
+      "CISD state",
+      "current_m3 coefficients",
+      "target error",
+      "fixed protocol constants",
+      "CISD proxy actions and their runtime counters"
+    ],
+    "forbidden_selector_inputs": [
+      "exact ground state",
+      "exact ground energy",
+      "exact ground overlap",
+      "exact spectral gap",
+      "direct PF eigenvalue or signed shift",
+      "direct PF error",
+      "direct required cost",
+      "direct optimum or candidate-grid minimum",
+      "past pass/fail label",
+      "Phase B output path or truth file path"
+    ],
+    "system_construction": {
+      "exact_diagonalization_allowed": false,
+      "z2_target_source": "RHF determinant and CISD support only",
+      "sector_rule": "Use the fixed (N_alpha,N_beta) population sector. A nonconstant exact diagonal-Z2 restriction may be used only when its mask and target are derived without an exact eigenvector; otherwise retain the full population sector.",
+      "adapt_sector_after_phase_b": false
+    },
+    "time_scale": {
+      "grid_kind": "geomspace",
+      "absolute_minimum_hartree_inverse": 0.02,
+      "absolute_maximum_hartree_inverse": 1.8,
+      "grid_count": 34,
+      "rolling_window_points": 5,
+      "formal_order": 4,
+      "formal_order_tolerance": 0.2,
+      "minimum_r_squared": 0.999,
+      "noise_floor_hartree": 5e-13,
+      "selection_rule": "earliest qualifying window",
+      "proxy_analytic_time": "t_ana=(epsilon_E/(5*abs(alpha_proxy)))^(1/4)"
+    },
+    "original_current_m3_rule": {
+      "model_training_relative_to_t_ana": [
+        0.1,
+        0.2,
+        0.3
+      ],
+      "cancellation_primary_relative_to_t_ana": 0.1,
+      "cancellation_robustness_relative_to_t_ana": 0.05,
+      "cancellation_fallback_below": 0.02,
+      "sentinel_relative_to_t_ana": 0.5,
+      "sentinel_residual_fallback_over_epsilon": 0.05,
+      "sign_noise_floor": "max(1e-12 Ha, 1e-6*epsilon_E)",
+      "optimization_relative_interval": [
+        0.05,
+        1.8
+      ],
+      "optimization_grid_points": 35001,
+      "fallback_cap_relative_to_t_ana": 0.5
+    },
+    "extension": {
+      "applies_only_when_original_fallback_is_true": true,
+      "base_window_points_relative_to_t_ana": [
+        0.1,
+        0.2,
+        0.3,
+        0.5
+      ],
+      "candidate_sequence_relative_to_t_ana": [
+        0.65,
+        0.8,
+        0.95,
+        1.1,
+        1.25,
+        1.4,
+        1.55,
+        1.7
+      ],
+      "window_width_points": 3,
+      "one_step_residual_over_epsilon_maximum": 0.05,
+      "adjacent_window_disagreement_over_epsilon_maximum": 0.05,
+      "sign_rule": "The measured proxy and both adjacent-window predictions at the candidate must exceed the inherited sign noise floor and have one common nonzero sign.",
+      "guarded_error": "e_guard=max(abs(g_measured),abs(f_previous_window),abs(f_current_window)) at the candidate",
+      "feasibility_rule": "e_guard < epsilon_E",
+      "minimum_predicted_budget_reduction_relative_to_current_fallback": 0.05,
+      "stop_rule": "Acquire candidates in the frozen order and stop immediately at the first residual, adjacent-window, sign, numeric, or feasibility failure. Later candidates are unavailable. A consistency pass without 5 percent predicted budget reduction may be traversed but is not eligible for selection.",
+      "indeterminate_or_no_eligible_candidate": "return the original current_m3 selection and frozen budget"
+    },
+    "strategies": {
+      "current_fallback": "Original current_m3-only rule, including the 0.5 t_ana fallback cap.",
+      "equal_information_pooled_fit": "Use exactly the proxy points actually acquired by the new rule, fit one [t^4,t^6] model to all of them, and select the minimum predicted-cost observed candidate without the adjacent-window gate. On infeasibility return current_fallback.",
+      "multiple_window_rule": "Use the frozen sequential adjacent-window gate and guarded error. On indeterminacy return current_fallback.",
+      "uncapped_counterfactual": "Use the original three-point model on the full frozen candidate list with the 0.5 cap removed. This is diagnostic only and cannot establish operational safety."
+    },
+    "equal_information_accounting": {
+      "state_generations_new_vs_pooled": "identical",
+      "hamiltonian_exponential_actions_new_vs_pooled": "identical",
+      "pf_state_actions_new_vs_pooled": "identical",
+      "group_spectra_new_vs_pooled": "identical",
+      "proxy_points_new_vs_pooled": "identical",
+      "cache_entries_new_vs_pooled": "identical"
+    },
+    "freeze": {
+      "required_files": [
+        "protocol.json",
+        "source_leakage_audit.json",
+        "sanitized_input_manifest.json",
+        "proxy_points.csv",
+        "predictions.json",
+        "prediction.sha256",
+        "phase_a_audit.json",
+        "PHASE_A_FROZEN.json"
+      ],
+      "required_marker_schema": "second_study_safe_time_domain_phase_a_freeze_v1",
+      "phase_a_commit_required_before_phase_b": true,
+      "phase_a_push_required_before_phase_b": true,
+      "post_freeze_changes": "Any scientific or selection change invalidates the run; preserve it and create a new protocol version. Do not edit the independent evaluation result."
+    },
+    "maximum_information_counts_per_condition": {
+      "new_state_generations": 1,
+      "group_spectrum_builds": 1,
+      "short_time_proxy_points": 34,
+      "fixed_base_relative_proxy_points": 5,
+      "extension_proxy_points": 8,
+      "total_proxy_points": 47,
+      "hamiltonian_exponential_actions": 47,
+      "current_m3_pf_state_actions": 47,
+      "explicit_hamiltonian_vector_actions_for_state_diagnostics": 1
+    },
+    "maximum_information_counts_all_four_conditions": {
+      "new_state_generations": 4,
+      "group_spectrum_builds": 4,
+      "proxy_points": 188,
+      "hamiltonian_exponential_actions": 188,
+      "current_m3_pf_state_actions": 188,
+      "explicit_hamiltonian_vector_actions_for_state_diagnostics": 4
+    }
+  },
+  "phase_b": {
+    "purpose": "After a committed and hash-frozen Phase A only, compute direct current_m3 truth on the preregistered grid and score all frozen strategies.",
+    "preconditions": [
+      "HEAD descends from the protocol commit",
+      "the protocol SHA-256 matches the committed sidecar",
+      "the Phase A prediction file is committed and byte-identical to prediction.sha256",
+      "the Phase A commit is present on origin",
+      "all Phase A oracle-access counters are zero",
+      "all four independent conditions and strategy selections match the frozen protocol",
+      "the output contains no existing direct cache except a resumable cache created by this exact protocol and Phase A prediction hash",
+      "the source/leakage and GPU-server-wide independence searches pass"
+    ],
+    "fixed_candidate_grid_relative_to_t_ana": [
+      0.5,
+      0.65,
+      0.8,
+      0.95,
+      1.1,
+      1.25,
+      1.4,
+      1.55,
+      1.7
+    ],
+    "truth_coordinate_plan": {
+      "candidate_grid_coordinates_per_condition": 9,
+      "original_current_fallback_coordinate_per_condition_maximum": 1,
+      "new_anchor_coordinate_per_condition": 1,
+      "anchor_time": "0.5*min(all candidate-grid coordinates and the original current-fallback selected coordinate for that condition)",
+      "absolute_time_deduplication_relative_tolerance": 2e-12,
+      "absolute_time_deduplication_absolute_tolerance": 1e-14,
+      "independent_condition_count": 4,
+      "maximum_candidate_grid_coordinates": 36,
+      "maximum_original_selection_coordinates": 4,
+      "new_anchor_coordinates": 4,
+      "maximum_total_new_direct_truth_coordinates": 44,
+      "old_direct_cache_reuse": 0
+    },
+    "branch_rule": {
+      "anchor_selection": "maximum exact-ground overlap at the new anchor only",
+      "remaining_coordinates": "ascending-time continuation by maximum previous-vector overlap",
+      "independent_check": "record maximum exact-ground-overlap branch at every point and flag disagreement",
+      "phase_unwrap": "continuous from the anchor"
+    },
+    "numerical_gates": {
+      "maximum_eigenpair_residual_2_norm": 1e-10,
+      "maximum_unitarity_residual_frobenius": 1e-10,
+      "minimum_anchor_ground_overlap_probability": 0.9,
+      "minimum_tracked_previous_overlap_probability": 0.9,
+      "minimum_tracked_ground_overlap_probability": 0.9,
+      "minimum_phase_gap_radian_exclusive": 1e-8,
+      "branch_disagreement_allowed": false,
+      "failure_status": "failed_numerical_validation",
+      "threshold_relaxation_after_failure": false
+    },
+    "scoring": {
+      "truth_used_for_strategy_selection": false,
+      "direct_required_cost": "beta*K_current_m3/[t*(epsilon_E-e_direct)] for e_direct<epsilon_E, otherwise infinity",
+      "candidate_grid_oracle": "minimum finite direct required cost over the nine fixed current_m3 candidate points",
+      "selection_regret": "direct required cost at the frozen selected time / candidate-grid oracle - 1",
+      "frozen_budget_regret": "frozen Pauli-rotation budget / candidate-grid oracle - 1",
+      "unsafe_execution": "direct PF error plus the phase-estimation error implied by the frozen budget exceeds epsilon_E",
+      "report_counterfactual_separately": true,
+      "interpolation": false,
+      "continuous_global_oracle_claim": false
+    }
+  },
+  "primary_metrics": [
+    "accuracy_target_miss_count and unsafe_execution_count",
+    "execution coverage, extension coverage, and consistency-rejection count",
+    "frozen Pauli-rotation budget per condition and in aggregate",
+    "selection and frozen-budget regret relative to the fixed current_m3 candidate grid",
+    "regret difference from equal_information_pooled_fit",
+    "new state-generation count and seconds",
+    "explicit Hamiltonian-vector actions and Hamiltonian-exponential actions",
+    "current_m3 PF state actions",
+    "group count, group-spectrum builds, and their seconds",
+    "calibration proxy-point count and seconds",
+    "Phase B direct-coordinate count, GPU seconds, and CPU/GPU peak memory"
+  ],
+  "decision": {
+    "go_to_phase_a": [
+      "all source identity hashes pass",
+      "local and GPU-server-wide searches find no prior PF-error, QPE-cost, proxy-response, or direct-truth result for any of the four independent conditions",
+      "the implementation and all boundary tests pass",
+      "the output roots are new and non-overwriting"
+    ],
+    "go_to_phase_b": [
+      "Phase A completed without exact/direct truth access",
+      "Phase A predictions and coordinate plan are committed, pushed, and SHA-256 frozen",
+      "the Phase B direct count is at most 44",
+      "all numerical preflight checks pass"
+    ],
+    "complete_with_benefit_requires_all": {
+      "source_and_numerical_gates": "all pass",
+      "new_rule_unsafe_execution_count": 0,
+      "new_rule_execution_coverage": "4/4",
+      "new_rule_extension_selection_count_minimum": 1,
+      "aggregate_frozen_budget_ratio_new_over_current_fallback_maximum": 0.9,
+      "mean_selection_regret_new_less_than_equal_information_pooled_fit": true,
+      "maximum_selection_regret_new_not_above_equal_information_pooled_fit": true,
+      "maximum_per_condition_regret_increase_new_minus_equal_information": 0.1,
+      "classical_information_counts_new_equal_equal_information": true
+    },
+    "complete_no_benefit": "All source and numerical gates pass but one or more benefit conditions fail. Preserve and publish the fixed negative result without retuning.",
+    "no_go_or_failed": [
+      "independence contamination",
+      "source identity mismatch",
+      "Phase A truth leakage or prediction hash mismatch",
+      "numerical validation failure",
+      "unplanned direct coordinate or cache reuse"
+    ]
+  },
+  "resource_estimate": {
+    "basis": "Existing 8-active-orbital current_m3 runs had restricted dimension 1568, 81-99 groups, Phase A preparation 7.45-11.37 s, proxy action about 0.18 s, CPU peak about 0.75 GiB, and direct points with median 4.19-4.84 s, maximum 11.75 s, and GPU maximum 701 MiB. LiF may have a larger frozen sector, so the estimate is deliberately widened.",
+    "planned_direct_truth_coordinates_maximum": 44,
+    "phase_a_cpu_wall_time_minutes": {
+      "lower": 2,
+      "upper": 10
+    },
+    "phase_b_single_gpu_wall_time_minutes": {
+      "lower": 8,
+      "upper": 30
+    },
+    "tests_and_packaging_cpu_wall_time_minutes": {
+      "lower": 2,
+      "upper": 10
+    },
+    "peak_cpu_memory_gib": {
+      "lower": 1.0,
+      "upper": 4.0
+    },
+    "peak_gpu_memory_gib": {
+      "lower": 1.0,
+      "upper": 4.0
+    },
+    "estimate_is_binding_limit": false,
+    "preflight_memory_requirement_gib": 8
+  },
+  "cache_and_artifact_policy": {
+    "required_existing_development_sources": [
+      "artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8 plus its server-side untracked cache/*.pkl",
+      "artifacts/server_unused_molecule_frozen_holdout_20260921_d288797 raw/fine truth",
+      "artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201",
+      "artifacts/server_pf_first_study_s4_state_convergence_v1_1_20260925_96699df",
+      "artifacts/pf_first_study_regret_decomposition_20260925_7f0b30d",
+      "artifacts/pf_first_study_completion_analysis_20260926_940ee7f",
+      "paper/evidence and paper/figures manifests"
+    ],
+    "independent_evaluation_existing_pickle_count": 0,
+    "phase_a_new_runtime_caches": [
+      ".runtime/system_cache/*.pkl",
+      ".runtime/proxy_cache/*.json",
+      ".runtime/component_spectra/*"
+    ],
+    "phase_b_new_runtime_caches": [
+      ".runtime/direct_cache/*.pkl"
+    ],
+    "cache_key_required_fields": [
+      "protocol_sha256",
+      "prediction_sha256",
+      "condition",
+      "hamiltonian_sha256",
+      "formula_sha256",
+      "absolute_time_hex",
+      "backend",
+      "dtype",
+      "branch_rule_version"
+    ],
+    "committed_runtime_cache": false,
+    "committed_pickle_or_npy": false,
+    "reuse_from_first_study_direct_cache": false
+  },
+  "stop_rules": [
+    "Stop after protocol commit and push; do not generate the new molecules, run Phase A, or run Phase B in the protocol-preparation task.",
+    "During execution, stop after Phase A commit and push until its hash boundary is independently verified.",
+    "After the one independent Phase B evaluation, do not retune thresholds, candidate times, state truncation, basis, geometry, safety multiplier, or selection rule on LiF/HCl.",
+    "Do not start S5, another PF, another molecule, another basis, or another target accuracy automatically.",
+    "A no-benefit outcome is a complete result for this information source."
+  ]
+}
