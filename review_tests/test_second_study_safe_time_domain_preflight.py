@@ -25,6 +25,10 @@ GPU_OVERLAY_RETRY_PROMPT = Path(
     "review_response/"
     "gpu_second_study_safe_time_domain_preflight_v1_3_overlay_retry_prompt.md"
 )
+GPU_CUPY_DEPENDENCY_RETRY_PROMPT = Path(
+    "review_response/"
+    "gpu_second_study_safe_time_domain_preflight_v1_4_cupy_dependency_retry_prompt.md"
+)
 AMENDMENT_PATH = Path(
     "review_response/"
     "second_study_safe_time_domain_preflight_amendment_v1_1.json"
@@ -368,3 +372,21 @@ def test_gpu_v1_3_retry_freezes_overlay_and_stops_before_phase_a() -> None:
     assert "preflight_pass_phase_a_not_authorized" in prompt
     assert "phase_a_authorized=false" in prompt
     assert "CuPy array、device allocation、GPU kernel" in prompt
+
+
+def test_gpu_v1_4_retry_freezes_cupy_dependency_and_stops() -> None:
+    prompt = GPU_CUPY_DEPENDENCY_RETRY_PROMPT.read_text(encoding="utf-8")
+    assert "9e0afa0dda26bc44d94a998739ef0ba103889ac1" in prompt
+    assert EXPECTED_CUPY_DEPENDENCY_AMENDMENT_SHA256 in prompt
+    assert "17422078d27bf3fc9e395719d335cd9ffa0e08a8" in prompt
+    assert "cupy-cuda12x==13.6.0" in prompt
+    assert "fastrlock==0.8.3" in prompt
+    assert "fastrlock>=0.5" in prompt
+    assert "374e873c946b8fb847925051ccd22b534660b480ae4d1c01aea1f540dadec401" in prompt
+    assert "0368d7063abcf0dfe42c68e6509edaaa6337a9aaa0c0750289884b82474d3aac" in prompt
+    assert "許可2件以外が0" in prompt
+    assert "gpu-second-study-safe-time-domain-preflight-v1-4-20260927" in prompt
+    assert "67/67" in prompt
+    assert "preflight_pass_phase_a_not_authorized" in prompt
+    assert "phase_a_authorized=false" in prompt
+    assert "CuPy array作成、device query、device allocation、GPU kernel" in prompt
