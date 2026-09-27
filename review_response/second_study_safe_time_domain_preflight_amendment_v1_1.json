@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "amendment_id": "second_study_safe_time_domain_preflight_v1_1",
+  "created_on": "2026-09-27",
+  "scope": "preflight_transport_identity_only",
+  "parent_protocol": {
+    "commit": "804331ecc976b83ae880940719706c11999247bc",
+    "sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b"
+  },
+  "parent_implementation_commit": "3a0dd5684abd7039935c02c14b44e3cb24bb149a",
+  "preserved_failed_preflight": {
+    "branch": "gpu-second-study-safe-time-domain-preflight-20260927",
+    "result_commit": "e1891dfd24ec5f0064b0598e51eb260073fd2b1e",
+    "status": "failed_source_identity",
+    "passed_source_checks": 66,
+    "failed_source_checks": 1,
+    "failed_check_id": "git:origin",
+    "phase_a_executed": false,
+    "phase_b_executed": false,
+    "new_scientific_computation": false
+  },
+  "cause": {
+    "classification": "preflight_portability_false_negative",
+    "expected_raw_url": "git@github.com:HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae.git",
+    "measured_raw_url": "https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae.git",
+    "same_host_owner_repository": true,
+    "shared_git_configuration_change_required": false
+  },
+  "identity_rule": {
+    "version": "github_transport_normalization_v1_1",
+    "expected_canonical_identity": "github.com/hiromu1015/evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+    "accepted_transport_families": [
+      "git_at_github_scp",
+      "https_github",
+      "ssh_github"
+    ],
+    "normalization": [
+      "require the github.com host",
+      "require exactly one owner and one repository path component",
+      "remove one terminal .git suffix",
+      "compare host, owner, and repository case-insensitively",
+      "preserve the raw measured URL and canonical identity in the audit"
+    ],
+    "must_reject": [
+      "a non-github.com host",
+      "a different owner or repository",
+      "a URL with query or fragment",
+      "an HTTPS URL with user information",
+      "an unsupported transport or extra path component"
+    ]
+  },
+  "scientific_protocol_changes": {
+    "protocol_json": false,
+    "information_source": false,
+    "formula": false,
+    "molecules_or_geometries": false,
+    "candidate_times": false,
+    "thresholds": false,
+    "stopping_rules": false,
+    "gamma_or_beta": false,
+    "phase_a_or_phase_b_authorization": false
+  },
+  "retry_rules": {
+    "preserve_failed_branch_and_output": true,
+    "new_branch_required": true,
+    "new_output_required": true,
+    "failed_output_or_cache_reuse": false,
+    "existing_python3_executable_may_be_used": true,
+    "record_python_executable_and_versions": true,
+    "stop_after_preflight_report": true,
+    "phase_a_authorized": false,
+    "phase_b_authorized": false
+  }
+}

@@ -14,9 +14,11 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 PROTOCOL_COMMIT = "804331ecc976b83ae880940719706c11999247bc"
 EXPECTED_PROTOCOL_SHA256 = (
@@ -26,6 +28,19 @@ EXPECTED_REMOTE = (
     "git@github.com:HIROMU1015/"
     "Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-"
     "higher-order-product-formulae.git"
+)
+EXPECTED_REPOSITORY_ID = (
+    "github.com/hiromu1015/"
+    "evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-"
+    "higher-order-product-formulae"
+)
+AMENDMENT_PATH = Path(
+    "review_response/"
+    "second_study_safe_time_domain_preflight_amendment_v1_1.json"
+)
+AMENDMENT_HASH_PATH = Path(str(AMENDMENT_PATH) + ".sha256")
+EXPECTED_AMENDMENT_SHA256 = (
+    "218d325d2b13eea24196302a52e4a1a3e34ae92973518b61835bf2ad3974759d"
 )
 DEFAULT_AUDIT = Path(
     "review_response/second_study_safe_time_domain_source_leakage_audit.json"
@@ -50,6 +65,74 @@ def sha256_file(path: Path) -> str:
         for block in iter(lambda: handle.read(1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def canonical_repository_identity(remote: str) -> str:
+    """Normalize supported GitHub transports without weakening repo identity."""
+
+    value = remote.strip()
+    scp_match = re.fullmatch(r"git@([^:]+):(.+)", value)
+    if scp_match:
+        host = scp_match.group(1)
+        path = scp_match.group(2)
+    else:
+        parsed = urlsplit(value)
+        if parsed.scheme not in {"https", "ssh"}:
+            raise PreflightError("unsupported origin transport")
+        if parsed.query or parsed.fragment:
+            raise PreflightError("origin URL query or fragment is forbidden")
+        try:
+            port = parsed.port
+        except ValueError as exc:
+            raise PreflightError("invalid origin URL port") from exc
+        allowed_port = 443 if parsed.scheme == "https" else 22
+        if port not in {None, allowed_port}:
+            raise PreflightError("non-default origin URL port is forbidden")
+        if parsed.scheme == "https" and (
+            parsed.username is not None or parsed.password is not None
+        ):
+            raise PreflightError("HTTPS origin user information is forbidden")
+        if parsed.scheme == "ssh" and parsed.username != "git":
+            raise PreflightError("SSH origin user must be git")
+        host = parsed.hostname or ""
+        path = parsed.path.removeprefix("/")
+
+    if host.lower() != "github.com":
+        raise PreflightError("origin host is not github.com")
+    if path.endswith(".git"):
+        path = path[:-4]
+    components = path.split("/")
+    if len(components) != 2 or not all(components):
+        raise PreflightError("origin must contain exactly owner/repository")
+    if not all(re.fullmatch(r"[A-Za-z0-9_.-]+", item) for item in components):
+        raise PreflightError("origin owner or repository contains invalid characters")
+    owner, repository = (item.lower() for item in components)
+    return f"github.com/{owner}/{repository}"
+
+
+def _load_amendment(project_root: Path) -> tuple[dict[str, Any], str]:
+    amendment_path = project_root / AMENDMENT_PATH
+    sidecar_path = project_root / AMENDMENT_HASH_PATH
+    if not amendment_path.is_file() or not sidecar_path.is_file():
+        raise PreflightError("missing v1.1 preflight amendment or hash sidecar")
+    fields = sidecar_path.read_text(encoding="utf-8").split()
+    if not fields:
+        raise PreflightError("invalid v1.1 preflight amendment hash sidecar")
+    actual = sha256_file(amendment_path)
+    if fields[0] != EXPECTED_AMENDMENT_SHA256 or actual != fields[0]:
+        raise PreflightError("v1.1 preflight amendment SHA-256 mismatch")
+    amendment = json.loads(amendment_path.read_text(encoding="utf-8"))
+    parent = amendment.get("parent_protocol", {})
+    if parent.get("commit") != PROTOCOL_COMMIT:
+        raise PreflightError("v1.1 amendment parent protocol commit mismatch")
+    if parent.get("sha256") != EXPECTED_PROTOCOL_SHA256:
+        raise PreflightError("v1.1 amendment parent protocol hash mismatch")
+    expected = amendment.get("identity_rule", {}).get(
+        "expected_canonical_identity"
+    )
+    if expected != EXPECTED_REPOSITORY_ID:
+        raise PreflightError("v1.1 amendment repository identity mismatch")
+    return amendment, actual
 
 
 def _git(
@@ -136,7 +219,16 @@ def _validate_git_identity(
     identity = audit["git_identity"]
     head = _git_text(project_root, "rev-parse", "HEAD")
     remote = _git_text(project_root, "remote", "get-url", "origin")
-    _record(checks, "git:origin", remote, EXPECTED_REMOTE)
+    try:
+        canonical_remote = canonical_repository_identity(remote)
+    except PreflightError as exc:
+        canonical_remote = f"invalid:{exc}"
+    _record(
+        checks,
+        "git:origin",
+        canonical_remote,
+        EXPECTED_REPOSITORY_ID,
+    )
     _record(
         checks,
         "git:protocol_commit_is_ancestor",
@@ -170,7 +262,11 @@ def _validate_git_identity(
         _is_ancestor(project_root, s0["commit"]),
         s0["is_ancestor_of_base"],
     )
-    return {"head": head, "origin": remote}
+    return {
+        "head": head,
+        "origin": remote,
+        "origin_repository_identity": canonical_remote,
+    }
 
 
 def _validate_protocol_and_audit(
@@ -317,6 +413,7 @@ def _validate_first_study_artifacts(
 
 def build_preflight_report(project_root: Path) -> dict[str, Any]:
     project_root = project_root.resolve()
+    amendment, amendment_sha256 = _load_amendment(project_root)
     audit_path = project_root / DEFAULT_AUDIT
     if not audit_path.is_file():
         raise PreflightError(f"missing frozen source/leakage audit: {audit_path}")
@@ -344,7 +441,7 @@ def build_preflight_report(project_root: Path) -> dict[str, Any]:
         "GPU free memory >= 8 GiB",
     ]
     return {
-        "schema": "second_study_safe_time_domain_local_preflight_v1",
+        "schema": "second_study_safe_time_domain_local_preflight_v1_1",
         "status": (
             "failed_local_preflight"
             if failed
@@ -352,8 +449,14 @@ def build_preflight_report(project_root: Path) -> dict[str, Any]:
         ),
         "protocol_commit": PROTOCOL_COMMIT,
         "protocol_sha256": protocol_sha256,
+        "preflight_amendment_id": amendment["amendment_id"],
+        "preflight_amendment_sha256": amendment_sha256,
+        "origin_identity_rule": amendment["identity_rule"]["version"],
         "head": git_identity["head"],
         "origin": git_identity["origin"],
+        "origin_repository_identity": git_identity[
+            "origin_repository_identity"
+        ],
         "read_only": True,
         "new_computation": audit["new_computation"],
         "checks": checks,
