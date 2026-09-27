@@ -21,6 +21,10 @@ GPU_ENVIRONMENT_RETRY_PROMPT = Path(
     "review_response/"
     "gpu_second_study_safe_time_domain_preflight_v1_2_environment_retry_prompt.md"
 )
+GPU_OVERLAY_RETRY_PROMPT = Path(
+    "review_response/"
+    "gpu_second_study_safe_time_domain_preflight_v1_3_overlay_retry_prompt.md"
+)
 AMENDMENT_PATH = Path(
     "review_response/"
     "second_study_safe_time_domain_preflight_amendment_v1_1.json"
@@ -295,3 +299,19 @@ def test_gpu_v1_2_retry_uses_only_existing_environment_and_stops() -> None:
     assert "preflight_pass_phase_a_not_authorized" in prompt
     assert "Phase A、Phase B、新規Hamiltonian" in prompt
     assert "CuPy array作成、device allocation、kernel" in prompt
+
+
+def test_gpu_v1_3_retry_freezes_overlay_and_stops_before_phase_a() -> None:
+    prompt = GPU_OVERLAY_RETRY_PROMPT.read_text(encoding="utf-8")
+    assert "699774cd23ac0010bde6ee015489ea62aaacf7a1" in prompt
+    assert EXPECTED_OVERLAY_AMENDMENT_SHA256 in prompt
+    assert "fd827f50dcbe64f8e2ea9d931cfdf2dd8eea4480" in prompt
+    assert "ef2dc7443092e93d09ead2fbf717645362fe4189" in prompt
+    assert "cupy-cuda12x==13.6.0" in prompt
+    assert "PYTHONNOUSERSITE=1" in prompt
+    assert "appendせず" in prompt
+    assert "gpu-second-study-safe-time-domain-preflight-v1-3-20260927" in prompt
+    assert "67/67" in prompt
+    assert "preflight_pass_phase_a_not_authorized" in prompt
+    assert "phase_a_authorized=false" in prompt
+    assert "CuPy array、device allocation、GPU kernel" in prompt
