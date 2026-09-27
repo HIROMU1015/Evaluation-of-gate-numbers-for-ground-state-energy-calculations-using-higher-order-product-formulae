@@ -1,0 +1,41 @@
+{
+  "schema_version": "hchain_direct_gpu_h5_h7_parity_amendment_v1_2",
+  "parent_identity_amendment_sha256": "589f1e26f8e912550e39f35c96121d4a33961855ff98f877a256c2659b5bd392",
+  "trigger": {
+    "system": "H5",
+    "formula_key": "m5",
+    "status": "failed_backend_parity_due_to_nonidentical_physical_time_comparison",
+    "gpu_direct_points_completed": 31,
+    "H5_y8_started": false,
+    "H7_started": false
+  },
+  "diagnosis": {
+    "gpu_analytic_time": 2.5939949327889926,
+    "parent_cpu_analytic_time": 2.5939977275727855,
+    "analytic_time_difference": -0.000002794783792836597,
+    "maximum_grid_physical_time_difference": 0.000004751132448355122,
+    "maximum_shift_difference_against_parent_at_different_physical_times_hartree": 0.00000017330154487453292,
+    "maximum_shift_difference_against_fresh_cpu_at_identical_physical_times_hartree": 3.3720188930198196e-15,
+    "gpu_cpu_unitary_frobenius_difference_at_t_0_125": 9.709651359087326e-16,
+    "selected_relative_time": 1.35
+  },
+  "allowed_change": {
+    "parity_comparison": "Compare all GPU maximum-ground and continuously-tracked direct shifts with a fresh exact CPU s2-cache construction at the identical physical time stored in each GPU point.",
+    "parent_raw_role": "Retain the parent-raw comparison as a schedule-difference diagnostic, but do not classify different-time shifts as a backend failure."
+  },
+  "unchanged": [
+    "maximum absolute direct-shift difference threshold 1e-9 Ha",
+    "GPU-versus-CPU unitary Frobenius threshold 1e-10",
+    "H5 m5 selected relative time requirement 1.35",
+    "H5 Y8 known branch disagreement must recur",
+    "fresh GPU calculation of all direct points",
+    "31-point relative grid and fresh fixed short-time fit",
+    "complex128 exact dense GPU unitary and CPU Schur",
+    "all scientific numerical gates and branch rules",
+    "no direct cache reuse between attempts or cells",
+    "H5 group-count identity amendment v1.1",
+    "H7 identity and H5/H7-only scope"
+  ],
+  "restart_rule": "Commit a new truth-free Phase A bundle and rerun H5/m5 in a new output directory without reusing the completed failed-parity raw as cache."
+}
+
