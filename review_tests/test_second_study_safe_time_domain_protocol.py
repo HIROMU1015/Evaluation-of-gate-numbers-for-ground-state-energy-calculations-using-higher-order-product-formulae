@@ -31,6 +31,10 @@ def _predictions() -> dict:
             strategy: {
                 "status": "selected",
                 "selected_time_hartree_inverse": 0.49,
+                "frozen_pauli_rotation_budget": 1.0e9,
+                "rotation_count_per_pf_step": 100,
+                "operational": strategy != "uncapped_counterfactual",
+                "extension_selected": False,
             }
             for strategy in guard.STRATEGIES
         }

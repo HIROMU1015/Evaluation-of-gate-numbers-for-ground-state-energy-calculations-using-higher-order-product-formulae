@@ -185,12 +185,46 @@ def validate_phase_a_predictions(predictions: dict[str, Any]) -> None:
         strategies = row.get("strategies")
         if not isinstance(strategies, dict) or set(strategies) != STRATEGIES:
             raise ProtocolBoundaryError("frozen strategy set changed")
-        current = strategies["current_fallback"]
-        selected_time = current.get("selected_time_hartree_inverse")
-        if not isinstance(selected_time, (int, float)):
-            raise ProtocolBoundaryError("current fallback selected time is missing")
-        if not math.isfinite(selected_time) or float(selected_time) <= 0.0:
-            raise ProtocolBoundaryError("current fallback selected time is invalid")
+        for strategy_name, strategy in strategies.items():
+            if not isinstance(strategy, dict):
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} prediction must be a mapping"
+                )
+            selected_time = strategy.get("selected_time_hartree_inverse")
+            if not isinstance(selected_time, (int, float)):
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} selected time is missing"
+                )
+            if not math.isfinite(selected_time) or float(selected_time) <= 0.0:
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} selected time is invalid"
+                )
+            frozen_budget = strategy.get("frozen_pauli_rotation_budget")
+            if not isinstance(frozen_budget, (int, float)):
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} frozen budget is missing"
+                )
+            if not math.isfinite(frozen_budget) or float(frozen_budget) <= 0.0:
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} frozen budget is invalid"
+                )
+            rotations = strategy.get("rotation_count_per_pf_step")
+            if not isinstance(rotations, int) or isinstance(rotations, bool):
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} rotation count is missing"
+                )
+            if rotations <= 0:
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} rotation count is invalid"
+                )
+            if not isinstance(strategy.get("operational"), bool):
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} operational flag is missing"
+                )
+            if not isinstance(strategy.get("extension_selected"), bool):
+                raise ProtocolBoundaryError(
+                    f"{strategy_name} extension flag is missing"
+                )
 
 
 def derive_phase_b_coordinate_plan(

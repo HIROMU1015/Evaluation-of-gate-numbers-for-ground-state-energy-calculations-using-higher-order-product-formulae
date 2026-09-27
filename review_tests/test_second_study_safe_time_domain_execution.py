@@ -1,0 +1,588 @@
+from __future__ import annotations
+
+import copy
+import inspect
+import math
+from pathlib import Path
+
+import numpy as np
+import pytest
+from scipy.sparse import csr_matrix
+
+from review_response import second_study_safe_time_domain_execution as execution
+from review_response import second_study_safe_time_domain_guard as guard
+from review_response import run_second_study_safe_time_domain_phase_a as phase_a
+from review_response import run_second_study_safe_time_domain_phase_b as phase_b
+
+
+def _protocol() -> dict:
+    return guard.load_protocol()[0]
+
+
+def _observations(
+    coefficient: float = 1.0e-5,
+    *,
+    fallback: bool = True,
+) -> dict[float, dict[str, float]]:
+    protocol = _protocol()
+    relative = {
+        0.05,
+        0.1,
+        0.2,
+        0.3,
+        0.5,
+        *protocol["phase_a"]["extension"][
+            "candidate_sequence_relative_to_t_ana"
+        ],
+    }
+    rows = {
+        float(value): {
+            "proxy_hartree": coefficient * float(value) ** 4,
+            "cancellation_index": 0.5,
+        }
+        for value in relative
+    }
+    rows[0.1]["cancellation_index"] = 0.01 if fallback else 0.5
+    return rows
+
+
+def _strategy(
+    name: str,
+    time_value: float,
+    *,
+    budget: float = 1.0e8,
+    extension_selected: bool = False,
+) -> dict:
+    return {
+        "strategy": name,
+        "status": "selected",
+        "selected_time_hartree_inverse": time_value,
+        "selected_relative_to_t_ana": time_value,
+        "predicted_signed_shift_hartree": 1.0e-6,
+        "predicted_error_hartree": 1.0e-6,
+        "guarded_error_hartree": 1.0e-6,
+        "predicted_required_pauli_rotations": budget / 1.01,
+        "frozen_pauli_rotation_budget": budget,
+        "rotation_count_per_pf_step": 100,
+        "selection_source": "synthetic",
+        "operational": name != "uncapped_counterfactual",
+        "extension_selected": extension_selected,
+    }
+
+
+def _predictions(selected_time: float = 0.65) -> dict:
+    protocol, protocol_sha = guard.load_protocol()
+    rows = []
+    for item in protocol["data_partition"]["independent_evaluation"][
+        "conditions"
+    ]:
+        strategies = {
+            name: _strategy(
+                name,
+                selected_time,
+                budget=8.0e7 if name == "multiple_window_rule" else 1.0e8,
+                extension_selected=name == "multiple_window_rule",
+            )
+            for name in guard.STRATEGIES
+        }
+        rows.append(
+            {
+                "condition": item["name"],
+                "proxy_analytic_time_hartree_inverse": 1.0,
+                "strategies": strategies,
+                "information_counts": {
+                    "multiple_window_rule": {"proxy_points": 7},
+                    "equal_information_pooled_fit": {"proxy_points": 7},
+                },
+            }
+        )
+    return {
+        "schema": execution.PHASE_A_SCHEMA,
+        "protocol_sha256": protocol_sha,
+        "oracle_access": {key: 0 for key in guard.ORACLE_ACCESS_COUNTERS},
+        "conditions": rows,
+    }
+
+
+def test_phase_a_source_has_no_truth_eigensolver_or_direct_builder() -> None:
+    source = Path(phase_a.__file__).read_text(encoding="utf-8")
+    assert "eigh(" not in source
+    assert "eigsh(" not in source
+    assert "schur(" not in source
+    assert "_build_gpu(" not in source
+    assert "_build_cpu(" not in source
+    assert "def exact_" not in source
+
+
+def test_formula_identity_is_protocol_derived() -> None:
+    protocol = _protocol()
+    assert execution.formula_sequence(protocol) == tuple(
+        protocol["formula"]["s2_sequence"]
+    )
+    changed = copy.deepcopy(protocol)
+    changed["scope"]["formulae"] = ["another_pf"]
+    with pytest.raises(execution.ExecutionError, match="PF scope"):
+        execution.formula_sequence(changed)
+
+
+def test_multiple_window_rule_uses_extension_and_pooled_uses_same_points() -> None:
+    short_points = [
+        {"time_hartree_inverse": 0.025, "proxy_hartree": 1.0e-5 * 0.025**4},
+        {"time_hartree_inverse": 0.04, "proxy_hartree": 1.0e-5 * 0.04**4},
+    ]
+    strategies, diagnostic = execution.select_phase_a_strategies(
+        t_ana=1.0,
+        observations_by_relative_time=_observations(),
+        pooled_extra_points=short_points,
+        rotations=100,
+        protocol=_protocol(),
+    )
+    assert diagnostic["fallback_triggered"] is True
+    assert diagnostic["extension_stop_reason"] is None
+    assert diagnostic["acquired_extension_relative_times"] == [
+        0.65,
+        0.8,
+        0.95,
+        1.1,
+        1.25,
+        1.4,
+        1.55,
+        1.7,
+    ]
+    assert 0.05 in diagnostic["pooled_training_relative_times"]
+    assert 0.025 in diagnostic["pooled_training_absolute_times"]
+    assert 0.04 in diagnostic["pooled_training_absolute_times"]
+    assert strategies["multiple_window_rule"]["extension_selected"] is True
+    assert (
+        strategies["multiple_window_rule"]["selected_time_hartree_inverse"]
+        > 0.5
+    )
+    assert strategies["uncapped_counterfactual"]["operational"] is False
+
+
+def test_multiple_window_stops_at_first_failure_and_hides_later_points() -> None:
+    rows = _observations()
+    rows[0.65]["proxy_hartree"] *= -50.0
+    strategies, diagnostic = execution.select_phase_a_strategies(
+        t_ana=1.0,
+        observations_by_relative_time=rows,
+        rotations=100,
+        protocol=_protocol(),
+    )
+    assert diagnostic["acquired_extension_relative_times"] == [0.65]
+    assert diagnostic["extension_stop_reason"] is not None
+    assert (
+        strategies["multiple_window_rule"]["status"]
+        == "no_eligible_extension_return_current"
+    )
+
+
+def test_extension_is_not_applied_without_original_fallback() -> None:
+    strategies, diagnostic = execution.select_phase_a_strategies(
+        t_ana=1.0,
+        observations_by_relative_time=_observations(fallback=False),
+        rotations=100,
+        protocol=_protocol(),
+    )
+    assert diagnostic["fallback_triggered"] is False
+    assert diagnostic["acquired_extension_relative_times"] == []
+    assert strategies["multiple_window_rule"]["selection_source"] == (
+        "current_fallback"
+    )
+    assert strategies["equal_information_pooled_fit"]["selection_source"] == (
+        "current_fallback"
+    )
+
+
+def test_strategy_selection_never_accepts_nonfinite_proxy() -> None:
+    rows = _observations()
+    rows[0.5]["proxy_hartree"] = math.nan
+    with pytest.raises(execution.ExecutionError, match="non-finite"):
+        execution.select_phase_a_strategies(
+            t_ana=1.0,
+            observations_by_relative_time=rows,
+            rotations=100,
+            protocol=_protocol(),
+        )
+
+
+def test_guard_requires_complete_strategy_budget_payload() -> None:
+    predictions = _predictions()
+    guard.validate_phase_a_predictions(predictions)
+    del predictions["conditions"][0]["strategies"]["multiple_window_rule"][
+        "frozen_pauli_rotation_budget"
+    ]
+    with pytest.raises(guard.ProtocolBoundaryError, match="frozen budget"):
+        guard.validate_phase_a_predictions(predictions)
+
+
+def test_phase_b_cache_key_has_all_frozen_identity_fields() -> None:
+    key = execution.phase_b_cache_key(
+        protocol_sha256="a" * 64,
+        prediction_sha256="b" * 64,
+        condition="LiF_active_eq_sto3g",
+        hamiltonian_sha256="c" * 64,
+        formula_sha256_value="d" * 64,
+        time_value=0.5,
+        backend="gpu",
+        previous_vector_sha256=None,
+    )
+    required = set(_protocol()["cache_and_artifact_policy"][
+        "cache_key_required_fields"
+    ])
+    assert required <= set(key)
+    assert key["absolute_time_hex"] == float(0.5).hex()
+    assert key["branch_rule_version"] == execution.PHASE_B_BRANCH_RULE_VERSION
+
+
+def test_direct_point_anchor_and_continuation_use_distinct_rules(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    time_value = 0.25
+    unitary = np.diag(
+        [
+            np.exp(1j * 0.1 * time_value),
+            np.exp(1j * 0.7 * time_value),
+        ]
+    )
+
+    def fake_build(*args, **kwargs):
+        return unitary.copy(), {"backend": "synthetic"}
+
+    monkeypatch.setattr(phase_b, "_build_unitary", fake_build)
+    system = {
+        "hamiltonian": csr_matrix(np.diag([0.1, 0.7])),
+        "component_spectra": [object()],
+    }
+    exact = np.asarray([1.0, 0.0], dtype=np.complex128)
+    anchor, vector, shift = phase_b.direct_point(
+        system=system,
+        exact_energy=0.1,
+        exact_state=exact,
+        sequence=(1.0,),
+        rotations=10,
+        time_value=time_value,
+        roles=["anchor"],
+        backend="cpu",
+        gpu_id=0,
+        previous_vector=None,
+        previous_unwrapped_shift=None,
+        epsilon=1.0,
+        beta=1.2,
+    )
+    assert anchor["selection_rule"] == "anchor_maximum_exact_ground_overlap"
+    assert anchor["ground_overlap_probability"] == pytest.approx(1.0)
+    assert anchor["unitarity_residual_frobenius"] < 1e-14
+    continued, _, _ = phase_b.direct_point(
+        system=system,
+        exact_energy=0.1,
+        exact_state=exact,
+        sequence=(1.0,),
+        rotations=10,
+        time_value=time_value,
+        roles=["candidate_00"],
+        backend="cpu",
+        gpu_id=0,
+        previous_vector=vector,
+        previous_unwrapped_shift=shift,
+        epsilon=1.0,
+        beta=1.2,
+    )
+    assert continued["selection_rule"].startswith("ascending_time")
+    assert continued["previous_vector_overlap_probability"] == pytest.approx(1.0)
+
+
+def test_numerical_gate_rejects_branch_disagreement() -> None:
+    point = {
+        "roles": ["anchor"],
+        "eigenpair_residual_2_norm": 1e-12,
+        "unitarity_residual_frobenius": 1e-12,
+        "ground_overlap_probability": 0.99,
+        "previous_vector_overlap_probability": None,
+        "phase_gap_radian": 0.2,
+        "branch_selection_disagrees_with_independent_rule": False,
+    }
+    later = {
+        **point,
+        "roles": ["candidate_00"],
+        "previous_vector_overlap_probability": 0.99,
+        "branch_selection_disagrees_with_independent_rule": True,
+    }
+    result = phase_b.validate_numerical_gates(
+        {"LiF_active_eq_sto3g": [point, later]},
+        _protocol(),
+    )
+    assert result["passed"] is False
+    assert result["checks"]["branch_disagreement"] is False
+
+
+def test_phase_b_scoring_uses_fixed_grid_and_frozen_selection_only() -> None:
+    predictions = _predictions()
+    direct = {}
+    for row in predictions["conditions"]:
+        direct[row["condition"]] = [
+            {
+                "time_hartree_inverse": relative,
+                "roles": [f"candidate_{index:02d}"],
+                "direct_error_hartree": 1.0e-6,
+                "direct_required_cost": 5.0e7 + index,
+            }
+            for index, relative in enumerate(
+                _protocol()["phase_b"]["fixed_candidate_grid_relative_to_t_ana"]
+            )
+        ]
+    result = execution.score_phase_b(
+        predictions=predictions,
+        direct_points_by_condition=direct,
+        protocol=_protocol(),
+    )
+    assert len(result["rows"]) == 16
+    assert set(result["candidate_grid_oracle_costs"]) == {
+        row["condition"] for row in predictions["conditions"]
+    }
+    assert all(
+        row["selected_time_hartree_inverse"] == 0.65
+        for row in result["rows"]
+    )
+    assert all("interpol" not in key for key in result)
+
+
+def test_phase_b_parser_requires_phase_a_commit_boundary() -> None:
+    actions = {
+        action.dest
+        for action in phase_b._parser()._actions
+        if action.required
+    }
+    assert {
+        "phase_a_root",
+        "phase_a_commit",
+        "phase_a_artifact_relative",
+        "preflight_root",
+    } <= actions
+
+
+def test_phase_a_runner_has_no_truth_path_argument() -> None:
+    destinations = {
+        action.dest for action in phase_a._parser()._actions
+    }
+    assert "truth_root" not in destinations
+    assert "phase_b_root" not in destinations
+    assert "h01_root" not in destinations
+    assert "p03_root" not in destinations
+
+
+def test_phase_a_mock_run_freezes_all_outputs_without_truth(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    protocol, protocol_sha = guard.load_protocol()
+    monkeypatch.setattr(
+        phase_a,
+        "validate_process_environment",
+        lambda project_root: {"status": "synthetic"},
+    )
+    monkeypatch.setattr(
+        phase_a,
+        "validate_preflight",
+        lambda project_root, preflight_root: {
+            "status": "preflight_pass_phase_a_not_authorized",
+            "result_commit": phase_a.PREFLIGHT_RESULT_COMMIT,
+        },
+    )
+
+    def fake_prepare(spec, protocol_sha256, work_dir, processes):
+        condition = spec["name"]
+        system = {
+            "schema": "second_study_safe_time_domain_phase_a_system_v1",
+            "condition": condition,
+            "protocol_sha256": protocol_sha256,
+            "hamiltonian_sha256": execution.sha256_bytes(
+                condition.encode("utf-8")
+            ),
+            "hamiltonian": csr_matrix(np.eye(2)),
+            "component_spectra": [],
+            "term_counts": [10],
+            "cisd_state": np.asarray([1.0, 0.0]),
+            "rhf_state": np.asarray([1.0, 0.0]),
+            "restricted_basis": np.asarray([0, 1]),
+            "num_qubits": 1,
+        }
+        return system, {
+            "condition": condition,
+            "exact_diagonalization_count": 0,
+            "direct_pf_eigenpair_count": 0,
+        }
+
+    def fake_selector(
+        *,
+        condition,
+        system,
+        protocol,
+        **kwargs,
+    ):
+        strategies = {
+            name: _strategy(name, 0.49)
+            for name in guard.STRATEGIES
+        }
+        counts = {
+            "state_generations": 1,
+            "group_spectrum_builds": 1,
+            "proxy_points": 5,
+            "hamiltonian_exponential_actions": 5,
+            "current_m3_pf_state_actions": 5,
+            "explicit_hamiltonian_vector_actions_for_state_diagnostics": 1,
+        }
+        return {
+            "condition": condition,
+            "hamiltonian_sha256": system["hamiltonian_sha256"],
+            "proxy_analytic_time_hartree_inverse": 1.0,
+            "proxy_scale_fit": {"synthetic": True},
+            "rotation_count_per_pf_step": 100,
+            "strategies": strategies,
+            "selector_diagnostics": {"synthetic": True},
+            "information_counts": {
+                "current_fallback": counts,
+                "equal_information_pooled_fit": counts,
+                "multiple_window_rule": counts,
+                "uncapped_counterfactual": counts,
+            },
+            "proxy_cache_counts": {"computed": 5, "reused": 0},
+            "proxy_unique_coordinate_count": 5,
+        }, [
+            {
+                "condition": condition,
+                "point_role": "synthetic",
+                "relative_to_t_ana": 0.1,
+                "time_hartree_inverse": 0.1,
+                "proxy_hartree": 1e-9,
+            }
+        ]
+
+    monkeypatch.setattr(phase_a, "prepare_condition", fake_prepare)
+    monkeypatch.setattr(phase_a, "run_condition_selector", fake_selector)
+    output = tmp_path / "phase_a"
+    audit = phase_a.run(
+        project_root=Path.cwd(),
+        protocol_path=Path(
+            "review_response/second_study_safe_time_domain_protocol.json"
+        ),
+        preflight_root=tmp_path / "preflight",
+        processes=1,
+        output_dir=output,
+    )
+    assert audit["status"] == "phase_a_frozen_phase_b_not_authorized"
+    assert audit["oracle_access"] == {
+        key: 0 for key in guard.ORACLE_ACCESS_COUNTERS
+    }
+    assert audit["phase_b_coordinate_count"] == 44
+    assert not (output / "COMPLETE").exists()
+    marker = guard.verify_phase_a_freeze(output)
+    assert marker["condition_count"] == 4
+    manifest = execution.load_json(output / "manifest.json")
+    assert {
+        row["path"] for row in manifest["files"]
+    } == set(protocol["phase_a"]["freeze"]["required_files"])
+    frozen_predictions = execution.load_json(output / "predictions.json")
+    assert frozen_predictions["new_direct_truth_coordinate_count"] == 0
+    assert frozen_predictions["exact_diagonalization_count"] == 0
+
+
+def test_phase_b_mock_run_preserves_negative_result_and_completes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    predictions = _predictions()
+    phase_a_root = tmp_path / "phase_a"
+    phase_a_root.mkdir()
+    prediction_path = phase_a_root / guard.PREDICTION_FILE
+    prediction_path.write_text(
+        __import__("json").dumps(predictions, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    prediction_sha = execution.sha256_file(prediction_path)
+    monkeypatch.setattr(
+        phase_a,
+        "validate_process_environment",
+        lambda project_root: {"status": "synthetic"},
+    )
+    monkeypatch.setattr(
+        phase_a,
+        "validate_preflight",
+        lambda project_root, preflight_root: {"status": "passed"},
+    )
+    monkeypatch.setattr(
+        phase_b,
+        "verify_phase_a_commit",
+        lambda **kwargs: {
+            "commit": "a" * 40,
+            "prediction_sha256": prediction_sha,
+        },
+    )
+    monkeypatch.setattr(
+        phase_b,
+        "load_phase_a_systems",
+        lambda root, protocol, protocol_sha: {
+            condition: {
+                "condition": condition,
+                "hamiltonian_sha256": execution.sha256_bytes(
+                    condition.encode()
+                ),
+            }
+            for condition in execution.condition_names(protocol)
+        },
+    )
+    monkeypatch.setattr(
+        phase_b,
+        "exact_ground_pair",
+        lambda system: (0.0, np.asarray([1.0, 0.0]), 1e-13),
+    )
+    monkeypatch.setattr(phase_a, "_rotation_count", lambda system, sequence: 100)
+
+    def fake_cached_direct_point(*, time_value, roles, **kwargs):
+        point = {
+            "time_hartree_inverse": float(time_value),
+            "roles": list(roles),
+            "direct_error_hartree": 1.0e-6,
+            "direct_required_cost": 5.0e7 + float(time_value),
+            "eigenpair_residual_2_norm": 1.0e-13,
+            "unitarity_residual_frobenius": 1.0e-13,
+            "ground_overlap_probability": 0.99,
+            "previous_vector_overlap_probability": (
+                None if "anchor" in roles else 0.99
+            ),
+            "phase_gap_radian": 0.2,
+            "branch_selection_disagrees_with_independent_rule": False,
+        }
+        return point, np.asarray([1.0, 0.0]), 1.0e-6, False
+
+    monkeypatch.setattr(
+        phase_b, "cached_direct_point", fake_cached_direct_point
+    )
+    output = tmp_path / "phase_b"
+    decision = phase_b.run(
+        project_root=Path.cwd(),
+        protocol_path=Path(
+            "review_response/second_study_safe_time_domain_protocol.json"
+        ),
+        preflight_root=tmp_path / "preflight",
+        phase_a_root=phase_a_root,
+        phase_a_commit="a" * 40,
+        phase_a_artifact_relative=Path("artifacts/synthetic_phase_a"),
+        backend="gpu",
+        gpu_id=0,
+        processes=1,
+        output_dir=output,
+    )
+    assert decision["status"] == "complete_no_benefit"
+    assert (output / "COMPLETE").is_file()
+    assert execution.load_json(output / "strategy_scoring.json")[
+        "benefit"
+    ] is False
+    assert not any((output / ".runtime").glob("**/*"))
+    manifest = execution.load_json(output / "manifest.json")
+    assert "COMPLETE" in {row["path"] for row in manifest["files"]}
+
+
+def test_phase_a_and_phase_b_main_do_not_run_on_import() -> None:
+    assert inspect.isfunction(phase_a.main)
+    assert inspect.isfunction(phase_b.main)
