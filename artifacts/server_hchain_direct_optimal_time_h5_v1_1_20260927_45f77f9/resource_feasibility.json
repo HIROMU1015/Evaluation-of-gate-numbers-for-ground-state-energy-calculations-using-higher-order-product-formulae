@@ -1,0 +1,164 @@
+{
+  "cells": {
+    "H5_m5": {
+      "before_hamiltonian_generation_and_device_allocation": true,
+      "captured_at_utc": "2026-09-27T13:44:29.262660+00:00",
+      "estimate": {
+        "dense_n3_units_for_31_direct_points": 3995125000,
+        "dense_n3_units_per_direct_point": 128875000,
+        "device_peak_upper_bound_bytes": 539128112,
+        "device_required_with_20_percent_margin_bytes": 646953735,
+        "dimension": 50,
+        "exact_complex128_plan_preserved": true,
+        "formula_key": "m5",
+        "group_count": 43,
+        "host_peak_upper_bound_bytes": 2378000,
+        "host_required_with_20_percent_margin_bytes": 2853600,
+        "resident_arrays": [
+          {
+            "bytes": 17200,
+            "dtype": "float64",
+            "name": "group_eigenvalues",
+            "placement": "host_and_device",
+            "shape": [
+              43,
+              50
+            ]
+          },
+          {
+            "bytes": 1720000,
+            "dtype": "complex128",
+            "name": "group_eigenvectors",
+            "placement": "host_and_device",
+            "shape": [
+              43,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 40000,
+            "dtype": "complex128",
+            "name": "hamiltonian",
+            "placement": "host",
+            "shape": [
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 800,
+            "dtype": "complex128",
+            "name": "state",
+            "placement": "host",
+            "shape": [
+              50
+            ]
+          },
+          {
+            "bytes": 240000,
+            "dtype": "complex128",
+            "name": "unique_s2_block_cache",
+            "placement": "device",
+            "shape": [
+              6,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 40000,
+            "dtype": "complex128",
+            "name": "pf_unitary",
+            "placement": "host_and_device",
+            "shape": [
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 240000,
+            "dtype": "complex128",
+            "name": "gpu_gemm_scratch_upper_bound",
+            "placement": "device",
+            "shape": [
+              6,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 480000,
+            "dtype": "complex128",
+            "name": "cpu_schur_triangular_vectors_workspace_upper_bound",
+            "placement": "host",
+            "shape": [
+              12,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 536870912,
+            "dtype": "bytes",
+            "name": "cuda_context_and_library_reserve",
+            "placement": "device",
+            "shape": null
+          }
+        ],
+        "system": "H5",
+        "unique_s2_blocks": 6,
+        "wall_time_gate_role": "record_only_for_H5_H7; the registered 72-hour automatic gate applied to H8/H9, which are outside this user-limited run"
+      },
+      "gates": {
+        "complex128_exact_plan": true,
+        "device_20_percent_margin": true,
+        "host_20_percent_margin": true,
+        "pass": true
+      },
+      "gpu": {
+        "driver_version": "560.35.05",
+        "existing_compute_processes_all_gpus": [
+          "330765, [Not Found], 0, GPU-e1d3fde4-c1af-1654-855b-3bdca33b5f5e"
+        ],
+        "free_bytes": 42409656320,
+        "name": "NVIDIA A100-SXM4-40GB",
+        "physical_gpu_id": 1,
+        "total_bytes": 42949672960,
+        "used_bytes": 1048576,
+        "utilization_percent": 0,
+        "uuid": "GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d"
+      },
+      "host": {
+        "available_bytes": 1012435791872,
+        "total_bytes": 1081968082944
+      },
+      "observed": {
+        "31_point_gpu_build_wall_seconds": 2.746619583107531,
+        "backend_identity": {
+          "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+          "cuda_runtime_version": 12090,
+          "cupy_version": "13.6.0",
+          "device_name": "NVIDIA A100-SXM4-40GB",
+          "dimension": 50,
+          "dtype": "complex128",
+          "group_count": 43,
+          "logical_device": 0
+        },
+        "cell_wall_seconds": 4.4265959076583385,
+        "gpu_memory_monitor": {
+          "maximum_used_mib": 437,
+          "minimum_used_mib": 1,
+          "peak_increment_mib": 436,
+          "physical_gpu_id": 1,
+          "sample_count": 17
+        },
+        "maximum_cpu_rss_kib": 704656,
+        "one_point_wall_seconds": 0.08860063171314617,
+        "system_preparation_seconds": 2.44591502007097
+      }
+    }
+  },
+  "schema_version": "hchain_direct_gpu_h5_h7_resource_feasibility_v1",
+  "updated_at_utc": "2026-09-27T13:44:36.141664+00:00"
+}

@@ -1,0 +1,3457 @@
+{
+  "epsilon_E_hartree": 0.00015936001019904,
+  "formula_keys": [
+    "m5"
+  ],
+  "gpu_extension": {
+    "backend": {
+      "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+      "cuda_runtime_version": 12090,
+      "cupy_version": "13.6.0",
+      "device_name": "NVIDIA A100-SXM4-40GB",
+      "dimension": 50,
+      "dtype": "complex128",
+      "group_count": 43,
+      "logical_device": 0
+    },
+    "cache_key": "c75fea1c5db85babd33f524e9d7e71c1b6ab7ce40a89aa0985178d3e2cb3b09c",
+    "cache_key_material": {
+      "backend": "gpu_exact_dense_sector_unitary_cpu_complex128_schur",
+      "dtype": "complex128",
+      "formula_key": "m5",
+      "formula_label": "4th(m5_best)",
+      "gpu_extension_sha256": "610bc26d3f3dda2c7161c7c465cafabcea04fb5735956b7421c14a578681362e",
+      "gpu_identity_amendment_v1_1_sha256": "589f1e26f8e912550e39f35c96121d4a33961855ff98f877a256c2659b5bd392",
+      "parent_protocol_sha256": "12d10562cf481b836242786462184d8a6ffb342153404c9bf84ff4d5ca836ab9",
+      "partial_stop_amendment_sha256": "526bdede05c1b39d0fab21e062b39a48284a1338fd51bc3c94fd3488732c70ff",
+      "prediction_sha256": "f113e1f5c265408ab19e7e05cf36d2358edb6a75d8be1bb1d0634851b9ce916b",
+      "relative_grid": [
+        0.2,
+        0.25,
+        0.3,
+        0.35,
+        0.4,
+        0.45,
+        0.5,
+        0.55,
+        0.6,
+        0.65,
+        0.7,
+        0.75,
+        0.8,
+        0.85,
+        0.9,
+        0.95,
+        1.0,
+        1.05,
+        1.1,
+        1.15,
+        1.2,
+        1.25,
+        1.3,
+        1.35,
+        1.4,
+        1.45,
+        1.5,
+        1.55,
+        1.6,
+        1.65,
+        1.7
+      ],
+      "sector_amendment_sha256": "5ca0ea30f9ad08bc7e4a54fcd8bab8f50195752dcaf3717c219281a458b0122e",
+      "sector_identity": {
+        "dimension": 50,
+        "family": "odd_cation_triplet",
+        "group_count": 43,
+        "population_counts": [
+          3,
+          1
+        ]
+      },
+      "source_manifest_sha256": "d5b15458f14601989542867ddb274cc67be1b2e77bd89551b1155fb0f0e54f45",
+      "system": "H5"
+    },
+    "completed_at_utc": "2026-09-27T13:44:36.135620+00:00",
+    "other_cell_direct_cache_points_reused": 0,
+    "other_run_direct_cache_points_reused": 0,
+    "parent_cpu_raw_used_as_cache": false,
+    "resource": {
+      "31_point_gpu_build_wall_seconds": 2.746619583107531,
+      "backend_identity": {
+        "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+        "cuda_runtime_version": 12090,
+        "cupy_version": "13.6.0",
+        "device_name": "NVIDIA A100-SXM4-40GB",
+        "dimension": 50,
+        "dtype": "complex128",
+        "group_count": 43,
+        "logical_device": 0
+      },
+      "cell_wall_seconds": 4.4265959076583385,
+      "gpu_memory_monitor": {
+        "maximum_used_mib": 437,
+        "minimum_used_mib": 1,
+        "peak_increment_mib": 436,
+        "physical_gpu_id": 1,
+        "sample_count": 17
+      },
+      "maximum_cpu_rss_kib": 704656,
+      "one_point_wall_seconds": 0.08860063171314617,
+      "system_preparation_seconds": 2.44591502007097
+    }
+  },
+  "purpose": "H6/H7 direct finite-time PF scaling and continuous eigenbranch tracking calibration",
+  "registered_amendments": {
+    "gpu_h5_h7_extension_sha256": "610bc26d3f3dda2c7161c7c465cafabcea04fb5735956b7421c14a578681362e",
+    "partial_v1_2_sha256": "526bdede05c1b39d0fab21e062b39a48284a1338fd51bc3c94fd3488732c70ff",
+    "sector_v1_1_sha256": "5ca0ea30f9ad08bc7e4a54fcd8bab8f50195752dcaf3717c219281a458b0122e"
+  },
+  "registered_protocol": {
+    "formula_key": "m5",
+    "h_chain": 5,
+    "prior_direct_results_reused": false,
+    "sha256": "12d10562cf481b836242786462184d8a6ffb342153404c9bf84ff4d5ca836ab9"
+  },
+  "relative_times": [
+    0.2,
+    0.25,
+    0.3,
+    0.35,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6,
+    0.65,
+    0.7,
+    0.75,
+    0.8,
+    0.85,
+    0.9,
+    0.95,
+    1.0,
+    1.05,
+    1.1,
+    1.15,
+    1.2,
+    1.25,
+    1.3,
+    1.35,
+    1.4,
+    1.45,
+    1.5,
+    1.55,
+    1.6,
+    1.65,
+    1.7
+  ],
+  "results": {
+    "H5": {
+      "elapsed_seconds": 3.0647734692320228,
+      "results": {
+        "4th(m5_best)": {
+          "analytic_optimal_time": 2.5939949327889926,
+          "effective_orders": {
+            "continuously_tracked_direct": [
+              {
+                "effective_order": 3.9587609750958923,
+                "geometric_midpoint_time": 0.5800349003006185,
+                "left_time": 0.5187989865577985,
+                "right_time": 0.6484987331972482
+              },
+              {
+                "effective_order": 3.9366251372645107,
+                "geometric_midpoint_time": 0.7103947693713143,
+                "left_time": 0.6484987331972482,
+                "right_time": 0.7781984798366978
+              },
+              {
+                "effective_order": 3.908363612429491,
+                "geometric_midpoint_time": 0.8405504266194692,
+                "left_time": 0.7781984798366978,
+                "right_time": 0.9078982264761474
+              },
+              {
+                "effective_order": 3.872732531522975,
+                "geometric_midpoint_time": 0.9705840301524108,
+                "left_time": 0.9078982264761474,
+                "right_time": 1.037597973115597
+              },
+              {
+                "effective_order": 3.827915841945165,
+                "geometric_midpoint_time": 1.1005388444031836,
+                "left_time": 1.037597973115597,
+                "right_time": 1.1672977197550467
+              },
+              {
+                "effective_order": 3.771199637335288,
+                "geometric_midpoint_time": 1.2304398339822913,
+                "left_time": 1.1672977197550467,
+                "right_time": 1.2969974663944963
+              },
+              {
+                "effective_order": 3.698385622667653,
+                "geometric_midpoint_time": 1.3603024188088166,
+                "left_time": 1.2969974663944963,
+                "right_time": 1.4266972130339461
+              },
+              {
+                "effective_order": 3.6026702845975325,
+                "geometric_midpoint_time": 1.4901366396208573,
+                "left_time": 1.4266972130339461,
+                "right_time": 1.5563969596733955
+              },
+              {
+                "effective_order": 3.4723251756812323,
+                "geometric_midpoint_time": 1.6199493163122847,
+                "left_time": 1.5563969596733955,
+                "right_time": 1.6860967063128454
+              },
+              {
+                "effective_order": 3.2853609423910237,
+                "geometric_midpoint_time": 1.749745243930502,
+                "left_time": 1.6860967063128454,
+                "right_time": 1.8157964529522947
+              },
+              {
+                "effective_order": 2.9953046725445898,
+                "geometric_midpoint_time": 1.879527892437582,
+                "left_time": 1.8157964529522947,
+                "right_time": 1.9454961995917444
+              },
+              {
+                "effective_order": 2.48227807595595,
+                "geometric_midpoint_time": 2.0092998349676394,
+                "left_time": 1.9454961995917444,
+                "right_time": 2.075195946231194
+              },
+              {
+                "effective_order": 1.3701126660430227,
+                "geometric_midpoint_time": 2.1390630200412,
+                "left_time": 2.075195946231194,
+                "right_time": 2.2048956928706436
+              },
+              {
+                "effective_order": -1.6016940610419548,
+                "geometric_midpoint_time": 2.268818950284763,
+                "left_time": 2.2048956928706436,
+                "right_time": 2.3345954395100934
+              },
+              {
+                "effective_order": 6.1220069048086545,
+                "geometric_midpoint_time": 2.398568803097255,
+                "left_time": 2.3345954395100934,
+                "right_time": 2.464295186149543
+              },
+              {
+                "effective_order": 16.279414766320947,
+                "geometric_midpoint_time": 2.528313514137086,
+                "left_time": 2.464295186149543,
+                "right_time": 2.5939949327889926
+              },
+              {
+                "effective_order": -13.691357544390486,
+                "geometric_midpoint_time": 2.6580538363437487,
+                "left_time": 2.5939949327889926,
+                "right_time": 2.7236946794284425
+              },
+              {
+                "effective_order": 2.797321603033867,
+                "geometric_midpoint_time": 2.78779038246994,
+                "left_time": 2.7236946794284425,
+                "right_time": 2.8533944260678923
+              },
+              {
+                "effective_order": 80.37488706167156,
+                "geometric_midpoint_time": 2.917523656260346,
+                "left_time": 2.8533944260678923,
+                "right_time": 2.9830941727073412
+              },
+              {
+                "effective_order": -32.110296031514125,
+                "geometric_midpoint_time": 3.0472540756625888,
+                "left_time": 2.9830941727073412,
+                "right_time": 3.112793919346791
+              },
+              {
+                "effective_order": 2.94926724807062,
+                "geometric_midpoint_time": 3.1769819903490886,
+                "left_time": 3.112793919346791,
+                "right_time": 3.242493665986241
+              },
+              {
+                "effective_order": -7.402973671462372,
+                "geometric_midpoint_time": 3.3067076951129697,
+                "left_time": 3.242493665986241,
+                "right_time": 3.3721934126256907
+              },
+              {
+                "effective_order": -101.55591288711389,
+                "geometric_midpoint_time": 3.436431440228784,
+                "left_time": 3.3721934126256907,
+                "right_time": 3.50189315926514
+              },
+              {
+                "effective_order": 138.60119717688272,
+                "geometric_midpoint_time": 3.5661534395512335,
+                "left_time": 3.50189315926514,
+                "right_time": 3.6315929059045895
+              },
+              {
+                "effective_order": -31.044362729638387,
+                "geometric_midpoint_time": 3.6958738769078674,
+                "left_time": 3.6315929059045895,
+                "right_time": 3.7612926525440393
+              },
+              {
+                "effective_order": -5.0561819869445275,
+                "geometric_midpoint_time": 3.825592911190834,
+                "left_time": 3.7612926525440393,
+                "right_time": 3.8909923991834887
+              },
+              {
+                "effective_order": -11.730275788091106,
+                "geometric_midpoint_time": 3.955310680446456,
+                "left_time": 3.8909923991834887,
+                "right_time": 4.020692145822939
+              },
+              {
+                "effective_order": 34.57130674417695,
+                "geometric_midpoint_time": 4.085027305185454,
+                "left_time": 4.020692145822939,
+                "right_time": 4.150391892462388
+              },
+              {
+                "effective_order": -13.043870401659106,
+                "geometric_midpoint_time": 4.21474289108177,
+                "left_time": 4.150391892462388,
+                "right_time": 4.280091639101838
+              },
+              {
+                "effective_order": -6.93835765027743,
+                "geometric_midpoint_time": 4.344457531187823,
+                "left_time": 4.280091639101838,
+                "right_time": 4.409791385741287
+              }
+            ],
+            "maximum_ground_overlap_direct": [
+              {
+                "effective_order": 3.9587609750958923,
+                "geometric_midpoint_time": 0.5800349003006185,
+                "left_time": 0.5187989865577985,
+                "right_time": 0.6484987331972482
+              },
+              {
+                "effective_order": 3.9366251372645107,
+                "geometric_midpoint_time": 0.7103947693713143,
+                "left_time": 0.6484987331972482,
+                "right_time": 0.7781984798366978
+              },
+              {
+                "effective_order": 3.908363612429491,
+                "geometric_midpoint_time": 0.8405504266194692,
+                "left_time": 0.7781984798366978,
+                "right_time": 0.9078982264761474
+              },
+              {
+                "effective_order": 3.872732531522975,
+                "geometric_midpoint_time": 0.9705840301524108,
+                "left_time": 0.9078982264761474,
+                "right_time": 1.037597973115597
+              },
+              {
+                "effective_order": 3.827915841945165,
+                "geometric_midpoint_time": 1.1005388444031836,
+                "left_time": 1.037597973115597,
+                "right_time": 1.1672977197550467
+              },
+              {
+                "effective_order": 3.771199637335288,
+                "geometric_midpoint_time": 1.2304398339822913,
+                "left_time": 1.1672977197550467,
+                "right_time": 1.2969974663944963
+              },
+              {
+                "effective_order": 3.698385622667653,
+                "geometric_midpoint_time": 1.3603024188088166,
+                "left_time": 1.2969974663944963,
+                "right_time": 1.4266972130339461
+              },
+              {
+                "effective_order": 3.6026702845975325,
+                "geometric_midpoint_time": 1.4901366396208573,
+                "left_time": 1.4266972130339461,
+                "right_time": 1.5563969596733955
+              },
+              {
+                "effective_order": 3.4723251756812323,
+                "geometric_midpoint_time": 1.6199493163122847,
+                "left_time": 1.5563969596733955,
+                "right_time": 1.6860967063128454
+              },
+              {
+                "effective_order": 3.2853609423910237,
+                "geometric_midpoint_time": 1.749745243930502,
+                "left_time": 1.6860967063128454,
+                "right_time": 1.8157964529522947
+              },
+              {
+                "effective_order": 2.9953046725445898,
+                "geometric_midpoint_time": 1.879527892437582,
+                "left_time": 1.8157964529522947,
+                "right_time": 1.9454961995917444
+              },
+              {
+                "effective_order": 2.48227807595595,
+                "geometric_midpoint_time": 2.0092998349676394,
+                "left_time": 1.9454961995917444,
+                "right_time": 2.075195946231194
+              },
+              {
+                "effective_order": 1.3701126660430227,
+                "geometric_midpoint_time": 2.1390630200412,
+                "left_time": 2.075195946231194,
+                "right_time": 2.2048956928706436
+              },
+              {
+                "effective_order": -1.6016940610419548,
+                "geometric_midpoint_time": 2.268818950284763,
+                "left_time": 2.2048956928706436,
+                "right_time": 2.3345954395100934
+              },
+              {
+                "effective_order": 6.1220069048086545,
+                "geometric_midpoint_time": 2.398568803097255,
+                "left_time": 2.3345954395100934,
+                "right_time": 2.464295186149543
+              },
+              {
+                "effective_order": 16.279414766320947,
+                "geometric_midpoint_time": 2.528313514137086,
+                "left_time": 2.464295186149543,
+                "right_time": 2.5939949327889926
+              },
+              {
+                "effective_order": -13.691357544390486,
+                "geometric_midpoint_time": 2.6580538363437487,
+                "left_time": 2.5939949327889926,
+                "right_time": 2.7236946794284425
+              },
+              {
+                "effective_order": 2.797321603033867,
+                "geometric_midpoint_time": 2.78779038246994,
+                "left_time": 2.7236946794284425,
+                "right_time": 2.8533944260678923
+              },
+              {
+                "effective_order": 80.37488706167156,
+                "geometric_midpoint_time": 2.917523656260346,
+                "left_time": 2.8533944260678923,
+                "right_time": 2.9830941727073412
+              },
+              {
+                "effective_order": -32.110296031514125,
+                "geometric_midpoint_time": 3.0472540756625888,
+                "left_time": 2.9830941727073412,
+                "right_time": 3.112793919346791
+              },
+              {
+                "effective_order": 2.94926724807062,
+                "geometric_midpoint_time": 3.1769819903490886,
+                "left_time": 3.112793919346791,
+                "right_time": 3.242493665986241
+              },
+              {
+                "effective_order": -7.402973671462372,
+                "geometric_midpoint_time": 3.3067076951129697,
+                "left_time": 3.242493665986241,
+                "right_time": 3.3721934126256907
+              },
+              {
+                "effective_order": -101.55591288711389,
+                "geometric_midpoint_time": 3.436431440228784,
+                "left_time": 3.3721934126256907,
+                "right_time": 3.50189315926514
+              },
+              {
+                "effective_order": 138.60119717688272,
+                "geometric_midpoint_time": 3.5661534395512335,
+                "left_time": 3.50189315926514,
+                "right_time": 3.6315929059045895
+              },
+              {
+                "effective_order": -31.044362729638387,
+                "geometric_midpoint_time": 3.6958738769078674,
+                "left_time": 3.6315929059045895,
+                "right_time": 3.7612926525440393
+              },
+              {
+                "effective_order": -5.0561819869445275,
+                "geometric_midpoint_time": 3.825592911190834,
+                "left_time": 3.7612926525440393,
+                "right_time": 3.8909923991834887
+              },
+              {
+                "effective_order": -11.730275788091106,
+                "geometric_midpoint_time": 3.955310680446456,
+                "left_time": 3.8909923991834887,
+                "right_time": 4.020692145822939
+              },
+              {
+                "effective_order": 34.57130674417695,
+                "geometric_midpoint_time": 4.085027305185454,
+                "left_time": 4.020692145822939,
+                "right_time": 4.150391892462388
+              },
+              {
+                "effective_order": -13.043870401659106,
+                "geometric_midpoint_time": 4.21474289108177,
+                "left_time": 4.150391892462388,
+                "right_time": 4.280091639101838
+              },
+              {
+                "effective_order": -6.93835765027743,
+                "geometric_midpoint_time": 4.344457531187823,
+                "left_time": 4.280091639101838,
+                "right_time": 4.409791385741287
+              }
+            ],
+            "one_overlap_phase": [
+              {
+                "effective_order": 3.957554082875431,
+                "geometric_midpoint_time": 0.5800349003006185,
+                "left_time": 0.5187989865577985,
+                "right_time": 0.6484987331972482
+              },
+              {
+                "effective_order": 3.9343439190066487,
+                "geometric_midpoint_time": 0.7103947693713143,
+                "left_time": 0.6484987331972482,
+                "right_time": 0.7781984798366978
+              },
+              {
+                "effective_order": 3.904877900629157,
+                "geometric_midpoint_time": 0.8405504266194692,
+                "left_time": 0.7781984798366978,
+                "right_time": 0.9078982264761474
+              },
+              {
+                "effective_order": 3.86857945926622,
+                "geometric_midpoint_time": 0.9705840301524108,
+                "left_time": 0.9078982264761474,
+                "right_time": 1.037597973115597
+              },
+              {
+                "effective_order": 3.8250006283150193,
+                "geometric_midpoint_time": 1.1005388444031836,
+                "left_time": 1.037597973115597,
+                "right_time": 1.1672977197550467
+              },
+              {
+                "effective_order": 3.7739022022632978,
+                "geometric_midpoint_time": 1.2304398339822913,
+                "left_time": 1.1672977197550467,
+                "right_time": 1.2969974663944963
+              },
+              {
+                "effective_order": 3.7153349831057487,
+                "geometric_midpoint_time": 1.3603024188088166,
+                "left_time": 1.2969974663944963,
+                "right_time": 1.4266972130339461
+              },
+              {
+                "effective_order": 3.6497222861722025,
+                "geometric_midpoint_time": 1.4901366396208573,
+                "left_time": 1.4266972130339461,
+                "right_time": 1.5563969596733955
+              },
+              {
+                "effective_order": 3.5779426443744304,
+                "geometric_midpoint_time": 1.6199493163122847,
+                "left_time": 1.5563969596733955,
+                "right_time": 1.6860967063128454
+              },
+              {
+                "effective_order": 3.5014112270502635,
+                "geometric_midpoint_time": 1.749745243930502,
+                "left_time": 1.6860967063128454,
+                "right_time": 1.8157964529522947
+              },
+              {
+                "effective_order": 3.422155803419905,
+                "geometric_midpoint_time": 1.879527892437582,
+                "left_time": 1.8157964529522947,
+                "right_time": 1.9454961995917444
+              },
+              {
+                "effective_order": 3.342878606180002,
+                "geometric_midpoint_time": 2.0092998349676394,
+                "left_time": 1.9454961995917444,
+                "right_time": 2.075195946231194
+              },
+              {
+                "effective_order": 3.2669896261422298,
+                "geometric_midpoint_time": 2.1390630200412,
+                "left_time": 2.075195946231194,
+                "right_time": 2.2048956928706436
+              },
+              {
+                "effective_order": 3.1985893895968234,
+                "geometric_midpoint_time": 2.268818950284763,
+                "left_time": 2.2048956928706436,
+                "right_time": 2.3345954395100934
+              },
+              {
+                "effective_order": 3.1423720753129296,
+                "geometric_midpoint_time": 2.398568803097255,
+                "left_time": 2.3345954395100934,
+                "right_time": 2.464295186149543
+              },
+              {
+                "effective_order": 3.1034159929823972,
+                "geometric_midpoint_time": 2.528313514137086,
+                "left_time": 2.464295186149543,
+                "right_time": 2.5939949327889926
+              },
+              {
+                "effective_order": 3.0868322062921814,
+                "geometric_midpoint_time": 2.6580538363437487,
+                "left_time": 2.5939949327889926,
+                "right_time": 2.7236946794284425
+              },
+              {
+                "effective_order": 3.0972601345528665,
+                "geometric_midpoint_time": 2.78779038246994,
+                "left_time": 2.7236946794284425,
+                "right_time": 2.8533944260678923
+              },
+              {
+                "effective_order": 3.138234733926255,
+                "geometric_midpoint_time": 2.917523656260346,
+                "left_time": 2.8533944260678923,
+                "right_time": 2.9830941727073412
+              },
+              {
+                "effective_order": 3.2115019838053818,
+                "geometric_midpoint_time": 3.0472540756625888,
+                "left_time": 2.9830941727073412,
+                "right_time": 3.112793919346791
+              },
+              {
+                "effective_order": 3.316414238042115,
+                "geometric_midpoint_time": 3.1769819903490886,
+                "left_time": 3.112793919346791,
+                "right_time": 3.242493665986241
+              },
+              {
+                "effective_order": 3.4495695907771986,
+                "geometric_midpoint_time": 3.3067076951129697,
+                "left_time": 3.242493665986241,
+                "right_time": 3.3721934126256907
+              },
+              {
+                "effective_order": 3.6048414543095197,
+                "geometric_midpoint_time": 3.436431440228784,
+                "left_time": 3.3721934126256907,
+                "right_time": 3.50189315926514
+              },
+              {
+                "effective_order": 3.773863151274278,
+                "geometric_midpoint_time": 3.5661534395512335,
+                "left_time": 3.50189315926514,
+                "right_time": 3.6315929059045895
+              },
+              {
+                "effective_order": 3.9469066908297634,
+                "geometric_midpoint_time": 3.6958738769078674,
+                "left_time": 3.6315929059045895,
+                "right_time": 3.7612926525440393
+              },
+              {
+                "effective_order": 4.113974817970989,
+                "geometric_midpoint_time": 3.825592911190834,
+                "left_time": 3.7612926525440393,
+                "right_time": 3.8909923991834887
+              },
+              {
+                "effective_order": 4.265865834884819,
+                "geometric_midpoint_time": 3.955310680446456,
+                "left_time": 3.8909923991834887,
+                "right_time": 4.020692145822939
+              },
+              {
+                "effective_order": 4.394997058099617,
+                "geometric_midpoint_time": 4.085027305185454,
+                "left_time": 4.020692145822939,
+                "right_time": 4.150391892462388
+              },
+              {
+                "effective_order": 4.495866244633475,
+                "geometric_midpoint_time": 4.21474289108177,
+                "left_time": 4.150391892462388,
+                "right_time": 4.280091639101838
+              },
+              {
+                "effective_order": 4.565142855212065,
+                "geometric_midpoint_time": 4.344457531187823,
+                "left_time": 4.280091639101838,
+                "right_time": 4.409791385741287
+              }
+            ]
+          },
+          "elapsed_seconds": 2.928886510897428,
+          "fixed_order_alpha": 7.03935473189451e-07,
+          "formal_order": 4,
+          "label": "4th(m5_best)",
+          "points": [
+            {
+              "continuously_tracked_branch": {
+                "cost": 151405727.24029425,
+                "direct_error_hartree": 5.081416830185288e-08,
+                "direct_to_model_ratio": 0.9964499609717445,
+                "ground_overlap_probability": 0.9999999999935052,
+                "overlap_with_previous_probability": null,
+                "principal_energy_shift_hartree": -5.081416830185288e-08,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -5.081416830185288e-08
+              },
+              "elapsed_seconds": 0.09063161490485072,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08670358499512076,
+                "build_seconds": 0.08741019293665886,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 8.813990280032158e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00039842911064624786,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999999935052,
+                  "principal_energy_shift_hartree": -5.081416830185288e-08,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 2.4556133258754703e-12,
+                  "principal_energy_shift_hartree": 2.1140685796478,
+                  "schur_index": 14
+                },
+                {
+                  "ground_overlap_probability": 1.7636897426430409e-12,
+                  "principal_energy_shift_hartree": 2.5087590364028145,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 6.421481760056646e-13,
+                  "principal_energy_shift_hartree": 1.9299341984283571,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 3.6143069740764474e-13,
+                  "principal_energy_shift_hartree": 1.777382244849727,
+                  "schur_index": 28
+                },
+                {
+                  "ground_overlap_probability": 3.1033212893255034e-13,
+                  "principal_energy_shift_hartree": 2.0298751498994907,
+                  "schur_index": 18
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 151405727.24029425,
+                "direct_error_hartree": 5.081416830185288e-08,
+                "direct_to_model_ratio": 0.9964499609717445,
+                "energy_shift_hartree": -5.081416830185288e-08,
+                "ground_overlap_probability": 0.9999999999935052,
+                "schur_index": 1
+              },
+              "model_error_hartree": 5.099520326369281e-08,
+              "one_overlap_perturbative_error_hartree": 5.080323289310478e-08,
+              "one_overlap_phase_error_hartree": 5.080323289328848e-08,
+              "one_overlap_phase_to_model_ratio": 0.9962355210271119,
+              "one_overlap_signed_perturbative_shift_hartree": -5.080323289310478e-08,
+              "one_overlap_signed_phase_shift_hartree": -5.080323289328848e-08,
+              "one_overlap_survival_probability": 0.9999999999927682,
+              "relative_to_analytic_time": 0.2,
+              "schur_off_diagonal_residual_frobenius_norm": 6.005536682577892e-13,
+              "time": 0.5187989865577985,
+              "unitarity_residual_frobenius_norm": 1.164582269978357e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.0877487319521606
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 121179430.75526872,
+                "direct_error_hartree": 1.2292165510467367e-07,
+                "direct_to_model_ratio": 0.9873224677725964,
+                "ground_overlap_probability": 0.9999999999595859,
+                "overlap_with_previous_probability": 0.9999999999855098,
+                "principal_energy_shift_hartree": -1.2292165510467367e-07,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -1.2292165510467367e-07
+              },
+              "elapsed_seconds": 0.08936103899031878,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08614194672554731,
+                "build_seconds": 0.08666942594572902,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 7.303990423679352e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00038573937490582466,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999999595859,
+                  "principal_energy_shift_hartree": -1.2292165510467367e-07,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 1.52531741211135e-11,
+                  "principal_energy_shift_hartree": 2.114068628136655,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 1.1152278229177938e-11,
+                  "principal_energy_shift_hartree": 2.5087590750723665,
+                  "schur_index": 6
+                },
+                {
+                  "ground_overlap_probability": 3.960676087173178e-12,
+                  "principal_energy_shift_hartree": 1.9299342121155396,
+                  "schur_index": 25
+                },
+                {
+                  "ground_overlap_probability": 2.2172489668153006e-12,
+                  "principal_energy_shift_hartree": 1.7773822537664414,
+                  "schur_index": 29
+                },
+                {
+                  "ground_overlap_probability": 1.921256446312775e-12,
+                  "principal_energy_shift_hartree": 2.029875162254023,
+                  "schur_index": 26
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 121179430.75526872,
+                "direct_error_hartree": 1.2292165510467367e-07,
+                "direct_to_model_ratio": 0.9873224677725964,
+                "energy_shift_hartree": -1.2292165510467367e-07,
+                "ground_overlap_probability": 0.9999999999595859,
+                "schur_index": 1
+              },
+              "model_error_hartree": 1.24500007968e-07,
+              "one_overlap_perturbative_error_hartree": 1.2286210940069092e-07,
+              "one_overlap_phase_error_hartree": 1.2286210940467648e-07,
+              "one_overlap_phase_to_model_ratio": 0.9868441890883692,
+              "one_overlap_signed_perturbative_shift_hartree": -1.2286210940069092e-07,
+              "one_overlap_signed_phase_shift_hartree": -1.2286210940467648e-07,
+              "one_overlap_survival_probability": 0.9999999999351237,
+              "relative_to_analytic_time": 0.25,
+              "schur_off_diagonal_residual_frobenius_norm": 6.015098356204073e-13,
+              "time": 0.6484987331972482,
+              "unitarity_residual_frobenius_norm": 1.1717175036772194e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08692110516130924
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 101064758.50788654,
+                "direct_error_hartree": 2.519621368443793e-07,
+                "direct_to_model_ratio": 0.9759800030322044,
+                "ground_overlap_probability": 0.9999999998168385,
+                "overlap_with_previous_probability": 0.9999999999484934,
+                "principal_energy_shift_hartree": -2.519621368443793e-07,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -2.519621368443793e-07
+              },
+              "elapsed_seconds": 0.09302613930776715,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08981413673609495,
+                "build_seconds": 0.09036296606063843,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 8.505024015903473e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003957189619541168,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999998168385,
+                  "principal_energy_shift_hartree": -2.519621368443793e-07,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 6.904282736433333e-11,
+                  "principal_energy_shift_hartree": 2.1140687150867907,
+                  "schur_index": 14
+                },
+                {
+                  "ground_overlap_probability": 5.1643578721225264e-11,
+                  "principal_energy_shift_hartree": 2.5087591444031303,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 1.7768532762492914e-11,
+                  "principal_energy_shift_hartree": 1.9299342367081744,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 9.879855751874724e-12,
+                  "principal_energy_shift_hartree": 1.7773822697626789,
+                  "schur_index": 28
+                },
+                {
+                  "ground_overlap_probability": 8.66000382480695e-12,
+                  "principal_energy_shift_hartree": 2.0298751843760354,
+                  "schur_index": 18
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 101064758.50788654,
+                "direct_error_hartree": 2.519621368443793e-07,
+                "direct_to_model_ratio": 0.9759800030322044,
+                "energy_shift_hartree": -2.519621368443793e-07,
+                "ground_overlap_probability": 0.9999999998168385,
+                "schur_index": 1
+              },
+              "model_error_hartree": 2.581632165224448e-07,
+              "one_overlap_perturbative_error_hartree": 2.5173535895879566e-07,
+              "one_overlap_phase_error_hartree": 2.517353590081494e-07,
+              "one_overlap_phase_to_model_ratio": 0.9751015748839784,
+              "one_overlap_signed_perturbative_shift_hartree": -2.5173535895879566e-07,
+              "one_overlap_signed_phase_shift_hartree": -2.517353590081494e-07,
+              "one_overlap_survival_probability": 0.9999999996079045,
+              "relative_to_analytic_time": 0.3,
+              "schur_off_diagonal_residual_frobenius_norm": 5.980510625419308e-13,
+              "time": 0.7781984798366978,
+              "unitarity_residual_frobenius_norm": 1.1619788076235287e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.09062580531463027
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 86740484.0339755,
+                "direct_error_hartree": 4.602435166696338e-07,
+                "direct_to_model_ratio": 0.9622904094805934,
+                "ground_overlap_probability": 0.9999999993296569,
+                "overlap_with_previous_probability": 0.9999999998472677,
+                "principal_energy_shift_hartree": -4.602435166696338e-07,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -4.602435166696338e-07
+              },
+              "elapsed_seconds": 0.08886575000360608,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.0857239980250597,
+                "build_seconds": 0.08623866597190499,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.248988211154938e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00039336876943707466,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999993296569,
+                  "principal_energy_shift_hartree": -4.602435166696338e-07,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 2.5214960020619005e-10,
+                  "principal_energy_shift_hartree": 2.1140688558064697,
+                  "schur_index": 14
+                },
+                {
+                  "ground_overlap_probability": 1.940503610773789e-10,
+                  "principal_energy_shift_hartree": 2.508759256574171,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 6.418256341453211e-11,
+                  "principal_energy_shift_hartree": 1.9299342766091354,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 3.5392771883436665e-11,
+                  "principal_energy_shift_hartree": 1.7773822956691798,
+                  "schur_index": 28
+                },
+                {
+                  "ground_overlap_probability": 3.146330721632092e-11,
+                  "principal_energy_shift_hartree": 2.0298752201172676,
+                  "schur_index": 18
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 86740484.0339755,
+                "direct_error_hartree": 4.602435166696338e-07,
+                "direct_to_model_ratio": 0.9622904094805934,
+                "energy_shift_hartree": -4.602435166696338e-07,
+                "ground_overlap_probability": 0.9999999993296569,
+                "schur_index": 1
+              },
+              "model_error_hartree": 4.782792306098688e-07,
+              "one_overlap_perturbative_error_hartree": 4.595822640087424e-07,
+              "one_overlap_phase_error_hartree": 4.595822644186541e-07,
+              "one_overlap_phase_to_model_ratio": 0.9609078442160793,
+              "one_overlap_signed_perturbative_shift_hartree": -4.595822640087424e-07,
+              "one_overlap_signed_phase_shift_hartree": -4.595822644186541e-07,
+              "one_overlap_survival_probability": 0.9999999982162133,
+              "relative_to_analytic_time": 0.35,
+              "schur_off_diagonal_residual_frobenius_norm": 5.951613257546984e-13,
+              "time": 0.9078982264761474,
+              "unitarity_residual_frobenius_norm": 1.16303721191097e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08648546598851681
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 76047089.59183072,
+                "direct_error_hartree": 7.719247735353716e-07,
+                "direct_to_model_ratio": 0.9460752239085604,
+                "ground_overlap_probability": 0.9999999978930663,
+                "overlap_with_previous_probability": 0.9999999995993962,
+                "principal_energy_shift_hartree": -7.719247735353716e-07,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -7.719247735353716e-07
+              },
+              "elapsed_seconds": 0.0885763899423182,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08541973866522312,
+                "build_seconds": 0.08593678567558527,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.810009315609932e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003973888233304024,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999978930663,
+                  "principal_energy_shift_hartree": -7.719247735353716e-07,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 7.898778388210712e-10,
+                  "principal_energy_shift_hartree": 2.1140690671222524,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 6.295972220949925e-10,
+                  "principal_energy_shift_hartree": 2.5087594249295475,
+                  "schur_index": 5
+                },
+                {
+                  "ground_overlap_probability": 1.9839485240032304e-10,
+                  "principal_energy_shift_hartree": 1.9299343367167459,
+                  "schur_index": 25
+                },
+                {
+                  "ground_overlap_probability": 1.0831816631652296e-10,
+                  "principal_energy_shift_hartree": 1.7773823346166582,
+                  "schur_index": 32
+                },
+                {
+                  "ground_overlap_probability": 9.794150151244243e-11,
+                  "principal_energy_shift_hartree": 2.029875273686359,
+                  "schur_index": 26
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 76047089.59183072,
+                "direct_error_hartree": 7.719247735353716e-07,
+                "direct_to_model_ratio": 0.9460752239085604,
+                "energy_shift_hartree": -7.719247735353716e-07,
+                "ground_overlap_probability": 0.9999999978930663,
+                "schur_index": 1
+              },
+              "model_error_hartree": 8.159232522190849e-07,
+              "one_overlap_perturbative_error_hartree": 7.703883631680983e-07,
+              "one_overlap_phase_error_hartree": 7.703883657020577e-07,
+              "one_overlap_phase_to_model_ratio": 0.9441921940658206,
+              "one_overlap_signed_perturbative_shift_hartree": -7.703883631680983e-07,
+              "one_overlap_signed_phase_shift_hartree": -7.703883657020577e-07,
+              "one_overlap_survival_probability": 0.9999999934218184,
+              "relative_to_analytic_time": 0.4,
+              "schur_off_diagonal_residual_frobenius_norm": 5.871108560739664e-13,
+              "time": 1.037597973115597,
+              "unitarity_residual_frobenius_norm": 1.1615896970479e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.0861754659563303
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 67785371.27894872,
+                "direct_error_hartree": 1.2116649078995592e-06,
+                "direct_to_model_ratio": 0.9270926338741721,
+                "ground_overlap_probability": 0.9999999940771398,
+                "overlap_with_previous_probability": 0.9999999990345545,
+                "principal_energy_shift_hartree": -1.2116649078995592e-06,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -1.2116649078995592e-06
+              },
+              "elapsed_seconds": 0.08822967112064362,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.0851304386742413,
+                "build_seconds": 0.08563334820792079,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.511986091732979e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00039032893255352974,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999940771398,
+                  "principal_energy_shift_hartree": -1.2116649078995592e-06,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 2.208932743111226e-09,
+                  "principal_energy_shift_hartree": 2.1140693666337373,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 1.838241496273453e-09,
+                  "principal_energy_shift_hartree": 2.5087596633269578,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 5.460076183537836e-10,
+                  "principal_energy_shift_hartree": 1.9299344222474275,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 2.945971812473376e-10,
+                  "principal_energy_shift_hartree": 1.7773823899185317,
+                  "schur_index": 29
+                },
+                {
+                  "ground_overlap_probability": 2.718240046487903e-10,
+                  "principal_energy_shift_hartree": 2.029875349456972,
+                  "schur_index": 18
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 67785371.27894872,
+                "direct_error_hartree": 1.2116649078995592e-06,
+                "direct_to_model_ratio": 0.9270926338741721,
+                "energy_shift_hartree": -1.2116649078995592e-06,
+                "ground_overlap_probability": 0.9999999940771398,
+                "schur_index": 1
+              },
+              "model_error_hartree": 1.306951283644877e-06,
+              "one_overlap_perturbative_error_hartree": 1.2088381054187371e-06,
+              "one_overlap_phase_error_hartree": 1.2088381178957082e-06,
+              "one_overlap_phase_to_model_ratio": 0.9249297452958254,
+              "one_overlap_signed_perturbative_shift_hartree": -1.2088381054187371e-06,
+              "one_overlap_signed_phase_shift_hartree": -1.2088381178957082e-06,
+              "one_overlap_survival_probability": 0.9999999793577489,
+              "relative_to_analytic_time": 0.45,
+              "schur_off_diagonal_residual_frobenius_norm": 5.861437398044032e-13,
+              "time": 1.1672977197550467,
+              "unitarity_residual_frobenius_norm": 1.1506863629852436e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08586198696866632
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 61235717.14028573,
+                "direct_error_hartree": 1.8027817871121548e-06,
+                "direct_to_model_ratio": 0.9050108793846022,
+                "ground_overlap_probability": 0.9999999846734643,
+                "overlap_with_previous_probability": 0.9999999978028671,
+                "principal_energy_shift_hartree": -1.8027817871121548e-06,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -1.8027817871121548e-06
+              },
+              "elapsed_seconds": 0.08793244184926152,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08478434989228845,
+                "build_seconds": 0.08528120908886194,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.759997293353081e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00038171932101249695,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999846734643,
+                  "principal_energy_shift_hartree": -1.8027817871121548e-06,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 5.670649408588094e-09,
+                  "principal_energy_shift_hartree": 2.1140697717338317,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 4.975661810156758e-09,
+                  "principal_energy_shift_hartree": -2.335648327024235,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 1.3750836483177058e-09,
+                  "principal_energy_shift_hartree": 1.929934538506156,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 7.316261598640919e-10,
+                  "principal_energy_shift_hartree": 1.7773824649259153,
+                  "schur_index": 28
+                },
+                {
+                  "ground_overlap_probability": 6.914696554072738e-10,
+                  "principal_energy_shift_hartree": 2.0298754517260695,
+                  "schur_index": 18
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 61235717.14028573,
+                "direct_error_hartree": 1.8027817871121548e-06,
+                "direct_to_model_ratio": 0.9050108793846022,
+                "energy_shift_hartree": -1.8027817871121548e-06,
+                "ground_overlap_probability": 0.9999999846734643,
+                "schur_index": 1
+              },
+              "model_error_hartree": 1.992000127488e-06,
+              "one_overlap_perturbative_error_hartree": 1.7990880879577202e-06,
+              "one_overlap_phase_error_hartree": 1.79908813921625e-06,
+              "one_overlap_phase_to_model_ratio": 0.9031566385916748,
+              "one_overlap_signed_perturbative_shift_hartree": -1.7990880879577202e-06,
+              "one_overlap_signed_phase_shift_hartree": -1.79908813921625e-06,
+              "one_overlap_survival_probability": 0.9999999430190268,
+              "relative_to_analytic_time": 0.5,
+              "schur_off_diagonal_residual_frobenius_norm": 5.905255042420757e-13,
+              "time": 1.2969974663944963,
+              "unitarity_residual_frobenius_norm": 1.1558026846021998e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08551764767616987
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 55939330.93218364,
+                "direct_error_hartree": 2.564656901069546e-06,
+                "direct_to_model_ratio": 0.8793649898177209,
+                "ground_overlap_probability": 0.9999999626800905,
+                "overlap_with_previous_probability": 0.9999999951743914,
+                "principal_energy_shift_hartree": -2.564656901069546e-06,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -2.564656901069546e-06
+              },
+              "elapsed_seconds": 0.09168073209002614,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08676567487418652,
+                "build_seconds": 0.08752569276839495,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.507011130452156e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003882385790348053,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999626800905,
+                  "principal_energy_shift_hartree": -2.564656901069546e-06,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 1.3641260863961795e-08,
+                  "principal_energy_shift_hartree": 2.1140702982961828,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 1.2779220697182167e-08,
+                  "principal_energy_shift_hartree": -1.8952471541813114,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 3.2329598009421206e-09,
+                  "principal_energy_shift_hartree": 1.9299346905863153,
+                  "schur_index": 24
+                },
+                {
+                  "ground_overlap_probability": 1.6920559859357564e-09,
+                  "principal_energy_shift_hartree": 1.7773825628479218,
+                  "schur_index": 31
+                },
+                {
+                  "ground_overlap_probability": 1.6452461670772503e-09,
+                  "principal_energy_shift_hartree": 2.029875584407111,
+                  "schur_index": 27
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 55939330.93218364,
+                "direct_error_hartree": 2.564656901069546e-06,
+                "direct_to_model_ratio": 0.8793649898177209,
+                "energy_shift_hartree": -2.564656901069546e-06,
+                "ground_overlap_probability": 0.9999999626800905,
+                "schur_index": 1
+              },
+              "model_error_hartree": 2.9164873866551827e-06,
+              "one_overlap_perturbative_error_hartree": 2.56354001501946e-06,
+              "one_overlap_phase_error_hartree": 2.5635401966349408e-06,
+              "one_overlap_phase_to_model_ratio": 0.878982096190368,
+              "one_overlap_signed_perturbative_shift_hartree": -2.56354001501946e-06,
+              "one_overlap_signed_phase_shift_hartree": -2.5635401966349408e-06,
+              "one_overlap_survival_probability": 0.9999998583133126,
+              "relative_to_analytic_time": 0.55,
+              "schur_off_diagonal_residual_frobenius_norm": 5.840709818568113e-13,
+              "time": 1.4266972130339461,
+              "unitarity_residual_frobenius_norm": 1.1493097662902905e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08911164896562696
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 51588387.05918888,
+                "direct_error_hartree": 3.5088839017814535e-06,
+                "direct_to_model_ratio": 0.849482923305127,
+                "ground_overlap_probability": 0.9999999129066272,
+                "overlap_with_previous_probability": 0.9999999895682257,
+                "principal_energy_shift_hartree": -3.5088839017814535e-06,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -3.5088839017814535e-06
+              },
+              "elapsed_seconds": 0.09497340396046638,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.09106969367712736,
+                "build_seconds": 0.0917738820426166,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 0.0001185801811516285,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00044842809438705444,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999999129066272,
+                  "principal_energy_shift_hartree": -3.5088839017814535e-06,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 3.177178894469706e-08,
+                  "principal_energy_shift_hartree": -1.5282460039774637,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 3.124888993763444e-08,
+                  "principal_energy_shift_hartree": -1.9229359680196167,
+                  "schur_index": 23
+                },
+                {
+                  "ground_overlap_probability": 7.20513828495395e-09,
+                  "principal_energy_shift_hartree": 1.9299348829697658,
+                  "schur_index": 25
+                },
+                {
+                  "ground_overlap_probability": 3.7193212565165023e-09,
+                  "principal_energy_shift_hartree": -2.007131176248065,
+                  "schur_index": 26
+                },
+                {
+                  "ground_overlap_probability": 3.6986578643233365e-09,
+                  "principal_energy_shift_hartree": 1.7773826865268614,
+                  "schur_index": 31
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 51588387.05918888,
+                "direct_error_hartree": 3.5088839017814535e-06,
+                "direct_to_model_ratio": 0.849482923305127,
+                "energy_shift_hartree": -3.5088839017814535e-06,
+                "ground_overlap_probability": 0.9999999129066272,
+                "schur_index": 1
+              },
+              "model_error_hartree": 4.1306114643591165e-06,
+              "one_overlap_perturbative_error_hartree": 3.521744251066382e-06,
+              "one_overlap_phase_error_hartree": 3.5217448198001058e-06,
+              "one_overlap_phase_to_model_ratio": 0.8525964860620269,
+              "one_overlap_signed_perturbative_shift_hartree": -3.521744251066382e-06,
+              "one_overlap_signed_phase_shift_hartree": -3.5217448198001058e-06,
+              "one_overlap_survival_probability": 0.9999996770259786,
+              "relative_to_analytic_time": 0.6,
+              "schur_off_diagonal_residual_frobenius_norm": 5.81656400620357e-13,
+              "time": 1.5563969596733955,
+              "unitarity_residual_frobenius_norm": 1.1519602185573047e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.09221714129671454
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 47966056.55645045,
+                "direct_error_hartree": 4.633128395005551e-06,
+                "direct_to_model_ratio": 0.8143508698294721,
+                "ground_overlap_probability": 0.9999998018392842,
+                "overlap_with_previous_probability": 0.9999999773389815,
+                "principal_energy_shift_hartree": -4.633128395005551e-06,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -4.633128395005551e-06
+              },
+              "elapsed_seconds": 0.09470241470262408,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.09114205278456211,
+                "build_seconds": 0.09171447204425931,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 0.00010462896898388863,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003982190974056721,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999998018392842,
+                  "principal_energy_shift_hartree": -4.633128395005551e-06,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 7.795476610753995e-08,
+                  "principal_energy_shift_hartree": -1.2177063849753884,
+                  "schur_index": 5
+                },
+                {
+                  "ground_overlap_probability": 6.908266920803467e-08,
+                  "principal_energy_shift_hartree": -1.6123961724738805,
+                  "schur_index": 23
+                },
+                {
+                  "ground_overlap_probability": 1.540852677690017e-08,
+                  "principal_energy_shift_hartree": -1.7965328135270455,
+                  "schur_index": 25
+                },
+                {
+                  "ground_overlap_probability": 8.091170879018826e-09,
+                  "principal_energy_shift_hartree": -1.6965919802712197,
+                  "schur_index": 26
+                },
+                {
+                  "ground_overlap_probability": 7.730941876292312e-09,
+                  "principal_energy_shift_hartree": 1.7773828381518744,
+                  "schur_index": 31
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 47966056.55645045,
+                "direct_error_hartree": 4.633128395005551e-06,
+                "direct_to_model_ratio": 0.8143508698294721,
+                "energy_shift_hartree": -4.633128395005551e-06,
+                "ground_overlap_probability": 0.9999998018392842,
+                "schur_index": 1
+              },
+              "model_error_hartree": 5.689351564118479e-06,
+              "one_overlap_perturbative_error_hartree": 4.689586580412013e-06,
+              "one_overlap_phase_error_hartree": 4.689588184204859e-06,
+              "one_overlap_phase_to_model_ratio": 0.8242746350535071,
+              "one_overlap_signed_perturbative_shift_hartree": -4.689586580412013e-06,
+              "one_overlap_signed_phase_shift_hartree": -4.689588184204859e-06,
+              "one_overlap_survival_probability": 0.9999993160407094,
+              "relative_to_analytic_time": 0.65,
+              "schur_off_diagonal_residual_frobenius_norm": 5.746172759688946e-13,
+              "time": 1.6860967063128454,
+              "unitarity_residual_frobenius_norm": 1.1323784681540063e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.092070740647614
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 44910630.52733654,
+                "direct_error_hartree": 5.910342346737051e-06,
+                "direct_to_model_ratio": 0.7723446326532657,
+                "ground_overlap_probability": 0.999999552118674,
+                "overlap_with_previous_probability": 0.9999999492189413,
+                "principal_energy_shift_hartree": -5.910342346737051e-06,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -5.910342346737051e-06
+              },
+              "elapsed_seconds": 0.09761124709621072,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.09418601589277387,
+                "build_seconds": 0.09472222393378615,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 7.024966180324554e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003975280560553074,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.999999552118674,
+                  "principal_energy_shift_hartree": -5.910342346737051e-06,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 1.928513257739041e-07,
+                  "principal_energy_shift_hartree": -0.9515293882479716,
+                  "schur_index": 5
+                },
+                {
+                  "ground_overlap_probability": 1.4914587358117423e-07,
+                  "principal_energy_shift_hartree": -1.3462189531048343,
+                  "schur_index": 22
+                },
+                {
+                  "ground_overlap_probability": 3.1946246161120456e-08,
+                  "principal_energy_shift_hartree": -1.5303562516093847,
+                  "schur_index": 24
+                },
+                {
+                  "ground_overlap_probability": 1.712620580763563e-08,
+                  "principal_energy_shift_hartree": -1.430415462602273,
+                  "schur_index": 26
+                },
+                {
+                  "ground_overlap_probability": 1.559937215626808e-08,
+                  "principal_energy_shift_hartree": -1.6829086327282885,
+                  "schur_index": 28
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 44910630.52733654,
+                "direct_error_hartree": 5.910342346737051e-06,
+                "direct_to_model_ratio": 0.7723446326532657,
+                "energy_shift_hartree": -5.910342346737051e-06,
+                "ground_overlap_probability": 0.999999552118674,
+                "schur_index": 1
+              },
+              "model_error_hartree": 7.6524676897579e-06,
+              "one_overlap_perturbative_error_hartree": 6.07891713476004e-06,
+              "one_overlap_phase_error_hartree": 6.07892126739004e-06,
+              "one_overlap_phase_to_model_ratio": 0.7943739867763306,
+              "one_overlap_signed_perturbative_shift_hartree": -6.07891713476004e-06,
+              "one_overlap_signed_phase_shift_hartree": -6.07892126739004e-06,
+              "one_overlap_survival_probability": 0.999998640382077,
+              "relative_to_analytic_time": 0.7,
+              "schur_off_diagonal_residual_frobenius_norm": 5.744709250159309e-13,
+              "time": 1.8157964529522947,
+              "unitarity_residual_frobenius_norm": 1.1306650099089947e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.09500102419406176
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 42290511.212485366,
+                "direct_error_hartree": 7.267108098394134e-06,
+                "direct_to_model_ratio": 0.7206215115572658,
+                "ground_overlap_probability": 0.9999989686172713,
+                "overlap_with_previous_probability": 0.9999998776321164,
+                "principal_energy_shift_hartree": -7.267108098394134e-06,
+                "schur_index": 1,
+                "unwrapped_energy_shift_hartree": -7.267108098394134e-06
+              },
+              "elapsed_seconds": 0.09123808331787586,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08795589208602905,
+                "build_seconds": 0.08847698103636503,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.914038047194481e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003964891657233238,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999989686172713,
+                  "principal_energy_shift_hartree": -7.267108098394134e-06,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 4.94718703369903e-07,
+                  "principal_energy_shift_hartree": -0.720842512229701,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 3.180800841187654e-07,
+                  "principal_energy_shift_hartree": -1.1155317868038497,
+                  "schur_index": 18
+                },
+                {
+                  "ground_overlap_probability": 6.480248776165907e-08,
+                  "principal_energy_shift_hartree": -1.2996698171540637,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 3.5632626544694534e-08,
+                  "principal_energy_shift_hartree": -1.1997290838193877,
+                  "schur_index": 22
+                },
+                {
+                  "ground_overlap_probability": 3.063260280234065e-08,
+                  "principal_energy_shift_hartree": -1.4522223131499967,
+                  "schur_index": 28
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 42290511.212485366,
+                "direct_error_hartree": 7.267108098394134e-06,
+                "direct_to_model_ratio": 0.7206215115572658,
+                "energy_shift_hartree": -7.267108098394134e-06,
+                "ground_overlap_probability": 0.9999989686172713,
+                "schur_index": 1
+              },
+              "model_error_hartree": 1.0084500645407997e-05,
+              "one_overlap_perturbative_error_hartree": 7.69776736048798e-06,
+              "one_overlap_phase_error_hartree": 7.69777720618552e-06,
+              "one_overlap_phase_to_model_ratio": 0.7633275535254909,
+              "one_overlap_signed_perturbative_shift_hartree": -7.69776736048798e-06,
+              "one_overlap_signed_phase_shift_hartree": -7.69777720618552e-06,
+              "one_overlap_survival_probability": 0.9999974420139119,
+              "relative_to_analytic_time": 0.75,
+              "schur_off_diagonal_residual_frobenius_norm": 5.735066393613659e-13,
+              "time": 1.9454961995917444,
+              "unitarity_residual_frobenius_norm": 1.1380905797451916e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.0887273601256311
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 39979255.35294472,
+                "direct_error_hartree": 8.529757933449083e-06,
+                "direct_to_model_ratio": 0.6533823731468085,
+                "ground_overlap_probability": 0.9999974447193777,
+                "overlap_with_previous_probability": 0.9999996388254089,
+                "principal_energy_shift_hartree": -8.529757933449083e-06,
+                "schur_index": 2,
+                "unwrapped_energy_shift_hartree": -8.529757933449083e-06
+              },
+              "elapsed_seconds": 0.09622909082099795,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.0893480977974832,
+                "build_seconds": 0.09014886617660522,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.68899156153202e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003816690295934677,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999974447193777,
+                  "principal_energy_shift_hartree": -8.529757933449083e-06,
+                  "schur_index": 2
+                },
+                {
+                  "ground_overlap_probability": 1.3750696798223667e-06,
+                  "principal_energy_shift_hartree": -0.5189914574268728,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 6.783259691531138e-07,
+                  "principal_energy_shift_hartree": -0.9136803135471617,
+                  "schur_index": 18
+                },
+                {
+                  "ground_overlap_probability": 1.2973483605262156e-07,
+                  "principal_energy_shift_hartree": -1.0978191096865946,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 7.362604123314843e-08,
+                  "principal_energy_shift_hartree": -0.9978784448528474,
+                  "schur_index": 22
+                },
+                {
+                  "ground_overlap_probability": 6.262943454626245e-08,
+                  "principal_energy_shift_hartree": -0.29625943228262386,
+                  "schur_index": 1
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 39979255.35294472,
+                "direct_error_hartree": 8.529757933449083e-06,
+                "direct_to_model_ratio": 0.6533823731468085,
+                "energy_shift_hartree": -8.529757933449083e-06,
+                "ground_overlap_probability": 0.9999974447193777,
+                "schur_index": 2
+              },
+              "model_error_hartree": 1.3054772035505359e-05,
+              "one_overlap_perturbative_error_hartree": 9.551266481728162e-06,
+              "one_overlap_phase_error_hartree": 9.551288379572821e-06,
+              "one_overlap_phase_to_model_ratio": 0.7316319544758013,
+              "one_overlap_signed_perturbative_shift_hartree": -9.551266481728162e-06,
+              "one_overlap_signed_phase_shift_hartree": -9.551288379572821e-06,
+              "one_overlap_survival_probability": 0.9999954148187562,
+              "relative_to_analytic_time": 0.8,
+              "schur_off_diagonal_residual_frobenius_norm": 5.620898738737122e-13,
+              "time": 2.075195946231194,
+              "unitarity_residual_frobenius_norm": 1.1259029249831678e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.09323752811178565
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 37812739.73066751,
+                "direct_error_hartree": 9.268518452484853e-06,
+                "direct_to_model_ratio": 0.5570898829390256,
+                "ground_overlap_probability": 0.999992618068579,
+                "overlap_with_previous_probability": 0.9999984121610138,
+                "principal_energy_shift_hartree": -9.268518452484853e-06,
+                "schur_index": 2,
+                "unwrapped_energy_shift_hartree": -9.268518452484853e-06
+              },
+              "elapsed_seconds": 0.0953470622189343,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.09177951095625758,
+                "build_seconds": 0.0924265799112618,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 8.97296704351902e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0004420592449605465,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.999992618068579,
+                  "principal_energy_shift_hartree": -9.268518452484853e-06,
+                  "schur_index": 2
+                },
+                {
+                  "ground_overlap_probability": 4.509980806855732e-06,
+                  "principal_energy_shift_hartree": -0.34088786551837114,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 1.46758993875765e-06,
+                  "principal_energy_shift_hartree": -0.7355759647101529,
+                  "schur_index": 13
+                },
+                {
+                  "ground_overlap_probability": 5.623781666004557e-07,
+                  "principal_energy_shift_hartree": -0.11815489355134583,
+                  "schur_index": 0
+                },
+                {
+                  "ground_overlap_probability": 2.5864281492885287e-07,
+                  "principal_energy_shift_hartree": -0.919715479337522,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 1.5280695145051828e-07,
+                  "principal_energy_shift_hartree": -0.8197748967852385,
+                  "schur_index": 22
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 37812739.73066751,
+                "direct_error_hartree": 9.268518452484853e-06,
+                "direct_to_model_ratio": 0.5570898829390256,
+                "energy_shift_hartree": -9.268518452484853e-06,
+                "ground_overlap_probability": 0.999992618068579,
+                "schur_index": 2
+              },
+              "model_error_hartree": 1.6637384264792522e-05,
+              "one_overlap_perturbative_error_hartree": 1.1643314214005743e-05,
+              "one_overlap_phase_error_hartree": 1.1643360050872804e-05,
+              "one_overlap_phase_to_model_ratio": 0.6998311673014667,
+              "one_overlap_signed_perturbative_shift_hartree": -1.1643314214005743e-05,
+              "one_overlap_signed_phase_shift_hartree": -1.1643360050872804e-05,
+              "one_overlap_survival_probability": 0.9999921267576234,
+              "relative_to_analytic_time": 0.85,
+              "schur_off_diagonal_residual_frobenius_norm": 5.639439387008743e-13,
+              "time": 2.2048956928706436,
+              "unitarity_residual_frobenius_norm": 1.1228045770181537e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.09272517869248986
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 35520138.41151921,
+                "direct_error_hartree": 8.457666034260691e-06,
+                "direct_to_model_ratio": 0.4044558766315308,
+                "ground_overlap_probability": 0.9999663899154702,
+                "overlap_with_previous_probability": 0.9999815967456485,
+                "principal_energy_shift_hartree": -8.457666034260691e-06,
+                "schur_index": 2,
+                "unwrapped_energy_shift_hartree": -8.457666034260691e-06
+              },
+              "elapsed_seconds": 0.0916588818654418,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08828686131164432,
+                "build_seconds": 0.08882224885746837,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 7.767928764224052e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00038836896419525146,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9999663899154702,
+                  "principal_energy_shift_hartree": -8.457666034260691e-06,
+                  "schur_index": 2
+                },
+                {
+                  "ground_overlap_probability": 2.191373204059619e-05,
+                  "principal_energy_shift_hartree": -0.18257510881012673,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 6.85680288826213e-06,
+                  "principal_energy_shift_hartree": 0.040160617360354554,
+                  "schur_index": 1
+                },
+                {
+                  "ground_overlap_probability": 3.284432571417997e-06,
+                  "principal_energy_shift_hartree": -0.5772610794256087,
+                  "schur_index": 8
+                },
+                {
+                  "ground_overlap_probability": 5.186623633882752e-07,
+                  "principal_energy_shift_hartree": -0.7614011034113966,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 3.2302748921215586e-07,
+                  "principal_energy_shift_hartree": -0.6614606170616233,
+                  "schur_index": 22
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 35520138.41151921,
+                "direct_error_hartree": 8.457666034260691e-06,
+                "direct_to_model_ratio": 0.4044558766315308,
+                "energy_shift_hartree": -8.457666034260691e-06,
+                "ground_overlap_probability": 0.9999663899154702,
+                "schur_index": 2
+              },
+              "model_error_hartree": 2.0911220538318032e-05,
+              "one_overlap_perturbative_error_hartree": 1.3978995142851899e-05,
+              "one_overlap_phase_error_hartree": 1.3979086073969549e-05,
+              "one_overlap_phase_to_model_ratio": 0.6684968985121679,
+              "one_overlap_signed_perturbative_shift_hartree": -1.3978995142851899e-05,
+              "one_overlap_signed_phase_shift_hartree": -1.3979086073969549e-05,
+              "one_overlap_survival_probability": 0.9999869908032625,
+              "relative_to_analytic_time": 0.9,
+              "schur_off_diagonal_residual_frobenius_norm": 5.61965244075148e-13,
+              "time": 2.3345954395100934,
+              "unitarity_residual_frobenius_norm": 1.1363139268438125e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08908678917214274
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 34407297.72037725,
+                "direct_error_hartree": 1.1776112968114825e-05,
+                "direct_to_model_ratio": 0.45362627043204184,
+                "ground_overlap_probability": 0.9993888521419982,
+                "overlap_with_previous_probability": 0.9996026215981061,
+                "principal_energy_shift_hartree": 1.1776112968114825e-05,
+                "schur_index": 5,
+                "unwrapped_energy_shift_hartree": 1.1776112968114825e-05
+              },
+              "elapsed_seconds": 0.09205370116978884,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08866286976262927,
+                "build_seconds": 0.08920425921678543,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 7.809000089764595e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003987192176282406,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9993888521419982,
+                  "principal_energy_shift_hartree": 1.1776112968114825e-05,
+                  "schur_index": 5
+                },
+                {
+                  "ground_overlap_probability": 0.0005996658142736478,
+                  "principal_energy_shift_hartree": -0.04094512893849049,
+                  "schur_index": 7
+                },
+                {
+                  "ground_overlap_probability": 7.832351384688838e-06,
+                  "principal_energy_shift_hartree": -0.43561143176621053,
+                  "schur_index": 12
+                },
+                {
+                  "ground_overlap_probability": 1.0592550420536017e-06,
+                  "principal_energy_shift_hartree": -0.6197514134685919,
+                  "schur_index": 21
+                },
+                {
+                  "ground_overlap_probability": 7.090198647945233e-07,
+                  "principal_energy_shift_hartree": -0.5198110364301289,
+                  "schur_index": 23
+                },
+                {
+                  "ground_overlap_probability": 4.6691525093432687e-07,
+                  "principal_energy_shift_hartree": 0.18181039077866135,
+                  "schur_index": 0
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 34407297.72037725,
+                "direct_error_hartree": 1.1776112968114825e-05,
+                "direct_to_model_ratio": 0.45362627043204184,
+                "energy_shift_hartree": 1.1776112968114825e-05,
+                "ground_overlap_probability": 0.9993888521419982,
+                "schur_index": 5
+              },
+              "model_error_hartree": 2.595994486143636e-05,
+              "one_overlap_perturbative_error_hartree": 1.656763850787349e-05,
+              "one_overlap_phase_error_hartree": 1.6567810513910998e-05,
+              "one_overlap_phase_to_model_ratio": 0.6382066912061347,
+              "one_overlap_signed_perturbative_shift_hartree": -1.656763850787349e-05,
+              "one_overlap_signed_phase_shift_hartree": -1.6567810513910998e-05,
+              "one_overlap_survival_probability": 0.9999792367806595,
+              "relative_to_analytic_time": 0.95,
+              "schur_off_diagonal_residual_frobenius_norm": 5.525858841920008e-13,
+              "time": 2.464295186149543,
+              "unitarity_residual_frobenius_norm": 1.1229377733754344e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08944466803222895
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 36485804.0361055,
+                "direct_error_hartree": 2.7142424108671283e-05,
+                "direct_to_model_ratio": 0.8516071276216193,
+                "ground_overlap_probability": 0.9997887444063461,
+                "overlap_with_previous_probability": 0.9985519894141628,
+                "principal_energy_shift_hartree": -2.7142424108671283e-05,
+                "schur_index": 11,
+                "unwrapped_energy_shift_hartree": -2.7142424108671283e-05
+              },
+              "elapsed_seconds": 0.0905692046508193,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08709937427192926,
+                "build_seconds": 0.08764761313796043,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.7930126786231995e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.000433329027146101,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9997887444063461,
+                  "principal_energy_shift_hartree": -2.7142424108671283e-05,
+                  "schur_index": 11
+                },
+                {
+                  "ground_overlap_probability": 0.00018264868139328152,
+                  "principal_energy_shift_hartree": 0.08658055637107485,
+                  "schur_index": 6
+                },
+                {
+                  "ground_overlap_probability": 2.098675200336526e-05,
+                  "principal_energy_shift_hartree": -0.3081282502970668,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 2.240992642365583e-06,
+                  "principal_energy_shift_hartree": -0.49226680805080947,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 1.6650313543231759e-06,
+                  "principal_energy_shift_hartree": -0.3923265536363558,
+                  "schur_index": 22
+                },
+                {
+                  "ground_overlap_probability": 1.2131552921749188e-06,
+                  "principal_energy_shift_hartree": -0.2822582271087006,
+                  "schur_index": 16
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 36485804.0361055,
+                "direct_error_hartree": 2.7142424108671283e-05,
+                "direct_to_model_ratio": 0.8516071276216193,
+                "energy_shift_hartree": -2.7142424108671283e-05,
+                "ground_overlap_probability": 0.9997887444063461,
+                "schur_index": 11
+              },
+              "model_error_hartree": 3.1872002039808e-05,
+              "one_overlap_perturbative_error_hartree": 1.9426343551011854e-05,
+              "one_overlap_phase_error_hartree": 1.94266554891962e-05,
+              "one_overlap_phase_to_model_ratio": 0.6095210293012778,
+              "one_overlap_signed_perturbative_shift_hartree": -1.9426343551011854e-05,
+              "one_overlap_signed_phase_shift_hartree": -1.94266554891962e-05,
+              "one_overlap_survival_probability": 0.9999678866536463,
+              "relative_to_analytic_time": 1.0,
+              "schur_off_diagonal_residual_frobenius_norm": 5.50204135711774e-13,
+              "time": 2.5939949327889926,
+              "unitarity_residual_frobenius_norm": 1.118047204207955e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08787994086742401
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 31588594.0362331,
+                "direct_error_hartree": 1.3916767203324552e-05,
+                "direct_to_model_ratio": 0.3592293576342459,
+                "ground_overlap_probability": 0.9998650474073637,
+                "overlap_with_previous_probability": 0.9999334078446588,
+                "principal_energy_shift_hartree": -1.3916767203324552e-05,
+                "schur_index": 11,
+                "unwrapped_energy_shift_hartree": -1.3916767203324552e-05
+              },
+              "elapsed_seconds": 0.09364669723436236,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08869138918817043,
+                "build_seconds": 0.0896213767118752,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.117019802331924e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00040659913793206215,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9998650474073637,
+                  "principal_energy_shift_hartree": -1.3916767203324552e-05,
+                  "schur_index": 11
+                },
+                {
+                  "ground_overlap_probability": 7.108356853304086e-05,
+                  "principal_energy_shift_hartree": -0.19279075563829642,
+                  "schur_index": 16
+                },
+                {
+                  "ground_overlap_probability": 4.540898576981546e-05,
+                  "principal_energy_shift_hartree": 0.20191663738481938,
+                  "schur_index": 5
+                },
+                {
+                  "ground_overlap_probability": 5.041670102309728e-06,
+                  "principal_energy_shift_hartree": -0.3769239108343392,
+                  "schur_index": 21
+                },
+                {
+                  "ground_overlap_probability": 4.599629505138551e-06,
+                  "principal_energy_shift_hartree": -0.16691493514941433,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 4.4179649470334424e-06,
+                  "principal_energy_shift_hartree": -0.27698380924912497,
+                  "schur_index": 23
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 31588594.0362331,
+                "direct_error_hartree": 1.3916767203324552e-05,
+                "direct_to_model_ratio": 0.3592293576342459,
+                "energy_shift_hartree": -1.3916767203324552e-05,
+                "ground_overlap_probability": 0.9998650474073637,
+                "schur_index": 11
+              },
+              "model_error_hartree": 3.874061767939939e-05,
+              "one_overlap_perturbative_error_hartree": 2.2583714161393827e-05,
+              "one_overlap_phase_error_hartree": 2.25842591856033e-05,
+              "one_overlap_phase_to_model_ratio": 0.5829607409076663,
+              "one_overlap_signed_perturbative_shift_hartree": -2.2583714161393827e-05,
+              "one_overlap_signed_phase_shift_hartree": -2.25842591856033e-05,
+              "one_overlap_survival_probability": 0.9999517359956981,
+              "relative_to_analytic_time": 1.05,
+              "schur_off_diagonal_residual_frobenius_norm": 5.445213330936525e-13,
+              "time": 2.7236946794284425,
+              "unitarity_residual_frobenius_norm": 1.1019666217320427e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.09081790503114462
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 30559128.64727172,
+                "direct_error_hartree": 1.5850892874340252e-05,
+                "direct_to_model_ratio": 0.3396828695982954,
+                "ground_overlap_probability": 0.9994475761520811,
+                "overlap_with_previous_probability": 0.9998092902554777,
+                "principal_energy_shift_hartree": 1.5850892874340252e-05,
+                "schur_index": 21,
+                "unwrapped_energy_shift_hartree": 1.5850892874340252e-05
+              },
+              "elapsed_seconds": 0.0900632357224822,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08667350467294455,
+                "build_seconds": 0.08720084372907877,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.740028038620949e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00038878899067640305,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9994475761520811,
+                  "principal_energy_shift_hartree": 1.5850892874340252e-05,
+                  "schur_index": 21
+                },
+                {
+                  "ground_overlap_probability": 0.00044853248003475535,
+                  "principal_energy_shift_hartree": -0.08795787674217857,
+                  "schur_index": 19
+                },
+                {
+                  "ground_overlap_probability": 4.361919487202402e-05,
+                  "principal_energy_shift_hartree": -0.062058958859398806,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 2.6419103172513575e-05,
+                  "principal_energy_shift_hartree": 0.3067574649654356,
+                  "schur_index": 8
+                },
+                {
+                  "ground_overlap_probability": 1.4983474050907304e-05,
+                  "principal_energy_shift_hartree": -0.17212773486208738,
+                  "schur_index": 23
+                },
+                {
+                  "ground_overlap_probability": 1.2632010825577245e-05,
+                  "principal_energy_shift_hartree": -0.2720675012465445,
+                  "schur_index": 15
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 30559128.64727172,
+                "direct_error_hartree": 1.5850892874340252e-05,
+                "direct_to_model_ratio": 0.3396828695982954,
+                "energy_shift_hartree": 1.5850892874340252e-05,
+                "ground_overlap_probability": 0.9994475761520811,
+                "schur_index": 21
+              },
+              "model_error_hartree": 4.666379818648292e-05,
+              "one_overlap_perturbative_error_hartree": 2.6083486873832674e-05,
+              "one_overlap_phase_error_hartree": 2.6084408420042367e-05,
+              "one_overlap_phase_to_model_ratio": 0.5589859684331959,
+              "one_overlap_signed_perturbative_shift_hartree": -2.6083486873832674e-05,
+              "one_overlap_signed_phase_shift_hartree": -2.6084408420042367e-05,
+              "one_overlap_survival_probability": 0.9999293443167687,
+              "relative_to_analytic_time": 1.1,
+              "schur_off_diagonal_residual_frobenius_norm": 5.439714628820401e-13,
+              "time": 2.8533944260678923,
+              "unitarity_residual_frobenius_norm": 1.0933159564015517e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08744520274922252
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.0005645512839005407,
+                "direct_to_model_ratio": 10.127510297931465,
+                "ground_overlap_probability": 0.9392781302753987,
+                "overlap_with_previous_probability": 0.9287065798403936,
+                "principal_energy_shift_hartree": -0.0005645512839005407,
+                "schur_index": 21,
+                "unwrapped_energy_shift_hartree": -0.0005645512839005407
+              },
+              "elapsed_seconds": 0.08968583727255464,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.0863212556578219,
+                "build_seconds": 0.08682385506108403,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.919020622968674e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003856993280351162,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9392781302753987,
+                  "principal_energy_shift_hartree": -0.0005645512839005407,
+                  "schur_index": 21
+                },
+                {
+                  "ground_overlap_probability": 0.060356000085337654,
+                  "principal_energy_shift_hartree": 0.008360280991309366,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 0.00019546308970039064,
+                  "principal_energy_shift_hartree": 0.03369003559424179,
+                  "schur_index": 19
+                },
+                {
+                  "ground_overlap_probability": 9.886263737484694e-05,
+                  "principal_energy_shift_hartree": -0.07639357951911718,
+                  "schur_index": 24
+                },
+                {
+                  "ground_overlap_probability": 3.8907772344695535e-05,
+                  "principal_energy_shift_hartree": -0.17633107386058824,
+                  "schur_index": 16
+                },
+                {
+                  "ground_overlap_probability": 2.0557471016708967e-05,
+                  "principal_energy_shift_hartree": 0.4025261596337016,
+                  "schur_index": 13
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.0005645512839005407,
+                "direct_to_model_ratio": 10.127510297931465,
+                "energy_shift_hartree": -0.0005645512839005407,
+                "ground_overlap_probability": 0.9392781302753987,
+                "schur_index": 21
+              },
+              "model_error_hartree": 5.574433076763692e-05,
+              "one_overlap_perturbative_error_hartree": 2.9987701180823947e-05,
+              "one_overlap_phase_error_hartree": 2.998921516620173e-05,
+              "one_overlap_phase_to_model_ratio": 0.5379778491055516,
+              "one_overlap_signed_perturbative_shift_hartree": -2.9987701180823947e-05,
+              "one_overlap_signed_phase_shift_hartree": -2.998921516620173e-05,
+              "one_overlap_survival_probability": 0.9998990365599427,
+              "relative_to_analytic_time": 1.15,
+              "schur_off_diagonal_residual_frobenius_norm": 5.35019849512761e-13,
+              "time": 2.9830941727073412,
+              "unitarity_residual_frobenius_norm": 1.1016196331828354e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08707883395254612
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 260783728.16622305,
+                "direct_error_hartree": 0.00014394473048897168,
+                "direct_to_model_ratio": 2.1780178874694975,
+                "ground_overlap_probability": 0.993546153342468,
+                "overlap_with_previous_probability": 0.9441560482416681,
+                "principal_energy_shift_hartree": -0.00014394473048897168,
+                "schur_index": 24,
+                "unwrapped_energy_shift_hartree": -0.00014394473048897168
+              },
+              "elapsed_seconds": 0.0931849880144,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08976802695542574,
+                "build_seconds": 0.0903098862618208,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.685025826096535e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.000420939177274704,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.993546153342468,
+                  "principal_energy_shift_hartree": -0.00014394473048897168,
+                  "schur_index": 24
+                },
+                {
+                  "ground_overlap_probability": 0.005552321379354433,
+                  "principal_energy_shift_hartree": 0.011438684929842699,
+                  "schur_index": 23
+                },
+                {
+                  "ground_overlap_probability": 0.0006389190420196276,
+                  "principal_energy_shift_hartree": 0.09564239248895177,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 0.0001980079062774198,
+                  "principal_energy_shift_hartree": -0.08858031954085903,
+                  "schur_index": 10
+                },
+                {
+                  "ground_overlap_probability": 1.9389735954866964e-05,
+                  "principal_energy_shift_hartree": 0.12144691426105395,
+                  "schur_index": 21
+                },
+                {
+                  "ground_overlap_probability": 1.852018141413462e-05,
+                  "principal_energy_shift_hartree": 0.4902841546812462,
+                  "schur_index": 19
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 260783728.16622305,
+                "direct_error_hartree": 0.00014394473048897168,
+                "direct_to_model_ratio": 2.1780178874694975,
+                "energy_shift_hartree": -0.00014394473048897168,
+                "ground_overlap_probability": 0.993546153342468,
+                "schur_index": 24
+              },
+              "model_error_hartree": 6.608978342974586e-05,
+              "one_overlap_perturbative_error_hartree": 3.437905664570906e-05,
+              "one_overlap_phase_error_hartree": 3.438148211076527e-05,
+              "one_overlap_phase_to_model_ratio": 0.5202238580084492,
+              "one_overlap_signed_perturbative_shift_hartree": -3.437905664570906e-05,
+              "one_overlap_signed_phase_shift_hartree": -3.438148211076527e-05,
+              "one_overlap_survival_probability": 0.9998589174328516,
+              "relative_to_analytic_time": 1.2,
+              "schur_off_diagonal_residual_frobenius_norm": 5.309639379015653e-13,
+              "time": 3.112793919346791,
+              "unitarity_residual_frobenius_norm": 1.1041504340375312e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.090556884650141
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.00016236134585953608,
+                "direct_to_model_ratio": 2.0865713795137104,
+                "ground_overlap_probability": 0.9694802458301239,
+                "overlap_with_previous_probability": 0.9704503701763686,
+                "principal_energy_shift_hartree": 0.00016236134585953608,
+                "schur_index": 8,
+                "unwrapped_energy_shift_hartree": 0.00016236134585953608
+              },
+              "elapsed_seconds": 0.08991988701745868,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08654112461954355,
+                "build_seconds": 0.08707343460991979,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.941977724432945e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0004113488830626011,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9694802458301239,
+                  "principal_energy_shift_hartree": 0.00016236134585953608,
+                  "schur_index": 8
+                },
+                {
+                  "ground_overlap_probability": 0.03006057074041947,
+                  "principal_energy_shift_hartree": -0.008070119243712042,
+                  "schur_index": 7
+                },
+                {
+                  "ground_overlap_probability": 0.00024209915460622915,
+                  "principal_energy_shift_hartree": 0.176358839911041,
+                  "schur_index": 11
+                },
+                {
+                  "ground_overlap_probability": 0.0001117364565160518,
+                  "principal_energy_shift_hartree": 0.09212312371543611,
+                  "schur_index": 13
+                },
+                {
+                  "ground_overlap_probability": 4.382421433144385e-05,
+                  "principal_energy_shift_hartree": -0.16038336705553274,
+                  "schur_index": 5
+                },
+                {
+                  "ground_overlap_probability": 1.825519924951585e-05,
+                  "principal_energy_shift_hartree": 0.571023221530569,
+                  "schur_index": 16
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.00016236134585953608,
+                "direct_to_model_ratio": 2.0865713795137104,
+                "energy_shift_hartree": 0.00016236134585953608,
+                "ground_overlap_probability": 0.9694802458301239,
+                "schur_index": 8
+              },
+              "model_error_hartree": 7.781250498000002e-05,
+              "one_overlap_perturbative_error_hartree": 3.93621301422347e-05,
+              "one_overlap_phase_error_hartree": 3.9365931226319635e-05,
+              "one_overlap_phase_to_model_ratio": 0.505907517518396,
+              "one_overlap_signed_perturbative_shift_hartree": -3.93621301422347e-05,
+              "one_overlap_signed_phase_shift_hartree": -3.9365931226319635e-05,
+              "one_overlap_survival_probability": 0.9998068993377048,
+              "relative_to_analytic_time": 1.25,
+              "schur_off_diagonal_residual_frobenius_norm": 5.281282060262643e-13,
+              "time": 3.242493665986241,
+              "unitarity_residual_frobenius_norm": 1.086086643398138e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.0873139426112175
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 97876106.543199,
+                "direct_error_hartree": 0.00012144657746487268,
+                "direct_to_model_ratio": 1.3341434442943618,
+                "ground_overlap_probability": 0.99663439880714,
+                "overlap_with_previous_probability": 0.9585612990133535,
+                "principal_energy_shift_hartree": -0.00012144657746487268,
+                "schur_index": 17,
+                "unwrapped_energy_shift_hartree": -0.00012144657746487268
+              },
+              "elapsed_seconds": 0.09222158137708902,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08710738364607096,
+                "build_seconds": 0.08782035205513239,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.8270059525966644e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0004015290178358555,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.99663439880714,
+                  "principal_energy_shift_hartree": -0.00012144657746487268,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 0.0023507807948736723,
+                  "principal_energy_shift_hartree": 0.006490171886133257,
+                  "schur_index": 16
+                },
+                {
+                  "ground_overlap_probability": 0.0005607938501037776,
+                  "principal_energy_shift_hartree": 0.06674389698551923,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 0.00019248257344345036,
+                  "principal_energy_shift_hartree": -0.08586322587672601,
+                  "schur_index": 18
+                },
+                {
+                  "ground_overlap_probability": 0.00015341448077034982,
+                  "principal_energy_shift_hartree": 0.2508649021893815,
+                  "schur_index": 29
+                },
+                {
+                  "ground_overlap_probability": 4.355063779029999e-05,
+                  "principal_energy_shift_hartree": 0.16664571345150675,
+                  "schur_index": 36
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 97876106.543199,
+                "direct_error_hartree": 0.00012144657746487268,
+                "direct_to_model_ratio": 1.3341434442943618,
+                "energy_shift_hartree": -0.00012144657746487268,
+                "ground_overlap_probability": 0.99663439880714,
+                "schur_index": 17
+              },
+              "model_error_hartree": 9.102962502589566e-05,
+              "one_overlap_perturbative_error_hartree": 4.506318802267722e-05,
+              "one_overlap_phase_error_hartree": 4.506903079252835e-05,
+              "one_overlap_phase_to_model_ratio": 0.4951028940271624,
+              "one_overlap_signed_perturbative_shift_hartree": -4.506318802267722e-05,
+              "one_overlap_signed_phase_shift_hartree": -4.506903079252835e-05,
+              "one_overlap_survival_probability": 0.9997407435855554,
+              "relative_to_analytic_time": 1.3,
+              "schur_off_diagonal_residual_frobenius_norm": 5.270290030222237e-13,
+              "time": 3.3721934126256907,
+              "unitarity_residual_frobenius_norm": 1.0949146870720351e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08943757833912969
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 22799498.778926548,
+                "direct_error_hartree": 2.6293088408167344e-06,
+                "direct_to_model_ratio": 0.02483688824461666,
+                "ground_overlap_probability": 0.9932696508740102,
+                "overlap_with_previous_probability": 0.9937168649396017,
+                "principal_energy_shift_hartree": 2.6293088408167344e-06,
+                "schur_index": 17,
+                "unwrapped_energy_shift_hartree": 2.6293088408167344e-06
+              },
+              "elapsed_seconds": 0.09036734513938427,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08677232498303056,
+                "build_seconds": 0.08758333278819919,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.738025695085526e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003946288488805294,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9932696508740102,
+                  "principal_energy_shift_hartree": 2.6293088408167344e-06,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 0.006201034843720257,
+                  "principal_energy_shift_hartree": -0.01694303656977553,
+                  "schur_index": 16
+                },
+                {
+                  "ground_overlap_probability": 0.0001713242063910504,
+                  "principal_energy_shift_hartree": 0.13573682035091086,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 0.00013361490388498585,
+                  "principal_energy_shift_hartree": -0.06200486186492964,
+                  "schur_index": 18
+                },
+                {
+                  "ground_overlap_probability": 0.00011830093797396494,
+                  "principal_energy_shift_hartree": 0.3196257253343853,
+                  "schur_index": 23
+                },
+                {
+                  "ground_overlap_probability": 2.763581746853527e-05,
+                  "principal_energy_shift_hartree": 0.23564384234638341,
+                  "schur_index": 22
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 22799498.778926548,
+                "direct_error_hartree": 2.6293088408167344e-06,
+                "direct_to_model_ratio": 0.02483688824461666,
+                "energy_shift_hartree": 2.6293088408167344e-06,
+                "ground_overlap_probability": 0.9932696508740102,
+                "schur_index": 17
+              },
+              "model_error_hartree": 0.00010586305397523505,
+              "one_overlap_perturbative_error_hartree": 5.162841776767113e-05,
+              "one_overlap_phase_error_hartree": 5.1637245844355175e-05,
+              "one_overlap_phase_to_model_ratio": 0.487774005239211,
+              "one_overlap_signed_perturbative_shift_hartree": -5.162841776767113e-05,
+              "one_overlap_signed_phase_shift_hartree": -5.1637245844355175e-05,
+              "one_overlap_survival_probability": 0.9996581134185456,
+              "relative_to_analytic_time": 1.35,
+              "schur_off_diagonal_residual_frobenius_norm": 5.212493298757469e-13,
+              "time": 3.50189315926514,
+              "unitarity_residual_frobenius_norm": 1.087119403151217e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08782076230272651
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.00040639274086898595,
+                "direct_to_model_ratio": 3.3191314663512395,
+                "ground_overlap_probability": 0.9058060763460504,
+                "overlap_with_previous_probability": 0.8892810876864528,
+                "principal_energy_shift_hartree": -0.00040639274086898595,
+                "schur_index": 17,
+                "unwrapped_energy_shift_hartree": -0.00040639274086898595
+              },
+              "elapsed_seconds": 0.09043031511828303,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08713866304606199,
+                "build_seconds": 0.08765399223193526,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.3839292377233505e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00040490971878170967,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9058060763460504,
+                  "principal_energy_shift_hartree": -0.00040639274086898595,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 0.0928972590219735,
+                  "principal_energy_shift_hartree": 0.0023384064177317428,
+                  "schur_index": 16
+                },
+                {
+                  "ground_overlap_probability": 0.000980324889610559,
+                  "principal_energy_shift_hartree": 0.04728805419433965,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 0.00010665135405739872,
+                  "principal_energy_shift_hartree": 0.3840671536819921,
+                  "schur_index": 19
+                },
+                {
+                  "ground_overlap_probability": 9.940079926577808e-05,
+                  "principal_energy_shift_hartree": 0.19980887344449721,
+                  "schur_index": 14
+                },
+                {
+                  "ground_overlap_probability": 3.089212606206097e-05,
+                  "principal_energy_shift_hartree": -0.22596861258145043,
+                  "schur_index": 10
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.00040639274086898595,
+                "direct_to_model_ratio": 3.3191314663512395,
+                "energy_shift_hartree": -0.00040639274086898595,
+                "ground_overlap_probability": 0.9058060763460504,
+                "schur_index": 17
+              },
+              "model_error_hartree": 0.0001224394830361264,
+              "one_overlap_perturbative_error_hartree": 5.9220514126680416e-05,
+              "one_overlap_phase_error_hartree": 5.9233647065491236e-05,
+              "one_overlap_phase_to_model_ratio": 0.48377897061207,
+              "one_overlap_signed_perturbative_shift_hartree": -5.9220514126680416e-05,
+              "one_overlap_signed_phase_shift_hartree": -5.9233647065491236e-05,
+              "one_overlap_survival_probability": 0.9995566362376442,
+              "relative_to_analytic_time": 1.4,
+              "schur_off_diagonal_residual_frobenius_norm": 5.159981125232405e-13,
+              "time": 3.6315929059045895,
+              "unitarity_residual_frobenius_norm": 1.0796937471601405e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.0878816619515419
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 146947273.96988243,
+                "direct_error_hartree": 0.00013671963555686678,
+                "direct_to_model_ratio": 0.9703972085582938,
+                "ground_overlap_probability": 0.9992171564224032,
+                "overlap_with_previous_probability": 0.9149000294094238,
+                "principal_energy_shift_hartree": -0.00013671963555686678,
+                "schur_index": 15,
+                "unwrapped_energy_shift_hartree": -0.00013671963555686678
+              },
+              "elapsed_seconds": 0.09195279097184539,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08854469005018473,
+                "build_seconds": 0.08907280908897519,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 7.297005504369736e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00039309868589043617,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9992171564224032,
+                  "principal_energy_shift_hartree": -0.00013671963555686678,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 0.00023827725886853724,
+                  "principal_energy_shift_hartree": 0.1069269761938386,
+                  "schur_index": 16
+                },
+                {
+                  "ground_overlap_probability": 0.0002054705703578641,
+                  "principal_energy_shift_hartree": 0.06175624698336236,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 0.00010209159885007165,
+                  "principal_energy_shift_hartree": 0.4436901919116205,
+                  "schur_index": 22
+                },
+                {
+                  "ground_overlap_probability": 7.386065730608451e-05,
+                  "principal_energy_shift_hartree": 0.25945624577833426,
+                  "schur_index": 13
+                },
+                {
+                  "ground_overlap_probability": 6.972024101857027e-05,
+                  "principal_energy_shift_hartree": -0.16631011810960997,
+                  "schur_index": 12
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 146947273.96988243,
+                "direct_error_hartree": 0.00013671963555686678,
+                "direct_to_model_ratio": 0.9703972085582938,
+                "energy_shift_hartree": -0.00013671963555686678,
+                "ground_overlap_probability": 0.9992171564224032,
+                "schur_index": 15
+              },
+              "model_error_hartree": 0.000140890384216984,
+              "one_overlap_perturbative_error_hartree": 6.801367600440477e-05,
+              "one_overlap_phase_error_hartree": 6.803293376326509e-05,
+              "one_overlap_phase_to_model_ratio": 0.4828784742221171,
+              "one_overlap_signed_perturbative_shift_hartree": -6.801367600440477e-05,
+              "one_overlap_signed_phase_shift_hartree": -6.803293376326509e-05,
+              "one_overlap_survival_probability": 0.9994339714564243,
+              "relative_to_analytic_time": 1.45,
+              "schur_off_diagonal_residual_frobenius_norm": 5.103373010371913e-13,
+              "time": 3.7612926525440393,
+              "unitarity_residual_frobenius_norm": 1.077585664039177e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08931996813043952
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 72798606.06333478,
+                "direct_error_hartree": 0.00011518274548581947,
+                "direct_to_model_ratio": 0.7138599962450064,
+                "ground_overlap_probability": 0.9993158801659473,
+                "overlap_with_previous_probability": 0.9999112180533337,
+                "principal_energy_shift_hartree": -0.00011518274548581947,
+                "schur_index": 9,
+                "unwrapped_energy_shift_hartree": -0.00011518274548581947
+              },
+              "elapsed_seconds": 0.0896908869035542,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08628759626299143,
+                "build_seconds": 0.08679987490177155,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 5.473010241985321e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003988887183368206,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9993158801659473,
+                  "principal_energy_shift_hartree": -0.00011518274548581947,
+                  "schur_index": 9
+                },
+                {
+                  "ground_overlap_probability": 0.00019166667812490557,
+                  "principal_energy_shift_hartree": -0.11063321711471495,
+                  "schur_index": 4
+                },
+                {
+                  "ground_overlap_probability": 0.00012731258095072863,
+                  "principal_energy_shift_hartree": 0.16260440040752747,
+                  "schur_index": 8
+                },
+                {
+                  "ground_overlap_probability": 0.00010286989145833144,
+                  "principal_energy_shift_hartree": 0.4993462319762065,
+                  "schur_index": 19
+                },
+                {
+                  "ground_overlap_probability": 7.029128990417306e-05,
+                  "principal_energy_shift_hartree": 0.11743494003185637,
+                  "schur_index": 10
+                },
+                {
+                  "ground_overlap_probability": 6.212650976329518e-05,
+                  "principal_energy_shift_hartree": 0.3150430757963682,
+                  "schur_index": 6
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 72798606.06333478,
+                "direct_error_hartree": 0.00011518274548581947,
+                "direct_to_model_ratio": 0.7138599962450064,
+                "energy_shift_hartree": -0.00011518274548581947,
+                "ground_overlap_probability": 0.9993158801659473,
+                "schur_index": 9
+              },
+              "model_error_hartree": 0.00016135201032652796,
+              "one_overlap_perturbative_error_hartree": 7.818719094110707e-05,
+              "one_overlap_phase_error_hartree": 7.821504636971266e-05,
+              "one_overlap_phase_to_model_ratio": 0.48474788886378867,
+              "one_overlap_signed_perturbative_shift_hartree": -7.818719094110707e-05,
+              "one_overlap_signed_phase_shift_hartree": -7.821504636971266e-05,
+              "one_overlap_survival_probability": 0.9992878796808145,
+              "relative_to_analytic_time": 1.5,
+              "schur_off_diagonal_residual_frobenius_norm": 5.112207142586497e-13,
+              "time": 3.8909923991834887,
+              "unitarity_residual_frobenius_norm": 1.0841976259438294e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08703183382749557
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 38444757.26936942,
+                "direct_error_hartree": 7.840488965959052e-05,
+                "direct_to_model_ratio": 0.42619368534372104,
+                "ground_overlap_probability": 0.9986625078187051,
+                "overlap_with_previous_probability": 0.9997549525570679,
+                "principal_energy_shift_hartree": -7.840488965959052e-05,
+                "schur_index": 20,
+                "unwrapped_energy_shift_hartree": -7.840488965959052e-05
+              },
+              "elapsed_seconds": 0.0978972758166492,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08652997529134154,
+                "build_seconds": 0.09308512788265944,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 0.0002468600869178772,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.006116964388638735,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9986625078187051,
+                  "principal_energy_shift_hartree": -7.840488965959052e-05,
+                  "schur_index": 20
+                },
+                {
+                  "ground_overlap_probability": 0.0008287229748318714,
+                  "principal_energy_shift_hartree": -0.05856501527321649,
+                  "schur_index": 19
+                },
+                {
+                  "ground_overlap_probability": 0.00010797562756074107,
+                  "principal_energy_shift_hartree": 0.5514882493047737,
+                  "schur_index": 10
+                },
+                {
+                  "ground_overlap_probability": 8.995137598206186e-05,
+                  "principal_energy_shift_hartree": 0.21469226754339504,
+                  "schur_index": 15
+                },
+                {
+                  "ground_overlap_probability": 5.762986072552045e-05,
+                  "principal_energy_shift_hartree": 0.36732103087142803,
+                  "schur_index": 21
+                },
+                {
+                  "ground_overlap_probability": 4.980015028798391e-05,
+                  "principal_energy_shift_hartree": -0.19078674174113824,
+                  "schur_index": 14
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 38444757.26936942,
+                "direct_error_hartree": 7.840488965959052e-05,
+                "direct_to_model_ratio": 0.42619368534372104,
+                "energy_shift_hartree": -7.840488965959052e-05,
+                "ground_overlap_probability": 0.9986625078187051,
+                "schur_index": 20
+              },
+              "model_error_hartree": 0.00018396539497378463,
+              "one_overlap_perturbative_error_hartree": 8.991789263616405e-05,
+              "one_overlap_phase_error_hartree": 8.995765168641267e-05,
+              "one_overlap_phase_to_model_ratio": 0.48899224606471114,
+              "one_overlap_signed_perturbative_shift_hartree": -8.991789263616405e-05,
+              "one_overlap_signed_phase_shift_hartree": -8.995765168641267e-05,
+              "one_overlap_survival_probability": 0.9991162885294038,
+              "relative_to_analytic_time": 1.55,
+              "schur_off_diagonal_residual_frobenius_norm": 5.018940129356818e-13,
+              "time": 4.020692145822939,
+              "unitarity_residual_frobenius_norm": 1.0825194087927075e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.09474497381597757
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.00023497527167211867,
+                "direct_to_model_ratio": 1.12494913274362,
+                "ground_overlap_probability": 0.9656626736440316,
+                "overlap_with_previous_probability": 0.9759168531265375,
+                "principal_energy_shift_hartree": 0.00023497527167211867,
+                "schur_index": 5,
+                "unwrapped_energy_shift_hartree": 0.00023497527167211867
+              },
+              "elapsed_seconds": 0.09043827513232827,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.08688709512352943,
+                "build_seconds": 0.08756530284881592,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.352970376610756e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.00040831882506608963,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9656626736440316,
+                  "principal_energy_shift_hartree": 0.00023497527167211867,
+                  "schur_index": 5
+                },
+                {
+                  "ground_overlap_probability": 0.03359826418606757,
+                  "principal_energy_shift_hartree": -0.01001766315371541,
+                  "schur_index": 6
+                },
+                {
+                  "ground_overlap_probability": 0.0001477336398343444,
+                  "principal_energy_shift_hartree": -0.05982551232061772,
+                  "schur_index": 24
+                },
+                {
+                  "ground_overlap_probability": 0.00011683315287624061,
+                  "principal_energy_shift_hartree": 0.6002245050332001,
+                  "schur_index": 19
+                },
+                {
+                  "ground_overlap_probability": 0.00010912148157315593,
+                  "principal_energy_shift_hartree": -0.1419178802435459,
+                  "schur_index": 9
+                },
+                {
+                  "ground_overlap_probability": 8.768836414100526e-05,
+                  "principal_energy_shift_hartree": -0.15685806632460722,
+                  "schur_index": 10
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": null,
+                "direct_error_hartree": 0.00023497527167211867,
+                "direct_to_model_ratio": 1.12494913274362,
+                "energy_shift_hartree": 0.00023497527167211867,
+                "ground_overlap_probability": 0.9656626736440316,
+                "schur_index": 5
+              },
+              "model_error_hartree": 0.00020887635256808574,
+              "one_overlap_perturbative_error_hartree": 0.00010337186327481442,
+              "one_overlap_phase_error_hartree": 0.00010342786968217263,
+              "one_overlap_phase_to_model_ratio": 0.4951631355610687,
+              "one_overlap_signed_perturbative_shift_hartree": -0.00010337186327481442,
+              "one_overlap_signed_phase_shift_hartree": -0.00010342786968217263,
+              "one_overlap_survival_probability": 0.9989173504057846,
+              "relative_to_analytic_time": 1.6,
+              "schur_off_diagonal_residual_frobenius_norm": 4.957129979320145e-13,
+              "time": 4.150391892462388,
+              "unitarity_residual_frobenius_norm": 1.0738121857277087e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08782485174015164
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 1413204153.547842,
+                "direct_error_hartree": 0.0001572911826261933,
+                "direct_to_model_ratio": 0.6658237100768969,
+                "ground_overlap_probability": 0.9919798161817359,
+                "overlap_with_previous_probability": 0.9407899428505325,
+                "principal_energy_shift_hartree": -0.0001572911826261933,
+                "schur_index": 23,
+                "unwrapped_energy_shift_hartree": -0.0001572911826261933
+              },
+              "elapsed_seconds": 0.0894385282881558,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.0860371170565486,
+                "build_seconds": 0.08656212501227856,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 6.577977910637856e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003922688774764538,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.9919798161817359,
+                  "principal_energy_shift_hartree": -0.0001572911826261933,
+                  "schur_index": 23
+                },
+                {
+                  "ground_overlap_probability": 0.003272913145398636,
+                  "principal_energy_shift_hartree": -0.01401631980636317,
+                  "schur_index": 24
+                },
+                {
+                  "ground_overlap_probability": 0.003079946847579576,
+                  "principal_energy_shift_hartree": 0.03634134634410952,
+                  "schur_index": 19
+                },
+                {
+                  "ground_overlap_probability": 0.00040682100913997694,
+                  "principal_energy_shift_hartree": -0.01657881084153482,
+                  "schur_index": 25
+                },
+                {
+                  "ground_overlap_probability": 0.00036289896130926007,
+                  "principal_energy_shift_hartree": 0.0020232867179604107,
+                  "schur_index": 22
+                },
+                {
+                  "ground_overlap_probability": 0.00028449507178692743,
+                  "principal_energy_shift_hartree": -0.09604948216322949,
+                  "schur_index": 17
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 1413204153.547842,
+                "direct_error_hartree": 0.0001572911826261933,
+                "direct_to_model_ratio": 0.6658237100768969,
+                "energy_shift_hartree": -0.0001572911826261933,
+                "ground_overlap_probability": 0.9919798161817359,
+                "schur_index": 23
+              },
+              "model_error_hartree": 0.00023623547831906966,
+              "one_overlap_perturbative_error_hartree": 0.00011869580871662981,
+              "one_overlap_phase_error_hartree": 0.00011877366650687416,
+              "one_overlap_phase_to_model_ratio": 0.502776582721641,
+              "one_overlap_signed_perturbative_shift_hartree": -0.00011869580871662981,
+              "one_overlap_signed_phase_shift_hartree": -0.00011877366650687416,
+              "one_overlap_survival_probability": 0.9986894879145489,
+              "relative_to_analytic_time": 1.65,
+              "schur_off_diagonal_residual_frobenius_norm": 4.955283040041912e-13,
+              "time": 4.280091639101838,
+              "unitarity_residual_frobenius_norm": 1.0702189783222852e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08679856499657035
+            },
+            {
+              "continuously_tracked_branch": {
+                "cost": 90097030.87516296,
+                "direct_error_hartree": 0.00012786413037885023,
+                "direct_to_model_ratio": 0.48033440963370083,
+                "ground_overlap_probability": 0.995909846397054,
+                "overlap_with_previous_probability": 0.9898605189155306,
+                "principal_energy_shift_hartree": -0.00012786413037885023,
+                "schur_index": 31,
+                "unwrapped_energy_shift_hartree": -0.00012786413037885023
+              },
+              "elapsed_seconds": 0.09231870993971825,
+              "gpu_backend": {
+                "backend": "gpu_exact_dense_sector_unitary_cpu_schur",
+                "block_build_seconds": 0.0889295400120318,
+                "build_seconds": 0.0894518569111824,
+                "cupy_pool_reserved_bytes": 2084864,
+                "device_free_after_bytes": 41950773248,
+                "device_free_before_bytes": 41952870400,
+                "device_total_bytes": 42409000960,
+                "dimension": 50,
+                "dtype": "complex128",
+                "group_count": 43,
+                "host_transfer_seconds": 7.42604024708271e-05,
+                "logical_device": 0,
+                "s2_stage_count": 11,
+                "stage_compose_seconds": 0.0003879494033753872,
+                "unique_s2_stage_count": 6
+              },
+              "leading_ground_overlap_branches": [
+                {
+                  "ground_overlap_probability": 0.995909846397054,
+                  "principal_energy_shift_hartree": -0.00012786413037885023,
+                  "schur_index": 31
+                },
+                {
+                  "ground_overlap_probability": 0.0011137594675445313,
+                  "principal_energy_shift_hartree": -0.052896320405364176,
+                  "schur_index": 17
+                },
+                {
+                  "ground_overlap_probability": 0.0008804893810169417,
+                  "principal_energy_shift_hartree": 0.02924699971415168,
+                  "schur_index": 32
+                },
+                {
+                  "ground_overlap_probability": 0.0007611834775712298,
+                  "principal_energy_shift_hartree": 0.07926482049559781,
+                  "schur_index": 22
+                },
+                {
+                  "ground_overlap_probability": 0.0006654491956670566,
+                  "principal_energy_shift_hartree": -0.0678175751300624,
+                  "schur_index": 18
+                },
+                {
+                  "ground_overlap_probability": 0.0001754198088889151,
+                  "principal_energy_shift_hartree": 0.026609601642513317,
+                  "schur_index": 36
+                }
+              ],
+              "maximum_ground_overlap_branch": {
+                "cost": 90097030.87516296,
+                "direct_error_hartree": 0.00012786413037885023,
+                "direct_to_model_ratio": 0.48033440963370083,
+                "energy_shift_hartree": -0.00012786413037885023,
+                "ground_overlap_probability": 0.995909846397054,
+                "schur_index": 31
+              },
+              "model_error_hartree": 0.00026619814823668035,
+              "one_overlap_perturbative_error_hartree": 0.00013600855623598104,
+              "one_overlap_phase_error_hartree": 0.00013611535998713862,
+              "one_overlap_phase_to_model_ratio": 0.5113309799064291,
+              "one_overlap_signed_perturbative_shift_hartree": -0.00013600855623598104,
+              "one_overlap_signed_phase_shift_hartree": -0.00013611535998713862,
+              "one_overlap_survival_probability": 0.9984314233395237,
+              "relative_to_analytic_time": 1.7,
+              "schur_off_diagonal_residual_frobenius_norm": 4.895304150609013e-13,
+              "time": 4.409791385741287,
+              "unitarity_residual_frobenius_norm": 1.053811250317549e-12,
+              "unitary_build_method": "s2-cache",
+              "unitary_build_seconds": 0.08968520723283291
+            }
+          ],
+          "short_time_fit": {
+            "elapsed_seconds": 0.12961025442928076,
+            "fit_mask": [
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true,
+              true
+            ],
+            "fixed_order": 4,
+            "fixed_order_alpha": 7.03935473189451e-07,
+            "free_fit": {
+              "alpha": 6.887718059224346e-07,
+              "order": 3.979458521002995,
+              "r2": 0.9999941485762589
+            },
+            "minimum_fit_error_hartree": 5e-12,
+            "points": [
+              {
+                "evolved_state_norm": 0.999999999999925,
+                "ground_state_survival_probability": 0.9999999999998499,
+                "overlap_phase_error_hartree": 3.603043789250445e-10,
+                "perturbative_error_hartree": 3.603043789250175e-10,
+                "phase_rotated_overlap": {
+                  "imag": -5.404565683875262e-11,
+                  "real": 0.999999999999925
+                },
+                "signed_perturbative_error_hartree": -3.603043789250175e-10,
+                "time": 0.15
+              },
+              {
+                "evolved_state_norm": 0.9999999999999215,
+                "ground_state_survival_probability": 0.9999999999998428,
+                "overlap_phase_error_hartree": 8.315239738378852e-10,
+                "perturbative_error_hartree": 8.315239738378198e-10,
+                "phase_rotated_overlap": {
+                  "imag": -1.5375911655013397e-10,
+                  "real": 0.9999999999999214
+                },
+                "signed_perturbative_error_hartree": -8.315239738378198e-10,
+                "time": 0.1849124275280644
+              },
+              {
+                "evolved_state_norm": 0.9999999999999194,
+                "ground_state_survival_probability": 0.9999999999998368,
+                "overlap_phase_error_hartree": 1.9183301368125444e-09,
+                "perturbative_error_hartree": 1.918330136812388e-09,
+                "phase_rotated_overlap": {
+                  "imag": -4.3728470844328626e-10,
+                  "real": 0.9999999999999184
+                },
+                "signed_perturbative_error_hartree": -1.918330136812388e-09,
+                "time": 0.22795070569547776
+              },
+              {
+                "evolved_state_norm": 0.9999999999999252,
+                "ground_state_survival_probability": 0.9999999999998348,
+                "overlap_phase_error_hartree": 4.423166493007339e-09,
+                "perturbative_error_hartree": 4.423166493006973e-09,
+                "phase_rotated_overlap": {
+                  "imag": -1.2429368645427985e-09,
+                  "real": 0.9999999999999174
+                },
+                "signed_perturbative_error_hartree": -4.423166493006973e-09,
+                "time": 0.28100612231257444
+              },
+              {
+                "evolved_state_norm": 0.9999999999999227,
+                "ground_state_survival_probability": 0.9999999999997184,
+                "overlap_phase_error_hartree": 1.0190088711893556e-08,
+                "perturbative_error_hartree": 1.0190088711892122e-08,
+                "phase_rotated_overlap": {
+                  "imag": -3.5299502765262503e-09,
+                  "real": 0.9999999999998592
+                },
+                "signed_perturbative_error_hartree": -1.0190088711892122e-08,
+                "time": 0.34641016151377546
+              },
+              {
+                "evolved_state_norm": 0.9999999999999216,
+                "ground_state_survival_probability": 0.9999999999988223,
+                "overlap_phase_error_hartree": 2.344523147065245e-08,
+                "perturbative_error_hartree": 2.3445231470638644e-08,
+                "phase_rotated_overlap": {
+                  "imag": -1.001198035588402e-08,
+                  "real": 0.9999999999994111
+                },
+                "signed_perturbative_error_hartree": -2.3445231470638644e-08,
+                "time": 0.4270369592393406
+              },
+              {
+                "evolved_state_norm": 0.9999999999999234,
+                "ground_state_survival_probability": 0.9999999999916653,
+                "overlap_phase_error_hartree": 5.383226857800538e-08,
+                "perturbative_error_hartree": 5.3832268577781034e-08,
+                "phase_rotated_overlap": {
+                  "imag": -2.833889989339866e-08,
+                  "real": 0.9999999999958322
+                },
+                "signed_perturbative_error_hartree": -5.3832268577781034e-08,
+                "time": 0.526429605180997
+              },
+              {
+                "evolved_state_norm": 0.9999999999999237,
+                "ground_state_survival_probability": 0.9999999999346729,
+                "overlap_phase_error_hartree": 1.232042400617039e-07,
+                "perturbative_error_hartree": 1.232042400576795e-07,
+                "phase_rotated_overlap": {
+                  "imag": -7.995411127614815e-08,
+                  "real": 0.9999999999673332
+                },
+                "signed_perturbative_error_hartree": -1.232042400576795e-07,
+                "time": 0.6489558414443911
+              },
+              {
+                "evolved_state_norm": 0.9999999999999246,
+                "ground_state_survival_probability": 0.9999999994852997,
+                "overlap_phase_error_hartree": 2.805151427056764e-07,
+                "perturbative_error_hartree": 2.8051514263348343e-07,
+                "phase_rotated_overlap": {
+                  "imag": -2.2441211410678674e-07,
+                  "real": 0.9999999997426247
+                },
+                "signed_perturbative_error_hartree": -2.8051514263348343e-07,
+                "time": 0.8
+              }
+            ],
+            "times": [
+              0.15,
+              0.1849124275280644,
+              0.22795070569547776,
+              0.28100612231257444,
+              0.34641016151377546,
+              0.4270369592393406,
+              0.526429605180997,
+              0.6489558414443911,
+              0.8
+            ]
+          }
+        }
+      },
+      "system": {
+        "ground_energy_without_constant_hartree": -1.8882774290003543,
+        "h_chain": 5,
+        "ham_name": "H5_sto-3g_triplet_1+_distance_100_charge_1",
+        "num_groups": 43,
+        "num_qubits": 10,
+        "preparation_seconds": 2.4456617003306746,
+        "sector": {
+          "dimension": 50,
+          "ground_state_eigenpair_residual": 4.228603501589257e-15,
+          "ground_state_outside_norm": 0.0,
+          "ground_state_refined_by_sector_diagonalization": false,
+          "input_ground_state_eigenpair_residual": 4.228603501589257e-15,
+          "input_to_refined_ground_state_overlap_probability": 1.0,
+          "kind": "fixed_populations_ordering_aware_v1_1",
+          "maximum_group_eigenvector_orthogonality_residual_frobenius_norm": 7.728234152668948e-15,
+          "maximum_group_hermiticity_residual_frobenius_norm": 4.550137020152556e-17,
+          "maximum_group_sector_leakage_frobenius_norm": 1.962615573354719e-17,
+          "population_counts": [
+            3,
+            1
+          ],
+          "reported_to_used_ground_energy_shift_hartree": 0.0,
+          "state_vector_ordering_convention": "block_alpha_beta"
+        }
+      }
+    }
+  },
+  "schema_version": 1,
+  "status": "complete",
+  "unitary_build_method": "s2-cache"
+}
