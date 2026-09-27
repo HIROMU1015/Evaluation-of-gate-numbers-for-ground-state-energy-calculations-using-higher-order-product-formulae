@@ -21,6 +21,13 @@ AMENDMENT_PATH = Path(
     "review_response/"
     "second_study_safe_time_domain_preflight_amendment_v1_1.json"
 )
+ENVIRONMENT_AMENDMENT_PATH = Path(
+    "review_response/"
+    "second_study_safe_time_domain_preflight_environment_amendment_v1_2.json"
+)
+EXPECTED_ENVIRONMENT_AMENDMENT_SHA256 = (
+    "ab87da7c42aba20658e5f5d4a204cdf761c50f0814d24719a36e72be674da77e"
+)
 
 
 def test_local_preflight_revalidates_frozen_sources_without_new_computation() -> None:
@@ -104,6 +111,37 @@ def test_v1_1_amendment_hash_and_scientific_nonchange_are_frozen() -> None:
     assert amendment["preserved_failed_preflight"]["result_commit"] == (
         "e1891dfd24ec5f0064b0598e51eb260073fd2b1e"
     )
+    assert not any(amendment["scientific_protocol_changes"].values())
+    assert amendment["retry_rules"]["phase_a_authorized"] is False
+    assert amendment["retry_rules"]["phase_b_authorized"] is False
+
+
+def test_v1_2_environment_amendment_is_identity_only_and_frozen() -> None:
+    amendment = json.loads(
+        ENVIRONMENT_AMENDMENT_PATH.read_text(encoding="utf-8")
+    )
+    actual = hashlib.sha256(ENVIRONMENT_AMENDMENT_PATH.read_bytes()).hexdigest()
+    sidecar = Path(str(ENVIRONMENT_AMENDMENT_PATH) + ".sha256").read_text().split()[0]
+    assert actual == sidecar == EXPECTED_ENVIRONMENT_AMENDMENT_SHA256
+    assert amendment["scope"] == "preflight_existing_environment_identity_only"
+    assert amendment["parent_protocol"] == {
+        "commit": preflight.PROTOCOL_COMMIT,
+        "sha256": preflight.EXPECTED_PROTOCOL_SHA256,
+    }
+    attempts = amendment["preserved_preflight_attempts"]
+    assert [row["result_commit"] for row in attempts] == [
+        "e1891dfd24ec5f0064b0598e51eb260073fd2b1e",
+        "b520f9bd8f575456531e7c0b0f2692973b436e21",
+    ]
+    assert amendment["existing_environment_identity"]["python_executable"] == (
+        "/home/AbeHiromu/venvs/trotter-common/bin/python"
+    )
+    assert amendment["dependency_gate"]["import_smoke_only"] is True
+    assert (
+        amendment["dependency_gate"]["gpu_kernel_or_allocation_permitted"]
+        is False
+    )
+    assert amendment["dependency_gate"]["install_or_update_on_failure"] is False
     assert not any(amendment["scientific_protocol_changes"].values())
     assert amendment["retry_rules"]["phase_a_authorized"] is False
     assert amendment["retry_rules"]["phase_b_authorized"] is False
