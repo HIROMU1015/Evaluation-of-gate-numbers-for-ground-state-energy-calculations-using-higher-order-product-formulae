@@ -520,6 +520,14 @@ def test_phase_b_mock_run_preserves_negative_result_and_completes(
     )
     monkeypatch.setattr(
         phase_b,
+        "verify_phase_a_runtime_inventory",
+        lambda root: {
+            "inventory_sha256": "b" * 64,
+            "all_files_byte_identical": True,
+        },
+    )
+    monkeypatch.setattr(
+        phase_b,
         "load_phase_a_systems",
         lambda root, protocol, protocol_sha: {
             condition: {
@@ -583,6 +591,40 @@ def test_phase_b_mock_run_preserves_negative_result_and_completes(
     assert "COMPLETE" in {row["path"] for row in manifest["files"]}
 
 
+def test_phase_b_runtime_inventory_gate_is_exact(tmp_path: Path) -> None:
+    phase_a_root = tmp_path / "phase_a"
+    runtime_root = phase_a_root / ".runtime"
+    cache = runtime_root / "system_cache" / "condition.pkl"
+    cache.parent.mkdir(parents=True)
+    cache.write_bytes(b"fixed-runtime-cache")
+    inventory = {
+        "schema": (
+            "second_study_safe_time_domain_phase_a_runtime_hash_inventory_v1"
+        ),
+        "runtime_root": str(runtime_root.resolve()),
+        "file_count": 1,
+        "total_bytes": cache.stat().st_size,
+        "files": [
+            {
+                "path": "system_cache/condition.pkl",
+                "absolute_path": str(cache.resolve()),
+                "bytes": cache.stat().st_size,
+                "sha256": execution.sha256_file(cache),
+            }
+        ],
+    }
+    (phase_a_root / "runtime_hash_inventory.json").write_text(
+        __import__("json").dumps(inventory, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    verified = phase_b.verify_phase_a_runtime_inventory(phase_a_root)
+    assert verified["file_count"] == 1
+    assert verified["all_files_byte_identical"] is True
+    cache.write_bytes(b"fIxed-runtime-cache")
+    with pytest.raises(execution.ExecutionError, match="SHA-256 mismatch"):
+        phase_b.verify_phase_a_runtime_inventory(phase_a_root)
+
+
 def test_phase_a_and_phase_b_main_do_not_run_on_import() -> None:
     assert inspect.isfunction(phase_a.main)
     assert inspect.isfunction(phase_b.main)
@@ -613,3 +655,50 @@ def test_gpu_phase_a_prompt_pins_reviewed_bundle_and_boundary() -> None:
     assert "run_second_study_safe_time_domain_phase_b.py" not in prompt
     assert "/home/AbeHiromu/venvs/trotter-common/bin/python" in prompt
     assert "gpu-second-study-safe-time-domain-phase-a-20260927" in prompt
+
+
+def test_committed_phase_a_boundary_audit_authorizes_only_fixed_phase_b() -> None:
+    audit = execution.load_json(
+        Path(__file__).parents[1]
+        / "review_response"
+        / "second_study_safe_time_domain_phase_a_boundary_audit.json"
+    )
+    assert audit["phase_a_result_commit"] == (
+        "efea5fe0718c2c2623935949460498da066bdec3"
+    )
+    assert audit["identity"]["prediction_sha256"] == (
+        "3406d2f69237d95b14be298059f777df3fbd5043446add2c31559bf902a34b83"
+    )
+    assert audit["freeze_checks"]["phase_b_coordinate_count"] == 42
+    assert audit["freeze_checks"]["phase_b_coordinate_limit"] == 44
+    assert all(
+        value in (0, False)
+        for value in audit["prohibited_operation_counts"].values()
+    )
+    assert audit["runtime_inventory"] == {
+        "runtime_root": (
+            "/home/AbeHiromu/worktrees/"
+            "gpu-second-study-safe-time-domain-phase-a-20260927/artifacts/"
+            "server_second_study_safe_time_domain_phase_a_20260927_e86e694/"
+            ".runtime"
+        ),
+        "file_count": 56,
+        "total_bytes": 113469289,
+        "committed": False,
+        "copied_from_other_run": False,
+        "phase_b_gate": (
+            "all files, relative paths, absolute paths, byte counts, total "
+            "bytes, and SHA-256 values must match before exact/direct "
+            "calculation"
+        ),
+    }
+    assert audit["decision"] == {
+        "phase_a_boundary_status": "verified",
+        "phase_a_predictions_mutable": False,
+        "phase_a_runtime_mutable": False,
+        "phase_b_authorization": "one_fixed_evaluation_only",
+        "phase_b_output_must_be_new": True,
+        "post_evaluation_retuning_allowed": False,
+        "additional_pf_or_molecule_allowed": False,
+    }
+    assert not audit["unresolved_blockers"]

@@ -112,6 +112,77 @@ def verify_phase_a_commit(
     }
 
 
+def verify_phase_a_runtime_inventory(
+    phase_a_root: Path,
+) -> dict[str, Any]:
+    inventory_path = phase_a_root / "runtime_hash_inventory.json"
+    inventory = execution.load_json(inventory_path)
+    if (
+        inventory.get("schema")
+        != "second_study_safe_time_domain_phase_a_runtime_hash_inventory_v1"
+    ):
+        raise execution.ExecutionError("invalid Phase A runtime inventory schema")
+    runtime_root = (phase_a_root / ".runtime").resolve()
+    if str(inventory.get("runtime_root")) != str(runtime_root):
+        raise execution.ExecutionError("Phase A runtime root identity mismatch")
+    rows = inventory.get("files")
+    if not isinstance(rows, list) or not rows:
+        raise execution.ExecutionError("Phase A runtime inventory is empty")
+    expected: dict[str, Mapping[str, Any]] = {}
+    for row in rows:
+        relative = Path(str(row.get("path", "")))
+        if (
+            not str(relative)
+            or relative.is_absolute()
+            or ".." in relative.parts
+            or relative.as_posix() in expected
+        ):
+            raise execution.ExecutionError(
+                "unsafe or duplicate Phase A runtime inventory path"
+            )
+        expected[relative.as_posix()] = row
+    actual = {
+        path.relative_to(runtime_root).as_posix(): path
+        for path in runtime_root.rglob("*")
+        if path.is_file()
+    }
+    if set(actual) != set(expected):
+        missing = sorted(set(expected) - set(actual))
+        extra = sorted(set(actual) - set(expected))
+        raise execution.ExecutionError(
+            f"Phase A runtime inventory file-set mismatch: "
+            f"missing={missing}, extra={extra}"
+        )
+    total_bytes = 0
+    for relative, path in actual.items():
+        row = expected[relative]
+        size = int(path.stat().st_size)
+        total_bytes += size
+        if size != int(row.get("bytes", -1)):
+            raise execution.ExecutionError(
+                f"Phase A runtime byte-count mismatch: {relative}"
+            )
+        if str(row.get("absolute_path")) != str(path.resolve()):
+            raise execution.ExecutionError(
+                f"Phase A runtime absolute-path mismatch: {relative}"
+            )
+        if execution.sha256_file(path) != row.get("sha256"):
+            raise execution.ExecutionError(
+                f"Phase A runtime SHA-256 mismatch: {relative}"
+            )
+    if len(actual) != int(inventory.get("file_count", -1)):
+        raise execution.ExecutionError("Phase A runtime file count mismatch")
+    if total_bytes != int(inventory.get("total_bytes", -1)):
+        raise execution.ExecutionError("Phase A runtime total byte count mismatch")
+    return {
+        "inventory_sha256": execution.sha256_file(inventory_path),
+        "runtime_root": str(runtime_root),
+        "file_count": len(actual),
+        "total_bytes": total_bytes,
+        "all_files_byte_identical": True,
+    }
+
+
 def load_phase_a_systems(
     phase_a_root: Path,
     protocol: Mapping[str, Any],
@@ -501,6 +572,7 @@ def run(
         phase_a_commit=phase_a_commit,
         phase_a_artifact_relative=phase_a_artifact_relative,
     )
+    phase_a_runtime_identity = verify_phase_a_runtime_inventory(phase_a_root)
     output_dir.mkdir(parents=True)
     started = time.perf_counter()
     predictions = execution.load_json(phase_a_root / guard.PREDICTION_FILE)
@@ -587,6 +659,7 @@ def run(
             "protocol_sha256": protocol_sha,
             "prediction_sha256": prediction_sha,
             "phase_a": phase_a_identity,
+            "phase_a_runtime": phase_a_runtime_identity,
             "preflight": preflight,
             "environment": environment,
             "numerical_validation": numerical,
@@ -632,6 +705,7 @@ def run(
         "protocol_sha256": protocol_sha,
         "prediction_sha256": prediction_sha,
         "phase_a": phase_a_identity,
+        "phase_a_runtime": phase_a_runtime_identity,
         "preflight": preflight,
         "environment": environment,
         "numerical_validation": numerical,
