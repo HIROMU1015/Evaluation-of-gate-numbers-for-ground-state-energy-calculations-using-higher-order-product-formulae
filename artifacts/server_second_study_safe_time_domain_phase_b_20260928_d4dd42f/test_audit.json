@@ -1,0 +1,86 @@
+{
+  "created_at": "2026-09-28T06:51:15.453316+09:00",
+  "environment": {
+    "LD_LIBRARY_PATH": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusparse/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusolver/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cuda_runtime/lib",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONPATH": "src:review_response:.:/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+    "python": "/home/AbeHiromu/venvs/trotter-common/bin/python"
+  },
+  "focused_test_files": [
+    "review_tests/test_second_study_safe_time_domain_protocol.py",
+    "review_tests/test_second_study_safe_time_domain_preflight.py",
+    "review_tests/test_second_study_safe_time_domain_execution.py",
+    "review_tests/test_practical_calibration_minimal.py",
+    "review_tests/test_pf_first_study_phase_boundary.py"
+  ],
+  "full_test_target": "review_tests",
+  "only_allowed_skip": "review_tests/test_pennylane_bch.py optional pennylane dependency",
+  "pytest_options": [
+    "-q",
+    "-rs",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "results": {
+    "post_focused": {
+      "errors": 0,
+      "failures": 0,
+      "file": "post_focused_tests.xml",
+      "passed": 68,
+      "sha256": "51953d371201d89fef22399eadaa0d91c95e9935a095ac56228750ac795a46cb",
+      "skip_rows": [],
+      "skipped": 0,
+      "tests": 68,
+      "time_seconds": 7.7
+    },
+    "post_full": {
+      "errors": 0,
+      "failures": 0,
+      "file": "post_full_tests.xml",
+      "passed": 304,
+      "sha256": "0e228bf2123fe0e8dc26728c9fab6fc24665eecdcd9ce99e547f72cd938fbf9e",
+      "skip_rows": [
+        {
+          "classname": "",
+          "detail": "('/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-phase-b-20260928/review_tests/test_pennylane_bch.py', 6, \"Skipped: could not import 'pennylane': No module named 'pennylane'\")",
+          "message": "collection skipped",
+          "name": "review_tests.test_pennylane_bch"
+        }
+      ],
+      "skipped": 1,
+      "tests": 305,
+      "time_seconds": 13.794
+    },
+    "pre_focused": {
+      "errors": 0,
+      "failures": 0,
+      "file": "pre_focused_tests.xml",
+      "passed": 68,
+      "sha256": "4c348c123af93d32e8c1303253d11b12f86692413adb59d757db566c5ff844a5",
+      "skip_rows": [],
+      "skipped": 0,
+      "tests": 68,
+      "time_seconds": 8.566
+    },
+    "pre_full": {
+      "errors": 0,
+      "failures": 0,
+      "file": "pre_full_tests.xml",
+      "passed": 304,
+      "sha256": "c79315622928ce6f4f56685e0aa41854ae070c840ae3c9e215dbbddb8d2419a9",
+      "skip_rows": [
+        {
+          "classname": "",
+          "detail": "('/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-phase-b-20260928/review_tests/test_pennylane_bch.py', 6, \"Skipped: could not import 'pennylane': No module named 'pennylane'\")",
+          "message": "collection skipped",
+          "name": "review_tests.test_pennylane_bch"
+        }
+      ],
+      "skipped": 1,
+      "tests": 305,
+      "time_seconds": 13.524
+    }
+  },
+  "schema": "second_study_safe_time_domain_phase_b_test_audit_v1"
+}
