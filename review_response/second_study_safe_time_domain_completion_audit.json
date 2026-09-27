@@ -1,0 +1,173 @@
+{
+  "schema": "second_study_safe_time_domain_completion_audit_v1",
+  "created_at": "2026-09-28T07:03:55+09:00",
+  "status": "complete_no_benefit",
+  "study_scope": "fixed_current_m3_safe_time_domain_multiple_window_consistency",
+  "git_identity": {
+    "protocol_commit": "804331ecc976b83ae880940719706c11999247bc",
+    "phase_b_bundle_commit": "d4dd42fd107ac9fb90547a190a0c7080484ee667",
+    "phase_b_result_branch": "gpu-second-study-safe-time-domain-phase-b-20260928",
+    "phase_b_result_commit": "4691ac1ea7423d3c3f5a0496c41c98b9dcba360f",
+    "phase_b_result_parent_is_bundle": true,
+    "phase_b_merge_commit": "d59f6d3fb2070df9a2d3cb1ab415b39a92b02c9f",
+    "phase_b_result_present_on_origin": true
+  },
+  "artifact_identity": {
+    "artifact_relative": "artifacts/server_second_study_safe_time_domain_phase_b_20260928_d4dd42f",
+    "protocol_sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+    "prediction_sha256": "3406d2f69237d95b14be298059f777df3fbd5043446add2c31559bf902a34b83",
+    "manifest_sha256": "eb3ac51a21b9b5edd4b65d1a01ee4486bea6ba811bb22ba5e8db4a5e526a0917",
+    "decision_sha256": "5c16dd7c357098159e10d7f58c9a5a855ef4653d85ec4e768cbe3b9722fc1588",
+    "direct_points_sha256": "9ee77192ee6da1287636cbbea0c094136232d753c43c781f4e6636b311f56b9b",
+    "strategy_scoring_sha256": "610fb420ea7fd1ac1f26f447478e457309ca477512b9901a75f716270fa6bccf",
+    "result_validation_sha256": "65e86fd71f15749a3c9a5bd61ffec80e8b5922d99076c4fadf3fd62d8f72298a",
+    "resource_audit_sha256": "529fdfd99964ea929c24e55f912bd2a42703f7384ea0f36e5c05c52c59e83ed6",
+    "test_audit_sha256": "f1f9f779d295f91d45a971d9d2d4d283a8817d5cfa72718745da75885e382bf5",
+    "complete_marker_sha256": "6b0df76205b8bb3570c5d9d2512b428f09263deaf9926e7dfd84a7b6415b62a6"
+  },
+  "independent_validation": {
+    "manifest_file_count": 17,
+    "all_manifest_hashes_and_byte_counts_match": true,
+    "tracked_runtime_pickle_npy_or_selected_vector_count": 0,
+    "coordinate_plan_recomputed_from_frozen_prediction": true,
+    "coordinate_plan_exact_match": true,
+    "condition_count": 4,
+    "direct_coordinate_count": 42,
+    "anchor_count": 4,
+    "numerical_gates_recomputed_exact_match": true,
+    "strategy_row_count": 16,
+    "strategy_rows_recomputed_exact_match": true,
+    "benefit_checks_recomputed_exact_match": true,
+    "benefit_decision_recomputed_exact_match": true,
+    "complete_marker_matches_decision": true,
+    "scoring_representation_note": {
+      "field": "strategy_summary.uncapped_counterfactual.aggregate_frozen_pauli_rotation_budget",
+      "committed": 8689143504.848944,
+      "independent_recomputation": 8689143504.848946,
+      "absolute_difference": 0.0000019073486328125,
+      "ulp_difference": 1.0,
+      "relative_difference": 2.1950939488433024e-16,
+      "scientific_or_decision_impact": false
+    }
+  },
+  "execution": {
+    "backend": "gpu",
+    "gpu_id": 0,
+    "processes": 1,
+    "interrupted_and_resumed_same_identity": true,
+    "direct_cache_computed": 22,
+    "direct_cache_reused": 20,
+    "direct_cache_total": 42,
+    "old_or_foreign_cache_reused": 0,
+    "same_run_identity_sha256": "7c4ee4c9156301d1301368c11cb86e3816700f08fadf7e3a5537cd1ee5aeb9c1",
+    "post_evaluation_retuning_performed": false
+  },
+  "numerical_validation": {
+    "passed": true,
+    "maximum_eigenpair_residual_2_norm": 9.813001224800841e-14,
+    "maximum_unitarity_residual_frobenius": 1.3700411950543468e-11,
+    "minimum_anchor_ground_overlap_probability": 0.9999999683019025,
+    "minimum_tracked_previous_overlap_probability": 0.9220325861410396,
+    "minimum_tracked_ground_overlap_probability": 0.9222306179948309,
+    "minimum_phase_gap_radian": 0.00004954692104540167,
+    "branch_disagreement_count": 0
+  },
+  "strategy_summary": {
+    "current_fallback": {
+      "safe_count": 2,
+      "condition_count": 4,
+      "accuracy_target_miss_count": 2,
+      "extension_selection_count": 0,
+      "aggregate_frozen_pauli_rotation_budget": 11721643230.730186,
+      "mean_selection_regret": 0.9153216203730394,
+      "maximum_selection_regret": 2.2897885529048723,
+      "mean_frozen_budget_regret": 0.7947289306136645,
+      "maximum_frozen_budget_regret": 2.270452264095916
+    },
+    "equal_information_pooled_fit": {
+      "safe_count": 2,
+      "condition_count": 4,
+      "accuracy_target_miss_count": 2,
+      "extension_selection_count": 2,
+      "aggregate_frozen_pauli_rotation_budget": 8359846080.464978,
+      "mean_selection_regret": 0.48737893712109653,
+      "maximum_selection_regret": 1.0366892506740313,
+      "mean_frozen_budget_regret": 0.37096178072078667,
+      "maximum_frozen_budget_regret": 1.0614269870599586
+    },
+    "multiple_window_rule": {
+      "safe_count": 3,
+      "condition_count": 4,
+      "accuracy_target_miss_count": 1,
+      "extension_selection_count": 1,
+      "aggregate_frozen_pauli_rotation_budget": 10471889449.413382,
+      "mean_selection_regret": 0.7145563528774114,
+      "maximum_selection_regret": 1.48672748292236,
+      "mean_frozen_budget_regret": 0.6302874002220547,
+      "maximum_frozen_budget_regret": 1.6126861425294767
+    },
+    "uncapped_counterfactual": {
+      "safe_count": 3,
+      "condition_count": 4,
+      "accuracy_target_miss_count": 1,
+      "extension_selection_count": 4,
+      "aggregate_frozen_pauli_rotation_budget": 8689143504.848944,
+      "mean_selection_regret": 0.3873174778728627,
+      "maximum_selection_regret": 1.0366892506740313,
+      "mean_frozen_budget_regret": 0.4263233686080398,
+      "maximum_frozen_budget_regret": 1.2721636895041555,
+      "operational": false
+    }
+  },
+  "new_rule_comparison": {
+    "aggregate_budget_ratio_over_current_fallback": 0.8933806671371491,
+    "aggregate_budget_ratio_over_equal_information": 1.2526414181098093,
+    "mean_selection_regret_minus_equal_information": 0.2271774157563149,
+    "maximum_selection_regret_minus_equal_information": 0.45003823224832873,
+    "mean_frozen_budget_regret_minus_equal_information": 0.259325619501268,
+    "maximum_frozen_budget_regret_minus_equal_information": 0.5512591554695181,
+    "per_condition_selection_regret_difference": {
+      "LiF_active_eq_sto3g": 0.0,
+      "LiF_active_stretch150_sto3g": 0.0,
+      "HCl_full_eq_sto3g": 0.45003823224832873,
+      "HCl_full_stretch150_sto3g": 0.4586714307769306
+    }
+  },
+  "benefit_checks": {
+    "new_rule_unsafe_execution_count_zero": false,
+    "new_rule_execution_coverage_4_of_4": true,
+    "new_rule_extension_selection_count_minimum": true,
+    "aggregate_frozen_budget_ratio_pass": true,
+    "mean_selection_regret_better_than_equal_information": false,
+    "maximum_selection_regret_not_above_equal_information": false,
+    "per_condition_regret_increase_bound": false,
+    "classical_information_counts_equal": true
+  },
+  "resources": {
+    "direct_point_time_sum_seconds": 4068.031270026695,
+    "build_time_sum_seconds": 90.94065277976915,
+    "gpu_transfer_multiply_output_time_sum_seconds": 62.6848831968382,
+    "external_gpu_peak_process_mib": 3002,
+    "external_gpu_peak_total_mib": 3011,
+    "maximum_recorded_cpu_rss_kib": 3108804,
+    "total_observed_wall_seconds_lower_bound": 2001.3653451699763,
+    "full_external_wall_time_available": false
+  },
+  "tests": {
+    "pre_focused": {"passed": 68, "failed": 0, "skipped": 0},
+    "pre_full": {"passed": 304, "failed": 0, "skipped": 1},
+    "post_focused": {"passed": 68, "failed": 0, "skipped": 0},
+    "post_full": {"passed": 304, "failed": 0, "skipped": 1},
+    "only_skip": "review_tests/test_pennylane_bch.py optional pennylane dependency"
+  },
+  "conclusion": {
+    "primary_claim": "The frozen multiple-window consistency rule did not establish a safe beneficial time-domain expansion on the four independent conditions.",
+    "reason": "It reduced aggregate frozen budget relative to current fallback, but retained one unsafe execution and had worse mean, maximum, and per-condition selection regret than the equal-information baseline.",
+    "adopt_new_rule": false,
+    "claim_strict_out_of_cap_safety": false,
+    "negative_result_complete": true,
+    "further_retuning_or_experiment_authorized": false
+  },
+  "unresolved_scientific_blockers": [],
+  "measurement_limitation": "The first interrupted leg has no final external timing record, so total external wall time is reported only as a lower bound; all scientific point timings and the resumed resource record are preserved."
+}

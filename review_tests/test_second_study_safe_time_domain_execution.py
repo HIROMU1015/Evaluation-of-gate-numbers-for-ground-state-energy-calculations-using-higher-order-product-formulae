@@ -758,3 +758,127 @@ def test_gpu_phase_b_prompt_pins_one_frozen_evaluation() -> None:
     assert "failed_numerical_validation" in prompt
     assert "Phase A再実行" in prompt
     assert "run_second_study_safe_time_domain_phase_a.py" not in prompt
+
+
+def test_second_study_completion_closes_as_fixed_negative_result() -> None:
+    root = Path(__file__).parents[1]
+    audit = execution.load_json(
+        root
+        / "review_response"
+        / "second_study_safe_time_domain_completion_audit.json"
+    )
+    assert audit["status"] == "complete_no_benefit"
+    assert audit["git_identity"]["phase_b_result_commit"] == (
+        "4691ac1ea7423d3c3f5a0496c41c98b9dcba360f"
+    )
+    assert audit["artifact_identity"]["prediction_sha256"] == (
+        "3406d2f69237d95b14be298059f777df3fbd5043446add2c31559bf902a34b83"
+    )
+    validation = audit["independent_validation"]
+    assert validation["coordinate_plan_exact_match"] is True
+    assert validation["numerical_gates_recomputed_exact_match"] is True
+    assert validation["strategy_rows_recomputed_exact_match"] is True
+    assert validation["benefit_decision_recomputed_exact_match"] is True
+    assert validation["scoring_representation_note"]["ulp_difference"] == 1.0
+    assert (
+        validation["scoring_representation_note"][
+            "scientific_or_decision_impact"
+        ]
+        is False
+    )
+    assert audit["execution"]["direct_cache_computed"] == 22
+    assert audit["execution"]["direct_cache_reused"] == 20
+    assert audit["execution"]["old_or_foreign_cache_reused"] == 0
+    assert audit["numerical_validation"]["passed"] is True
+    assert audit["strategy_summary"]["multiple_window_rule"]["safe_count"] == 3
+    assert audit["benefit_checks"]["new_rule_unsafe_execution_count_zero"] is False
+    conclusion = audit["conclusion"]
+    assert conclusion["adopt_new_rule"] is False
+    assert conclusion["claim_strict_out_of_cap_safety"] is False
+    assert conclusion["negative_result_complete"] is True
+    assert conclusion["further_retuning_or_experiment_authorized"] is False
+    report = (
+        root
+        / "review_response"
+        / "second_study_safe_time_domain_completion_report.md"
+    ).read_text(encoding="utf-8")
+    assert "complete_no_benefit" in report
+    assert "negative result" in report
+    assert "1 ULP" in report
+    assert "第三研究は自動的に開始しません" in report
+
+
+def test_committed_phase_b_result_recomputes_from_frozen_inputs() -> None:
+    root = Path(__file__).parents[1]
+    artifact = (
+        root
+        / "artifacts"
+        / "server_second_study_safe_time_domain_phase_b_20260928_d4dd42f"
+    )
+    manifest = execution.load_json(artifact / "manifest.json")
+    assert len(manifest["files"]) == 17
+    for row in manifest["files"]:
+        path = artifact / row["path"]
+        assert path.stat().st_size == row["bytes"]
+        assert execution.sha256_file(path) == row["sha256"]
+    predictions = execution.load_json(
+        root
+        / "artifacts"
+        / "server_second_study_safe_time_domain_phase_a_20260927_e86e694"
+        / "predictions.json"
+    )
+    points = execution.load_json(artifact / "direct_points.json")["points"]
+    protocol = _protocol()
+    by_condition = {
+        condition: [
+            {key: value for key, value in point.items() if key != "condition"}
+            for point in points
+            if point["condition"] == condition
+        ]
+        for condition in execution.condition_names(protocol)
+    }
+    expected_plan = guard.derive_phase_b_coordinate_plan(predictions)
+    for row in expected_plan:
+        actual = by_condition[row["condition"]]
+        assert [
+            (point["time_hartree_inverse"], point["roles"])
+            for point in actual
+        ] == [
+            (point["time_hartree_inverse"], point["roles"])
+            for point in row["coordinates"]
+        ]
+    decision = execution.load_json(artifact / "decision.json")
+    assert phase_b.validate_numerical_gates(by_condition, protocol) == decision[
+        "numerical_validation"
+    ]
+    recomputed = execution.score_phase_b(
+        predictions=predictions,
+        direct_points_by_condition=by_condition,
+        protocol=protocol,
+    )
+    stored = execution.load_json(artifact / "strategy_scoring.json")
+    for key in (
+        "schema",
+        "rows",
+        "regret_difference_from_equal_information",
+        "candidate_grid_oracle_costs",
+        "aggregate_frozen_budget_ratio_new_over_current_fallback",
+        "benefit_checks",
+        "benefit",
+    ):
+        assert recomputed[key] == stored[key]
+    for strategy, summary in recomputed["strategy_summary"].items():
+        if strategy != "uncapped_counterfactual":
+            assert summary == stored["strategy_summary"][strategy]
+            continue
+        committed = stored["strategy_summary"][strategy]
+        for key, value in summary.items():
+            if key == "aggregate_frozen_pauli_rotation_budget":
+                assert abs(value - committed[key]) == math.ulp(committed[key])
+            else:
+                assert value == committed[key]
+    assert decision["status"] == "complete_no_benefit"
+    assert (artifact / "COMPLETE").read_text(encoding="utf-8").splitlines()[
+        0
+    ] == "status=complete_no_benefit"
+    assert not (artifact / ".runtime").exists()
