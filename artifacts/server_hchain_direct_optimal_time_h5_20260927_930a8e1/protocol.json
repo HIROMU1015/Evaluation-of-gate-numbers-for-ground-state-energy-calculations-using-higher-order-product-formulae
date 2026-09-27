@@ -1,0 +1,97 @@
+{
+  "schema_version": "hchain_direct_optimal_time_scaling_protocol_v1",
+  "study_kind": "registered_retrospective_small_system_validation",
+  "scope_statement": "Recompute direct PF eigenvalue-error cost curves on H2/H4/H5/H6/H7 and test whether the domain-restricted direct optimum is predictably related to H-chain size. Prior H-chain results were inspected before this protocol, so this is not an independent holdout.",
+  "code_base_commit": "a6e67dfb93f2d30b337a4cae9437de2cee9cc3ec",
+  "direct_solver_origin_commit": "2881c0ddb411d3b2991a82c7204cffd1d814ac6d",
+  "target": {
+    "epsilon_E_hartree": 0.00015936001019904,
+    "epsilon_E_kcal_per_mol": 0.1,
+    "beta": 1.2,
+    "cost_definition": "beta * N_exp / (t * (epsilon_E - abs(delta_E_direct(t))))",
+    "infeasible_rule": "cost is null when abs(delta_E_direct) >= epsilon_E"
+  },
+  "systems": {
+    "included": [
+      {"id": "H2", "h_chain": 2, "family": "even_neutral_singlet"},
+      {"id": "H4", "h_chain": 4, "family": "even_neutral_singlet"},
+      {"id": "H6", "h_chain": 6, "family": "even_neutral_singlet"},
+      {"id": "H5", "h_chain": 5, "family": "odd_cation_triplet"},
+      {"id": "H7", "h_chain": 7, "family": "odd_cation_triplet"}
+    ],
+    "excluded": [
+      {
+        "id": "H3",
+        "reason": "The stored short-time m5/Y8 errors are below the fixed 5e-12 Ha fitting floor, so the common normalized search coordinate cannot be defined reliably. It must not be silently mixed into the scaling fit."
+      },
+      {
+        "id": "H8_and_larger",
+        "reason": "Exact dense direct diagonalization over the fixed multi-time grid is outside the practical capacity of the local 4 GiB GPU/CPU environment. H8 is reserved as a future independent holdout."
+      }
+    ]
+  },
+  "product_formulas": [
+    {"key": "m5", "label": "4th(m5_best)", "formal_order": 4},
+    {"key": "y8", "label": "8th(Morales-Y8m10b)", "formal_order": 8}
+  ],
+  "time_grid": {
+    "coordinate": "relative_to_short_time_model_analytic_time",
+    "role_of_analytic_time": "normalization and finite-domain definition only; it is not used to choose the direct optimum within the grid",
+    "start": 0.2,
+    "stop": 1.7,
+    "step": 0.05,
+    "point_count": 31,
+    "selection": "minimum finite continuously-tracked direct cost on the complete fixed grid",
+    "boundary_rule": "a minimum at the first or final grid point is not scorable",
+    "claim_scope": "domain-restricted discrete optimum; not a global optimum over all positive time"
+  },
+  "branch_tracking": {
+    "ordering": "strictly increasing time",
+    "initialization": "maximum exact-ground-state overlap at the first time",
+    "continuation": "maximum overlap with the previously selected Schur vector",
+    "crosscheck": "maximum-ground-overlap and continuously-tracked energy shifts must agree at every sampled time"
+  },
+  "numerical_gates": {
+    "maximum_unitarity_frobenius_residual": 1e-10,
+    "maximum_schur_off_diagonal_frobenius_residual": 1e-10,
+    "maximum_branch_shift_disagreement_hartree": 1e-10,
+    "minimum_ground_overlap_at_selected_optimum": 0.9,
+    "previous_overlap_warning_threshold": 0.5
+  },
+  "optimum_robustness": {
+    "near_optimal_cost_factor": 1.01,
+    "maximum_near_optimal_relative_time_width_for_well_localized": 0.25,
+    "zero_crossing_rule": "report whether the connected 1-percent near-optimal component intersects a signed direct-error sign-change interval",
+    "coarse_grid_uncertainty": "report the immediate sampled neighbor bracket around the selected point"
+  },
+  "scaling_analysis": {
+    "primary_family": "even_neutral_singlet",
+    "primary_sizes": [2, 4, 6],
+    "secondary_family": "odd_cation_triplet",
+    "secondary_sizes": [5, 7],
+    "do_not_pool_families": true,
+    "candidate_laws": ["constant", "power_law_t_equals_a_times_N_to_b"],
+    "validation": "leave-one-size-out on H2/H4/H6; H5/H7 are descriptive only",
+    "maximum_power_law_loo_relative_error_for_small_system_support": 0.2,
+    "strong_scaling_claim_allowed_without_H8_holdout": false,
+    "valid_outcomes": [
+      "small_system_predictable_requires_H8_holdout",
+      "no_predictable_power_law_on_current_sizes",
+      "not_scorable_due_to_numerical_or_boundary_gate"
+    ]
+  },
+  "execution": {
+    "backend": "cpu_dense_sector_schur",
+    "unitary_build_method": "s2-cache",
+    "processes": 1,
+    "blas_threads": 1,
+    "reuse_prior_direct_results": false,
+    "allow_resume_only_from_protocol_identical_complete_jobs": true
+  },
+  "interpretation_limits": [
+    "The cost is the repository's continuous QPE precision-allocation proxy, not a complete end-to-end QPE implementation cost.",
+    "The grid coverage was informed by previously inspected H-chain results, so the result is retrospective.",
+    "A stable H2/H4/H6 relation is small-system evidence only; H8 remains necessary for an independent even-chain holdout.",
+    "Failure to find a predictable law is a valid scientific result and must not trigger threshold or domain changes in this run."
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "hchain_direct_gpu_h5_h7_extension_v1",
+  "scope_change": {
+    "authority": "user_instruction_2026-09-27",
+    "included_systems_in_order": ["H5", "H7"],
+    "excluded_from_this_run": ["H8", "H9"],
+    "stop_after": "H7",
+    "reason": "The user requested an interim execution restricted to H5 and H7."
+  },
+  "parent_identity": {
+    "result_commit": "c27e31e82ca55fc404ed33123cfd5d2c6a76bc35",
+    "protocol_commit": "4b559fab2f4e60b513ad77e82c6e3733445d1e45",
+    "ordering_aware_commit": "ce7b961f2df0017c375bb1ccc4b92e8d4cd3b9cc",
+    "partial_result_commit": "9f98749e5ebcd9c7939ff80a8730b0e3d61a4d45",
+    "protocol_sha256": "12d10562cf481b836242786462184d8a6ffb342153404c9bf84ff4d5ca836ab9",
+    "sector_amendment_sha256": "5ca0ea30f9ad08bc7e4a54fcd8bab8f50195752dcaf3717c219281a458b0122e",
+    "partial_stop_amendment_sha256": "526bdede05c1b39d0fab21e062b39a48284a1338fd51bc3c94fd3488732c70ff"
+  },
+  "fixed_scientific_configuration": {
+    "epsilon_E_hartree": 0.00015936001019904,
+    "beta": 1.2,
+    "formula_keys_in_order": ["m5", "y8"],
+    "formula_labels": ["4th(m5_best)", "8th(Morales-Y8m10b)"],
+    "relative_grid": {"start": 0.2, "stop": 1.7, "step": 0.05, "point_count": 31},
+    "selection": "minimum finite continuously-tracked direct cost on the complete fixed grid",
+    "endpoint_minimum_scorable": false,
+    "near_optimal_cost_factor": 1.01,
+    "maximum_near_optimal_relative_time_width": 0.25,
+    "dtype": "complex128"
+  },
+  "execution": {
+    "backend": "gpu_exact_dense_sector_unitary_cpu_complex128_schur",
+    "process_count": 1,
+    "gpu_count": 1,
+    "blas_threads": 1,
+    "unitary_method": "complete conserved-sector eigensystems and exact dense cached S2 blocks",
+    "approximations_forbidden": ["low_rank", "truncation", "krylov", "low_energy_projection", "grid_thinning", "non_complex128"],
+    "direct_cache_reuse_from_parent_or_other_cell": false,
+    "same_cell_resume_requires_identical_cache_key": true
+  },
+  "expected_sector_identity": {
+    "H5": {"family": "odd_cation_triplet", "population_counts": [3, 1], "dimension": 50, "group_count": 45},
+    "H7": {"family": "odd_cation_triplet", "population_counts": [4, 2], "dimension": 735, "group_count": 105}
+  },
+  "backend_parity_gate": {
+    "must_pass_before_H7": true,
+    "H5_m5_selected_relative_time": 1.35,
+    "maximum_absolute_direct_shift_difference_hartree": 1e-9,
+    "maximum_gpu_cpu_unitary_frobenius_difference": 1e-10,
+    "unitary_parity_formula": "m5",
+    "unitary_parity_time": 0.125,
+    "H5_y8_known_branch_disagreement_must_recur": true
+  },
+  "analysis_limit": {
+    "odd_family_fit": "not_performed_with_only_H5_and_H7; the registered exploratory fit requires scorable H5/H7/H9",
+    "H5_y8_gate_threshold_unchanged": true,
+    "H8_holdout": "not_run_by_user_scope",
+    "H9_odd_scaling_point": "not_run_by_user_scope"
+  }
+}
+

@@ -1,0 +1,543 @@
+{
+  "H8_H9": "not_estimated_or_executed_by_user_scope",
+  "phase": "A_no_truth",
+  "schema_version": "hchain_direct_gpu_h5_h7_resource_feasibility_v1",
+  "targets": {
+    "H5_m5": {
+      "before_hamiltonian_generation_and_device_allocation": true,
+      "captured_at_utc": "2026-09-27T13:43:30.528825+00:00",
+      "estimate": {
+        "dense_n3_units_for_31_direct_points": 3995125000,
+        "dense_n3_units_per_direct_point": 128875000,
+        "device_peak_upper_bound_bytes": 539128112,
+        "device_required_with_20_percent_margin_bytes": 646953735,
+        "dimension": 50,
+        "exact_complex128_plan_preserved": true,
+        "formula_key": "m5",
+        "group_count": 43,
+        "host_peak_upper_bound_bytes": 2378000,
+        "host_required_with_20_percent_margin_bytes": 2853600,
+        "resident_arrays": [
+          {
+            "bytes": 17200,
+            "dtype": "float64",
+            "name": "group_eigenvalues",
+            "placement": "host_and_device",
+            "shape": [
+              43,
+              50
+            ]
+          },
+          {
+            "bytes": 1720000,
+            "dtype": "complex128",
+            "name": "group_eigenvectors",
+            "placement": "host_and_device",
+            "shape": [
+              43,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 40000,
+            "dtype": "complex128",
+            "name": "hamiltonian",
+            "placement": "host",
+            "shape": [
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 800,
+            "dtype": "complex128",
+            "name": "state",
+            "placement": "host",
+            "shape": [
+              50
+            ]
+          },
+          {
+            "bytes": 240000,
+            "dtype": "complex128",
+            "name": "unique_s2_block_cache",
+            "placement": "device",
+            "shape": [
+              6,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 40000,
+            "dtype": "complex128",
+            "name": "pf_unitary",
+            "placement": "host_and_device",
+            "shape": [
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 240000,
+            "dtype": "complex128",
+            "name": "gpu_gemm_scratch_upper_bound",
+            "placement": "device",
+            "shape": [
+              6,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 480000,
+            "dtype": "complex128",
+            "name": "cpu_schur_triangular_vectors_workspace_upper_bound",
+            "placement": "host",
+            "shape": [
+              12,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 536870912,
+            "dtype": "bytes",
+            "name": "cuda_context_and_library_reserve",
+            "placement": "device",
+            "shape": null
+          }
+        ],
+        "system": "H5",
+        "unique_s2_blocks": 6,
+        "wall_time_gate_role": "record_only_for_H5_H7; the registered 72-hour automatic gate applied to H8/H9, which are outside this user-limited run"
+      },
+      "gates": {
+        "complex128_exact_plan": true,
+        "device_20_percent_margin": true,
+        "host_20_percent_margin": true,
+        "pass": true
+      },
+      "gpu": {
+        "driver_version": "560.35.05",
+        "existing_compute_processes_all_gpus": [
+          "330765, [Not Found], 0, GPU-e1d3fde4-c1af-1654-855b-3bdca33b5f5e"
+        ],
+        "free_bytes": 42409656320,
+        "name": "NVIDIA A100-SXM4-40GB",
+        "physical_gpu_id": 1,
+        "total_bytes": 42949672960,
+        "used_bytes": 1048576,
+        "utilization_percent": 0,
+        "uuid": "GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d"
+      },
+      "host": {
+        "available_bytes": 1011657236480,
+        "total_bytes": 1081968082944
+      }
+    },
+    "H5_y8": {
+      "before_hamiltonian_generation_and_device_allocation": true,
+      "captured_at_utc": "2026-09-27T13:43:30.679475+00:00",
+      "estimate": {
+        "dense_n3_units_for_31_direct_points": 7327625000,
+        "dense_n3_units_per_direct_point": 236375000,
+        "device_peak_upper_bound_bytes": 539328112,
+        "device_required_with_20_percent_margin_bytes": 647193735,
+        "dimension": 50,
+        "exact_complex128_plan_preserved": true,
+        "formula_key": "y8",
+        "group_count": 43,
+        "host_peak_upper_bound_bytes": 2378000,
+        "host_required_with_20_percent_margin_bytes": 2853600,
+        "resident_arrays": [
+          {
+            "bytes": 17200,
+            "dtype": "float64",
+            "name": "group_eigenvalues",
+            "placement": "host_and_device",
+            "shape": [
+              43,
+              50
+            ]
+          },
+          {
+            "bytes": 1720000,
+            "dtype": "complex128",
+            "name": "group_eigenvectors",
+            "placement": "host_and_device",
+            "shape": [
+              43,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 40000,
+            "dtype": "complex128",
+            "name": "hamiltonian",
+            "placement": "host",
+            "shape": [
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 800,
+            "dtype": "complex128",
+            "name": "state",
+            "placement": "host",
+            "shape": [
+              50
+            ]
+          },
+          {
+            "bytes": 440000,
+            "dtype": "complex128",
+            "name": "unique_s2_block_cache",
+            "placement": "device",
+            "shape": [
+              11,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 40000,
+            "dtype": "complex128",
+            "name": "pf_unitary",
+            "placement": "host_and_device",
+            "shape": [
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 240000,
+            "dtype": "complex128",
+            "name": "gpu_gemm_scratch_upper_bound",
+            "placement": "device",
+            "shape": [
+              6,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 480000,
+            "dtype": "complex128",
+            "name": "cpu_schur_triangular_vectors_workspace_upper_bound",
+            "placement": "host",
+            "shape": [
+              12,
+              50,
+              50
+            ]
+          },
+          {
+            "bytes": 536870912,
+            "dtype": "bytes",
+            "name": "cuda_context_and_library_reserve",
+            "placement": "device",
+            "shape": null
+          }
+        ],
+        "system": "H5",
+        "unique_s2_blocks": 11,
+        "wall_time_gate_role": "record_only_for_H5_H7; the registered 72-hour automatic gate applied to H8/H9, which are outside this user-limited run"
+      },
+      "gates": {
+        "complex128_exact_plan": true,
+        "device_20_percent_margin": true,
+        "host_20_percent_margin": true,
+        "pass": true
+      },
+      "gpu": {
+        "driver_version": "560.35.05",
+        "existing_compute_processes_all_gpus": [
+          "330765, [Not Found], 0, GPU-e1d3fde4-c1af-1654-855b-3bdca33b5f5e"
+        ],
+        "free_bytes": 42409656320,
+        "name": "NVIDIA A100-SXM4-40GB",
+        "physical_gpu_id": 1,
+        "total_bytes": 42949672960,
+        "used_bytes": 1048576,
+        "utilization_percent": 0,
+        "uuid": "GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d"
+      },
+      "host": {
+        "available_bytes": 1011996979200,
+        "total_bytes": 1081968082944
+      }
+    },
+    "H7_m5": {
+      "before_hamiltonian_generation_and_device_allocation": true,
+      "captured_at_utc": "2026-09-27T13:43:30.823693+00:00",
+      "estimate": {
+        "dense_n3_units_for_31_direct_points": 31006438068375,
+        "dense_n3_units_per_direct_point": 1000207679625,
+        "device_peak_upper_bound_bytes": 1557433112,
+        "device_required_with_20_percent_margin_bytes": 1868919735,
+        "dimension": 735,
+        "exact_complex128_plan_preserved": true,
+        "formula_key": "m5",
+        "group_count": 105,
+        "host_peak_upper_bound_bytes": 1046504760,
+        "host_required_with_20_percent_margin_bytes": 1255805712,
+        "resident_arrays": [
+          {
+            "bytes": 617400,
+            "dtype": "float64",
+            "name": "group_eigenvalues",
+            "placement": "host_and_device",
+            "shape": [
+              105,
+              735
+            ]
+          },
+          {
+            "bytes": 907578000,
+            "dtype": "complex128",
+            "name": "group_eigenvectors",
+            "placement": "host_and_device",
+            "shape": [
+              105,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 8643600,
+            "dtype": "complex128",
+            "name": "hamiltonian",
+            "placement": "host",
+            "shape": [
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 11760,
+            "dtype": "complex128",
+            "name": "state",
+            "placement": "host",
+            "shape": [
+              735
+            ]
+          },
+          {
+            "bytes": 51861600,
+            "dtype": "complex128",
+            "name": "unique_s2_block_cache",
+            "placement": "device",
+            "shape": [
+              6,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 8643600,
+            "dtype": "complex128",
+            "name": "pf_unitary",
+            "placement": "host_and_device",
+            "shape": [
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 51861600,
+            "dtype": "complex128",
+            "name": "gpu_gemm_scratch_upper_bound",
+            "placement": "device",
+            "shape": [
+              6,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 103723200,
+            "dtype": "complex128",
+            "name": "cpu_schur_triangular_vectors_workspace_upper_bound",
+            "placement": "host",
+            "shape": [
+              12,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 536870912,
+            "dtype": "bytes",
+            "name": "cuda_context_and_library_reserve",
+            "placement": "device",
+            "shape": null
+          }
+        ],
+        "system": "H7",
+        "unique_s2_blocks": 6,
+        "wall_time_gate_role": "record_only_for_H5_H7; the registered 72-hour automatic gate applied to H8/H9, which are outside this user-limited run"
+      },
+      "gates": {
+        "complex128_exact_plan": true,
+        "device_20_percent_margin": true,
+        "host_20_percent_margin": true,
+        "pass": true
+      },
+      "gpu": {
+        "driver_version": "560.35.05",
+        "existing_compute_processes_all_gpus": [
+          "330765, [Not Found], 0, GPU-e1d3fde4-c1af-1654-855b-3bdca33b5f5e"
+        ],
+        "free_bytes": 42409656320,
+        "name": "NVIDIA A100-SXM4-40GB",
+        "physical_gpu_id": 1,
+        "total_bytes": 42949672960,
+        "used_bytes": 1048576,
+        "utilization_percent": 0,
+        "uuid": "GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d"
+      },
+      "host": {
+        "available_bytes": 1012066004992,
+        "total_bytes": 1081968082944
+      }
+    },
+    "H7_y8": {
+      "before_hamiltonian_generation_and_device_allocation": true,
+      "captured_at_utc": "2026-09-27T13:43:30.975152+00:00",
+      "estimate": {
+        "dense_n3_units_for_31_direct_points": 56855393980875,
+        "dense_n3_units_per_direct_point": 1834044967125,
+        "device_peak_upper_bound_bytes": 1600651112,
+        "device_required_with_20_percent_margin_bytes": 1920781335,
+        "dimension": 735,
+        "exact_complex128_plan_preserved": true,
+        "formula_key": "y8",
+        "group_count": 105,
+        "host_peak_upper_bound_bytes": 1046504760,
+        "host_required_with_20_percent_margin_bytes": 1255805712,
+        "resident_arrays": [
+          {
+            "bytes": 617400,
+            "dtype": "float64",
+            "name": "group_eigenvalues",
+            "placement": "host_and_device",
+            "shape": [
+              105,
+              735
+            ]
+          },
+          {
+            "bytes": 907578000,
+            "dtype": "complex128",
+            "name": "group_eigenvectors",
+            "placement": "host_and_device",
+            "shape": [
+              105,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 8643600,
+            "dtype": "complex128",
+            "name": "hamiltonian",
+            "placement": "host",
+            "shape": [
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 11760,
+            "dtype": "complex128",
+            "name": "state",
+            "placement": "host",
+            "shape": [
+              735
+            ]
+          },
+          {
+            "bytes": 95079600,
+            "dtype": "complex128",
+            "name": "unique_s2_block_cache",
+            "placement": "device",
+            "shape": [
+              11,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 8643600,
+            "dtype": "complex128",
+            "name": "pf_unitary",
+            "placement": "host_and_device",
+            "shape": [
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 51861600,
+            "dtype": "complex128",
+            "name": "gpu_gemm_scratch_upper_bound",
+            "placement": "device",
+            "shape": [
+              6,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 103723200,
+            "dtype": "complex128",
+            "name": "cpu_schur_triangular_vectors_workspace_upper_bound",
+            "placement": "host",
+            "shape": [
+              12,
+              735,
+              735
+            ]
+          },
+          {
+            "bytes": 536870912,
+            "dtype": "bytes",
+            "name": "cuda_context_and_library_reserve",
+            "placement": "device",
+            "shape": null
+          }
+        ],
+        "system": "H7",
+        "unique_s2_blocks": 11,
+        "wall_time_gate_role": "record_only_for_H5_H7; the registered 72-hour automatic gate applied to H8/H9, which are outside this user-limited run"
+      },
+      "gates": {
+        "complex128_exact_plan": true,
+        "device_20_percent_margin": true,
+        "host_20_percent_margin": true,
+        "pass": true
+      },
+      "gpu": {
+        "driver_version": "560.35.05",
+        "existing_compute_processes_all_gpus": [
+          "330765, [Not Found], 0, GPU-e1d3fde4-c1af-1654-855b-3bdca33b5f5e"
+        ],
+        "free_bytes": 42409656320,
+        "name": "NVIDIA A100-SXM4-40GB",
+        "physical_gpu_id": 1,
+        "total_bytes": 42949672960,
+        "used_bytes": 1048576,
+        "utilization_percent": 0,
+        "uuid": "GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d"
+      },
+      "host": {
+        "available_bytes": 1012081164288,
+        "total_bytes": 1081968082944
+      }
+    }
+  }
+}

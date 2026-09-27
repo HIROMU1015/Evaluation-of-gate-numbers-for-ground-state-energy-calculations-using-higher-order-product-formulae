@@ -1,0 +1,42 @@
+{
+  "schema_version": "hchain_direct_gpu_h5_h7_identity_amendment_v1_1",
+  "parent_gpu_extension_sha256": "610bc26d3f3dda2c7161c7c465cafabcea04fb5735956b7421c14a578681362e",
+  "authority": "explicit_user_approval_after_identity_gate_stop_2026-09-27",
+  "trigger": {
+    "system": "H5",
+    "formula_key": "m5",
+    "status": "stopped_source_identity_mismatch_before_pf_unitary",
+    "direct_points_completed": 0,
+    "pf_unitaries_built": 0
+  },
+  "evidence": {
+    "parent_result_commit": "c27e31e82ca55fc404ed33123cfd5d2c6a76bc35",
+    "parent_H5_m5_raw_sha256": "da52273613ce59df6347d99001a7daafece1281cc65fbe298de94d7bb998a3d7",
+    "parent_H5_y8_raw_sha256": "9c5cecece27197ebfa858693fe6376015b54bc89d55c2d4f6db12844958a44b6",
+    "parent_H5_m5_num_groups": 43,
+    "parent_H5_y8_num_groups": 43,
+    "fresh_H5_preparation_num_groups": 43,
+    "matching_population_counts": [3, 1],
+    "matching_sector_dimension": 50
+  },
+  "allowed_change": {
+    "path": "expected_sector_identity.H5.group_count",
+    "from": 45,
+    "to": 43
+  },
+  "unchanged": [
+    "H5 physical system, charge, multiplicity, basis, and geometry",
+    "H7 expected sector identity including group_count 105",
+    "parent protocol and all parent amendments",
+    "H5/H7-only scope and execution order",
+    "product formulas and coefficients",
+    "epsilon_E and beta",
+    "31-point relative grid",
+    "complex128 exact dense backend",
+    "Schur and continuous-branch rules",
+    "all numerical gates and thresholds",
+    "cache isolation and parity requirements"
+  ],
+  "restart_rule": "Create and commit a new truth-free Phase A bundle containing this amendment, then rerun H5/m5 from a new output directory. Do not reuse the stopped output as direct cache."
+}
+
