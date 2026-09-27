@@ -1,0 +1,35 @@
+{
+  "schema": "second_study_safe_time_domain_preflight_decision_v1_1",
+  "status": "failed_environment",
+  "completed_at": "2026-09-27T13:03:41+09:00",
+  "branch": "gpu-second-study-safe-time-domain-preflight-v1-1-20260927",
+  "protocol_commit": "804331ecc976b83ae880940719706c11999247bc",
+  "parent_implementation_commit": "3a0dd5684abd7039935c02c14b44e3cb24bb149a",
+  "v1_1_implementation_commit": "0f3381863ed0eb0a31b59b8018e816bebe3840f7",
+  "reviewed_bundle_commit": "ee9103b18b48dccde5700287405780565bd35cb7",
+  "protocol_sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+  "amendment_sha256": "218d325d2b13eea24196302a52e4a1a3e34ae92973518b61835bf2ad3974759d",
+  "origin": {
+    "raw": "https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae.git",
+    "canonical": "github.com/hiromu1015/evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+    "identity_rule": "github_transport_normalization_v1_1"
+  },
+  "gates": {
+    "source_identity": {"status": "passed", "checks_passed": 67, "checks_total": 67},
+    "h01_p03_identity": {"status": "passed"},
+    "independence_search": {"status": "passed_no_numeric_contamination_hits", "worktree_count": 20, "git_ref_count": 81, "archive_count": 15, "total_hit_record_count": 2166, "planning_validation_hit_count": 67, "suspicious_hit_count": 0, "independent_condition_numeric_result_hit_count": 0},
+    "gpu_memory": {"status": "passed", "minimum_free_memory_mib": 40445, "required_free_memory_mib": 8192},
+    "python_dependencies": {"status": "failed", "python_executable": "/usr/bin/python3", "python_version": "3.12.3", "missing_required_modules": ["numpy", "scipy", "pytest", "qiskit", "qiskit_aer", "cupy", "pyscf", "matplotlib", "pandas"]},
+    "focused_tests": {"status": "not_run_due_to_failed_environment"},
+    "all_review_tests": {"status": "not_run_due_to_failed_environment"}
+  },
+  "initial_failed_preflight": {"branch": "gpu-second-study-safe-time-domain-preflight-20260927", "result_commit": "e1891dfd24ec5f0064b0598e51eb260073fd2b1e", "output_preserved": true},
+  "failure": {"gate": "python_dependencies", "reason": "The mandated /usr/bin/python3 environment lacks pytest and the checked scientific packages; installation/update is not authorized."},
+  "phase_a_authorized": false,
+  "phase_b_authorized": false,
+  "preflight_only_complete_marker_created": false,
+  "new_scientific_computation": false,
+  "gpu_kernel_launched": false,
+  "shared_environment_changed": false,
+  "other_processes_stopped": false
+}

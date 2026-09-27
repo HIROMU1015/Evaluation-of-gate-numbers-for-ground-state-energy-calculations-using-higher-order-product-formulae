@@ -1,0 +1,51 @@
+{
+  "schema": "second_study_safe_time_domain_gpu_environment_v1_1",
+  "status": "failed_environment",
+  "recorded_at": "2026-09-27T13:03:41+09:00",
+  "python": {
+    "sys_executable": "/usr/bin/python3",
+    "version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "version_info": [3, 12, 3, "final", 0],
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "cuda_visible_devices": null
+  },
+  "package_imports": {
+    "numpy": {"importable": false, "error": "ModuleNotFoundError: No module named 'numpy'"},
+    "scipy": {"importable": false, "error": "ModuleNotFoundError: No module named 'scipy'"},
+    "pytest": {"importable": false, "error": "ModuleNotFoundError: No module named 'pytest'"},
+    "qiskit": {"importable": false, "error": "ModuleNotFoundError: No module named 'qiskit'"},
+    "qiskit_aer": {"importable": false, "error": "ModuleNotFoundError: No module named 'qiskit_aer'"},
+    "cupy": {"importable": false, "error": "ModuleNotFoundError: No module named 'cupy'", "backend_smoke_passed": false},
+    "pyscf": {"importable": false, "error": "ModuleNotFoundError: No module named 'pyscf'"},
+    "matplotlib": {"importable": false, "error": "ModuleNotFoundError: No module named 'matplotlib'"},
+    "pandas": {"importable": false, "error": "ModuleNotFoundError: No module named 'pandas'"}
+  },
+  "nvidia_smi": {
+    "driver_version": "560.35.05",
+    "reported_cuda_version": "12.6",
+    "gpu_count": 8,
+    "gpus": [
+      {"index": 0, "uuid": "GPU-7b7753f3-d258-9e61-9349-e64d2fa59a08", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445},
+      {"index": 1, "uuid": "GPU-148fd0a0-591c-a6a3-3ef8-d8d1562b5f6d", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445},
+      {"index": 2, "uuid": "GPU-43a18e74-6ec8-53f9-43a4-b97d4c2fb7d3", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445},
+      {"index": 3, "uuid": "GPU-e1d3fde4-c1af-1654-855b-3bdca33b5f5e", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445},
+      {"index": 4, "uuid": "GPU-9e24f6d6-dd6f-5ffd-e0ed-2af80e55464b", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445},
+      {"index": 5, "uuid": "GPU-8a8c78b9-45e3-9955-4548-2a6bbff77b46", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445},
+      {"index": 6, "uuid": "GPU-f682c30a-50d4-d21f-0c9a-b225d02fadb7", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445},
+      {"index": 7, "uuid": "GPU-19895fa1-e15a-b3d9-408e-cfdaf9664931", "model": "NVIDIA A100-SXM4-40GB", "memory_total_mib": 40960, "memory_free_mib": 40445}
+    ],
+    "minimum_free_memory_mib": 40445,
+    "required_free_memory_mib": 8192,
+    "memory_gate_passed": true,
+    "compute_process_count": 0,
+    "compute_processes": []
+  },
+  "failure": {
+    "gate": "required_python_dependencies",
+    "reason": "The mandated /usr/bin/python3 environment lacks pytest and all checked scientific packages."
+  },
+  "package_install_or_update_attempted": false,
+  "gpu_kernel_launched": false,
+  "processes_signaled_or_stopped": false,
+  "system_or_shared_environment_changed": false
+}
