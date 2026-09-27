@@ -1,0 +1,31 @@
+{
+  "schema_version": "hchain_direct_optimal_time_scaling_partial_stop_amendment_v1_2",
+  "parent_protocol_sha256": "12d10562cf481b836242786462184d8a6ffb342153404c9bf84ff4d5ca836ab9",
+  "parent_sector_amendment_sha256": "5ca0ea30f9ad08bc7e4a54fcd8bab8f50195752dcaf3717c219281a458b0122e",
+  "scope_change_reason": "The user requested that the current validation stop at H6. H7 direct diagonalization was interrupted during construction of its first PF unitary, before any H7 direct point was completed.",
+  "completed_systems": ["H2", "H4", "H5", "H6"],
+  "primary_scaling_systems": ["H2", "H4", "H6"],
+  "descriptive_only_systems": ["H5"],
+  "not_executed_systems": ["H7"],
+  "completed_formula_keys": ["m5", "y8"],
+  "expected_points_per_system_formula": 31,
+  "expected_completed_direct_point_count": 248,
+  "expected_primary_scaling_direct_point_count": 186,
+  "expected_H7_completed_direct_point_count": 0,
+  "analysis_rules": {
+    "reuse_parent_numerical_gates": true,
+    "reuse_parent_optimum_robustness_rules": true,
+    "reuse_parent_even_chain_scaling_rule": true,
+    "H5_role": "single odd-cation-triplet descriptive result only; no odd-family scaling fit",
+    "H7_runtime_rule": "An interrupted runtime file may be preserved, but it must contain zero completed direct points and must not be used in any summary, fit, decision, or manifest payload.",
+    "completion_marker": "PARTIAL_H6_COMPLETE",
+    "full_protocol_COMPLETE_forbidden": true
+  },
+  "scientific_limits": [
+    "This is a user-requested partial completion through H6, not completion of the parent H2/H4/H5/H6/H7 protocol.",
+    "The scaling decision remains restricted to the pre-registered even neutral singlet family H2/H4/H6.",
+    "H5 is reported only as a single descriptive odd-family point and is not pooled with the even family.",
+    "H7 and H8 are not executed; no strong scaling or independent-holdout claim is permitted.",
+    "No threshold, time grid, cost definition, branch rule, or numerical gate is changed by this amendment."
+  ]
+}
