@@ -184,6 +184,7 @@ def test_unsafe_or_ambiguous_remote_forms_are_rejected(remote: str) -> None:
 def test_gpu_v1_1_retry_prompt_preserves_failure_and_stops_before_phase_a() -> None:
     prompt = GPU_RETRY_PROMPT.read_text(encoding="utf-8")
     assert "0f3381863ed0eb0a31b59b8018e816bebe3840f7" in prompt
+    assert "ee9103b18b48dccde5700287405780565bd35cb7" in prompt
     assert preflight.EXPECTED_AMENDMENT_SHA256 in prompt
     assert "e1891dfd24ec5f0064b0598e51eb260073fd2b1e" in prompt
     assert "gpu-second-study-safe-time-domain-preflight-v1-1-20260927" in prompt

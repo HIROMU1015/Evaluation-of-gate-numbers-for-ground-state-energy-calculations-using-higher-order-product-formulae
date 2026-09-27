@@ -15,6 +15,7 @@ Phase A、Phase B、新規Hamiltonian、RHF/CISD、group spectrum、proxy、PF a
   `a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b`
 - parent preflight実装commit：`3a0dd5684abd7039935c02c14b44e3cb24bb149a`
 - v1.1実装commit：`0f3381863ed0eb0a31b59b8018e816bebe3840f7`
+- v1.1 review済みbundle commit：`ee9103b18b48dccde5700287405780565bd35cb7`
 - v1.1 amendment：
   `review_response/second_study_safe_time_domain_preflight_amendment_v1_1.json`
 - amendment SHA-256：
@@ -62,15 +63,19 @@ protocol JSON、分子、geometry、情報源、PF、候補時刻、threshold、
 git fetch origin --prune
 git cat-file -e e1891dfd24ec5f0064b0598e51eb260073fd2b1e^{commit}
 git cat-file -e 0f3381863ed0eb0a31b59b8018e816bebe3840f7^{commit}
+git cat-file -e ee9103b18b48dccde5700287405780565bd35cb7^{commit}
 git merge-base --is-ancestor \
   804331ecc976b83ae880940719706c11999247bc \
   0f3381863ed0eb0a31b59b8018e816bebe3840f7
 git merge-base --is-ancestor \
   3a0dd5684abd7039935c02c14b44e3cb24bb149a \
   0f3381863ed0eb0a31b59b8018e816bebe3840f7
+git merge-base --is-ancestor \
+  0f3381863ed0eb0a31b59b8018e816bebe3840f7 \
+  ee9103b18b48dccde5700287405780565bd35cb7
 ```
 
-v1.1実装commitから独立worktreeと新規branchを作ります。推奨名は
+v1.1 review済みbundle commit `ee9103b...`から独立worktreeと新規branchを作ります。推奨名は
 
 `gpu-second-study-safe-time-domain-preflight-v1-1-20260927`
 
