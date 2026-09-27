@@ -13,6 +13,10 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 GPU_PROMPT = Path(
     "review_response/gpu_second_study_safe_time_domain_preflight_prompt.md"
 )
+GPU_RETRY_PROMPT = Path(
+    "review_response/"
+    "gpu_second_study_safe_time_domain_preflight_v1_1_retry_prompt.md"
+)
 AMENDMENT_PATH = Path(
     "review_response/"
     "second_study_safe_time_domain_preflight_amendment_v1_1.json"
@@ -136,6 +140,31 @@ def test_different_repository_does_not_match_expected_identity() -> None:
     assert measured != preflight.EXPECTED_REPOSITORY_ID
 
 
+def test_full_preflight_accepts_gpu_https_origin(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    https_remote = (
+        "https://github.com/HIROMU1015/"
+        "Evaluation-of-gate-numbers-for-ground-state-energy-calculations-"
+        "using-higher-order-product-formulae.git"
+    )
+    original_git_text = preflight._git_text
+
+    def gpu_git_text(project_root: Path, *args: str) -> str:
+        if args == ("remote", "get-url", "origin"):
+            return https_remote
+        return original_git_text(project_root, *args)
+
+    monkeypatch.setattr(preflight, "_git_text", gpu_git_text)
+    report = preflight.build_preflight_report(PROJECT_ROOT)
+    assert report["origin"] == https_remote
+    assert report["origin_repository_identity"] == (
+        preflight.EXPECTED_REPOSITORY_ID
+    )
+    assert report["checks"]["git:origin"]["passed"] is True
+    assert report["failed_checks"] == []
+
+
 @pytest.mark.parametrize(
     "remote",
     [
@@ -150,3 +179,15 @@ def test_different_repository_does_not_match_expected_identity() -> None:
 def test_unsafe_or_ambiguous_remote_forms_are_rejected(remote: str) -> None:
     with pytest.raises(preflight.PreflightError):
         preflight.canonical_repository_identity(remote)
+
+
+def test_gpu_v1_1_retry_prompt_preserves_failure_and_stops_before_phase_a() -> None:
+    prompt = GPU_RETRY_PROMPT.read_text(encoding="utf-8")
+    assert "0f3381863ed0eb0a31b59b8018e816bebe3840f7" in prompt
+    assert preflight.EXPECTED_AMENDMENT_SHA256 in prompt
+    assert "e1891dfd24ec5f0064b0598e51eb260073fd2b1e" in prompt
+    assert "gpu-second-study-safe-time-domain-preflight-v1-1-20260927" in prompt
+    assert "/usr/bin/python3" in prompt
+    assert "67/67" in prompt
+    assert "preflight_pass_phase_a_not_authorized" in prompt
+    assert "Phase A、Phase B、新規Hamiltonian" in prompt
