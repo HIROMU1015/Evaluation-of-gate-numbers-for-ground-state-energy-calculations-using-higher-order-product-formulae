@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "amendment_id": "second_study_safe_time_domain_preflight_cupy_dependency_v1_4",
+  "created_on": "2026-09-27",
+  "scope": "preflight_cupy_required_transitive_dependency_only",
+  "parent_protocol": {
+    "commit": "804331ecc976b83ae880940719706c11999247bc",
+    "sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b"
+  },
+  "parent_overlay_amendment": {
+    "commit": "699774cd23ac0010bde6ee015489ea62aaacf7a1",
+    "reviewed_bundle_commit": "25a4a415609189ce3333c380e7c55a76d76e401f",
+    "sha256": "c8ec1925f2ad8f2dbb0b3e466514cd8fb0d70d39c58ee538e3ea5ff4e8e7d6ac"
+  },
+  "preserved_v1_3_failure": {
+    "branch": "gpu-second-study-safe-time-domain-preflight-v1-3-20260927",
+    "result_commit": "17422078d27bf3fc9e395719d335cd9ffa0e08a8",
+    "status": "failed_environment_identity",
+    "failed_check": "unlisted_foreign_distribution:fastrlock==0.8.3",
+    "downstream_gates_started": false,
+    "phase_a_executed": false,
+    "phase_b_executed": false,
+    "new_scientific_computation": false
+  },
+  "cause": {
+    "classification": "incomplete_enumeration_of_fixed_cupy_runtime_dependency",
+    "cupy_declared_requirement": "fastrlock>=0.5",
+    "fresh_process_before_cupy_import_fastrlock_loaded": false,
+    "fresh_process_after_cupy_import_fastrlock_loaded": true,
+    "primary_environment_fastrlock_available": false,
+    "scientific_result_used_to_select_dependency": false
+  },
+  "overlay_identity": {
+    "site_packages": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+    "allowed_distributions": [
+      {
+        "name": "cupy-cuda12x",
+        "version": "13.6.0",
+        "record_sha256": "374e873c946b8fb847925051ccd22b534660b480ae4d1c01aea1f540dadec401",
+        "owned_top_level_modules": [
+          "cupy",
+          "cupyx",
+          "cupy_backends"
+        ]
+      },
+      {
+        "name": "fastrlock",
+        "version": "0.8.3",
+        "record_sha256": "0368d7063abcf0dfe42c68e6509edaaa6337a9aaa0c0750289884b82474d3aac",
+        "owned_top_level_modules": [
+          "fastrlock"
+        ],
+        "authorization_basis": "required_by_cupy_metadata"
+      }
+    ],
+    "allowed_distribution_count": 2,
+    "all_other_overlay_distributions_forbidden": true
+  },
+  "metadata_and_record_gate": {
+    "require_cupy_metadata_requirement_exactly_present": "fastrlock>=0.5",
+    "require_distribution_record_sha256_match": true,
+    "verify_metadata_and_loaded_package_files_against_record_digests": true,
+    "record_metadata_path_and_sha256": true,
+    "record_record_path_and_sha256": true,
+    "record_package_to_distribution_ownership": true,
+    "classify_cupyx_and_cupy_backends_as_cupy_cuda12x_components": true,
+    "fresh_process_import_sequence": [
+      "confirm fastrlock is not loaded before importing cupy",
+      "import cupy without allocating an array or querying a device",
+      "confirm fastrlock is loaded from the fixed overlay",
+      "enumerate every loaded module owned by an overlay distribution",
+      "reject every overlay distribution other than cupy-cuda12x and fastrlock"
+    ]
+  },
+  "unchanged_v1_3_rules": {
+    "python_executable": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "pythonpath_overlay": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+    "ld_library_path_order_unchanged": true,
+    "primary_package_versions_unchanged": true,
+    "nvidia_distribution_identity_gate_unchanged": true,
+    "module_resolution_gate_unchanged_except_fastrlock": true,
+    "test_policy_unchanged": true
+  },
+  "scientific_protocol_changes": {
+    "protocol_json": false,
+    "information_source": false,
+    "formula": false,
+    "molecules_or_geometries": false,
+    "candidate_times": false,
+    "thresholds": false,
+    "stopping_rules": false,
+    "gamma_or_beta": false,
+    "phase_a_or_phase_b_authorization": false
+  },
+  "prohibited_actions": [
+    "installing, updating, downgrading, repairing, or copying any package or library",
+    "adding another site-packages or shared-library directory",
+    "allowing an overlay distribution other than cupy-cuda12x and fastrlock",
+    "changing shell startup files or shared environment configuration",
+    "launching a GPU kernel or allocating a GPU device array",
+    "creating a Hamiltonian, state, proxy value, PF action, group spectrum, or direct truth value"
+  ],
+  "retry_rules": {
+    "preserve_all_prior_branches_and_outputs": true,
+    "new_branch_required": true,
+    "new_output_required": true,
+    "prior_output_or_cache_reuse": false,
+    "rerun_environment_identity": true,
+    "rerun_source_identity": true,
+    "rerun_h01_p03_identity": true,
+    "rerun_full_independence_search": true,
+    "rerun_gpu_memory_check": true,
+    "run_focused_tests": true,
+    "run_full_review_tests": true,
+    "stop_after_preflight_report": true,
+    "phase_a_authorized": false,
+    "phase_b_authorized": false
+  }
+}

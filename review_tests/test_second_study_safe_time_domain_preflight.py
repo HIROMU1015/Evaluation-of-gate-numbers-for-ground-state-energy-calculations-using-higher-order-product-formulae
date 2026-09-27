@@ -43,6 +43,13 @@ OVERLAY_AMENDMENT_PATH = Path(
 EXPECTED_OVERLAY_AMENDMENT_SHA256 = (
     "c8ec1925f2ad8f2dbb0b3e466514cd8fb0d70d39c58ee538e3ea5ff4e8e7d6ac"
 )
+CUPY_DEPENDENCY_AMENDMENT_PATH = Path(
+    "review_response/"
+    "second_study_safe_time_domain_preflight_cupy_dependency_amendment_v1_4.json"
+)
+EXPECTED_CUPY_DEPENDENCY_AMENDMENT_SHA256 = (
+    "849542cb18c03356d0224e28905fddd1fbb8b912b92a01621d03843c810b57e3"
+)
 
 
 def test_local_preflight_revalidates_frozen_sources_without_new_computation() -> None:
@@ -195,6 +202,51 @@ def test_v1_3_overlay_amendment_is_process_only_and_scientifically_frozen() -> N
     cuda_gate = amendment["cuda_library_identity_gate"]
     assert cuda_gate["gpu_device_allocation_permitted"] is False
     assert cuda_gate["gpu_kernel_permitted"] is False
+    assert not any(amendment["scientific_protocol_changes"].values())
+    assert amendment["retry_rules"]["phase_a_authorized"] is False
+    assert amendment["retry_rules"]["phase_b_authorized"] is False
+
+
+def test_v1_4_cupy_dependency_amendment_is_minimal_and_frozen() -> None:
+    amendment = json.loads(
+        CUPY_DEPENDENCY_AMENDMENT_PATH.read_text(encoding="utf-8")
+    )
+    actual = hashlib.sha256(
+        CUPY_DEPENDENCY_AMENDMENT_PATH.read_bytes()
+    ).hexdigest()
+    sidecar = Path(
+        str(CUPY_DEPENDENCY_AMENDMENT_PATH) + ".sha256"
+    ).read_text().split()[0]
+    assert actual == sidecar == EXPECTED_CUPY_DEPENDENCY_AMENDMENT_SHA256
+    assert amendment["scope"] == (
+        "preflight_cupy_required_transitive_dependency_only"
+    )
+    assert amendment["parent_protocol"] == {
+        "commit": preflight.PROTOCOL_COMMIT,
+        "sha256": preflight.EXPECTED_PROTOCOL_SHA256,
+    }
+    assert amendment["preserved_v1_3_failure"]["result_commit"] == (
+        "17422078d27bf3fc9e395719d335cd9ffa0e08a8"
+    )
+    allowed = amendment["overlay_identity"]["allowed_distributions"]
+    assert [(row["name"], row["version"]) for row in allowed] == [
+        ("cupy-cuda12x", "13.6.0"),
+        ("fastrlock", "0.8.3"),
+    ]
+    assert [row["record_sha256"] for row in allowed] == [
+        "374e873c946b8fb847925051ccd22b534660b480ae4d1c01aea1f540dadec401",
+        "0368d7063abcf0dfe42c68e6509edaaa6337a9aaa0c0750289884b82474d3aac",
+    ]
+    assert amendment["overlay_identity"]["allowed_distribution_count"] == 2
+    assert (
+        amendment["overlay_identity"]["all_other_overlay_distributions_forbidden"]
+        is True
+    )
+    gate = amendment["metadata_and_record_gate"]
+    assert gate["require_cupy_metadata_requirement_exactly_present"] == (
+        "fastrlock>=0.5"
+    )
+    assert gate["require_distribution_record_sha256_match"] is True
     assert not any(amendment["scientific_protocol_changes"].values())
     assert amendment["retry_rules"]["phase_a_authorized"] is False
     assert amendment["retry_rules"]["phase_b_authorized"] is False
