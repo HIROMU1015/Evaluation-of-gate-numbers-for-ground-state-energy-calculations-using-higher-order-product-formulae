@@ -586,7 +586,8 @@ def test_phase_b_mock_run_preserves_negative_result_and_completes(
     assert execution.load_json(output / "strategy_scoring.json")[
         "benefit"
     ] is False
-    assert not any((output / ".runtime").glob("**/*"))
+    assert (output / ".runtime" / "run_identity.json").is_file()
+    assert not (output / ".runtime" / "direct_cache").exists()
     manifest = execution.load_json(output / "manifest.json")
     assert "COMPLETE" in {row["path"] for row in manifest["files"]}
 
@@ -623,6 +624,32 @@ def test_phase_b_runtime_inventory_gate_is_exact(tmp_path: Path) -> None:
     cache.write_bytes(b"fIxed-runtime-cache")
     with pytest.raises(execution.ExecutionError, match="SHA-256 mismatch"):
         phase_b.verify_phase_a_runtime_inventory(phase_a_root)
+
+
+def test_phase_b_output_resume_requires_exact_identity_and_cache_only(
+    tmp_path: Path,
+) -> None:
+    output = tmp_path / "phase_b"
+    identity = {
+        "schema": "second_study_safe_time_domain_phase_b_run_identity_v1",
+        "protocol_sha256": "a" * 64,
+        "prediction_sha256": "b" * 64,
+    }
+    first = phase_b.prepare_phase_b_output(output, identity)
+    assert first["resumed"] is False
+    cache = output / ".runtime" / "direct_cache" / "condition" / "x.pkl"
+    cache.parent.mkdir(parents=True)
+    cache.write_bytes(b"cache")
+    resumed = phase_b.prepare_phase_b_output(output, identity)
+    assert resumed["resumed"] is True
+    assert resumed["preexisting_direct_cache_files"] == 1
+    with pytest.raises(execution.ExecutionError, match="identity mismatch"):
+        phase_b.prepare_phase_b_output(
+            output, {**identity, "prediction_sha256": "c" * 64}
+        )
+    (output / "unexpected.json").write_text("{}\n", encoding="utf-8")
+    with pytest.raises(execution.ExecutionError, match="unexpected file"):
+        phase_b.prepare_phase_b_output(output, identity)
 
 
 def test_phase_a_and_phase_b_main_do_not_run_on_import() -> None:

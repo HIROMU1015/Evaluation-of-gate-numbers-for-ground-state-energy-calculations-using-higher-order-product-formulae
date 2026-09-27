@@ -183,6 +183,56 @@ def verify_phase_a_runtime_inventory(
     }
 
 
+def prepare_phase_b_output(
+    output_dir: Path,
+    run_identity: Mapping[str, Any],
+) -> dict[str, Any]:
+    runtime_root = output_dir / ".runtime"
+    marker = runtime_root / "run_identity.json"
+    if not output_dir.exists():
+        output_dir.mkdir(parents=True)
+        _write_json(marker, run_identity)
+        return {
+            "resumed": False,
+            "preexisting_direct_cache_files": 0,
+            "run_identity_sha256": execution.sha256_file(marker),
+        }
+    if not output_dir.is_dir():
+        raise execution.ExecutionError("Phase B output exists and is not a directory")
+    if not marker.is_file():
+        raise execution.ExecutionError(
+            "existing Phase B output lacks exact-run identity marker"
+        )
+    if execution.load_json(marker) != dict(run_identity):
+        raise execution.ExecutionError("existing Phase B run identity mismatch")
+    allowed_marker = marker.relative_to(output_dir).as_posix()
+    cache_files = []
+    for path in output_dir.rglob("*"):
+        if path.is_symlink():
+            raise execution.ExecutionError(
+                f"symlink forbidden in Phase B resume output: {path}"
+            )
+        if not path.is_file():
+            continue
+        relative = path.relative_to(output_dir).as_posix()
+        if relative == allowed_marker:
+            continue
+        if (
+            len(Path(relative).parts) < 4
+            or Path(relative).parts[:2] != (".runtime", "direct_cache")
+            or path.suffix != ".pkl"
+        ):
+            raise execution.ExecutionError(
+                f"unexpected file in Phase B resume output: {relative}"
+            )
+        cache_files.append(relative)
+    return {
+        "resumed": True,
+        "preexisting_direct_cache_files": len(cache_files),
+        "run_identity_sha256": execution.sha256_file(marker),
+    }
+
+
 def load_phase_a_systems(
     phase_a_root: Path,
     protocol: Mapping[str, Any],
@@ -561,8 +611,6 @@ def run(
     project_root = project_root.resolve()
     phase_a_root = phase_a_root.resolve()
     output_dir = output_dir.resolve()
-    if output_dir.exists():
-        raise execution.ExecutionError(f"refusing to overwrite output: {output_dir}")
     protocol, protocol_sha = execution.load_frozen_protocol(protocol_path)
     environment = phase_a.validate_process_environment(project_root)
     preflight = phase_a.validate_preflight(project_root, preflight_root.resolve())
@@ -573,7 +621,20 @@ def run(
         phase_a_artifact_relative=phase_a_artifact_relative,
     )
     phase_a_runtime_identity = verify_phase_a_runtime_inventory(phase_a_root)
-    output_dir.mkdir(parents=True)
+    output_identity = prepare_phase_b_output(
+        output_dir,
+        {
+            "schema": "second_study_safe_time_domain_phase_b_run_identity_v1",
+            "protocol_sha256": protocol_sha,
+            "prediction_sha256": phase_a_identity["prediction_sha256"],
+            "phase_a_commit": phase_a_commit,
+            "phase_a_artifact_root": str(phase_a_root),
+            "phase_a_artifact_relative": phase_a_artifact_relative.as_posix(),
+            "backend": backend,
+            "gpu_id": int(gpu_id),
+            "processes": int(processes),
+        },
+    )
     started = time.perf_counter()
     predictions = execution.load_json(phase_a_root / guard.PREDICTION_FILE)
     prediction_sha = execution.sha256_file(
@@ -660,6 +721,7 @@ def run(
             "prediction_sha256": prediction_sha,
             "phase_a": phase_a_identity,
             "phase_a_runtime": phase_a_runtime_identity,
+            "phase_b_output_identity": output_identity,
             "preflight": preflight,
             "environment": environment,
             "numerical_validation": numerical,
@@ -706,6 +768,7 @@ def run(
         "prediction_sha256": prediction_sha,
         "phase_a": phase_a_identity,
         "phase_a_runtime": phase_a_runtime_identity,
+        "phase_b_output_identity": output_identity,
         "preflight": preflight,
         "environment": environment,
         "numerical_validation": numerical,
