@@ -1,0 +1,152 @@
+{
+  "all_listed_file_hashes_verified": true,
+  "branch": "gpu-second-study-safe-time-domain-preflight-v1-3-20260927",
+  "created_at": "2026-09-27T15:00:09+09:00",
+  "excluded_from_commit": [
+    "*.pkl",
+    "*.pickle",
+    "*.npy",
+    "*.npz",
+    ".runtime/",
+    "archive extraction directories"
+  ],
+  "failure": {
+    "cupy_declared_requirement": "fastrlock>=0.5",
+    "failed_checks": [
+      "unlisted_foreign_distribution:fastrlock==0.8.3"
+    ],
+    "gate": "python_environment_identity",
+    "overlay_fastrlock_record_sha256": "0368d7063abcf0dfe42c68e6509edaaa6337a9aaa0c0750289884b82474d3aac",
+    "overlay_fastrlock_version": "0.8.3",
+    "primary_environment_fastrlock_available": false,
+    "reason": "Importing the permitted cupy-cuda12x==13.6.0 distribution automatically resolves fastrlock==0.8.3 from the CuPy overlay, but v1.3 permits no foreign distribution other than cupy-cuda12x."
+  },
+  "files": [
+    {
+      "bytes": 343,
+      "path": "all_review_tests.log",
+      "sha256": "33c3f0d2d0c2d1a13576a7e4f9e250e0abe9dd3fc3c82ba7a54837272d179fcf"
+    },
+    {
+      "bytes": 5068,
+      "path": "decision.json",
+      "sha256": "f23f108c00fcd11a46189b2b958c5a2a17effaba200d3b5bb6165c30c7148c3d"
+    },
+    {
+      "bytes": 334,
+      "path": "focused_tests.log",
+      "sha256": "28107349746e23e83f66da3cc2fab5b529cd231cd761fe493aec851b35ae2802"
+    },
+    {
+      "bytes": 326,
+      "path": "gpu_environment.json",
+      "sha256": "8624ec74f2f97b868258012e517c3852ced77e88d411b75b4b84d66ab6afd949"
+    },
+    {
+      "bytes": 301,
+      "path": "independence_search.log",
+      "sha256": "359331c27a311d691c07d4fdc6d5002aa232e54b6e736a3ebc585f1cd74f514c"
+    },
+    {
+      "bytes": 324,
+      "path": "independence_search_inventory.json",
+      "sha256": "dc71520f14ac78b3374c1c8239a54c9985df22c511925108ba38fc5bd61ef93c"
+    },
+    {
+      "bytes": 612,
+      "path": "local_source_preflight.json",
+      "sha256": "4daa789b34917c2dce64e9ccf2a0f34ee7706f391416909a69d095a11c6f18bc"
+    },
+    {
+      "bytes": 138706,
+      "path": "python_environment_identity.json",
+      "sha256": "4abb8a89b4798dd86b5730dff2718b44492f3300f9614725b16e0a6c1d37d111"
+    },
+    {
+      "bytes": 772,
+      "path": "source_identity_audit.json",
+      "sha256": "3c77f9941c8742e7fff365bd80614745d8a51af0213d4d652d0da7d199618c6d"
+    }
+  ],
+  "gates": {
+    "all_review_tests": {
+      "status": "not_run"
+    },
+    "focused_tests": {
+      "status": "not_run"
+    },
+    "gpu_memory": {
+      "status": "not_run"
+    },
+    "h01_p03_identity": {
+      "status": "not_run"
+    },
+    "independence_search": {
+      "status": "not_run"
+    },
+    "python_environment_identity": {
+      "failed_checks": [
+        "unlisted_foreign_distribution:fastrlock==0.8.3"
+      ],
+      "status": "failed"
+    },
+    "source_identity": {
+      "status": "not_run"
+    }
+  },
+  "input_head": "25a4a415609189ce3333c380e7c55a76d76e401f",
+  "marker": {
+    "created": false,
+    "path": "PREFLIGHT_ONLY_COMPLETE",
+    "reason": "failed_environment_identity"
+  },
+  "parent_preflight_implementation_commit": "0f3381863ed0eb0a31b59b8018e816bebe3840f7",
+  "preserved_prior_attempts": [
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-20260927",
+      "output": "artifacts/server_second_study_safe_time_domain_preflight_20260927_3a0dd56/",
+      "result_commit": "e1891dfd24ec5f0064b0598e51eb260073fd2b1e",
+      "status": "failed_source_identity"
+    },
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-v1-1-20260927",
+      "output": "artifacts/server_second_study_safe_time_domain_preflight_v1_1_20260927_0f33818/",
+      "result_commit": "b520f9bd8f575456531e7c0b0f2692973b436e21",
+      "status": "failed_environment"
+    },
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-v1-2-20260927",
+      "output": "artifacts/server_second_study_safe_time_domain_preflight_v1_2_20260927_9e2b9b0/",
+      "result_commit": "fd827f50dcbe64f8e2ea9d931cfdf2dd8eea4480",
+      "status": "failed_environment_identity"
+    },
+    {
+      "branch": "gpu-second-study-safe-time-domain-preflight-v1-2-adapted-20260927",
+      "classification": "environment_adaptation_evidence_not_formal_v1_2_completion",
+      "output": "artifacts/server_second_study_safe_time_domain_preflight_v1_2_adapted_20260927_9e2b9b0/",
+      "result_commit": "ef2dc7443092e93d09ead2fbf717645362fe4189",
+      "status": "preflight_pass_phase_a_not_authorized"
+    }
+  ],
+  "protocol_commit": "804331ecc976b83ae880940719706c11999247bc",
+  "protocol_sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+  "push_performed": false,
+  "python": {
+    "environment_identity_file": "python_environment_identity.json",
+    "executable_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "fixed_overlay_used": true,
+    "requested_path": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "requirements_gpu_sha256": "2d4b882eece717f246b528b1c573c59cd70b43aac665faff7057b3c1cf5cb187",
+    "resolved_path": "/usr/bin/python3.12",
+    "sys_base_prefix": "/usr",
+    "sys_prefix": "/home/AbeHiromu/venvs/trotter-common"
+  },
+  "schema": "second_study_safe_time_domain_preflight_manifest_v1_3",
+  "status": "failed_environment_identity",
+  "v1_1_amendment_sha256": "218d325d2b13eea24196302a52e4a1a3e34ae92973518b61835bf2ad3974759d",
+  "v1_2_amendment_sha256": "ab87da7c42aba20658e5f5d4a204cdf761c50f0814d24719a36e72be674da77e",
+  "v1_2_reviewed_bundle_commit": "a23b5beb8c62380b8f873385e37fd0031e265da2",
+  "v1_3_amendment_sha256": "c8ec1925f2ad8f2dbb0b3e466514cd8fb0d70d39c58ee538e3ea5ff4e8e7d6ac",
+  "v1_3_overlay_amendment_commit": "699774cd23ac0010bde6ee015489ea62aaacf7a1",
+  "v1_3_reviewed_bundle_commit": "25a4a415609189ce3333c380e7c55a76d76e401f"
+}

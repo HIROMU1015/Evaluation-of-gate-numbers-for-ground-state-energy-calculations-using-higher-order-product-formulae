@@ -1,0 +1,2930 @@
+{
+  "allowed_foreign_distribution": {
+    "name": "cupy-cuda12x",
+    "version": "13.6.0"
+  },
+  "audit_implementation_correction": {
+    "applied": true,
+    "applied_at": "2026-09-27T14:57:31+09:00",
+    "downstream_gates_started_before_correction": false,
+    "reason": "Initial path-prefix classification falsely treated cupyx and cupy_backends as separate distributions. Classification was corrected using importlib.metadata package-to-distribution ownership.",
+    "remaining_failure_is_environmental": true
+  },
+  "cuda_library_directories": [
+    {
+      "exists": true,
+      "libraries": [
+        "libnvJitLink.so.12"
+      ],
+      "passed": true,
+      "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib",
+      "realpath": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib"
+    },
+    {
+      "exists": true,
+      "libraries": [
+        "libcusparse.so.12"
+      ],
+      "passed": true,
+      "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusparse/lib",
+      "realpath": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusparse/lib"
+    },
+    {
+      "exists": true,
+      "libraries": [
+        "libcusolver.so.11",
+        "libcusolverMg.so.11"
+      ],
+      "passed": true,
+      "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusolver/lib",
+      "realpath": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusolver/lib"
+    },
+    {
+      "exists": true,
+      "libraries": [
+        "libcublas.so.12",
+        "libcublasLt.so.12",
+        "libnvblas.so.12"
+      ],
+      "passed": true,
+      "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib",
+      "realpath": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib"
+    },
+    {
+      "exists": true,
+      "libraries": [
+        "libcudart.so.12"
+      ],
+      "passed": true,
+      "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cuda_runtime/lib",
+      "realpath": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cuda_runtime/lib"
+    }
+  ],
+  "cupy_runtime_dependency_observation": {
+    "cupy_declares_dependency": true,
+    "fresh_process_after_cupy_import_fastrlock_loaded": true,
+    "fresh_process_before_cupy_import_fastrlock_loaded": false,
+    "primary_environment_fastrlock_spec": null
+  },
+  "distribution_identities": {
+    "cupy-cuda12x": {
+      "canonical_name": "cupy-cuda12x",
+      "dist_info_path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_cuda12x-13.6.0.dist-info",
+      "distribution_root": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_cuda12x-13.6.0.dist-info/RECORD",
+      "record_sha256": "374e873c946b8fb847925051ccd22b534660b480ae4d1c01aea1f540dadec401",
+      "requested_name": "cupy-cuda12x",
+      "version": "13.6.0"
+    },
+    "matplotlib": {
+      "canonical_name": "matplotlib",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/matplotlib-3.9.2.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/matplotlib-3.9.2.dist-info/RECORD",
+      "record_sha256": "0a476a709aa606dea445ee5d211f2970936699c632be6b64207c25593251d734",
+      "requested_name": "matplotlib",
+      "version": "3.9.2"
+    },
+    "numpy": {
+      "canonical_name": "numpy",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/numpy-1.26.4.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/numpy-1.26.4.dist-info/RECORD",
+      "record_sha256": "f617e6689cba0602c39806260e8c1e82773428cfc7ee166416026403fe47994c",
+      "requested_name": "numpy",
+      "version": "1.26.4"
+    },
+    "openfermion": {
+      "canonical_name": "openfermion",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermion-1.6.1.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermion-1.6.1.dist-info/RECORD",
+      "record_sha256": "46d08e792a12ad879c094cf6a416aff0a39bb2d384b3fb327820f78ef441d490",
+      "requested_name": "openfermion",
+      "version": "1.6.1"
+    },
+    "openfermionpyscf": {
+      "canonical_name": "openfermionpyscf",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermionpyscf-0.5.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermionpyscf-0.5.dist-info/RECORD",
+      "record_sha256": "ad5c95d5ede76469ddd2aa4a8f973eaac97d232b2de073007ba4b776067ed3b6",
+      "requested_name": "openfermionpyscf",
+      "version": "0.5"
+    },
+    "pandas": {
+      "canonical_name": "pandas",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pandas-2.3.3.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pandas-2.3.3.dist-info/RECORD",
+      "record_sha256": "d76b79c44e7cb0d9da9d3e56a257d3aea66a2c3d5d29eadfbd15b790a8688cfa",
+      "requested_name": "pandas",
+      "version": "2.3.3"
+    },
+    "pyscf": {
+      "canonical_name": "pyscf",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pyscf-2.7.0.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pyscf-2.7.0.dist-info/RECORD",
+      "record_sha256": "683245e9888901075852c6a7a5f1145b85c67e26a8ad2bced11eb98642c7097a",
+      "requested_name": "pyscf",
+      "version": "2.7.0"
+    },
+    "pytest": {
+      "canonical_name": "pytest",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pytest-9.0.3.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pytest-9.0.3.dist-info/RECORD",
+      "record_sha256": "67ff1595514ea5052fc16a79171da38955fb7030a41780f53d2f3f68439c9dfe",
+      "requested_name": "pytest",
+      "version": "9.0.3"
+    },
+    "qiskit": {
+      "canonical_name": "qiskit",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit-1.3.0.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit-1.3.0.dist-info/RECORD",
+      "record_sha256": "856f0ece55a0a63019626fab49a54a6933711b6a7d30d26511e9535f9fca49e0",
+      "requested_name": "qiskit",
+      "version": "1.3.0"
+    },
+    "qiskit-aer-gpu": {
+      "canonical_name": "qiskit-aer-gpu",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer_gpu-0.15.1.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer_gpu-0.15.1.dist-info/RECORD",
+      "record_sha256": "5818399cd7bd5c5b557dae3983029719050961bd7837730d7441e2bffb1724cf",
+      "requested_name": "qiskit-aer-gpu",
+      "version": "0.15.1"
+    },
+    "scipy": {
+      "canonical_name": "scipy",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/scipy-1.14.1.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/scipy-1.14.1.dist-info/RECORD",
+      "record_sha256": "e6a1060abf3de5bec40d503fab87c699afee34dcb41e119072141e1c51d04130",
+      "requested_name": "scipy",
+      "version": "1.14.1"
+    }
+  },
+  "environment": {
+    "LD_LIBRARY_PATH": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusparse/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusolver/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cuda_runtime/lib",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONPATH": "src:review_response:.:/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+    "expected_LD_LIBRARY_PATH": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusparse/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusolver/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib:/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cuda_runtime/lib",
+    "expected_PYTHONPATH": "src:review_response:.:/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+    "inherited_paths_appended": false,
+    "scope": "child_process_only",
+    "shell_activation_used": false
+  },
+  "executable": {
+    "executable": true,
+    "exists": true,
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "realpath": "/usr/bin/python3.12",
+    "requested_path": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "symlink_target": "python3",
+    "sys_executable": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "version_info": [
+      3,
+      12,
+      3,
+      "final",
+      0
+    ]
+  },
+  "failed_checks": [
+    "unlisted_foreign_distribution:fastrlock==0.8.3"
+  ],
+  "file_identities": {
+    "pyvenv_cfg": {
+      "expected_sha256": "1c6bbb327ae94536cbb3c4bc75dcf21a19ba4bf623f1e96eaf9a9b1dbc797a1e",
+      "passed": true,
+      "path": "/home/AbeHiromu/venvs/trotter-common/pyvenv.cfg",
+      "sha256": "1c6bbb327ae94536cbb3c4bc75dcf21a19ba4bf623f1e96eaf9a9b1dbc797a1e"
+    },
+    "requirements_gpu": {
+      "expected_sha256": "2d4b882eece717f246b528b1c573c59cd70b43aac665faff7057b3c1cf5cb187",
+      "passed": true,
+      "path": "/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-preflight-v1-3-20260927/requirements-gpu.txt",
+      "sha256": "2d4b882eece717f246b528b1c573c59cd70b43aac665faff7057b3c1cf5cb187"
+    }
+  },
+  "foreign_site_packages_on_sys_path": [],
+  "gpu_device_allocation_attempted": false,
+  "gpu_kernel_launched": false,
+  "identity_frozen_for_later_phase_a": false,
+  "later_phase_a_requires_byte_identical_identity": true,
+  "loaded_overlay_modules": [
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._binary",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_binary/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._binary.elementwise",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_binary/elementwise.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._binary.packing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_binary/packing.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._accelerator",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_accelerator.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._carray",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_carray.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._codeblock",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_codeblock.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._cub_reduction",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_cub_reduction.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._dtype",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_dtype.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._fusion_interface",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_fusion_interface.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._fusion_kernel",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_fusion_kernel.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._fusion_op",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_fusion_op.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._fusion_optimization",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_fusion_optimization.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._fusion_thread_local",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_fusion_thread_local.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._fusion_trace",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_fusion_trace.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._fusion_variable",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_fusion_variable.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._gufuncs",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_gufuncs.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._kernel",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_kernel.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._memory_range",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_memory_range.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._optimize_config",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_optimize_config.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._reduction",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_reduction.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_binary",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_binary.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_indexing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_indexing.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_linalg",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_linalg.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_logic",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_logic.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_manipulation",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_manipulation.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_math",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_math.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_sorting",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_sorting.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._routines_statistics",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_routines_statistics.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._scalar",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_scalar.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core._ufuncs",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/_ufuncs.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.core",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/core.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.dlpack",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/dlpack.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.flags",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/flags.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.fusion",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/fusion.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.internal",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/internal.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.new_fusion",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/new_fusion.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.raw",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/raw.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._core.syncdetect",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_core/syncdetect.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._creation",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_creation/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._creation.basic",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_creation/basic.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._creation.from_data",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_creation/from_data.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._creation.matrix",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_creation/matrix.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._creation.ranges",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_creation/ranges.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._environment",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_environment.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._functional",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_functional/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._functional.piecewise",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_functional/piecewise.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._functional.vectorize",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_functional/vectorize.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._indexing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_indexing/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._indexing.generate",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_indexing/generate.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._indexing.indexing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_indexing/indexing.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._indexing.insert",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_indexing/insert.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._indexing.iterate",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_indexing/iterate.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._io",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_io/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._io.formatting",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_io/formatting.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._io.npz",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_io/npz.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._io.text",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_io/text.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._logic",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_logic/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._logic.comparison",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_logic/comparison.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._logic.content",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_logic/content.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._logic.ops",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_logic/ops.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._logic.truth",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_logic/truth.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._logic.type_testing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_logic/type_testing.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.add_remove",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/add_remove.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.basic",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/basic.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.dims",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/dims.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.join",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/join.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.kind",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/kind.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.rearrange",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/rearrange.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.shape",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/shape.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.split",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/split.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.tiling",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/tiling.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._manipulation.transpose",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_manipulation/transpose.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.arithmetic",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/arithmetic.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.explog",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/explog.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.floating",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/floating.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.hyperbolic",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/hyperbolic.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.misc",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/misc.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.rational",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/rational.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.rounding",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/rounding.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.special",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/special.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.sumprod",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/sumprod.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.trigonometric",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/trigonometric.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.ufunc",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/ufunc.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._math.window",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_math/window.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._misc",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_misc/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._misc.byte_bounds",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_misc/byte_bounds.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._misc.memory_ranges",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_misc/memory_ranges.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._misc.who",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_misc/who.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._padding",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_padding/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._padding.pad",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_padding/pad.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._sorting",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_sorting/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._sorting.count",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_sorting/count.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._sorting.search",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_sorting/search.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._sorting.sort",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_sorting/sort.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._statistics",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_statistics/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._statistics.correlation",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_statistics/correlation.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._statistics.histogram",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_statistics/histogram.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._statistics.meanvar",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_statistics/meanvar.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._statistics.order",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_statistics/order.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._util",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_util.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy._version",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/_version.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.common",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/common.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.compiler",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/compiler.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.cub",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/cub.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.device",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/device.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.function",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/function.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.graph",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/graph.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.memory",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/memory.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.memory_hook",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/memory_hook.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.memory_hooks",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/memory_hooks/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.memory_hooks.debug_print",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/memory_hooks/debug_print.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.memory_hooks.line_profile",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/memory_hooks/line_profile.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.pinned_memory",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/pinned_memory.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.profiler",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/profiler.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.stream",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/stream.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.texture",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/texture.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.cuda.thrust",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/cuda/thrust.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.exceptions",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/exceptions/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.fft",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/fft/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.fft._cache",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/fft/_cache.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.fft._callback",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/fft/_callback.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.fft._fft",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/fft/_fft.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.fft.config",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/fft/config.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.lib",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/lib/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.lib._polynomial",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/lib/_polynomial.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.lib._routines_poly",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/lib/_routines_poly.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.lib._shape_base",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/lib/_shape_base.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.lib.stride_tricks",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/lib/stride_tricks.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._decomposition",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_decomposition.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._eigenvalue",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_eigenvalue.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._einsum",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_einsum.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._einsum_cutn",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_einsum_cutn.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._einsum_opt",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_einsum_opt.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._norms",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_norms.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._product",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_product.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._solve",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_solve.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.linalg._util",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/linalg/_util.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.polynomial",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/polynomial/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.polynomial.polynomial",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/polynomial/polynomial.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.polynomial.polyutils",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/polynomial/polyutils.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.random",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/random/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.random._bit_generator",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/random/_bit_generator.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.random._distributions",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/random/_distributions.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.random._generator",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/random/_generator.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.random._kernels",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/random/_kernels.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.random._permutations",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/random/_permutations.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.random._sample",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/random/_sample.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.sparse",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/sparse/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._array",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_array.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._attr",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_attr.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._bundle",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_bundle.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._helper",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_helper.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._loops",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_loops.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._parameterized",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_parameterized.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._pytest_impl",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_pytest_impl.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.testing._random",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/testing/_random.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.typing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/typing/__init__.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy.typing._types",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/typing/_types.py",
+      "top_level_module": "cupy"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/__init__.py",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/__init__.py",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda._softlink",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/_softlink.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.api",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/api/__init__.py",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.api._driver_enum",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/api/_driver_enum.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.api._runtime_enum",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/api/_runtime_enum.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.api.driver",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/api/driver.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.api.runtime",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/api/runtime.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.libs",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/libs/__init__.py",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.libs.cutensor",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/libs/cutensor.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.libs.nvrtc",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/libs/nvrtc.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.libs.nvtx",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/libs/nvtx.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupy_backends.cuda.stream",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy_backends/cuda/stream.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupy_backends"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx._gufunc",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/_gufunc.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx._pinned_array",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/_pinned_array.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx._rsqrt",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/_rsqrt.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx._runtime",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/_runtime.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx._scatter",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/_scatter.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx._ufunc_config",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/_ufunc_config.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.cutensor",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/cutensor.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit._builtin_funcs",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/_builtin_funcs.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit._compile",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/_compile.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit._cuda_typerules",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/_cuda_typerules.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit._cuda_types",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/_cuda_types.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit._interface",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/_interface.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit._internal_types",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/_internal_types.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit.cg",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/cg.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit.cub",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/cub.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.jit.thrust",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/jit/thrust.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.linalg",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/linalg/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.linalg._solve",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/linalg/_solve.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.linalg.sparse",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/linalg/sparse/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.linalg.sparse._solve",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/linalg/sparse/_solve.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.optimizing",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/optimizing/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.optimizing._optimize",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/optimizing/_optimize.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.profiler",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/profiler/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.profiler._time",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/profiler/_time.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.profiler._time_range",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/profiler/_time_range.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.fft",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/fft/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.fft._fft",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/fft/_fft.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.fft._fftlog",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/fft/_fftlog.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.fft._helper",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/fft/_helper.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.fft._realtransforms",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/fft/_realtransforms.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.fftpack",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/fftpack/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.fftpack._fft",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/fftpack/_fft.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._base",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_base.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._compressed",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_compressed.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._construct",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_construct.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._coo",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_coo.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._csc",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_csc.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._csr",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_csr.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._data",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_data.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._dia",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_dia.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._extract",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_extract.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._index",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_index.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._sputils",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_sputils.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.sparse._util",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/sparse/_util.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/__init__.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._basic",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_basic.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._bessel",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_bessel.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._beta",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_beta.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._binom",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_binom.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._complexstuff",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_complexstuff.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._convex_analysis",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_convex_analysis.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._digamma",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_digamma.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._ellip",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_ellip.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._erf",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_erf.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._exp1",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_exp1.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._expi",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_expi.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._expn",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_expn.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._gamma",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_gamma.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._gammainc",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_gammainc.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._gammaln",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_gammaln.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._gammasgn",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_gammasgn.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._loggamma",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_loggamma.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._logsoftmax",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_logsoftmax.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._logsumexp",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_logsumexp.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._lpmv",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_lpmv.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._poch",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_poch.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._polygamma",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_polygamma.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._softmax",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_softmax.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._sph_harm",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_sph_harm.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._spherical_bessel",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_spherical_bessel.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._statistics",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_statistics.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._stats_distributions",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_stats_distributions.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._trig",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_trig.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._xlogy",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_xlogy.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._zeta",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_zeta.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.scipy.special._zetac",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/scipy/special/_zetac.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": true,
+      "module": "cupyx.time",
+      "owning_distributions": [
+        "cupy-cuda12x"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupyx/time.py",
+      "top_level_module": "cupyx"
+    },
+    {
+      "allowed_by_distribution_identity": false,
+      "module": "fastrlock",
+      "owning_distributions": [
+        "fastrlock"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/fastrlock/__init__.py",
+      "top_level_module": "fastrlock"
+    },
+    {
+      "allowed_by_distribution_identity": false,
+      "module": "fastrlock.rlock",
+      "owning_distributions": [
+        "fastrlock"
+      ],
+      "path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/fastrlock/rlock.cpython-312-x86_64-linux-gnu.so",
+      "top_level_module": "fastrlock"
+    }
+  ],
+  "modules": {
+    "cupy": {
+      "expected_distribution": "cupy-cuda12x",
+      "expected_version": "13.6.0",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/cupy/__init__.py",
+      "module_version": "13.6.0",
+      "passed": true,
+      "resolution": "cupy_overlay"
+    },
+    "matplotlib": {
+      "expected_distribution": "matplotlib",
+      "expected_version": "3.9.2",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/matplotlib/__init__.py",
+      "module_version": "3.9.2",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "numpy": {
+      "expected_distribution": "numpy",
+      "expected_version": "1.26.4",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/numpy/__init__.py",
+      "module_version": "1.26.4",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "openfermion": {
+      "expected_distribution": "openfermion",
+      "expected_version": "1.6.1",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermion/__init__.py",
+      "module_version": "1.6.1",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "openfermionpyscf": {
+      "expected_distribution": "openfermionpyscf",
+      "expected_version": "0.5",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermionpyscf/__init__.py",
+      "module_version": "0.5",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "pandas": {
+      "expected_distribution": "pandas",
+      "expected_version": "2.3.3",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pandas/__init__.py",
+      "module_version": "2.3.3",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "pyscf": {
+      "expected_distribution": "pyscf",
+      "expected_version": "2.7.0",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pyscf/__init__.py",
+      "module_version": "2.7.0",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "pytest": {
+      "expected_distribution": "pytest",
+      "expected_version": "9.0.3",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pytest/__init__.py",
+      "module_version": "9.0.3",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "qiskit": {
+      "expected_distribution": "qiskit",
+      "expected_version": "1.3.0",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit/__init__.py",
+      "module_version": "1.3.0",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "qiskit_aer": {
+      "expected_distribution": "qiskit-aer-gpu",
+      "expected_version": "0.15.1",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/__init__.py",
+      "module_version": "0.15.1",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "scipy": {
+      "expected_distribution": "scipy",
+      "expected_version": "1.14.1",
+      "importable": true,
+      "module_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/scipy/__init__.py",
+      "module_version": "1.14.1",
+      "passed": true,
+      "resolution": "primary_trotter_common"
+    },
+    "trotterlib": {
+      "importable": true,
+      "module_path": "/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-preflight-v1-3-20260927/src/trotterlib/__init__.py",
+      "passed": true,
+      "resolution": "current_worktree_src"
+    }
+  },
+  "new_scientific_computation": false,
+  "nvidia_distributions": [
+    {
+      "canonical_name": "nvidia-cublas-cu12",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cublas_cu12-12.9.2.10.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "passed": true,
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cublas_cu12-12.9.2.10.dist-info/RECORD",
+      "record_sha256": "d453aae505d1fcd53bd2799e0480c5b000070d9a78158fc453ed620f0a9c5d5f",
+      "requested_name": "nvidia-cublas-cu12",
+      "resolution": "primary_trotter_common",
+      "version": "12.9.2.10"
+    },
+    {
+      "canonical_name": "nvidia-cuda-nvrtc-cu12",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cuda_nvrtc_cu12-12.9.86.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "passed": true,
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cuda_nvrtc_cu12-12.9.86.dist-info/RECORD",
+      "record_sha256": "7c67f50554c6d2f34fd2d4d85e1d0b1c6813d0eb803503df93c2c115d274c969",
+      "requested_name": "nvidia-cuda-nvrtc-cu12",
+      "resolution": "primary_trotter_common",
+      "version": "12.9.86"
+    },
+    {
+      "canonical_name": "nvidia-cuda-runtime-cu12",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cuda_runtime_cu12-12.9.79.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "passed": true,
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cuda_runtime_cu12-12.9.79.dist-info/RECORD",
+      "record_sha256": "484ca9df3ec8bf4a14eb30847288fc1e45a77abd2dbaa7a4355947d333c1b1d1",
+      "requested_name": "nvidia-cuda-runtime-cu12",
+      "resolution": "primary_trotter_common",
+      "version": "12.9.79"
+    },
+    {
+      "canonical_name": "nvidia-cusolver-cu12",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cusolver_cu12-11.7.5.82.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "passed": true,
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cusolver_cu12-11.7.5.82.dist-info/RECORD",
+      "record_sha256": "b082303cc785ddeede9767bf5a9d70fa6ad5776a193f1584bb9786b557e877b1",
+      "requested_name": "nvidia-cusolver-cu12",
+      "resolution": "primary_trotter_common",
+      "version": "11.7.5.82"
+    },
+    {
+      "canonical_name": "nvidia-cusparse-cu12",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cusparse_cu12-12.5.10.65.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "passed": true,
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_cusparse_cu12-12.5.10.65.dist-info/RECORD",
+      "record_sha256": "753687b56d49545edf14bce2b392af854b21375796f4fece05a2cc35470f86a7",
+      "requested_name": "nvidia-cusparse-cu12",
+      "resolution": "primary_trotter_common",
+      "version": "12.5.10.65"
+    },
+    {
+      "canonical_name": "nvidia-nvjitlink-cu12",
+      "dist_info_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_nvjitlink_cu12-12.9.86.dist-info",
+      "distribution_root": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+      "passed": true,
+      "record_exists": true,
+      "record_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia_nvjitlink_cu12-12.9.86.dist-info/RECORD",
+      "record_sha256": "38038c28c5618440f79d347338f29e7e042f04db08cf61380d4bf369c0741f58",
+      "requested_name": "nvidia-nvjitlink-cu12",
+      "resolution": "primary_trotter_common",
+      "version": "12.9.86"
+    }
+  ],
+  "package_install_or_update_attempted": false,
+  "package_or_library_copy_attempted": false,
+  "persistent_environment_changed": false,
+  "phase_a_identity_eligibility": "ineligible_due_to_failed_environment_identity",
+  "prefix": {
+    "sys_base_prefix": "/usr",
+    "sys_prefix": "/home/AbeHiromu/venvs/trotter-common"
+  },
+  "qiskit_aer_ldd": [
+    {
+      "command": [
+        "ldd",
+        "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/controller_wrappers.cpython-312-x86_64-linux-gnu.so"
+      ],
+      "extension": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/controller_wrappers.cpython-312-x86_64-linux-gnu.so",
+      "extension_sha256": "85b8b840a4320feb10baf5c3489a5bc44d76f50fc775555aef3afb14c70f734f",
+      "foreign_cuda_library_resolutions": [],
+      "passed": true,
+      "resolved_libraries": [
+        {
+          "library": "libopenblas-r0-f650aae0.3.3.so",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer_gpu.libs/libopenblas-r0-f650aae0.3.3.so",
+          "sha256": "79ec02b53f573cd7116a89f04c397473018e7fda05720b354d43505c19d47958"
+        },
+        {
+          "library": "libdl.so.2",
+          "path": "/usr/lib/x86_64-linux-gnu/libdl.so.2",
+          "sha256": "c2994527172cc23b7fb0f7d611b71e00a37da27af12c2e5e9e0dc1a742886c96"
+        },
+        {
+          "library": "libcusolver.so.11",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusolver/lib/libcusolver.so.11",
+          "sha256": "30a1fe2fe22dad7141afaa2878fb6e9d7360b016e164d2153e1f31a46f2a9833"
+        },
+        {
+          "library": "libcusparse.so.12",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cusparse/lib/libcusparse.so.12",
+          "sha256": "6d85ab1acdabfe3b5a54aa76bc948c719bcd03e07eede3eb8122b083c1a6ecf7"
+        },
+        {
+          "library": "libcustatevec.so.1",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/cuquantum/lib/libcustatevec.so.1",
+          "sha256": "64f4d0321557936a676a210fae490e4cc21bc179a52c54ad4262d616878d44b7"
+        },
+        {
+          "library": "libcutensornet.so.2",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/cuquantum/lib/libcutensornet.so.2",
+          "sha256": "0f7a3539322c258a97cbabd7f1bf871bd21c0b7d1c27195bbc1f4f4fa7bf4175"
+        },
+        {
+          "library": "libcudart.so.12",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cuda_runtime/lib/libcudart.so.12",
+          "sha256": "256e6409e4f06f618e1fb53d4844a6b81cdded1013afa8ade40c22f99eb133b7"
+        },
+        {
+          "library": "libpthread.so.0",
+          "path": "/usr/lib/x86_64-linux-gnu/libpthread.so.0",
+          "sha256": "90491a21ce44efcf3bd4b65ec82501c091d7ebe7f8d9b341dd01d721001d9ecd"
+        },
+        {
+          "library": "libstdc++.so.6",
+          "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33",
+          "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11"
+        },
+        {
+          "library": "libm.so.6",
+          "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+          "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0"
+        },
+        {
+          "library": "libgomp-a34b3233.so.1.0.0",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer_gpu.libs/libgomp-a34b3233.so.1.0.0",
+          "sha256": "3a7eaece7231911be2fbb1b3e7cb4cb5c2e0f84e0c2bb73739472b5a1feec8c1"
+        },
+        {
+          "library": "libgcc_s.so.1",
+          "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+          "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb"
+        },
+        {
+          "library": "libc.so.6",
+          "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+          "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf"
+        },
+        {
+          "library": "libgfortran-91cc3cb1.so.3.0.0",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer_gpu.libs/libgfortran-91cc3cb1.so.3.0.0",
+          "sha256": "55e3eb67306c2ff17e6f8a0810eaa0dcb26e94cd83924c5065d5040e87814608"
+        },
+        {
+          "library": "libnvJitLink.so.12",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib/libnvJitLink.so.12",
+          "sha256": "02d3acb5fe598dd20f0fca3cc03734ad164037a22747a01900561a42d0b8448f"
+        },
+        {
+          "library": "libcublas.so.12",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib/libcublas.so.12",
+          "sha256": "5757ab5839fb4f203ca47ecb336110d10f4a5606b1e097f195fbca89774569e2"
+        },
+        {
+          "library": "libcublasLt.so.12",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12",
+          "sha256": "2c9006a75c74b3bea2dc7ae2ec38ab038b0e45ea02cb4b717a915e8a5796acb1"
+        },
+        {
+          "library": "librt.so.1",
+          "path": "/usr/lib/x86_64-linux-gnu/librt.so.1",
+          "sha256": "6d072187d88e092e81561a44c03a4a41397319022c6d43519757cc051c576d82"
+        },
+        {
+          "library": "libcutensor.so.2",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/cutensor/lib/libcutensor.so.2",
+          "sha256": "1ca5ab01a0a47d98755147a8be92a26f09c31824eb1fc333f8d7baf0a754c244"
+        },
+        {
+          "library": "libquadmath-96973f99.so.0.0.0",
+          "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer_gpu.libs/libquadmath-96973f99.so.0.0.0",
+          "sha256": "934c22ded0e7d169c4d4678876c96051adf3d94545da962f60b41659b075da3b"
+        }
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\tlinux-vdso.so.1 (0x00007fff1a15f000)\n\tlibopenblas-r0-f650aae0.3.3.so => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../qiskit_aer_gpu.libs/libopenblas-r0-f650aae0.3.3.so (0x000014f1ef800000)\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x000014f1f3c9f000)\n\tlibcusolver.so.11 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../nvidia/cusolver/lib/libcusolver.so.11 (0x000014f1dd200000)\n\tlibcusparse.so.12 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../nvidia/cusparse/lib/libcusparse.so.12 (0x000014f1bfc00000)\n\tlibcustatevec.so.1 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../cuquantum/lib/libcustatevec.so.1 (0x000014f1b8800000)\n\tlibcutensornet.so.2 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../cuquantum/lib/libcutensornet.so.2 (0x000014f1b7c00000)\n\tlibcudart.so.12 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../nvidia/cuda_runtime/lib/libcudart.so.12 (0x000014f1b7600000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x000014f1f3c98000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000014f1b7200000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000014f1f3baf000)\n\tlibgomp-a34b3233.so.1.0.0 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../qiskit_aer_gpu.libs/libgomp-a34b3233.so.1.0.0 (0x000014f1b6c00000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000014f1f3b7f000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000014f1b6800000)\n\t/lib64/ld-linux-x86-64.so.2 (0x000014f1f3cb4000)\n\tlibgfortran-91cc3cb1.so.3.0.0 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../qiskit_aer_gpu.libs/libgfortran-91cc3cb1.so.3.0.0 (0x000014f1b6200000)\n\tlibnvJitLink.so.12 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/nvjitlink/lib/libnvJitLink.so.12 (0x000014f1b0400000)\n\tlibcublas.so.12 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib/libcublas.so.12 (0x000014f1a9a00000)\n\tlibcublasLt.so.12 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/nvidia/cublas/lib/libcublasLt.so.12 (0x000014f177400000)\n\tlibrt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x000014f1f3b78000)\n\tlibcutensor.so.2 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../cuquantum/lib/../../cutensor/lib/libcutensor.so.2 (0x000014f15a400000)\n\tlibquadmath-96973f99.so.0.0.0 => /home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer/backends/../../qiskit_aer_gpu.libs/libquadmath-96973f99.so.0.0.0 (0x000014f159e00000)\n",
+      "unresolved": []
+    }
+  ],
+  "recorded_at": "2026-09-27T14:54:28+09:00",
+  "schema": "second_study_safe_time_domain_python_environment_identity_v1_3",
+  "shared_or_system_environment_changed": false,
+  "site_getsitepackages": [
+    "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+    "/home/AbeHiromu/venvs/trotter-common/local/lib/python3.12/dist-packages",
+    "/home/AbeHiromu/venvs/trotter-common/lib/python3/dist-packages",
+    "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/dist-packages"
+  ],
+  "started_at": "2026-09-27T14:54:21+09:00",
+  "status": "failed_environment_identity",
+  "sys_path": [
+    "/tmp",
+    "/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-preflight-v1-3-20260927/src",
+    "/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-preflight-v1-3-20260927/review_response",
+    "/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-preflight-v1-3-20260927",
+    "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+    "/usr/lib/python312.zip",
+    "/usr/lib/python3.12",
+    "/usr/lib/python3.12/lib-dynload",
+    "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages",
+    "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/trotter-practical-calibration-minimal/src"
+  ],
+  "unlisted_foreign_distributions": {
+    "fastrlock": {
+      "dist_info_path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/fastrlock-0.8.3.dist-info",
+      "distribution_root": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages",
+      "modules": [
+        "fastrlock",
+        "fastrlock.rlock"
+      ],
+      "name": "fastrlock",
+      "record_path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages/fastrlock-0.8.3.dist-info/RECORD",
+      "record_sha256": "0368d7063abcf0dfe42c68e6509edaaa6337a9aaa0c0750289884b82474d3aac",
+      "requires": null,
+      "version": "0.8.3"
+    }
+  },
+  "unlisted_foreign_module_resolution_detected": true
+}
