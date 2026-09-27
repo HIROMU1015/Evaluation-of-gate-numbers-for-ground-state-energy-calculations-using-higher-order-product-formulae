@@ -586,3 +586,30 @@ def test_phase_b_mock_run_preserves_negative_result_and_completes(
 def test_phase_a_and_phase_b_main_do_not_run_on_import() -> None:
     assert inspect.isfunction(phase_a.main)
     assert inspect.isfunction(phase_b.main)
+
+
+def test_gpu_phase_a_prompt_pins_reviewed_bundle_and_boundary() -> None:
+    prompt = (
+        Path(__file__).parents[1]
+        / "review_response"
+        / "gpu_second_study_safe_time_domain_phase_a_execution_prompt.md"
+    ).read_text(encoding="utf-8")
+    for value in (
+        "804331ecc976b83ae880940719706c11999247bc",
+        "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+        "e86e694805e8fcbc63659f7073eea95f67b8f435",
+        "bbc063a05074260930860ef862d7e24bd81e3878",
+        "2b37191594d7f79565314a5dad0d889f78aec504",
+        "11dc5630d6bf21ec14f024e07ee272fc8c43c68ce1ce0fbcd2b0ab0cea393032",
+        "107f362e63eb7fa2e7b03e37cfa357026eb07c18b032a3eafc4d1a0faf4b4363",
+        "2e5cc1e8f476393c1e6dff4ed481bf723a83545d4a50f432cfb229215e71bf2d",
+    ):
+        assert value in prompt
+    assert "run_second_study_safe_time_domain_phase_a.py" in prompt
+    assert "--processes 1" in prompt
+    assert "PHASE_A_FROZEN" in prompt
+    assert "phase_a_frozen_phase_b_not_authorized" in prompt
+    assert "Phase B、direct truth" in prompt
+    assert "run_second_study_safe_time_domain_phase_b.py" not in prompt
+    assert "/home/AbeHiromu/venvs/trotter-common/bin/python" in prompt
+    assert "gpu-second-study-safe-time-domain-phase-a-20260927" in prompt
