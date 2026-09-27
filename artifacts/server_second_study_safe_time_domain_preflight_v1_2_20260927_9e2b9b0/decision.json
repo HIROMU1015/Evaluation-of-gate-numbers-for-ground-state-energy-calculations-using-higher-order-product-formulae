@@ -1,0 +1,52 @@
+{
+  "schema": "second_study_safe_time_domain_preflight_decision_v1_2",
+  "status": "failed_environment_identity",
+  "completed_at": "2026-09-27T13:25:33+09:00",
+  "branch": "gpu-second-study-safe-time-domain-preflight-v1-2-20260927",
+  "protocol_commit": "804331ecc976b83ae880940719706c11999247bc",
+  "parent_preflight_implementation_commit": "0f3381863ed0eb0a31b59b8018e816bebe3840f7",
+  "v1_1_reviewed_bundle_commit": "ee9103b18b48dccde5700287405780565bd35cb7",
+  "v1_2_environment_amendment_commit": "9e2b9b0ba2d068b18ca8fda5b3a346954551938f",
+  "v1_2_reviewed_bundle_commit": "a23b5beb8c62380b8f873385e37fd0031e265da2",
+  "fixed_hashes": {
+    "protocol_sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+    "v1_1_amendment_sha256": "218d325d2b13eea24196302a52e4a1a3e34ae92973518b61835bf2ad3974759d",
+    "v1_2_amendment_sha256": "ab87da7c42aba20658e5f5d4a204cdf761c50f0814d24719a36e72be674da77e",
+    "current_worktree_verification": "not_run_due_to_failed_environment_identity"
+  },
+  "python_environment": {
+    "requested_path": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "resolved_path": "/usr/bin/python3.12",
+    "executable_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "sys_prefix": "/home/AbeHiromu/venvs/trotter-common",
+    "sys_base_prefix": "/usr",
+    "requirements_gpu_sha256": "2d4b882eece717f246b528b1c573c59cd70b43aac665faff7057b3c1cf5cb187"
+  },
+  "gates": {
+    "python_environment_identity": {"status": "failed", "failed_checks": ["import_smoke:cupy", "import_smoke:qiskit_aer"]},
+    "source_identity": {"status": "not_run"},
+    "h01_p03_identity": {"status": "not_run"},
+    "independence_search": {"status": "not_run"},
+    "gpu_memory": {"status": "not_run"},
+    "focused_tests": {"status": "not_run"},
+    "all_review_tests": {"status": "not_run"}
+  },
+  "preserved_prior_stops": [
+    {"branch": "gpu-second-study-safe-time-domain-preflight-20260927", "result_commit": "e1891dfd24ec5f0064b0598e51eb260073fd2b1e", "status": "failed_source_identity", "clean": true},
+    {"branch": "gpu-second-study-safe-time-domain-preflight-v1-1-20260927", "result_commit": "b520f9bd8f575456531e7c0b0f2692973b436e21", "status": "failed_environment", "clean": true}
+  ],
+  "failure": {
+    "gate": "python_environment_identity",
+    "reasons": [
+      "CuPy distribution/module is absent from the fixed environment.",
+      "qiskit_aer import fails because libcusparse.so.12 cannot resolve __nvJitLinkGetErrorLogSize_12_9 in libnvJitLink.so.12."
+    ]
+  },
+  "phase_a_authorized": false,
+  "phase_b_authorized": false,
+  "preflight_only_complete_marker_created": false,
+  "new_scientific_computation": false,
+  "environment_changed": false,
+  "gpu_kernel_launched": false,
+  "other_processes_stopped": false
+}
