@@ -17,6 +17,10 @@ GPU_RETRY_PROMPT = Path(
     "review_response/"
     "gpu_second_study_safe_time_domain_preflight_v1_1_retry_prompt.md"
 )
+GPU_ENVIRONMENT_RETRY_PROMPT = Path(
+    "review_response/"
+    "gpu_second_study_safe_time_domain_preflight_v1_2_environment_retry_prompt.md"
+)
 AMENDMENT_PATH = Path(
     "review_response/"
     "second_study_safe_time_domain_preflight_amendment_v1_1.json"
@@ -230,3 +234,18 @@ def test_gpu_v1_1_retry_prompt_preserves_failure_and_stops_before_phase_a() -> N
     assert "67/67" in prompt
     assert "preflight_pass_phase_a_not_authorized" in prompt
     assert "Phase A、Phase B、新規Hamiltonian" in prompt
+
+
+def test_gpu_v1_2_retry_uses_only_existing_environment_and_stops() -> None:
+    prompt = GPU_ENVIRONMENT_RETRY_PROMPT.read_text(encoding="utf-8")
+    assert "9e2b9b0ba2d068b18ca8fda5b3a346954551938f" in prompt
+    assert EXPECTED_ENVIRONMENT_AMENDMENT_SHA256 in prompt
+    assert "b520f9bd8f575456531e7c0b0f2692973b436e21" in prompt
+    assert "/home/AbeHiromu/venvs/trotter-common/bin/python" in prompt
+    assert "failed_environment_identity" in prompt
+    assert "install、update、downgrade、修復しない" in prompt
+    assert "gpu-second-study-safe-time-domain-preflight-v1-2-20260927" in prompt
+    assert "67/67" in prompt
+    assert "preflight_pass_phase_a_not_authorized" in prompt
+    assert "Phase A、Phase B、新規Hamiltonian" in prompt
+    assert "CuPy array作成、device allocation、kernel" in prompt
