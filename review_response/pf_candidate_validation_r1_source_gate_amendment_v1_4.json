@@ -1,0 +1,57 @@
+{
+  "schema": "pf_candidate_validation_r1_source_gate_amendment_v1_4",
+  "amendment_id": "D2R-R1-portable-test-source-gate-20260928",
+  "frozen_on": "2026-09-28",
+  "status": "frozen_before_r1_execution",
+  "source_commit": "05649f1a7b6e405eadc2dbbdc0897836e0fa2f02",
+  "parent_test_portability_amendment_sha256": "9cc7b101fdcca2f696e0d2a7ed43f4564bc3b42e9cd5c38397943b1426572cc3",
+  "trigger": {
+    "stage": "GPU R1 v1.1 source-identity gate",
+    "status": "failed_source_identity",
+    "error": "frozen source changed before R1: review_tests/test_second_study_safe_time_domain_execution.py",
+    "focused_tests_before_source_gate": "35_passed",
+    "full_tests_before_source_gate": "319_passed_1_skipped_pennylane",
+    "phase_a_runtime_identity_passed": true,
+    "r1_output_directory_created": false,
+    "exact_ground_state_count": 0,
+    "r1_proxy_evaluation_count": 0,
+    "new_direct_truth_coordinate_count": 0,
+    "gpu_operation_count": 0
+  },
+  "permitted_source_overrides": [
+    {
+      "path": "review_tests/test_second_study_safe_time_domain_execution.py",
+      "frozen_blob_sha256": "a37901af437bea8f0a4fe3cc501f148279c1037a55ae924012632547360bdba1",
+      "authorized_current_sha256": "b4735f7d81eb16a616a53710a9578170a5f4390e931a2864ac2ddd1765d004e0",
+      "change_class": "test_only_one_ulp_portability",
+      "old_invariant": "absolute_difference == one_ulp",
+      "new_invariant": "absolute_difference <= one_ulp",
+      "production_imported_by_r1_runner": false
+    }
+  ],
+  "source_gate_rule": {
+    "permitted_override_count": 1,
+    "require_frozen_and_current_sha256_exact_match": true,
+    "require_every_other_frozen_source_path_byte_identical": true,
+    "reject_unused_or_unchanged_override": true,
+    "reject_any_unlisted_source_change": true,
+    "record_frozen_and_current_hash_in_source_manifest": true
+  },
+  "unchanged_rules": {
+    "production_source_changed": false,
+    "existing_scientific_artifact_changed": false,
+    "r1_protocol_changed": false,
+    "phase_a_cache_amendment_changed": false,
+    "scientific_threshold_changed": false,
+    "coordinate_or_decomposition_rule_changed": false,
+    "closed_complete_no_benefit_decision_changed": false,
+    "r2_authorized": false
+  },
+  "retry_rule": {
+    "preserve_v1_1_stopped_branch_and_worktree": true,
+    "create_new_branch_and_worktree_from_fixed_commit": true,
+    "rerun_all_pretests_and_source_gates": true,
+    "use_original_phase_a_runtime_byte_identity_path": true,
+    "stop_after_r1": true
+  }
+}

@@ -114,6 +114,56 @@ def load_phase_a_cache_amendment(
     return amendment, validation.sha256_file(path)
 
 
+def load_test_portability_amendment(
+    path: Path, parent_cache_amendment_sha256: str
+) -> tuple[dict[str, Any], str]:
+    amendment = validation.read_json(path)
+    if (
+        amendment.get("schema")
+        != "pf_candidate_validation_r1_test_portability_amendment_v1_3"
+    ):
+        raise validation.CandidateValidationError(
+            "unexpected R1 test portability amendment schema"
+        )
+    if amendment.get("status") != "frozen_after_pretest_failure_before_r1_execution":
+        raise validation.CandidateValidationError(
+            "test portability amendment is not frozen"
+        )
+    if (
+        amendment.get("parent_phase_a_cache_amendment_sha256")
+        != parent_cache_amendment_sha256
+    ):
+        raise validation.CandidateValidationError(
+            "test portability amendment parent mismatch"
+        )
+    return amendment, validation.sha256_file(path)
+
+
+def load_source_gate_amendment(
+    path: Path, parent_test_amendment_sha256: str
+) -> tuple[dict[str, Any], str]:
+    amendment = validation.read_json(path)
+    if amendment.get("schema") != "pf_candidate_validation_r1_source_gate_amendment_v1_4":
+        raise validation.CandidateValidationError(
+            "unexpected R1 source-gate amendment schema"
+        )
+    if amendment.get("status") != "frozen_before_r1_execution":
+        raise validation.CandidateValidationError(
+            "source-gate amendment is not frozen"
+        )
+    if amendment.get("parent_test_portability_amendment_sha256") != (
+        parent_test_amendment_sha256
+    ):
+        raise validation.CandidateValidationError(
+            "source-gate amendment parent mismatch"
+        )
+    if amendment.get("source_commit") != validation.SOURCE_COMMIT:
+        raise validation.CandidateValidationError(
+            "source-gate amendment source commit mismatch"
+        )
+    return amendment, validation.sha256_file(path)
+
+
 def environment_identity() -> dict[str, Any]:
     packages = {}
     for name in (
@@ -144,6 +194,7 @@ def validate_protocol_and_plan(
     project_root: Path,
     r1_protocol: Mapping[str, Any],
     r0: Mapping[str, Any],
+    source_gate_amendment: Mapping[str, Any] | None = None,
 ) -> None:
     if r1_protocol["source_commit"] != validation.SOURCE_COMMIT:
         raise validation.CandidateValidationError("R1 source commit changed")
@@ -169,12 +220,39 @@ def validate_protocol_and_plan(
     ]
     if actual != expected:
         raise validation.CandidateValidationError("R1 coordinate list changed")
+    permitted: dict[str, Mapping[str, Any]] = {}
+    if source_gate_amendment is not None:
+        rows = source_gate_amendment.get("permitted_source_overrides", [])
+        if not isinstance(rows, list):
+            raise validation.CandidateValidationError(
+                "source-gate override list is invalid"
+            )
+        permitted = {str(row["path"]): row for row in rows}
+        if len(permitted) != len(rows):
+            raise validation.CandidateValidationError(
+                "duplicate source-gate override path"
+            )
+    observed_overrides: set[str] = set()
     for relative in validation.SOURCE_PATHS:
         frozen = validation.git_blob(project_root, validation.SOURCE_COMMIT, relative)
-        if validation.sha256_bytes(frozen) != validation.sha256_file(project_root / relative):
+        frozen_sha256 = validation.sha256_bytes(frozen)
+        current_sha256 = validation.sha256_file(project_root / relative)
+        if frozen_sha256 == current_sha256:
+            continue
+        override = permitted.get(relative.as_posix())
+        if (
+            override is None
+            or override.get("frozen_blob_sha256") != frozen_sha256
+            or override.get("authorized_current_sha256") != current_sha256
+        ):
             raise validation.CandidateValidationError(
                 f"frozen source changed before R1: {relative}"
             )
+        observed_overrides.add(relative.as_posix())
+    if observed_overrides != set(permitted):
+        raise validation.CandidateValidationError(
+            "source-gate amendment contains an unused or unchanged override"
+        )
 
 
 def prepare_output(
@@ -647,6 +725,8 @@ def run(
     protocol_path: Path,
     environment_amendment_path: Path | None,
     phase_a_cache_amendment_path: Path | None,
+    test_portability_amendment_path: Path | None,
+    source_gate_amendment_path: Path | None,
     phase_a_root: Path | None,
     output_dir: Path,
 ) -> dict[str, Any]:
@@ -665,6 +745,10 @@ def run(
     environment_amendment_sha256: str | None = None
     phase_a_cache_amendment: dict[str, Any] | None = None
     phase_a_cache_amendment_sha256: str | None = None
+    test_portability_amendment: dict[str, Any] | None = None
+    test_portability_amendment_sha256: str | None = None
+    source_gate_amendment: dict[str, Any] | None = None
+    source_gate_amendment_sha256: str | None = None
     if local_mode:
         assert environment_amendment_path is not None
         environment_amendment_path = environment_amendment_path.resolve()
@@ -673,23 +757,61 @@ def run(
                 environment_amendment_path, r1_protocol_sha256
             )
         )
+        if (
+            test_portability_amendment_path is not None
+            or source_gate_amendment_path is not None
+        ):
+            raise validation.CandidateValidationError(
+                "local bridge mode cannot use the cache retry amendments"
+            )
         system_source_mode = "local_numeric_reconstruction_bridge"
     else:
-        if phase_a_cache_amendment_path is None or phase_a_root is None:
+        if (
+            phase_a_cache_amendment_path is None
+            or test_portability_amendment_path is None
+            or source_gate_amendment_path is None
+            or phase_a_root is None
+        ):
             raise validation.CandidateValidationError(
-                "Phase A cache mode requires both amendment and artifact root"
+                "Phase A cache mode requires all cache retry amendments and artifact root"
             )
         phase_a_cache_amendment_path = phase_a_cache_amendment_path.resolve()
+        test_portability_amendment_path = (
+            test_portability_amendment_path.resolve()
+        )
+        source_gate_amendment_path = source_gate_amendment_path.resolve()
         phase_a_root = phase_a_root.resolve()
         phase_a_cache_amendment, phase_a_cache_amendment_sha256 = (
             load_phase_a_cache_amendment(
                 phase_a_cache_amendment_path, r1_protocol_sha256
             )
         )
+        test_portability_amendment, test_portability_amendment_sha256 = (
+            load_test_portability_amendment(
+                test_portability_amendment_path,
+                phase_a_cache_amendment_sha256,
+            )
+        )
+        source_gate_amendment, source_gate_amendment_sha256 = (
+            load_source_gate_amendment(
+                source_gate_amendment_path,
+                test_portability_amendment_sha256,
+            )
+        )
         system_source_mode = "original_phase_a_runtime_byte_identity"
     r0 = validation.build_failure_ledger(project_root)
-    validate_protocol_and_plan(project_root, r1_protocol, r0)
-    source_manifest = validation.source_manifest(project_root)
+    validate_protocol_and_plan(
+        project_root, r1_protocol, r0, source_gate_amendment
+    )
+    source_overrides = {
+        str(row["path"]): row
+        for row in (source_gate_amendment or {}).get(
+            "permitted_source_overrides", []
+        )
+    }
+    source_manifest = validation.source_manifest(
+        project_root, permitted_overrides=source_overrides
+    )
     head = subprocess.run(
         ["git", "rev-parse", "HEAD"], cwd=project_root, check=True,
         text=True, stdout=subprocess.PIPE
@@ -702,6 +824,8 @@ def run(
         "r1_protocol_sha256": r1_protocol_sha256,
         "environment_amendment_sha256": environment_amendment_sha256,
         "phase_a_cache_amendment_sha256": phase_a_cache_amendment_sha256,
+        "test_portability_amendment_sha256": test_portability_amendment_sha256,
+        "source_gate_amendment_sha256": source_gate_amendment_sha256,
         "phase_a_root": str(phase_a_root) if phase_a_root is not None else None,
         "system_source_mode": system_source_mode,
         "coordinate_plan_sha256": validation.canonical_json_sha256(
@@ -1103,6 +1227,8 @@ def run(
         "r1_protocol_sha256": r1_protocol_sha256,
         "environment_amendment_sha256": environment_amendment_sha256,
         "phase_a_cache_amendment_sha256": phase_a_cache_amendment_sha256,
+        "test_portability_amendment_sha256": test_portability_amendment_sha256,
+        "source_gate_amendment_sha256": source_gate_amendment_sha256,
         "system_source_mode": system_source_mode,
         "system_source_identity_pass": bool(system_source_audit["all_pass"]),
         "closed_second_study_decision": "complete_no_benefit_unchanged",
@@ -1146,6 +1272,8 @@ def parser() -> argparse.ArgumentParser:
     value.add_argument("--protocol", type=Path, required=True)
     value.add_argument("--environment-amendment", type=Path)
     value.add_argument("--phase-a-cache-amendment", type=Path)
+    value.add_argument("--test-portability-amendment", type=Path)
+    value.add_argument("--source-gate-amendment", type=Path)
     value.add_argument("--phase-a-root", type=Path)
     value.add_argument("--output-dir", type=Path, required=True)
     return value
@@ -1158,6 +1286,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         protocol_path=args.protocol,
         environment_amendment_path=args.environment_amendment,
         phase_a_cache_amendment_path=args.phase_a_cache_amendment,
+        test_portability_amendment_path=args.test_portability_amendment,
+        source_gate_amendment_path=args.source_gate_amendment,
         phase_a_root=args.phase_a_root,
         output_dir=args.output_dir,
     )

@@ -99,8 +99,14 @@ def git_blob(project_root: Path, commit: str, relative: Path) -> bytes:
     return result.stdout
 
 
-def source_manifest(project_root: Path, commit: str = SOURCE_COMMIT) -> dict[str, Any]:
+def source_manifest(
+    project_root: Path,
+    commit: str = SOURCE_COMMIT,
+    permitted_overrides: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    overrides = dict(permitted_overrides or {})
     entries: list[dict[str, Any]] = []
+    observed_overrides: set[str] = set()
     for relative in SOURCE_PATHS:
         path = project_root / relative
         if not path.is_file():
@@ -108,25 +114,41 @@ def source_manifest(project_root: Path, commit: str = SOURCE_COMMIT) -> dict[str
         blob = git_blob(project_root, commit, relative)
         working_hash = sha256_file(path)
         blob_hash = sha256_bytes(blob)
-        if working_hash != blob_hash:
+        matches = working_hash == blob_hash
+        override = overrides.get(relative.as_posix())
+        if not matches and (
+            override is None
+            or override.get("frozen_blob_sha256") != blob_hash
+            or override.get("authorized_current_sha256") != working_hash
+        ):
             raise CandidateValidationError(
                 f"working-tree source differs from frozen blob: {relative}"
             )
-        entries.append(
-            {
-                "path": relative.as_posix(),
-                "sha256": working_hash,
-                "source_commit": commit,
-                "byte_count": path.stat().st_size,
-                "working_tree_matches_source_blob": True,
-            }
+        entry = {
+            "path": relative.as_posix(),
+            "sha256": working_hash,
+            "source_commit": commit,
+            "byte_count": path.stat().st_size,
+            "working_tree_matches_source_blob": matches,
+        }
+        if not matches:
+            observed_overrides.add(relative.as_posix())
+            entry["frozen_blob_sha256"] = blob_hash
+            entry["authorized_override"] = True
+        entries.append(entry)
+    if observed_overrides != set(overrides):
+        raise CandidateValidationError(
+            "source manifest contains an unused or unchanged override"
         )
-    return {
+    result = {
         "schema": "pf_candidate_validation_source_manifest_v1",
         "source_commit": commit,
         "entry_count": len(entries),
         "entries": entries,
     }
+    if overrides:
+        result["authorized_override_count"] = len(observed_overrides)
+    return result
 
 
 def _close(left: float, right: float) -> bool:

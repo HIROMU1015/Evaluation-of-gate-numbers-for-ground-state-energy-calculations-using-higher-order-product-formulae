@@ -3,6 +3,8 @@ from __future__ import annotations
 import math
 from pathlib import Path
 
+import pytest
+
 import pf_candidate_validation as validation
 import run_pf_candidate_validation_r1 as r1_runner
 
@@ -260,3 +262,43 @@ def test_r1_test_portability_amendment_changes_no_science() -> None:
     assert change["protocol_or_threshold_changed"] is False
     assert change["closed_complete_no_benefit_decision_changed"] is False
     assert amendment["retry_rules"]["r2_authorized"] is False
+
+
+def test_r1_source_gate_authorizes_only_the_fixed_portable_test() -> None:
+    path = (
+        PROJECT_ROOT
+        / "review_response/pf_candidate_validation_r1_source_gate_amendment_v1_4.json"
+    )
+    amendment, digest = r1_runner.load_source_gate_amendment(
+        path,
+        "9cc7b101fdcca2f696e0d2a7ed43f4564bc3b42e9cd5c38397943b1426572cc3",
+    )
+    assert digest == "94fd553f6d600578ae3bdb97c1167e4054369ef0a0d7b58c3f6aecbb16dbeaad"
+    assert amendment["source_gate_rule"]["permitted_override_count"] == 1
+    override = amendment["permitted_source_overrides"][0]
+    assert override["path"] == "review_tests/test_second_study_safe_time_domain_execution.py"
+    assert override["production_imported_by_r1_runner"] is False
+
+    r0 = validation.build_failure_ledger(PROJECT_ROOT)
+    protocol = validation.read_json(
+        PROJECT_ROOT / "review_response/pf_candidate_validation_r1_protocol.json"
+    )
+    with pytest.raises(
+        validation.CandidateValidationError, match="frozen source changed before R1"
+    ):
+        r1_runner.validate_protocol_and_plan(PROJECT_ROOT, protocol, r0)
+    r1_runner.validate_protocol_and_plan(PROJECT_ROOT, protocol, r0, amendment)
+
+    overrides = {override["path"]: override}
+    manifest = validation.source_manifest(
+        PROJECT_ROOT, permitted_overrides=overrides
+    )
+    changed = [
+        row for row in manifest["entries"]
+        if not row["working_tree_matches_source_blob"]
+    ]
+    assert manifest["authorized_override_count"] == 1
+    assert len(changed) == 1
+    assert changed[0]["path"] == override["path"]
+    assert changed[0]["frozen_blob_sha256"] == override["frozen_blob_sha256"]
+    assert changed[0]["sha256"] == override["authorized_current_sha256"]
