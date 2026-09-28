@@ -120,3 +120,28 @@ def test_component_classification_is_fixed_and_cancellation_aware() -> None:
     )
     assert mixed["attribution"] == "mixed_or_none"
     assert mixed["largest_absolute_component"] == "model"
+
+
+def test_environment_bridge_amendment_is_frozen_and_uses_saved_points() -> None:
+    path = (
+        PROJECT_ROOT
+        / "review_response/pf_candidate_validation_r1_environment_amendment_v1_1.json"
+    )
+    amendment = validation.read_json(path)
+    assert validation.sha256_file(path) == (
+        "bd0f9c1d32db6fda391b912a769688e6f53d4b39ecdb2e8ce8ab196f1baf03fd"
+    )
+    assert amendment["parent_r1_protocol_sha256"] == (
+        "186d2240bbf78733c1389fac66e2b261a7dfe50d8712b656ce0e1c45a6c67e49"
+    )
+    points = amendment["bridge"]["points"]
+    assert len(points) == 11
+    assert len({(row["condition"], row["time_hex"]) for row in points}) == 11
+    saved = validation.read_csv(
+        PROJECT_ROOT / validation.PHASE_A_RELATIVE / "proxy_points.csv"
+    )
+    keys = {
+        (row["condition"], float(row["time_hartree_inverse"]).hex())
+        for row in saved
+    }
+    assert all((row["condition"], row["time_hex"]) in keys for row in points)

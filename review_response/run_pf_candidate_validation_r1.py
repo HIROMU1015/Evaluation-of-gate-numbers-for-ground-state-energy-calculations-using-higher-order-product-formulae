@@ -73,6 +73,26 @@ def load_r1_protocol(path: Path) -> tuple[dict[str, Any], str]:
     return protocol, validation.sha256_file(path)
 
 
+def load_environment_amendment(
+    path: Path, parent_protocol_sha256: str
+) -> tuple[dict[str, Any], str]:
+    amendment = validation.read_json(path)
+    if (
+        amendment.get("schema")
+        != "pf_candidate_validation_r1_environment_amendment_v1_1"
+    ):
+        raise validation.CandidateValidationError(
+            "unexpected R1 environment amendment schema"
+        )
+    if amendment.get("status") != "frozen_before_any_r1_proxy_or_exact_state_result":
+        raise validation.CandidateValidationError("environment amendment not frozen")
+    if amendment.get("parent_r1_protocol_sha256") != parent_protocol_sha256:
+        raise validation.CandidateValidationError(
+            "environment amendment parent protocol mismatch"
+        )
+    return amendment, validation.sha256_file(path)
+
+
 def environment_identity() -> dict[str, Any]:
     packages = {}
     for name in (
@@ -174,6 +194,7 @@ def load_or_build_system(
     source_protocol_sha256: str,
     expected_hamiltonian_sha256: str,
     counters: dict[str, int],
+    allow_numeric_reconstruction_bridge: bool,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     cache = runtime / "system_cache" / f"{condition}.pkl"
     if cache.is_file():
@@ -185,7 +206,12 @@ def load_or_build_system(
             system.get("schema") != "second_study_safe_time_domain_phase_a_system_v1"
             or system.get("condition") != condition
             or system.get("protocol_sha256") != source_protocol_sha256
-            or system.get("hamiltonian_sha256") != expected_hamiltonian_sha256
+            or payload.get("expected_hamiltonian_sha256")
+            != expected_hamiltonian_sha256
+            or (
+                system.get("hamiltonian_sha256") != expected_hamiltonian_sha256
+                and not allow_numeric_reconstruction_bridge
+            )
         ):
             raise validation.CandidateValidationError(
                 f"invalid R1 system cache: {cache}"
@@ -207,11 +233,24 @@ def load_or_build_system(
     system, metadata = phase_a.prepare_condition(
         spec, source_protocol_sha256, work_dir, 1
     )
-    if system["hamiltonian_sha256"] != expected_hamiltonian_sha256:
+    byte_identity_match = (
+        system["hamiltonian_sha256"] == expected_hamiltonian_sha256
+    )
+    if not byte_identity_match and not allow_numeric_reconstruction_bridge:
         raise validation.CandidateValidationError(
             f"{condition}: rebuilt Hamiltonian identity mismatch"
         )
-    atomic_pickle(cache, {"system": system, "metadata": metadata})
+    metadata = dict(metadata)
+    metadata["expected_phase_a_hamiltonian_sha256"] = expected_hamiltonian_sha256
+    metadata["rebuilt_hamiltonian_byte_identity_match"] = byte_identity_match
+    atomic_pickle(
+        cache,
+        {
+            "system": system,
+            "metadata": metadata,
+            "expected_hamiltonian_sha256": expected_hamiltonian_sha256,
+        },
+    )
     return system, metadata
 
 
@@ -323,6 +362,86 @@ def saved_proxy_map(project_root: Path) -> dict[tuple[str, str], dict[str, Any]]
             "saved_point_role": row["point_role"],
         }
     return result
+
+
+def run_environment_bridge(
+    *,
+    runtime: Path,
+    amendment: Mapping[str, Any],
+    amendment_sha256: str,
+    systems: Mapping[str, Mapping[str, Any]],
+    sequence: Sequence[float],
+    saved: Mapping[tuple[str, str], Mapping[str, Any]],
+    r1_protocol_sha256: str,
+    counters: dict[str, int],
+) -> list[dict[str, Any]]:
+    threshold = float(
+        amendment["bridge"]["maximum_absolute_proxy_difference_hartree"]
+    )
+    rows: list[dict[str, Any]] = []
+    for planned in amendment["bridge"]["points"]:
+        condition = str(planned["condition"])
+        time_value = float(planned["time_hartree_inverse"])
+        if time_value.hex() != str(planned["time_hex"]):
+            raise validation.CandidateValidationError(
+                f"bridge time hex mismatch: {condition}/{time_value}"
+            )
+        key = (condition, time_value.hex())
+        if key not in saved:
+            raise validation.CandidateValidationError(
+                f"bridge saved proxy missing: {condition}/{time_value.hex()}"
+            )
+        system = systems[condition]
+        point, cache_reused = computed_proxy(
+            runtime=runtime,
+            condition=condition,
+            time_value=time_value,
+            state_kind="environment_bridge_cisd",
+            state=np.asarray(system["cisd_state"], dtype=np.complex128),
+            system=system,
+            sequence=sequence,
+            r1_protocol_sha256=r1_protocol_sha256 + ":" + amendment_sha256,
+            counters=counters,
+        )
+        if not cache_reused:
+            counters["computed_this_invocation"] += 1
+        observed = float(point["proxy_hartree"])
+        expected = float(saved[key]["proxy_hartree"])
+        difference = observed - expected
+        rows.append(
+            {
+                "condition": condition,
+                "time_hartree_inverse": time_value,
+                "time_hex": time_value.hex(),
+                "role": str(planned["role"]),
+                "saved_proxy_hartree": expected,
+                "rebuilt_proxy_hartree": observed,
+                "signed_difference_hartree": difference,
+                "absolute_difference_hartree": abs(difference),
+                "threshold_hartree": threshold,
+                "pass": abs(difference) <= threshold,
+                "proxy_cache_reused_on_this_invocation": cache_reused,
+                "rebuilt_hamiltonian_sha256": system["hamiltonian_sha256"],
+            }
+        )
+    counters["environment_bridge_cisd_proxy_count"] = len(rows)
+    audit = {
+        "schema": "pf_candidate_validation_r1_environment_bridge_audit_v1",
+        "amendment_sha256": amendment_sha256,
+        "point_count": len(rows),
+        "maximum_absolute_proxy_difference_hartree": max(
+            float(row["absolute_difference_hartree"]) for row in rows
+        ),
+        "threshold_hartree": threshold,
+        "all_pass": all(bool(row["pass"]) for row in rows),
+        "rows": rows,
+    }
+    atomic_json(runtime / "environment_bridge_audit.json", audit)
+    if not audit["all_pass"]:
+        raise validation.CandidateValidationError(
+            amendment["bridge"]["failure_status"]
+        )
+    return rows
 
 
 def local_budget_diagnostic(
@@ -442,13 +561,23 @@ def manifest(output_dir: Path, names: Sequence[str]) -> dict[str, Any]:
 
 
 def run(
-    *, project_root: Path, protocol_path: Path, output_dir: Path
+    *,
+    project_root: Path,
+    protocol_path: Path,
+    environment_amendment_path: Path,
+    output_dir: Path,
 ) -> dict[str, Any]:
     started = time.perf_counter()
     project_root = project_root.resolve()
     protocol_path = protocol_path.resolve()
+    environment_amendment_path = environment_amendment_path.resolve()
     output_dir = output_dir.resolve()
     r1_protocol, r1_protocol_sha256 = load_r1_protocol(protocol_path)
+    environment_amendment, environment_amendment_sha256 = (
+        load_environment_amendment(
+            environment_amendment_path, r1_protocol_sha256
+        )
+    )
     r0 = validation.build_failure_ledger(project_root)
     validate_protocol_and_plan(project_root, r1_protocol, r0)
     source_manifest = validation.source_manifest(project_root)
@@ -462,6 +591,7 @@ def run(
         "execution_head": head,
         "source_protocol_sha256": r0["protocol_sha256"],
         "r1_protocol_sha256": r1_protocol_sha256,
+        "environment_amendment_sha256": environment_amendment_sha256,
         "coordinate_plan_sha256": validation.canonical_json_sha256(
             r0["coordinate_plan"]
         ),
@@ -486,6 +616,8 @@ def run(
         "saved_cisd_proxy_reuse_count": 0,
         "new_cisd_proxy_count": 0,
         "new_exact_proxy_count": 0,
+        "environment_bridge_cisd_proxy_count": 0,
+        "hamiltonian_byte_identity_mismatch_count": 0,
         "computed_this_invocation": 0,
         "new_direct_truth_coordinate_count": 0,
         "full_pf_unitary_build_count": 0,
@@ -493,7 +625,6 @@ def run(
     }
     systems: dict[str, dict[str, Any]] = {}
     metadata_by_condition: dict[str, dict[str, Any]] = {}
-    exact_by_condition: dict[str, tuple[float, np.ndarray, float]] = {}
     for condition in execution.condition_names(source_protocol):
         before_reuse = counters["system_cache_reused"]
         system, metadata = load_or_build_system(
@@ -505,16 +636,39 @@ def run(
                 "hamiltonian_sha256"
             ],
             counters=counters,
+            allow_numeric_reconstruction_bridge=True,
         )
         if counters["system_cache_reused"] == before_reuse:
             counters["system_regeneration_count"] += 1
+        if not metadata["rebuilt_hamiltonian_byte_identity_match"]:
+            counters["hamiltonian_byte_identity_mismatch_count"] += 1
+        systems[condition] = system
+        metadata_by_condition[condition] = metadata
+
+    bridge_rows = run_environment_bridge(
+        runtime=runtime,
+        amendment=environment_amendment,
+        amendment_sha256=environment_amendment_sha256,
+        systems=systems,
+        sequence=sequence,
+        saved=saved,
+        r1_protocol_sha256=r1_protocol_sha256,
+        counters=counters,
+    )
+    expected_bridge_count = int(
+        environment_amendment["revised_calculation_accounting"]
+        ["bridge_cisd_proxy_evaluations"]
+    )
+    if len(bridge_rows) != expected_bridge_count:
+        raise validation.CandidateValidationError("environment bridge count changed")
+
+    exact_by_condition: dict[str, tuple[float, np.ndarray, float]] = {}
+    for condition, system in systems.items():
         energy, state, residual, reused = load_or_build_exact(
             runtime=runtime, condition=condition, system=system
         )
         if not reused:
             counters["exact_ground_regeneration_count"] += 1
-        systems[condition] = system
-        metadata_by_condition[condition] = metadata
         exact_by_condition[condition] = (energy, state, residual)
 
     coordinate_rows: list[dict[str, Any]] = []
@@ -717,6 +871,9 @@ def run(
                 ) ** 2
             ),
             "exact_ground_residual_2_norm": float(exact_by_condition[condition][2]),
+            "expected_phase_a_hamiltonian_sha256": metadata_by_condition[condition]["expected_phase_a_hamiltonian_sha256"],
+            "rebuilt_hamiltonian_sha256": systems[condition]["hamiltonian_sha256"],
+            "rebuilt_hamiltonian_byte_identity_match": bool(metadata_by_condition[condition]["rebuilt_hamiltonian_byte_identity_match"]),
         }
         for condition in systems
     }
@@ -729,11 +886,28 @@ def run(
         "counts": counters,
         "condition_controls": controls,
         "maximum_decomposition_closure_residual_hartree": maximum_closure,
+        "environment_reconstruction_bridge": {
+            "point_count": len(bridge_rows),
+            "maximum_absolute_proxy_difference_hartree": max(float(row["absolute_difference_hartree"]) for row in bridge_rows),
+            "all_pass": all(bool(row["pass"]) for row in bridge_rows),
+            "amendment_sha256": environment_amendment_sha256,
+        },
         "environment": environment,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     validation.write_json(output_dir / "source_manifest.json", source_manifest)
     validation.write_json(output_dir / "environment_identity.json", environment)
+    validation.write_csv(
+        output_dir / "environment_reconstruction_bridge.csv", bridge_rows
+    )
+    validation.write_json(
+        output_dir / "environment_reconstruction_bridge.json",
+        {
+            "schema": "pf_candidate_validation_r1_environment_bridge_result_v1",
+            "amendment_sha256": environment_amendment_sha256,
+            "rows": bridge_rows,
+        },
+    )
     validation.write_csv(output_dir / "coordinate_proxy_results.csv", coordinate_rows)
     validation.write_csv(output_dir / "strategy_cause_decomposition.csv", decomposition_rows)
     validation.write_json(output_dir / "resource_audit.json", resource_audit)
@@ -753,6 +927,8 @@ def run(
         "execution_head": head,
         "source_protocol_sha256": r0["protocol_sha256"],
         "r1_protocol_sha256": r1_protocol_sha256,
+        "environment_amendment_sha256": environment_amendment_sha256,
+        "environment_reconstruction_bridge_pass": all(bool(row["pass"]) for row in bridge_rows),
         "closed_second_study_decision": "complete_no_benefit_unchanged",
         "coordinate_count": len(coordinate_rows),
         "strategy_decomposition_row_count": len(decomposition_rows),
@@ -761,11 +937,15 @@ def run(
         "new_direct_truth_coordinate_count": 0,
         "r2_authorized": False,
         "stop_for_research_direction_review": True,
+        "byte_identical_hamiltonian_reconstruction_claim": False,
+        "evidence_class": environment_amendment["interpretation_limit"]["r1_evidence_class_after_pass"],
     }
     validation.write_json(output_dir / "decision.json", decision)
     names = [
         "source_manifest.json",
         "environment_identity.json",
+        "environment_reconstruction_bridge.csv",
+        "environment_reconstruction_bridge.json",
         "coordinate_proxy_results.csv",
         "strategy_cause_decomposition.csv",
         "resource_audit.json",
@@ -789,6 +969,7 @@ def parser() -> argparse.ArgumentParser:
     value = argparse.ArgumentParser()
     value.add_argument("--project-root", type=Path, required=True)
     value.add_argument("--protocol", type=Path, required=True)
+    value.add_argument("--environment-amendment", type=Path, required=True)
     value.add_argument("--output-dir", type=Path, required=True)
     return value
 
@@ -798,6 +979,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     result = run(
         project_root=args.project_root,
         protocol_path=args.protocol,
+        environment_amendment_path=args.environment_amendment,
         output_dir=args.output_dir,
     )
     print(json.dumps(result, indent=2, sort_keys=True))

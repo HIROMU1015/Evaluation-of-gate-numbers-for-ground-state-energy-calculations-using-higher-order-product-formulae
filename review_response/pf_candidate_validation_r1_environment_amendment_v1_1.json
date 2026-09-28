@@ -1,0 +1,60 @@
+{
+  "schema": "pf_candidate_validation_r1_environment_amendment_v1_1",
+  "amendment_id": "D2R-R1-local-numeric-reconstruction-bridge-20260928",
+  "frozen_on": "2026-09-28",
+  "status": "frozen_before_any_r1_proxy_or_exact_state_result",
+  "parent_r1_protocol_sha256": "186d2240bbf78733c1389fac66e2b261a7dfe50d8712b656ce0e1c45a6c67e49",
+  "trigger": {
+    "gate": "rebuilt restricted Hamiltonian byte SHA-256",
+    "result": "mismatch",
+    "first_condition": "LiF_active_eq_sto3g",
+    "expected_sha256": "febd5388f7acb55ff43968dc522495638b4540ef69fcaf247bede6d852bc36e5",
+    "local_sha256": "25536fa441d22b6c0fcf44fb48edb13b49c01c0d01d908868d1b60d0f7b4c711",
+    "r1_proxy_results_opened_before_amendment": 0,
+    "exact_states_generated_before_amendment": 0,
+    "new_direct_truth_coordinates_before_amendment": 0
+  },
+  "unchanged_rules": [
+    "ten R1 selected coordinates",
+    "signed three-component decomposition",
+    "fixed materiality and 2x dominance rule",
+    "closed second-study complete_no_benefit decision",
+    "no new direct PF eigenpair or truth coordinate",
+    "R2 remains unauthorized"
+  ],
+  "bridge": {
+    "purpose": "quantify local numerical reconstruction compatibility before mixing local state proxies with saved GPU direct shifts",
+    "evidence_level": "numeric_reconstruction_bridge_not_byte_identity",
+    "maximum_absolute_proxy_difference_hartree": 1e-10,
+    "all_points_must_pass": true,
+    "failure_status": "failed_environment_reconstruction_bridge",
+    "points": [
+      {"condition": "LiF_active_eq_sto3g", "time_hex": "0x1.087d6eb6659ecp-4", "time_hartree_inverse": 0.06457274672570862, "role": "original_model_training_0.1"},
+      {"condition": "LiF_active_eq_sto3g", "time_hex": "0x1.087d6eb6659ecp-3", "time_hartree_inverse": 0.12914549345141724, "role": "original_model_training_0.2"},
+      {"condition": "LiF_active_eq_sto3g", "time_hex": "0x1.8cbc2611986e2p-3", "time_hartree_inverse": 0.19371824017712586, "role": "original_model_training_0.3"},
+      {"condition": "LiF_active_stretch150_sto3g", "time_hex": "0x1.0b92b09cb0a0fp-4", "time_hartree_inverse": 0.0653254412564268, "role": "original_model_training_0.1"},
+      {"condition": "LiF_active_stretch150_sto3g", "time_hex": "0x1.0b92b09cb0a0fp-3", "time_hartree_inverse": 0.1306508825128536, "role": "original_model_training_0.2"},
+      {"condition": "LiF_active_stretch150_sto3g", "time_hex": "0x1.915c08eb08f15p-3", "time_hartree_inverse": 0.19597632376928034, "role": "original_model_training_0.3"},
+      {"condition": "HCl_full_eq_sto3g", "time_hex": "0x1.f05c92e251856p-4", "time_hartree_inverse": 0.12118203522285972, "role": "saved_selected_0.5"},
+      {"condition": "HCl_full_eq_sto3g", "time_hex": "0x1.42a292acb4fd2p-3", "time_hartree_inverse": 0.15753664578971766, "role": "saved_selected_0.65"},
+      {"condition": "HCl_full_eq_sto3g", "time_hex": "0x1.8d16dbe841378p-3", "time_hartree_inverse": 0.19389125635657556, "role": "saved_selected_0.8"},
+      {"condition": "HCl_full_stretch150_sto3g", "time_hex": "0x1.3da896eea2786p-3", "time_hartree_inverse": 0.1551067153525844, "role": "saved_selected_0.5"},
+      {"condition": "HCl_full_stretch150_sto3g", "time_hex": "0x1.9cf4c436399c8p-3", "time_hartree_inverse": 0.20163872995835974, "role": "saved_selected_0.65"}
+    ]
+  },
+  "revised_calculation_accounting": {
+    "bridge_cisd_proxy_evaluations": 11,
+    "r1_missing_selected_time_cisd_proxy_evaluations": 5,
+    "r1_exact_state_proxy_evaluations": 10,
+    "total_new_proxy_evaluations_maximum": 26,
+    "new_direct_pf_eigenpair_count": 0,
+    "new_direct_truth_coordinate_count": 0,
+    "gpu_operation_count": 0
+  },
+  "interpretation_limit": {
+    "byte_identical_claim_allowed": false,
+    "bridge_pass_claim": "local reconstruction reproduces the fixed saved CISD proxy values at the eleven preregistered bridge coordinates within 1e-10 Ha",
+    "r1_evidence_class_after_pass": "post_hoc_development_diagnostic_with_numeric_reconstruction_bridge",
+    "future_independent_validation_must_use_one_environment_identity": true
+  }
+}
