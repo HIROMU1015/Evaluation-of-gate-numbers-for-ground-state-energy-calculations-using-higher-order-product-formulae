@@ -200,7 +200,7 @@ def build_rows(root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]], 
 
 def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
     with path.open("w", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         for row in rows:
             writer.writerow({k: json.dumps(v, sort_keys=True) if isinstance(v, (list, dict)) else v
