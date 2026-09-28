@@ -487,7 +487,11 @@ def write_csv(path: Path, rows: Sequence[Mapping[str, Any]]) -> None:
     if not rows:
         raise CandidateValidationError(f"refusing to write empty CSV: {path}")
     with path.open("x", newline="", encoding="utf-8") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(
+            stream,
+            fieldnames=list(rows[0]),
+            lineterminator="\n",
+        )
         writer.writeheader()
         for row in rows:
             writer.writerow({key: csv_value(value) for key, value in row.items()})
