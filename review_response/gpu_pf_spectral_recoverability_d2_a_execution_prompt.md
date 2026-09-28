@@ -36,9 +36,10 @@ D2-A completion reportをcommit・pushして報告した時点で停止してく
 - Phase A runtime inventory SHA-256：
   `5dbe617f37dcfd4274fa5f89eddf6167ffe62a3816200bec6eb66f9e49e73d91`
 
-execution bundleの正確なcommitは、このpromptを渡す際のhandoffで別途示します。そのcommitは上記
-implementation commitの子孫でなければなりません。上記source 5件はimplementation commitと
-byte-identicalであることを実行前とprediction commit後に確認してください。
+execution bundleの正確な40文字commitは、このpromptを渡すhandoff messageで固定します。prompt自身へ
+自己参照commitを埋め込まず、handoffに示されたcommitをbranch/worktreeの起点として使用してください。
+そのcommitは上記implementation commitの子孫でなければなりません。上記source 5件はimplementation
+commitとbyte-identicalであることを実行前とprediction commit後に確認してください。
 
 ## 今回の科学的範囲
 
@@ -138,7 +139,10 @@ MKL_NUM_THREADS=1
 
 virtualenvをactivateせず、package、Python、CUDA、driver、shell設定を変更しません。
 
-## 計算前test
+## Freeze前のtruth-free gate
+
+prediction freeze前には、既存truth artifactを読むtestを実行しません。次のD2-A synthetic/source/access
+testだけを実行し、fail/skip 0を要求します。
 
 ```bash
 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
@@ -146,16 +150,12 @@ PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 \
 PYTHONPATH="src:review_response:." \
 /home/AbeHiromu/venvs/trotter-common/bin/python -m pytest -q -rs \
   review_tests/test_pf_spectral_recoverability_d2.py \
-  review_tests/test_pf_spectral_information_pilot_d1.py \
-  review_tests/test_pf_r1_reorientation_d0.py \
-  review_tests/test_pf_candidate_validation.py \
-  review_tests/test_second_study_safe_time_domain_execution.py \
   -p no:cacheprovider
 ```
 
-focusedはfail/skip 0を要求します。続いて全`review_tests`を実行し、fail 0、skipは
-`review_tests/test_pennylane_bch.py`の任意依存`pennylane`だけ最大1件を許可します。pre-test logは
-一時pathへ保存し、scorer完了後にresult outputへ収録します。
+この段階では全`review_tests`、D1/R1/second-study execution testsを実行しません。test logは一時pathへ
+保存します。このgateはsynthetic matrix、一時Git repository、source text、protocol/authorizationだけを使い、
+Phase B `direct_points.*`、D1 oracle artifact、R1 truth artifactを開きません。
 
 ## Step 1：truth-free prediction
 
@@ -190,15 +190,51 @@ predictor完了後、次を照合します。
 - source、runtime、environment、access gateが全件合格。
 
 `.runtime`、pickle、npy、matrix/vectorを含めず、prediction outputの軽量7ファイルだけをcommitします。
+directory一括の`git add`は禁止し、次の7件だけを明示的にstageします。
 
 ```bash
-git add artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c
+git add \
+  artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/prediction.json \
+  artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/prediction.sha256 \
+  artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/PREDICTION_FROZEN.json \
+  artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/manifest.json \
+  artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/source_audit.json \
+  artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/access_audit.json \
+  artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/resource_audit.json
 git commit -m "Freeze D2-A truth-free predictions"
 PREDICTION_COMMIT=$(git rev-parse HEAD)
 ```
 
 commit後に上記5 sourceがimplementation commitとbyte-identicalで、worktreeにprediction変更がないことを
-再確認します。ここまで完了する前はStep 2へ進みません。
+再確認します。staged/committed file setが上記7件だけであることも照合します。
+
+## Prediction freeze後のtest gate
+
+ここから既存truth artifactの読み取りを許可します。ただしpredictionの変更は禁止します。次のfocused testsを
+実行し、fail/skip 0を要求します。
+
+```bash
+OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 \
+PYTHONPATH="src:review_response:." \
+/home/AbeHiromu/venvs/trotter-common/bin/python -m pytest -q -rs \
+  review_tests/test_pf_spectral_recoverability_d2.py \
+  review_tests/test_pf_spectral_information_pilot_d1.py \
+  review_tests/test_pf_r1_reorientation_d0.py \
+  review_tests/test_pf_candidate_validation.py \
+  review_tests/test_second_study_safe_time_domain_execution.py \
+  -p no:cacheprovider
+```
+
+続いて全`review_tests`を実行し、fail 0、skipは`review_tests/test_pennylane_bch.py`の任意依存
+`pennylane`だけ最大1件を許可します。両logは一時pathへ保存します。test後に次を再確認します。
+
+- HEADが`PREDICTION_COMMIT`のまま。
+- prediction artifact 7件がprediction commit blobとbyte-identical。
+- source 5件がimplementation commitとbyte-identical。
+- tracked worktreeがclean。
+
+一件でも不一致ならscorerを実行せず停止します。
 
 ## Step 2：既存truthによるscoring
 
@@ -233,9 +269,9 @@ byte-identicalであることを検査します。違えばtruth採点を開始�
 
 ## 計算後test、commit、push、停止
 
-計算前と同じfocused/full testsを再実行します。pre/post log、command、Python identity、時刻、件数、
-resource summaryをresult outputへ追加しますが、runner生成manifestは書き換えず、その記載5ファイルを
-再hash照合します。
+Prediction freeze後のgateと同じfocused/full testsを再実行します。freeze前truth-free、freeze後pre-scorer、
+post-scorerの各log、command、Python identity、時刻、件数、resource summaryをresult outputへ追加します。
+runner生成manifestは書き換えず、その記載5ファイルを再hash照合します。
 
 prediction commit後の最終commitには、scorerの軽量CSV/JSON/report/manifestとtest/resource logだけを
 含めます。`.runtime`、pickle、npy、matrix、state、unitary、eigenvectorをcommitしません。originへ
@@ -250,7 +286,7 @@ prediction commit後の最終commitには、scorerの軽量CSV/JSON/report/manif
 - PF/H actions、component gates、wall/CPU memory、GPU counts 0。
 - prediction commit 7件のbyte identity。
 - 既存truth採点後のbranch correct、安全数、危険な過小評価、baseline gamma frontier、budget差。
-- pre/post focused/full test件数。
+- freeze前truth-free、freeze後pre-scorer、post-scorerのtest件数。
 - 三分岐status、D2-B unauthorized、未解決事項。
 
 報告後に停止してください。D2-B、LiF、holdout、方法のfreeze、新分子・PF、追加diagnostic、
