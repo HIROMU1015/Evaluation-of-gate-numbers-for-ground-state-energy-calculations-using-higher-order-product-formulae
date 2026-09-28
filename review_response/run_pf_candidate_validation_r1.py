@@ -194,6 +194,16 @@ def load_or_build_system(
         return system, metadata
     cache.parent.mkdir(parents=True, exist_ok=True)
     work_dir = runtime / "pyscf" / condition
+    if work_dir.exists():
+        for attempt in range(1, 100):
+            candidate = runtime / "pyscf" / f"{condition}_attempt{attempt}"
+            if not candidate.exists():
+                work_dir = candidate
+                break
+        else:
+            raise validation.CandidateValidationError(
+                f"{condition}: too many incomplete PySCF attempts"
+            )
     system, metadata = phase_a.prepare_condition(
         spec, source_protocol_sha256, work_dir, 1
     )
