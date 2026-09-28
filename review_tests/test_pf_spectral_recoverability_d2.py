@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 
 import numpy as np
@@ -281,3 +282,52 @@ def test_prediction_hash_tamper_is_rejected(tmp_path: Path) -> None:
     prediction.write_text("{}\n", encoding="utf-8")
     with pytest.raises(scorer.ScorerError, match="manifest mismatch"):
         scorer.verify_prediction(tmp_path)
+
+
+def test_scorer_requires_prediction_freeze_commit_boundary() -> None:
+    source = SCORER.read_text(encoding="utf-8")
+    assert "def verify_prediction_commit(" in source
+    assert '"--prediction-commit"' in source
+    assert '"--prediction-artifact-relative"' in source
+    assert "scorer HEAD must equal the prediction freeze commit" in source
+    assert "prediction differs from freeze commit" in source
+
+
+def test_prediction_commit_gate_rejects_post_commit_change(tmp_path: Path) -> None:
+    root = tmp_path / "repo"
+    artifact = root / "artifact"
+    artifact.mkdir(parents=True)
+    names = [
+        "prediction.json", "prediction.sha256", "PREDICTION_FROZEN.json",
+        "manifest.json", "source_audit.json", "access_audit.json",
+        "resource_audit.json",
+    ]
+    for index, name in enumerate(names):
+        (artifact / name).write_text(f"frozen-{index}\n", encoding="utf-8")
+    commands = [
+        ["git", "init", "-q"],
+        ["git", "config", "user.name", "D2 Test"],
+        ["git", "config", "user.email", "d2-test@example.invalid"],
+        ["git", "add", "artifact"],
+        ["git", "commit", "-q", "-m", "freeze prediction"],
+    ]
+    for command in commands:
+        subprocess.run(command, cwd=root, check=True)
+    commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=root, check=True,
+        capture_output=True, text=True,
+    ).stdout.strip()
+
+    identity = scorer.verify_prediction_commit(
+        root, artifact, commit, Path("artifact")
+    )
+    assert identity["prediction_commit"] == commit
+    assert len(identity["verified_prediction_commit_files"]) == 7
+
+    (artifact / "prediction.json").write_text(
+        "changed-after-freeze\n", encoding="utf-8"
+    )
+    with pytest.raises(
+        scorer.ScorerError, match="prediction differs from freeze commit"
+    ):
+        scorer.verify_prediction_commit(root, artifact, commit, Path("artifact"))

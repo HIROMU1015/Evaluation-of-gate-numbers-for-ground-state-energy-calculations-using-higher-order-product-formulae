@@ -128,6 +128,63 @@ def verify_prediction(prediction_root: Path) -> tuple[dict[str, Any], str]:
     return prediction, prediction_hash
 
 
+def verify_prediction_commit(
+    root: Path,
+    prediction_root: Path,
+    prediction_commit: str,
+    artifact_relative: Path,
+) -> dict[str, Any]:
+    """Require the scorer to start from the commit that froze prediction files."""
+    try:
+        actual_relative = prediction_root.resolve().relative_to(root.resolve())
+    except ValueError as error:
+        raise ScorerError("prediction root is outside the project worktree") from error
+    if actual_relative != artifact_relative:
+        raise ScorerError("prediction artifact relative path mismatch")
+
+    head = subprocess.run(
+        ["git", "rev-parse", "HEAD"], cwd=root, check=True,
+        capture_output=True, text=True,
+    ).stdout.strip()
+    resolved = subprocess.run(
+        ["git", "rev-parse", f"{prediction_commit}^{{commit}}"],
+        cwd=root, check=True, capture_output=True, text=True,
+    ).stdout.strip()
+    if head != resolved:
+        raise ScorerError("scorer HEAD must equal the prediction freeze commit")
+
+    names = [
+        "prediction.json", "prediction.sha256", "PREDICTION_FROZEN.json",
+        "manifest.json", "source_audit.json", "access_audit.json",
+        "resource_audit.json",
+    ]
+    verified: list[dict[str, Any]] = []
+    for name in names:
+        path = prediction_root / name
+        if not path.is_file():
+            raise ScorerError(f"missing frozen prediction artifact: {name}")
+        blob = subprocess.run(
+            [
+                "git", "show",
+                f"{resolved}:{actual_relative.as_posix()}/{name}",
+            ],
+            cwd=root, check=True, capture_output=True,
+        ).stdout
+        current = path.read_bytes()
+        if blob != current:
+            raise ScorerError(f"prediction differs from freeze commit: {name}")
+        verified.append({
+            "path": f"{actual_relative.as_posix()}/{name}",
+            "bytes": len(current),
+            "sha256": hashlib.sha256(current).hexdigest(),
+        })
+    return {
+        "prediction_commit": resolved,
+        "prediction_artifact_relative": actual_relative.as_posix(),
+        "verified_prediction_commit_files": verified,
+    }
+
+
 def _key(condition: str, time_value: float) -> tuple[str, str]:
     return str(condition), float(time_value).hex()
 
@@ -299,6 +356,10 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project-root", required=True, type=Path)
     parser.add_argument("--prediction-root", required=True, type=Path)
+    parser.add_argument("--prediction-commit", required=True)
+    parser.add_argument(
+        "--prediction-artifact-relative", required=True, type=Path
+    )
     parser.add_argument("--output-dir", required=True, type=Path)
     args = parser.parse_args()
     started = time.perf_counter()
@@ -306,6 +367,12 @@ def main() -> int:
     source = verify_sources(root)
     prediction_root = args.prediction_root.resolve()
     prediction, prediction_hash = verify_prediction(prediction_root)
+    prediction_commit_identity = verify_prediction_commit(
+        root,
+        prediction_root,
+        args.prediction_commit,
+        args.prediction_artifact_relative,
+    )
     output = (
         args.output_dir if args.output_dir.is_absolute() else root / args.output_dir
     ).resolve()
@@ -358,6 +425,7 @@ def main() -> int:
         "summary": summary,
         "wall_seconds": time.perf_counter() - started,
         "source_head": source["head"],
+        **prediction_commit_identity,
     }
     atomic_json(output / "decision.json", decision)
     report = (
