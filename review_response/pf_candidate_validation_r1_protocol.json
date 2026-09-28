@@ -1,0 +1,113 @@
+{
+  "schema": "pf_candidate_validation_r1_protocol_v1",
+  "protocol_id": "D2R-R1-selected-coordinate-cause-decomposition-20260928",
+  "frozen_on": "2026-09-28",
+  "status": "frozen_before_r1_execution",
+  "source_commit": "05649f1a7b6e405eadc2dbbdc0897836e0fa2f02",
+  "source_protocol_sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+  "r0": {
+    "artifact_relative": "artifacts/pf_candidate_validation_r0_20260928_05649f1",
+    "ledger_canonical_sha256": "fe08eea8f9f8e101fa49661c6ea5a73b2863b7a4bc6eaa42df13e3dc96b200a0",
+    "coordinate_plan_canonical_sha256": "84faad4338438d405e75d56dedd80233c5e86ea2b2a16412d48ad6c744759626"
+  },
+  "authorization": {
+    "r1_authorized": true,
+    "authorization_basis": "user request on 2026-09-28 to run R0 through R1 and then stop for research-plan revision",
+    "r2_authorized": false,
+    "new_direct_truth_authorized": false,
+    "new_pf_authorized": false,
+    "new_molecule_authorized": false
+  },
+  "scientific_role": {
+    "lif_hcl_status": "development_after_closed_second_study",
+    "closed_second_study_decision": "complete_no_benefit_unchanged",
+    "exact_state_proxy": "post_hoc_cause_diagnostic_only",
+    "saved_direct_shift": "post_hoc_scoring_and_cause_diagnostic_only",
+    "forbidden_operational_inputs": [
+      "exact state proxy",
+      "saved direct PF shift",
+      "direct required cost",
+      "R1 pass/fail label"
+    ]
+  },
+  "coordinates": [
+    {"condition": "LiF_active_eq_sto3g", "time_hex": "0x1.cedb81bf31d5cp-1", "time_hartree_inverse": 0.9040184541599205},
+    {"condition": "LiF_active_eq_sto3g", "time_hex": "0x1.ddaf77858c5d5p-1", "time_hartree_inverse": 0.9329793310664011},
+    {"condition": "LiF_active_stretch150_sto3g", "time_hex": "0x1.685654565724cp-1", "time_hartree_inverse": 0.703783641376114},
+    {"condition": "LiF_active_stretch150_sto3g", "time_hex": "0x1.6fe9b2d772dd4p-1", "time_hartree_inverse": 0.7185798538206947},
+    {"condition": "HCl_full_eq_sto3g", "time_hex": "0x1.f05c92e251856p-4", "time_hartree_inverse": 0.12118203522285972},
+    {"condition": "HCl_full_eq_sto3g", "time_hex": "0x1.42a292acb4fd2p-3", "time_hartree_inverse": 0.15753664578971766},
+    {"condition": "HCl_full_eq_sto3g", "time_hex": "0x1.8d16dbe841378p-3", "time_hartree_inverse": 0.19389125635657556},
+    {"condition": "HCl_full_stretch150_sto3g", "time_hex": "0x1.3da896eea2786p-3", "time_hartree_inverse": 0.1551067153525844},
+    {"condition": "HCl_full_stretch150_sto3g", "time_hex": "0x1.9cf4c436399c8p-3", "time_hartree_inverse": 0.20163872995835974},
+    {"condition": "HCl_full_stretch150_sto3g", "time_hex": "0x1.fc40f17dd0c0ap-3", "time_hartree_inverse": 0.24817074456413507}
+  ],
+  "calculation_limits": {
+    "condition_count": 4,
+    "selected_coordinate_count": 10,
+    "new_hamiltonian_count": 0,
+    "regenerated_same_hamiltonian_count_maximum": 4,
+    "regenerated_cisd_state_count_maximum": 4,
+    "regenerated_exact_ground_state_count_maximum": 4,
+    "saved_cisd_proxy_reuse_count_expected": 5,
+    "new_cisd_proxy_evaluation_count_maximum": 5,
+    "new_exact_state_proxy_evaluation_count_maximum": 10,
+    "new_proxy_evaluation_count_total_maximum": 15,
+    "new_direct_pf_eigenpair_count": 0,
+    "new_direct_truth_coordinate_count": 0,
+    "gpu_allocation_or_kernel_count": 0,
+    "processes": 1
+  },
+  "state_and_action_rules": {
+    "system_construction": "byte-identical source implementation and molecular specifications from the frozen second-study source commit",
+    "hamiltonian_identity": "rebuilt restricted Hamiltonian SHA-256 must match the Phase A prediction",
+    "cisd_identity": "same PySCF CISD construction and restricted-sector mapping as frozen Phase A",
+    "exact_ground": "lowest dense Hermitian eigenpair in the same frozen restricted sector; residual <= 1e-10",
+    "proxy": "Im(<psi|exp(-iHt) U_current_m3(t)|psi>)/t using PF state action and sparse-H exponential action",
+    "full_pf_unitary_build": false,
+    "direct_pf_eigenpair": false,
+    "numeric_dtype": "complex128"
+  },
+  "decomposition": {
+    "identity": "f-delta=(f-g_cisd)+(g_cisd-g_exact)+(g_exact-delta)",
+    "components": {
+      "model_component": "f_signed-proxy_cisd_signed",
+      "state_component": "proxy_cisd_signed-proxy_exact_signed",
+      "proxy_eigenvalue_component": "proxy_exact_signed-direct_shift_signed"
+    },
+    "closure_absolute_tolerance_hartree": 1e-14,
+    "budget_error": "use the original frozen strategy guarded_error, not abs(f) when those differ",
+    "guard_premium": "budget_error_used-abs(f_signed)"
+  },
+  "fixed_attribution_rule": {
+    "allowance": "(1-1/gamma)*(epsilon-budget_error_used)",
+    "material_component": "abs(component)>allowance",
+    "sole_dominant_component": "largest absolute component is material and is at least 2 times the second-largest absolute component",
+    "otherwise": "mixed_or_none",
+    "signed_components_and_cancellation_must_be_reported": true,
+    "threshold_changes_after_results": false
+  },
+  "counterfactual_diagnostics": {
+    "local_cisd_proxy_budget": "replace e_hat by abs(proxy_cisd) at the already selected time and evaluate the inherited gamma budget identity",
+    "local_exact_proxy_budget": "replace e_hat by abs(proxy_exact) at the already selected time and evaluate the inherited gamma budget identity",
+    "interpretation": "post_hoc mechanism diagnostic, not an independently validated new method and not a change to the closed study"
+  },
+  "hcl_control": {
+    "record_fixed_population_dimension": true,
+    "record_restricted_dimension": true,
+    "record_cisd_hamiltonian_residual": true,
+    "record_exact_ground_overlap": true,
+    "do_not_equate_excitation_space_completeness_with_unconditional_spin_ground_state_guarantee": true
+  },
+  "completion": {
+    "required_coordinate_rows": 10,
+    "required_strategy_decomposition_rows": 16,
+    "required_saved_proxy_reuse_count": 5,
+    "required_new_cisd_proxy_count": 5,
+    "required_new_exact_proxy_count": 10,
+    "required_new_direct_truth_count": 0,
+    "required_gpu_count": 0,
+    "status": "r1_complete_stop_for_research_direction_review",
+    "r2_authorized": false
+  }
+}
