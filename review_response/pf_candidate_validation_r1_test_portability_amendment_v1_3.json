@@ -1,0 +1,41 @@
+{
+  "schema": "pf_candidate_validation_r1_test_portability_amendment_v1_3",
+  "amendment_id": "D2R-R1-closed-result-ulp-portability-20260928",
+  "frozen_on": "2026-09-28",
+  "status": "frozen_after_pretest_failure_before_r1_execution",
+  "parent_phase_a_cache_amendment_sha256": "a95a9abf87f1d428c35d34ed13cbea8c2ff930e91a3e5eb3a2550fd5d1dd1051",
+  "trigger": {
+    "stage": "GPU R1 focused pretest",
+    "test": "test_second_study_phase_b_committed_result_recomputes",
+    "field": "strategy_summary.uncapped_counterfactual.aggregate_frozen_pauli_rotation_budget",
+    "stored_value": 8689143504.848944,
+    "gpu_python_3_12_recomputed_value": 8689143504.848944,
+    "gpu_absolute_difference": 0.0,
+    "historical_completion_audit_recomputed_value": 8689143504.848946,
+    "historical_absolute_difference": 0.0000019073486328125,
+    "ulp_at_stored_value": 0.0000019073486328125,
+    "focused_result": "33_passed_1_failed",
+    "r1_output_directory_created": false,
+    "exact_ground_state_count": 0,
+    "r1_proxy_evaluation_count": 0,
+    "new_direct_truth_coordinate_count": 0,
+    "gpu_operation_count": 0
+  },
+  "test_only_change": {
+    "old_assertion": "absolute_difference == one_ulp",
+    "new_assertion": "absolute_difference <= one_ulp",
+    "reason": "exact equality and the historically observed one-ULP representation difference are both valid recomputations of the same fixed aggregate",
+    "maximum_allowed_absolute_difference": 0.0000019073486328125,
+    "production_source_changed": false,
+    "stored_scientific_artifact_changed": false,
+    "protocol_or_threshold_changed": false,
+    "closed_complete_no_benefit_decision_changed": false
+  },
+  "retry_rules": {
+    "rerun_focused_tests_from_a_new_fixed_commit": true,
+    "rerun_full_review_tests_before_r1": true,
+    "preserve_initial_stopped_branch_and_worktree": true,
+    "use_original_phase_a_runtime_byte_identity_path": true,
+    "r2_authorized": false
+  }
+}

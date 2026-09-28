@@ -239,3 +239,24 @@ def test_local_environment_failure_audit_manifest() -> None:
         path = root / row["path"]
         assert path.stat().st_size == row["byte_count"]
         assert validation.sha256_file(path) == row["sha256"]
+
+
+def test_r1_test_portability_amendment_changes_no_science() -> None:
+    path = (
+        PROJECT_ROOT
+        / "review_response/pf_candidate_validation_r1_test_portability_amendment_v1_3.json"
+    )
+    amendment = validation.read_json(path)
+    assert validation.sha256_file(path) == (
+        "9cc7b101fdcca2f696e0d2a7ed43f4564bc3b42e9cd5c38397943b1426572cc3"
+    )
+    assert amendment["status"] == "frozen_after_pretest_failure_before_r1_execution"
+    assert amendment["trigger"]["gpu_absolute_difference"] == 0.0
+    change = amendment["test_only_change"]
+    assert change["old_assertion"] == "absolute_difference == one_ulp"
+    assert change["new_assertion"] == "absolute_difference <= one_ulp"
+    assert change["production_source_changed"] is False
+    assert change["stored_scientific_artifact_changed"] is False
+    assert change["protocol_or_threshold_changed"] is False
+    assert change["closed_complete_no_benefit_decision_changed"] is False
+    assert amendment["retry_rules"]["r2_authorized"] is False

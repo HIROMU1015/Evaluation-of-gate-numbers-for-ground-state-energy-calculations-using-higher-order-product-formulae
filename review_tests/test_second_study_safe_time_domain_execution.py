@@ -874,7 +874,10 @@ def test_committed_phase_b_result_recomputes_from_frozen_inputs() -> None:
         committed = stored["strategy_summary"][strategy]
         for key, value in summary.items():
             if key == "aggregate_frozen_pauli_rotation_budget":
-                assert abs(value - committed[key]) == math.ulp(committed[key])
+                # The completion audit observed a one-ULP representation
+                # difference, while Python 3.12 can reproduce the stored sum
+                # exactly.  Both satisfy the fixed scientific identity.
+                assert abs(value - committed[key]) <= math.ulp(committed[key])
             else:
                 assert value == committed[key]
     assert decision["status"] == "complete_no_benefit"
