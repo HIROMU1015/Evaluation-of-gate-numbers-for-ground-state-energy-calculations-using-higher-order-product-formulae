@@ -1,0 +1,161 @@
+{
+  "schema": "pf_spectral_information_pilot_d1_execution_audit_v1",
+  "audit_generated_utc": "2026-09-28T12:57:09.931566843Z",
+  "branch": "gpu-pf-spectral-information-pilot-d1-20260928",
+  "execution_bundle_commit": "03747a2ca85c46d593b4fcf1e4969fd45005e37e",
+  "worktree": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/.worktrees/gpu-pf-spectral-information-pilot-d1-20260928",
+  "output_directory": "artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2",
+  "identity": {
+    "evidence_commit": "a134ba3950a521225a14c46943d0dbe469425e00",
+    "d0_result_commit": "0d13decb8793c5e6fd83075b1559e05424f93c04",
+    "d1_implementation_commit": "03747a2ca85c46d593b4fcf1e4969fd45005e37e",
+    "protocol_sha256": "44d69fa249a075a6dd863ddc518a5d93da7e6699d4f888037c8476e68e5cdb9e",
+    "d0_authorization_sha256": "74c7644a7e1f1f427e3fd2f9fe9d183828a588697f2d195bc5f04cd8f6f58f9a",
+    "d0_manifest_sha256": "cb6bc10625c117ab025d2b94b54f6eccf4517cbd57e63c23417e712f958d8f87",
+    "d1_authorization_sha256": "5ec7fc1d041f3b2c8d1ea9d1e5418a7a6e9c7d9773c96532d826a003714cc186",
+    "runner_sha256": "aa2380feff4544b10e198c31ad0671deeac8d379a5d9f6b8996f3f45aa086caf",
+    "d1_unit_test_sha256": "ad860f4bdc732c907e9b711ab723fc9cccd471437aba78a9573b746ba831daae",
+    "phase_a_cache_amendment_sha256": "a95a9abf87f1d428c35d34ed13cbea8c2ff930e91a3e5eb3a2550fd5d1dd1051",
+    "phase_a_runtime_inventory_sha256": "5dbe617f37dcfd4274fa5f89eddf6167ffe62a3816200bec6eb66f9e49e73d91"
+  },
+  "process_environment": {
+    "python_executable": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "python_realpath": "/usr/bin/python3.12",
+    "python_version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "PYTHONPATH": "src:review_response:.",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "processes": 1,
+    "backend": "cpu",
+    "virtualenv_activated": false,
+    "gpu_queried": false
+  },
+  "phase_a_runtime_verification": {
+    "absolute_artifact_root": "/home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-phase-a-20260927/artifacts/server_second_study_safe_time_domain_phase_a_20260927_e86e694",
+    "file_count": 56,
+    "total_bytes": 113469289,
+    "all_files_byte_identical": true,
+    "hcl_system_cache_sha256": {
+      "HCl_full_eq_sto3g": "8733b890a2d1f449f30ac43290b00fc94d5b08129403bee735fb78fa308aeab7",
+      "HCl_full_stretch150_sto3g": "8bac20c917e2242c1ecc84c9735bf0a93758e8b0211fe297551ae2026b1239f7"
+    }
+  },
+  "commands": {
+    "focused_tests": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:review_response:. /home/AbeHiromu/venvs/trotter-common/bin/python -m pytest -q -rs review_tests/test_pf_spectral_information_pilot_d1.py review_tests/test_pf_r1_reorientation_d0.py review_tests/test_pf_candidate_validation.py review_tests/test_second_study_safe_time_domain_execution.py -p no:cacheprovider",
+    "full_tests": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:review_response:. /home/AbeHiromu/venvs/trotter-common/bin/python -m pytest -q -rs review_tests -p no:cacheprovider",
+    "runner": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:review_response:. /home/AbeHiromu/venvs/trotter-common/bin/python -u review_response/run_pf_spectral_information_pilot_d1.py --project-root $PWD --protocol review_response/pf_spectral_information_pilot_protocol_draft.json --d0-authorization review_response/pf_spectral_information_pilot_authorization.json --d1-authorization review_response/pf_spectral_information_pilot_d1_authorization.json --phase-a-cache-amendment review_response/pf_candidate_validation_r1_phase_a_cache_amendment_v1_2.json --phase-a-root /home/AbeHiromu/worktrees/gpu-second-study-safe-time-domain-phase-a-20260927/artifacts/server_second_study_safe_time_domain_phase_a_20260927_e86e694 --processes 1 --output-dir artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2"
+  },
+  "executions": {
+    "pre_focused": {
+      "start_utc": "2026-09-28T12:51:08.923779358Z",
+      "end_utc": "2026-09-28T12:51:09.753779358Z",
+      "timestamp_source": "derived from final log mtime and pytest-reported elapsed time",
+      "passed": 49,
+      "failed": 0,
+      "skipped": 0,
+      "pytest_seconds": 0.83,
+      "log": "pre_focused_tests.log"
+    },
+    "pre_full": {
+      "start_utc": "2026-09-28T12:51:22.270642700Z",
+      "end_utc": "2026-09-28T12:51:33.990642700Z",
+      "timestamp_source": "derived from final log mtime and pytest-reported elapsed time",
+      "passed": 333,
+      "failed": 0,
+      "skipped": 1,
+      "allowed_skip": "review_tests/test_pennylane_bch.py: optional pennylane unavailable",
+      "pytest_seconds": 11.72,
+      "log": "pre_full_review_tests.log"
+    },
+    "d1_runner": {
+      "start_utc": "2026-09-28T12:51:50.744548234Z",
+      "end_utc": "2026-09-28T12:51:54.522526933Z",
+      "timestamp_source": "output-directory birth time and final manifest mtime",
+      "runner_wall_seconds": 3.7609896971844137,
+      "exit_status": 0,
+      "log": "d1_runner.log"
+    },
+    "post_focused": {
+      "start_utc": "2026-09-28T12:54:55.823780584Z",
+      "end_utc": "2026-09-28T12:54:56.955251503Z",
+      "timestamp_source": "timestamps embedded by execution wrapper",
+      "passed": 49,
+      "failed": 0,
+      "skipped": 0,
+      "pytest_seconds": 0.81,
+      "log": "post_focused_tests.log"
+    },
+    "post_full": {
+      "start_utc": "2026-09-28T12:55:07.443380019Z",
+      "end_utc": "2026-09-28T12:55:20.763846687Z",
+      "timestamp_source": "timestamps embedded by execution wrapper",
+      "passed": 333,
+      "failed": 0,
+      "skipped": 1,
+      "allowed_skip": "review_tests/test_pennylane_bch.py: optional pennylane unavailable",
+      "pytest_seconds": 11.90,
+      "log": "post_full_review_tests.log"
+    }
+  },
+  "result": {
+    "status": "d1_complete_prototype_candidate_stop",
+    "all_numerical_gates_pass": true,
+    "all_resource_gates_pass": true,
+    "d2_authorized": false,
+    "closed_second_study_status": "complete_no_benefit_unchanged",
+    "counts": {
+      "condition_count": 2,
+      "coordinate_count": 6,
+      "new_direct_coordinate_count": 0,
+      "exact_ground_computed": 2,
+      "exact_ground_reused": 0,
+      "full_pf_unitary_computed": 6,
+      "full_pf_unitary_reused": 0,
+      "pf_eigendecomposition_computed": 6,
+      "pf_eigendecomposition_reused": 0,
+      "gpu_query": 0,
+      "gpu_allocation": 0,
+      "gpu_kernel": 0
+    },
+    "peak_cpu_rss_kib": 457204,
+    "maximum_eigenpair_residual_2_norm": 7.089277907812766e-14,
+    "maximum_unitarity_residual_frobenius": 3.419570997609378e-12,
+    "maximum_complex_echo_absolute_residual": 1.1444590148095612e-14,
+    "minimum_phase_gap_radian": 0.015541193598473948,
+    "branch_selection_disagreement_count": 0,
+    "weight_ranked_k_le_4_actual_and_conservative_all_six": true,
+    "oracle_contribution_k_le_8_actual_all_six": true
+  },
+  "truth_free_route": {
+    "candidate": "unitary_krylov_moments_from_frozen_approximate_state",
+    "subspace_dimension_maximum": 8,
+    "pf_actions_per_coordinate_maximum": 8,
+    "hamiltonian_actions_per_coordinate_maximum": 8,
+    "resource_envelope_within_d0_limits": true,
+    "implemented_or_validated_in_d1": false,
+    "uses_direct_truth_operationally": false,
+    "uses_exact_state_operationally": false,
+    "unresolved": [
+      "branch correspondence without truth",
+      "conditioning and truncation",
+      "measurement precision and classical information cost",
+      "transfer from exact-ground diagnostic weights to an obtainable state"
+    ]
+  },
+  "runner_manifest_verification": {
+    "manifest_sha256": "44b3bc7a702f50693c7b6e17e2f98d8af222b0b430d3fb6c136200fa1dc18c05",
+    "entry_count": 10,
+    "matching_entry_count": 10,
+    "all_bytes_and_sha256_match": true,
+    "runner_manifest_rewritten": false
+  },
+  "operator_notes": [
+    "The output directory did not exist before the one authorized D1 runner invocation.",
+    "Before the successful post-focused test, one shell wrapper stopped on a quoting syntax error and one pytest invocation stopped before collection because two nonexistent candidate test paths were supplied. Neither attempt ran scientific computation, queried a GPU, or changed a runner-produced artifact; the successful required four-file focused command replaced the temporary post-focused log.",
+    "No Phase A runtime file, prior worktree, package, Python installation, CUDA setting, driver, or shell setting was modified.",
+    "Runtime pickle files under .runtime are excluded from the result commit."
+  ]
+}
