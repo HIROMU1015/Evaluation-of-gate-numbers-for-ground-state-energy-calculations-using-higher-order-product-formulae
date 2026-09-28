@@ -1,0 +1,38 @@
+{
+  "schema": "pf_spectral_recoverability_d2_a_authorization_v1",
+  "status": "d2_a_authorized_once_d2_b_not_authorized",
+  "authorized_on": "2026-09-29",
+  "planning_commit": "d99715ef2c575a547394f2a5916abad27213d6fb",
+  "protocol_sha256": "fb1d112e13830924ee5bed058cea8a8a6196d01b303b96fff664676db98d83f5",
+  "authorization": {
+    "method_implementation_authorized": true,
+    "synthetic_unit_tests_authorized": true,
+    "d2_a_predictor_authorized": true,
+    "d2_a_scorer_authorized_after_prediction_freeze": true,
+    "maximum_completed_predictor_runs": 1,
+    "maximum_completed_scorer_runs": 1,
+    "conditions": [
+      "HCl_full_eq_sto3g",
+      "HCl_full_stretch150_sto3g"
+    ],
+    "coordinate_count": 6,
+    "product_formula": "current_m3",
+    "backend": "cpu",
+    "processes": 1
+  },
+  "not_authorized": {
+    "d2_b": true,
+    "new_coordinate": true,
+    "new_molecule": true,
+    "new_product_formula": true,
+    "new_approximate_state": true,
+    "threshold_retuning": true,
+    "gpu": true,
+    "holdout": true,
+    "full_hamiltonian_eigendecomposition_in_predictor": true,
+    "full_pf_construction_or_eigendecomposition_in_predictor": true,
+    "truth_access_before_prediction_freeze": true
+  },
+  "all_complete_statuses_stop": true,
+  "closed_second_study_status": "complete_no_benefit_unchanged"
+}
