@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Run D2R R1 on the ten frozen, already-scored selected coordinates.
 
-The runner rebuilds the same four Phase A systems, evaluates CISD/exact-state
-echo proxies, and reads direct shifts from the closed Phase B artifact.  It
-never constructs a full PF unitary or computes a new PF eigenpair.
+The runner either loads the byte-identical frozen Phase A systems or, under the
+separately frozen local bridge amendment, reconstructs the same four systems.
+It evaluates CISD/exact-state echo proxies and reads direct shifts from the
+closed Phase B artifact.  It never constructs a full PF unitary or computes a
+new PF eigenpair.
 """
 
 from __future__ import annotations
@@ -89,6 +91,25 @@ def load_environment_amendment(
     if amendment.get("parent_r1_protocol_sha256") != parent_protocol_sha256:
         raise validation.CandidateValidationError(
             "environment amendment parent protocol mismatch"
+        )
+    return amendment, validation.sha256_file(path)
+
+
+def load_phase_a_cache_amendment(
+    path: Path, parent_protocol_sha256: str
+) -> tuple[dict[str, Any], str]:
+    amendment = validation.read_json(path)
+    if amendment.get("schema") != "pf_candidate_validation_r1_phase_a_cache_amendment_v1_2":
+        raise validation.CandidateValidationError(
+            "unexpected R1 Phase A cache amendment schema"
+        )
+    if amendment.get("status") != "frozen_before_cache_based_r1_execution":
+        raise validation.CandidateValidationError(
+            "Phase A cache amendment is not frozen"
+        )
+    if amendment.get("parent_r1_protocol_sha256") != parent_protocol_sha256:
+        raise validation.CandidateValidationError(
+            "Phase A cache amendment parent protocol mismatch"
         )
     return amendment, validation.sha256_file(path)
 
@@ -252,6 +273,66 @@ def load_or_build_system(
         },
     )
     return system, metadata
+
+
+def load_phase_a_cache_systems(
+    *,
+    phase_a_root: Path,
+    source_protocol: Mapping[str, Any],
+    source_protocol_sha256: str,
+    prediction_by_condition: Mapping[str, Mapping[str, Any]],
+    amendment: Mapping[str, Any],
+) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]], dict[str, Any]]:
+    expected_root = Path(str(amendment["phase_a_runtime"]["absolute_artifact_root"]))
+    if phase_a_root.resolve() != expected_root:
+        raise validation.CandidateValidationError(
+            "Phase A artifact root differs from the frozen cache amendment"
+        )
+    runtime_identity = phase_b.verify_phase_a_runtime_inventory(phase_a_root)
+    expected_inventory_sha = str(
+        amendment["phase_a_runtime"]["runtime_inventory_sha256"]
+    )
+    if runtime_identity["inventory_sha256"] != expected_inventory_sha:
+        raise validation.CandidateValidationError(
+            "Phase A runtime inventory SHA-256 mismatch"
+        )
+    systems = phase_b.load_phase_a_systems(
+        phase_a_root, source_protocol, source_protocol_sha256
+    )
+    input_manifest = validation.read_json(
+        phase_a_root / "sanitized_input_manifest.json"
+    )
+    expected_cache_hashes = amendment["phase_a_runtime"]["system_cache_sha256"]
+    metadata_by_condition: dict[str, dict[str, Any]] = {}
+    for row in input_manifest["entries"]:
+        condition = str(row["condition"])
+        system = systems[condition]
+        expected_hamiltonian_sha = str(
+            prediction_by_condition[condition]["hamiltonian_sha256"]
+        )
+        if system["hamiltonian_sha256"] != expected_hamiltonian_sha:
+            raise validation.CandidateValidationError(
+                f"{condition}: original Phase A Hamiltonian identity mismatch"
+            )
+        if row["runtime_system_cache_sha256"] != expected_cache_hashes[condition]:
+            raise validation.CandidateValidationError(
+                f"{condition}: frozen system-cache SHA-256 mismatch"
+            )
+        metadata_path = phase_a_root / str(row["metadata"])
+        if validation.sha256_file(metadata_path) != row["metadata_sha256"]:
+            raise validation.CandidateValidationError(
+                f"{condition}: original Phase A metadata SHA-256 mismatch"
+            )
+        metadata = validation.read_json(metadata_path)
+        metadata["expected_phase_a_hamiltonian_sha256"] = expected_hamiltonian_sha
+        metadata["rebuilt_hamiltonian_byte_identity_match"] = True
+        metadata["system_source"] = "original_phase_a_runtime_cache"
+        metadata_by_condition[condition] = metadata
+    if set(systems) != set(expected_cache_hashes):
+        raise validation.CandidateValidationError(
+            "Phase A cache condition set differs from amendment"
+        )
+    return systems, metadata_by_condition, runtime_identity
 
 
 def load_or_build_exact(
@@ -564,20 +645,48 @@ def run(
     *,
     project_root: Path,
     protocol_path: Path,
-    environment_amendment_path: Path,
+    environment_amendment_path: Path | None,
+    phase_a_cache_amendment_path: Path | None,
+    phase_a_root: Path | None,
     output_dir: Path,
 ) -> dict[str, Any]:
     started = time.perf_counter()
     project_root = project_root.resolve()
     protocol_path = protocol_path.resolve()
-    environment_amendment_path = environment_amendment_path.resolve()
     output_dir = output_dir.resolve()
     r1_protocol, r1_protocol_sha256 = load_r1_protocol(protocol_path)
-    environment_amendment, environment_amendment_sha256 = (
-        load_environment_amendment(
-            environment_amendment_path, r1_protocol_sha256
+    local_mode = environment_amendment_path is not None
+    cache_mode = phase_a_cache_amendment_path is not None or phase_a_root is not None
+    if local_mode == cache_mode:
+        raise validation.CandidateValidationError(
+            "select exactly one R1 system source: local bridge or Phase A cache"
         )
-    )
+    environment_amendment: dict[str, Any] | None = None
+    environment_amendment_sha256: str | None = None
+    phase_a_cache_amendment: dict[str, Any] | None = None
+    phase_a_cache_amendment_sha256: str | None = None
+    if local_mode:
+        assert environment_amendment_path is not None
+        environment_amendment_path = environment_amendment_path.resolve()
+        environment_amendment, environment_amendment_sha256 = (
+            load_environment_amendment(
+                environment_amendment_path, r1_protocol_sha256
+            )
+        )
+        system_source_mode = "local_numeric_reconstruction_bridge"
+    else:
+        if phase_a_cache_amendment_path is None or phase_a_root is None:
+            raise validation.CandidateValidationError(
+                "Phase A cache mode requires both amendment and artifact root"
+            )
+        phase_a_cache_amendment_path = phase_a_cache_amendment_path.resolve()
+        phase_a_root = phase_a_root.resolve()
+        phase_a_cache_amendment, phase_a_cache_amendment_sha256 = (
+            load_phase_a_cache_amendment(
+                phase_a_cache_amendment_path, r1_protocol_sha256
+            )
+        )
+        system_source_mode = "original_phase_a_runtime_byte_identity"
     r0 = validation.build_failure_ledger(project_root)
     validate_protocol_and_plan(project_root, r1_protocol, r0)
     source_manifest = validation.source_manifest(project_root)
@@ -592,6 +701,9 @@ def run(
         "source_protocol_sha256": r0["protocol_sha256"],
         "r1_protocol_sha256": r1_protocol_sha256,
         "environment_amendment_sha256": environment_amendment_sha256,
+        "phase_a_cache_amendment_sha256": phase_a_cache_amendment_sha256,
+        "phase_a_root": str(phase_a_root) if phase_a_root is not None else None,
+        "system_source_mode": system_source_mode,
         "coordinate_plan_sha256": validation.canonical_json_sha256(
             r0["coordinate_plan"]
         ),
@@ -612,6 +724,7 @@ def run(
     counters = {
         **resume_counts,
         "system_regeneration_count": 0,
+        "phase_a_system_cache_reuse_count": 0,
         "exact_ground_regeneration_count": 0,
         "saved_cisd_proxy_reuse_count": 0,
         "new_cisd_proxy_count": 0,
@@ -625,42 +738,61 @@ def run(
     }
     systems: dict[str, dict[str, Any]] = {}
     metadata_by_condition: dict[str, dict[str, Any]] = {}
-    for condition in execution.condition_names(source_protocol):
-        before_reuse = counters["system_cache_reused"]
-        system, metadata = load_or_build_system(
+    bridge_rows: list[dict[str, Any]] = []
+    phase_a_runtime_identity: dict[str, Any] | None = None
+    if local_mode:
+        assert environment_amendment is not None
+        assert environment_amendment_sha256 is not None
+        for condition in execution.condition_names(source_protocol):
+            before_reuse = counters["system_cache_reused"]
+            system, metadata = load_or_build_system(
+                runtime=runtime,
+                condition=condition,
+                spec=specs[condition],
+                source_protocol_sha256=r0["protocol_sha256"],
+                expected_hamiltonian_sha256=prediction_by_condition[condition][
+                    "hamiltonian_sha256"
+                ],
+                counters=counters,
+                allow_numeric_reconstruction_bridge=True,
+            )
+            if counters["system_cache_reused"] == before_reuse:
+                counters["system_regeneration_count"] += 1
+            if not metadata["rebuilt_hamiltonian_byte_identity_match"]:
+                counters["hamiltonian_byte_identity_mismatch_count"] += 1
+            systems[condition] = system
+            metadata_by_condition[condition] = metadata
+        bridge_rows = run_environment_bridge(
             runtime=runtime,
-            condition=condition,
-            spec=specs[condition],
-            source_protocol_sha256=r0["protocol_sha256"],
-            expected_hamiltonian_sha256=prediction_by_condition[condition][
-                "hamiltonian_sha256"
-            ],
+            amendment=environment_amendment,
+            amendment_sha256=environment_amendment_sha256,
+            systems=systems,
+            sequence=sequence,
+            saved=saved,
+            r1_protocol_sha256=r1_protocol_sha256,
             counters=counters,
-            allow_numeric_reconstruction_bridge=True,
         )
-        if counters["system_cache_reused"] == before_reuse:
-            counters["system_regeneration_count"] += 1
-        if not metadata["rebuilt_hamiltonian_byte_identity_match"]:
-            counters["hamiltonian_byte_identity_mismatch_count"] += 1
-        systems[condition] = system
-        metadata_by_condition[condition] = metadata
-
-    bridge_rows = run_environment_bridge(
-        runtime=runtime,
-        amendment=environment_amendment,
-        amendment_sha256=environment_amendment_sha256,
-        systems=systems,
-        sequence=sequence,
-        saved=saved,
-        r1_protocol_sha256=r1_protocol_sha256,
-        counters=counters,
-    )
-    expected_bridge_count = int(
-        environment_amendment["revised_calculation_accounting"]
-        ["bridge_cisd_proxy_evaluations"]
-    )
-    if len(bridge_rows) != expected_bridge_count:
-        raise validation.CandidateValidationError("environment bridge count changed")
+        expected_bridge_count = int(
+            environment_amendment["revised_calculation_accounting"]
+            ["bridge_cisd_proxy_evaluations"]
+        )
+        if len(bridge_rows) != expected_bridge_count:
+            raise validation.CandidateValidationError(
+                "environment bridge count changed"
+            )
+    else:
+        assert phase_a_cache_amendment is not None
+        assert phase_a_root is not None
+        systems, metadata_by_condition, phase_a_runtime_identity = (
+            load_phase_a_cache_systems(
+                phase_a_root=phase_a_root,
+                source_protocol=source_protocol,
+                source_protocol_sha256=r0["protocol_sha256"],
+                prediction_by_condition=prediction_by_condition,
+                amendment=phase_a_cache_amendment,
+            )
+        )
+        counters["phase_a_system_cache_reuse_count"] = len(systems)
 
     exact_by_condition: dict[str, tuple[float, np.ndarray, float]] = {}
     for condition, system in systems.items():
@@ -878,6 +1010,36 @@ def run(
         for condition in systems
     }
     environment = environment_identity()
+    if local_mode:
+        system_source_audit = {
+            "mode": system_source_mode,
+            "environment_amendment_sha256": environment_amendment_sha256,
+            "point_count": len(bridge_rows),
+            "maximum_absolute_proxy_difference_hartree": max(
+                float(row["absolute_difference_hartree"]) for row in bridge_rows
+            ),
+            "all_pass": all(bool(row["pass"]) for row in bridge_rows),
+            "phase_a_runtime_identity": None,
+        }
+        evidence_class = environment_amendment["interpretation_limit"][
+            "r1_evidence_class_after_pass"
+        ]
+        byte_identical_claim = False
+    else:
+        assert phase_a_cache_amendment is not None
+        system_source_audit = {
+            "mode": system_source_mode,
+            "environment_amendment_sha256": None,
+            "point_count": 0,
+            "maximum_absolute_proxy_difference_hartree": None,
+            "all_pass": True,
+            "phase_a_runtime_identity": phase_a_runtime_identity,
+            "phase_a_cache_amendment_sha256": phase_a_cache_amendment_sha256,
+        }
+        evidence_class = phase_a_cache_amendment["interpretation_limit"][
+            "r1_evidence_class"
+        ]
+        byte_identical_claim = True
     resource_audit = {
         "schema": "pf_candidate_validation_r1_resource_audit_v1",
         "created_at": now(),
@@ -886,28 +1048,40 @@ def run(
         "counts": counters,
         "condition_controls": controls,
         "maximum_decomposition_closure_residual_hartree": maximum_closure,
-        "environment_reconstruction_bridge": {
-            "point_count": len(bridge_rows),
-            "maximum_absolute_proxy_difference_hartree": max(float(row["absolute_difference_hartree"]) for row in bridge_rows),
-            "all_pass": all(bool(row["pass"]) for row in bridge_rows),
-            "amendment_sha256": environment_amendment_sha256,
-        },
+        "system_source_identity": system_source_audit,
         "environment": environment,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     validation.write_json(output_dir / "source_manifest.json", source_manifest)
     validation.write_json(output_dir / "environment_identity.json", environment)
-    validation.write_csv(
-        output_dir / "environment_reconstruction_bridge.csv", bridge_rows
-    )
-    validation.write_json(
-        output_dir / "environment_reconstruction_bridge.json",
-        {
-            "schema": "pf_candidate_validation_r1_environment_bridge_result_v1",
-            "amendment_sha256": environment_amendment_sha256,
-            "rows": bridge_rows,
-        },
-    )
+    identity_output_names: list[str]
+    if local_mode:
+        validation.write_csv(
+            output_dir / "environment_reconstruction_bridge.csv", bridge_rows
+        )
+        validation.write_json(
+            output_dir / "environment_reconstruction_bridge.json",
+            {
+                "schema": "pf_candidate_validation_r1_environment_bridge_result_v1",
+                "amendment_sha256": environment_amendment_sha256,
+                "rows": bridge_rows,
+            },
+        )
+        identity_output_names = [
+            "environment_reconstruction_bridge.csv",
+            "environment_reconstruction_bridge.json",
+        ]
+    else:
+        validation.write_json(
+            output_dir / "phase_a_runtime_identity.json",
+            {
+                "schema": "pf_candidate_validation_r1_phase_a_runtime_identity_v1",
+                "amendment_sha256": phase_a_cache_amendment_sha256,
+                "system_source_mode": system_source_mode,
+                **dict(phase_a_runtime_identity or {}),
+            },
+        )
+        identity_output_names = ["phase_a_runtime_identity.json"]
     validation.write_csv(output_dir / "coordinate_proxy_results.csv", coordinate_rows)
     validation.write_csv(output_dir / "strategy_cause_decomposition.csv", decomposition_rows)
     validation.write_json(output_dir / "resource_audit.json", resource_audit)
@@ -928,7 +1102,9 @@ def run(
         "source_protocol_sha256": r0["protocol_sha256"],
         "r1_protocol_sha256": r1_protocol_sha256,
         "environment_amendment_sha256": environment_amendment_sha256,
-        "environment_reconstruction_bridge_pass": all(bool(row["pass"]) for row in bridge_rows),
+        "phase_a_cache_amendment_sha256": phase_a_cache_amendment_sha256,
+        "system_source_mode": system_source_mode,
+        "system_source_identity_pass": bool(system_source_audit["all_pass"]),
         "closed_second_study_decision": "complete_no_benefit_unchanged",
         "coordinate_count": len(coordinate_rows),
         "strategy_decomposition_row_count": len(decomposition_rows),
@@ -937,15 +1113,14 @@ def run(
         "new_direct_truth_coordinate_count": 0,
         "r2_authorized": False,
         "stop_for_research_direction_review": True,
-        "byte_identical_hamiltonian_reconstruction_claim": False,
-        "evidence_class": environment_amendment["interpretation_limit"]["r1_evidence_class_after_pass"],
+        "byte_identical_phase_a_runtime_claim": byte_identical_claim,
+        "evidence_class": evidence_class,
     }
     validation.write_json(output_dir / "decision.json", decision)
     names = [
         "source_manifest.json",
         "environment_identity.json",
-        "environment_reconstruction_bridge.csv",
-        "environment_reconstruction_bridge.json",
+        *identity_output_names,
         "coordinate_proxy_results.csv",
         "strategy_cause_decomposition.csv",
         "resource_audit.json",
@@ -969,7 +1144,9 @@ def parser() -> argparse.ArgumentParser:
     value = argparse.ArgumentParser()
     value.add_argument("--project-root", type=Path, required=True)
     value.add_argument("--protocol", type=Path, required=True)
-    value.add_argument("--environment-amendment", type=Path, required=True)
+    value.add_argument("--environment-amendment", type=Path)
+    value.add_argument("--phase-a-cache-amendment", type=Path)
+    value.add_argument("--phase-a-root", type=Path)
     value.add_argument("--output-dir", type=Path, required=True)
     return value
 
@@ -980,6 +1157,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         project_root=args.project_root,
         protocol_path=args.protocol,
         environment_amendment_path=args.environment_amendment,
+        phase_a_cache_amendment_path=args.phase_a_cache_amendment,
+        phase_a_root=args.phase_a_root,
         output_dir=args.output_dir,
     )
     print(json.dumps(result, indent=2, sort_keys=True))

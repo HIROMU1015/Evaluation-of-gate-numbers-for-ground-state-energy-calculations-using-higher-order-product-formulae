@@ -4,6 +4,7 @@ import math
 from pathlib import Path
 
 import pf_candidate_validation as validation
+import run_pf_candidate_validation_r1 as r1_runner
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -145,3 +146,96 @@ def test_environment_bridge_amendment_is_frozen_and_uses_saved_points() -> None:
         for row in saved
     }
     assert all((row["condition"], row["time_hex"]) in keys for row in points)
+
+
+def test_phase_a_cache_amendment_is_frozen_and_keeps_r2_closed() -> None:
+    path = (
+        PROJECT_ROOT
+        / "review_response/pf_candidate_validation_r1_phase_a_cache_amendment_v1_2.json"
+    )
+    amendment, digest = r1_runner.load_phase_a_cache_amendment(
+        path,
+        "186d2240bbf78733c1389fac66e2b261a7dfe50d8712b656ce0e1c45a6c67e49",
+    )
+    assert digest == "a95a9abf87f1d428c35d34ed13cbea8c2ff930e91a3e5eb3a2550fd5d1dd1051"
+    assert amendment["system_source_rule"]["local_hamiltonian_reconstruction_count"] == 0
+    assert amendment["calculation_accounting"]["phase_a_system_cache_reuse_count"] == 4
+    assert amendment["calculation_accounting"]["new_direct_truth_coordinate_count"] == 0
+    assert amendment["interpretation_limit"]["r2_authorized"] is False
+    assert len(amendment["phase_a_runtime"]["system_cache_sha256"]) == 4
+
+
+def test_phase_a_cache_loader_requires_frozen_hashes(tmp_path, monkeypatch) -> None:
+    condition = "LiF_active_eq_sto3g"
+    metadata_path = tmp_path / ".runtime/system_cache/condition.metadata.json"
+    metadata_path.parent.mkdir(parents=True)
+    validation.write_json(
+        metadata_path,
+        {
+            "cisd_hamiltonian_residual_2_norm": 0.0,
+            "population_sector_dimension": 1,
+            "restricted_dimension": 1,
+        },
+    )
+    cache_sha = "1" * 64
+    validation.write_json(
+        tmp_path / "sanitized_input_manifest.json",
+        {
+            "entries": [
+                {
+                    "condition": condition,
+                    "metadata": metadata_path.relative_to(tmp_path).as_posix(),
+                    "metadata_sha256": validation.sha256_file(metadata_path),
+                    "runtime_system_cache_sha256": cache_sha,
+                }
+            ]
+        },
+    )
+    monkeypatch.setattr(
+        r1_runner.phase_b,
+        "verify_phase_a_runtime_inventory",
+        lambda root: {"inventory_sha256": "2" * 64, "file_count": 56},
+    )
+    monkeypatch.setattr(
+        r1_runner.phase_b,
+        "load_phase_a_systems",
+        lambda root, protocol, protocol_sha256: {
+            condition: {"hamiltonian_sha256": "3" * 64}
+        },
+    )
+    systems, metadata, identity = r1_runner.load_phase_a_cache_systems(
+        phase_a_root=tmp_path,
+        source_protocol={},
+        source_protocol_sha256="4" * 64,
+        prediction_by_condition={condition: {"hamiltonian_sha256": "3" * 64}},
+        amendment={
+            "phase_a_runtime": {
+                "absolute_artifact_root": str(tmp_path.resolve()),
+                "runtime_inventory_sha256": "2" * 64,
+                "system_cache_sha256": {condition: cache_sha},
+            }
+        },
+    )
+    assert set(systems) == {condition}
+    assert metadata[condition]["system_source"] == "original_phase_a_runtime_cache"
+    assert metadata[condition]["rebuilt_hamiltonian_byte_identity_match"] is True
+    assert identity["file_count"] == 56
+
+
+def test_local_environment_failure_audit_manifest() -> None:
+    root = (
+        PROJECT_ROOT
+        / "artifacts/pf_candidate_validation_r1_local_environment_gate_20260928_5c36399"
+    )
+    decision = validation.read_json(root / "decision.json")
+    assert decision["status"] == "failed_environment_reconstruction_bridge"
+    assert decision["failed_point_count"] == 4
+    assert decision["exact_ground_state_count"] == 0
+    assert decision["new_direct_truth_coordinate_count"] == 0
+    assert decision["threshold_relaxed"] is False
+    assert decision["r2_authorized"] is False
+    manifest = validation.read_json(root / "manifest.json")
+    for row in manifest["entries"]:
+        path = root / row["path"]
+        assert path.stat().st_size == row["byte_count"]
+        assert validation.sha256_file(path) == row["sha256"]
