@@ -1,0 +1,99 @@
+{
+  "schema": "pf_spectral_recoverability_d2_source_manifest_v1",
+  "evidence_commit": "94ba9d6f71c1318ee03b85498e7a0b8b23abfd7a",
+  "files": [
+    {
+      "path": "review_response/pf_spectral_information_pilot_protocol_draft.json",
+      "sha256": "44d69fa249a075a6dd863ddc518a5d93da7e6699d4f888037c8476e68e5cdb9e",
+      "role": "D0-frozen P-SPEC-6 protocol"
+    },
+    {
+      "path": "review_response/pf_spectral_information_pilot_d1_authorization.json",
+      "sha256": "5ec7fc1d041f3b2c8d1ea9d1e5418a7a6e9c7d9773c96532d826a003714cc186",
+      "role": "D1 one-run authorization"
+    },
+    {
+      "path": "review_response/run_pf_spectral_information_pilot_d1.py",
+      "sha256": "aa2380feff4544b10e198c31ad0671deeac8d379a5d9f6b8996f3f45aa086caf",
+      "role": "D1 diagnostic runner and Phase A identity reference"
+    },
+    {
+      "path": "artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2/decision.json",
+      "sha256": "bbd22158616731843c6e34ade81de501be66eaefb48c48e56f84ccbffbf2cbcb",
+      "role": "D1 decision"
+    },
+    {
+      "path": "artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2/coordinate_summary.csv",
+      "sha256": "b4bffaddc65a3c9bf25859a65515f1f7959b68374657689d7796f08f5285cd82",
+      "role": "D1 coordinate diagnostic"
+    },
+    {
+      "path": "artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2/top_k_compression.csv",
+      "sha256": "bb0cd5cb552c10e395580669db79efc93d3285e53a13e6942275a8afdd555539",
+      "role": "D1 post-hoc compression diagnostic; forbidden predictor input"
+    },
+    {
+      "path": "artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2/manifest.json",
+      "sha256": "44b3bc7a702f50693c7b6e17e2f98d8af222b0b430d3fb6c136200fa1dc18c05",
+      "role": "D1 output manifest"
+    },
+    {
+      "path": "artifacts/pf_r1_readonly_design_summary_20260928/coordinate_budget_diagnostics.csv",
+      "sha256": "d492668367d96d3839f37bc2a3fec4da45a8752792416ab8720ec3126b8ba770",
+      "role": "development baseline design evidence; forbidden predictor scoring label"
+    },
+    {
+      "path": "artifacts/server_pf_candidate_validation_r1_20260928_fba3383/coordinate_proxy_results.csv",
+      "sha256": "b32ff4fe1e45b5012b4a0174465764b6829aaba5d67d1dfb79be4676951fa995",
+      "role": "R1 cause diagnostic; exact columns forbidden predictor input"
+    },
+    {
+      "path": "artifacts/server_second_study_safe_time_domain_phase_b_20260928_d4dd42f/direct_points.csv",
+      "sha256": "dc0df4d7587f6c3342ea5ee09b753dec588d7cc6b634cde2adf4a7aeb20bfc78",
+      "role": "existing scorer-only truth"
+    },
+    {
+      "path": "review_response/second_study_safe_time_domain_protocol.json",
+      "sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+      "role": "inherited PF and QPE cost identity"
+    },
+    {
+      "path": "review_response/run_second_study_safe_time_domain_phase_a.py",
+      "sha256": "8a5d3b4827f354b46cfde4da5546487eaccac147500c936b6967799c1caa49f9",
+      "role": "existing proxy and sanitized-system construction"
+    },
+    {
+      "path": "review_response/run_second_study_safe_time_domain_phase_b.py",
+      "sha256": "0bfefe181421171395572de8d25f441577bde604c18dcdd5d851def9a86a3d50",
+      "role": "runtime verifier plus explicitly forbidden full-unitary/exact paths"
+    },
+    {
+      "path": "review_response/second_study_safe_time_domain_execution.py",
+      "sha256": "cdd9daeb364b96dab85d825c034c110da77622e7a84a2a5cc757d91449aec799",
+      "role": "formula sequence and shared identities"
+    },
+    {
+      "path": "review_response/run_h01_approximate_state_calibration.py",
+      "sha256": "9f82a2f6b0a4f3d84d59f5bc5e07a79cd52bd2919478acc39cdea983de04ae6c",
+      "role": "existing PF state-action semantics and rotation count"
+    },
+    {
+      "path": "src/trotterlib/component_sector_pf.py",
+      "sha256": "a0744017269b6069ee8af34585820d926d6aee7b3e7ecca8ca89e8edd36ad74f",
+      "role": "component exponential construction"
+    },
+    {
+      "path": "docs/pf_data_use_ledger.md",
+      "sha256": "a643a7ba42eda3848ea62b3b471927edccb15af2087bde65adf59ae0afe6fe33",
+      "role": "data-use boundary"
+    }
+  ],
+  "static_findings": {
+    "state_action_function": "review_response/run_h01_approximate_state_calibration.py:_apply_pf_cpu",
+    "state_action_rematerializes_component_gates_per_call": true,
+    "hamiltonian_action": "system['hamiltonian'] @ vector",
+    "formula_sequence_function": "review_response/second_study_safe_time_domain_execution.py:formula_sequence",
+    "forbidden_full_unitary_function": "review_response/run_second_study_safe_time_domain_phase_b.py:_build_unitary",
+    "forbidden_exact_ground_function": "review_response/run_second_study_safe_time_domain_phase_b.py:exact_ground_pair"
+  }
+}

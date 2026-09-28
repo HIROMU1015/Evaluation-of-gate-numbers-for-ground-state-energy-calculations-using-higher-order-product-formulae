@@ -1,0 +1,38 @@
+{
+  "schema": "pf_spectral_recoverability_d2_planning_decision_v1",
+  "status": "d2_protocol_prepared_not_authorized",
+  "evidence_commit": "94ba9d6f71c1318ee03b85498e7a0b8b23abfd7a",
+  "scientific_computation_authorized": false,
+  "method_implementation_authorized": false,
+  "d2_a_authorized": false,
+  "d2_b_authorized": false,
+  "holdout_authorized": false,
+  "new_pf_search_authorized": false,
+  "closed_second_study_status": "complete_no_benefit_unchanged",
+  "new_scientific_calculation_count": 0,
+  "krylov_execution_count": 0,
+  "molecular_matrix_action_count": 0,
+  "gpu_operation_count": 0,
+  "unresolved_specification_items": [
+    {
+      "id": "conditional_ground_certificate",
+      "reason": "No allowed external global-ground interval or spectral-separation certificate is fixed.",
+      "required_decision": "Keep D2-A claims empirical or separately authorize a non-oracular certificate."
+    },
+    {
+      "id": "action_error_bound",
+      "reason": "The existing PF action reports numerical timing but no rigorous forward-error bound.",
+      "required_decision": "Treat residual widths as empirical integrity estimates in D2-A."
+    },
+    {
+      "id": "component_gate_cache",
+      "reason": "The existing helper rematerializes gates on each action call.",
+      "required_decision": "Implement an identity-preserving coordinate-local cache or charge all rematerializations."
+    },
+    {
+      "id": "independent_holdout",
+      "reason": "HCl and planned LiF transfer conditions are already development data.",
+      "required_decision": "Choose a new family only after a method is frozen and separately authorize it."
+    }
+  ]
+}

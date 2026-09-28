@@ -1,0 +1,334 @@
+{
+  "schema": "pf_spectral_recoverability_d2_protocol_draft_v1",
+  "protocol_id": "D2-A-HCl-existing-coordinate-unitary-Arnoldi-20260928",
+  "frozen_on": "2026-09-28",
+  "status": "d2_protocol_prepared_not_authorized",
+  "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+  "evidence_identity": {
+    "d1_implementation_commit": "03747a2ca85c46d593b4fcf1e4969fd45005e37e",
+    "d1_reviewed_execution_prompt_bundle": "e0aad5a06eb3a8f5385efd8c6129f4e74f35e5cc",
+    "d1_result_commit": "94ba9d6f71c1318ee03b85498e7a0b8b23abfd7a",
+    "d1_result_parent": "03747a2ca85c46d593b4fcf1e4969fd45005e37e",
+    "procedural_note": "The D1 result is a direct child of the implementation commit, not of the reviewed execution-prompt bundle. Scientific fixed hashes passed; the ancestry difference remains recorded.",
+    "d0_frozen_p_spec_6_protocol_sha256": "44d69fa249a075a6dd863ddc518a5d93da7e6699d4f888037c8476e68e5cdb9e",
+    "d1_authorization_sha256": "5ec7fc1d041f3b2c8d1ea9d1e5418a7a6e9c7d9773c96532d826a003714cc186",
+    "d1_output_manifest_sha256": "44b3bc7a702f50693c7b6e17e2f98d8af222b0b430d3fb6c136200fa1dc18c05",
+    "second_study_protocol_sha256": "a6290b107ebbf93f7c0ee3bc383208862c51e37603a670625091e15472d4584b",
+    "phase_a_runtime_inventory_sha256": "5dbe617f37dcfd4274fa5f89eddf6167ffe62a3816200bec6eb66f9e49e73d91"
+  },
+  "evidence_boundary": {
+    "closed_second_study_status": "complete_no_benefit_unchanged",
+    "d1_status": "d1_complete_prototype_candidate_stop",
+    "d1_role": "post_hoc_exact_ground_spectral_compressibility_diagnostic",
+    "d2_a_role": "development_only_truth_free_recoverability_and_cost_feasibility",
+    "independent_validation_claim": false,
+    "new_method_success_claim_before_scoring": false
+  },
+  "authorization": {
+    "protocol_and_design_preparation_authorized": true,
+    "method_implementation_authorized": false,
+    "d2_a_predictor_authorized": false,
+    "d2_a_scorer_authorized": false,
+    "d2_b_authorized": false,
+    "new_scientific_calculation_authorized": false,
+    "new_direct_truth_authorized": false,
+    "new_coordinate_authorized": false,
+    "new_molecule_authorized": false,
+    "new_product_formula_authorized": false,
+    "gpu_authorized": false,
+    "holdout_authorized": false,
+    "retuning_authorized": false
+  },
+  "scope": {
+    "product_formula": "current_m3",
+    "approximate_state": "original Phase A CISD state",
+    "conditions": [
+      "HCl_full_eq_sto3g",
+      "HCl_full_stretch150_sto3g"
+    ],
+    "coordinate_count": 6,
+    "coordinates": [
+      {
+        "condition": "HCl_full_eq_sto3g",
+        "relative_to_t_ana": 0.5,
+        "time_hartree_inverse": 0.12118203522285972,
+        "time_hex": "0x1.f05c92e251856p-4"
+      },
+      {
+        "condition": "HCl_full_eq_sto3g",
+        "relative_to_t_ana": 0.65,
+        "time_hartree_inverse": 0.15753664578971766,
+        "time_hex": "0x1.42a292acb4fd2p-3"
+      },
+      {
+        "condition": "HCl_full_eq_sto3g",
+        "relative_to_t_ana": 0.8,
+        "time_hartree_inverse": 0.19389125635657556,
+        "time_hex": "0x1.8d16dbe841378p-3"
+      },
+      {
+        "condition": "HCl_full_stretch150_sto3g",
+        "relative_to_t_ana": 0.5,
+        "time_hartree_inverse": 0.1551067153525844,
+        "time_hex": "0x1.3da896eea2786p-3"
+      },
+      {
+        "condition": "HCl_full_stretch150_sto3g",
+        "relative_to_t_ana": 0.65,
+        "time_hartree_inverse": 0.20163872995835974,
+        "time_hex": "0x1.9cf4c436399c8p-3"
+      },
+      {
+        "condition": "HCl_full_stretch150_sto3g",
+        "relative_to_t_ana": 0.8,
+        "time_hartree_inverse": 0.24817074456413507,
+        "time_hex": "0x1.fc40f17dd0c0ap-3"
+      }
+    ],
+    "prefix_dimensions": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "primary_dimension": 8,
+    "one_chain_per_coordinate": true
+  },
+  "notation": {
+    "d1_top_k": "number of retained non-target spectral clusters in the post-hoc D1 diagnostic",
+    "arnoldi_m": "explicit-vector Arnoldi subspace dimension",
+    "K_current_m3": "Pauli rotations per current_m3 PF step in the inherited QPE cost model",
+    "forbid_symbol_collision": true
+  },
+  "access_contract": {
+    "predictor_process": {
+      "allowed_runtime_fields": [
+        "condition",
+        "protocol_sha256",
+        "hamiltonian_sha256",
+        "hamiltonian sparse matrix for action only",
+        "component_spectra for PF state action only",
+        "term_counts",
+        "original cisd_state",
+        "population-sector metadata",
+        "current_m3 coefficient sequence",
+        "six fixed coordinate times"
+      ],
+      "allowed_tracked_inputs": [
+        "D2 protocol and one-run authorization",
+        "Phase A runtime identity inventory",
+        "Phase A sanitized input manifest",
+        "source identity manifests"
+      ],
+      "forbidden_inputs": [
+        "exact ground state",
+        "exact ground energy",
+        "D1 spectral components or clusters",
+        "D1 target cluster identifiers",
+        "D1 q_omit or true phase gaps",
+        "D1 coordinate pass/fail labels",
+        "R1 exact-state proxy",
+        "Phase B direct shifts",
+        "Phase B branch labels or ground overlaps",
+        "scorer outputs"
+      ],
+      "forbidden_operations": [
+        "full Hamiltonian eigendecomposition",
+        "full PF matrix construction",
+        "full PF eigendecomposition",
+        "new coordinate acquisition",
+        "threshold fitting against truth",
+        "GPU query or use"
+      ]
+    },
+    "freeze_boundary": {
+      "prediction_artifact_must_close_before_truth_open": true,
+      "prediction_sha256_required": true,
+      "frozen_fields": [
+        "branch candidate",
+        "phase unwrap integer",
+        "signed shift estimate",
+        "claim class",
+        "indeterminate status",
+        "e_use",
+        "gamma",
+        "frozen budget B",
+        "action counts"
+      ],
+      "predictor_and_scorer_are_separate_entry_points": true,
+      "scorer_may_not_import_predictor_runtime_objects": true
+    },
+    "scorer_process": {
+      "opens_truth_only_after_prediction_hash_verification": true,
+      "allowed_truth": [
+        "existing Phase B direct points for the six fixed coordinates",
+        "existing D1 branch and phase diagnostics for scoring only"
+      ],
+      "may_change_prediction": false,
+      "may_add_coordinates": false
+    }
+  },
+  "estimator": {
+    "method": "classical explicit-vector twice-reorthogonalized unitary Arnoldi",
+    "start_state": "normalized original CISD state",
+    "pf_convention": "U_P(t) approximates exp(+i H t)",
+    "projected_operators": [
+      "T_m=Q^dagger U_P(t) Q",
+      "H_m=Q^dagger H Q"
+    ],
+    "reuse_single_chain_for_prefixes": true,
+    "full_action_residuals_required": true,
+    "unit_circle_projection_requires_residual_recalculation": true,
+    "projected_H_is_not_toeplitz": true,
+    "U_P_t_power_must_not_be_replaced_by_U_P_mt": true
+  },
+  "branch_rule": {
+    "h_reference_candidate": "lowest Ritz value of H_m; empirical ground candidate unless an external ground certificate is available",
+    "u_candidate_primary_score": "squared overlap between the H-reference Ritz vector and each U Ritz vector in the common Q basis",
+    "time_continuity_secondary_score": "projector overlap with the previously frozen candidate at the preceding fixed time of the same condition",
+    "deterministic_tie_break": [
+      "larger H-reference overlap",
+      "larger previous-time projector overlap when available",
+      "smaller absolute energy difference after unwrap to H-reference Ritz value",
+      "ascending projected eigenvalue index"
+    ],
+    "phase_unwrap": "choose the integer giving the energy nearest the frozen H-reference Ritz value",
+    "ground_certification_from_ritz_gap_forbidden": true,
+    "branch_indeterminate_if": [
+      "top two H-reference overlap scores differ by no more than overlap_ambiguity_tolerance",
+      "selected candidate full-action residual exceeds its numerical gate",
+      "phase unwrap is non-unique within energy_ambiguity_tolerance_hartree",
+      "Arnoldi rank is insufficient for the requested prefix"
+    ],
+    "truth_may_not_resolve_predictor_ambiguity": true
+  },
+  "numerical_rules": {
+    "dtype": "complex128",
+    "modified_gram_schmidt_passes": 2,
+    "vector_normalization_residual_maximum": 1e-12,
+    "basis_orthogonality_frobenius_residual_maximum": 1e-10,
+    "relative_breakdown_tolerance": 1e-12,
+    "overlap_ambiguity_tolerance": 1e-10,
+    "energy_ambiguity_tolerance_hartree": 1e-10,
+    "pf_action_norm_residual_maximum": 1e-10,
+    "full_u_ritz_residual_maximum": 0.05,
+    "full_h_ritz_residual_hartree_maximum": 0.05,
+    "prefix_stability_reference": "absolute difference between m=8 and the largest available lower prefix estimate",
+    "numerical_threshold_origin": "normalization, orthogonality, breakdown and ambiguity tolerances are floating-point integrity rules; 0.05 full residual limits are predeclared empirical feasibility limits, not spectral certificates",
+    "threshold_retuning_after_truth": false
+  },
+  "prediction_and_budget": {
+    "primary_prefix": 8,
+    "signed_shift_estimate": "unwrapped selected U energy minus selected H-reference Ritz energy",
+    "u_phase_radius": "2*asin(min(2,r_U)/2)/t",
+    "local_residual_width": "r_H + u_phase_radius + numerical_action_bound",
+    "prefix_width": "absolute difference between primary and largest lower available prefix signed-shift estimates",
+    "empirical_width": "max(local_residual_width,prefix_width)",
+    "e_use": "abs(signed_shift_estimate)+empirical_width",
+    "abstain_if": "branch indeterminate or e_use>=epsilon_E",
+    "epsilon_E_hartree": 0.00015936001019904,
+    "qpe_beta": 1.2,
+    "qpe_rotation_constant_symbol": "K_current_m3",
+    "gamma": 1.0,
+    "frozen_budget": "beta*K_current_m3/[t*(epsilon_E-e_use)]",
+    "scoring_condition": "e_direct+beta*K_current_m3/(t*B)<=epsilon_E",
+    "counterfactual_may_not_replace_frozen_budget": true
+  },
+  "resource_accounting": {
+    "backend": "cpu",
+    "processes": 1,
+    "blas_threads": 1,
+    "peak_memory_bytes_maximum": 4294967296,
+    "wall_seconds_maximum": 1800,
+    "per_coordinate": {
+      "pf_actions_per_vector_maximum": 8,
+      "hamiltonian_matvecs_per_vector_maximum": 8,
+      "basis_dimension_maximum": 8,
+      "new_anchor_count": 0,
+      "restart_count": 0
+    },
+    "separate_counters": [
+      "PF per-vector actions",
+      "PF block-call count",
+      "component-gate materializations",
+      "sparse state multiplies",
+      "Hamiltonian matvecs",
+      "Hamiltonian exponential actions",
+      "inner products and reorthogonalization",
+      "state and group-spectrum preparation",
+      "gate-cache peak bytes",
+      "basis-vector peak bytes"
+    ],
+    "block_call_may_not_hide_per_vector_count": true,
+    "full_h_diagonalizations_in_predictor": 0,
+    "full_pf_constructions_in_predictor": 0,
+    "full_pf_eigendecompositions_in_predictor": 0,
+    "gpu_query_allocation_kernel_counts": [
+      0,
+      0,
+      0
+    ]
+  },
+  "scoring": {
+    "development_coordinate_count": 6,
+    "branch_correctness_requires_all_six": true,
+    "frozen_budget_safety_requires_all_non_abstained_coordinates": true,
+    "report_abstention_before_budget": true,
+    "report": [
+      "signed shift error",
+      "absolute-error dangerous underestimation",
+      "branch correctness",
+      "phase unwrap correctness",
+      "coverage and abstention",
+      "frozen budget safety",
+      "aggregate frozen budget",
+      "classical wall and memory cost",
+      "action counts",
+      "Pareto comparison with fixed-margin local-CISD baselines"
+    ],
+    "baseline_gamma_frontier": [
+      1.01,
+      1.02,
+      1.05,
+      1.1
+    ],
+    "main_baseline_gamma": 1.02,
+    "main_baseline_rationale": "1.02 is fixed before D2-A and slightly exceeds the saved HCl-only local-CISD requirement 1.016654654156445; 1.10 remains a sensitivity point rather than the sole comparator",
+    "classical_seconds_are_not_added_to_pauli_rotations": true
+  },
+  "completion": {
+    "permitted_complete_statuses": [
+      "d2_a_complete_prototype_candidate_stop",
+      "d2_a_complete_information_cost_limit_stop",
+      "d2_a_complete_close_spectral_route_stop"
+    ],
+    "prototype_candidate": "all source, access, numerical and resource gates pass; all six branches and unwraps score correctly; no non-abstained frozen budget is unsafe; and at least one spectral point is non-dominated relative to the fixed local-CISD margin frontier",
+    "information_cost_limit": "all six branches and unwraps score correctly but the method abstains, exceeds a resource limit, or has no non-dominated safe frozen-budget point",
+    "close_spectral_route": "any truth-scored wrong branch/unwrap, predictor truth leakage, unapproved rescue, or unrecoverable conditioning/source failure",
+    "all_statuses_stop": true,
+    "d2_b_authorized": false,
+    "holdout_authorized": false
+  },
+  "unresolved_specification_items": [
+    {
+      "id": "conditional_ground_certificate",
+      "issue": "No allowed external interval or full-space gap certificate is currently fixed.",
+      "effect": "D2-A ground/reference claims remain empirical even when local residuals are small."
+    },
+    {
+      "id": "action_error_bound",
+      "issue": "The existing PF state-action path reports timing but no rigorous forward-error bound.",
+      "effect": "The initial numerical_action_bound is an integrity estimate, not a rigorous certificate."
+    },
+    {
+      "id": "component_gate_cache_design",
+      "issue": "The existing PF helper rematerializes component gates on every call.",
+      "effect": "D2 implementation must either add a run-local cache with explicit memory accounting or charge every rematerialization."
+    },
+    {
+      "id": "independent_holdout_family",
+      "issue": "HCl and LiF are both development data for this method.",
+      "effect": "No generalization or independent-validation claim is permitted after D2-A or D2-B."
+    }
+  ]
+}
