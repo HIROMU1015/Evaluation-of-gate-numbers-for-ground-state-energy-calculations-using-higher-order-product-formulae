@@ -1,0 +1,92 @@
+{
+  "schema": "pf_spectral_recoverability_d2_a_scoring_audit_protocol_v1",
+  "status": "post_hoc_scoring_audit_prepared_original_result_unchanged",
+  "classification": {
+    "post_hoc": true,
+    "procedural_definition_audit": true,
+    "confirmatory_scientific_result": false,
+    "new_scientific_computation": false,
+    "original_d2_a_decision_may_be_rewritten": false
+  },
+  "fixed_identity": {
+    "d2_a_execution_bundle_commit": "1fbf40effc34834aa9955cdb2bf4eea356653554",
+    "d2_a_implementation_commit": "e2e8e5c7a913140d2f2d61b2743f6fbf652498e3",
+    "d2_a_prediction_commit": "49c7bc017647b2922bd0e86cc95b3f45cff612f5",
+    "d2_a_result_commit": "e1fd81dc0f3c58396b99fee40ac55987b9dc4f07",
+    "prediction_sha256": "cc496d70c0d7c48239b6f6dd9f69fa351a1b65f9109bb4b1588da1f17dd16226",
+    "prediction_manifest_sha256": "7f424e75ace03cae645b39cebe9875ecf2c3722828728d326bd715e13f45ec3b",
+    "original_coordinate_scoring_csv_sha256": "4381eb3d99e58ca85e941eb8d3189502b360e3ac70eed1aedacfd5b2c90c63c5",
+    "original_coordinate_scoring_json_sha256": "bf4aeb658b298e5a4e0f6231dd1efb3141918a12695c835778b8d2876be85eb5",
+    "original_decision_sha256": "00b3a35a2e0fd87a55b0b0f24fd3fc35d0fa89f33c01e433ea2dfa328beea2a7",
+    "original_result_manifest_sha256": "474c26d6653ee6b07b6c9d7eb0f6bfc8978cfb9dab0c83c83f0173cd18bffaab",
+    "d1_coordinate_summary_sha256": "b4bffaddc65a3c9bf25859a65515f1f7959b68374657689d7796f08f5285cd82",
+    "d2_core_sha256": "04eafd4051430be55c1494a6fbadf1800b2dc7c54ab1c3071a7a3e0a7616d033",
+    "original_scorer_sha256": "473d199021fe241144cc8a81f5b7be3fb07be2afc6e2085fb8d6289a07008ad2"
+  },
+  "read_only_inputs": [
+    "frozen D2-A prediction.json and manifest.json",
+    "original D2-A coordinate_scoring.csv/json, decision.json, and manifest.json",
+    "fixed D1 coordinate_summary.csv",
+    "fixed D2 core and original scorer source text"
+  ],
+  "definition_audit": {
+    "d2_a_integer_coordinate": "k_abs in E_abs = arg(lambda_PF)/t + k_abs*2*pi/t, chosen nearest the H-Ritz absolute energy",
+    "d1_integer_coordinate": "k_rel in delta = arg(exp(-i*E0*t)*lambda_PF)/t + k_rel*2*pi/t, chosen nearest the saved direct shift",
+    "integer_equality_is_coordinate_invariant": false,
+    "original_integer_comparison": "k_abs == k_rel",
+    "audit_question": "whether original branch failure was produced by comparing unlike integer coordinates"
+  },
+  "fixed_representation_invariant_scoring": {
+    "phase_error_radian": "abs(atan2(sin((delta_hat-delta_direct)*t), cos((delta_hat-delta_direct)*t)))",
+    "physical_branch_correct": "phase_error_radian < 0.5*D1_phase_gap_radian",
+    "equivalent_local_energy_check": "abs(delta_hat-delta_direct) < 0.5*D1_phase_gap_radian/t when no phase wrapping occurs",
+    "strict_comparison": true,
+    "threshold_retuning": false,
+    "uses_existing_d1_phase_gap": true,
+    "uses_existing_direct_shift": true
+  },
+  "secondary_common_reference_check": {
+    "predicted_energy_on_h_reference": "E_H_Ritz + delta_hat",
+    "truth_target_on_h_reference": "E_H_Ritz + delta_direct",
+    "interpretation": "common-reference diagnostic only; not an exact absolute PF energy certificate",
+    "exact_ground_energy_required": false
+  },
+  "required_consistency_checks": [
+    "six coordinates match by condition and time_hex across prediction, original scoring, and D1 summary",
+    "saved predicted/direct shifts and original integer labels are unchanged",
+    "D2 absolute unwrap integer recomputes from frozen unit-circle eigenvalue and H-Ritz reference",
+    "D1 source applies exp(-i*E0*t) before its relative unwrap",
+    "original formal decision remains d2_a_complete_close_spectral_route_stop",
+    "prediction and original result manifests remain byte-identical"
+  ],
+  "fixed_outcomes": {
+    "all_six_physical_branches_correct": "scoring_audit_coordinate_system_mismatch_confirmed_physical_branch_6_of_6_stop",
+    "one_or_more_physical_branches_incorrect": "scoring_audit_physical_branch_failure_confirmed_stop",
+    "identity_or_definition_failure": "scoring_audit_failed_identity_or_definition_stop"
+  },
+  "interpretation_if_all_six_correct": {
+    "spectral_recovery_failed_claim_supported": false,
+    "accuracy_recovery_supported_on_development_coordinates": true,
+    "certification_cost_bottleneck_supported_if_no_budget_beats_main_baseline": true,
+    "independent_generalization_claim": false
+  },
+  "not_authorized": {
+    "arnoldi_rerun": true,
+    "hamiltonian_or_pf_action": true,
+    "new_truth": true,
+    "new_coordinate": true,
+    "new_molecule_or_lif": true,
+    "threshold_or_dimension_change": true,
+    "prediction_or_original_decision_change": true,
+    "d2_b": true,
+    "gpu_query_or_use": true
+  },
+  "completion": {
+    "audit_runs_maximum": 1,
+    "coordinate_rows": 6,
+    "original_d2_a_status": "d2_a_complete_close_spectral_route_stop",
+    "original_status_unchanged": true,
+    "d2_b_authorized": false,
+    "next_step": "stop_for_full_research_direction_review"
+  }
+}
