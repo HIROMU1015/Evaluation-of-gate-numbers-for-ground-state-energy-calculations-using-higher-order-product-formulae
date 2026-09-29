@@ -1,0 +1,84 @@
+{
+  "schema": "second_study_v2_related_work_role_map_v1",
+  "verified_on": "2026-09-30",
+  "external_method_implementation_in_HF_pilot": false,
+  "entries": [
+    {
+      "id": "L1",
+      "title": "Estimating Trotter Approximation Errors to Optimize Hamiltonian Partitioning for Lower Eigenvalue Errors",
+      "authors": "Mehendale; Martinez-Martinez; Kamath; Izmaylov",
+      "version": "arXiv:2312.13282v3",
+      "url": "https://arxiv.org/html/2312.13282v3",
+      "role": "core_related_work",
+      "inherited_component": "problem framing for approximate-state eigenvalue-error calibration and QPE resource relevance",
+      "not_claimed": "novel perturbative estimator or reproduction of its partition-ranking results"
+    },
+    {
+      "id": "L2",
+      "title": "Practical Estimation of Trotter Error for Hamiltonian Simulation",
+      "authors": "Maxwell et al.",
+      "version": "arXiv:2606.30738v1",
+      "url": "https://arxiv.org/html/2606.30738v1",
+      "role": "core_related_work",
+      "inherited_component": "context for practical estimator accuracy and information-cost tradeoffs",
+      "not_claimed": "compact BCH, importance sampling, implementation, or scaling results"
+    },
+    {
+      "id": "L3",
+      "title": "Better product formulas for quantum phase estimation",
+      "authors": "Hejazi; Soni; Shokrian Zini; Arrazola",
+      "version": "arXiv:2412.16811v1",
+      "url": "https://arxiv.org/html/2412.16811v1",
+      "role": "core_related_work",
+      "inherited_component": "task-specific QPE eigenvalue-error and resource-aware PF framing",
+      "not_claimed": "custom product-formula design, low-energy bounds, or a new PF"
+    },
+    {
+      "id": "L4",
+      "title": "A Theory of Quantum Subspace Diagonalization",
+      "authors": "Epperly; Lin; Nakatsukasa",
+      "version": "arXiv:2110.07492v2",
+      "url": "https://arxiv.org/html/2110.07492v2",
+      "role": "method_source",
+      "inherited_component": "motivation to treat subspace conditioning and truncation as explicit numerical gates",
+      "not_claimed": "its theorems provide an operational certificate for this Arnoldi pilot"
+    },
+    {
+      "id": "L5",
+      "title": "Making Trotterization adaptive and energy-self-correcting for NISQ devices and beyond",
+      "authors": "Zhao; Bukov; Heyl; Moessner",
+      "version": "arXiv:2209.12653v3",
+      "url": "https://arxiv.org/html/2209.12653v3",
+      "role": "peripheral",
+      "inherited_component": "task-boundary comparison with adaptive time-step simulation",
+      "not_claimed": "the dynamics feedback algorithm is implemented as a frozen QPE selector"
+    },
+    {
+      "id": "L6",
+      "title": "Spectral Analysis of Product Formulas for Quantum Simulation",
+      "authors": "Yi; Crosson",
+      "version": "arXiv:2102.12655v1",
+      "url": "https://arxiv.org/abs/2102.12655v1",
+      "role": "core_related_work",
+      "inherited_component": "spectral eigenvalue/eigenvector and gap-aware PF analysis context",
+      "not_claimed": "its rigorous bounds or asymptotic speedups are achieved here"
+    }
+  ],
+  "local_method_source": {
+    "id": "M1",
+    "path": "review_response/pf_spectral_recoverability_d2.py",
+    "sha256": "04eafd4051430be55c1494a6fbadf1800b2dc7c54ab1c3071a7a3e0a7616d033",
+    "role": "method_source",
+    "inherited_component": "explicit-vector unitary Arnoldi, H-reference phase lift, empirical width and counters",
+    "not_claimed": "Arnoldi novelty or a rigorous ground/branch certificate"
+  },
+  "external_baseline_gate": {
+    "maximum_methods": 1,
+    "requires_all": [
+      "resource-aware intervention signal",
+      "cheap local proxy cannot reproduce the decision",
+      "comparison distinguishes Arnoldi-specific from generic high-accuracy calibration effects"
+    ],
+    "separate_authorization": true
+  }
+}

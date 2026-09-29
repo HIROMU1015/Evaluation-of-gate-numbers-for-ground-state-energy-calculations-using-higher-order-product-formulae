@@ -1,0 +1,64 @@
+{
+  "schema": "hf_domain_predictor_input_allowlist_v1",
+  "status": "design_only_execution_not_authorized",
+  "sanitizer_required": true,
+  "raw_pickle_direct_access_forbidden": true,
+  "allowed": [
+    "condition_id for routing and debugging only",
+    "protocol, Hamiltonian, PF, state and component-order identity hashes",
+    "same Hamiltonian matvec callable with shape and dtype",
+    "same PF state-action callable",
+    "source component spectra and coefficient sequence",
+    "same original CISD vector and normalization metadata",
+    "population-sector metadata",
+    "term counts and K_current_m3",
+    "epsilon_E and beta",
+    "inherited T0, B0, t_ana, cap_active and source fallback reason",
+    "fixed candidate factors, proposed eta and numerical gates",
+    "truth-free Ritz values, lifted residuals, prefix values and local proxy observations generated in the run",
+    "action counters, wall time and memory"
+  ],
+  "condition_id_prohibited_uses": [
+    "molecule-specific threshold lookup",
+    "past pass/fail lookup",
+    "truth or headroom lookup"
+  ],
+  "forbidden": [
+    "exact ground state or exact ground energy",
+    "FCI state",
+    "past exact overlap",
+    "D1 weights, clusters, target identifiers or true gaps",
+    "full-space spectral gap",
+    "direct PF shift or direct cost",
+    "true optimum or oracle headroom",
+    "past pass/fail labels",
+    "scorer output",
+    "truth file paths",
+    "Phase B or other direct-truth cache"
+  ],
+  "forbidden_operations": [
+    "full Hamiltonian eigendecomposition",
+    "full PF matrix construction",
+    "full PF eigendecomposition",
+    "new coordinate acquisition",
+    "threshold fitting against truth",
+    "GPU query or use"
+  ],
+  "artifact_isolation": {
+    "predictor_and_scorer_separate_processes": true,
+    "predictor_environment_must_not_mount_truth_paths": true,
+    "prediction_hash_and_commit_before_truth": true,
+    "scorer_may_read_only_frozen_prediction_and_authorized_truth": true,
+    "prediction_mutation_after_truth": false
+  },
+  "required_source_checks": [
+    "condition exact set equals two HF conditions",
+    "Hamiltonian hash matches source contract",
+    "source pickle/cache hash matches source contract",
+    "original CISD state metadata matches",
+    "group/component metadata matches",
+    "current_m3 coefficient sequence and term counts match",
+    "T0, B0 and t_ana decimal and float.hex match"
+  ],
+  "failure_policy": "stop before any PF or H action; do not rebuild or substitute a cache"
+}

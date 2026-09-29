@@ -1,0 +1,306 @@
+{
+  "schema": "second_study_v2_hf_domain_protocol_v1",
+  "protocol_id": "HF-domain-intervention-pilot-20260930",
+  "created_on": "2026-09-30",
+  "status": "second_study_v2_hf_domain_protocol_complete_review_required",
+  "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+  "base_identity_commit": "137abdccabbc909f3b237e1a0ff0fc2ebd748b73",
+  "purpose": "Test whether finite truth-free calibration information can convert the first-study HF time-domain loss into a safe change of QPE time and budget.",
+  "claim_boundary": {
+    "primary_claim_class": "future_frozen_development_pilot",
+    "not_an_error_estimator_benchmark": true,
+    "arnoldi_novelty_claim": false,
+    "certificate_claim": false,
+    "generalization_claim": false,
+    "headroom_is_causal_effect": false
+  },
+  "authorization": {
+    "protocolization_and_static_source_audit": true,
+    "pilot_execution_authorized": false,
+    "new_scientific_computation_authorized": false,
+    "new_truth_authorized": false,
+    "c1_authorized": false,
+    "d2_b_authorized": false,
+    "lif_authorized": false,
+    "holdout_authorized": false,
+    "new_pf_authorized": false,
+    "external_baseline_implementation_authorized": false,
+    "gpu_authorized": false,
+    "push_authorized": false
+  },
+  "scope": {
+    "conditions": [
+      "HF_full_eq_sto3g",
+      "HF_full_stretch150_sto3g"
+    ],
+    "condition_count": 2,
+    "product_formula": "current_m3",
+    "approximate_state": "same original CISD state as the inherited first-study baseline",
+    "same_hamiltonian_required": true,
+    "candidate_factors_of_T0": [
+      1.0,
+      1.3,
+      1.6
+    ],
+    "maximum_coordinate_count": 6,
+    "T0_role": [
+      "source and branch reproduction control",
+      "same-time diagnostic",
+      "fallback reference"
+    ],
+    "domain_intervention_requires_time_strictly_greater_than_T0": true,
+    "nearest_truth_grid_snap": false,
+    "truth_interpolation": false,
+    "new_molecule_count": 0,
+    "new_hamiltonian_count": 0,
+    "new_product_formula_count": 0
+  },
+  "fixed_constants": {
+    "epsilon_E_hartree": 0.00015936001019904,
+    "beta": 1.2,
+    "K_current_m3_per_step": 9108,
+    "baseline_margin_gamma": 1.01,
+    "eta_primary_proposal": 0.1,
+    "eta_approval_status": "pending_human_approval_before_execution",
+    "eta_post_result_change_forbidden": true
+  },
+  "baseline_contract": {
+    "B0_definition": "first-study B_frozen = 1.01 * C_hat",
+    "B0_metric": "continuous Pauli-rotation cost proxy",
+    "source": "artifacts/pf_first_study_completion_analysis_20260926_940ee7f/cost_factor_decomposition.csv",
+    "conditions": [
+      {
+        "condition": "HF_full_eq_sto3g",
+        "T0_hartree_inverse": 0.148871685974198,
+        "T0_hex": "0x1.30e3a37479fbdp-3",
+        "t_ana_hartree_inverse": 0.297743371948396,
+        "t_ana_hex": "0x1.30e3a37479fbdp-2",
+        "T0_over_t_ana": 0.5,
+        "C_hat_continuous": 463823391.8193374,
+        "B0_continuous": 468461625.7375308,
+        "B0_hex": "0x1.bec2839bcced2p+28",
+        "cap_active": true,
+        "fallback_reason": "cancellation"
+      },
+      {
+        "condition": "HF_full_stretch150_sto3g",
+        "T0_hartree_inverse": 0.20600464713499966,
+        "T0_hex": "0x1.a5e5c3b226978p-3",
+        "t_ana_hartree_inverse": 0.4120092942699993,
+        "t_ana_hex": "0x1.a5e5c3b226978p-2",
+        "T0_over_t_ana": 0.5,
+        "C_hat_continuous": 334916449.94069874,
+        "B0_continuous": 338265614.44010574,
+        "B0_hex": "0x1.429860e70aac5p+28",
+        "cap_active": true,
+        "fallback_reason": "cancellation"
+      }
+    ]
+  },
+  "budget_rule": {
+    "target": "B_target=(1-eta)*B0",
+    "candidate_allowance": "A_eta(t;B0)=epsilon_E-beta*K_current_m3/[t*(1-eta)*B0]",
+    "structural_rejection": "A_eta<=0",
+    "estimated_error": "e_use=abs(delta_hat)+w_A",
+    "admission": "all numerical, branch, alias and conditioning gates pass and e_use<=A_eta",
+    "continuous_candidate_budget": "B_A=beta*K_current_m3/[t*(epsilon_E-e_use)]",
+    "invalid_if": "e_use>=epsilon_E",
+    "truth_safety": "abs(delta_direct)+beta*K_current_m3/(t*B_frozen)<=epsilon_E",
+    "predicted_admission_is_truth_safety": false,
+    "target_feasibility_is_output_budget_safety": false,
+    "continuous_proxy_storage": "IEEE-754 binary64 decimal plus float.hex",
+    "budget_discretization_status": "unresolved_requires_approval",
+    "integerization_or_ceiling_rule": null,
+    "integerization_note": "No authoritative integerization rule exists in the frozen first-study sources. No rule is invented in P0.",
+    "execution_blocked_until_discretization_resolved_or_continuous_only_scope_explicitly_approved": true
+  },
+  "arms": {
+    "B0": {
+      "name": "inherited_first_study_baseline",
+      "time": "T0",
+      "budget": "B0",
+      "frozen": true
+    },
+    "B1": {
+      "name": "same_candidate_local_CISD_proxy",
+      "gamma_arms": [
+        1.01,
+        1.02,
+        1.05,
+        1.1
+      ],
+      "each_gamma_is_an_independent_frozen_arm": true,
+      "posthoc_gamma_promotion_forbidden": true,
+      "comparison_if_no_main_gamma": "compare M1 against every safe B1 arm and the safe B1 Pareto frontier"
+    },
+    "M1": {
+      "name": "fixed_D2A_spectral_information_arm",
+      "method": "explicit-vector twice-reorthogonalized unitary Arnoldi",
+      "maximum_dimension": 8,
+      "prefixes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "one_chain_per_coordinate": true,
+      "restart_count": 0,
+      "H_reference": "lowest H Ritz candidate in the shared Krylov basis; not a certified ground state",
+      "width": "max(r_H + 2*asin(min(2,r_U)/2)/t + b_num, abs(delta_hat_8-delta_hat_lower))",
+      "b_num_saved_value": 0.0,
+      "b_num_zero_is_rigorous_forward_error_bound": false,
+      "claim_class": "empirical_guarded_estimate",
+      "width_change_in_first_pilot_forbidden": true,
+      "source_core_sha256": "04eafd4051430be55c1494a6fbadf1800b2dc7c54ab1c3071a7a3e0a7616d033"
+    }
+  },
+  "selection_rule": {
+    "order": [
+      "structurally reject candidates with A_eta<=0",
+      "mark numerical, branch, alias or conditioning failures abstain",
+      "mark candidates with e_use<=A_eta eligible",
+      "compute the frozen continuous budget for every eligible candidate",
+      "select the eligible candidate with minimum frozen budget",
+      "break an exact tie by smaller time",
+      "fallback to the inherited T0,B0 if no intervention candidate is eligible"
+    ],
+    "T0_may_be_selected_as_domain_intervention": false,
+    "eligible_and_selected_are_distinct": true,
+    "candidate_independence": "failure of one exterior candidate does not reject the other",
+    "monotonic_error_assumption": false,
+    "post_result_candidate_or_tie_break_change_forbidden": true,
+    "required_output_fields": [
+      "eligible_count",
+      "eligible_candidates",
+      "selected_candidate",
+      "selected_time",
+      "selected_budget_continuous",
+      "selected_budget_discrete_if_authorized",
+      "fallback_used",
+      "fallback_reason"
+    ]
+  },
+  "prediction_scoring_boundary": {
+    "separate_processes": true,
+    "prediction_must_be_committed_and_sha256_frozen_before_truth": true,
+    "prediction_blob_identity_check_required": true,
+    "truth_access_before_freeze_forbidden": true,
+    "frozen_fields": [
+      "candidate eligibility",
+      "selected candidate and time",
+      "continuous and any approved discrete frozen budget",
+      "branch and reference candidate",
+      "claim class",
+      "abstention",
+      "resource counters"
+    ],
+    "scorer_may_change_prediction": false,
+    "scorer_may_resolve_abstention": false,
+    "scorer_may_add_coordinate": false
+  },
+  "branch_scoring": {
+    "direct_absolute_vs_ground_removed_unwrap_integer_comparison_forbidden": true,
+    "required_representations": [
+      "absolute PF phase",
+      "Hamiltonian reference energy",
+      "ground-removed signed shift",
+      "principal wrapped phase",
+      "unwrapped physical energy",
+      "representation-independent energy difference"
+    ],
+    "primary_validity": "compare prediction and truth in a common physical energy gauge/lift",
+    "truth_may_not_repair_predictor_branch": true,
+    "unscorable_policy": "report unscorable; do not add an unplanned anchor",
+    "prior_audit": "scoring_audit_coordinate_system_mismatch_confirmed_physical_branch_6_of_6_stop"
+  },
+  "scoring_order": [
+    "source/truth evaluability",
+    "branch/reference validity",
+    "frozen-budget execution safety",
+    "strict domain intervention t>T0",
+    "target reduction eta",
+    "added value beyond safe B1 arms",
+    "resource and information-cost decomposition"
+  ],
+  "status_taxonomy": {
+    "primary_priority": [
+      "not_evaluable_source_or_truth",
+      "reference_or_branch_failure",
+      "unsafe_frozen_budget",
+      "cheap_proxy_sufficient",
+      "robust_signal",
+      "limited_signal",
+      "fixed_width_no_benefit",
+      "no_benefit_on_frozen_grid"
+    ],
+    "definitions": {
+      "robust_signal": "2/2 safe, t>T0, eta target met, and not reproducible by the safe local-proxy frontier",
+      "limited_signal": "the robust-signal conjunction holds for exactly 1/2 conditions",
+      "cheap_proxy_sufficient": "a safe B1 arm matches or dominates M1 in coverage and quantum budget at no greater information cost",
+      "fixed_width_no_benefit": "point estimate is usable but the frozen D2-A width blocks intervention or target reduction",
+      "reference_or_branch_failure": "H-reference, phase lift, alias or physical branch validity fails",
+      "not_evaluable_source_or_truth": "required identity or exact-time truth cannot be fixed",
+      "unsafe_frozen_budget": "at least one selected non-fallback intervention violates frozen-budget truth safety",
+      "no_benefit_on_frozen_grid": "no safe added resource value appears on the fixed grid after other statuses are excluded"
+    },
+    "secondary_tags_allowed": true,
+    "completion_status": "second_study_v2_hf_domain_pilot_complete_review_required",
+    "automatic_next_stage_authorization": false
+  },
+  "external_baseline_gate": {
+    "implemented_in_HF_pilot": false,
+    "maximum_future_external_methods": 1,
+    "all_required": [
+      "resource-aware intervention signal is observed",
+      "cheap local proxy does not reproduce the decision",
+      "the comparison can distinguish Arnoldi-specific from generic high-accuracy calibration effects"
+    ],
+    "failure_action": "do not implement an external baseline",
+    "separate_authorization_required": true
+  },
+  "proposed_execution_limits_not_authorized": {
+    "conditions": 2,
+    "coordinates": 6,
+    "arnoldi_pf_vector_actions_maximum": 48,
+    "arnoldi_H_matvecs_maximum": 48,
+    "local_proxy_pf_actions_maximum": 6,
+    "total_pf_vector_actions_maximum": 54,
+    "H_exponential_actions_maximum": 6,
+    "H_exponential_internal_matvecs_count_separately": true,
+    "cap_truth_reuse": 2,
+    "new_cap_exterior_truth_maximum_if_separately_authorized": 4,
+    "new_anchor_coordinates": 0,
+    "predictor_full_H_eigendecompositions": 0,
+    "predictor_full_PF_builds": 0,
+    "predictor_full_PF_eigendecompositions": 0,
+    "cpu_processes": 1,
+    "blas_threads": 1,
+    "peak_memory_bytes_maximum": 4294967296,
+    "wall_seconds_maximum": null,
+    "wall_limit_status": "unresolved_requires_approval",
+    "gpu_query_allocation_kernel": [
+      0,
+      0,
+      0
+    ]
+  },
+  "P0_counts": {
+    "new_scientific_computation": 0,
+    "new_truth": 0,
+    "PF_actions": 0,
+    "H_matvecs": 0,
+    "Arnoldi_runs": 0,
+    "new_gap_calculations": 0,
+    "GPU_operations": 0,
+    "threshold_fits": 0,
+    "selector_fits": 0
+  },
+  "execution_blockers": [
+    "human approval of eta=0.10",
+    "authoritative continuous-only versus discrete budget policy",
+    "wall-time limit",
+    "byte-identical runtime cache availability for the two HF systems",
+    "separate authorization for four missing cap-exterior truth coordinates",
+    "implementation and tests of the input adapter, selector wrapper and scorer"
+  ]
+}

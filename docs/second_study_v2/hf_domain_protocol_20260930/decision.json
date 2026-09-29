@@ -1,0 +1,65 @@
+{
+  "schema": "second_study_v2_hf_domain_protocolization_decision_v1",
+  "status": "second_study_v2_hf_domain_protocol_complete_review_required",
+  "classification": "design_and_static_source_audit_only",
+  "base_identity_commit": "137abdccabbc909f3b237e1a0ff0fc2ebd748b73",
+  "protocolization_content_commit": null,
+  "summary": {
+    "condition_count": 2,
+    "candidate_coordinate_count": 6,
+    "control_coordinate_count": 2,
+    "domain_intervention_coordinate_count": 4,
+    "cap_truth_exact_reuse_count": 2,
+    "cap_exterior_exact_truth_available_count": 0,
+    "future_new_truth_required_count_if_authorized": 4,
+    "arms": [
+      "B0 inherited baseline",
+      "B1 local proxy gamma frontier",
+      "M1 fixed D2-A spectral arm"
+    ],
+    "primary_eta_proposal": 0.1,
+    "eta_approved": false,
+    "budget_discretization_status": "unresolved_requires_approval",
+    "related_work_role_map_complete": true,
+    "external_baseline_gate_fixed": true,
+    "representation_independent_branch_scoring_fixed": true
+  },
+  "source_identity": {
+    "predesign_manifest_sha256": "df86d6573c0f5ea5edc9480064bfd0541946a1313af4387d43b4d8a8145b9476",
+    "D2_core_sha256": "04eafd4051430be55c1494a6fbadf1800b2dc7c54ab1c3071a7a3e0a7616d033",
+    "practical_protocol_sha256": "7bbe9958837a881f0247b6e72f5e80e2331e0cfe50dea18addd13a2748467d55",
+    "handoff_zip_sha256": "749aac29eb8a24d4979defa5c684918a30c3a65eb09b28c67742e9aaf71bef62",
+    "protocolization_instruction_sha256": "92c26f9c6c885ee192f4e05ba5d3622803c712b18e6ca3b148fd593a58cabec6"
+  },
+  "P0_counts": {
+    "new_scientific_computation_count": 0,
+    "new_truth_count": 0,
+    "PF_action_count": 0,
+    "H_matvec_count": 0,
+    "Arnoldi_count": 0,
+    "new_gap_count": 0,
+    "GPU_operation_count": 0,
+    "threshold_fit_count": 0,
+    "selector_fit_count": 0
+  },
+  "authorization": {
+    "pilot_execution_authorized": false,
+    "new_truth_authorized": false,
+    "external_baseline_implementation_authorized": false,
+    "c1_authorized": false,
+    "d2_b_authorized": false,
+    "holdout_authorized": false,
+    "new_pf_authorized": false,
+    "push_authorized": false
+  },
+  "blocking_items": [
+    "approve or reject eta=0.10",
+    "resolve continuous-only versus discrete budget policy",
+    "fix wall-time limit",
+    "verify byte-identical executable HF cache",
+    "separately authorize four cap-exterior truth points if P1 is approved",
+    "implement and review adapter, selector, freeze boundary, scorer and tests"
+  ],
+  "next_step": "human_review_of_protocol_and_execution_blockers",
+  "automatic_next_stage": false
+}
