@@ -1,0 +1,131 @@
+{
+  "schema": "second_study_v2_predesign_analysis_audit_v1",
+  "status": "second_study_v2_predesign_complete_review_required",
+  "classification": "read_only_post_hoc_predesign_analysis",
+  "base_identity_commit": "599a9f2e9a45302b8d34192ef581fd3ea55a1f1e",
+  "execution_bundle_commit": "4c579886b49d1c0aef7362809ed5e41a7a77d660",
+  "input_identity": {
+    "prompt_sha256": "ee2accc1d23564d198cdb107f8230cc4704265ff29af625e8fdface1f409880b",
+    "amendment_sha256": "25dc59ead86a9d631842febfd4d783d5de3b36182d11dacb4f3e9b0ba4613104",
+    "protected_source_count": 29,
+    "protected_artifact_difference_count": 0,
+    "untracked_input_count": 0,
+    "network_source_count": 0
+  },
+  "source_row_counts": {
+    "first_study_cost_factor_rows": 6,
+    "first_study_HF_boundary_rows": 2,
+    "phase_b_strategy_rows": 16,
+    "R1_strategy_rows": 16,
+    "R1_coordinate_rows": 10,
+    "D1_coordinate_rows": 6,
+    "D1_top_k_rows": 60,
+    "D2A_audit_coordinate_rows": 6,
+    "C0_coordinate_rows": 6
+  },
+  "generated_row_counts": {
+    "resource_loss_map": 16,
+    "intervention_headroom": 45,
+    "information_access_matrix": 24,
+    "decision_changing_headroom": 33
+  },
+  "arithmetic_rules": {
+    "factor_notation": "F_PF",
+    "isolated_factor_headroom": "H(F)=1-1/F for F>0, with other factors held fixed",
+    "causal_interpretation": "prohibited; intervention_achievability remains not_established",
+    "bound_transform": "monotone transform of positive factor intervals",
+    "dominant_factor": "maximum log(F) only among exact, same-baseline, same-metric comparable positive-loss factors",
+    "materiality": "not prespecified; 1%, 5%, 10%, 20% sensitivities are descriptive only",
+    "signed_vs_absolute": "signed shift for mechanism; absolute PF error for budget"
+  },
+  "truth_accounting": {
+    "new_truth_count": 0,
+    "truth_used_for_post_hoc_scorer_only": true,
+    "stored_truth_source_read_count": 8,
+    "stored_truth_sources_read": [
+      "artifacts/pf_first_study_completion_analysis_20260926_940ee7f/cost_factor_decomposition.csv",
+      "artifacts/pf_first_study_completion_analysis_20260926_940ee7f/boundary_bounds.json",
+      "artifacts/server_second_study_safe_time_domain_phase_b_20260928_d4dd42f/strategy_scoring.json",
+      "artifacts/server_pf_candidate_validation_r1_20260928_fba3383/strategy_cause_decomposition.csv",
+      "artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2/coordinate_summary.csv",
+      "artifacts/server_pf_spectral_information_pilot_d1_20260928_03747a2/top_k_compression.csv",
+      "artifacts/pf_spectral_recoverability_d2_a_scoring_audit_20260929/coordinate_scoring_audit.csv",
+      "artifacts/pf_post_d2a_width_design_readonly_20260929/budget_headroom_and_widths.csv"
+    ]
+  },
+  "data_use_status": [
+    {
+      "system": "H-chain",
+      "status": "used",
+      "basis": "historical ledger"
+    },
+    {
+      "system": "LiH",
+      "status": "used",
+      "basis": "historical ledger"
+    },
+    {
+      "system": "BeH2",
+      "status": "used",
+      "basis": "historical ledger"
+    },
+    {
+      "system": "H2O",
+      "status": "used",
+      "basis": "historical ledger"
+    },
+    {
+      "system": "NH3",
+      "status": "used/development",
+      "basis": "historical ledger"
+    },
+    {
+      "system": "CH4",
+      "status": "used including uncommitted historical artifacts",
+      "basis": "historical ledger"
+    },
+    {
+      "system": "N2",
+      "status": "used/development; not future holdout",
+      "basis": "historical ledger plus first-study"
+    },
+    {
+      "system": "CO",
+      "status": "used/development; not future holdout",
+      "basis": "historical ledger plus first-study"
+    },
+    {
+      "system": "HF",
+      "status": "used/development; not future holdout",
+      "basis": "historical ledger plus first-study"
+    },
+    {
+      "system": "LiF",
+      "status": "used in closed second study and R1 development; not future holdout",
+      "basis": "audited S05-S07 supplement"
+    },
+    {
+      "system": "HCl",
+      "status": "used in closed second study, R1, D1, D2-A, C0; not future holdout",
+      "basis": "audited S05-S15 supplement"
+    }
+  ],
+  "scientific_operations": {
+    "new_scientific_computation_count": 0,
+    "new_hamiltonian_count": 0,
+    "new_state_count": 0,
+    "new_direct_truth_count": 0,
+    "PF_action_count": 0,
+    "Hamiltonian_action_count": 0,
+    "Arnoldi_or_Krylov_action_count": 0,
+    "full_spectrum_eigendecomposition_count": 0,
+    "new_gap_calculation_count": 0,
+    "selector_fit_count": 0,
+    "threshold_fit_count": 0,
+    "GPU_query_count": 0,
+    "GPU_allocation_count": 0,
+    "GPU_kernel_count": 0
+  },
+  "source_artifacts_modified": false,
+  "original_result_status_modified": false
+}
