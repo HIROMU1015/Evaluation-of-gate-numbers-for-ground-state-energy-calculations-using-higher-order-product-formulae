@@ -1,0 +1,197 @@
+{
+  "schema": "pf_post_d2a_width_design_protocol_draft_v1",
+  "protocol_id": "post-D2A-C0-width-information-resource-design-20260929",
+  "status": "post_d2a_width_design_complete_review_required",
+  "classification": "design_and_post_hoc_development_arithmetic_only",
+  "evidence_commit": "17e4d6357c7c5ef9bb849d0f787a642f972c7995",
+  "planning_commit_recorded": false,
+  "evidence_boundary": {
+    "d2_a_formal_status": "d2_a_complete_close_spectral_route_stop",
+    "d2_a_formal_status_unchanged": true,
+    "scoring_audit_status": "scoring_audit_coordinate_system_mismatch_confirmed_physical_branch_6_of_6_stop",
+    "development_only": true,
+    "independent_validation_claim": false,
+    "new_method_success_claim": false
+  },
+  "authorization": {
+    "c0_document_and_existing_scalar_arithmetic": true,
+    "new_scientific_computation_authorized": false,
+    "width_prototype_execution_authorized": false,
+    "arnoldi_execution_authorized": false,
+    "hamiltonian_or_pf_action_authorized": false,
+    "new_gap_calculation_authorized": false,
+    "toy_numerical_experiment_authorized": false,
+    "c1_authorized": false,
+    "d2_b_authorized": false,
+    "lif_authorized": false,
+    "holdout_authorized": false,
+    "new_pf_authorized": false,
+    "retuning_closed_results_authorized": false,
+    "gpu_authorized": false
+  },
+  "constants": {
+    "epsilon_E_hartree": 0.00015936001019904,
+    "qpe_beta": 1.2,
+    "K_current_m3_source": "per-coordinate frozen prediction field",
+    "main_baseline_gamma": 1.02
+  },
+  "quantity_dictionary": {
+    "delta_hat_signed_hartree": "frozen signed PF shift estimate",
+    "delta_direct_signed_hartree": "saved signed direct PF shift; scorer only",
+    "e_direct_hartree": "abs(delta_direct_signed_hartree); the direct PF error used by the uncorrected QPE budget",
+    "g_target_chord": "min_{j != 0} abs(lambda_j-lambda_0); target-to-others chord separation",
+    "g_rho_others_chord": "min_{j != 0} abs(lambda_j-rho); the separation required by the candidate residual bound",
+    "g_phase_principal_radian": "principal circular separation in [0, pi] between unit-circle eigenvalues",
+    "g_energy_unwrapped_hartree": "g_phase_principal_radian/t only after a common physical lift is certified",
+    "rho": "Rayleigh quotient y^* A y of the original normal operator",
+    "r_rayleigh": "full-action Rayleigh residual norm ||(A-rho)y||",
+    "width_hartree": "upper width for abs(delta_hat-delta_0), with a mandatory claim class",
+    "w_win": "maximum nonnegative width compatible with a fixed resource target"
+  },
+  "symbol_separation": {
+    "K_current_m3": "Pauli rotations per PF step",
+    "arnoldi_m": "Arnoldi subspace dimension",
+    "K_D1": "number of retained non-target clusters in the D1 oracle diagnostic",
+    "interchange_forbidden": true
+  },
+  "candidate_bound": {
+    "name": "conditional_normal_residual_separation_bound",
+    "operator": "finite-dimensional normal A",
+    "definitions": {
+      "rho": "y^* A y with ||y||=1",
+      "r": "||(A-rho)y||",
+      "g": "g_rho_others_chord = min_{j != 0}|lambda_j-rho|"
+    },
+    "assumptions": [
+      "the target eigenvalue lambda_0 is independently identified",
+      "g is a valid full-space lower bound",
+      "g > r",
+      "r is evaluated for the original normal operator and lifted vector",
+      "inexact action and roundoff are separately bounded"
+    ],
+    "bound": "d = r^2/[g*(1-r^2/g^2)]",
+    "conclusion": "abs(lambda_0-rho) <= d",
+    "g_target_may_replace_g_rho_others": false,
+    "projected_ritz_gap_is_full_space_lower_bound": false,
+    "claim_class_when_all_assumptions_certified": "conditional_certificate",
+    "claim_when_any_required_assumption_missing": "indeterminate"
+  },
+  "chord_to_phase": {
+    "inputs": "lambda=exp(i theta), rho=a exp(i phi), a>0, abs(lambda-rho)<=d",
+    "inconsistent_if": "d < abs(1-a) beyond numerical identity tolerance",
+    "trivial_only_if": "d >= 1+a",
+    "nontrivial_domain": "abs(1-a) <= d < 1+a",
+    "principal_angle_bound": "acos((1+a^2-d^2)/(2a))",
+    "acos_clamp": "allowed only within a predeclared floating-point tolerance of [-1,1]",
+    "physical_energy_width": "principal_angle_bound/t only when t>0 and the physical phase lift is independently certified",
+    "failure_action": "indeterminate",
+    "fallback_to_small_empirical_width": false
+  },
+  "gap_conversion": {
+    "formula": "g_chord=2*sin(g_phase_principal_radian/2)",
+    "requirements": [
+      "both endpoints are on the unit circle",
+      "g_phase_principal_radian is in [0,pi]",
+      "the separation is the principal circular separation"
+    ],
+    "energy_conversion_requires_common_lift": true
+  },
+  "width_composition": {
+    "candidate": "w=b_PF+b_H+b_action+b_round",
+    "ground_identity_is_separate": true,
+    "branch_identity_is_separate": true,
+    "cluster_requires_set_or_projector_treatment": true,
+    "saved_d2_a_width_class": "empirical_or_heuristic_not_unconditional_certificate"
+  },
+  "claim_classes": [
+    "conditional_certificate",
+    "empirically_validated_width",
+    "heuristic_width",
+    "indeterminate"
+  ],
+  "resource_value": {
+    "C_req": "beta*K_current_m3/[t*(epsilon_E-e_direct)]",
+    "S_max_same_time": "1-C_req/B0",
+    "w_win": "epsilon_E-abs(delta_hat)-beta*K_current_m3/[t*(1-eta)*B0]",
+    "eta_zero_interpretation": "baseline-equal boundary; strict resource improvement requires w < w_win(t;0)",
+    "eta_greater_than_zero_selected_in_c0": false,
+    "cpu_seconds_and_pauli_rotations_directly_added": false,
+    "required_comparison_axes": [
+      "incremental classical cost",
+      "quantum budget",
+      "coverage",
+      "claim class"
+    ]
+  },
+  "c0_findings": {
+    "coordinate_count": 6,
+    "width_determining_component_local_residual_count": 6,
+    "saved_formula_explicit_numerical_action_bound_hartree": 0.0,
+    "zero_action_bound_is_rigorous_forward_error_certificate": false,
+    "minimum_S_max_same_time": 0.0032797508270148157,
+    "maximum_S_max_same_time": 0.022864616434407847,
+    "minimum_current_width_to_w_win_eta_0": 1.1061956449162504,
+    "maximum_current_width_to_w_win_eta_0": 167.4914533452045,
+    "coordinates_with_current_width_below_w_win_eta_0": 0,
+    "operational_g_rho_others_available": false
+  },
+  "c1_draft": {
+    "status": "draft_not_authorized",
+    "objective": "test one fixed residual-separation width and determine whether its required information is operationally obtainable and resource-relevant",
+    "scope": {
+      "saved_hcl_development_coordinates": 6,
+      "new_molecular_coordinates": 0,
+      "new_lif_conditions": 0,
+      "new_product_formulas": 0,
+      "arnoldi_reruns": 0,
+      "molecular_pf_actions": 0,
+      "molecular_hamiltonian_actions": 0,
+      "operational_width_methods_maximum": 1,
+      "oracle_sensitivity_methods_maximum": 1,
+      "synthetic_controls_maximum": 8,
+      "synthetic_dimension_maximum": 4,
+      "molecular_full_spectrum_operations": 0,
+      "gpu_operations": 0
+    },
+    "arms": {
+      "operational": "truth-free allowlisted inputs only; unavailable full-space separation yields indeterminate",
+      "oracle_sensitivity": "true gap may be read by scorer only after operational prediction freeze; never counted as deployable success",
+      "baseline": "saved D2-A empirical width and local-CISD gamma=1.02 with claim-class differences reported"
+    },
+    "freeze_boundary": {
+      "predictor_and_scorer_separate": true,
+      "prediction_width_branch_claim_budget_hashed_before_truth": true,
+      "truth_may_not_resolve_predictor_indeterminate": true,
+      "absolute_and_relative_unwrap_integer_direct_comparison_forbidden": true
+    },
+    "prototype_candidate_requires": [
+      "the mathematical assumptions pass fixed positive and negative controls",
+      "a truth-free full-space separation/reference path is specified",
+      "action and roundoff errors are included",
+      "the attainable width can cross a predeclared w_win target on at least part of the development set",
+      "the information cost does not silently solve the original ground-energy problem"
+    ],
+    "information_cost_or_limit_result_if": [
+      "only the oracle arm obtains a useful width",
+      "the operational information cost is less favorable than a matched margin baseline",
+      "the access model yields a quantitative indistinguishability or required-precision result"
+    ],
+    "route_close_if": "the work reduces to substituting a true gap into a standard bound and yields neither an operational route nor a useful quantitative limit",
+    "c2_or_d2_b_auto_authorized": false
+  },
+  "unresolved_items": [
+    "truth-free acquisition of a full-space g_rho_others lower bound",
+    "ground/reference certification",
+    "physical branch and alias certification",
+    "rigorous PF/H action forward-error bounds",
+    "cluster/set-valued extension",
+    "matched guarantee-class baseline",
+    "practical effect size and allowed classical information budget"
+  ],
+  "completion": {
+    "status": "post_d2a_width_design_complete_review_required",
+    "next_step": "full_research_direction_review",
+    "c1_authorized": false,
+    "d2_b_authorized": false
+  }
+}
