@@ -1,0 +1,145 @@
+{
+  "authorization": {
+    "c1_authorized": false,
+    "d2_b_authorized": false,
+    "external_baseline_implementation_authorized": false,
+    "holdout_authorized": false,
+    "implementation_and_truth_free_tests": true,
+    "lif_authorized": false,
+    "new_pf_authorized": false,
+    "new_truth_maximum_four_after_freeze": true,
+    "phase_a_after_all_preflight_gates": true,
+    "phase_b_only_after_prediction_commit": true,
+    "post_result_retuning_authorized": false,
+    "push_authorized": false
+  },
+  "authorization_id": "HF-domain-intervention-pilot-execution-20260930",
+  "completion": {
+    "automatic_next_stage": false,
+    "status": "second_study_v2_hf_domain_pilot_complete_review_required"
+  },
+  "frozen_on": "2026-09-30",
+  "parent_protocol": {
+    "inherit_all_unmodified_rules": true,
+    "path": "docs/second_study_v2/hf_domain_protocol_20260930/second_study_v2_hf_domain_protocol.json",
+    "protocolization_commit": "6047f66",
+    "sha256": "a2f1b286eb0a94f63bd23702c7c1b26a46480d1c3731932e74dd22c074b60a1c"
+  },
+  "phase_a": {
+    "arms": [
+      "M1_fixed_D2A_spectral",
+      "B1_local_CISD_gamma_frontier"
+    ],
+    "coordinate_count": 6,
+    "full_hamiltonian_eigendecomposition_count": 0,
+    "full_pf_construction_count": 0,
+    "full_pf_eigendecomposition_count": 0,
+    "gamma_arms": [
+      1.01,
+      1.02,
+      1.05,
+      1.1
+    ],
+    "prediction_commit_and_sha256_required": true,
+    "prediction_fields_frozen": [
+      "eligibility",
+      "selected_time",
+      "fallback",
+      "frozen_continuous_budget",
+      "branch_candidate",
+      "e_use",
+      "abstention",
+      "action_counts"
+    ],
+    "predictor_run_maximum": 1,
+    "truth_open_count": 0
+  },
+  "phase_b": {
+    "T0_reproduction_control": {
+      "arm": "M1_fixed_D2A_spectral",
+      "failure_action": "invalidate_cap_out_intervention_for_that_condition",
+      "pass_rule": "not_abstained AND physical_branch_correct AND direct_shift_inside_frozen_interval",
+      "required_per_condition": true
+    },
+    "fixed_width_rescue_forbidden": true,
+    "prediction_blob_identity_required": true,
+    "prediction_mutation_forbidden": true,
+    "resource_target_rule": "t>T0 AND B_frozen<=0.90*B0",
+    "safety_rule": "abs(delta_direct)+beta*K_current_m3/(t*B_frozen)<=epsilon_E",
+    "scorer_run_maximum": 1,
+    "threshold_or_candidate_change_forbidden": true
+  },
+  "resolved_execution_blockers": {
+    "budget": {
+      "budget_model": "continuous_rotation_cost_proxy",
+      "discrete_budget_model": "not_defined_in_inherited_study",
+      "future_discrete_end_to_end_model_is_separate_research_condition": true,
+      "integerization_or_ceiling_rule": null,
+      "primary_and_safety_metric": "continuous_frozen_budget"
+    },
+    "cache_preflight": {
+      "conditions": [
+        "HF_full_eq_sto3g",
+        "HF_full_stretch150_sto3g"
+      ],
+      "hamiltonian_sha256": {
+        "HF_full_eq_sto3g": "cd074e4870223646ff51e98a72a679b33019cd96bb013de7536c0ceb3e7456c8",
+        "HF_full_stretch150_sto3g": "c68722b3f9f98488e765afb49fa2d1153e41b2a8e84b6df21841400650cec499"
+      },
+      "mismatch_action": "stop_before_scientific_computation",
+      "pickle_sha256": {
+        "HF_full_eq_sto3g": "1da32d7e96eddaebfd3039f4576e1b4f86098c1acffb207d59779cf6f3c3b07a",
+        "HF_full_stretch150_sto3g": "89e7cff9a70d481fcc15b11908686a47d55b23a2b7206062d8b9a1ea9fe1d173"
+      },
+      "required_before_scientific_computation": true,
+      "silent_regeneration_forbidden": true
+    },
+    "eta": {
+      "approved": true,
+      "post_result_change_forbidden": true,
+      "value": 0.1
+    },
+    "resource_envelope": {
+      "blas_threads": 1,
+      "cpu_processes": 1,
+      "gpu_query_allocation_kernel": [
+        0,
+        0,
+        0
+      ],
+      "local_proxy_arm_wall_seconds_maximum": 1800,
+      "peak_memory_bytes_maximum": 4294967296,
+      "runtime_accounting_must_be_separate_by_arm": true,
+      "spectral_arm_wall_seconds_maximum": 1800
+    },
+    "truth": {
+      "access_before_prediction_commit": false,
+      "authorized_only_after_prediction_freeze": true,
+      "cap_truth_reuse_maximum": 2,
+      "interpolation": false,
+      "nearest_coordinate_substitution": false,
+      "new_cap_exterior_direct_coordinates_maximum": 4,
+      "new_coordinates": [
+        [
+          "HF_full_eq_sto3g",
+          0.65
+        ],
+        [
+          "HF_full_eq_sto3g",
+          0.8
+        ],
+        [
+          "HF_full_stretch150_sto3g",
+          0.65
+        ],
+        [
+          "HF_full_stretch150_sto3g",
+          0.8
+        ]
+      ],
+      "reuse_byte_identical_exact_coordinate_before_recompute": true
+    }
+  },
+  "schema": "hf_domain_intervention_pilot_execution_authorization_v1",
+  "status": "hf_domain_pilot_execution_rules_frozen_implementation_authorized"
+}
