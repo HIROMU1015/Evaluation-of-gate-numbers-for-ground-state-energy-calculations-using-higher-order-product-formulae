@@ -1,0 +1,47 @@
+{
+  "schema": "second_study_v2_matched_data_prevalidation_feasibility_v1",
+  "status": "coverage_review_complete_execution_not_authorized",
+  "counts": {
+    "condition_count": 10,
+    "coordinate_inventory_count": 28,
+    "strict_materialized_cheap_m1_truth_coordinate_count": 12,
+    "strict_complete_condition_count": 4,
+    "partial_cheap_truth_coordinate_count": 16,
+    "missing_m1_coordinate_count": 16,
+    "combined_h1_cost_measured_condition_count": 0,
+    "common_cross_family_candidate_contract_count": 0
+  },
+  "feasibility": {
+    "S1A_existing_tuple_schema_replay": true,
+    "S1A_leakage_and_freeze_order_tests": true,
+    "S1A_resource_ledger_join_with_unknowns": true,
+    "B2_policy_fit_from_existing_data": false,
+    "H1_acquisition_policy_fit_from_existing_data": false,
+    "B2_H1_scientific_comparison_from_existing_data": false,
+    "independent_generalization_claim": false,
+    "automatic_missing_tuple_acquisition": false
+  },
+  "reasons_policy_development_not_ready": [
+    "HF has only two conditions and is motivation/sanity data with known pilot outcomes",
+    "HCl uses a different candidate contract and mixed cheap evidence stages",
+    "LiF has no saved M1 tuple",
+    "N2 and CO have replayable cheap plus truth but no saved M1 tuple",
+    "no combined selective H1 shared/reuse cost was measured",
+    "development folds and all numerical success parameters remain unresolved"
+  ],
+  "permitted_after_external_review_only": [
+    "no-fit S1A replay implementation",
+    "deterministic materialization of frozen noncenter cheap model values",
+    "a separately bounded missing-M1 acquisition protocol",
+    "a bounded B2/H1 development protocol"
+  ],
+  "authorization": {
+    "S1A_replay": false,
+    "cheap_materialization": false,
+    "M1_acquisition": false,
+    "truth_generation": false,
+    "policy_fit": false,
+    "threshold_fit": false,
+    "holdout": false
+  }
+}
