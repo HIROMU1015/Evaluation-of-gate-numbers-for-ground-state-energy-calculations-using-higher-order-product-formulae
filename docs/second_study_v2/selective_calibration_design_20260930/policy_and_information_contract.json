@@ -1,0 +1,168 @@
+{
+  "schema": "second_study_v2_selective_calibration_policy_information_contract_v1",
+  "status": "design_only_unfitted",
+  "task_contract": {
+    "product_formula": "current_m3_initial_scope",
+    "resource_metric": "continuous_rotation_cost_proxy",
+    "safety_rule": "abs(delta_direct)+beta*K/(t*B_frozen)<=epsilon_E",
+    "eta_domain_target": 0.1,
+    "eta_scope": "B0_domain_intervention_only_not_incremental_H1_effect",
+    "discrete_budget_model": "not_defined_in_inherited_study"
+  },
+  "arms": {
+    "B0": {
+      "role": "historical_first_study_baseline",
+      "frozen": true
+    },
+    "B1": {
+      "role": "fixed_cheap_margin_frontier",
+      "gamma_arms": [
+        1.01,
+        1.02,
+        1.05,
+        1.1
+      ],
+      "independent_frozen_arms": true,
+      "post_hoc_best_gamma_operational": false
+    },
+    "B2": {
+      "role": "single_cheap_only_adaptive_candidate",
+      "maximum_method_count": 1,
+      "input_information": "I_C_only",
+      "output": [
+        "selected_time",
+        "frozen_budget",
+        "execute_fallback_or_abstain"
+      ],
+      "implemented": false,
+      "fit_authorized": false
+    },
+    "M1": {
+      "role": "always_on_fixed_spectral_module",
+      "module_frozen_for_first_development": true,
+      "maximum_krylov_dimension": 8,
+      "prefixes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "empirical_width_is_rigorous_certificate": false,
+      "candidate_level_adaptation_authorized": false
+    },
+    "H1": {
+      "role": "selective_spectral_candidate",
+      "cheap_policy_must_equal_B2": true,
+      "acquisition_rule": "pi_acquire(I_C,remaining_classical_budget)->q_in_{0,1}",
+      "final_rule": "pi_final(I_C,q*I_S)->(t,B,execute_fallback_or_abstain)",
+      "implemented": false,
+      "fit_authorized": false
+    }
+  },
+  "information_sets": {
+    "I_C_allowed_before_acquisition_freeze": [
+      "fixed_source_and_task_identity",
+      "cheap_proxy_values",
+      "cheap_trajectory_or_local_consistency",
+      "echo_or_cancellation_if_part_of_measured_cheap_layer",
+      "A_eta",
+      "cheap_predicted_budget",
+      "candidate_budget_difference",
+      "target_headroom",
+      "remaining_classical_budget",
+      "approximate_state_H_residual_only_if_truth_free_and_cost_accounted"
+    ],
+    "I_C_forbidden_before_acquisition_freeze": [
+      "direct_truth",
+      "true_gamma",
+      "true_gap",
+      "truth_safety",
+      "M1_prefix",
+      "M1_width",
+      "M1_Ritz_residual",
+      "M1_branch_result",
+      "other_arm_unacquired_output",
+      "exact_state_overlap",
+      "held_out_family_information",
+      "condition_name_as_route_label",
+      "equilibrium_or_stretch_as_route_label"
+    ],
+    "I_S_allowed_after_query": [
+      "M1_point_estimate",
+      "M1_e_use",
+      "M1_empirical_width",
+      "M1_prefix_diagnostics",
+      "M1_branch_reference_status",
+      "M1_resource_counters"
+    ],
+    "truth_allowed_only_after_final_freeze": [
+      "direct_signed_shift",
+      "direct_absolute_PF_error",
+      "branch_scoring_quantity",
+      "safety_at_frozen_budget",
+      "post_hoc_required_gamma"
+    ]
+  },
+  "fairness_constraints": [
+    "B2_and_H1_share_identical_cheap_features",
+    "B2_and_H1_share_identical_cheap_policy",
+    "H1_cannot_receive_more_favorable_cheap_threshold_or_fallback",
+    "same_candidate_and_task_contract_within_each_direct_comparison",
+    "unsafe_or_lower_coverage_outputs_cannot_win_by_budget_alone",
+    "oracle_conditionwise_choices_are_diagnostic_only"
+  ],
+  "post_query_consistency": {
+    "same_time_cheap_budget_retention_rule": "e_use_S(t_C)+beta*K/(t_C*B_C)<=epsilon_E",
+    "different_time_rescue_allowed": false,
+    "retain_cheap_after_spectral_invalidation_allowed": false,
+    "indeterminate_branch_action": "pre_frozen_fallback_or_abstain",
+    "query_cost_counted_if_result_unused_or_failed": true
+  },
+  "freeze_sequence": [
+    "source_environment_tuple_identity",
+    "cheap_information",
+    "B2_cheap_decision",
+    "H1_acquisition_decision",
+    "selective_M1_acquisition",
+    "H1_final_action",
+    "prediction_commit_and_hash",
+    "truth_open_and_scoring"
+  ],
+  "required_distinct_fields": [
+    "spectral_requested",
+    "spectral_result_used",
+    "spectral_observation_invalidated_cheap",
+    "spectral_query_failed",
+    "fallback_used",
+    "abstained",
+    "query_cost_charged"
+  ],
+  "effect_decomposition": {
+    "domain_intervention_effect": "intervention_arm_minus_B0_under_same_task_metric",
+    "adaptive_cheap_effect": "B2_minus_pre_frozen_B1_reference",
+    "spectral_incremental_effect": "spectral_enabled_minus_identical_cheap_layer",
+    "selective_acquisition_effect": "H1_minus_always_on_M1_with_quantum_noninferiority_and_equal_coverage"
+  },
+  "unresolved_requires_review": [
+    "B2_feature_and_numerical_threshold",
+    "H1_escalation_feature_and_threshold",
+    "quantum_budget_noninferiority_margin",
+    "classical_information_budget_ceiling",
+    "minimum_practical_effect_size",
+    "development_family_and_fold_boundary",
+    "maximum_paired_acquisition_scope",
+    "independent_holdout_design"
+  ],
+  "authorization": {
+    "scientific_execution": false,
+    "development_acquisition": false,
+    "policy_fitting": false,
+    "threshold_fitting": false,
+    "truth_opening": false,
+    "holdout": false,
+    "external_baseline": false,
+    "c1": false,
+    "d2_b": false,
+    "new_pf": false
+  }
+}

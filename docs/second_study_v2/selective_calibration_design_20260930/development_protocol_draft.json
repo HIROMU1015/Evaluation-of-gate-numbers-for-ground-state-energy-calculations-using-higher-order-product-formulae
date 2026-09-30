@@ -1,0 +1,108 @@
+{
+  "schema": "second_study_v2_selective_calibration_bounded_development_protocol_draft_v1",
+  "status": "draft_review_required_execution_not_authorized",
+  "objective": "Determine whether one cheap-only B2 and one selective-spectral H1 can be fairly frozen using a bounded development set without altering M1.",
+  "entry_gate": [
+    "paired_data_coverage_review_complete",
+    "all_numeric_success_conditions_frozen",
+    "development_families_and_fold_boundaries_frozen",
+    "source_and_runtime_identity_frozen",
+    "new_acquisition_scope_explicitly_authorized_if_needed"
+  ],
+  "development_sequence": [
+    {
+      "stage": "S1A",
+      "name": "existing_matched_tuple_replay",
+      "new_scientific_computation": false,
+      "purpose": "Validate schemas, leakage barriers, accounting and direct-comparison eligibility on existing HF and HCl tuples.",
+      "policy_fit_allowed": false
+    },
+    {
+      "stage": "S1B",
+      "name": "bounded_policy_development",
+      "authorized": false,
+      "purpose": "Select at most one B2 and one H1 rule within predeclared feature families and fold boundaries.",
+      "maximum_B2_method_count": 1,
+      "maximum_H1_method_count": 1,
+      "feature_family_count_bound": 2,
+      "feature_families": [
+        "resource_side",
+        "one_cheap_reliability_family"
+      ],
+      "threshold_candidate_count": "unresolved_requires_review",
+      "fold_boundary": "unresolved_requires_review"
+    },
+    {
+      "stage": "S1C",
+      "name": "optional_missing_tuple_acquisition",
+      "authorized": false,
+      "condition_scope": "unresolved_requires_review_after_paired_coverage_review",
+      "maximum_new_coordinate_count": "unresolved_requires_review",
+      "maximum_M1_PF_actions": "unresolved_requires_review",
+      "maximum_M1_H_matvecs": "unresolved_requires_review",
+      "maximum_new_truth_count": "unresolved_requires_review",
+      "wall_time_limit_seconds": "unresolved_requires_review",
+      "peak_memory_limit_bytes": "unresolved_requires_review",
+      "gpu_allowed": false,
+      "nearest_or_interpolation_allowed": false,
+      "different_state_substitution_allowed": false
+    },
+    {
+      "stage": "S1_stop",
+      "name": "development_completion_review",
+      "required": true,
+      "automatic_holdout_progression": false
+    }
+  ],
+  "fixed_components": {
+    "product_formula": "current_m3",
+    "B1_gamma_frontier": [
+      1.01,
+      1.02,
+      1.05,
+      1.1
+    ],
+    "M1_maximum_krylov_dimension": 8,
+    "M1_prefixes": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "M1_width_rule": "inherited_frozen_empirical_width",
+    "continuous_budget_primary": true
+  },
+  "data_use": {
+    "HF_role": "motivation_and_sanity_check_not_route_labels",
+    "HCl_role": "existing_matched_module_transfer_diagnostic_with_different_candidate_contract",
+    "LiF_role": "cheap_truth_available_M1_missing",
+    "N2_CO_role": "cheap_feature_availability_complete_tuple_not_yet_audited",
+    "used_families_are_independent_holdout": false,
+    "family_level_cross_validation_is_internal_only": true
+  },
+  "required_outputs_if_authorized_later": [
+    "development_source_contract",
+    "fold_and_feature_freeze",
+    "B2_policy_freeze",
+    "H1_acquisition_policy_freeze",
+    "H1_final_action_freeze",
+    "resource_ledger",
+    "post_freeze_truth_scoring",
+    "development_decision"
+  ],
+  "success_parameters": {
+    "quantum_budget_noninferiority_margin": "unresolved_requires_review",
+    "classical_budget_ceiling": "unresolved_requires_review",
+    "minimum_practical_effect_size": "unresolved_requires_review",
+    "query_budget": "unresolved_requires_review",
+    "aggregation_weights": "unresolved_requires_review"
+  },
+  "authorization": {
+    "execution": false,
+    "new_acquisition": false,
+    "policy_fit": false,
+    "threshold_fit": false,
+    "truth_generation": false,
+    "holdout": false
+  }
+}
