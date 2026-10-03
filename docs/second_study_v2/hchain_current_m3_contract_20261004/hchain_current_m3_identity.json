@@ -1,0 +1,217 @@
+{
+  "schema": "hchain_current_m3_identity_v1",
+  "verified_snapshot_commit": "09400dd1911022575db03d3cae51d727dd7d7d84",
+  "scope": [
+    "H2",
+    "H4",
+    "H6"
+  ],
+  "geometry": {
+    "basis": "sto-3g",
+    "spacing_angstrom": 1,
+    "rule": "linear z_i=(i-(n-1)/2)*1.0 Angstrom",
+    "charge": 0,
+    "multiplicity": 1,
+    "mapping": "Jordan-Wigner",
+    "constant_policy": "remove scalar identity contribution"
+  },
+  "PF": {
+    "formula_id": "current_m3",
+    "formal_order": 4,
+    "compact_weights": [
+      -0.4737318199452465,
+      0.3316118001935053,
+      0.2092246690782796,
+      0.1960294407008384
+    ],
+    "s2_sequence": [
+      0.1960294407008384,
+      0.2092246690782796,
+      0.3316118001935053,
+      -0.4737318199452465,
+      0.3316118001935053,
+      0.2092246690782796,
+      0.1960294407008384
+    ],
+    "compact_canonical_hex": [
+      "-0x1.e519f446f523cp-2",
+      "0x1.53920b3331f67p-2",
+      "0x1.ac7dfbb9a93bbp-3",
+      "0x1.9177e226e7fb4p-3"
+    ],
+    "compact_legacy_hex": [
+      "-0x1.e519f446f523cp-2",
+      "0x1.53920b3331f67p-2",
+      "0x1.ac7dfbb9a93bcp-3",
+      "0x1.9177e226e7fb5p-3"
+    ],
+    "canonical_sequence_hex": [
+      "0x1.9177e226e7fb4p-3",
+      "0x1.ac7dfbb9a93bbp-3",
+      "0x1.53920b3331f67p-2",
+      "-0x1.e519f446f523cp-2",
+      "0x1.53920b3331f67p-2",
+      "0x1.ac7dfbb9a93bbp-3",
+      "0x1.9177e226e7fb4p-3"
+    ],
+    "legacy_differing_compact_indices": [
+      2,
+      3
+    ],
+    "sign_convention": "U_P(t) approximates exp(+i H t)",
+    "echo": "W(t)=exp(-i H t) U_P(t)",
+    "expansion": "symmetric_s2_sequence reverses compact tail around w0; merge adjacent same-group exponentials",
+    "rotation_definition": "number of nonidentity Pauli rotations in one merged PF step, not group-exponential count, sparse multiplies or RZ layers",
+    "K_by_system": {
+      "H2": 108,
+      "H4": 2556,
+      "H6": 14344
+    },
+    "counts_alone_do_not_establish_PF_identity": true,
+    "legacy_new3_not_current_m3": {
+      "compact_tail": [
+        0.40653666,
+        0.21638706,
+        0.14924614
+      ],
+      "source": "src/trotterlib/product_formula.py:new_4th_m3_list",
+      "reuse_authorized": false
+    },
+    "legacy_ulp_variant_reuse_authorized": false
+  },
+  "systems": {
+    "H2": {
+      "geometry_angstrom": [
+        [
+          "H",
+          0,
+          0,
+          -0.5
+        ],
+        [
+          "H",
+          0,
+          0,
+          0.5
+        ]
+      ],
+      "electrons": 2,
+      "n_alpha": 1,
+      "n_beta": 1,
+      "num_qubits": 4,
+      "sector_dimension": 4,
+      "hamiltonian_hash": "fa275e11bfeba2d3631fbf6b731583bcd10ff92d84f06ab3cfe936b4e9678a0e",
+      "hash_kind": "archived sector array; not term-order hash",
+      "cisd_bundle_sha256": "aa5286b2394c26015d9b3dbc69c5466ed9d35a4ec4274de7d58bf08d58ac5a2a",
+      "cisd_individual_array_hash": null,
+      "cisd_identity_note": "H01 saved reference+singles+doubles subspace dimension 4; stored CISD/FCI overlap is diagnostic, not permission to replace state or proxy definition"
+    },
+    "H4": {
+      "geometry_angstrom": [
+        [
+          "H",
+          0,
+          0,
+          -1.5
+        ],
+        [
+          "H",
+          0,
+          0,
+          -0.5
+        ],
+        [
+          "H",
+          0,
+          0,
+          0.5
+        ],
+        [
+          "H",
+          0,
+          0,
+          1.5
+        ]
+      ],
+      "electrons": 4,
+      "n_alpha": 2,
+      "n_beta": 2,
+      "num_qubits": 8,
+      "sector_dimension": 36,
+      "sector_kind": "fixed_half_populations",
+      "hamiltonian_hash": "88d0c1ed0fed1c5be1034afdbc23d6cde31c2d920b7d788ec6aa5492d3c5f172",
+      "cisd_state_hash": "bce356423ac4e5f550ce99117f6fa15de11f72372565b2ee061342cdcd433872",
+      "group_count": 13,
+      "ordered_group_sequence_sha256": "8edb08b8dbfe152578fdcfcc2b6f06a229f31b8a4f2b96eb485a34ddd8a58e9b"
+    },
+    "H6": {
+      "geometry_angstrom": [
+        [
+          "H",
+          [
+            0,
+            0,
+            -2.5
+          ]
+        ],
+        [
+          "H",
+          [
+            0,
+            0,
+            -1.5
+          ]
+        ],
+        [
+          "H",
+          [
+            0,
+            0,
+            -0.5
+          ]
+        ],
+        [
+          "H",
+          [
+            0,
+            0,
+            0.5
+          ]
+        ],
+        [
+          "H",
+          [
+            0,
+            0,
+            1.5
+          ]
+        ],
+        [
+          "H",
+          [
+            0,
+            0,
+            2.5
+          ]
+        ]
+      ],
+      "electrons": 6,
+      "n_alpha": 3,
+      "n_beta": 3,
+      "num_qubits": 12,
+      "population_sector_dimension": 400,
+      "historical_exact_ground_restricted_dimension": 200,
+      "restriction_kind": "automatically_discovered_diagonal_Z2",
+      "hamiltonian_term_order_sha256": "c0498d974439cc65b9b8a2229163c4a8e153d184d2f533280165e6cb086c1956",
+      "ordered_grouping_structure_sha256": "857d6fcd77cfcf4a31cd435011268c80c4f3764c47b1300eba97c9f0ce91bad6",
+      "hash_kind": "term serialization/group structure; not byte-identical matrix hash",
+      "group_count": 57,
+      "cisd_state_hash": null,
+      "operational_CISD_Z2_restriction_validated": false,
+      "archived_exact_state_is_not_operational_CISD": true
+    }
+  },
+  "same_canonical_coefficients_observed_in_H4_phaseA_and_H6_holdout": true,
+  "common_operational_state_and_Hamiltonian_cache_identity_established": false,
+  "science_reconstruction_performed": false
+}
