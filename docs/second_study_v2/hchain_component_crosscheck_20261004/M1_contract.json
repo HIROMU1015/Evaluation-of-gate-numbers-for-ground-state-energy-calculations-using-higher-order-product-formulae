@@ -1,0 +1,72 @@
+{
+  "schema": "hchain_component_M1_contract_v1",
+  "status": "fixed_primary_dimension_requires_review_for_H2",
+  "implementation_path": "review_response/pf_spectral_recoverability_d2.py",
+  "function": "analyze_coordinate",
+  "sha256": "04eafd4051430be55c1494a6fbadf1800b2dc7c54ab1c3071a7a3e0a7616d033",
+  "algorithm": "explicit-vector unitary Arnoldi; one chain per coordinate with shared prefixes",
+  "primary_dimension": 8,
+  "prefixes": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "reorthogonalization_passes": 2,
+  "reference": "lowest Hermitian-projected H Ritz candidate, not certified ground",
+  "PF_candidate_sort": [
+    "descending H-reference overlap",
+    "descending previous-projector overlap when available",
+    "increasing absolute energy distance to H-reference",
+    "projected index"
+  ],
+  "continuation": "ascending selected times within each system, previous candidate vector only; no truth tie break",
+  "phase_lift": "principal arg(lambda)/t + k*(2*pi/t), k=round((E_H_Ritz-principal)/(2*pi/t)); ambiguity from inherited half-period tolerance",
+  "residuals": "full vector-action residual after unit-circle projection; H reference residual from matching stored H actions",
+  "width": {
+    "phase_residual_width": "2*asin(min(2,max(0,r_U))/2)/t",
+    "local_residual_width": "r_H + phase_residual_width",
+    "prefix_width": "abs(primary shift - largest available lower prefix shift); infinity if no lower prefix",
+    "empirical_width": "max(local_residual_width,prefix_width)",
+    "classification": "empirical, not certified error bound",
+    "numerical_action_error_bound": "not implemented in inherited core; do not claim the draft's numerical_action_bound exists"
+  },
+  "numerical_rules": {
+    "dtype": "complex128",
+    "modified_gram_schmidt_passes": 2,
+    "vector_normalization_residual_maximum": 1e-12,
+    "basis_orthogonality_frobenius_residual_maximum": 1e-10,
+    "relative_breakdown_tolerance": 1e-12,
+    "overlap_ambiguity_tolerance": 1e-10,
+    "energy_ambiguity_tolerance_hartree": 1e-10,
+    "pf_action_norm_residual_maximum": 1e-10,
+    "full_u_ritz_residual_maximum": 0.05,
+    "full_h_ritz_residual_hartree_maximum": 0.05,
+    "prefix_stability_reference": "absolute difference between m=8 and the largest available lower prefix estimate",
+    "numerical_threshold_origin": "normalization, orthogonality, breakdown and ambiguity tolerances are floating-point integrity rules; 0.05 full residual limits are predeclared empirical feasibility limits, not spectral certificates",
+    "threshold_retuning_after_truth": false
+  },
+  "H2_rank_issue": {
+    "sector_dimension": 4,
+    "maximum_orthonormal_Krylov_rank": 4,
+    "requested_primary": 8,
+    "source_fail_flag": "primary_dimension_unavailable",
+    "core_lower_prefix_behavior": "uses largest available prefix for diagnostic output but still marks primary unavailable/abstains",
+    "automatic_m4_primary_override": false,
+    "review_options": [
+      "retain H2 as an explicitly approved expected-abstention control",
+      "separately approve a rank-adaptive contract amendment; outside current execution authorization"
+    ]
+  },
+  "legacy_QPE_fields": {
+    "e_use": "abs(shift)+width",
+    "failure_flag": "no_positive_qpe_allowance",
+    "budget_field": "inherited implementation may emit absolute budget; not used for T0/B0 or resource-benefit scoring",
+    "policy": "preserve unchanged core output; report this feasibility flag separately from branch/numerical issues; any reinterpretation requires review"
+  },
+  "available_M1_results_Hchain": 0,
+  "PF_actions_per_coordinate_maximum": 8,
+  "H_matvecs_per_coordinate_maximum": 8,
+  "source_unchanged": true,
+  "execution_authorized": false
+}

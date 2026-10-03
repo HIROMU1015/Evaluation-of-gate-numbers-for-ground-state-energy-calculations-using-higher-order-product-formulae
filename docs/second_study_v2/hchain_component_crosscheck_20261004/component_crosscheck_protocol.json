@@ -1,0 +1,92 @@
+{
+  "schema": "hchain_component_mechanism_crosscheck_planning_v1",
+  "status": "hchain_component_crosscheck_contract_blocked",
+  "evaluation_class": "controlled_component_mechanism_crosscheck",
+  "summary_kind": "controlled_size_trend_diagnostic",
+  "base_commit": "6cd821045baa070f4692e51870c2fab1e29396e0",
+  "systems": [
+    "H2",
+    "H4",
+    "H6"
+  ],
+  "PF": "current_m3",
+  "formal_order": 4,
+  "s2_sequence": [
+    0.1960294407008384,
+    0.2092246690782796,
+    0.3316118001935053,
+    -0.4737318199452465,
+    0.3316118001935053,
+    0.2092246690782796,
+    0.1960294407008384
+  ],
+  "K_by_system": {
+    "H2": 108,
+    "H4": 2556,
+    "H6": 14344
+  },
+  "time_independent_variable": "same positive absolute finite time; not a resource optimum or normalized baseline",
+  "state_family": "same frozen CISD from HF-reference plus single/double determinant excitation subspace",
+  "state_contract_established": false,
+  "planning_only": true,
+  "scientific_execution_authorized": false,
+  "read_only_replay_authorized": false,
+  "push_authorized": false,
+  "time_contract": {
+    "selected_times": [],
+    "selected_coordinate_count": 0,
+    "eligible_common_time_count": 0,
+    "common_truth_metadata_time_count": 0,
+    "metadata_union_across_systems_time_count": 514,
+    "positive_only": true,
+    "equality": "binary64 hex equality; no tolerance, nearest or interpolation",
+    "selection_rule": "If all prerequisites and >=3 valid common times: smallest positive, median, largest; inspect invalidity metadata only.",
+    "median_for_even_cardinality": "unresolved_requires_review; do not invent a midpoint outside intersection",
+    "known_invalid_largest": "stop common_time_contract_requires_review; do not silently drop or replace it",
+    "current_time_status": "hchain_component_crosscheck_time_grid_requires_review",
+    "source_oracle_fit_times": "catalog only; not predictor scales or synthesized candidates"
+  },
+  "contracts": {
+    "state": "state_contract.json",
+    "cheap": "cheap_proxy_contract.json",
+    "M1": "M1_contract.json",
+    "truth": "truth_scoring_contract.md",
+    "resource": "resource_accounting_plan.md"
+  },
+  "freeze_boundary": [
+    "P1: all selected coordinates cheap acquisition without truth",
+    "P2: all selected coordinates M1 acquisition without truth; no routing",
+    "commit/hash freeze cheap/M1/width/branch/resource artifacts",
+    "scorer-only exact-coordinate truth read after blob identity verification"
+  ],
+  "outcomes_planning": [
+    "hchain_component_crosscheck_existing_data_ready",
+    "hchain_component_crosscheck_requires_limited_acquisition_review",
+    "hchain_component_crosscheck_time_grid_requires_review",
+    "hchain_component_crosscheck_contract_blocked"
+  ],
+  "blocked_status_precedence": "missing state or incompatible fixed M1 contract outranks time-grid review; both blockers preserved",
+  "mechanism_labels_post_execution_only": [
+    "cheap_and_M1_both_accurate",
+    "spectral_accuracy_advantage",
+    "spectral_width_overconservative",
+    "branch_or_numerical_issue",
+    "state_quality_limited"
+  ],
+  "mechanism_label_policy": "descriptive multi-label candidate interpretations only; no new effect threshold, causality, scaling exponent or asymptotic claim; no labels assigned in preflight",
+  "preserved_results": {
+    "T0_B0_audit": "hchain_current_m3_contract_not_justified",
+    "S1A_formal_classification": "D",
+    "B2_H1_policy_validation": false
+  },
+  "prohibited": [
+    "new T0 or B0",
+    "half-scale artificial cap",
+    "domain-regret recovery",
+    "10-percent reduction target",
+    "B2/H1/selective classifier",
+    "new PF/geometry/system H8+",
+    "new state/H/proxy/M1/direct/scorer computation without separate approval",
+    "result-dependent threshold/m/time/branch adjustment"
+  ]
+}

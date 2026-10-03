@@ -1,0 +1,48 @@
+{
+  "schema": "hchain_component_cheap_proxy_contract_v1",
+  "status": "observable_recovered_execution_not_authorized",
+  "implementation_path": "review_response/run_practical_calibration_minimal.py",
+  "function": "proxy_point",
+  "sha256": "713f1d2f95ddd69b890759de47e40e4382ad5be4f1005447408117c037dd80db",
+  "definition": {
+    "U_P": "current_m3 approximates exp(+i H t)",
+    "echo": "<psi_CISD|exp(-i H t) U_P(t)|psi_CISD>",
+    "signed_estimate_hartree": "Im(echo)/t",
+    "absolute_estimate_hartree": "abs(Im(echo)/t)",
+    "reference_evolution": "scipy.sparse.linalg.expm_multiply(+i*t*H,psi_CISD); not an exact-ground state",
+    "state_error": "norm(U_P psi - exp(+iHt) psi)",
+    "cancellation_index": "abs(Im(echo))/max(state_error, machine_tiny)",
+    "PF_actions_per_coordinate": 1,
+    "H_exponential_actions_per_coordinate": 1,
+    "internal_H_matvecs": "not exposed by inherited expm_multiply; do not invent count"
+  },
+  "observable_match_evidence": "First-study H4 finite-time proxy uses pf_first_study_phase_common.proxy_from_unitary -> echo_proxies; same Im(echo)/t observable. Its historical full-PF construction is not the future vector-action implementation or matched cost.",
+  "forbidden_substitutions": [
+    "CISD D4 expectation",
+    "exact-state echo",
+    "arg(echo)/t",
+    "nearby time",
+    "different PF or Hamiltonian hash"
+  ],
+  "near_zero_ratio_rule": {
+    "origin": "practical_calibration_minimal_protocol.json selector.sentinel.sign_noise_floor_hartree",
+    "inherited_floor": {
+      "absolute_minimum": 1e-12,
+      "target_error_multiplier": 0.000001
+    },
+    "formula": "max(absolute_minimum,target_error_multiplier*epsilon_E)",
+    "epsilon_E_hartree": 0.00015936001019904,
+    "floor_hartree": 1.5936001019904e-10,
+    "R_C": "abs(cheap)/abs(direct) only if abs(direct)>floor; otherwise null and absolute error only",
+    "truth_ratio_scored_only_after_freeze": true,
+    "new_floor_fit": false
+  },
+  "saved_coordinates_by_system": {
+    "H2": 0,
+    "H4": 50,
+    "H6": 0
+  },
+  "saved_same_observable_does_not_establish_same_cost": true,
+  "branch_correct_label_allowed": false,
+  "gamma_margin_or_selector_used": false
+}
