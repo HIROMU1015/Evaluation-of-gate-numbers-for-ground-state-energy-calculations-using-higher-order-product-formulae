@@ -1,0 +1,33 @@
+{
+  "schema": "second_study_v2_s1a_no_fit_replay_authorization_v1",
+  "status": "authorized_once_under_frozen_protocol",
+  "base_coverage_commit": "b0a7e2151a0c14e6cecad20763f5be05bb1385e5",
+  "allowed": {
+    "read_existing_cheap_artifacts": true,
+    "read_existing_M1_only_after_q_freeze": true,
+    "read_existing_truth_only_after_prediction_commit": true,
+    "write_lightweight_prediction_and_result_artifacts": true,
+    "local_commits": true
+  },
+  "forbidden": {
+    "new_PF_actions": true,
+    "new_H_actions": true,
+    "new_Arnoldi": true,
+    "new_truth": true,
+    "new_state_or_Hamiltonian": true,
+    "policy_fit": true,
+    "threshold_fit": true,
+    "margin_fit": true,
+    "missing_M1_acquisition": true,
+    "combined_cost_measurement": true,
+    "nearest_or_interpolation": true,
+    "new_molecule": true,
+    "holdout": true,
+    "external_baseline": true,
+    "new_PF": true,
+    "push": true
+  },
+  "one_run_only": true,
+  "classification_priority": ["D", "B", "A", "C", "E"],
+  "stop_after_result_commit": true
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "second_study_v2_s1a_predictor_source_contract_v1",
+  "truth_paths_exposed_to_predictor": 0,
+  "sources": [
+    {
+      "path": "artifacts/server_hf_domain_intervention_prediction_20260930_0aef1c0/prediction.json",
+      "sha256": "7537ddc01a78cb904423b2b617bb19e8f3a7810d12f16e648c3a882643b52ec4",
+      "role": "HF frozen B1 frontier and M1 rows",
+      "access_stage": "cheap first; M1 fields only after q freeze"
+    },
+    {
+      "path": "artifacts/server_hf_domain_intervention_prediction_20260930_0aef1c0/resource_audit.json",
+      "sha256": "fbafbafd11da9fa5a386ecf0f4ffdf09b026d9854183752cd864a3022aa72d59",
+      "role": "HF saved arm resource accounting",
+      "access_stage": "after q freeze for cost envelope"
+    },
+    {
+      "path": "artifacts/server_second_study_safe_time_domain_phase_a_20260927_e86e694/predictions.json",
+      "sha256": "3406d2f69237d95b14be298059f777df3fbd5043446add2c31559bf902a34b83",
+      "role": "HCl frozen cheap strategy and selector records",
+      "access_stage": "cheap"
+    },
+    {
+      "path": "artifacts/server_second_study_safe_time_domain_phase_a_20260927_e86e694/proxy_points.csv",
+      "sha256": "dd77504c02c3a6e6b959fdcfb6006a50f3e2e9029cfc35f8c9387431272af0d0",
+      "role": "HCl truth-free signed cheap proxy rows",
+      "access_stage": "cheap"
+    },
+    {
+      "path": "artifacts/server_second_study_safe_time_domain_phase_a_20260927_e86e694/resource_audit.json",
+      "sha256": "d15bae711382e940de754455c75f4a2e87c0c87d254384e4545504a6ea25f1fb",
+      "role": "HCl saved cheap resource accounting",
+      "access_stage": "after q freeze for cost envelope"
+    },
+    {
+      "path": "artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/prediction.json",
+      "sha256": "cc496d70c0d7c48239b6f6dd9f69fa351a1b65f9109bb4b1588da1f17dd16226",
+      "role": "HCl frozen M1 rows",
+      "access_stage": "only q=1 condition rows"
+    },
+    {
+      "path": "artifacts/server_pf_spectral_recoverability_d2_a_prediction_20260929_e2e8e5c/resource_audit.json",
+      "sha256": "04a2331a4944621e141e930941473dada2402364cde3ebdd496333e26e8f3732",
+      "role": "HCl saved M1 resource accounting",
+      "access_stage": "after q freeze for cost envelope"
+    }
+  ],
+  "contract_rules": {
+    "read_whole_combined_artifact_before_field_gate": false,
+    "project_cheap_and_M1_namespaces_before_policy_evaluation": true,
+    "M1_rows_opened_only_for_q_one": true,
+    "truth_artifact_access": false,
+    "runtime_or_untracked_cache_search": false
+  }
+}

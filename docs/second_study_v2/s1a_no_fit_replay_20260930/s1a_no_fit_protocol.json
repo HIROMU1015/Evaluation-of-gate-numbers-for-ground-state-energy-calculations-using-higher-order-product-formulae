@@ -1,0 +1,143 @@
+{
+  "schema": "second_study_v2_s1a_no_fit_replay_protocol_v1",
+  "status": "s1a_no_fit_rules_frozen_execution_not_started",
+  "claim_class": "post_hoc_development_diagnostic",
+  "base_coverage_commit": "b0a7e2151a0c14e6cecad20763f5be05bb1385e5",
+  "external_rule_spec_sha256": "5f77895a09caffafd4928526ee33d1b26f21adf3bafb52f21da2b357c6ac1e5a",
+  "scope": {
+    "condition_unit_count": 4,
+    "conditions": [
+      "HF_full_eq_sto3g",
+      "HF_full_stretch150_sto3g",
+      "HCl_full_eq_sto3g",
+      "HCl_full_stretch150_sto3g"
+    ],
+    "matched_coordinate_count": 12,
+    "coordinate_rows_are_independent_samples": false,
+    "native_candidate_contracts_remain_separate": true,
+    "product_formula": "current_m3"
+  },
+  "fixed_constants": {
+    "gamma_frontier": [1.01, 1.02, 1.05, 1.1],
+    "gamma_stable": 1.01,
+    "gamma_unstable": 1.1,
+    "sign_noise_floor": "max(1e-12,1e-6*epsilon_E)",
+    "numerical_relative_tolerance": 1e-12,
+    "resource_metric": "continuous_rotation_cost_proxy"
+  },
+  "rule_1_B2_S1A_no_fit_probe": {
+    "allowed_inputs": [
+      "frozen_B1_local_cheap_proxy",
+      "frozen_gamma_frontier",
+      "per_gamma_eligible_candidate_set",
+      "per_gamma_selected_candidate",
+      "per_gamma_fallback_status",
+      "per_gamma_frozen_continuous_budget",
+      "signed_cheap_proxy"
+    ],
+    "forbidden_inputs": ["M1_output", "direct_truth", "truth_safety", "post_freeze_score"],
+    "gamma_candidate_disagreement": "nonfallback selected candidates are not identical across all four gamma arms",
+    "gamma_eligibility_disagreement": "eligible candidate sets or fallback status are not identical across all four gamma arms",
+    "proxy_sign_instability": "cap-exterior proxies contain both positive and negative signs or at least one indeterminate sign",
+    "cheap_instability": "gamma_candidate_disagreement OR gamma_eligibility_disagreement OR proxy_sign_instability",
+    "gamma_choice": "1.01 if stable else 1.10",
+    "candidate_choice": "minimum frozen continuous budget among eligible candidates; tie chooses smaller time; no eligible candidate falls back to inherited B0/T0",
+    "policy_fit": false
+  },
+  "rule_2_H1_acquisition": {
+    "policy_name": "H1_S1A_selective_spectral_probe",
+    "cheap_policy_byte_identical_to_B2": true,
+    "q_rule": "q=1 iff cheap_instability is true or B2 uses baseline fallback; otherwise q=0",
+    "decision_forbids_M1_and_truth": true,
+    "conditional_access": "open saved M1 rows only for q=1 conditions",
+    "record_available_and_opened_M1_separately": true
+  },
+  "rule_3_H1_final": {
+    "q_zero": "H1 action equals B2 action",
+    "M1_unusable": "retain nonfallback B2; otherwise use B0",
+    "exact_candidate_match_required": true,
+    "nearest_or_interpolation": false,
+    "spectral_consistency": "e_use_S(t_C)+beta*K/(t_C*B_C)<=epsilon_E",
+    "if_B2_validated": "choose smaller frozen quantum budget between nonfallback B2 and M1; numerical tie chooses B2",
+    "if_B2_invalidated": "choose nonfallback M1; otherwise B0",
+    "empirical_width_is_rigorous_certificate": false
+  },
+  "rule_4_replay_work_cost_envelope": {
+    "measured_combined_H1_cost": false,
+    "condition_costs": {
+      "C_C": "saved cheap-arm wall time over all matched native candidates",
+      "C_S": "saved standalone-M1 wall time over all matched native candidates"
+    },
+    "B2": "C_C",
+    "always_M1": "C_S",
+    "H1_q_zero": "[C_C,C_C]",
+    "H1_q_one": "[max(C_C,C_S),C_C+C_S]",
+    "interpretation": "saved-arm replay envelope, not measured combined runtime",
+    "missing_cost_action": "cost_not_evaluable",
+    "resource_vector_fields": ["wall_seconds", "PF_actions", "H_exponential_actions", "H_matvecs", "peak_memory"],
+    "heterogeneous_actions_summed_to_scalar": false
+  },
+  "rule_5_classification": {
+    "priority": ["D", "B", "A", "C", "E"],
+    "D": {
+      "name": "contract_or_cost_not_replayable",
+      "conditions": [
+        "required cheap tuple missing",
+        "required exact-coordinate M1 tuple missing for q=1",
+        "B2 candidate has no matching M1 row",
+        "Rules 1-3 are not uniquely evaluable under a native contract",
+        "saved cost required for A-C is missing"
+      ]
+    },
+    "B": {
+      "name": "cheap_only_sufficient",
+      "conditions": [
+        "B2 unsafe count is zero",
+        "B2 domain interventions are not fewer than H1",
+        "B2 aggregate quantum budget is not worse than H1",
+        "B2 aggregate quantum budget is not worse than always-M1"
+      ]
+    },
+    "A": {
+      "name": "selective_value_signal",
+      "conditions": [
+        "H1 unsafe count is zero",
+        "0 < acquisition count < condition count",
+        "decision change count >= 1",
+        "H1 strictly improves at least one of unsafe, fallback, domain intervention, aggregate quantum budget versus B2",
+        "H1 quantum budget is not worse than always-M1",
+        "H1 cost-envelope upper is strictly lower than standalone always-M1 cost"
+      ]
+    },
+    "C": {
+      "name": "selective_decision_signal_cost_unresolved",
+      "conditions": ["A decision conditions hold", "cost advantage cannot be established"]
+    },
+    "E": {
+      "name": "no_selective_value_signal",
+      "condition": "none of D, B, A, C applies"
+    },
+    "not_worse": "x<=y*(1+1e-12)",
+    "strictly_better": "x<y*(1-1e-12)",
+    "effect_size_threshold": "not_defined"
+  },
+  "existing_frontier_gate": {
+    "require_exact_four_gamma_frontier_per_condition": true,
+    "require_saved_eligible_sets_selections_fallback_and_budgets": true,
+    "derive_or_refit_missing_frontier": false,
+    "failure_action": "freeze contract_not_replayable and classify D without rescue"
+  },
+  "freeze_sequence": [
+    "verify source identities and native contracts",
+    "open cheap allowlist only",
+    "freeze B2 and q",
+    "open M1 rows only for q=1",
+    "freeze H1 and cost envelope",
+    "commit and hash prediction artifact",
+    "verify prediction commit byte identity",
+    "open truth only if scoring is required",
+    "score and classify once"
+  ],
+  "terminal_status": "second_study_v2_s1a_no_fit_replay_complete_review_required",
+  "automatic_next_steps": []
+}
