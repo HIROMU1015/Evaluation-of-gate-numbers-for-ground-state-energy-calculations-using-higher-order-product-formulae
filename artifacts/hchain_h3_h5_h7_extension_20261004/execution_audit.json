@@ -1,0 +1,144 @@
+{
+  "base_commit": "5a9226a94fad0b578df1a53edd1a29e3571ad8c3",
+  "full_legacy_test_suite": "not_run; focused synthetic/source/immutable-scoring tests only",
+  "new_or_repeat_calibration_after_freeze": 0,
+  "next_stage_authorized": false,
+  "old_even_Git_artifacts_byte_identical": true,
+  "original_even_runtime_not_accessed": true,
+  "phases": [
+    {
+      "audit_path": "inputs_execution_audit.json",
+      "audit_sha256": "257375a3688bf64b6b634544fd0c7647d72e9a669187ce4d3e92abc1b219f253",
+      "finish_utc": "2026-10-04T08:16:49.247779+00:00",
+      "phase": "inputs",
+      "start_utc": "2026-10-04T08:16:41.488193+00:00",
+      "status": "phase_complete"
+    },
+    {
+      "audit_path": "reference_execution_audit.json",
+      "audit_sha256": "ff75646ca2dce0eea528a0042968cf5a0c240b9470424e68432c48071038a87a",
+      "finish_utc": "2026-10-04T08:17:42.593293+00:00",
+      "phase": "reference",
+      "start_utc": "2026-10-04T08:17:36.901600+00:00",
+      "status": "phase_complete"
+    },
+    {
+      "audit_path": "prediction_execution_audit.json",
+      "audit_sha256": "42dbce45b5deac9d227bbfda55773ede9d1898c9957e470f2e9a8709da1af01a",
+      "finish_utc": "2026-10-04T08:18:22.142419+00:00",
+      "phase": "prediction",
+      "start_utc": "2026-10-04T08:18:17.946834+00:00",
+      "status": "phase_complete"
+    },
+    {
+      "audit_path": "truth_execution_audit.json",
+      "audit_sha256": "1e2f25987ee1a241a489a00687a5931b1be0613984130b06a8617c5d07c7b6f3",
+      "finish_utc": "2026-10-04T08:20:14.126706+00:00",
+      "phase": "truth",
+      "start_utc": "2026-10-04T08:20:04.670992+00:00",
+      "status": "phase_complete"
+    }
+  ],
+  "push_authorized": false,
+  "remote_gate": {
+    "branch": "pf-second-study-v2-hchain-truth-scoring-20261004",
+    "mechanism": "user_supplied_live_git_ls_remote_output",
+    "root_agent_network_confirmation": false,
+    "tip": "5a9226a94fad0b578df1a53edd1a29e3571ad8c3"
+  },
+  "source_content_commit": "85c33f0951aa04635ca440c7fd9689013dbe55d2",
+  "stage_commits": {
+    "acquisition": "c7fc4112aac98518f06607dfc8d8f81e53c2c5fe",
+    "ground": "5b06be4aa6201eb6ace1da352d125d7495481355",
+    "h1": "cd9c4f22857e17870462a60d0d6c9d2005e6f891",
+    "inputs": "49ec2de066ee8c0f63e99c77b94a52cf2aa73ccd",
+    "prediction": "747868eb3527261fff74c515221b0ea4235bbcbf",
+    "reference": "6c063dd2578109b204c0a1346581b2016c724957",
+    "scored": "2065a4b2d5a0aef2db52135b549be299793c3c0b",
+    "truth": "db504bf8b9902a31aa14fa97d84cab9da82bdee4"
+  },
+  "tests": [
+    {
+      "command": [
+        "/home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-rs",
+        "review_tests/test_hchain_odd_extension.py",
+        "review_tests/test_hchain_input_reference_preparation.py",
+        "review_tests/test_hchain_prediction_phase.py",
+        "review_tests/test_hchain_truth_scoring.py",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "end_utc": "2026-10-04T08:15:36.089956+00:00",
+      "environment": {
+        "packages": {
+          "numpy": "1.26.4",
+          "openfermion": "1.6.1",
+          "pyscf": "2.7.0",
+          "pytest": "8.3.3",
+          "scipy": "1.14.1"
+        },
+        "python": "/home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python",
+        "python_version": "3.11.1",
+        "variables": {
+          "MKL_NUM_THREADS": "1",
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONNOUSERSITE": "1",
+          "PYTHONPATH": "src:review_response:."
+        }
+      },
+      "log": "........................................................................ [ 67%]\n..................................                                       [100%]\n106 passed in 1.41s\n",
+      "returncode": 0,
+      "scope": "truth_free_synthetic_source_only",
+      "start_utc": "2026-10-04T08:15:34.399335+00:00",
+      "wall_seconds": 1.6906226868741214
+    },
+    {
+      "command": [
+        "/home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-rs",
+        "review_tests/test_hchain_odd_extension.py",
+        "review_tests/test_hchain_input_reference_preparation.py",
+        "review_tests/test_hchain_prediction_phase.py",
+        "review_tests/test_hchain_truth_scoring.py",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "end_utc": "2026-10-04T08:20:03.549694+00:00",
+      "log": "........................................................................ [ 67%]\n..................................                                       [100%]\n106 passed in 1.39s\n",
+      "returncode": 0,
+      "scope": "post_prediction_pre_scorer_focused",
+      "start_utc": "2026-10-04T08:20:01.886960+00:00",
+      "wall_seconds": 1.662739829160273
+    },
+    {
+      "command": [
+        "/home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-rs",
+        "review_tests/test_hchain_odd_extension.py",
+        "review_tests/test_hchain_input_reference_preparation.py",
+        "review_tests/test_hchain_prediction_phase.py",
+        "review_tests/test_hchain_truth_scoring.py",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "end_utc": "2026-10-04T08:22:19.964229+00:00",
+      "log": "........................................................................ [ 67%]\n..................................                                       [100%]\n106 passed in 1.41s\n",
+      "returncode": 0,
+      "scope": "post_result_focused",
+      "start_utc": "2026-10-04T08:22:18.276255+00:00",
+      "wall_seconds": 1.687981486786157
+    }
+  ]
+}

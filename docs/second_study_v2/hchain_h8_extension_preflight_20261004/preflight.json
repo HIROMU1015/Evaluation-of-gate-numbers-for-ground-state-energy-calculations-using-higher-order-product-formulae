@@ -1,0 +1,133 @@
+{
+  "status": "H8_extension_contract_blocked",
+  "science_authorized": false,
+  "system": {
+    "geometry": "centered linear, 1 Angstrom",
+    "basis": "sto-3g",
+    "charge": 0,
+    "multiplicity": 1,
+    "n_alpha": 4,
+    "n_beta": 4,
+    "active_spatial_orbitals": 8,
+    "sector_dimension": 4900,
+    "CISD_dimension": 361,
+    "sector_kind": "fixed_half_populations",
+    "group_count": null,
+    "current_m3_K": null,
+    "group_K_status": "operational identity not frozen",
+    "legacy_same_length_DECOMPO_NUM_candidate": 47932,
+    "legacy_K_is_current_m3_identity": false
+  },
+  "storage": {
+    "one_complex128_dense_matrix_bytes": 384160000,
+    "one_matrix_GiB": 0.3577768802642822,
+    "CISD_subspace_complex128_bytes": 2085136,
+    "one_vector_bytes": 78400,
+    "maximum_dense_matrix_count_under_4GiB_ignoring_everything_else": 11,
+    "loader": "retains all dense groups before constructing compact spectra; workspace/total RAM unknown"
+  },
+  "work": {
+    "reference_PF_H_exp": [
+      34,
+      34
+    ],
+    "candidate_cheap_PF_H_exp": [
+      3,
+      3
+    ],
+    "rank8_M1_PF_H": [
+      24,
+      24
+    ],
+    "ground_solves": 1,
+    "full_PF_Schur_gap_coordinates": 3
+  },
+  "measured_H7_stage_seconds": {
+    "inputs": {
+      "H7_input": 6.911882905289531
+    },
+    "reference": {
+      "H7_reference": 4.943481021095067,
+      "H_exponential_action": 0.05856875190511346,
+      "PF_vector_action": 1.7969774128869176,
+      "component_gate_materialization": 1.5463969116099179,
+      "group_spectrum_preprocessing": 1.2685569636523724
+    },
+    "prediction": {
+      "H7_M1": 0.30337144108489156,
+      "H7_candidate_cheap": 0.16974107176065445,
+      "H7_shared_preprocessing": 3.0979681690223515,
+      "H_exponential_action": 0.006840703543275595,
+      "M1_H_matvec": 0.0013159341178834438,
+      "PF_vector_action": 0.4579580477438867,
+      "component_gate_materialization": 0.2793260579928756,
+      "group_spectrum_preprocessing": 1.2882468290627003
+    },
+    "truth": {
+      "H7_direct_truth_and_gap": 5.616292329970747,
+      "H7_same_H_ground": 3.240509015042335,
+      "group_spectrum_preprocessing": 1.2585568712092936,
+      "truth_Schur_branch_gap": 1.7073491481132805,
+      "truth_full_PF_construction": 3.907979673240334
+    }
+  },
+  "arithmetic_ratios_vs_H7": {
+    "dimension": 6.666666666666667,
+    "dense_storage": 44.44444444444445,
+    "cubic_dense_operations": 296.29629629629636,
+    "interpretation": "complexity arithmetic only; not measured scaling or runtime bounds"
+  },
+  "runtime_estimates": {
+    "Hamiltonian": "not_evaluable: H8 inputs/group data and operation costs unmeasured",
+    "CISD": "not_evaluable: H8 inputs/group data and operation costs unmeasured",
+    "reference": "not_evaluable: H8 inputs/group data and operation costs unmeasured",
+    "candidate_cheap": "not_evaluable: H8 inputs/group data and operation costs unmeasured",
+    "M1": "not_evaluable: H8 inputs/group data and operation costs unmeasured",
+    "ground": "not_evaluable: H8 inputs/group data and operation costs unmeasured",
+    "direct_truth": "not_evaluable: H8 inputs/group data and operation costs unmeasured"
+  },
+  "wall_time_range_seconds": null,
+  "peak_RAM_GiB": null,
+  "CPU_feasibility": "not established under 4GiB dense-group input loader",
+  "GPU_necessity": "not established; GPU alone does not remove CPU loader issue",
+  "reuse": {
+    "Hamiltonian": "exact byte/H/state/PF identity not established in audited Git inventory",
+    "grouping": "exact byte/H/state/PF identity not established in audited Git inventory",
+    "CISD": "exact byte/H/state/PF identity not established in audited Git inventory",
+    "ground": "exact byte/H/state/PF identity not established in audited Git inventory",
+    "current_m3_direct": "exact byte/H/state/PF identity not established in audited Git inventory"
+  },
+  "legacy_H8": "tracked legacy 4th(new_3) coefficients cannot substitute for operational current_m3 inputs/truth",
+  "reason": "Canonical physical recipe known; operational H/group/state/coordinate/runtime identity not frozen, RAM unresolved. No H8 calculations permitted to close gaps in this preflight.",
+  "source_registry": [
+    {
+      "path": "src/trotterlib/chemistry_hamiltonian.py",
+      "bytes": 5057,
+      "sha256": "4c30b842c065f613e566fb21c1d2c59adfbad05af4d519a548c5e656b9e0b4cb",
+      "origin_result_commit": "e0e82f6c7bee73d2360b77456bd22f7356572e01",
+      "verified_snapshot_commit": "5a9226a94fad0b578df1a53edd1a29e3571ad8c3"
+    },
+    {
+      "path": "src/trotterlib/config.py",
+      "bytes": 12610,
+      "sha256": "30a6d2afa5b94e7a8d5f2cef222b92c3490ffe58686b49256f5c3b3628111787",
+      "origin_result_commit": "6d4848d298a2b434fd7583af830c0234d4aaeae8",
+      "verified_snapshot_commit": "5a9226a94fad0b578df1a53edd1a29e3571ad8c3"
+    },
+    {
+      "path": "src/trotterlib/Almost_optimal_grouping.py",
+      "bytes": 42859,
+      "sha256": "5eae25459c7a1895d1a3715b8aa747b36965a65b198ebeb78d6e52e461cf3874",
+      "origin_result_commit": "e0e82f6c7bee73d2360b77456bd22f7356572e01",
+      "verified_snapshot_commit": "5a9226a94fad0b578df1a53edd1a29e3571ad8c3"
+    },
+    {
+      "path": "review_response/gpu_direct_solver_benchmark_instructions.md",
+      "bytes": 15853,
+      "sha256": "a15dd8b9b470e00b1409101b143a992b89f8afcbf8983b1ae4da016f3d34c738",
+      "origin_result_commit": "60fdf206f4f0fef4d34fa2140f9bdc08d595b376",
+      "verified_snapshot_commit": "5a9226a94fad0b578df1a53edd1a29e3571ad8c3"
+    }
+  ],
+  "new_H8_Hamiltonian_CISD_reference_M1_ground_truth": 0
+}
