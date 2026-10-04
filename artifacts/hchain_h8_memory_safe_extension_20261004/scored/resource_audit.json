@@ -1,0 +1,134 @@
+{
+  "BLAS_threads": 1,
+  "CPU_processes": 1,
+  "H_exponential_internal_matvec_count": "unknown_not_exposed_by_CSR_expm_multiply",
+  "combined_H1_cost": "not_measured_preparation_only",
+  "counts": {
+    "Arnoldi_chains": 0,
+    "GPU_allocations": 0,
+    "GPU_kernels": 0,
+    "GPU_queries": 0,
+    "candidate_cheap_pf_actions": 0,
+    "candidate_h_exponential_actions": 0,
+    "direct_Schur_solves": 3,
+    "direct_truth_coordinates": 3,
+    "full_H_ground_solves": 1,
+    "full_pf_unitary_builds": 3,
+    "ground_verification_H_matvecs": 1,
+    "group_component_eigh_batches": 404,
+    "group_spectrum_preparations": 105,
+    "m1_h_matvecs": 0,
+    "m1_pf_vector_actions": 0,
+    "target_phase_gaps": 3,
+    "truth_array_reads": 1,
+    "truth_component_gate_materializations": 1260,
+    "truth_sparse_matrix_dense_matrix_multiplies": 4371
+  },
+  "maximum_gate_cache_bytes": 0,
+  "maximum_h_exp_norm_residual": 0.0,
+  "maximum_pf_norm_residual": 0.0,
+  "memory_events": [
+    {
+      "VmHWM_bytes": 356667392,
+      "VmRSS_bytes": 356667392,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 0,
+      "largest_object_bytes": 786432,
+      "simultaneously_live_full_sector_dense_matrices": 0,
+      "stage": "streamed_component_preprocessing"
+    },
+    {
+      "VmHWM_bytes": 711610368,
+      "VmRSS_bytes": 711610368,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 1,
+      "largest_object_bytes": 384160000,
+      "simultaneously_live_full_sector_dense_matrices": 1,
+      "stage": "same_H_ground_input"
+    },
+    {
+      "VmHWM_bytes": 1874337792,
+      "VmRSS_bytes": 366698496,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 0,
+      "largest_object_bytes": 0,
+      "simultaneously_live_full_sector_dense_matrices": 0,
+      "stage": "same_H_ground_released"
+    },
+    {
+      "VmHWM_bytes": 1874337792,
+      "VmRSS_bytes": 986173440,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 1,
+      "largest_object_bytes": 384160000,
+      "simultaneously_live_full_sector_dense_matrices": 1,
+      "stage": "one_full_PF"
+    },
+    {
+      "VmHWM_bytes": 2555604992,
+      "VmRSS_bytes": 615129088,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 0,
+      "largest_object_bytes": 0,
+      "simultaneously_live_full_sector_dense_matrices": 0,
+      "stage": "coordinate_dense_objects_released"
+    },
+    {
+      "VmHWM_bytes": 2555604992,
+      "VmRSS_bytes": 1010626560,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 1,
+      "largest_object_bytes": 384160000,
+      "simultaneously_live_full_sector_dense_matrices": 1,
+      "stage": "one_full_PF"
+    },
+    {
+      "VmHWM_bytes": 2567229440,
+      "VmRSS_bytes": 626548736,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 0,
+      "largest_object_bytes": 0,
+      "simultaneously_live_full_sector_dense_matrices": 0,
+      "stage": "coordinate_dense_objects_released"
+    },
+    {
+      "VmHWM_bytes": 2567229440,
+      "VmRSS_bytes": 910786560,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 1,
+      "largest_object_bytes": 384160000,
+      "simultaneously_live_full_sector_dense_matrices": 1,
+      "stage": "one_full_PF"
+    },
+    {
+      "VmHWM_bytes": 2567229440,
+      "VmRSS_bytes": 526655488,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 0,
+      "largest_object_bytes": 0,
+      "simultaneously_live_full_sector_dense_matrices": 0,
+      "stage": "coordinate_dense_objects_released"
+    }
+  ],
+  "native_workspace_allocation_count": "unknown_not_instrumented",
+  "peak_RSS_KiB": 2507060,
+  "quantum_K_not_classical_action_count": true,
+  "timings_seconds": {
+    "H8_same_H_ground": 125.7555375979282,
+    "H8_truth_H8_r0.5": 478.5751746278256,
+    "H8_truth_H8_r0.65": 478.49760016193613,
+    "H8_truth_H8_r0.8": 480.1973010697402,
+    "group_spectrum_preprocessing": 31.8440333600156,
+    "truth_Schur_branch_gap": 381.00620387867093,
+    "truth_full_PF_construction": 1056.261739892885
+  }
+}
