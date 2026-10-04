@@ -1,0 +1,297 @@
+........................................................................ [ 14%]
+........................................................................ [ 29%]
+........................................................................ [ 43%]
+............FF.......................................................... [ 58%]
+.................................F...................................... [ 73%]
+........................................................................ [ 87%]
+...............FFF.........F...............................              [100%]
+=================================== FAILURES ===================================
+____________ test_allowlist_contains_all_frozen_prediction_sources _____________
+
+    def test_allowlist_contains_all_frozen_prediction_sources():
+>       runtime = preparation_gate(ROOT)
+
+review_tests/test_hchain_truth_scoring_resume.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-h8-memory-safe-extension-20261004')
+
+    def preparation_gate(root):
+        directory = root / PREP
+        manifest = directory / "manifest.json"
+        if sha_file(manifest) != "ec3bd3d8b709d9e8128a1cd00bf31212bd1419e1e9fa82b10f171b7ccfc5d2af":
+            raise PreparationError("preparation result manifest mismatch")
+        entries = json.loads(manifest.read_text())["files"]
+        verify_entries(directory, entries)
+        for entry in entries:
+            verify_blob(root, f"{PREP}/{entry['path']}", BASE)
+        for name in INPUT_FILES:
+            verify_blob(root, f"{PREP}/{name}", INPUT_COMMIT)
+        complete = json.loads((directory / "COMPLETE.json").read_text())
+        if complete["status"] != "hchain_input_reference_preparation_complete_execution_ready":
+            raise PreparationError("preparation not complete")
+        runtime = directory / ".runtime"
+        entries = json.loads((directory / "runtime_manifest.json").read_text())["files"]
+        found = {str(path.relative_to(runtime)) for path in runtime.rglob("*") if path.is_file()}
+        if found != {entry["path"] for entry in entries} or len(entries) != 7:
+>           raise PreparationError("runtime file set mismatch")
+E           review_response.hchain_input_reference_preparation.PreparationError: runtime file set mismatch
+
+review_response/hchain_prediction_phase.py:121: PreparationError
+_____ test_actual_composed_source_and_runtime_gates_under_active_boundary ______
+
+    def test_actual_composed_source_and_runtime_gates_under_active_boundary():
+>       runtime = preparation_gate(ROOT)
+
+review_tests/test_hchain_truth_scoring_resume.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-h8-memory-safe-extension-20261004')
+
+    def preparation_gate(root):
+        directory = root / PREP
+        manifest = directory / "manifest.json"
+        if sha_file(manifest) != "ec3bd3d8b709d9e8128a1cd00bf31212bd1419e1e9fa82b10f171b7ccfc5d2af":
+            raise PreparationError("preparation result manifest mismatch")
+        entries = json.loads(manifest.read_text())["files"]
+        verify_entries(directory, entries)
+        for entry in entries:
+            verify_blob(root, f"{PREP}/{entry['path']}", BASE)
+        for name in INPUT_FILES:
+            verify_blob(root, f"{PREP}/{name}", INPUT_COMMIT)
+        complete = json.loads((directory / "COMPLETE.json").read_text())
+        if complete["status"] != "hchain_input_reference_preparation_complete_execution_ready":
+            raise PreparationError("preparation not complete")
+        runtime = directory / ".runtime"
+        entries = json.loads((directory / "runtime_manifest.json").read_text())["files"]
+        found = {str(path.relative_to(runtime)) for path in runtime.rglob("*") if path.is_file()}
+        if found != {entry["path"] for entry in entries} or len(entries) != 7:
+>           raise PreparationError("runtime file set mismatch")
+E           review_response.hchain_input_reference_preparation.PreparationError: runtime file set mismatch
+
+review_response/hchain_prediction_phase.py:121: PreparationError
+____________ test_runner_reproduces_all_outputs_in_fresh_directory _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-abe/pytest-191/test_runner_reproduces_all_out0')
+
+    def test_runner_reproduces_all_outputs_in_fresh_directory(tmp_path: Path) -> None:
+        output = tmp_path / "paper-evidence"
+>       manifest = evidence.run(PROJECT_ROOT, PROTOCOL, output)
+
+review_tests/test_pf_first_study_paper_evidence.py:183: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+review_response/run_pf_first_study_paper_evidence.py:935: in run
+    source_records, roots = _validate_sources(project_root, protocol)
+review_response/run_pf_first_study_paper_evidence.py:132: in _validate_sources
+    _git_blob(project_root, spec["result_commit"], relative)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+project_root = PosixPath('/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-h8-memory-safe-extension-20261004')
+commit = 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'
+relative_path = 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json'
+
+    def _git_blob(project_root: Path, commit: str, relative_path: str) -> bytes:
+        result = subprocess.run(
+            ["git", "show", f"{commit}:{relative_path}"],
+            cwd=project_root,
+            check=False,
+            capture_output=True,
+        )
+        if result.returncode:
+            stderr = result.stderr.decode("utf-8", errors="replace").strip()
+>           raise PaperEvidenceError(
+                f"cannot read {relative_path} at source commit {commit}: {stderr}"
+            )
+E           review_response.run_pf_first_study_paper_evidence.PaperEvidenceError: cannot read artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json at source commit cc3626a8135b647fe283fc60c963de70c5f6b2a5: fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'
+
+review_response/run_pf_first_study_paper_evidence.py:90: PaperEvidenceError
+___ test_local_preflight_revalidates_frozen_sources_without_new_computation ____
+
+    def test_local_preflight_revalidates_frozen_sources_without_new_computation() -> None:
+>       report = preflight.build_preflight_report(PROJECT_ROOT)
+
+review_tests/test_second_study_safe_time_domain_preflight.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+review_response/run_second_study_safe_time_domain_preflight.py:435: in build_preflight_report
+    _validate_first_study_artifacts(project_root, audit, checks)
+review_response/run_second_study_safe_time_domain_preflight.py:373: in _validate_first_study_artifacts
+    _record_file_and_blob(
+review_response/run_second_study_safe_time_domain_preflight.py:209: in _record_file_and_blob
+    _git_blob_sha256(project_root, source_commit, relative),
+review_response/run_second_study_safe_time_domain_preflight.py:158: in _git_blob_sha256
+    return sha256_bytes(_git(project_root, "show", f"{commit}:{relative}").stdout)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+project_root = PosixPath('/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-h8-memory-safe-extension-20261004')
+check = True
+args = ('show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json')
+result = CompletedProcess(args=['git', 'show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exa...act_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'\n")
+detail = "fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'"
+
+    def _git(
+        project_root: Path, *args: str, check: bool = True
+    ) -> subprocess.CompletedProcess[bytes]:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=project_root,
+            check=False,
+            capture_output=True,
+        )
+        if check and result.returncode:
+            detail = result.stderr.decode("utf-8", errors="replace").strip()
+>           raise PreflightError(f"git {' '.join(args)} failed: {detail}")
+E           review_response.run_second_study_safe_time_domain_preflight.PreflightError: git show cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json failed: fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'
+
+review_response/run_second_study_safe_time_domain_preflight.py:149: PreflightError
+__________ test_local_preflight_output_is_json_and_never_overwritten ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-abe/pytest-191/test_local_preflight_output_is0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7126c56684d0>
+
+    def test_local_preflight_output_is_json_and_never_overwritten(
+        tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
+        output = tmp_path / "preflight.json"
+        monkeypatch.setattr(
+            "sys.argv",
+            [
+                "run_second_study_safe_time_domain_preflight.py",
+                "--project-root",
+                str(PROJECT_ROOT),
+                "--output",
+                str(output),
+            ],
+        )
+>       assert preflight.main() == 0
+
+review_tests/test_second_study_safe_time_domain_preflight.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+review_response/run_second_study_safe_time_domain_preflight.py:494: in main
+    report = build_preflight_report(args.project_root)
+review_response/run_second_study_safe_time_domain_preflight.py:435: in build_preflight_report
+    _validate_first_study_artifacts(project_root, audit, checks)
+review_response/run_second_study_safe_time_domain_preflight.py:373: in _validate_first_study_artifacts
+    _record_file_and_blob(
+review_response/run_second_study_safe_time_domain_preflight.py:209: in _record_file_and_blob
+    _git_blob_sha256(project_root, source_commit, relative),
+review_response/run_second_study_safe_time_domain_preflight.py:158: in _git_blob_sha256
+    return sha256_bytes(_git(project_root, "show", f"{commit}:{relative}").stdout)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+project_root = PosixPath('/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-h8-memory-safe-extension-20261004')
+check = True
+args = ('show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json')
+result = CompletedProcess(args=['git', 'show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exa...act_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'\n")
+detail = "fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'"
+
+    def _git(
+        project_root: Path, *args: str, check: bool = True
+    ) -> subprocess.CompletedProcess[bytes]:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=project_root,
+            check=False,
+            capture_output=True,
+        )
+        if check and result.returncode:
+            detail = result.stderr.decode("utf-8", errors="replace").strip()
+>           raise PreflightError(f"git {' '.join(args)} failed: {detail}")
+E           review_response.run_second_study_safe_time_domain_preflight.PreflightError: git show cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json failed: fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'
+
+review_response/run_second_study_safe_time_domain_preflight.py:149: PreflightError
+_____________ test_gpu_search_is_not_silently_treated_as_complete ______________
+
+    def test_gpu_search_is_not_silently_treated_as_complete() -> None:
+>       report = preflight.build_preflight_report(PROJECT_ROOT)
+
+review_tests/test_second_study_safe_time_domain_preflight.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+review_response/run_second_study_safe_time_domain_preflight.py:435: in build_preflight_report
+    _validate_first_study_artifacts(project_root, audit, checks)
+review_response/run_second_study_safe_time_domain_preflight.py:373: in _validate_first_study_artifacts
+    _record_file_and_blob(
+review_response/run_second_study_safe_time_domain_preflight.py:209: in _record_file_and_blob
+    _git_blob_sha256(project_root, source_commit, relative),
+review_response/run_second_study_safe_time_domain_preflight.py:158: in _git_blob_sha256
+    return sha256_bytes(_git(project_root, "show", f"{commit}:{relative}").stdout)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+project_root = PosixPath('/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-h8-memory-safe-extension-20261004')
+check = True
+args = ('show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json')
+result = CompletedProcess(args=['git', 'show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exa...act_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'\n")
+detail = "fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'"
+
+    def _git(
+        project_root: Path, *args: str, check: bool = True
+    ) -> subprocess.CompletedProcess[bytes]:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=project_root,
+            check=False,
+            capture_output=True,
+        )
+        if check and result.returncode:
+            detail = result.stderr.decode("utf-8", errors="replace").strip()
+>           raise PreflightError(f"git {' '.join(args)} failed: {detail}")
+E           review_response.run_second_study_safe_time_domain_preflight.PreflightError: git show cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json failed: fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'
+
+review_response/run_second_study_safe_time_domain_preflight.py:149: PreflightError
+_________________ test_full_preflight_accepts_gpu_https_origin _________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7126c566cfd0>
+
+    def test_full_preflight_accepts_gpu_https_origin(
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        https_remote = (
+            "https://github.com/HIROMU1015/"
+            "Evaluation-of-gate-numbers-for-ground-state-energy-calculations-"
+            "using-higher-order-product-formulae.git"
+        )
+        original_git_text = preflight._git_text
+    
+        def gpu_git_text(project_root: Path, *args: str) -> str:
+            if args == ("remote", "get-url", "origin"):
+                return https_remote
+            return original_git_text(project_root, *args)
+    
+        monkeypatch.setattr(preflight, "_git_text", gpu_git_text)
+>       report = preflight.build_preflight_report(PROJECT_ROOT)
+
+review_tests/test_second_study_safe_time_domain_preflight.py:306: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+review_response/run_second_study_safe_time_domain_preflight.py:435: in build_preflight_report
+    _validate_first_study_artifacts(project_root, audit, checks)
+review_response/run_second_study_safe_time_domain_preflight.py:373: in _validate_first_study_artifacts
+    _record_file_and_blob(
+review_response/run_second_study_safe_time_domain_preflight.py:209: in _record_file_and_blob
+    _git_blob_sha256(project_root, source_commit, relative),
+review_response/run_second_study_safe_time_domain_preflight.py:158: in _git_blob_sha256
+    return sha256_bytes(_git(project_root, "show", f"{commit}:{relative}").stdout)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+project_root = PosixPath('/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-h8-memory-safe-extension-20261004')
+check = True
+args = ('show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json')
+result = CompletedProcess(args=['git', 'show', 'cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exa...act_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'\n")
+detail = "fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'"
+
+    def _git(
+        project_root: Path, *args: str, check: bool = True
+    ) -> subprocess.CompletedProcess[bytes]:
+        result = subprocess.run(
+            ["git", *args],
+            cwd=project_root,
+            check=False,
+            capture_output=True,
+        )
+        if check and result.returncode:
+            detail = result.stderr.decode("utf-8", errors="replace").strip()
+>           raise PreflightError(f"git {' '.join(args)} failed: {detail}")
+E           review_response.run_second_study_safe_time_domain_preflight.PreflightError: git show cc3626a8135b647fe283fc60c963de70c5f6b2a5:artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json failed: fatal: path 'artifacts/server_pf_first_study_s0_exact_time_v1_1_20260925_3279201/manifest.json' exists on disk, but not in 'cc3626a8135b647fe283fc60c963de70c5f6b2a5'
+
+review_response/run_second_study_safe_time_domain_preflight.py:149: PreflightError
+=========================== short test summary info ============================
+SKIPPED [1] review_tests/test_pennylane_bch.py:6: could not import 'pennylane': No module named 'pennylane'
+7 failed, 484 passed, 1 skipped in 6.73s
