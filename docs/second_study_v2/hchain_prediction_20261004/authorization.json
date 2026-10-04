@@ -1,0 +1,48 @@
+{
+  "schema": "hchain_truth_free_prediction_authorization_v1",
+  "basis": "User explicitly authorized the nine fixed candidate predictions through PREDICTION_FROZEN, 2026-10-04",
+  "preparation_snapshot_commit": "a03bd71415cac6deb3b653c131905f32b744cec5",
+  "input_freeze_commit": "ed8b77ffb2d446283a079a6a6c9083c0a22886de",
+  "worktree": "/home/abe/myproject/Evaluation_numGate_highorder/.worktrees/pf-second-study-v2-hchain-input-reference-preparation-20261004",
+  "branch": "pf-second-study-v2-hchain-prediction-20261004",
+  "preparation_root": "artifacts/hchain_input_reference_preparation_20261004_06922cb",
+  "output_root": "artifacts/hchain_truth_free_prediction_20261004",
+  "permissions": {
+    "candidate_cheap": true,
+    "candidate_M1": true,
+    "local_source_and_prediction_freeze_commits": true,
+    "exact_ground": false,
+    "direct_truth": false,
+    "target_phase_gap": false,
+    "performance_scoring": false,
+    "full_legacy_tests": false,
+    "push": false,
+    "runtime_transfer_or_regeneration": false
+  },
+  "limits": {
+    "candidate_coordinates": 9,
+    "candidate_cheap_PF_actions": 9,
+    "candidate_H_exponential_actions": 9,
+    "M1_PF_actions": 60,
+    "M1_H_matvecs": 60,
+    "M1_chains": 9,
+    "M1_maximum_per_coordinate": {"H2": 4, "H4": 8, "H6": 8},
+    "wall_seconds_shared_preprocessing": 1800,
+    "wall_seconds_cheap_total": 1800,
+    "wall_seconds_M1_total_including_comparator_completion": 1800,
+    "peak_RSS_bytes": 4294967296,
+    "CPU_processes": 1,
+    "BLAS_threads": 1,
+    "GPU_operations": 0
+  },
+  "environment": {
+    "python": "/home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python",
+    "python_version": "3.11.1",
+    "packages": {"numpy": "1.26.4", "scipy": "1.14.1", "pyscf": "2.7.0", "openfermion": "1.6.1", "pytest": "8.3.3"},
+    "variables": {"PYTHONPATH": "src:review_response:.", "PYTHONNOUSERSITE": "1", "PYTHONDONTWRITEBYTECODE": "1", "OPENBLAS_NUM_THREADS": "1", "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}
+  },
+  "inherited_rules": "All PF, B0/B1/B2/H1, rank-aware M1, numerical/width/branch/continuity and budget rules stay byte-identical to preparation. Only execution permission changes.",
+  "freeze_order": ["cheap nine coordinates", "B0/B1/B2/q Git freeze", "q=1 M1 only", "H1 Git freeze", "q=0 always-M1 completion", "PREDICTION_FROZEN local commit", "review stop"],
+  "success_status": "hchain_truth_free_prediction_complete_review_required",
+  "scoring_authorized": false
+}
