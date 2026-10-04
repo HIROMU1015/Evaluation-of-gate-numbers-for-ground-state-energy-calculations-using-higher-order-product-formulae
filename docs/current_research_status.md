@@ -1,16 +1,22 @@
 # 現在の研究方針と検証状況
 
+> 2026-10-05 H-chain結果統合：第2研究v2のH2–H8検証は、
+> [H-chain calibration とresource decisionの検証結果](second_study_v2/hchain_independent_validation_summary_20261005.md)
+> を入口とする。Reference適格6系ではcheap-onlyがsafeかつ約33%のcontinuous budget削減を達成したが、
+> fixed cheap gamma=1.01も同じ結果で、adaptive/selectiveの追加利益は未確認。H3はreference適用不能として分離する。
+> 証拠snapshotは`971dc7a9b1b138fbbbb95fc684aa52af657e81b1`。次は研究方針レビューであり、新しい科学計算の許可ではない。
+
 > 2026-09-29成果整理：第一研究からC0までの成果・限定・証拠対応は、
 > [`research_outcomes/20260929/README.md`](research_outcomes/20260929/README.md)
 > を入口とする。これは文書監査済みの内部成果整理版であり、新しい科学計算の許可ではない。
 
-最終更新：2026-09-26
+最終更新：2026-10-05（H-chain総括への導線追加。以下の第一研究・旧stageの記述は歴史的範囲を保持）
 
 > 2026-09-28追補：第二研究は`complete_no_benefit`で閉じ、その後のD2R R0/R1事後原因分離まで完了した。R2は未許可である。方針再検討時は、先に
 > [`pf_research_status_after_d2r_r1_20260928.md`](pf_research_status_after_d2r_r1_20260928.md)
 > を参照すること。
 
-最新の確認済み数値結果：ブランチ`first-study-completion-analysis-20260926`（保存済みS0/S4の完了再解析、本ブランチ）
+第一研究完了再解析の確認済み数値結果（2026-09-26）：ブランチ`first-study-completion-analysis-20260926`（保存済みS0/S4の完了再解析）。最新のH-chain結果は上記総括から参照する。
 
 この文書は、古い実行指示や途中結果を現在の結論と誤認しないための入口である。数値を引用するときは、ここからリンクしたGit管理済み報告書も確認する。
 
