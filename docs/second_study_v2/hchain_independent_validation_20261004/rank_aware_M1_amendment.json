@@ -1,0 +1,93 @@
+{
+  "schema": "hchain_rank_aware_M1_amendment_v1",
+  "status": "predeclared_design_amendment_not_executed",
+  "core": {
+    "path": "review_response/pf_spectral_recoverability_d2.py",
+    "source_commit": "d6edd248377385ff1c116d27149e3eecba21d609",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "04eafd4051430be55c1494a6fbadf1800b2dc7c54ab1c3071a7a3e0a7616d033"
+  },
+  "inherited_rules": {
+    "path": "review_response/pf_spectral_recoverability_d2_protocol_draft.json",
+    "source_commit": "d99715ef2c575a547394f2a5916abad27213d6fb",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "fb1d112e13830924ee5bed058cea8a8a6196d01b303b96fff664676db98d83f5"
+  },
+  "allowed_change_only": "primary_dimension and prefix_dimensions chosen from physical sector dimension before results",
+  "primary_rule": "max(m in [1,2,4,8] with m<=d_sector)",
+  "prefix_rule": "[m in [1,2,4,8] with m<=d_sector]",
+  "fixed_by_system": {
+    "H2": {
+      "sector_dimension": 4,
+      "primary": 4,
+      "prefixes": [
+        1,
+        2,
+        4
+      ],
+      "stability_lower": 2,
+      "PF_vector_actions_maximum": 12,
+      "H_matvecs_maximum": 12
+    },
+    "H4": {
+      "sector_dimension": 36,
+      "primary": 8,
+      "prefixes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "stability_lower": 4,
+      "PF_vector_actions_maximum": 24,
+      "H_matvecs_maximum": 24
+    },
+    "H6": {
+      "sector_dimension": 400,
+      "primary": 8,
+      "prefixes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "stability_lower": 4,
+      "PF_vector_actions_maximum": 24,
+      "H_matvecs_maximum": 24
+    }
+  },
+  "algorithm": "one explicit U-Arnoldi chain per coordinate; retain matching UQ and HQ; all prefixes share actions",
+  "numerical_rules": {
+    "dtype": "complex128",
+    "modified_gram_schmidt_passes": 2,
+    "vector_normalization_residual_maximum": 1e-12,
+    "basis_orthogonality_frobenius_residual_maximum": 1e-10,
+    "relative_breakdown_tolerance": 1e-12,
+    "overlap_ambiguity_tolerance": 1e-10,
+    "energy_ambiguity_tolerance_hartree": 1e-10,
+    "pf_action_norm_residual_maximum": 1e-10,
+    "full_u_ritz_residual_maximum": 0.05,
+    "full_h_ritz_residual_hartree_maximum": 0.05,
+    "prefix_stability_reference": "primary versus largest available lower prefix; H2 4 vs 2, H4/H6 8 vs 4",
+    "numerical_threshold_origin": "normalization, orthogonality, breakdown and ambiguity tolerances are floating-point integrity rules; 0.05 full residual limits are predeclared empirical feasibility limits, not spectral certificates",
+    "threshold_retuning_after_truth": false
+  },
+  "phase_rule": "unit-circle projection of projected U eigenvalues followed by full-action residual recalculation; phase lifted to nearest lowest H Ritz energy",
+  "branch_ties": "descending H-reference overlap, descending previous projector overlap, ascending abs(lifted energy-Href), ascending projected index; overlap ambiguity still abstains",
+  "time_continuity": "ascending three fixed times within each system; previous selected vector from inherited analyze_coordinate only; no cross-system continuity",
+  "width": {
+    "local": "r_H + 2*asin(min(2,r_U)/2)/t",
+    "prefix": "abs(delta_primary-delta_largest_available_lower)",
+    "empirical": "max(local,prefix)",
+    "claim_class": "empirical_feasibility_width_not_certificate",
+    "new_action_forward_error_bound": false
+  },
+  "breakdown": "If actual rank < requested primary, keep failure primary_dimension_unavailable and abstain. Diagnostic lower prefix must not become an accepted lower primary.",
+  "rank_exhaustion_at_requested_primary": "not a failure solely because H2 primary equals sector dimension; apply inherited numerical/branch gates",
+  "action_semantics": "build_arnoldi_chain calls apply_u and apply_h once per basis vector. Prefix eigensolutions and residuals use cached UQ/HQ, not additional PF/H calls.",
+  "predictor_full_space_solver_policy": "no full H/PF truth eigensolver or full PF materialization; projected solve is allowed even when H2 m=4 equals d_sector, labeled finite-sector limit not hidden exact-state input",
+  "global_PF_vector_actions_maximum": 60,
+  "global_H_matvecs_maximum": 60,
+  "core_source_modified": false,
+  "execution_authorized": false
+}

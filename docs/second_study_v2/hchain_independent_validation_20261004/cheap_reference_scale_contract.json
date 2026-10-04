@@ -1,0 +1,126 @@
+{
+  "schema": "hchain_cheap_reference_scale_contract_v1",
+  "status": "inherited_fit_fixed_two_reference_values_unavailable",
+  "fit_driver": {
+    "path": "review_response/_pf_first_study_phase_a_base.py",
+    "source_commit": "62652436a98ceaeac6f5d5d519d20d31ca70ceb7",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "430911c07fb00e3d3c8e4e9f4776a1ee0a19d1a4b2c02e581c55c36dd5c7294b",
+    "function": "_decision_prediction",
+    "usage": "source of grid, formal-order leading fit and t_ref arithmetic; do not execute historical runner"
+  },
+  "fit_function": {
+    "path": "review_response/pf_first_study_phase_common.py",
+    "source_commit": "62652436a98ceaeac6f5d5d519d20d31ca70ceb7",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "4117d68b0a1b87cfcb76805450cb8d5dc1ad3f81a48e9a0f930c5f61be5e741e",
+    "function": "leading_fit"
+  },
+  "window_function": {
+    "path": "src/trotterlib/fit_window.py",
+    "source_commit": "814d1cd3e3e765db2fd8ebddd4c56769a4747f41",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "3b91a111dadeedf9ebde82db8cbb225300a82ea51a25fc24e52f1c405168dd62",
+    "function": "rolling_loglog_fits"
+  },
+  "coefficient_function": {
+    "path": "src/trotterlib/analysis_utils.py",
+    "source_commit": "e0e82f6c7bee73d2360b77456bd22f7356572e01",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "28613830f12f7762454c06e5be2ae864c6c29ffb464b5ac02fdc1351848af2bf",
+    "function": "loglog_average_coeff"
+  },
+  "protocol_source": {
+    "path": "PF_first_study_protocol_20260925.json",
+    "source_commit": "d3faddebe490dbe8224bd4274578f2edd313dfb0",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "410367f7ff1093fb5f171bb00ca8c22b292de34c19ff03553c600a0313565565",
+    "field": "experiment_B_h4.decision_track.short_time_leading_fit"
+  },
+  "fit_grid": {
+    "generator": "numpy.geomspace(0.02,1.8,34), float64",
+    "minimum_hartree_inverse": 0.02,
+    "maximum_hartree_inverse": 1.8,
+    "count": 34,
+    "order": "ascending positive time",
+    "absolute_grid_and_hex_must_freeze_before_acquisition": true
+  },
+  "fit_rules": {
+    "rolling_window_points": 5,
+    "formal_order": 4,
+    "formal_order_tolerance": 0.2,
+    "minimum_r_squared": 0.999,
+    "noise_floor_hartree": 5e-13,
+    "eligible_window": "all abs(proxy) finite and > noise floor; abs(free_order-4)<=0.2; R2>=0.999",
+    "selection": "minimum start_index among qualifying consecutive windows",
+    "alpha_C": "10**mean(log10(abs(proxy))-4*log10(t)) in selected window",
+    "requires_finite_positive_alpha": true,
+    "t_ref": "(epsilon_E/(5*alpha_C))**0.25",
+    "failure_status": "hchain_cisd_reference_scale_unavailable",
+    "failure_action": "stop; no alternate grid/window/oracle coefficient"
+  },
+  "observable": {
+    "echo": "vdot(exp(+i*t*H) psi_CISD, U_P(t) psi_CISD)",
+    "delta_C": "Im(echo)/t [Ha]",
+    "not_phase_proxy": "not arg(echo)/t",
+    "not_D4": "not an effective-Hamiltonian D4 expectation"
+  },
+  "acquisition_method_source": {
+    "path": "review_response/run_practical_calibration_minimal.py",
+    "source_commit": "79035cc7c414c04cafe8b9f8bdc779a17ec57302",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "713f1d2f95ddd69b890759de47e40e4382ad5be4f1005447408117c037dd80db",
+    "function": "proxy_point",
+    "PF_actions_per_time": 1,
+    "H_exponential_actions_per_time": 1,
+    "internal_expm_multiply_H_matvec_count": "not exposed by inherited helper; report unknown unless separately instrumented"
+  },
+  "implementation_boundary": {
+    "unchanged": "leading_fit, rolling_loglog_fits, alpha arithmetic, grid, gates and observable",
+    "different": "allowlisted vector-action acquisition instead of historical full-unitary acquisition and exact-state-aligned loader",
+    "adapter_review_required": true,
+    "whole_historical_runner_authorized": false,
+    "claim_byte_identical_full_pipeline": false
+  },
+  "saved_values": {
+    "H2": {
+      "alpha_C": null,
+      "t_ref": null,
+      "reason": "no same-rule operational CISD finite-time fit fixed"
+    },
+    "H4": {
+      "alpha_C": 0.000013583752443385904,
+      "t_ref": 1.237648718781152,
+      "source": {
+        "path": "artifacts/pf_first_study_phase_a_20260925_6265243/predictions.json",
+        "source_commit": "5a2f0a2e0315493c892c79f1a6b8c9285cc52ac3",
+        "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+        "sha256": "60058fe333d4b25f1ad4b8f3f5342a3736f2379ce9490b3f2ecde69583beeeda"
+      },
+      "selected_window_start": 0,
+      "selected_window_stop_exclusive": 5,
+      "reuse": "candidate for identity-verified saved scalar reuse; not yet a three-system input freeze"
+    },
+    "H6": {
+      "alpha_C": null,
+      "t_ref": null,
+      "reason": "operational CISD state and finite-time fit not fixed"
+    }
+  },
+  "forbidden_reference_sources": [
+    "H2 D4 analytic coefficient",
+    "H6 exact-ground local coefficient",
+    "direct truth optimum",
+    "HF t_ref copied to H-chain"
+  ],
+  "future_acquisition_proposal": {
+    "maximum_times_per_system": 34,
+    "PF_actions_all_systems_maximum": 102,
+    "H_exponential_actions_all_systems_maximum": 102,
+    "fit_calls_maximum": 3,
+    "H4_saved_reuse_priority": true,
+    "new_actions_for_exact_reused_grid_rows": 0,
+    "extra_repeatability_sweeps": 0,
+    "scope": "separate reference preparation, not nine candidate actions; pending review only"
+  }
+}

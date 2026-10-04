@@ -1,0 +1,76 @@
+{
+  "schema": "hchain_uniform_cisd_generation_contract_v1",
+  "status": "uniform_family_defined_runtime_generation_not_authorized",
+  "source": {
+    "path": "review_response/audit_h01_approximate_state_pilot.py",
+    "source_commit": "828b8a4f75f6d78fc1bd2ecdd1a3bfbfd6388fa0",
+    "verified_snapshot_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+    "sha256": "3e5cf6a14f1dffcae40d18b25d9325995c9cee2a50fc49ac93bb85b518c48fb9",
+    "function": "determinant_cisd_state",
+    "reference_functions": [
+      "sector_basis_indices",
+      "hartree_fock_full_basis_index",
+      "determinant_excitation_rank"
+    ]
+  },
+  "definition": {
+    "reference": "fixed lowest-spatial-orbital RHF determinant in the frozen spin-orbital ordering",
+    "subspace": "ascending sector positions whose full determinant XOR reference has bit_count/2 <= 2",
+    "solve": "lowest eigenvector of H restricted to reference + singles + doubles",
+    "embed": "zero-fill original population sector; complex128 normalization",
+    "not_exact_ground_substitution": true
+  },
+  "sector_dimensions": {
+    "H2": 4,
+    "H4": 36,
+    "H6": 400
+  },
+  "subspace_dimension_saved": {
+    "H2": 4,
+    "H4": 27,
+    "H6": null
+  },
+  "saved_state_bundle": {
+    "path": "artifacts/prevalidation_h01_approximate_state_pilot_20260922/states.npz",
+    "sha256": "aa5286b2394c26015d9b3dbc69c5466ed9d35a4ec4274de7d58bf08d58ac5a2a",
+    "load_policy": "future sanitized extractor may load only named CISD/RHF arrays, not exact states; current audit hashes bytes only"
+  },
+  "systems": {
+    "H2": {
+      "preferred": "reuse H2_cisd_state",
+      "individual_hash": null,
+      "saved_norm": 1,
+      "saved_residual_hartree": 1.3510178087449744e-16
+    },
+    "H4": {
+      "preferred": "byte-identical H4_cisd_state reuse",
+      "individual_hash": "bce356423ac4e5f550ce99117f6fa15de11f72372565b2ee061342cdcd433872",
+      "saved_norm": 1,
+      "saved_residual_hartree": 0.060234885341702675
+    },
+    "H6": {
+      "preferred": "separately authorized determinant-CISD preparation in dimension 400",
+      "state_hash": null,
+      "norm": null,
+      "residual_hartree": null,
+      "generation_authorized_now": false
+    }
+  },
+  "diagnostics": "Saved scalars above are not new computations. CISD residual is descriptive, not a fitted eligibility gate.",
+  "norm_absolute_gate": 1e-12,
+  "phase_gauge": "reuse existing bytes for archived states; any new state phase convention must be frozen before generation; no exact-state phase alignment",
+  "generation_wrapper_sha256": null,
+  "wrapper_status": "requires implementation and review; importing whole historical audit runner would expose exact fields",
+  "must_freeze_before_candidate_execution": [
+    "Hamiltonian byte identity",
+    "ordered sector indices and orbital basis identity",
+    "RHF reference integer",
+    "CISD subspace positions",
+    "state file and array hash",
+    "norm and H expectation residual",
+    "generator source hash",
+    "Python/numerical library identity"
+  ],
+  "H2_full_sector_warning": "The CISD rule spans dimension 4. This mathematical limit does not authorize exact-state input or a new exact-ground solver in predictor.",
+  "H6_restriction": "Do not reuse automatic exact-ground 200-dimensional Z2 restriction without a separately justified matching CISD contract."
+}

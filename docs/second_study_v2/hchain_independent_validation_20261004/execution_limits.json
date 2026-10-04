@@ -1,0 +1,77 @@
+{
+  "schema": "hchain_independent_validation_execution_limits_v1",
+  "status": "design_ceiling_proposal_no_scientific_authorization",
+  "observed": {
+    "new_Hamiltonians": 0,
+    "new_states": 0,
+    "new_fits": 0,
+    "new_cheap_proxy": 0,
+    "Arnoldi_chains": 0,
+    "PF_vector_actions": 0,
+    "H_matvecs": 0,
+    "H_exponential_actions": 0,
+    "new_direct_truth": 0,
+    "new_target_phase_gap_count": 0,
+    "full_unitary_builds": 0,
+    "full_eigensolver_calls": 0,
+    "toy_experiments": 0,
+    "scientific_test_runs": 0,
+    "GPU_queries": 0,
+    "GPU_allocations": 0,
+    "GPU_kernels": 0
+  },
+  "backend_proposal": {
+    "backend": "CPU",
+    "processes": 1,
+    "BLAS_threads": 1,
+    "wall_seconds_per_stage_maximum": 1800,
+    "peak_RSS_bytes_maximum": 4294967296,
+    "source": "inherited D2 envelope proposed for each separately timed stage; not existing measured H-chain performance",
+    "stages": [
+      "input/state preparation",
+      "short-time reference calibration",
+      "candidate cheap",
+      "M1 acquisition and comparator completion",
+      "direct scorer"
+    ],
+    "Python_identity": "unresolved_requires_execution_review",
+    "package_environment_changes": false
+  },
+  "future_conditional_ceiling": {
+    "systems": 3,
+    "candidates_per_system": 3,
+    "candidates_total": 9,
+    "H2_CISD_generation_or_reuse_verification_maximum": 1,
+    "H4_CISD_generation_or_reuse_verification_maximum": 1,
+    "H6_CISD_generation_maximum": 1,
+    "reference_grid_points_per_system_maximum": 34,
+    "reference_PF_actions_maximum": 102,
+    "reference_H_exponential_actions_maximum": 102,
+    "candidate_cheap_PF_actions_maximum": 9,
+    "candidate_cheap_H_exponential_actions_maximum": 9,
+    "M1_PF_vector_actions_maximum": 60,
+    "M1_H_matvecs_maximum": 60,
+    "Arnoldi_chains_maximum": 9,
+    "full_PF_builds_in_predictor": 0,
+    "full_H_PF_truth_eigensolves_in_predictor": 0,
+    "direct_truth_coordinate_maximum": 9,
+    "new_target_phase_gap_count_maximum": 9
+  },
+  "scorer_ground_state": {
+    "maximum_new_same_H_ground_states": null,
+    "reason": "Needs explicitly reviewed source and permission separate from coordinate ceiling; candidate proposal at most one per system, not an approved limit."
+  },
+  "H1_ceiling": "Global M1 60 actions includes H1-first acquisition and later standalone-comparator completion; a fresh extra H1 run is not included.",
+  "source_preparation": "H6 operational Hamiltonian/component cache availability unestablished. New Hamiltonian generation not automatically authorized by allowing future CISD.",
+  "reuse": "Exact identity/time reuse only; count computed/reused separately; no near-time/interpolation",
+  "execution_resume": "only same run identity/output after separately reviewed authorization; no independent retries or output switch after scientific results",
+  "authorization": {
+    "scientific_execution": false,
+    "state_generation": false,
+    "reference_preparation": false,
+    "predictor": false,
+    "scorer": false,
+    "scientific_tests": false,
+    "push": false
+  }
+}

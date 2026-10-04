@@ -1,0 +1,71 @@
+{
+  "schema": "hchain_independent_validation_protocolization_decision_v1",
+  "status": "hchain_independent_validation_protocol_blocked",
+  "base_commit": "50344a766ffbe40d969471200fe165e438f4c9ec",
+  "contract_recipes_defined": true,
+  "all_numeric_inputs_frozen": false,
+  "execution_ready": false,
+  "planned_systems": 3,
+  "planned_candidate_rows": 9,
+  "frozen_absolute_coordinate_count": 0,
+  "absolute_coordinate_values_specified_from_saved_scalar": 3,
+  "unresolved_absolute_coordinate_values": 6,
+  "saved_H4_reference_scale_available": true,
+  "missing_operational_reference_scale_systems": [
+    "H2",
+    "H6"
+  ],
+  "blockers": [
+    {
+      "code": "INPUT_IDENTITY_NOT_FROZEN",
+      "issue": "H6 population-sector Hamiltonian bytes and CISD state are not frozen; H2 individual state identity and sanitized adapters remain to be verified.",
+      "resolution": "Separate truth-free input-preparation authorization, fixed cache provenance, then hash freeze. No current permission to generate H or H6 CISD."
+    },
+    {
+      "code": "REFERENCE_AND_ABSOLUTE_COORDINATES_NOT_FROZEN",
+      "issue": "H2/H6 operational CISD leading fits are absent. Nine absolute candidate times and binary64 hex cannot all be populated without prohibited acquisition.",
+      "resolution": "Review a bounded truth-free reference-preparation phase before candidate-plan freeze; never use historical exact-ground/D4 coefficients."
+    },
+    {
+      "code": "ACQUISITION_ADAPTER_CONTRACT_REQUIRES_REVIEW",
+      "issue": "Historical first-study acquisition constructs full PF matrices and loads exact-state fields. Fit/selection functions are reusable unchanged; a sanitized vector-only acquisition wrapper is not the identical historical runner.",
+      "resolution": "Review acquisition-only adapter as an explicit implementation difference, retain leading_fit/grid/observable unchanged, freeze wrapper hash and counters."
+    },
+    {
+      "code": "H1_COMBINED_COST_PATH_NOT_VALIDATED",
+      "issue": "No measured combined H1 path exists. Fresh H1 replay in addition to standalone M1 would exceed the proposed global 60-action cap.",
+      "resolution": "Review a single-acquisition schedule with conditional first access and later comparator completion; do not call the comparator runtime an independently measured H1 run."
+    },
+    {
+      "code": "SCORER_GROUND_AND_BRANCH_PREPARATION_REQUIRES_REVIEW",
+      "issue": "Nine-coordinate direct truth ceiling does not fix missing same-H exact-ground input or authorize its generation. H6 historical 200-dimensional restriction cannot substitute for the frozen 400-dimensional predictor sector.",
+      "resolution": "Fix scorer-only same-H ground source, separate generation limit if needed, three-point continuation and gap validity before execution."
+    }
+  ],
+  "old_results_unchanged": {
+    "hchain_contract": "hchain_current_m3_contract_not_justified",
+    "component_planning": "hchain_component_crosscheck_contract_blocked",
+    "formal_S1A": "D",
+    "B2_H1_validated": false
+  },
+  "source_hash_checks_passed": 47,
+  "prior_manifest_file_checks_passed": 14,
+  "new_scientific_computation_count": 0,
+  "new_Hamiltonian_count": 0,
+  "new_state_count": 0,
+  "new_fit_count": 0,
+  "new_cheap_count": 0,
+  "new_M1_count": 0,
+  "new_direct_truth_count": 0,
+  "new_gap_count": 0,
+  "new_toy_count": 0,
+  "scientific_test_run_count": 0,
+  "GPU_operation_count": 0,
+  "scientific_execution_authorized": false,
+  "input_reference_preparation_authorized": false,
+  "implementation_authorized": false,
+  "push_authorized": false,
+  "automatic_subset_or_retry": false,
+  "next_step": "Review bounded truth-free preparation and candidate/input hash freeze, acquisition-only adapter, shared H1 cost schedule and scorer-only ground source; no science before separate authorization.",
+  "not_a_scientific_failure": true
+}
