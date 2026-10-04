@@ -1,0 +1,84 @@
+{
+  "schema": "hchain_input_reference_preparation_authorization_v1",
+  "scope": "truth_free_input_reference_preparation_only",
+  "base_commit": "99791c0271c8972e90d5fb486ab03f603196bd89",
+  "basis": "user explicitly authorized bounded H-chain input/reference preparation, 2026-10-04",
+  "epsilon_E": 0.00015936001019904,
+  "permissions": {
+    "H2_H4_sanitized_CISD_reuse_verification": true,
+    "H6_Hamiltonian_and_determinant_CISD_generation": true,
+    "H2_H6_fixed_reference_grid": true,
+    "H4_identity_verified_saved_reference_reuse": true,
+    "adapter_and_instrumentation_unit_tests": true,
+    "local_source_input_and_result_freeze_commits": true,
+    "candidate_cheap": false,
+    "candidate_M1": false,
+    "exact_ground": false,
+    "direct_truth": false,
+    "target_phase_gap": false,
+    "performance_scoring": false,
+    "push": false
+  },
+  "limits": {
+    "H6_Hamiltonian_generations": 1,
+    "H6_CISD_generations": 1,
+    "input_verification_H_actions": 3,
+    "new_reference_systems": ["H2", "H6"],
+    "new_reference_points_per_system": 34,
+    "new_reference_PF_actions_total": 68,
+    "new_reference_H_exponential_actions_total": 68,
+    "extra_repeatability_sweeps": 0,
+    "wall_seconds_per_stage": 1800,
+    "peak_RSS_bytes": 4294967296,
+    "processes": 1,
+    "BLAS_threads": 1,
+    "GPU_operations": 0
+  },
+  "environment": {
+    "python": "/home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python",
+    "python_version": "3.11.1",
+    "packages": {"numpy": "1.26.4", "scipy": "1.14.1", "pyscf": "2.7.0", "openfermion": "1.6.1", "pytest": "8.3.3"},
+    "variables": {
+      "PYTHONPATH": "src:review_response:.",
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    }
+  },
+  "determinant_helpers": {
+    "path": "review_response/audit_h01_approximate_state_pilot.py",
+    "sha256": "3e5cf6a14f1dffcae40d18b25d9325995c9cee2a50fc49ac93bb85b518c48fb9",
+    "load": "only four hash-verified pure function ASTs, never historical imports/top-level code"
+  },
+  "H6_generation": {
+    "geometry": "linear H6 z_i=i-2.5 Angstrom, STO-3G, neutral singlet",
+    "orbitals": "canonical RHF, conv_tol=1e-12, max_cycle=200, no core, six active spatial orbitals",
+    "integrals": "CASCI.get_h1eff only, ao2mo.kernel/restore(1), two_body=eri.transpose(0,2,3,1)",
+    "CASCI_kernel_called": false,
+    "grouping": "unchanged Almost_optimal_grouper, validation=True, Jordan-Wigner, archived group structure and K must match",
+    "population_sector": "alpha=beta=3, ascending MSB full indices, dimension 400; no ground-derived Z2 restriction",
+    "state": "RHF determinant plus singles/doubles, lowest subspace eigenvector, embedded into population sector",
+    "new_state_phase": "largest magnitude component real positive, no exact-state alignment",
+    "Hamiltonian_identity": "new coefficient snapshot explicitly authorized; freeze bytes and array/term/group identities, not numerically-equivalent historical cache reuse"
+  },
+  "reference": {
+    "generator": "numpy.geomspace(0.02,1.8,34), float64",
+    "point_values_and_hex": "reference_grid.json, committed before science",
+    "fit": "unchanged hash-verified leading_fit AST and inherited rolling_loglog_fits",
+    "observable": "Im(vdot(exp(+iHt)*CISD, U_P(t)*CISD))/t",
+    "H4_saved_t_ref": 1.237648718781152,
+    "candidates": "float(r)*float(t_ref), r=0.5,0.65,0.8, single multiplication",
+    "candidate_freeze_does_not_authorize_execution": true
+  },
+  "barrier": {
+    "input_freeze": "six lightweight input artifacts committed before H2/H6 grid acquisition",
+    "mixed_archives": "whole-file hash allowed; only named Hamiltonian/group/CISD members deserialized; no exact/ground/D4/D6/D8 member reads",
+    "tests": "new truth-free unit tests only; no legacy truth-reading/full review_tests before later candidate prediction freeze",
+    "failure": "stop with separate failure audit, no alternative grid/state/grouping/subset/precision/retry rescue"
+  },
+  "success_status": "hchain_input_reference_preparation_complete_execution_ready",
+  "success_meaning": "input/coordinate/source/method readiness only; main candidate execution requires a new reviewed authorization",
+  "old_formal_results_and_closed_studies": "unchanged"
+}
