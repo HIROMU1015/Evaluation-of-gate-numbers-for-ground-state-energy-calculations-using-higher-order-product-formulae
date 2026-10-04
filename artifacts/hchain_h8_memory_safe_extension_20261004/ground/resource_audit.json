@@ -1,0 +1,66 @@
+{
+  "BLAS_threads": 1,
+  "CPU_processes": 1,
+  "H_exponential_internal_matvec_count": "unknown_not_exposed_by_CSR_expm_multiply",
+  "combined_H1_cost": "not_measured_preparation_only",
+  "counts": {
+    "Arnoldi_chains": 0,
+    "GPU_allocations": 0,
+    "GPU_kernels": 0,
+    "GPU_queries": 0,
+    "candidate_cheap_pf_actions": 0,
+    "candidate_h_exponential_actions": 0,
+    "direct_truth_coordinates": 0,
+    "full_H_ground_solves": 1,
+    "full_pf_unitary_builds": 0,
+    "ground_verification_H_matvecs": 1,
+    "group_component_eigh_batches": 404,
+    "group_spectrum_preparations": 105,
+    "m1_h_matvecs": 0,
+    "m1_pf_vector_actions": 0,
+    "target_phase_gaps": 0,
+    "truth_array_reads": 0
+  },
+  "maximum_gate_cache_bytes": 0,
+  "maximum_h_exp_norm_residual": 0.0,
+  "maximum_pf_norm_residual": 0.0,
+  "memory_events": [
+    {
+      "VmHWM_bytes": 356667392,
+      "VmRSS_bytes": 356667392,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 0,
+      "largest_object_bytes": 786432,
+      "simultaneously_live_full_sector_dense_matrices": 0,
+      "stage": "streamed_component_preprocessing"
+    },
+    {
+      "VmHWM_bytes": 711610368,
+      "VmRSS_bytes": 711610368,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 1,
+      "largest_object_bytes": 384160000,
+      "simultaneously_live_full_sector_dense_matrices": 1,
+      "stage": "same_H_ground_input"
+    },
+    {
+      "VmHWM_bytes": 1874337792,
+      "VmRSS_bytes": 366698496,
+      "VmSwap_bytes": 0,
+      "allocation_count_scope": "instrumented Python-owned full-sector objects; native temporaries unobserved",
+      "explicit_large_allocation_count": 0,
+      "largest_object_bytes": 0,
+      "simultaneously_live_full_sector_dense_matrices": 0,
+      "stage": "same_H_ground_released"
+    }
+  ],
+  "native_workspace_allocation_count": "unknown_not_instrumented",
+  "peak_RSS_KiB": 1830408,
+  "quantum_K_not_classical_action_count": true,
+  "timings_seconds": {
+    "H8_same_H_ground": 125.7555375979282,
+    "group_spectrum_preprocessing": 31.8440333600156
+  }
+}
