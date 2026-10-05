@@ -1,0 +1,70 @@
+{
+  "schema": "prospective_P2_focused_validation_v1",
+  "status": "P2_local_focused_pass_P3_server_allocation_pending",
+  "tests": {
+    "passed": 41,
+    "failed": 0,
+    "skipped": 0,
+    "command": "OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:review_response:. /home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python -m pytest -q -rs review_tests/test_prospective_input_reference.py -p no:cacheprovider",
+    "final_stdout": ".                                [100%]\n41 passed in 1.98s\n",
+    "scope": "synthetic/stub implementation tests; not molecular reference/candidate performance"
+  },
+  "environment": {
+    "python": "3.11.1 (main, Nov 18 2024, 15:05:59) [GCC 11.4.0]",
+    "numpy": "1.26.4",
+    "scipy": "1.14.1",
+    "pyscf": "2.7.0",
+    "openfermion": "1.6.1",
+    "BLAS": [
+      {
+        "library": "libopenblas64_p-r0-0cf96a72.3.23.dev.so",
+        "thread_query": "openblas_get_num_threads64_",
+        "threads": 1
+      },
+      {
+        "library": "libopenblas-r0-f650aae0.3.3.so",
+        "thread_query": "openblas_get_num_threads",
+        "threads": 1
+      },
+      {
+        "library": "libscipy_openblas-c128ec02.so",
+        "thread_query": "scipy_openblas_get_num_threads",
+        "threads": 1
+      }
+    ],
+    "pyscf_threads": 1,
+    "molecular_science_actions": 0,
+    "synthetic_readiness_operations": [
+      "numpy_dot",
+      "scipy_expm_2x2",
+      "OpenFermion_algebra"
+    ]
+  },
+  "molecular_science_counts": {
+    "SCF": 0,
+    "new_H": 0,
+    "new_CISD": 0,
+    "reference_PF": 0,
+    "reference_H_exponential": 0,
+    "candidate_cheap": 0,
+    "M1": 0,
+    "exact_ground": 0,
+    "direct_truth": 0,
+    "gap": 0,
+    "scoring": 0,
+    "GPU": 0
+  },
+  "synthetic_operations": "small array/CSR/component/CISD/fit fixtures and stubbed molecular backends; counters in fixtures do not represent experimental data",
+  "development_failures_closed": [
+    "signed-zero byte-identity fixture corrected to compare CSR dense bytes",
+    "no-ground call graph permits ao2mo integral kernel, not CASCI/FCI kernel",
+    "synthetic grouping fixture uses >=4 orbitals required by inherited grouper",
+    "temporary indentation error corrected before final test"
+  ],
+  "limitations": [
+    "server tests/readiness/allocation remain mandatory",
+    "no molecular ROHF/CISD performance or reference fit success established",
+    "no candidate/M1/truth/scoring execution authorization",
+    "legacy truth-bearing full tests deferred"
+  ]
+}

@@ -7,6 +7,7 @@ private, untracked and unreachable objects are outside the stated certificate.
 from __future__ import annotations
 
 import argparse
+import ast
 from collections import defaultdict
 from datetime import datetime, timezone
 import hashlib
@@ -17,7 +18,57 @@ import subprocess
 
 TEXT_SUFFIXES = {".md", ".markdown", ".json", ".csv", ".py", ".pyi", ".txt",
                  ".yaml", ".yml", ".toml", ".sh", ".ipynb", ".rst"}
-PATTERN = re.compile(r"(?<![A-Za-z0-9])(?:CH_?2|CH₂|methylene)(?![A-Za-z0-9])", re.I)
+PATTERN = re.compile(r"(?<![A-Za-z0-9])(?:CH_?(?:2|\{2\})|CH₂|methylene)(?![A-Za-z0-9])", re.I)
+
+
+def literal_geometry_hits(text, paths):
+    """Also find literal C/H/H atom lists or strings without a molecule label.
+
+    No execution/evaluation of source. Dynamically generated opaque geometries
+    remain explicitly outside the certification; every positive needs review.
+    """
+    hits = []
+    def inspect(value, location):
+        if isinstance(value, (list, tuple)) and len(value) == 3:
+            symbols = []
+            for row in value:
+                if isinstance(row, (list, tuple)) and len(row) == 2 and isinstance(row[0], str):
+                    symbols.append(row[0].strip().capitalize())
+            if sorted(symbols) == ["C", "H", "H"]:
+                hits.append({"location": location, "kind": "literal_C_H_H_atom_list"})
+        if isinstance(value, str):
+            rows = re.split(r"[;\n]", value.strip())
+            symbols = [re.match(r"^\s*(C|H)\s*(?:\(|[-+\d])", row) for row in rows]
+            if len(rows) == 3 and all(symbols) and sorted(m.group(1) for m in symbols) == ["C", "H", "H"]:
+                hits.append({"location": location, "kind": "literal_C_H_H_atom_string"})
+    if any(path.endswith(".py") for path in paths):
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            tree = None
+        if tree:
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.List, ast.Tuple, ast.Constant)):
+                    try:
+                        inspect(ast.literal_eval(node), f"python_line_{node.lineno}")
+                    except (ValueError, TypeError, SyntaxError, MemoryError, RecursionError):
+                        continue
+    if any(path.endswith(".json") for path in paths):
+        try:
+            data = json.loads(text)
+        except ValueError:
+            data = None
+        def walk(value, location):
+            inspect(value, location)
+            if isinstance(value, dict):
+                for key, item in value.items():
+                    walk(item, location + "." + str(key))
+            elif isinstance(value, list):
+                for i, item in enumerate(value):
+                    if isinstance(item, (dict, list, str)):
+                        walk(item, location + f"[{i}]")
+        walk(data, "json")
+    return hits
 
 
 def git(root, *args):
@@ -73,11 +124,13 @@ def inventory(root):
             hits = [{"line": index, "excerpt": line[:800]} for index, line in enumerate(text.splitlines(), 1)
                     if PATTERN.search(line)]
             path_hits = [path for path in row["paths"] if PATTERN.search(path)]
-            if hits or path_hits:
+            geometry_hits = literal_geometry_hits(text, row["paths"])
+            if hits or path_hits or geometry_hits:
                 matches.append({"blob_oid": oid, "sha256": hashlib.sha256(body).hexdigest(),
                     "bytes": size, "paths": sorted(row["paths"]),
                     "example_snapshot_commit": row["example_snapshot_commit"],
                     "path_matches": path_hits, "match_lines": hits,
+                    "literal_geometry_hits": geometry_hits,
                     "classification": "requires_content_review_not_automatic_execution_evidence"})
     finally:
         proc.stdin.close()
@@ -91,7 +144,7 @@ def inventory(root):
         "unique_tracked_text_blobs_scanned": len(objects), "text_blob_bytes_scanned": scanned_bytes,
         "match_expression": PATTERN.pattern, "text_suffixes": sorted(TEXT_SUFFIXES),
         "excluded_binary_archive_path_count": len(binary_paths),
-        "excluded_scope": ["untracked", "private", "archive_payload", "binary_document_contents", "unreachable_objects"],
+        "excluded_scope": ["untracked", "private", "archive_payload", "binary_document_contents", "unreachable_objects", "opaque_dynamically_generated_unnamed_geometries"],
         "unreadable_text_blobs": unreadable, "matches": matches,
         "certificate": "pending_manual_classification",
         "scientific_actions": 0, "numerical_imports": 0}
