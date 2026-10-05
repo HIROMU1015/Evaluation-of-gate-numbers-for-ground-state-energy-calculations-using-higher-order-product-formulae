@@ -1,0 +1,255 @@
+{
+  "schema": "hf_G2_execution_audit_v1",
+  "status": "second_study_v2_hf_g2_fixed_rule_replay_complete_review_required",
+  "base_commit": "b92bd034dcf711ce819835ffa1dd6b59dc08977d",
+  "branch": "pf-second-study-v2-hf-g2-fixed-rule-replay-20261005",
+  "protocol_implementation_commit": "67a832f0083e593dd375bd3040dab75680790a09",
+  "cheap_acquisition_commit": "50d0293d8f03541913a4d2a9c924336e8df9a1a1",
+  "H1_commit": "d4c5e78cac5fa9cc7be6de4c15c0022a49009638",
+  "prediction_commit": "0b4dca38bac1aa2c1b70d60702a72e378c5e4b3b",
+  "prediction_sha256": "4b8b1a3635bf1988bd0ce3af53c05b874352262c9224b84906697dc4c6c4256c",
+  "classification": "D_gate_false_negative",
+  "replay_stage_runs": {
+    "cheap": 1,
+    "H1": 1,
+    "comparator_completion_and_final_prediction": 1,
+    "saved_truth_scoring": 1
+  },
+  "formal_tests": [
+    {
+      "phase": "pre_protocol_freeze_truth_free_synthetic",
+      "command": [
+        "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "review_tests.test_hf_g2_fixed_rule_replay",
+        "-v"
+      ],
+      "started_utc": "2026-10-05T07:21:06.371777+00:00",
+      "ended_utc": "2026-10-05T07:21:06.438906+00:00",
+      "exit_code": 0,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "log_file": "pre_freeze_tests.log"
+    },
+    {
+      "phase": "after_prediction_freeze_before_saved_truth",
+      "command": [
+        "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "review_tests.test_hf_g2_fixed_rule_replay",
+        "-v"
+      ],
+      "started_utc": "2026-10-05T07:24:51.194231+00:00",
+      "ended_utc": "2026-10-05T07:24:51.257425+00:00",
+      "exit_code": 0,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "log_file": "pre_score_tests.log"
+    },
+    {
+      "phase": "post_score_truth_free_synthetic",
+      "command": [
+        "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "review_tests.test_hf_g2_fixed_rule_replay",
+        "-v"
+      ],
+      "started_utc": "2026-10-05T07:25:48.162099+00:00",
+      "ended_utc": "2026-10-05T07:25:48.224501+00:00",
+      "exit_code": 0,
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "log_file": "post_score_tests.log"
+    }
+  ],
+  "initial_development_synthetic_test": {
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "timestamps_not_separately_captured": true,
+    "log_file": "development_tests.log"
+  },
+  "full_legacy_tests_executed": false,
+  "full_legacy_caveat": "No claim of a green full legacy suite; prior H8 failures/missing artifacts were not repaired.",
+  "independent_post_scoring_verification": {
+    "checked_utc": "2026-10-05T07:28:04.935972+00:00",
+    "all_checks_passed": true,
+    "protocol_implementation_files_verified": 7,
+    "source_origin_snapshot_bytes_verified": 8,
+    "cheap_files_byte_identity": 4,
+    "H1_files_byte_identity": 4,
+    "prediction_files_byte_identity": 5,
+    "result_manifest_payload_hashes_verified": 5,
+    "independent_frozen_budget_safety_checks": 16,
+    "truth_exact_coordinates_reused": 6,
+    "classification": "D_gate_false_negative",
+    "all_existing_scientific_artifacts_unchanged": true,
+    "current_research_status_unchanged": true,
+    "new_scientific_actions": 0,
+    "stage_resources": {
+      "cheap": {
+        "counts": {
+          "CuPy_import": 0,
+          "GPU_allocation": 0,
+          "GPU_kernel": 0,
+          "GPU_query": 0,
+          "combined_acquisition_cost_measurement": 0,
+          "new_H_exponential_actions": 0,
+          "new_H_matvecs": 0,
+          "new_M1_Arnoldi": 0,
+          "new_PF_actions": 0,
+          "new_gap": 0,
+          "new_state_or_Hamiltonian": 0,
+          "new_truth": 0,
+          "policy_or_threshold_fit": 0
+        },
+        "new_scientific_computation_count": 0,
+        "process_peak_rss_kib": 382268,
+        "processes": 1,
+        "python_executable": "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+        "python_version": "3.11.1 (main, Nov 18 2024, 15:05:59) [GCC 11.4.0]",
+        "replay_work_seconds_before_artifact_serialization": 0.05307978391647339,
+        "scope": "file/hash/Git/decision replay cost, not calibration acquisition or combined H1 molecular runtime",
+        "stage": "cheap",
+        "utc": "2026-10-05T07:22:10.587460+00:00"
+      },
+      "h1": {
+        "counts": {
+          "CuPy_import": 0,
+          "GPU_allocation": 0,
+          "GPU_kernel": 0,
+          "GPU_query": 0,
+          "combined_acquisition_cost_measurement": 0,
+          "new_H_exponential_actions": 0,
+          "new_H_matvecs": 0,
+          "new_M1_Arnoldi": 0,
+          "new_PF_actions": 0,
+          "new_gap": 0,
+          "new_state_or_Hamiltonian": 0,
+          "new_truth": 0,
+          "policy_or_threshold_fit": 0
+        },
+        "new_scientific_computation_count": 0,
+        "process_peak_rss_kib": 382268,
+        "processes": 1,
+        "python_executable": "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+        "python_version": "3.11.1 (main, Nov 18 2024, 15:05:59) [GCC 11.4.0]",
+        "replay_work_seconds_before_artifact_serialization": 0.033279943745583296,
+        "scope": "file/hash/Git/decision replay cost, not calibration acquisition or combined H1 molecular runtime",
+        "stage": "h1",
+        "utc": "2026-10-05T07:23:19.400017+00:00"
+      },
+      "prediction": {
+        "counts": {
+          "CuPy_import": 0,
+          "GPU_allocation": 0,
+          "GPU_kernel": 0,
+          "GPU_query": 0,
+          "combined_acquisition_cost_measurement": 0,
+          "new_H_exponential_actions": 0,
+          "new_H_matvecs": 0,
+          "new_M1_Arnoldi": 0,
+          "new_PF_actions": 0,
+          "new_gap": 0,
+          "new_state_or_Hamiltonian": 0,
+          "new_truth": 0,
+          "policy_or_threshold_fit": 0
+        },
+        "new_scientific_computation_count": 0,
+        "process_peak_rss_kib": 382268,
+        "processes": 1,
+        "python_executable": "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+        "python_version": "3.11.1 (main, Nov 18 2024, 15:05:59) [GCC 11.4.0]",
+        "replay_work_seconds_before_artifact_serialization": 0.06606738595291972,
+        "scope": "file/hash/Git/decision replay cost, not calibration acquisition or combined H1 molecular runtime",
+        "stage": "prediction",
+        "utc": "2026-10-05T07:23:40.670040+00:00"
+      },
+      "result": {
+        "counts": {
+          "CuPy_import": 0,
+          "GPU_allocation": 0,
+          "GPU_kernel": 0,
+          "GPU_query": 0,
+          "combined_acquisition_cost_measurement": 0,
+          "new_H_exponential_actions": 0,
+          "new_H_matvecs": 0,
+          "new_M1_Arnoldi": 0,
+          "new_PF_actions": 0,
+          "new_gap": 0,
+          "new_state_or_Hamiltonian": 0,
+          "new_truth": 0,
+          "policy_or_threshold_fit": 0
+        },
+        "new_scientific_computation_count": 0,
+        "process_peak_rss_kib": 382268,
+        "processes": 1,
+        "python_executable": "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+        "python_version": "3.11.1 (main, Nov 18 2024, 15:05:59) [GCC 11.4.0]",
+        "replay_work_seconds_before_artifact_serialization": 0.04852139810100198,
+        "scope": "file/hash/Git/decision replay cost, not calibration acquisition or combined H1 molecular runtime",
+        "stage": "result",
+        "utc": "2026-10-05T07:24:51.464325+00:00"
+      }
+    },
+    "prediction_sha256": "4b8b1a3635bf1988bd0ce3af53c05b874352262c9224b84906697dc4c6c4256c",
+    "result_manifest_sha256": "f72869a1b5327ce6bd474aecfefb9822f0e76328c1a920fc835601e4110cdb8b",
+    "epsilon_E_hartree": 0.00015936001019904
+  },
+  "numerical_and_GPU_module_probe_after_scoring": {
+    "loaded": [],
+    "modules_checked": [
+      "numpy",
+      "scipy",
+      "cupy",
+      "torch",
+      "jax"
+    ],
+    "probe_did_not_query_GPU": true
+  },
+  "resource_caveats": {
+    "replay_work_excludes_startup_and_serialization": true,
+    "ru_maxrss_is_process_high_water_not_incremental_heap": true,
+    "saved_costs_not_actual_replay_or_combined_calibration_cost": true,
+    "peak_values_not_summed": true
+  },
+  "process": {
+    "python": "/home/abe/.pyenv/versions/3.11.1/bin/python3",
+    "processes": 1,
+    "environment": {
+      "PYTHONPATH": "src:review_response:.",
+      "PYTHONNOUSERSITE": "1",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "package_or_driver_changes": false,
+    "GPU_operations": 0
+  },
+  "source_hash_metadata_for_truth_pre_prediction_was_only_prior_registry_data": true,
+  "combined_prediction_bytes_read_for_hash_and_lexical_projector_not_all_value_decoding": true,
+  "q_one_M1_values_decoded": 0,
+  "q_zero_comparator_M1_rows_decoded_after_H1_commit": 6,
+  "truth_rows_reused_after_final_prediction_commit": 6,
+  "new_scientific_acquisition_count": 0,
+  "threshold_or_budget_changes_after_scoring": 0,
+  "old_formal_decisions_unchanged": true,
+  "Direction_C_approval": "provisional_only_final_review_required",
+  "current_research_status_unchanged": true,
+  "root_worktree_dirty_state_preserved": true,
+  "runner_result_manifest_unchanged": true,
+  "local_commits_authorized": true,
+  "push_authorized": false,
+  "push_performed": false,
+  "automatic_next_steps": []
+}
