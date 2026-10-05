@@ -32,14 +32,17 @@ Predictionをcommit/pushしremote/blob gateを確認した時点で停止、trut
 
 ## 有効なallocationとruntimeを先に確認
 
-P3 allocationは`2026-10-06T04:05:36.631599+00:00`で期限切れです。
-期限を自己更新せず、schedulerまたはユーザーから有効なallocationと新出力先の承認を確認してください。
-science承認はallocation期限の更新ではありません。未確認なら計算前で停止して不足項目だけ尋ねます。
+P3 allocationの期限は`2026-10-06T04:05:36.631599+00:00`です。
+文書確認時刻は`2026-10-05T17:47:57+00:00`で、まだ期限内でした。実行時刻で再確認してください。
+期限を自己更新せず、有効なscheduler/user quotaが今回のprediction phaseと新出力先をカバーする証拠を確認します。
+期限内の既存allocationを引き継ぐ場合は、元のstart/expiryと累積quotaを維持し、今回承認のoutput-layout委任を
+適用根拠として記録してください。期限切れまたは適用範囲不明なら計算前で停止して再承認を求めます。
+science承認はallocation期限の更新ではありません。
 
 上限は既存枠：CPU16、RAM128GiB、job12h、worker12GiB/2h、累積disk2GiB、reserve128MiB。
 本実装は1 worker/BLAS1。旧P3 artifact/runtimeと新predictionを合算してdisk会計します。
 旧private allocation/evidenceは旧P3 artifact、新allocation/evidenceは新出力`.private`内に保持しGitに入れません。
-Renewalは枠内でも実際のauthority/evidence/start/expiryが必要です。
+既存allocationの継承もrenewalも、実際のauthority/evidence/start/expiryが必要です。
 
 新出力は固定：`$PWD/artifacts/prospective_candidate_M1_prediction_20261006`。
 新allocation JSONはその`.private/allocation.json`に保存し、P3と同じrequired quota/evidence fieldに加えて
