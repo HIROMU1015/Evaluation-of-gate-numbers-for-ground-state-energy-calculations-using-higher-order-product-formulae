@@ -1,0 +1,40 @@
+{
+  "schema": "prospective_candidate_prediction_authorization_v1",
+  "base_snapshot_commit": "ec87adf35a5f8c2812557812ece34f3d41be3da1",
+  "direction": "C",
+  "attempted_conditions": 16,
+  "family_units": 4,
+  "ready_conditions": 13,
+  "candidate_coordinates": 39,
+  "terminal_conditions": {
+    "LiH_R1.40": "candidate_time_domain_ineligible",
+    "LiH_R2.60": "candidate_time_domain_ineligible",
+    "LiF_R2.60": "input_reference_ineligible"
+  },
+  "new_action_limits": {
+    "candidate_pf_vector_actions": 39,
+    "candidate_h_exponential_actions": 39,
+    "M1_pf_vector_actions": 312,
+    "M1_h_matvecs": 312
+  },
+  "B1_gammas": [1.01, 1.02, 1.05, 1.10],
+  "B0": {"ratio": 0.8, "gamma": 1.10, "role": "benchmark_only_not_safe_or_fallback"},
+  "M1": {
+    "acquisition": "all_39_independent_of_cheap",
+    "primary_rank": "max({1,2,4,8} intersect [1,d_sector])",
+    "prefixes": [1, 2, 4, 8],
+    "MGS_passes": 2,
+    "width": "max(w_local,w_prefix)",
+    "breakdown": "abstain_no_lower_prefix_primary_rescue",
+    "selection": "accepted_positive_finite_allowance_minimum_budget_exact_tie_earliest_time",
+    "no_accepted_candidate": "condition_abstention_without_B0_fallback",
+    "claim": "empirical_feasibility_only_not_certificate"
+  },
+  "truth_scoring_B2_H1_authorized": false,
+  "scientific_retry_count": 0,
+  "technical_workers_in_this_implementation": 1,
+  "BLAS_threads": 1,
+  "allocation": "fresh_scheduler_or_explicit_user_evidence_required_no_self_renewal",
+  "publication": "HIROMU1015_research_branch_non_force_required",
+  "stop_status": "prospective_candidate_M1_prediction_freeze_complete_review_required"
+}
