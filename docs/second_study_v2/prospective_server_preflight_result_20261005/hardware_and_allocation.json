@@ -1,0 +1,206 @@
+{
+  "schema": "study2_prospective_read_only_hardware_v1",
+  "measured_at_utc": "2026-10-05T13:21:56.211043+00:00",
+  "measured_at_jst": "2026-10-05T22:21:56.211060+09:00",
+  "measurement_scope": "current Codex execution process and visible server procfs, no scheduler allocation inferred",
+  "cpu": {
+    "model": "AMD EPYC 7742 64-Core Processor",
+    "physical_packages_lscpu": 2,
+    "cores_per_package_lscpu": 64,
+    "physical_cores_topology_estimate": 128,
+    "logical_cpus_visible": 128,
+    "threads_per_core_lscpu": 1,
+    "process_affinity_logical_cpu_count": 128,
+    "process_affinity_logical_cpu_range": "0-127",
+    "proc_self_status_allowance_lines": [
+      "Cpus_allowed_list:\t0-255",
+      "Mems_allowed_list:\t0-7"
+    ],
+    "allowance_discrepancy": "proc status lists CPUs 0-255 while online/affinity/cgroup effective expose 0-127; do not use 256 as budget",
+    "allocated_CPU_budget": null,
+    "allocation_status": "allocation_unverified"
+  },
+  "ram": {
+    "host_total_bytes": 1081968082944,
+    "host_available_bytes": 1049950076928,
+    "host_free_bytes": 894480343040,
+    "swap_total_bytes": 17159942144,
+    "swap_free_bytes": 16978538496,
+    "allocated_RAM_bytes": null,
+    "other_jobs_reserved_RAM_bytes": null,
+    "host_available_is_own_allocation": false
+  },
+  "cgroup": {
+    "process_membership": "0::/user.slice/user-30038.slice/session-92601.scope",
+    "own_and_ancestor_limits": [
+      {
+        "path": "/sys/fs/cgroup/user.slice/user-30038.slice/session-92601.scope",
+        "cpu.max": "max 100000",
+        "memory.max": "max",
+        "memory.high": "max",
+        "memory.current": "3991371776",
+        "cpuset.cpus.effective": "unavailable_in_visible_mount"
+      },
+      {
+        "path": "/sys/fs/cgroup/user.slice/user-30038.slice",
+        "cpu.max": "max 100000",
+        "memory.max": "max",
+        "memory.high": "max",
+        "memory.current": "8617328640",
+        "cpuset.cpus.effective": "unavailable_in_visible_mount"
+      },
+      {
+        "path": "/sys/fs/cgroup/user.slice",
+        "cpu.max": "max 100000",
+        "memory.max": "max",
+        "memory.high": "max",
+        "memory.current": "119607201792",
+        "cpuset.cpus.effective": "0-127"
+      },
+      {
+        "path": "/sys/fs/cgroup/",
+        "cpu.max": "unavailable_in_visible_mount",
+        "memory.max": "unavailable_in_visible_mount",
+        "memory.high": "unavailable_in_visible_mount",
+        "memory.current": "unavailable_in_visible_mount",
+        "cpuset.cpus.effective": "0-127"
+      }
+    ],
+    "interpretation": "max is absence of enforced quota at visible levels, not permission to use shared resources"
+  },
+  "scheduler_metadata_allowlist": {
+    "SLURM_JOB_ID": null,
+    "SLURM_CPUS_PER_TASK": null,
+    "SLURM_CPUS_ON_NODE": null,
+    "SLURM_JOB_CPUS_PER_NODE": null,
+    "SLURM_MEM_PER_NODE": null,
+    "SLURM_MEM_PER_CPU": null,
+    "SLURM_JOB_NUM_NODES": null,
+    "PBS_JOBID": null,
+    "PBS_NP": null,
+    "PBS_NUM_PPN": null,
+    "PBS_NCPUS": null,
+    "NSLOTS": null,
+    "JOB_ID": null,
+    "LSB_JOBID": null,
+    "LSB_DJOB_NUMPROC": null
+  },
+  "scheduler_allocation": "allocation_unverified_no_job_id_or_approved_CPU_RAM_reservation_found",
+  "disk": {
+    "df_bytes_output": "Filesystem     Type     1B-blocks          Used        Avail Use% Mounted on\n/dev/nvme2n1p1 ext4 3780241436672 3582403125248   5783789568 100% /home\n/dev/md2p1     ext4 1866703372288 1184246472704 587558047744  67% /\n",
+    "home_available_bytes": 5783789568,
+    "home_available_GiB": 5.386573791503906,
+    "tmp_filesystem_available_bytes": 587558047744,
+    "own_quota_or_reserved_storage_bytes": null,
+    "tmp_shared_available_is_allocation": false,
+    "future_output_and_cache_destination": "unresolved_requires_review"
+  },
+  "python_environment_proposal": {
+    "venv_path": "/home/AbeHiromu/venvs/trotter-common",
+    "python_path": "/home/AbeHiromu/venvs/trotter-common/bin/python",
+    "python_exists": true,
+    "python_realpath": "/usr/bin/python3.12",
+    "packages": {
+      "scipy": {
+        "version": "1.14.1",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/scipy-1.14.1.dist-info/METADATA",
+        "metadata_sha256": "031edf0fce95ede724b72a1edcf8c26f4b8bf6030516581d13dc11baa54b7a92"
+      },
+      "numpy": {
+        "version": "1.26.4",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/numpy-1.26.4.dist-info/METADATA",
+        "metadata_sha256": "b09734a7fed44e84b4c8161934ce532dff1e779ec6822d415644d117f6381070"
+      },
+      "pyscf": {
+        "version": "2.7.0",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pyscf-2.7.0.dist-info/METADATA",
+        "metadata_sha256": "ff8cc3232fa77fa35fceeee22d97833f176fb272df980d12a980ac6516ef52a9"
+      },
+      "pytest": {
+        "version": "9.0.3",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pytest-9.0.3.dist-info/METADATA",
+        "metadata_sha256": "c3966f28791686477bae35e518736d4cbea5b626d3a79011215854e2bc670207"
+      },
+      "h5py": {
+        "version": "3.16.0",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/h5py-3.16.0.dist-info/METADATA",
+        "metadata_sha256": "e461fcf7eb9fee6242205f9225cc178455a0212d1c0cb8f997f7eebf8cd9695e"
+      },
+      "qiskit-aer": {
+        "version": "0.15.1",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit_aer-0.15.1.dist-info/METADATA",
+        "metadata_sha256": "dbcf89c6fd36b31fe49e947472492c291913f6ece8606e781542f81fd7740907"
+      },
+      "matplotlib": {
+        "version": "3.9.2",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/matplotlib-3.9.2.dist-info/METADATA",
+        "metadata_sha256": "249eeb451c3fe8b1487bf4a44e76ec2b356c686e6b46107e220a71761fed5a5f"
+      },
+      "qiskit": {
+        "version": "1.3.0",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/qiskit-1.3.0.dist-info/METADATA",
+        "metadata_sha256": "3cada854405638c029ac6db7898c6cf3c2c16a7b371dd221df970950e7ff8908"
+      },
+      "openfermionpyscf": {
+        "version": "0.5",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermionpyscf-0.5.dist-info/METADATA",
+        "metadata_sha256": "5fa99c2440e114af4361a05f6e69e9f3232d40693848fc643e8d7e6249f0b9dd"
+      },
+      "openfermion": {
+        "version": "1.6.1",
+        "metadata_path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/openfermion-1.6.1.dist-info/METADATA",
+        "metadata_sha256": "24c87f9fcb66eeea9439e07f0e248e23a136c70f552cc0d91dc9f25567e5cff5"
+      }
+    },
+    "numeric_imports": 0,
+    "pyvenv_cfg_sha256": "1c6bbb327ae94536cbb3c4bc75dcf21a19ba4bf623f1e96eaf9a9b1dbc797a1e",
+    "python_version_no_site": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "version_exit_code": 0,
+    "site_packages_paths": [
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages"
+    ],
+    "blas_file_names_only": {
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/numpy.libs": [
+        "libopenblas64_p-r0-0cf96a72.3.23.dev.so"
+      ],
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/scipy.libs": [
+        "libscipy_openblas-c128ec02.so"
+      ],
+      "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pyscf/lib": [
+        "libopenblas-r0-f650aae0.3.3.so"
+      ]
+    },
+    "installed_sto3g_file": {
+      "path": "/home/AbeHiromu/venvs/trotter-common/lib/python3.12/site-packages/pyscf/gto/basis/sto-3g.dat",
+      "sha256": "0514de5da5df92e477ce69ef906c81589a310260557bcda84531b144eed00cc3"
+    }
+  },
+  "other_existing_python_candidates": [
+    {
+      "venv_path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv",
+      "python_path": "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/bin/python",
+      "python_exists": true,
+      "python_realpath": "/usr/bin/python3.12",
+      "packages": {},
+      "numeric_imports": 0,
+      "pyvenv_cfg_sha256": "324b538d9b5437d6d3885a3497ad496789fe250a5c51732dabe573f6c2056fcf",
+      "python_version_no_site": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "version_exit_code": 0,
+      "site_packages_paths": [
+        "/home/AbeHiromu/projects/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/venv/lib/python3.12/site-packages"
+      ]
+    }
+  ],
+  "environment_readiness": "metadata_only_import_runtime_compatibility_and_BLAS_thread_enforcement_unverified",
+  "threadpoolctl_metadata_present": false,
+  "future_process_local_environment_proposal": {
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "current_environment_or_packages_changed": false,
+  "numeric_library_imports": 0,
+  "GPU_queries_allocations_kernels": 0
+}
