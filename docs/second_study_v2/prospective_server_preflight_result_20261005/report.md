@@ -3,6 +3,18 @@
 Status: `prospective_budget_safety_preflight_complete_review_required`.
 科学計算開始の許可ではない。Direction C、承認済みRQ・claim scope、既存formal resultを維持する。
 
+Publication status: `pending_user_push`。
+Read-only調査とprotocol案、local commitは完了したが、GitHub handoffは未公開・未完了。
+ユーザーが「プッシュはこちらで行うのでコマンドだけ」と指定したため、公開担当をユーザーへ引き渡す。
+Codexはこれ以上push/API書込みを試行せず、local commitとpushコマンドを残して停止する。
+通常HTTPS pushは `could not read Username` で失敗した。
+既存credential helper、GitHub token環境変数、SSH鍵は確認できず、設定を追加していない。
+接続済みGitHub連携は本人認証とrepository metadataを読めたが、Git tree作成は
+`403 Resource not accessible by integration`。書込み権限の迂回や権限/共有設定変更はしない。
+remote branch先端・remote fetch・成果blobの取得確認はできていない。
+既存push認証経路の問い合わせに対し、ユーザーがpushを担当すると回答した。
+公開待ちを科学計算の開始理由にしない。
+
 ユーザー指定handoff `c04d95a9fa8b9653b58bea59169ce6e7352a9da0` の
 AGENTS.md、指示書、必読資料を全文確認し、そのcommitから独立worktreeを作成した。
 指定branch `pf-study2-prospective-server-preflight-20261005` のremote先端も同SHAだった。
@@ -52,7 +64,8 @@ H8のstreamed input実装はground取得を分離しているが、H8・populati
 Read-only hardware/allocation・環境metadata・使用履歴範囲の記録、candidate inventory、組合せ・storage算術、
 parallel/resource案とprotocol案を作成した。確認できない項目を `unresolved_requires_review` と記録したので、
 preflight調査は完了するが `execution_ready` ではない。
-最終検証はJSON/CSV、リンク、manifest hash、source/blob、禁止操作0、dirty保存、公開commitの照合だけである。
+最終検証はJSON/CSV、ローカルリンク、manifest hash、local source/blob、禁止操作0、dirty保存に限定した。
+公開commitの照合は認証不足で未完了であり、passedと記載しない。
 数値test・legacy suite・数値pilotは実行していない。
 
 新規SCF/Hamiltonian/CISD、PF/H action、reference/cheap、Arnoldi/M1、eigensolve、exact ground、

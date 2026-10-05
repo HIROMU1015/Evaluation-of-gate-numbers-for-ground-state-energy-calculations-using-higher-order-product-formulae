@@ -3,6 +3,26 @@
 Status: `prospective_budget_safety_preflight_complete_review_required`。
 科学計算・GPU操作は0。共有環境変更0。実割当は `allocation_unverified`。
 
+Publication status: `pending_user_push`。
+本bundleはlocal commit済みだが未公開で、GPTがGitHubから成果を読める状態ではない。
+ユーザーがpushを担当すると明示したため、Codexはこれ以上push/API書込みを試行しない。
+通常HTTPS pushは認証情報不足、GitHub連携のGit tree書込みはintegration権限不足（403）で失敗した。
+成果branchのremote先端は存在せず、公開snapshot SHAはnull、remote fetch/blob確認は未実施。
+共有認証/環境/Git設定を変更せず、以下のコマンドをユーザーへ引き渡す。
+
+Repository rootから実行する（科学計算runnerは起動しない）。
+
+```bash
+git -C .worktrees/gpu-pf-study2-prospective-preflight-20261005 push origin HEAD:refs/heads/gpu-pf-study2-prospective-preflight-20261005
+```
+
+push後のremote先端照合は次で行える。公開後の40文字SHAはlocal HEADと一致する必要がある。
+
+```bash
+git -C .worktrees/gpu-pf-study2-prospective-preflight-20261005 rev-parse HEAD
+git ls-remote --heads origin gpu-pf-study2-prospective-preflight-20261005
+```
+
 Repository: `HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae`
 
 Instruction branch: `pf-study2-prospective-server-preflight-20261005`
@@ -15,15 +35,16 @@ Result branch: `gpu-pf-study2-prospective-preflight-20261005`
 
 Artifact origin/freeze commit: `dfdbc703443da4a847f8fb6c5975fc3d32c24e3a`
 
-[成果資料commit固定リンク](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/commit/dfdbc703443da4a847f8fb6c5975fc3d32c24e3a)
+[成果資料commitの予定URL（未公開・現在取得不可）](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/commit/dfdbc703443da4a847f8fb6c5975fc3d32c24e3a)
 
 そのcommitは13件のreview資料を含み、core manifest SHA-256は
 `0e2cbc4dbcc9340c7189df44cb26754e03e3f9e17cdbcad63604de893953490f`。
-後続handoff commitは本固定リンク、validation timestamp、manifestのみを更新する。
+後続handoff commitは公開状態のreport/audit/handoffとvalidation/manifestを更新する。
 origin/freeze commitと、push後に検証する公開snapshot commitは役割を統合しない。
 
-このbundleを含む40文字のpublication SHA、commit固定リンク、remote先端/fetch/blob確認は
-commit/push後の最終メッセージに示す。publication SHAを自身のmanifestへ埋める自己参照は行わない。
+このbundleを含む40文字のlocal SHAと未公開状態を最終メッセージに示す。
+pushが成功した後だけpublication SHA、commit固定リンク、remote先端/fetch/blob確認を報告する。
+publication SHAを自身のmanifestへ埋める自己参照は行わない。
 この文書自身がどのGitHub commitで開かれているかがresult snapshotの固定identityである。
 source origin/result commitとverified snapshot commitは [source registry](source_registry.json) の別fieldを使う。
 

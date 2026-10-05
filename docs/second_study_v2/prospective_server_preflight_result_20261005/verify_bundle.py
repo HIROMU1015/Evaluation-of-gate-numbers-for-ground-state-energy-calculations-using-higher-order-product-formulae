@@ -122,7 +122,8 @@ def validate():
             'root_dirty_files_and_main_index_preserved': True,
             'root_unrelated_porcelain_state_preserved': True, 'base_source_and_frozen_results_unchanged': True,
             'no_numeric_library_imports_or_runner_execution': True,
-            'publication_verification': 'pending at bundle freeze; remote SHA/fetch/required blobs verified after push and reported in final handoff'}
+            'publication_status': audit.get('publication_status', 'pending_at_bundle_freeze'),
+            'publication_verification': 'not complete; remote SHA/fetch/required blobs require successful authenticated publication'}
 
 
 def main():
@@ -144,6 +145,7 @@ def main():
                     'created_date_jst': '2026-10-05', 'files': files,
                     'operations': {'new_scientific_acquisition': 0, 'GPU_queries_allocations_kernels': 0,
                                    'shared_environment_changes': 0, 'numeric_tests': 0},
+                    'publication_status': result['publication_status'],
                     'publication_commit': 'commit containing this manifest reported in final handoff; no self-reference'}
         (BUNDLE / 'bundle_manifest.json').write_text(json.dumps(manifest, indent=2) + '\n')
     manifest = json.loads((BUNDLE / 'bundle_manifest.json').read_text())

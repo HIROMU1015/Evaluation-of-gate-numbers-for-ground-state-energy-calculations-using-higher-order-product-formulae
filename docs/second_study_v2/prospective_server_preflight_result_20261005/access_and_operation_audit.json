@@ -66,5 +66,23 @@
     "unrelated_contents_analyzed": false
   },
   "root_dirty_final_verification": "validated before commit and after push; see validation.json and final handoff",
-  "publication_verification": "pending at bundle freeze; verify after commit/push and report in final handoff; no self-referential commit hash"
+  "publication_verification": "not performed; user will push from an authenticated context; no further Codex write/API attempt authorized for this handoff",
+  "publication_status": "pending_user_push",
+  "publication_attempts": {
+    "ordinary_non_force_git_push": {
+      "attempts": 1,
+      "success": false,
+      "reason": "HTTPS credential unavailable; could not read Username"
+    },
+    "GitHub_connector_tree_creation": {
+      "attempts": 1,
+      "success": false,
+      "reason": "403 Resource not accessible by integration"
+    },
+    "remote_branch_exists_after_attempts": false,
+    "remote_snapshot_commit": null,
+    "credential_or_remote_configuration_changed": false,
+    "further_attempts_after_user_took_publication": 0
+  },
+  "publication_owner": "user; explicitly instructed Codex to provide only the push command"
 }
