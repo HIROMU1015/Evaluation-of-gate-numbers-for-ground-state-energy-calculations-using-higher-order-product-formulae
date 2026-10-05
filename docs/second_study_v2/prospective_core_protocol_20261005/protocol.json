@@ -1,0 +1,274 @@
+{
+  "schema": "prospective_core_protocol_v1",
+  "status": "P1_fixed_P2_required_P3_conditional",
+  "direction": "C",
+  "source_review_sha256": "f2e20c32d8ecbdd3961da782264d82e45a469c284e95bb1ccf7b7f7b367e316c",
+  "base_snapshot_commit": "f5e737699e66731fcdd26c434652c4e62ca6b3c3",
+  "scope": {
+    "core_conditions": 16,
+    "strata": [
+      "used_family_new_condition_or_contract",
+      "repository_tracked_family_unseen"
+    ],
+    "family_units": 4,
+    "geometries_per_family": 4,
+    "HCN": "excluded_deferred_no_automatic_substitution",
+    "P3_authorized_only_after": [
+      "CH2_history_certification",
+      "protocol_and_code_freeze",
+      "focused_tests_no_fail_or_skip",
+      "actual_allocation_verification",
+      "environment_readiness"
+    ],
+    "P3_only": [
+      "SCF",
+      "same_recipe_H_group_K",
+      "determinant_CISD",
+      "input_commit_freeze",
+      "34_point_reference",
+      "fit_and_candidate_plan_freeze"
+    ],
+    "future_candidates_M1_truth_scoring": "requires_separate_approval"
+  },
+  "chemistry": {
+    "basis": "sto-3g",
+    "unit": "Angstrom",
+    "charge": 0,
+    "symmetry": false,
+    "orbital_order": "unchanged canonical RHF/ROHF MO order; no result-dependent reorder",
+    "scf_conv_tol": 1e-12,
+    "scf_max_cycle": 200,
+    "state": "population-preserving reference + all singles/doubles; lowest CISD subspace eigenvector",
+    "phase_gauge": "largest magnitude component real positive",
+    "spin_claim": "fixed alpha/beta populations; no pure-S^2 or global molecular ground-state certification",
+    "constant_policy": "remove scalar identity from every group; record removed scalar; use same scalar-free H and energy origin throughout"
+  },
+  "families": [
+    {
+      "name": "LiH",
+      "stratum": "used_family_new_condition_or_contract",
+      "distances": [
+        1.4,
+        1.8,
+        2.2,
+        2.6
+      ],
+      "geometry": "Li(0,0,0), H(0,0,R)",
+      "reference": "RHF",
+      "spin": 0,
+      "electrons": 4,
+      "orbitals": 6,
+      "frozen_core_orbitals": 0,
+      "populations": [
+        2,
+        2
+      ]
+    },
+    {
+      "name": "LiF",
+      "stratum": "used_family_new_condition_or_contract",
+      "distances": [
+        1.4,
+        1.8,
+        2.2,
+        2.6
+      ],
+      "geometry": "Li(0,0,0), F(0,0,R)",
+      "reference": "RHF",
+      "spin": 0,
+      "electrons": 8,
+      "orbitals": 8,
+      "frozen_core_orbitals": 2,
+      "populations": [
+        4,
+        4
+      ]
+    },
+    {
+      "name": "BeH2",
+      "stratum": "used_family_new_condition_or_contract",
+      "distances": [
+        1.2,
+        1.4,
+        1.8,
+        2.2
+      ],
+      "geometry": "Be(0,0,0), H(0,0,-R), H(0,0,+R)",
+      "reference": "RHF",
+      "spin": 0,
+      "electrons": 6,
+      "orbitals": 7,
+      "frozen_core_orbitals": 0,
+      "populations": [
+        3,
+        3
+      ]
+    },
+    {
+      "name": "CH2",
+      "stratum": "repository_tracked_family_unseen",
+      "distances": [
+        1,
+        1.15,
+        1.4,
+        1.7
+      ],
+      "geometry": "C(0,0,0), H(+R*sin(51deg),0,R*cos(51deg)), H(-R*sin(51deg),0,R*cos(51deg)); design geometry not equilibrium",
+      "reference": "ROHF",
+      "spin": 2,
+      "electrons": 8,
+      "orbitals": 7,
+      "frozen_core_orbitals": 0,
+      "populations": [
+        5,
+        3
+      ],
+      "angle_degrees": 102,
+      "conditional_history_pass": true
+    }
+  ],
+  "PF": {
+    "id": "current_m3",
+    "order": 4,
+    "mapping": "Jordan-Wigner, up-then-down, ascending MSB sector indices",
+    "grouping": "unchanged Almost_optimal_grouper(validation=True), ordered groups",
+    "s2_sequence": [
+      0.1960294407008384,
+      0.2092246690782796,
+      0.3316118001935053,
+      -0.4737318199452465,
+      0.3316118001935053,
+      0.2092246690782796,
+      0.1960294407008384
+    ],
+    "canonical_sequence_hex": [
+      "0x1.9177e226e7fb4p-3",
+      "0x1.ac7dfbb9a93bbp-3",
+      "0x1.53920b3331f67p-2",
+      "-0x1.e519f446f523cp-2",
+      "0x1.53920b3331f67p-2",
+      "0x1.ac7dfbb9a93bbp-3",
+      "0x1.9177e226e7fb4p-3"
+    ],
+    "sign": "exp(+itH)",
+    "K": "per-condition nonidentity Pauli rotations in merged PF step; not vector actions"
+  },
+  "reference": {
+    "grid": {
+      "generator": "numpy.geomspace(0.02,1.8,34)",
+      "count": 34,
+      "minimum": 0.02,
+      "maximum": 1.8,
+      "all_points_required": true
+    },
+    "observable": "Im(vdot(exp(+itH) psi_CISD,U_P(t) psi_CISD))/t",
+    "fit": {
+      "rolling_window_points": 5,
+      "formal_order": 4,
+      "formal_order_tolerance": 0.2,
+      "minimum_r_squared": 0.999,
+      "noise_floor_hartree": 5e-12,
+      "selection": "first qualifying window",
+      "alpha": "10**mean(log10(abs(delta_C))-4*log10(t))"
+    },
+    "t_ref": "(epsilon_E/(5*alpha_C))**0.25",
+    "fit_failure": "reference_scale_unavailable_under_frozen_protocol",
+    "ratios": [
+      0.8,
+      1,
+      1.2
+    ],
+    "candidate_domain": [
+      0.02,
+      1.8
+    ],
+    "candidate_failure": "candidate_time_domain_ineligible",
+    "no_clipping_or_grid_extension": true
+  },
+  "resource": {
+    "epsilon_E": 0.00015936001019904,
+    "beta": 1.2,
+    "metric": "continuous_rotation_cost_proxy",
+    "discrete_model": "not_defined_in_inherited_study",
+    "T0_ratio": 0.8,
+    "B0_gamma": 1.1,
+    "B0_role": "benchmark_only_not_safe_or_fallback",
+    "gammas": [
+      1.01,
+      1.02,
+      1.05,
+      1.1
+    ],
+    "B1": "each gamma independently selects minimum finite positive-allowance candidate; exact ties earliest time",
+    "B1_abstention": "B1_abstain_no_eligible_candidate",
+    "B2_H1": "not_executed",
+    "P3_max_conditions": 16,
+    "P3_reference_pf_actions_per_condition": 34,
+    "P3_reference_h_exponential_actions_per_condition": 34,
+    "P3_reference_pf_actions_total": 544,
+    "P3_reference_h_exponential_actions_total": 544,
+    "scientific_retries": 0,
+    "technical_retries_max": 1,
+    "technical_retries": "only pre-action failure or resume immutable byte-identical checkpoint within cumulative hard caps; never rerun completed science",
+    "allocation": "unverified_requires_server_gate; host totals are not quotas",
+    "processes": "sequential 1 initially; BLAS threads 1; parallel coordinator requires allocation-aware reservations and reviewed implementation"
+  },
+  "M1_future": {
+    "when": "all three candidates of every reference/time eligible condition before global prediction freeze; NOT authorized in P3",
+    "primary": "max({1,2,4,8} intersect [1,sector_dimension])",
+    "prefixes": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "breakdown": "abstain_no_lower_prefix_rescue",
+    "dtype": "complex128",
+    "orthogonalization": "MGS_two_pass",
+    "norm_residual": 1e-12,
+    "orthogonality_frobenius": 1e-10,
+    "relative_breakdown": 1e-12,
+    "overlap_ambiguity": 1e-10,
+    "energy_ambiguity_hartree": 1e-10,
+    "pf_norm_residual": 1e-10,
+    "u_ritz_residual": 0.05,
+    "h_ritz_residual_hartree": 0.05,
+    "gate_class": "empirical_feasibility_not_certificate",
+    "width": "max(w_local,w_prefix), inherited fixed package",
+    "selection": "minimum budget among accepted candidates; condition abstention if none"
+  },
+  "truth_future": {
+    "when": "separate approval after global predictions and ALL terminal condition statuses commit/byte freeze",
+    "ground": "same-H, same scalar origin, same active orbitals, fixed alpha/beta population sector; no historical Z2 state",
+    "direct": "complex Schur full PF, ascending fixed candidate times",
+    "first_target": "maximum same-H ground overlap",
+    "continuation": "maximum previous selected PF eigenvector overlap",
+    "norm": 1e-12,
+    "ground_residual_hartree": 1e-10,
+    "ground_ambiguity_hartree": 1e-10,
+    "unitarity_frobenius": 1e-10,
+    "eigenpair_residual": 1e-10,
+    "phase_cluster_ambiguity_rad": 1e-8,
+    "overlap_minimum": 0.9,
+    "shift": "arg(exp(-i*E0*t)*lambda_PF)/t; no predictor-selected unwrap rescue",
+    "target_gap": "diagnostic principal phase gap only; no g_rho_others certificate",
+    "failure": "indeterminate_no_rescue"
+  },
+  "analysis_future": {
+    "e": "abs(delta_direct)",
+    "c": "abs(delta_C)",
+    "underestimation": "e-c",
+    "M_gamma": "(1-1/gamma)*(epsilon_E-c)",
+    "safety_slack": "M_gamma-(e-c)",
+    "gamma_req": "(epsilon_E-c)/(epsilon_E-e) only with positive allowances",
+    "gamma_equal_one": "use slack, not ratio by zero margin",
+    "headroom": "cost-free oracle algebra; not observed intervention, certification or net classical+quantum benefit",
+    "PF_H_reference_decomposition": "only if same H, scalar origin and physical branch verified"
+  },
+  "failure": {
+    "SCF": "input_reference_ineligible_no_state_recipe_switch",
+    "history": "stop_P1_no_substitute",
+    "numerical_or_resource": "stop_condition_preserve_checkpoint_no_result_dependent_rescue"
+  },
+  "stop_status": "prospective_input_reference_preparation_complete_review_required"
+}
