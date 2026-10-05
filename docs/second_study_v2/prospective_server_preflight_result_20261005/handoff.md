@@ -13,6 +13,15 @@ Instruction/handoff commit: `c04d95a9fa8b9653b58bea59169ce6e7352a9da0`
 
 Result branch: `gpu-pf-study2-prospective-preflight-20261005`
 
+Artifact origin/freeze commit: `dfdbc703443da4a847f8fb6c5975fc3d32c24e3a`
+
+[成果資料commit固定リンク](https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/commit/dfdbc703443da4a847f8fb6c5975fc3d32c24e3a)
+
+そのcommitは13件のreview資料を含み、core manifest SHA-256は
+`0e2cbc4dbcc9340c7189df44cb26754e03e3f9e17cdbcad63604de893953490f`。
+後続handoff commitは本固定リンク、validation timestamp、manifestのみを更新する。
+origin/freeze commitと、push後に検証する公開snapshot commitは役割を統合しない。
+
 このbundleを含む40文字のpublication SHA、commit固定リンク、remote先端/fetch/blob確認は
 commit/push後の最終メッセージに示す。publication SHAを自身のmanifestへ埋める自己参照は行わない。
 この文書自身がどのGitHub commitで開かれているかがresult snapshotの固定identityである。
