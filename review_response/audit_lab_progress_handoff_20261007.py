@@ -1,6 +1,7 @@
 """Read-only source, freeze, document and public-package audit; no science runs."""
 from __future__ import annotations
 
+import csv
 import hashlib
 import json
 from pathlib import Path
@@ -48,6 +49,67 @@ def package_files() -> list[Path]:
     return sorted(paths)
 
 
+def audit_slide_scalar_explanations(outline: str) -> dict:
+    """Check newly explained identities and table values using saved scalars."""
+    epsilon = read(DIRECTORIES[0] / "protocol.json")["constants"]["epsilon_E_hartree"]
+    one_term_records = read(ROOT / "artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/summary.json")["records"]
+    one_term = []
+    for record in one_term_records:
+        if record["condition"] not in ("H6", "H7") or record["formula"] != "current_m3":
+            continue
+        definition = record["models"]["original_one_term"]["definition"]
+        time = definition["predicted_optimal_time"]
+        error = abs(definition["a4"]) * time ** 4
+        assert abs(error - epsilon / 5) < 1e-15
+        assert abs(error - definition["predicted_error_hartree"]) < 1e-15
+        one_term.append({"condition": record["condition"], "predicted_error_hartree": error})
+    assert len(one_term) == 2
+
+    bridge = list(csv.DictReader((DIRECTORIES[0] / "long_time_bridge.csv").open()))
+    block = outline.split("### Slide 17：", 1)[1].split("### Slide 18：", 1)[0]
+    table = [line for line in block.splitlines() if re.match(r"^\| (2\.147|3\.518)：", line)]
+    assert len(table) == len(bridge) == 2
+    totals = []
+    keys = ("fit_component", "state_component", "proxy_component", "total_prediction_difference")
+    for line, row in zip(table, bridge, strict=True):
+        saved = [float(row[key]) for key in keys]
+        assert abs(sum(saved[:3]) - saved[3]) < 1e-15
+        assert abs(saved[3] - (float(row["model_signed_shift"]) - float(row["direct_shift_hartree"]))) < 1e-15
+        cells = [cell.strip() for cell in line.strip("|").split("|")][1:]
+        assert cells == [f"{value * 1e6:+.3f}".replace("-", "−") for value in saved]
+        totals.append({"time": float(row["time_hartree_inverse"]),
+                       "total_prediction_difference_hartree": saved[3],
+                       "displayed_total_microhartree": cells[-1]})
+    phase_difference = float(bridge[1]["time_hartree_inverse"]) * float(bridge[1]["direct_shift_hartree"])
+    assert f"{phase_difference:.3g}" == "2.45e-05"
+
+    hf_protocol = read(DIRECTORIES[1] / "protocol.json")
+    beta = hf_protocol["qpe_beta"]
+    assert hf_protocol["target_error_hartree"] == epsilon
+    cap_checks = []
+    for row in csv.DictReader((DIRECTORIES[1] / "joint_selection_scoring.csv").open()):
+        direct = float(row["direct_error"])
+        predicted = float(row["predicted_error"])
+        actual = beta * int(row["rotations"]) / (float(row["selected_time"]) * (epsilon - direct))
+        budget = float(row["budget"])
+        total = direct + beta * int(row["rotations"]) / (float(row["selected_time"]) * budget)
+        assert abs(actual / float(row["actual_required_cost"]) - 1) < 1e-12
+        assert abs(total - float(row["total_error"])) < 1e-15
+        assert (budget >= actual) == (total <= epsilon) == (row["precision_pass"] == "True")
+        if float(row["cap"]) > 0.5:
+            assert predicted < direct and budget < actual
+        cap_checks.append({"condition": row["condition"], "cap": float(row["cap"]),
+                           "predicted_error_hartree": predicted, "direct_error_hartree": direct,
+                           "budget_over_required_cost": budget / actual,
+                           "target_precision_met": total <= epsilon})
+    assert len(cap_checks) == 6
+    return {"epsilon_E": epsilon, "one_term_epsilon_over_five_identity": one_term,
+            "h4_signed_decomposition_table": totals, "hf_joint_budget_checks": cap_checks,
+            "h4_long_time_target_phase_difference_radians": phase_difference,
+            "new_scientific_computations": 0, "model_refits": 0,
+            "formal_results_modified": False}
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     snapshot = "869806ff9995b76ef2786ca7b57b9acc02c2731f"
@@ -89,6 +151,7 @@ def main() -> None:
             assert destination.is_file() or destination in (OUT / "handoff_checks.json", OUT / "manifest.json"), target
             links.append({"document": str(doc.relative_to(ROOT)), "target": target})
     outline = DOCS[0].read_text()
+    scalar_explanations = audit_slide_scalar_explanations(outline)
     slides = re.findall(r"^### Slide (\d+)：(.+)$", outline, re.M)
     index = re.findall(r"^\| (\d+) \| (.+) \|$", outline, re.M)
     assert slides == index and [int(n) for n, _ in slides] == list(range(1, 25))
@@ -129,6 +192,7 @@ def main() -> None:
               "existing_linked_blobs": existing_linked_blobs,
               "slide_count": len(slides), "appendix_count": 3, "evidence_id_count": len(registry_ids),
               "numeric_audit": "cross_checks.json", "scientific_computations_in_this_script": 0,
+              "slide_scalar_explanations": scalar_explanations,
               "matrix_vector_pickle_runtime_publication_count": 0,
               "generated_python_bytecode_excluded": True,
               "audit_hash_self_excluded": self_excluded,
