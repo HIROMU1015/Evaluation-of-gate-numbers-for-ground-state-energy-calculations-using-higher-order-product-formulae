@@ -1,5 +1,12 @@
 # 現在の研究方針と検証状況
 
+> 2026-10-06 第2研究v2：Track R・Track Gの完了をユーザー/GPTレビューで受理し、
+> H-chainの新規科学計算はいったん終了する。[統合evidence map](second_study_v2/evidence_integration_20261006/README.md)を参照する。
+> Direction C・承認済みRQは不変。HF/HCl/native H-chain、H6 geometry、rank診断、prospectiveを、
+> native contract・分母・再利用tupleを保って整理した。新規科学計算・再scoringは0。
+> H9/H10、rank64、追加geometry/gap、gamma/width/gate調整は自動実行しない。
+> 次はGPT側の論文配置・claim scopeレビュー。以下の旧stage記録は作成時点のまま保持する。
+
 > 2026-10-05 第2研究の承認済み最終方針と成果整理：
 > [成果整理版の入口](second_study_v2/result_synthesis_20261005/README.md)を参照する。
 > Direction Cを、固定finite-time PF校正の予算信頼性・残余headroomを扱う数値方法論研究としてまとめる。
@@ -18,7 +25,7 @@
 > [`research_outcomes/20260929/README.md`](research_outcomes/20260929/README.md)
 > を入口とする。これは文書監査済みの内部成果整理版であり、新しい科学計算の許可ではない。
 
-最終更新：2026-10-05（承認済み第2研究成果版への導線追加。以下の第一研究・旧stageの記述は歴史的範囲を保持）
+最終更新：2026-10-06（承認済みH-chain完了受理と統合evidence mapへの導線追加。以下の第一研究・旧stageの記述は歴史的範囲を保持）
 
 > 2026-09-28追補：第二研究は`complete_no_benefit`で閉じ、その後のD2R R0/R1事後原因分離まで完了した。R2は未許可である。方針再検討時は、先に
 > [`pf_research_status_after_d2r_r1_20260928.md`](pf_research_status_after_d2r_r1_20260928.md)
