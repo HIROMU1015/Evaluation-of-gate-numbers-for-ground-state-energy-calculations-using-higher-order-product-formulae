@@ -1,0 +1,215 @@
+Commit `f54db03a6a619b978a38152ff15fcce9963f676f` の準備資料を確認しました。
+
+H6 geometry sweep（Track G）とH6/H7/H8 M1 rank convergence（Track R）について、runner実装・focused tests・freezeを完了させた上で本計算へ進むことを承認します。
+
+科学仕様はpreregistration `de91a39` および承認済み指示を維持してください。以下の2点を今回の確定事項とします。
+
+## 1. ローカル実行枠
+
+今回はGPUサーバーの共有allocationではなく、ユーザー所有のローカルPC上での独立実行なので、CPU 1 / worker 1という保守的制限は使用しません。
+
+実行開始直前に実機について、
+
+- logical / physical CPU数
+- 利用可能RAM
+- swap
+- output filesystemの空き容量
+- GPU有無は参考情報として記録。ただし今回のscience kernelを勝手にGPU化しない
+
+を取得し、allocation recordとして保存してください。
+
+### CPU / parallelism
+
+可能な限りローカルCPUを利用してよいです。
+
+ただし、
+
+- `OPENBLAS_NUM_THREADS=1`
+- `OMP_NUM_THREADS=1`
+- `MKL_NUM_THREADS=1`
+- PySCF threads = 1
+
+を各workerで維持し、BLAS内部並列とprocess並列の二重oversubscriptionを避けてください。
+
+parallelismはscience上独立な単位だけで行います。
+
+Track G:
+- geometry間は並列可。
+- 同一geometry内でbranch continuationを必要とするcandidate truth時刻は逐次。
+- reference acquisitionの34時刻について、protocol上の結果を変えない範囲で実装上の並列化は可。ただしfirst qualifying windowの選択は全34点取得後にfrozen ruleで一括判定する。
+- prediction freeze前にtruthを開かない。
+
+Track R:
+- H6 / H7 / H8 system間は並列可。
+- systemごとの3 candidate timesはrank continuationのため時刻順に処理する。
+- 1 coordinateでrankごとに独立Arnoldi chainを作らず、予定どおり最大rank32の1本のshared chainを使用する。
+- prefix solve自体はcached UQ/HQから処理し、追加PF/H actionとして数えない。
+
+Track GとTrack Rも、ローカルresource schedulerがCPU/RAMを超過させない場合は同時実行してよいです。逐次実行を必須とはしません。
+
+### RAM
+
+固定12 GiB全体上限は今回使用しません。
+
+実行開始時の物理RAMを確認し、ホスト全体の安定性を保つreserveを残した上で利用可能RAMを最大限使ってください。
+
+ただし、
+
+- swap依存で計算を継続しない。
+- OOMによるscientific retryを行わない。
+- workerごとのpeak RSSと全体peak RSSを記録する。
+- schedulerは予測/実測RSSからworker数を減らすことは可。
+- science resultを見てworker数を変えるのではなく、resource状態だけを根拠に変更する。
+
+H8 rank32など高メモリ条件を複数同時に走らせてRAMを枯渇させないようにしてください。
+
+### Wall time
+
+12時間を科学的hard capとはしません。
+
+ローカル実行なので完了まで継続可とします。ただし、
+
+- stage wall time
+- coordinate wall time
+- total wall time
+
+は必ず記録する。
+
+hang / numerical failureを時間延長で救済しない。watchdogは明らかな異常停止検出用に実装してよいです。
+
+### Disk
+
+2 GiBを科学的hard capとはしませんが、不要なdense intermediateを保存しない方針は維持します。
+
+- 既存runtimeはreadonly reuse。
+- dense PF/unitary/Arnoldi basis等の大型中間物は原則private runtime。
+- Gitへcommitするのはscalar results、small tables、figures、hash、audit、tests、manifest。
+- 実行前後のdisk使用量を記録する。
+- filesystemを圧迫する場合は新規science action開始前に停止する。
+
+「ローカル資源を最大利用する」は、science protocol/action capsを拡張する意味ではありません。
+
+Track Gの既登録action caps、Track Rの
+- PF vector actions <= 288
+- H matvecs <= 288
+- Arnoldi chains = 9
+- new truth = 0
+
+等のscience capsは変更しません。
+
+## 2. Track Rのrank continuation
+
+主解析では、各rank自身のbranch historyを使います。
+
+各systemについてcandidate timesを
+
+`r=0.5 -> 0.65 -> 0.8`
+
+の順に処理し、各rank
+
+`m = 1, 2, 4, 8, 16, 32`
+
+について、
+
+- 最初の時刻ではそのrankのfrozen H-reference ruleでbranchを選択。
+- 次の時刻では、同じrankの直前時刻で選択したvector/projectorをcontinuation anchorにする。
+
+すなわち、rank mのtrajectoryはrank m自身で閉じます。
+
+rank32 selected vectorを他rankへ流用しない。
+rank8 selected vectorを全prefixへ流用しない。
+
+primary analysis ranksは従来どおり
+
+`m = 4, 8, 16, 32`
+
+です。
+
+prefix widthは事前登録どおり、
+
+- m4: `abs(delta_M(4)-delta_M(2))`
+- m8: `abs(delta_M(8)-delta_M(4))`
+- m16: `abs(delta_M(16)-delta_M(8))`
+- m32: `abs(delta_M(32)-delta_M(16))`
+
+とし、
+
+`w_M(m)=max(local_width(m), prefix_width(m))`
+
+を使用します。
+
+このrank-specific continuationをTrack Rの新しいmechanistic diagnosticの主結果とします。
+
+### 旧rank8 reproduction control
+
+既存H-chain formal rank8結果は変更しません。
+
+旧 `analyze_coordinate` の、
+
+「previous primary rank8 selected vectorを全prefix analysisへ渡す」
+
+という既存規則を、同じcached UQ/HQから別controlとして再現してください。
+
+目的は、
+
+1. 保存済みrank8 point / branch / width / numerical gateを再現できることの確認。
+2. 新rank-specific continuationによって生じる差をbranch-policy differenceとして識別すること。
+
+です。
+
+旧rank8 controlのwidthを新rank-specific primary widthへ置き換えない。
+逆に、新rank-specific結果で旧formal rank8 resultを再採点・上書きしない。
+
+追加PF/H actionが不要な形でcontrolを作成してください。
+
+旧rank8 reproductionが保存結果とnumerical tolerance内で一致しない場合は、
+`rank8_reproduction_control_failed_review_required`
+としてTrack Rのscience interpretationを停止し、結果依存の修正を行わないでください。
+
+## 実行前gate
+
+本計算前に以下を完了してください。
+
+1. science runner実装。
+2. focused tests fail/skip 0。
+3. source/input/time/hash freeze。
+4. Track GではR=1.0 anchorのarray/H/state/sector/group/energy-origin closure。
+5. Track Rでは9 coordinatesのarray identity closure。
+6. 実行時resource inventory。
+7. prediction freeze / byte gate。
+
+Track Gのtruthはprediction freeze後だけ開く。
+Track Rの保存truthも新rank prediction freeze後だけ読む。
+
+進行中のgeneral-molecule prospective validationのruntime・partial truth・scoring resultは、このH-chain補助検証の条件選択やprotocol変更に使用しないでください。
+
+科学retryは0。
+technical retryはbyte-identical input/source/protocolのpre-action failureまたはcheckpoint resumeのみ最大1回。
+
+## 最終停止
+
+Track G:
+`hchain_h6_geometry_sweep_complete_review_required`
+
+Track R:
+`hchain_m1_rank_convergence_complete_review_required`
+
+まで実行し、commit・pushして停止してください。
+
+handoffには最低限、
+
+- branch
+- 40文字commit
+- actual CPU/RAM/disk resource inventory
+- actual worker concurrency
+- action counts
+- runtime / peak RSS
+- prediction/truth freeze hashes
+- rank8 reproduction control
+- missing/failure/abstention
+- focused test結果
+- primary scalar/figure summaries
+
+を記載してください。
+
+この2 Track終了後にH-chainの追加geometry/rank/systemを自動追加しないでください。
