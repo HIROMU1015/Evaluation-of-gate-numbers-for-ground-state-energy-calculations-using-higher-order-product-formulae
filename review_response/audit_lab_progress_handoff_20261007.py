@@ -91,7 +91,7 @@ def main() -> None:
     outline = DOCS[0].read_text()
     slides = re.findall(r"^### Slide (\d+)：(.+)$", outline, re.M)
     index = re.findall(r"^\| (\d+) \| (.+) \|$", outline, re.M)
-    assert slides == index and [int(n) for n, _ in slides] == list(range(1, 23))
+    assert slides == index and [int(n) for n, _ in slides] == list(range(1, 25))
     assert len(re.findall(r"^### A\d+：", outline, re.M)) == 3
     registry_ids = set(re.findall(r"^\| (E\d+) \|", outline, re.M))
     assert registry_ids == {f"E{n:02}" for n in range(1, 21)}
