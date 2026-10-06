@@ -1,0 +1,47 @@
+{
+  "science_ready": true,
+  "science_ready_definition": "Design readiness for a separately authorized H4 pilot; NOT permission or an enabled production runner.",
+  "science_authorized": false,
+  "production_execution_ready": false,
+  "phase05_complete": true,
+  "unresolved_design_issues": [],
+  "resolved_with_explicit_user_approval": [
+    "Retain estimator; replace unconditional commuting-zero test with identity/exact-input tests and commuting counterexample.",
+    "Full residual least-squares is primary; projected L_m/a_m diagnostic only."
+  ],
+  "implementation_tasks_before_execution": [
+    "Implement reviewed archive allowlist adapter using only saved H/13 groups/CISD, no inherited truth-reading loader.",
+    "Implement frozen Padé S2-cache backend and full cold replay with per-arm inherited noise/quality.",
+    "Connect scalar-only Phase A publication/freeze and committed-blob-verified Phase B saved-truth reader.",
+    "Validate adapter/backend on synthetic arrays against original formula and expected counters before H4 input decode."
+  ],
+  "exact_next_actions_if_separately_approved": {
+    "scope": "One saved H4/current_m3/CISD; m1,2,4,8;10 signed train and12 signed evaluation times.",
+    "passes": 2,
+    "H_matvec_count_if_rank8": 18,
+    "PF_forward_action_count_if_rank8": 220,
+    "PF_adjoint_action_count": 44,
+    "response_svd_factorization_count_if_rank8": 8,
+    "response_rhs_solve_count_if_rank8": 176,
+    "small_projected_ritz_eigh_count_if_rank8": 8,
+    "new_state_preparation_count_if_rank8": 8,
+    "basis_vectors_if_rank8": 16,
+    "new_ground_full_eigh_Schur_direct_truth": 0,
+    "fits_after_replay": 27,
+    "phase_a_signed_evaluation_predictions": 108,
+    "Phase_B_saved_direct_coordinates": 12,
+    "Phase_B_saved_exact_proxy_coordinates": 22,
+    "A3_reference_fits": 3,
+    "rank_stop": "Record lower actual counts according to expected_action_counts.json; no alternate directions or increased m.",
+    "required_stop": "Freeze/commit Phase A before saved truth access. After Phase B scoring, stop for GPT/user decision; no molecular/resource extension."
+  },
+  "current_science_action_count": 0,
+  "claims_not_established": [
+    "Actual H4 response improvement",
+    "refit total calibration benefit",
+    "response-specific advantage over Ritz",
+    "resource savings",
+    "independent generalization or safety certificate"
+  ],
+  "phase05_stop": "Commit/push design/test materials, verify remote tip/blobs, then stop; do not invoke H4 runner."
+}

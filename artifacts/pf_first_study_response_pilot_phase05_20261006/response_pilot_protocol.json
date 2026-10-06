@@ -1,0 +1,266 @@
+{
+  "protocol_id": "pf_first_study_response_pilot_phase05_20261006_v1",
+  "normative": true,
+  "status": "design_frozen_after_user_math_amendments_before_H4_execution",
+  "frozen_on": "2026-10-06",
+  "base_verified_snapshot_commit": "1b7b2fc959185ca1be06581682a67d28e02db21c",
+  "science_authorized": false,
+  "science_calculation_count": 0,
+  "conflict_rule": "JSON is normative; stop before production load/action if code, prose, sources or operation counts conflict. Amend/version/commit before any science; never silently change after evaluation.",
+  "research_questions": {
+    "RQ1": "Can response correction reduce CISD state bias while preserving exact eigenstate target?",
+    "RQ2": "Does refitting the same fixed model reduce total finite-time prediction error?",
+    "RQ3": "Is the response tradeoff distinct from equal-information Ritz state improvement?",
+    "RQ4": "Which of absolute error, magnitude underestimation and sign crossings improve?"
+  },
+  "scope": {
+    "system": "H4",
+    "state": "CISD",
+    "PF": "current_m3",
+    "sector_dimension": 36,
+    "training_abs_times": [
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
+    ],
+    "evaluation_abs_times": [
+      0.125,
+      0.175,
+      0.225,
+      0.275,
+      0.35,
+      0.4
+    ],
+    "signs": [
+      1,
+      -1
+    ],
+    "signed_training_coordinates": 10,
+    "signed_evaluation_coordinates": 12,
+    "signed_coordinates_total": 22,
+    "evaluation_type": "Previously observed development data; algorithm/predictions frozen before scoring, not prospective or independent holdout.",
+    "epsilon_E_Ha": 0.00015936001019904,
+    "beta": 1.2,
+    "gamma_unchanged": 1.01,
+    "level3_resource_stage": false
+  },
+  "input_identity": "source_identity_phase_a.json",
+  "formula_definition": {
+    "formal_order": 4,
+    "s2_sequence": [
+      0.1960294407008384,
+      0.2092246690782796,
+      0.3316118001935053,
+      -0.4737318199452465,
+      0.3316118001935053,
+      0.2092246690782796,
+      0.1960294407008384
+    ],
+    "h4_expanded_step_count": 169,
+    "h4_pauli_rotations_per_pf_step": 2556,
+    "provenance": "review_response/compare_existing_pf_low_order_models_local.py:CURRENT_M3_WEIGHTS"
+  },
+  "observable": {
+    "U": "approximates exp(+iHt)",
+    "W": "exp(-iHt) U_P(t)",
+    "W_adjoint": "U_P(t)† exp(+iHt); NOT W(-t)",
+    "A": "(W-W†)/(2it)",
+    "bare": "Im <psi|W|psi>/t",
+    "signed_policy": "Build +t and -t independently. Direct saved branches joined independently by sign. No echo argument/unwrap fit or averaging switch."
+  },
+  "response": {
+    "E": "Re <psi|H|psi>",
+    "Q": "I-psi psi†",
+    "r": "Q(H-E)psi",
+    "L": "Q(H-E)Q",
+    "a": "QA psi",
+    "subspace": "span{r,QHr,QH^2r,...,QH^(m-1)r}",
+    "implementation_span": "MGS Arnoldi on L with residual start; equivalent prefix span to requested powers",
+    "m_values": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "primary_m": 8,
+    "diagnostic_m": [
+      1,
+      2,
+      4
+    ],
+    "basis_shared_abs_times": 11,
+    "minimization": "min_c ||a-(LZ_m)c||_2 in full 36-dimensional residual space",
+    "solution": "z=Z_m c, minimum-norm truncated thin-SVD solution of B=LZ_m",
+    "estimator": "g_resp=g_base-2 Re(z†r)",
+    "projected_quantities": "Save L_m=Z†B and a_m=Z†a as diagnostics, never substitute them for full-residual objective.",
+    "target_invariance": "X=z psi†-psi z†, Atilde=A-[H,X]; every exact H-eigenstate has unchanged expectation for fixed X.",
+    "user_amendments": "user_amendments.json"
+  },
+  "numeric": {
+    "dtype": "complex128 / float64",
+    "eps": 2.220446049250313e-16,
+    "precision_multiplier": 64,
+    "orthogonalization": "Exactly two modified Gram-Schmidt passes; project against psi before each pass, then sequential accepted columns. Largest-magnitude component phase made positive, first index wins ties.",
+    "initial_rank_threshold": "64 eps N max(||Hpsi||,|E|,tiny); reject norm <= threshold",
+    "subsequent_rank_threshold": "64 eps N max(||Hz_previous||,||B_previous||,|E|,tiny)",
+    "rank_stop": "Stop at first rejected direction, use identical retained prefix for all arms/m; no replacement directions or increased m. k_m=min(m,k_max).",
+    "orthogonality_gate": "||Z†Z-I||_F and ||psi†Z||_2 <=64 eps N; failure stops, no extra passes.",
+    "SVD": "Thin SVD of full B=N x k. Keep sigma_i >64 eps max(N,k) sigma_max. No ridge, inverse, gap truth, parameter search. Cache one factor per distinct nonzero k_m.",
+    "relative_residual_denominator": "max(||a||,epsilon_num), epsilon_num=64 eps N max(||a||,1 Ha); fixed units Ha.",
+    "projected_hermiticity_gate": "||H_m-H_m†||_F <=64 eps N max(||H_m||_F,tiny); symmetrize only within this gate.",
+    "ritz_tie_rule": "lowest projected eigenspace within 64 eps dim(H_m)||H_m||_2; project e0 then e1,... until norm>64 eps dim(H_m), normalize, fix largest-component phase.",
+    "nonfinite_policy": "Stop affected run before interpretation on any nonfinite coefficient, vector, residual or proxy. Zero-rank response is z=0 and Ritz original psi, reuse baseline.",
+    "response_diagnostics": [
+      "d_norm",
+      "relative_residual",
+      "z_norm",
+      "basis_dimension",
+      "SVD_effective_rank",
+      "condition_number_retained",
+      "condition_number_full_or_null_if_singular",
+      "singular_values",
+      "svd_threshold",
+      "rank_thresholds",
+      "orthogonality_residual",
+      "L_m",
+      "a_m"
+    ],
+    "response_residual_claim": "Equation-solving diagnostic, not target-error certificate.",
+    "residual_convergence": "For each of 22 signed coordinates and consecutive m, d_next<=d_prev+eta_prev+eta_next, eta_m=64 eps N(||a||+||B_m||_F||c_m||). All comparisons must pass for Outcome A. Cutoff changes may break monotonicity; record failure, never tune cutoff.",
+    "inherited_gates_phase_a": {
+      "state_normalization_absolute": 1e-12,
+      "hamiltonian_relative_hermiticity": 1e-12,
+      "group_sum_frobenius": 1e-12,
+      "pf_unitarity_frobenius": 1e-10,
+      "U_minus_t_minus_U_t_dagger_relative_frobenius": 1e-10
+    },
+    "noise_rule": "eta=max(||U†U-I||_F/|t|, |g_full_replay-g_first|,50 eps max(||H||_2,1/|t|)); same formula per arm, no truth in eta. Response conditioning/roundoff diagnostics separately reported, not a bias certificate.",
+    "rho_quality": "rho=abs(g)/max(eta,1e-300); resolved>=100, marginal>=10, unresolved otherwise; applies to each arm. No post-hoc rescue.",
+    "cold_replay": "One complete independent replay: rebuild basis, PF block/echo backend, states, factors, all signed proxies; no cache shared across passes. Local identical S2 block cache inside one build retained. Count all repeat operations."
+  },
+  "ritz": {
+    "V": "[psi,Z_m]",
+    "H_m": "V†HV from already cached Hpsi,HZ",
+    "solve": "lowest small projected Hermitian eigenpair, dimension<=9; no full-H ground solve",
+    "proxy": "Im <phi_m|W|phi_m>/t using forward W only, no adjoint needed for scalar expectation",
+    "primary_m": 8,
+    "diagnostic_m": [
+      1,
+      2,
+      4
+    ]
+  },
+  "arms": {
+    "A0": "CISD baseline",
+    "A1": "response m8",
+    "A2": "Ritz m8",
+    "A3": "saved exact-ground proxy; Phase B only, no new exact-state PF action",
+    "diagnostics": "response and Ritz m1,m2,m4; never select m after result"
+  },
+  "fit": {
+    "functional_form": "a4*t^4+a6*t^6",
+    "intercept": false,
+    "weighting": "unweighted OLS",
+    "scaling": "each design column divided by its 2-norm, coefficients transformed back",
+    "solver": "numpy.linalg.lstsq(scaled_design, y, rcond=None)",
+    "primary": "raw_positive_even_two_term: five positive-time proxies; evaluate both signs with same even model",
+    "even_diagnostic": "evenized_two_term: five (g(+t)+g(-t))/2; selection inactive",
+    "odd_diagnostic": "odd_diagnostic: powers 5,7 on (g(+t)-g(-t))/2; selection inactive",
+    "validity": "all five positive training rows marginal/resolved, at least three resolved, scaled condition<=1e8; fit_ok else not_identifiable. Same rule for all arms and diagnostics.",
+    "save": [
+      "a4",
+      "a6",
+      "scaled_condition_number",
+      "maximum_absolute_training_residual_Ha",
+      "model_status",
+      "quality_gate",
+      "diagnostic_models"
+    ],
+    "no_result_dependent_switch": true,
+    "baseline_refit": true,
+    "new_science_fit_count_phase05": 0
+  },
+  "phase_boundary": {
+    "phase_a_allowed": "Whitelisted H,13 groups,CISD, fixed coefficients/times, epsilon/beta, normative parameters. No exact state/energy,D4/D6/D8, branch/direct/decomposition/whole truth-mixed CSV inputs.",
+    "phase_a_freeze": "Commit scalar proxy rows, fitted coefficients, all signed predictions, diagnostics, action ledger, source/code/protocol hashes. Manifest excludes itself; obtain full40 Git commit. Keep production vectors/matrices private and uncommitted.",
+    "phase_b_precondition": "Verify actual committed prediction blob equals frozen file bytes and SHA256 before invoking truth loader; reject changed/uncommitted bytes or source hash mismatch.",
+    "phase_b_truth": "Existing Phase B direct truth and exact-proxy scalars only, filter B/H4/current_m3/mechanism_fixed and exact 12 signed evaluation keys; exact training scalars only for A3 reference fits. No new direct/Schur/ground computation.",
+    "failure_policy": "Missing/duplicate/unreliable branch or hash mismatch stops scoring. No replacement, interpolation, coordinate addition or prediction modification.",
+    "module_split": [
+      "phase05_phase_a.py",
+      "phase05_phase_b.py"
+    ],
+    "production_runner": "phase05_runner.py --phase-a / --phase-b fail closed before archive decode in this Phase0.5 package."
+  },
+  "metrics": {
+    "rowwise": [
+      "g_method-g_exact",
+      "fhat-direct",
+      "abs(fhat-direct)",
+      "u=abs(direct)-abs(fhat)",
+      "u_plus=max(0,u)",
+      "sign(fhat)!=sign(direct)"
+    ],
+    "aggregate": [
+      "S_abs=sum(abs(total_error))",
+      "S_under=sum(u_plus)",
+      "E_max=max(abs(total_error))",
+      "sign_crossing_count",
+      "improved/worsened/equal row count vs A0",
+      "response residual statistics",
+      "standalone/shared/incremental action costs"
+    ],
+    "all_12_rows": true,
+    "sign_crossing": "nonadditive label; no componentwise unsafe attribution on crossing rows",
+    "zero_sign": "numpy sign: zero is a distinct sign, no data-dependent zero threshold",
+    "point_improvement": "sum(abs(g_response-g_exact)) lower than baseline over all 12 signed evaluation rows; diagnostic only",
+    "quality_policy": "Retain all rows and raw fits including not_identifiable with status flags; no denominator filtering. Invalid primary fit/unstable run cannot support A or B."
+  },
+  "outcomes": {
+    "comparison": "Strict continuous scalar decreases, no new percentage/material threshold. Report raw values, ratios (null if denominator zero), and all rowwise results.",
+    "response_vs_ritz_tuple": [
+      "S_abs",
+      "S_under",
+      "standalone_H_matvec",
+      "standalone_PF_forward_plus_adjoint"
+    ],
+    "response_unique_tradeoff": "Response is not Pareto-dominated by Ritz in tuple and strictly better in at least one component. Equal tuple does not qualify. Report any disadvantage explicitly; no sum of unlike action units.",
+    "A": "All: response S_abs<base, S_under<base, residual_converged, response_unique_tradeoff, stable/identifiable.",
+    "B": "Response and Ritz each reduce S_abs and S_under vs base; response lacks unique tradeoff; stable/identifiable.",
+    "C": "Response point/proxy aggregate improves but response does not reduce both total S_abs and S_under; no resource stage.",
+    "D": "Neither response nor Ritz reduces both S_abs and S_under, or numerical instability; no percentage threshold.",
+    "decision_precedence": [
+      "numerical invalid D",
+      "A",
+      "B",
+      "C",
+      "D",
+      "inconclusive_mixed_predicates"
+    ],
+    "uncovered_combinations": "inconclusive_mixed_predicates is a reporting status for asymmetric or nonconverged combinations; do not force success/failure or modify A-D. GPT/user review required before follow-up.",
+    "paper_levels": {
+      "1": "state sensitivity / calibration mechanism",
+      "2": "response-specific tradeoff supported only after A; novel positioning still requires review",
+      "3": "N2/CO resource improvement separately preregistered/authorized later; no current evidence."
+    }
+  },
+  "backend_future_contract": {
+    "implementation": "CPU numpy1.26.4, scipy1.14.1 expm scaling/Padé, complex128; use original S2-cache block order and left multiplications; no full-H/group eigendecomposition or Schur.",
+    "block_rule": "For each distinct S2 weight, build group0..11 half weights, group12 full, group11..0 half; left multiply; sequence seven blocks left multiplied. Four unique weights. Independent signed builds.",
+    "echo_actions": "forward psi -> U psi -> exp(-iHt) U psi; adjoint psi -> exp(+iHt) psi -> U† exp(+iHt) psi. Use adjoints of the same signed matrices, not opposite-time echo.",
+    "exact_H_propagation": "Explicitly costed classical echo reference; not an operational quantum access/free oracle assumption.",
+    "acceptance_before_science": "Production adapter code review/test against synthetic original spectral builder and counter plan, no H4 tests/loader invocation until separate science authorization. No protocol changes to fit results."
+  },
+  "cost_contract": "expected_action_counts.json and cost_accounting.md; nominal rank8, two complete passes, exact lower counts recorded on prefix breakdown; diagnostic and primary cost reported separately.",
+  "prohibitions": [
+    "No H4 science in Phase0.5",
+    "No new molecules/geometry/PF/state family",
+    "No new direct truth",
+    "No full ground/Schur solve",
+    "No tuning m/ridge/rank/noise/gamma/fit after scoring",
+    "No N2/CO/HF extension",
+    "No rewrite formal/Phase0/S4"
+  ]
+}
