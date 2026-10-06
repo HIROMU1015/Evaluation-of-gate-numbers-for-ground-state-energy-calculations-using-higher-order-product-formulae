@@ -1,0 +1,15 @@
+{
+  "original_failed_commit": "e74fdec5e5085fd7c4f7a39fb4d59cec052f68f4",
+  "science_source_sha256": "0a2fce70ba9af6f2892b31b4c21febf6ddccbe3fbeec116e324212992a082d3f",
+  "extractor_before_sha256": "fa0246e93aa3f25b9d605407e250e2fb8c1684c722b60391806996eba80b43c3",
+  "extractor_after_sha256": "2aaa138c912e042af33605bd173cc72641f98f757133a491f9747fbe0302b0d7",
+  "exact_one_line_namespace_binding_only": true,
+  "other_extractor_AST_unchanged": true,
+  "science_generator_original_file_unchanged": true,
+  "geometry_AST_modifications": 1,
+  "science_function_AST_sha256": "fa170d7998a26fa8418b37920ec0f3ccde0fe54f07395f4dac7a3a6baf8d716f",
+  "geometry_function_AST_sha256": "b191c7fd1e09163de37b6eef7fadf5ec93d7adf5ef42d2e3dc191d7cf076deb3",
+  "distance_variable_only": true,
+  "science_recipe_changed": false,
+  "diff": "diff --git a/review_response/hchain_supplement_execution.py b/review_response/hchain_supplement_execution.py\nindex 23d74ae..9115385 100644\n--- a/review_response/hchain_supplement_execution.py\n+++ b/review_response/hchain_supplement_execution.py\n@@ -478,6 +478,7 @@ def geometry_generator(root, distance):\n     if modifications != 1:\n         raise PreparationError(\"geometry-only AST modification count\")\n     namespace = {\"np\": np, \"time\": time, \"json\": json, \"redirect_stdout\": redirect_stdout,\n+                 \"write_json\": write_json,\n                  \"canonical_hash\": canonical_hash, \"sha_array\": sha_array, \"state_identity\": state_identity,\n                  \"PreparationError\": PreparationError, \"OLD\": OLD, \"distance\": float(distance)}\n     module = ast.Module(body=[ast.ImportFrom(module=\"__future__\", names=[ast.alias(name=\"annotations\")], level=0), function], type_ignores=[])\n"
+}

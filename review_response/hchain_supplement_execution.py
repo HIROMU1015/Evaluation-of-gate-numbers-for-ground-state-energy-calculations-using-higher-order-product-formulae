@@ -478,6 +478,7 @@ def geometry_generator(root, distance):
     if modifications != 1:
         raise PreparationError("geometry-only AST modification count")
     namespace = {"np": np, "time": time, "json": json, "redirect_stdout": redirect_stdout,
+                 "write_json": write_json,
                  "canonical_hash": canonical_hash, "sha_array": sha_array, "state_identity": state_identity,
                  "PreparationError": PreparationError, "OLD": OLD, "distance": float(distance)}
     module = ast.Module(body=[ast.ImportFrom(module="__future__", names=[ast.alias(name="annotations")], level=0), function], type_ignores=[])

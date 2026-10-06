@@ -1,0 +1,259 @@
+Track R commit `0c40a3d7987e0961262bfd38bbb214a9e2946824` は完了結果として受理します。追加rank/system計算は行わないでください。
+
+Track G commit `e74fdec5e5085fd7c4f7a39fb4d59cec052f68f4` のimplementation incidentを確認しました。
+
+4 new geometriesの失敗は、
+
+`NameError: name 'write_json' is not defined`
+
+によるserialization/extraction namespace defectであり、scientific ineligibilityではありません。
+
+新geometryではreference、candidate cheap、M1、ground、direct truthは0であり、結果依存のmethod変更も行われていません。
+
+Track Gについて、**1回限りの明示的なimplementation recovery run**を承認します。
+
+## Recoveryの位置付け
+
+これは元runのsilent retryではありません。
+
+以下を別々に永久保存してください。
+
+- original failed run:
+  `e74fdec5e5085fd7c4f7a39fb4d59cec052f68f4`
+- failure cause / incident audit
+- failed H generation attempts = 4
+- failed CISD generation attempts = 4
+- recovery generation attempts
+- recovery successful freezes
+
+最終論文・resource accountingでは、元runの4 generation attemptsを削除しないでください。
+
+4 geometryを8 independent casesとして数えないでください。
+
+## 許可する修正
+
+科学generator body、Hamiltonian/state/PF/reference/time/budget規則は変更しない。
+
+許可するのはserialization infrastructureの修正だけです。
+
+具体的には、extracted generatorが元実装と同じ`write_json` helperを利用できるように、
+
+- extraction namespaceへ既存helperを正しくbind/importする
+- または元generatorが期待するserialization dependencyを同等に提供する
+
+ことだけを許可します。
+
+`write_json` failureを回避するためにgenerator bodyを書き換えたり、別形式の科学inputを新規設計しないでください。
+
+修正前後でgenerator science bodyが、既承認のdistance multiplication以外変更されていないことをhash/AST auditしてください。
+
+## 修正後のtest gate
+
+molecular recoveryを始める前に、今回欠けていた経路を直接testしてください。
+
+既存synthetic 68 testsに加え、
+
+1. extracted generator namespaceに必要global/helperが全て存在すること。
+2. serializationまで通るend-to-end generator-path test。
+3. `write_json` callが実際に成功すること。
+4. generated sanitized predictor inputをwrapperが再読込できること。
+5. H/state/sector/groups/K hashをfreezeできること。
+
+を追加してください。
+
+可能なら小さいsynthetic/mock fixtureで実行し、new H6 geometry scienceをtestとして先に開かないでください。
+
+fail/skipが1件でもあればscience recoveryを開始せず停止してください。
+
+## Recovery対象
+
+固定済み4 geometryのみ:
+
+- H6 R=0.80 Å
+- H6 R=1.20 Å
+- H6 R=1.40 Å
+- H6 R=1.60 Å
+
+R=1.00 Åは既存anchorをそのまま使用。
+
+geometry、basis、state recipe、PF、reference grid、candidate ratios、gamma、M1 rankを変更しない。
+
+失敗geometryの置換・追加は禁止。
+
+## Input regeneration
+
+前runではusable sanitized predictor inputがfreezeされておらず、array checkpoint resume可能な状態ではないため、4 geometryのH/CISD generationを1回だけ再実行してよいです。
+
+これは新しいauthorization下の`recovery_generation`として会計し、前runのaction countsへ上書きしない。
+
+Recovery cap:
+
+- H generation <= 4
+- CISD generation <= 4
+- input verification H matvec <= 4
+
+同一geometryで2回目のrecovery generationは禁止。
+
+recoveryでも同じtechnical failureまたは新しいfailureが発生した場合、さらに再実行せず停止してください。
+
+scientific retry = 0。
+今回のauthorized recovery attempt = 最大1。
+
+## Recovery input freeze
+
+4 geometryのgeneration成功後、
+
+- H
+- CISD state
+- sector indices
+- ordered groups
+- K
+- energy origin
+- current_m3 coefficients
+- source hashes
+
+をfreezeする。
+
+R=1.00 anchorを含めて5 geometryのglobal input identityを作る。
+
+このfreezeまではreference/truthを開かない。
+
+## その後のTrack G science
+
+input freezeが成立した場合のみ、元preregistrationどおり続行してください。
+
+### Reference
+
+新4 geometryについて各34 frozen times。
+
+最大新規:
+
+- reference PF vector actions = 136
+- reference H exponential actions = 136
+
+H-chain native contractを変更しない。
+
+- grid `geomspace(0.02,1.8,34)`
+- noise floor `5e-13 Ha`
+- rolling window 5
+- order 4 ±0.2
+- R² >=0.999
+- first qualifying window
+- no rescue
+
+### Candidates
+
+eligible new geometryのみ
+
+`r = {0.5, 0.65, 0.8}`
+
+をfreeze。
+
+candidate domain failure等があればそのままterminal statusにする。
+
+### Cheap
+
+最大12 coordinates。
+
+- candidate PF <=12
+- candidate H exponential <=12
+- fixed gamma frontier `{1.01,1.02,1.05,1.10}`
+- B2/H1なし
+
+### M1
+
+元仕様どおりrank8 fixed package。
+
+最大:
+
+- M1 PF <=96
+- M1 H <=96
+
+rank rescueなし。
+
+### Prediction freeze
+
+5 geometry全体を含める。
+
+新4 geometryのpredictionとR=1 anchorをまとめてfreezeする。
+
+truthはprediction freeze後だけ。
+
+### Truth
+
+eligible new geometryのみ。
+
+最大:
+
+- same-H ground solves <=4
+- direct full-PF/Schur coordinates <=12
+
+各geometry内は
+
+`r=.5 -> .65 -> .8`
+
+の順にbranch continuation。
+
+R=1.00の既存truthはidentity確認後にreuse。
+
+predictor-assisted branch rescueは禁止。
+
+### Immutable scoring
+
+truth freeze後のみ実行。
+
+当初preregisterした
+
+- gamma_req
+- safety slack
+- B0/B1 safety
+- oracle headroom
+- cheap/M1 point error
+- M1 width coverage
+- physical branch
+- abstention
+- PF/H-reference decomposition
+
+だけを計算する。
+
+結果を見てgeometry/time/gamma/rank/widthを追加・変更しない。
+
+## Resource
+
+前回のlocal resource policyを維持。
+
+- BLAS/PySCF threads = 1 per worker
+- independent geometry process parallelism可
+- local CPU/RAMをresource-safeな範囲で使用
+- swap依存禁止
+- runtime private
+- dense intermediates Git非公開
+- resource/action countsをoriginal failed runとrecovery runで別記録
+
+## 最終status
+
+成功した場合:
+
+`hchain_h6_geometry_sweep_recovery_complete_review_required`
+
+としてcommit・pushして停止。
+
+handoffでは必ず、
+
+- original failed commit
+- recovery amendment commit
+- serialization-only code diff
+- new test coverage
+- failed-generation action accounting
+- recovery-generation action accounting
+- 5 geometry status
+- reference/candidate/M1/truth counts
+- resource accounting
+- freeze hashes
+- main scalar tables/figures
+
+を示してください。
+
+Recoveryが失敗した場合、2回目のrecoveryを自動実行せず、
+`hchain_h6_geometry_sweep_recovery_failed_review_required`
+で停止してください。
