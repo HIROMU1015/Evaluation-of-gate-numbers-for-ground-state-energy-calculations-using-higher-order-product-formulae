@@ -1,0 +1,128 @@
+{
+  "analysis_type": "post_hoc_saved_scalar_and_procedure_audit",
+  "scientific_calculation_performed": false,
+  "original_artifacts_modified": false,
+  "source_registry": {
+    "h4_prediction": {
+      "path": "artifacts/pf_first_study_phase_a_20260925_6265243/predictions.json",
+      "origin_result_commit": "5a2f0a2e0315493c892c79f1a6b8c9285cc52ac3",
+      "verified_snapshot_commit": "52261023678c2fc4369ce4312b9385830b843399",
+      "sha256": "60058fe333d4b25f1ad4b8f3f5342a3736f2379ce9490b3f2ecde69583beeeda"
+    },
+    "h4_direct": {
+      "path": "artifacts/pf_first_study_phase_b_20260925_5a2f0a2/branch_audit.csv",
+      "origin_result_commit": "d13f49dc8923b0553f8c8596de3c44c8a7a6f14f",
+      "verified_snapshot_commit": "52261023678c2fc4369ce4312b9385830b843399",
+      "sha256": "912ef32fadda285a0994ac2e060208a9fffefa12b46c2fc8682c6ffeb88d4122"
+    },
+    "h4_protocol": {
+      "path": "PF_first_study_protocol_20260925.json",
+      "origin_result_commit": "d3faddebe490dbe8224bd4274578f2edd313dfb0",
+      "verified_snapshot_commit": "52261023678c2fc4369ce4312b9385830b843399",
+      "sha256": "410367f7ff1093fb5f171bb00ca8c22b292de34c19ff03553c600a0313565565"
+    },
+    "one_two_comparison": {
+      "path": "artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/summary.json",
+      "origin_result_commit": "73cdbf200d348cc610d4c20f45a3208ce7ad2e7e",
+      "verified_snapshot_commit": "52261023678c2fc4369ce4312b9385830b843399",
+      "sha256": "79df529b0ae331af206d1936f49f446224b260eaac957850856b370654ca0be6"
+    },
+    "practical_prediction": {
+      "path": "artifacts/server_practical_calibration_minimal_20260923_79035cc/predictions.json",
+      "origin_result_commit": "4f4374bdf4dbcb7d8e1d14f9682570c221e4c88a",
+      "verified_snapshot_commit": "52261023678c2fc4369ce4312b9385830b843399",
+      "sha256": "fd354e0c0d161dae86bee1e220e36958a450659ea2ed5409d10cf4c13674477e"
+    },
+    "practical_protocol": {
+      "path": "review_response/practical_calibration_minimal_protocol.json",
+      "origin_result_commit": "79035cc7c414c04cafe8b9f8bdc779a17ec57302",
+      "verified_snapshot_commit": "52261023678c2fc4369ce4312b9385830b843399",
+      "sha256": "7bbe9958837a881f0247b6e72f5e80e2331e0cfe50dea18addd13a2748467d55"
+    }
+  },
+  "h4_m5_comparison_minimum": {
+    "time_hartree_inverse": 3.5175172132783867,
+    "zero_based_candidate_index": 361,
+    "candidate_count": 401,
+    "candidate_interval_hartree_inverse": [
+      0.5385146445049875,
+      4.3081171560399
+    ],
+    "proxy_reference_time_hartree_inverse": 2.15405857801995,
+    "saved_model": {
+      "coefficients": [
+        -1.550188160548012e-06,
+        7.180093502989105e-09
+      ],
+      "maximum_absolute_residual_hartree": 2.601456179289953e-09,
+      "powers": [
+        4,
+        6
+      ],
+      "scaled_design_condition_number": 13.079351080278142
+    },
+    "post_hoc_predicted_signed_shift_hartree": -0.00022371699990222493,
+    "target_error_hartree": 0.00015936001019904,
+    "predicted_feasible": false,
+    "saved_direct_shift_hartree": 6.975989149005102e-06,
+    "saved_direct_cost": 8946044.72065897,
+    "direct_feasible": true,
+    "interpretation": "Candidate was present in the original grid, but the saved prediction rejected it on the error condition."
+  },
+  "saved_one_two_term_examples": [
+    {
+      "condition": "H6",
+      "formula": "current_m3",
+      "models": {
+        "original_one_term": {
+          "time_hartree_inverse": 1.130328683486731,
+          "predicted_absolute_error_hartree": 3.187200203980801e-05,
+          "direct_absolute_error_hartree": 2.9706717906622357e-05,
+          "cost_prediction_relative_error": 0.01698421808019161
+        },
+        "two_term": {
+          "time_hartree_inverse": 1.1590446836907113,
+          "predicted_absolute_error_hartree": 3.283578988223308e-05,
+          "direct_absolute_error_hartree": 3.270673573759969e-05,
+          "cost_prediction_relative_error": 0.0010199955732605977
+        }
+      }
+    },
+    {
+      "condition": "H7",
+      "formula": "current_m3",
+      "models": {
+        "original_one_term": {
+          "time_hartree_inverse": 1.1792969989068247,
+          "predicted_absolute_error_hartree": 3.1872002039807995e-05,
+          "direct_absolute_error_hartree": 2.9691575850007067e-05,
+          "cost_prediction_relative_error": 0.017102990479524852
+        },
+        "two_term": {
+          "time_hartree_inverse": 1.2094870020788393,
+          "predicted_absolute_error_hartree": 3.284492900610913e-05,
+          "direct_absolute_error_hartree": 3.271096171281467e-05,
+          "cost_prediction_relative_error": 0.0010589037451604875
+        }
+      }
+    }
+  ],
+  "saved_hf_cap_triggers": [
+    {
+      "condition": "HF_full_eq_sto3g",
+      "formula": "current_m3",
+      "proxy_reference_time_hartree_inverse": 0.297743371948396,
+      "selected_time_hartree_inverse": 0.148871685974198,
+      "cancellation_ratio_at_0p1_reference_time": 0.0002970476512284558,
+      "trigger": "cancellation_ratio_below_0.02"
+    },
+    {
+      "condition": "HF_full_stretch150_sto3g",
+      "formula": "current_m3",
+      "proxy_reference_time_hartree_inverse": 0.4120092942699993,
+      "selected_time_hartree_inverse": 0.20600464713499966,
+      "cancellation_ratio_at_0p1_reference_time": 0.00016871597347607728,
+      "trigger": "cancellation_ratio_below_0.02"
+    }
+  ]
+}
