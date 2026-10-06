@@ -350,6 +350,18 @@ def test_disk_reserve_stops_before_quota(tmp_path):
         s.resource_guard(data)
 
 
+def test_private_temp_links_count_metadata_without_following_targets(tmp_path):
+    output=tmp_path/'out';output.mkdir()
+    outside=tmp_path/'outside';outside.mkdir()
+    (outside/'data').write_bytes(b'a'*8192)
+    (output/'file_link').symlink_to(outside/'data')
+    (output/'directory_link').symlink_to(outside,target_is_directory=True)
+    expected=sum(max(f.lstat().st_size,f.lstat().st_blocks*512) for f in output.iterdir())
+    assert s.disk_bytes([output]) == expected
+    (outside/'data').write_bytes(b'a'*(64*1024))
+    assert s.disk_bytes([output]) == expected
+
+
 def test_one_shot_execution_and_worker_markers(tmp_path):
     runner.one_shot(tmp_path/"STARTED.json","synthetic")
     with pytest.raises(FileExistsError): runner.one_shot(tmp_path/"STARTED.json","synthetic")

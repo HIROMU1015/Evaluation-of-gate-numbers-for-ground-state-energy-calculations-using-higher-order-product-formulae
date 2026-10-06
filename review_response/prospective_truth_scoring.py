@@ -25,6 +25,7 @@ HELPER = "review_response/_pf_first_study_s0_exact_time_scoring_base.py"
 HELPER_SHA = "a4b32ba8456d74acb072601b4dee0f3a6162be5d591ff4d79f08378f32250619"
 DOC = "docs/second_study_v2/prospective_truth_scoring_20261006"
 OUTPUT = "artifacts/prospective_truth_scoring_20261006"
+MANIFEST = "implementation_manifest_v2.json"
 SUCCESS = "prospective_truth_scoring_complete_review_required"
 SOURCES = (f"{DOC}/approved_truth_scoring_authorization.md", f"{DOC}/authorization.json",
            f"{DOC}/method.json", f"{DOC}/protocol.md",
@@ -86,7 +87,7 @@ def prediction_gate(root):
 
 def source_gate(root):
     values = prediction_gate(root)
-    manifest_path = Path(root) / DOC / "implementation_manifest.json"
+    manifest_path = Path(root) / DOC / MANIFEST
     p.verify_blob(root, str(manifest_path.relative_to(root)), "HEAD")
     manifest = prep.read(manifest_path)
     if manifest.get("manifest_self_excluded") is not True or {r["path"] for r in manifest["files"]} != set(SOURCES):
@@ -106,6 +107,7 @@ def source_gate(root):
     audit = {**values[-1], "truth_implementation_origin_commit": content,
              "verified_truth_source_snapshot_commit": p.git(root, "rev-parse", "HEAD").decode().strip(),
              "truth_sources": manifest["files"], "truth_manifest_sha256": prep.sha_file(manifest_path),
+             "pre_action_source_revision": manifest.get("pre_action_source_revision"),
              "direct_helper_sha256": HELPER_SHA, "method_sha256": prep.sha_file(Path(root) / DOC / "method.json")}
     return (*values[:-1], audit)
 
@@ -120,25 +122,26 @@ def seal_source(root):
         p.verify_blob(root, name, content)
         rows.append({"path": name, "sha256": prep.sha_file(Path(root) / name),
                      "bytes": (Path(root) / name).stat().st_size,
-                     "origin_result_commit": content, "verified_snapshot_commit": content})
-    path = Path(root) / DOC / "implementation_manifest.json"
+                     "origin_result_commit": p.git(root,"log","-1","--format=%H",content,"--",name).decode().strip(),
+                     "verified_snapshot_commit": content})
+    path = Path(root) / DOC / MANIFEST
     if path.exists():
         raise prep.PreparationError("implementation seal already exists")
+    revision_path = Path(root)/OUTPUT/".private/pre_action_source_revision_audit.json"
+    revision = prep.read(revision_path) if revision_path.exists() else None
     prep.write(path, {"content_commit": content, "prediction_commit": BASE,
-                      "manifest_self_excluded": True, "files": rows})
+                      "manifest_self_excluded": True, "files": rows, "pre_action_source_revision": revision})
 
 
 def disk_bytes(roots):
     seen, total = set(), 0
     for directory in roots:
         for parent, dirs, files in os.walk(directory, followlinks=False):
+            links = [Path(parent)/d for d in dirs if (Path(parent)/d).is_symlink()]
             dirs[:] = [d for d in dirs if not (Path(parent) / d).is_symlink()]
-            for name in files:
-                path = Path(parent) / name
-                if path.is_symlink():
-                    raise prep.PreparationError("linked artifact in cumulative disk accounting")
+            for path in [*links, *(Path(parent)/name for name in files)]:
                 try:
-                    stat = path.stat()
+                    stat = path.lstat() if path.is_symlink() else path.stat()
                 except FileNotFoundError:
                     continue  # atomic checkpoint replacement during monitoring
                 inode = (stat.st_dev, stat.st_ino)
