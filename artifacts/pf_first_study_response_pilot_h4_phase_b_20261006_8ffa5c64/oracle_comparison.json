@@ -1,0 +1,25 @@
+{
+  "historical_phase0_sources": [
+    "artifacts/pf_first_study_phase0_feasibility_20261006/analysis_protocol.json",
+    "artifacts/pf_first_study_phase0_feasibility_20261006/metric_dictionary.md",
+    "artifacts/pf_first_study_phase0_feasibility_20261006/report.md"
+  ],
+  "historical_pooled_oracle_to_current_fraction": null,
+  "historical_fraction_not_computed_reason": "Phase0 pooled H4/current_m3 eligible166 rows and CISD46 rows across PFs differ from the current frozen CISD/current_m3 evaluation12 denominator and baseline fit.",
+  "matched_current_counterfactual": {
+    "denominator": 12,
+    "baseline": "Frozen Phase A A0 prediction, identical signed evaluation keys",
+    "definition": "Remove state-like point error from the fixed A0 fitted prediction: fhat_oracle=fhat_A0-(g_A0-g_exact). No refit/no new science.",
+    "equivalent_signed_error": "(fhat_A0-g_A0)+(g_exact-direct)",
+    "A0_S_abs": 7.791762292681509e-08,
+    "oracle_S_abs": 1.0997672393017449e-10,
+    "oracle_absolute_error_reduction": 7.780764620288491e-08,
+    "oracle_S_under": 2.002335938080669e-12,
+    "response_realized_fraction": 0.9423140125743203,
+    "Ritz_realized_fraction": 1.0012496346232407,
+    "denominator_identity_confirmed": true,
+    "not_a_universal_achievable_upper_bound": true,
+    "fraction_above_one_policy": "Retain raw value: refitted methods differ from this fixed-fit counterfactual; do not clip or claim more-than-perfect state correction."
+  },
+  "source_scope": "Frozen Phase A and already selected12 direct /22 exact scalars only; no Phase0 oracle row/truth CSV intake."
+}
