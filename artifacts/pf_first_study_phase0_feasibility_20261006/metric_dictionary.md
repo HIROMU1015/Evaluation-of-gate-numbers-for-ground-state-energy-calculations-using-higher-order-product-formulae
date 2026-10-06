@@ -1,0 +1,23 @@
+# Phase 0 metric dictionary
+
+- `source_row`：原error_decomposition.csvの1-based行番号（headerは1）。全rowに元caseのdominanceとquality/model statusを残す。
+- `primary_eligible`：保存`fit_ok` AND `resolved`。これは主diagnosticの分母、元formal case判定は別。
+- phase average：同一experiment/case/PF/q/time/signの4 phase。gはimaginary-echo/timeでありarg proxyではない。
+- `state_abs_reduction_ratio`：1-|phase-average state error|/|元state error|。負値は悪化、ゼロ分母は空欄/null。
+- `interference_squared_error_fraction`：quartet内mean(E_int²)/mean(E_state²)。absolute errorの加算割合ではない。
+- `phase_q_scaling.csv`：3 qのE_avg/q、RMS(E_int)/sqrt(q*(1-q))を比較。exponent fitなし。noiseが成分を支配する小値も消さず、resolved complete quartetで解釈する。
+- `no_state_signed_hartree`：元fitを固定したE_fit+E_proxy。state改善後の再fit結果ではない。
+- `residual_bottleneck`：abs(fit)とabs(proxy)のargmax（tieはtie）。3倍/過半数のformal dominanceとは別。
+- `underestimation_hartree`：abs(direct)-abs(predicted)。signed prediction errorとは別。正値だけでgamma込みbudget unsafeとは判定しない。
+- `u_fit/u_state/u_proxy`：同符号rowでのみ-sgn(direct)*signed_component。sign-crossingでは空欄/nullとする。
+- `largest_positive_unsafe_component`：同符号rowの正のu_kのargmax。全寄与が非正ならno_positive_component、同値なら複数名。新formal dominanceではない。
+- `positive_underestimation_sum_hartree`：各rowのmax(u,0)の総和。独立Nや成功率ではなく保存座標全体の診断量。
+- `gamma_req_posthoc`：(epsilon-c)/(epsilon-e)。conservativeなら1未満となる代数的診断。運用policyではない。
+- `same_time_calibration_headroom`：1-1/F_calibration。無料のtruthでmodelとmarginを除くsame-time上限的診断。
+- `same_time_perfect_prediction_fixed_gamma_saving`：1-1/F_model。固定gamma=1.01を保つ場合。負値をclipしない。
+- `truth_free_within_domain_maximum_saving_bound`：1-beta*K/(T*epsilon*B0)。同一PFと固定cap内だけ、truth scalarを使わない。
+- HF F_within/F_domainの空欄は不足ではなく、point estimateを作らずintervalを保持することを意味する。active-space exactは保存grid限定。
+- `actual_total_regret`：F_total-1=B0/C_star_saved_grid-1。別量のdirect-time regretと混同しない。
+- `group_values`：JSON object。q=nullはRHF/CISDなどcontrolled族以外。Cではlambda caseを別に保つ。
+- pooled reduction：1-sum(new_abs)/sum(original_abs)。行ratioの平均ではない。時間/PFのsignal-weightingがあるため subgroupを併読する。
+- これらはpost-hoc development診断。prospective safety、net resource gain、新アルゴリズムのclaimではない。
