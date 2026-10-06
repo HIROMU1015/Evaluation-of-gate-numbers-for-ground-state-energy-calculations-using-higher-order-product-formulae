@@ -1,0 +1,19 @@
+{
+  "schema": "hchain_supplement_preparation_test_gate_v1",
+  "command": "env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:review_response:. /home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python -m pytest -q -rs review_tests/test_hchain_supplement_preflight.py -p no:cacheprovider",
+  "scope": "new synthetic and source-contract focused tests only",
+  "before_inventory": {"passed": 33, "failed": 0, "skipped": 0, "reported_seconds": 0.08, "UTC_timestamps_separately_captured": false},
+  "after_inventory": {"passed": 33, "failed": 0, "skipped": 0, "reported_seconds": 0.08},
+  "post_test_recorded_at": "2026-10-06T14:05:37+09:00",
+  "test_molecular_runtime_reads": 0,
+  "test_truth_reads": 0,
+  "synthetic_Arnoldi_fixture_actions": {"PF": 40, "H": 40, "molecular": false},
+  "legacy_full_tests_run": false,
+  "legacy_truth_bearing_tests_run": false,
+  "environment_modified": false,
+  "inventory_attempts": [
+    {"attempt": 1, "outcome": "stopped_before_runtime_audit", "cause": "published candidate CSV not present in scientific prediction commit; source registry must use publication commit", "molecular_actions": 0},
+    {"attempt": 2, "outcome": "passed", "correction": "H7/H8 CSV publication origins ff949e6 and cc3c49d; frozen CSV bytes unchanged", "molecular_actions": 0}
+  ],
+  "scientific_retry_count": 0
+}
