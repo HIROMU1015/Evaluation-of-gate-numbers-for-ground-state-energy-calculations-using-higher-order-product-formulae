@@ -1,0 +1,40 @@
+{
+  "science_execution_occurred": true,
+  "execution_attempts": 1,
+  "cold_replay_execution_observed": true,
+  "internal_frozen_formula_comparison_passed_before_failure": true,
+  "full_actual_ledger_persisted": false,
+  "actual_retained_rank": null,
+  "rank_independent_counts_established_by_completed_control_flow": {
+    "PF_adjoint_action_count": 44,
+    "PF_dense_build_count": 44,
+    "group_expm_count": 4400,
+    "PF_dense_matrix_multiplication_count": 4708,
+    "full_H_expm_count": 44,
+    "H_spectral_norm_svd_count": 2,
+    "fit_count": 27,
+    "new_direct_truth_count": 0,
+    "saved_direct_truth_read_count": 0,
+    "new_ground_solve_count": 0,
+    "full_H_eigh_count": 0,
+    "new_Schur_count": 0
+  },
+  "rank_dependent_counts_not_recoverable": {
+    "H_matvec_count": null,
+    "PF_forward_action_count": null,
+    "response_svd_factorization_count": null,
+    "small_dense_response_solve_count": null,
+    "small_dense_ritz_eigh_count": null
+  },
+  "conditional_frozen_formulas_for_unrecovered_k": {
+    "H_matvec": "2*(1+k)",
+    "PF_forward": "44*(1+u)",
+    "response_SVD": "2*u",
+    "response_RHS": "44*u",
+    "small_Ritz": "2*u",
+    "u": "distinct nonzero min(m,k) for m=1,2,4,8"
+  },
+  "nominal_rank8_is_not_asserted_as_an_observation": true,
+  "accounting_limitation": "No complete on-disk scalar ledger exists. Fixed counts above are code-path facts, not a recovered counter dump.",
+  "additional_science_reruns": 0
+}

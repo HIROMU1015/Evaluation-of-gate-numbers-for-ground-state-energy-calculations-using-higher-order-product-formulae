@@ -1,0 +1,37 @@
+{
+  "status": "PHASE_A_FAILED",
+  "failure_category": "artifact_integrity",
+  "failure_stage": "post_execution_pre_write_schema_validation",
+  "error_type": "jsonschema.exceptions.ValidationError",
+  "error_path": [
+    "source",
+    "input_array_identities",
+    "ordered_group_identity"
+  ],
+  "cause": "Frozen loader returns 13 Python tuple pairs via list(zip(groups,hashes)); frozen jsonschema array type accepts JSON lists, not Python tuples.",
+  "execution_driver_failure_line": 114,
+  "execution_reached": {
+    "source_code_protocol_identity_assertions_passed": true,
+    "execute_phase_a_returned": true,
+    "two_complete_passes_observed_in_memory": true,
+    "frozen_action_formula_assertion_passed_in_memory": true,
+    "artifact_schema_validation_passed": false,
+    "artifact_writer_called": false
+  },
+  "science_execution_occurred": true,
+  "science_execution_attempts": 1,
+  "additional_science_reruns": 0,
+  "recovery_snapshot_saved_before_validation": false,
+  "numerical_outputs_available": false,
+  "data_loss_explanation": "Process exited at schema validation before payload/private diagnostics/audit were written; the orchestration wrapper did not save a recovery snapshot before that boundary.",
+  "predictions_frozen": false,
+  "prediction_sha256": null,
+  "phase_a_freeze_commit": null,
+  "phase_b_executed": false,
+  "saved_direct_truth_access_count": 0,
+  "saved_exact_proxy_access_count": 0,
+  "science_specifications_changed": false,
+  "frozen_phase06_modified": false,
+  "stopping_rule": "User §§20–25 require stopping on hard artifact failure; no result-dependent rescue or additional science run.",
+  "proposed_next_step_not_executed": "GPT/user may separately approve a serialization-only fix, scalar recovery logging, and a new explicitly budgeted Phase A attempt. No rerun is authorized or performed by this report."
+}

@@ -1,0 +1,39 @@
+{
+  "status": "PHASE_A_FAILED",
+  "prediction_freeze_completed": false,
+  "phase_a_freeze_commit": null,
+  "prediction_sha256": null,
+  "science_rerun_performed": false,
+  "science_execution_occurred": true,
+  "authorization_valid_for_phase_a_only": true,
+  "pre_execution_source_code_protocol_checks_passed": true,
+  "artifact_integrity_failed": true,
+  "schema_issue_reproduced_without_science": true,
+  "frozen_science_source_changes": [],
+  "unresolved_issues": [
+    "Production identity tuple representation fails frozen strict schema.",
+    "Numerical payload and exact rank-dependent ledger were not persisted before validation failure."
+  ],
+  "unavailable_success_artifacts": [
+    "phase_a.json",
+    "phase_a_manifest.json",
+    "predictions.json",
+    "prediction.sha256",
+    "PHASE_A_FROZEN",
+    "response_diagnostics.csv",
+    "ritz_diagnostics.csv",
+    "proxy_values.csv",
+    "fit_results.csv"
+  ],
+  "publication_kind": "Failed-attempt audit and source provenance only; this commit cannot satisfy a Phase B prediction freeze.",
+  "publication_verification": "Performed after commit/push and reported separately to avoid self-reference.",
+  "saved_truth_access_count": 0,
+  "phase_b_executed": false,
+  "metadata_only_tests": {
+    "passed": 2,
+    "failed": 0,
+    "science_actions": 0,
+    "log": "reproduction_tests.log",
+    "purpose": "Confirm frozen production identity fails in memory and canonical JSON passes with unchanged source hash; no implementation fix applied."
+  }
+}
