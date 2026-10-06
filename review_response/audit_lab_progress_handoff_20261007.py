@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import hashlib
+import io
 import json
 from pathlib import Path
 import re
@@ -110,6 +111,82 @@ def audit_slide_scalar_explanations(outline: str) -> dict:
             "formal_results_modified": False}
 
 
+def audit_followup_connection_sources(outline: str) -> dict:
+    """Verify separately published source blobs and saved reference arithmetic."""
+    registry = read(OUT / "followup_sources.json")
+    repository = "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae"
+    assert registry["repository"] == repository
+    assert registry["origin_and_verified_snapshot_roles_separate"]
+    assert registry["new_scientific_computations"] == registry["model_refits"] == 0
+    assert not registry["formal_results_modified"]
+    public_tips = registry["public_branch_tips_verified_by_git_ls_remote"]
+    for branch, tip in public_tips.items():
+        assert len(tip) == 40
+        # Remote availability was checked separately; this audit is local/read-only.
+        git("merge-base", "--is-ancestor", tip, f"refs/remotes/origin/{branch}")
+
+    blobs = {}
+    sources = registry["sources"]
+    assert len(sources) == 9
+    for source in sources:
+        origin = source["origin_result_commit"]
+        snapshot = source["verified_snapshot_commit"]
+        assert len(origin) == len(snapshot) == 40
+        git("merge-base", "--is-ancestor", origin, snapshot)
+        git("merge-base", "--is-ancestor", snapshot, public_tips[source["public_branch"]])
+        name = source["path"]
+        assert Path(name).suffix in (".md", ".json", ".csv") and ".runtime" not in Path(name).parts
+        blob = git("show", f"{snapshot}:{name}")
+        assert hashlib.sha256(blob).hexdigest() == source["sha256"]
+        assert len(blob) == source["bytes"]
+        assert git("rev-parse", f"{snapshot}:{name}").decode().strip() == source["git_blob_sha"]
+        assert git("show", f"{origin}:{name}") == blob
+        assert source["snapshot_github_url"] == f"https://github.com/{repository}/blob/{snapshot}/{name}"
+        assert source["origin_github_url"] == f"https://github.com/{repository}/blob/{origin}/{name}"
+        assert name not in blobs
+        blobs[name] = blob
+    source_urls = {source["snapshot_github_url"] for source in sources}
+    referenced_urls = set(re.findall(r"\]\((https://github\.com/[^)]+/blob/9accc300ba7b8049ae9a1ef870ca4e7c0032e6ae/[^)]+)\)", outline))
+    assert referenced_urls and referenced_urls <= source_urls
+
+    c0 = "artifacts/pf_first_study_fs_c0_20261007/"
+    outcome_path = "artifacts/pf_first_study_response_pilot_h4_phase_b_20261006_8ffa5c64/scientific_outcome.json"
+    outcome = json.loads(blobs[outcome_path])
+    assert outcome["outcome"] == "point_only" and not outcome["next_stage_started"]
+    assert outcome["S_abs"]["A1"] < outcome["S_abs"]["A0"]
+    assert outcome["S_abs"]["A2"] < outcome["S_abs"]["A0"]
+    assert outcome["S_under"]["A0"] == outcome["S_under"]["A1"] == 0
+    assert outcome["S_under"]["A2"] > 0
+    readiness = json.loads(blobs[c0 + "GO_NO_GO_FOR_FS_C1.json"])
+    assert readiness["status"] == "NO_GO_FOR_FS_C1"
+    assert not any(readiness[key] for key in ("design_complete", "execution_ready", "science_authorized", "training_policy_resolved"))
+    assert "TRAINING_BASELINE_CONFLICT" in {issue["id"] for issue in readiness["unresolved_issues"]}
+
+    reference_rows = [row for row in csv.DictReader(io.StringIO(blobs[c0 + "H4_posthoc_decision_scale.csv"].decode()))
+                      if float(row["time"]) == 0.4]
+    assert len(reference_rows) == 3
+    savings = {}
+    for row in reference_rows:
+        epsilon = float(row["epsilon_E"])
+        ratio = (epsilon - float(row["c_A0"])) / (epsilon - float(row["c_method"]))
+        assert abs(ratio - float(row["reference_budget_ratio"])) < 1e-15
+        assert abs(1 - ratio - float(row["reference_saving"])) < 1e-15
+        assert float(row["gamma"]) == 1.01
+        savings[row["arm"]] = 100 * (1 - ratio)
+    assert f"{savings['A2']:.3f}" == "0.013" and f"{savings['A1']:.3f}" == "0.012"
+    return {"registry": "followup_sources.json", "source_entries": sources,
+            "published_source_branches": public_tips,
+            "source_origin_commits_in_their_published_branch_histories": True,
+            "sources_copied_or_regenerated": False,
+            "H4_formal_outcome": outcome["outcome"],
+            "H4_posthoc_same_time_same_margin_saving_percent": savings,
+            "intervention_execution_readiness": readiness["status"],
+            "intervention_design_complete": readiness["design_complete"],
+            "intervention_science_authorized": readiness["science_authorized"],
+            "third_study_start_claimed": False,
+            "new_scientific_computations": 0, "model_refits": 0}
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     snapshot = "869806ff9995b76ef2786ca7b57b9acc02c2731f"
@@ -152,12 +229,13 @@ def main() -> None:
             links.append({"document": str(doc.relative_to(ROOT)), "target": target})
     outline = DOCS[0].read_text()
     scalar_explanations = audit_slide_scalar_explanations(outline)
+    followup_sources = audit_followup_connection_sources(outline)
     slides = re.findall(r"^### Slide (\d+)：(.+)$", outline, re.M)
     index = re.findall(r"^\| (\d+) \| (.+) \|$", outline, re.M)
-    assert slides == index and [int(n) for n, _ in slides] == list(range(1, 25))
+    assert slides == index and [int(n) for n, _ in slides] == list(range(1, 30))
     assert len(re.findall(r"^### A\d+：", outline, re.M)) == 3
     registry_ids = set(re.findall(r"^\| (E\d+) \|", outline, re.M))
-    assert registry_ids == {f"E{n:02}" for n in range(1, 21)}
+    assert registry_ids == {f"E{n:02}" for n in range(1, 24)}
     widths = []
     for line in outline.splitlines():
         if line.startswith("|"):
@@ -193,6 +271,7 @@ def main() -> None:
               "slide_count": len(slides), "appendix_count": 3, "evidence_id_count": len(registry_ids),
               "numeric_audit": "cross_checks.json", "scientific_computations_in_this_script": 0,
               "slide_scalar_explanations": scalar_explanations,
+              "followup_connection": followup_sources,
               "matrix_vector_pickle_runtime_publication_count": 0,
               "generated_python_bytecode_excluded": True,
               "audit_hash_self_excluded": self_excluded,

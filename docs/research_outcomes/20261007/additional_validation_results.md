@@ -160,7 +160,7 @@ CISDによる運用予測は新しいPF真値より前に保存した。HFの実
 
 旧H6/H7の保存値も再集計し、一項モデルの時刻と局所7点の直接最小点は約2.48–2.50%ずれ、直接費用の超過は約0.168–0.172%だった。二項モデルの時刻はその局所最小点と一致した。同時刻の費用予測誤差約1.7%とは比較する量が異なる。[横断監査](../../../artifacts/lab_progress_additional_validation_20261007/cross_checks.json)。
 
-再利用した採点・freeze・校正処理の関連19テストと、新しい別鎖処理の数値3テストが合格した。文書の24枚・補足3枚・20根拠ID、ローカルリンク、既存入力blobと新規manifestは[引渡し監査](../../../artifacts/lab_progress_additional_validation_20261007/handoff_checks.json)で確認した。
+再利用した採点・freeze・校正処理の関連19テストと、新しい別鎖処理の数値3テストが合格した。現在の文書の29枚・補足3枚・23根拠ID、ローカルリンク、既存入力blob、後続研究の公開sourceと新規manifestは[引渡し監査](../../../artifacts/lab_progress_additional_validation_20261007/handoff_checks.json)で確認する。
 
 ## 8. GPTレビューの反映と、残る範囲
 
@@ -170,10 +170,16 @@ CISDによる運用予測は新しいPF真値より前に保存した。HFの実
 
 細部のGPTレビューでは、一項モデルの3系の値が同じ理由、三成分分解が恒等式であること、HFで時刻上限を縮める検査の意図と、安い時刻でも予算が不足した理由を説明へ加えた。三成分の合計列を丸め前の保存値から追加し、同じ時刻での状態改善と、PF・時刻・予算を選び直した結果を区別した。H2の予算不足は補助評価であると明記し、用語を「予測精度」と「目標精度達成」に分け、PFの呼称を統一した。追加計算・再fit・再採点は行わず、本文24枚・補足3枚を維持した。2PFの候補はprotocolで事前固定した事実を示し、候補を絞った理由は根拠なしに補わない。
 
+後続研究への接続を示す今回の改訂では、ユーザーが共有したGPT方針に沿ってSlide 25–29を追加した。H4のResponse/Ritzは実施済みの別の短時間検証として示し、N₂・CO平衡で状態改善と選択時刻での代理量の直接評価を分ける2×2比較を、未実施の計画として示した。Ritzによる校正状態の変更と、QPE入力状態の変更は区別する。第2研究は追加スペクトル情報の取得価値を評価した既存研究、第3研究は校正側で解消できない資源差とPF変更の改善可能性を確認した場合の条件付き計画として接続した。研究の問いの順序と、実行済み段階の時系列は同じではない。
+
+後続研究の原本は、公開済みの`pf-first-study-response-pilot-h4-phase-b-20261006`と`pf-first-study-fs-c0-20261007`を参照し、このbranchへ重複コピーしない。原本のorigin/result commit、今回のverified snapshot、blob、SHA-256、公開branchと固定GitHubリンクは[接続説明のsource registry](../../../artifacts/lab_progress_additional_validation_20261007/followup_sources.json)に残す。H4の正式`point_only`判定は変更しない。約0.013%は同じ$t=0.4$・同じ1%余裕で保存値を予算へ事後換算した参考値で、新しい予算選択や資源改善の達成結果ではない。
+
+follow-up準備の公開監査は完了しているが、実験の開始条件は未成立である。原baselineのfitは3点で、元5点を使う設計案との一致を確認できていない。元のprivate入力の取得・配列の同一性、Ritz入力へのnative echoの数値精度・内部費用、M00再現の許容差も未完了であり、公開判定は`NO_GO_FOR_FS_C1`、`design_complete=false`、`science_authorized=false`のまま保持する。Slide 26はこの未実施の比較の目的を示すもので、これらを解決したという意味ではない。今回、入力の再生成、fit条件の変更、比較実験の実行は行っていない。
+
 今回、短時間の状態差から長時間の誤差予測へ至る比較を、同じ時刻の三成分・状態改善・固有成分・上限変更・別鎖で埋めた。どの成分が大きいかはPF・分子・時刻で変わるので、近似状態だけを一律の原因とする説明は支持されない。
 
 ここでは、モデルの切り詰めと外挿をさらに分けるfit条件比較、N₂・COの状態改善・上限感度、H3の四次係数不成立の機構、連続枝と独立最大重なりの対応を全時刻で安定させる方法、古典計算や状態準備を含む総実行費用までは評価していない。追加条件を結果後に調整して救済する操作も行っていない。
 
 今後、論文でより強いclaimを検討する場合は、GPTレビューに挙がったH5/H6の枝の対応確定、モデルの予測差の内訳比較、必要に応じた独立検証について、目的と条件を別途定める。これらの追加検証や改善方法の確立を、今回の発表準備の条件にはしない。研究方針・新規性・中心claimはCodexが独自に変更していない。
 
-読む順序は、この報告 → [スライド本文](../20261006/lab_progress_slide_outline.md) → H4・HF・別鎖の各報告 → 各protocol・凍結予測・採点・監査・manifest。sourceの `origin/result commit` と `verified snapshot commit` は各担当のregistryで分ける。追加検証の科学結果のorigin/result commitは `8436a2f3644e0403ff5ebf19bee6caae364ae66e`、本改訂前の確認版は `a7cf13a59eedb8f9ff09dcc9577af3f6be500c49`。説明と引渡し監査を更新したcommitは最終GitHub handoffで示す。
+読む順序は、この報告 → [スライド本文](../20261006/lab_progress_slide_outline.md) → H4・HF・別鎖の各報告 → 各protocol・凍結予測・採点・監査・manifest。接続スライドの確認にはE21のH4 Response/Ritz報告 → E22のfollow-up方針・2×2設計・開始条件 → E08・E10・E23の第2研究と第3研究の位置付けを読む。sourceの `origin/result commit` と `verified snapshot commit` は各担当と接続説明のregistryで分ける。追加検証の科学結果のorigin/result commitは `8436a2f3644e0403ff5ebf19bee6caae364ae66e`、本改訂前の確認版は `e73e758c383b8c941fa4cc6dee5b10af0c7e488e`。説明と引渡し監査を更新したcommitは最終GitHub handoffで示す。
