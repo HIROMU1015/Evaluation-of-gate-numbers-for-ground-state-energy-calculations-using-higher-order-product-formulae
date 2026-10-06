@@ -1,0 +1,358 @@
+{
+  "analysis_type": "post_hoc_saved_scalar_and_procedure_audit",
+  "scientific_calculation_performed": false,
+  "original_artifacts_modified": false,
+  "source_registry": {
+    "h4_search": {
+      "path": "artifacts/two_term_pf_m3_refinement_local_20260909/refinement_results.json",
+      "origin_result_commit": "d2360f49f9a754d1850eab60cd483f684bd8bffb",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "7d9f674ebfed2ea9cf88b5707f1dbe1d9eb308db1833ddd04d40b9b96b43c99b"
+    },
+    "holdout_code": {
+      "path": "review_response/run_two_term_pf_m3_holdout_server2.py",
+      "origin_result_commit": "92df2dbda9de5f41183af551b7acec06d88a3ada",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "0d1f89735656690dc3d5fb44a8c3b64aafb56c4c4cc26eb92b2b4d82a94c079e"
+    },
+    "h4_prediction": {
+      "path": "artifacts/pf_first_study_phase_a_20260925_6265243/predictions.json",
+      "origin_result_commit": "5a2f0a2e0315493c892c79f1a6b8c9285cc52ac3",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "60058fe333d4b25f1ad4b8f3f5342a3736f2379ce9490b3f2ecde69583beeeda"
+    },
+    "h4_direct": {
+      "path": "artifacts/pf_first_study_phase_b_20260925_5a2f0a2/branch_audit.csv",
+      "origin_result_commit": "d13f49dc8923b0553f8c8596de3c44c8a7a6f14f",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "912ef32fadda285a0994ac2e060208a9fffefa12b46c2fc8682c6ffeb88d4122"
+    },
+    "h4_state_quality": {
+      "path": "artifacts/pf_first_study_phase_b_20260925_5a2f0a2/state_diagnostics.csv",
+      "origin_result_commit": "d13f49dc8923b0553f8c8596de3c44c8a7a6f14f",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "027c3071135866a6a034a2acd1f6183fbe183923d3e5d36dd1b870b138f15ee7"
+    },
+    "molecule_state_quality": {
+      "path": "artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/aggregate/state_diagnostics.csv",
+      "origin_result_commit": "568f00249abb5b89ae3e6bb39cb4af87ed8581bd",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "35fb938153dcbb1907250007a3400aae7f519ae21d5f5901bcbf2cf3431f5ed2"
+    },
+    "exact_state_comparison": {
+      "path": "artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/aggregate/summary.json",
+      "origin_result_commit": "568f00249abb5b89ae3e6bb39cb4af87ed8581bd",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "3fb75498d33459df45a857c4c8aefbb6aa058925a1767c9e2678e10f1f8f42c5"
+    },
+    "s4_prediction": {
+      "path": "artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f/predictions.json",
+      "origin_result_commit": "95ed24c74bb29d883bbaf76d4578ff7af08ed995",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "47cdef9b52ea73feef0c005229cb9a482ee8e95afff87f038ff8461549f1c729"
+    },
+    "s4_diagnostic": {
+      "path": "artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f/state_diagnostics.csv",
+      "origin_result_commit": "95ed24c74bb29d883bbaf76d4578ff7af08ed995",
+      "verified_snapshot_commit": "870b4de4af32edde73d514bc6832dc5533b76cb7",
+      "sha256": "44a8bd7a2086d5572370ae4e01bf72b8813c5989eef5126ed1a182054aa49aa5"
+    }
+  },
+  "h4_one_term_at_analytic_time": {
+    "formula": "current_m3",
+    "scope": "earlier coefficient-search experiment",
+    "time_hartree_inverse": 1.2544522904737871,
+    "model_error_hartree": 3.1872002039808e-05,
+    "direct_error_hartree": 3.0123132411240527e-05,
+    "model_cost": 19178675.492643476,
+    "direct_cost": 18919144.284064546,
+    "cost_prediction_relative_error": 0.013717914757779531,
+    "interpretation": "Both errors and costs are evaluated at t_ana, not at separately optimized times."
+  },
+  "holdout_two_term_time_selection": {
+    "method": "numerical minimum of model costs on a 20001-point linear grid",
+    "relative_interval": [
+      0.1,
+      1.4
+    ],
+    "pf_diagonalization_at_every_model_candidate": false,
+    "subsequent_direct_comparison": "saved local direct grid around the model-selected time"
+  },
+  "h4_candidate_minima": [
+    {
+      "formula": "yoshida4",
+      "candidate_count": 401,
+      "interval_hartree_inverse": [
+        0.07187055691036282,
+        0.5749644552829025
+      ],
+      "direct_minimum_time_hartree_inverse": 0.28798082826007665,
+      "zero_based_minimum_index": 267,
+      "minimum_at_interval_endpoint": false
+    },
+    {
+      "formula": "current_m3",
+      "candidate_count": 401,
+      "interval_hartree_inverse": [
+        0.309412179695288,
+        2.475297437562304
+      ],
+      "direct_minimum_time_hartree_inverse": 2.151140704187331,
+      "zero_based_minimum_index": 373,
+      "minimum_at_interval_endpoint": false
+    },
+    {
+      "formula": "two_term_center",
+      "candidate_count": 401,
+      "interval_hartree_inverse": [
+        0.2732419958694326,
+        2.1859359669554608
+      ],
+      "direct_minimum_time_hartree_inverse": 1.112072727307015,
+      "zero_based_minimum_index": 270,
+      "minimum_at_interval_endpoint": false
+    },
+    {
+      "formula": "m5_best",
+      "candidate_count": 401,
+      "interval_hartree_inverse": [
+        0.5385146445049875,
+        4.3081171560399
+      ],
+      "direct_minimum_time_hartree_inverse": 3.5175172132783867,
+      "zero_based_minimum_index": 361,
+      "minimum_at_interval_endpoint": false
+    }
+  ],
+  "candidate_range_sufficiency": "All four saved direct minima are interior; optimality outside the frozen ranges is unestablished.",
+  "saved_state_quality_evaluation_only": [
+    {
+      "condition": "H4",
+      "state": "rhf",
+      "ground_overlap_probability": 0.9364638563852806,
+      "energy_error_hartree": 0.06784151163704677
+    },
+    {
+      "condition": "H4",
+      "state": "cisd",
+      "ground_overlap_probability": 0.9994668439213916,
+      "energy_error_hartree": 0.0013556073912417421
+    },
+    {
+      "condition": "CO_active_eq_sto3g",
+      "state": "cisd",
+      "ground_overlap_probability": 0.9948983111282917,
+      "energy_error_hartree": 0.012361433265953181
+    },
+    {
+      "condition": "CO_active_stretch150_sto3g",
+      "state": "cisd",
+      "ground_overlap_probability": 0.9345056467980485,
+      "energy_error_hartree": 0.05527594177105133
+    },
+    {
+      "condition": "HF_full_eq_sto3g",
+      "state": "cisd",
+      "ground_overlap_probability": 1.0000000000000004,
+      "energy_error_hartree": -7.105427357601002e-15
+    },
+    {
+      "condition": "HF_full_stretch150_sto3g",
+      "state": "cisd",
+      "ground_overlap_probability": 0.999999999999984,
+      "energy_error_hartree": 1.2789769243681803e-13
+    },
+    {
+      "condition": "N2_active_eq_sto3g",
+      "state": "cisd",
+      "ground_overlap_probability": 0.9952719209963322,
+      "energy_error_hartree": 0.012441692687807482
+    },
+    {
+      "condition": "N2_active_stretch150_sto3g",
+      "state": "cisd",
+      "ground_overlap_probability": 0.9226094451522178,
+      "energy_error_hartree": 0.08260507841939191
+    }
+  ],
+  "earlier_exact_state_comparison": {
+    "cisd": {
+      "current_m3": {
+        "all_four_pass": false,
+        "budget_1_01_all_four": true,
+        "conditions": 4
+      },
+      "yoshida4": {
+        "all_four_pass": false,
+        "budget_1_01_all_four": true,
+        "conditions": 4
+      }
+    },
+    "exact_ground": {
+      "current_m3": {
+        "all_four_pass": true,
+        "budget_1_01_all_four": true,
+        "conditions": 4
+      },
+      "yoshida4": {
+        "all_four_pass": true,
+        "budget_1_01_all_four": true,
+        "conditions": 4
+      }
+    },
+    "rhf_determinant": {
+      "current_m3": {
+        "all_four_pass": false,
+        "budget_1_01_all_four": false,
+        "conditions": 4
+      },
+      "yoshida4": {
+        "all_four_pass": false,
+        "budget_1_01_all_four": false,
+        "conditions": 4
+      }
+    }
+  },
+  "s4_fixed_diagnostic_comparisons": [
+    {
+      "condition": "N2_active_eq_sto3g",
+      "formula": "current_m3",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.013245351374375557,
+      "maximum_proxy_difference_hartree": 2.1107793301103573e-06,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "N2_active_eq_sto3g",
+      "formula": "yoshida4",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.00044407932550884243,
+      "maximum_proxy_difference_hartree": 7.076848584227194e-08,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "N2_active_stretch150_sto3g",
+      "formula": "current_m3",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.007494029736035047,
+      "maximum_proxy_difference_hartree": 1.1942486551664542e-06,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "N2_active_stretch150_sto3g",
+      "formula": "yoshida4",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.001879813152116028,
+      "maximum_proxy_difference_hartree": 2.995670430934998e-07,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "CO_active_eq_sto3g",
+      "formula": "current_m3",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.01304692436888893,
+      "maximum_proxy_difference_hartree": 2.0791580004922435e-06,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "CO_active_eq_sto3g",
+      "formula": "yoshida4",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 9.848828198752695e-05,
+      "maximum_proxy_difference_hartree": 1.5695093622018224e-08,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "CO_active_stretch150_sto3g",
+      "formula": "current_m3",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.002195647743421487,
+      "maximum_proxy_difference_hartree": 3.4989844678514735e-07,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "CO_active_stretch150_sto3g",
+      "formula": "yoshida4",
+      "baseline_cap_applied": false,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.0009485297082773132,
+      "maximum_proxy_difference_hartree": 1.5115770398516509e-07,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "HF_full_eq_sto3g",
+      "formula": "current_m3",
+      "baseline_cap_applied": true,
+      "state_diagnostic_triggered": true,
+      "diagnostic_score": 0.009109744889477033,
+      "maximum_proxy_difference_hartree": 1.4517290384977126e-06,
+      "magnitude_triggered": false,
+      "sign_triggered": true,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "HF_full_eq_sto3g",
+      "formula": "yoshida4",
+      "baseline_cap_applied": true,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.0016964615677879495,
+      "maximum_proxy_difference_hartree": 2.7034813274496705e-07,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "HF_full_stretch150_sto3g",
+      "formula": "current_m3",
+      "baseline_cap_applied": true,
+      "state_diagnostic_triggered": true,
+      "diagnostic_score": 0.003975781788483881,
+      "maximum_proxy_difference_hartree": 6.335806263619488e-07,
+      "magnitude_triggered": false,
+      "sign_triggered": true,
+      "baseline_and_targeted_selection_identical": true
+    },
+    {
+      "condition": "HF_full_stretch150_sto3g",
+      "formula": "yoshida4",
+      "baseline_cap_applied": true,
+      "state_diagnostic_triggered": false,
+      "diagnostic_score": 0.003003147923313901,
+      "maximum_proxy_difference_hartree": 4.785816836885291e-07,
+      "magnitude_triggered": false,
+      "sign_triggered": false,
+      "baseline_and_targeted_selection_identical": true
+    }
+  ],
+  "s4_uncapped_pf_condition_count": 8,
+  "s4_new_diagnostic_trigger_count_in_uncapped": 0,
+  "remaining_unestablished": [
+    "matched FCI-input allocation selection on the frozen H4 decision grids",
+    "sufficiency or global optimality outside the frozen candidate time ranges",
+    "which prediction-error component dominates at the long H4 allocation times",
+    "a truncation-based diagnostic certifying proximity to the exact ground state"
+  ]
+}
