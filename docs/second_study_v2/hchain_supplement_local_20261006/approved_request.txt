@@ -1,0 +1,496 @@
+第2研究v2 Direction Cを維持したまま、H-chainについて以下の2検証のみ追加で実施してください。
+
+目的は既存結果の救済や新policy開発ではなく、
+
+1. fixed-size H-chainでgeometry変化がbudget safety / oracle headroom / M1挙動へ与える影響を調べる。
+2. H6–H8で既存rank-8 M1の挙動が単なるrank不足なのか、rankを増やしてもdecision valueへ結びつきにくいのかを診断する。
+
+ことです。
+
+現在進行中のgeneral-molecule prospective truth/scoringとは独立した補助検証です。prospective truthの途中結果を読んだり、それに応じて下記protocolを変更しないでください。
+
+---
+
+# 共通ガバナンス
+
+- Direction C、既存RQ・claim scopeを変更しない。
+- 新PFを探索しない。
+- gamma、threshold、width、candidate time、rank上限を結果後に変更しない。
+- q=1探索、B2/H1復活、結果依存の追加条件を行わない。
+- failureを別条件で置換しない。
+- geometryやrankを独立sampleとして数えない。
+- continuous rotation cost proxyを維持する。
+- `epsilon_E = 0.00015936001019904 Ha`
+- `beta = 1.2`
+- canonical `current_m3`
+- STO-3G
+- Jordan–Wigner / existing ordered-group convention
+- exact-ground/truthをpredictorへ流入させない。
+- 既存H-chain frozen artifactsを再利用するときはHamiltonian、sector、state、PF coefficients、time、energy originのidentityをhashで確認する。
+- 現在走っているgeneral-molecule prospective truthのruntime/output/partial truthを読まない。
+- 現在のprospective truth jobに予約されたCPU/RAM/diskを侵食しない。独立allocationが確認できない場合はprotocol・実装・testsまでで停止し、science jobは起動しない。
+- coordinatorのみGit操作。workerはGit操作しない。
+- 各trackを別worktree・別branchで実施してよい。
+
+推奨branch:
+- `gpu-hchain-h6-geometry-sweep-20261006`
+- `gpu-hchain-m1-rank-convergence-20261006`
+
+---
+
+# Track G — H6 geometry sweep
+
+## 科学目的
+
+固定size H6において、原子間距離を変えたときに、
+
+- cheap magnitude underestimation
+- fixed-gamma budget safety
+- gamma_req
+- safety slack
+- cost-free oracle headroom
+- M1 point accuracy
+- M1 empirical width
+- M1 abstention
+- PF-side / H-reference error
+
+がどのように変化するかを調べる。
+
+「stretchすると相関が強くなる」等を結果前にラベル化せず、geometry coordinateとして扱う。
+
+## 条件
+
+linear H6、neutral singlet、STO-3G。
+
+隣接H–H距離:
+
+- R = 0.80 Å
+- R = 1.00 Å
+- R = 1.20 Å
+- R = 1.40 Å
+- R = 1.60 Å
+
+原子は既存H6と同じcentered linear convention。
+
+R=1.00 Åは既存H6 frozen resultのanchorとする。
+Hamiltonian/state/PF/sector/time identityが完全一致する場合のみ保存結果を再利用し、新規science actionを0にする。
+
+identityが一致しない場合、旧値を無理に流用しない。その場合は`anchor_identity_mismatch_review_required`として停止し、勝手に新しいR=1.00 replicationへ置換しない。
+
+他4 geometryはnew conditions。
+
+## Input/state
+
+既存H-chain H6 contractをそのまま使用。
+
+- RHF
+- neutral singlet
+- fixed alpha/beta population sector
+- same determinant-CISD recipe
+- same orbital ordering
+- same scalar-identity removal
+- same group ordering
+- same current_m3 coefficients
+
+新しいstate recipeやactive-space変更は禁止。
+
+## Truth-free reference
+
+既存H-chain native contractをそのまま使用し、general-molecule prospective contractへ変更しない。
+
+- grid: `numpy.geomspace(0.02, 1.8, 34)`
+- 全34点取得
+- observable:
+  `Im(<exp(+iHt) psi_CISD, U_P(t) psi_CISD>)/t`
+- rolling window = 5
+- formal order = 4
+- `abs(p_free - 4) <= 0.2`
+- `R^2 >= 0.999`
+- noise floor = `5e-13 Ha`
+- first qualifying window
+- `alpha_C = 10**mean(log10(abs(delta_C))-4*log10(t))`
+- `t_ref = (epsilon_E/(5*alpha_C))**0.25`
+
+reference不成立時は
+
+`reference_scale_unavailable_under_frozen_protocol`
+
+としてそのgeometryを停止。
+
+grid延長、floor変更、window変更、別referenceへの救済は禁止。
+
+## Candidate times
+
+既存H-chain native contractを維持する。
+
+- `r = 0.50`
+- `r = 0.65`
+- `r = 0.80`
+
+`t = r * t_ref`
+
+absolute binary64 time / float.hexをcandidate science取得前にfreezeする。
+
+候補時刻がfrozen domain外ならgeometryをineligibleとして残し、clipしない。
+
+## Cheap / budget arms
+
+3候補すべてでcheapを取得。
+
+B0:
+- `T0 = 0.5 * t_ref`
+- `B0 = 1.01 * C_C(T0)`
+- benchmark only
+- safe fallbackとは仮定しない
+
+主要比較はfixed B1 gamma frontier:
+
+- gamma = 1.01
+- gamma = 1.02
+- gamma = 1.05
+- gamma = 1.10
+
+各gammaについてfrozen 3候補からminimum valid budgetを選ぶ。
+
+B2/H1は実行しない。
+
+## M1
+
+3候補すべてで既存rank-8 M1 packageを取得する。
+
+- primary rank = 8
+- prefixes = [1,2,4,8]
+- explicit-vector unitary Arnoldi
+- MGS two-pass
+- existing numerical gates
+- same phase/reference rule
+- width = `max(local_width, prefix_width)`
+- empirical feasibility width only
+- rank不足・numerical gate failure・no-positive-QPE allowanceはabstain
+- lower-rank rescueは禁止
+
+M1をoperational selectorへ追加しない。
+fixed comparator / diagnosticとして扱う。
+
+## Truth
+
+prediction freeze後だけ取得する。
+
+各eligible geometry:
+
+- same-H ground ×1
+- direct PF truth ×3
+- ascending r=0.5 -> 0.65 -> 0.8
+- first branch: same-H ground overlap maximum
+- continuation: previous selected PF eigenvector overlap maximum
+- same numerical gates as existing H-chain truth contract
+- predictor-based unwrap rescueは禁止
+
+target phase gapは同じSchur spectrumからdiagnosticとして取得し、追加gap solveはしない。
+
+## Scoring
+
+truth freeze後にimmutable scoring。
+
+保存する主要量:
+
+- `e = abs(delta_direct)`
+- `c = abs(delta_C)`
+- `u = e-c`
+- `M_gamma`
+- `safety_slack`
+- `gamma_req`
+- fixed B1 safety
+- B0 safety
+- same-time cost-free truth headroom
+- native 3-candidate oracle
+- M1 point error
+- cheap point error
+- M1 width coverage
+- M1 branch diagnostic
+- M1 abstention
+
+PF/H-reference decompositionはsame-H identityとphysical branchが確認できる場合のみ実施。
+
+主図候補はgeometry Rに対する
+
+- gamma_req
+- gamma1.01 safety slack
+- oracle headroom
+- cheap/M1 point error
+- M1 width
+
+の曲線。
+
+5 geometryを5 independent samplesとは扱わない。
+
+---
+
+# Track R — H6/H7/H8 M1 rank convergence
+
+## 科学目的
+
+既存R=1.0 Å H-chainで、
+
+- H6ではrank-8 M1 pointがcheapより改善したがwidthによりabstain
+- H7/H8ではrank-8 M1 point自体がcheapより悪化
+
+した原因が、単純なKrylov rank不足で説明できるかを診断する。
+
+これは既存M1 packageを救済・置換する実験ではない。
+main prospective M1のrank=8やwidthを変更しない。
+
+## Systems
+
+保存済み:
+
+- H6 R=1.0 Å
+- H7 R=1.0 Å
+- H8 R=1.0 Å
+
+のみ。
+
+各systemの既存frozen candidate 3点:
+
+- r=0.5
+- r=0.65
+- r=0.8
+
+をそのまま使う。
+
+新reference、新candidate time、新truthは取得しない。
+
+既存のsame-H ground / direct truth / target gapをidentity確認後に再利用する。
+
+## Rank schedule
+
+1座標につき1本のArnoldi chainを最大rank 32まで作り、prefixを共有する。
+
+取得prefix:
+
+- m=1
+- m=2
+- m=4
+- m=8
+- m=16
+- m=32
+
+primary analysis ranks:
+
+- m=4
+- m=8
+- m=16
+- m=32
+
+m=1,2はwidth/reference用diagnostic。
+
+全9座標について必ず同じrank scheduleを試す。
+truthや途中rankの性能を見てrankを打ち切ったり延長しない。
+
+m=32で終了。
+m=64以上への救済は禁止。
+
+actual Arnoldi breakdownがあればそのactual rankを保存し、欠損rankを別規則で補わない。
+
+## Action accounting
+
+single shared chainなので、最大:
+
+- 9 coordinates × 32 = 288 PF vector actions
+- 9 coordinates × 32 = 288 H matvecs
+
+prefix solveはcached UQ/HQを使い、追加PF/H actionとして数えない。
+
+rankごとに独立chainを再構築しない。
+
+## 各rankで保存する量
+
+各mについて:
+
+- `delta_M(m)`
+- H-reference Ritz energy
+- PF Ritz phase/energy
+- PF full-action residual
+- H Ritz residual
+- selected overlap
+- branch ambiguity
+- actual rank
+- orthogonality residual
+- normalization residual
+
+### Width
+
+rank比較用widthを事前固定する。
+
+local widthは既存式をそのまま使う。
+
+prefix width:
+
+- m=4: `abs(delta_M(4) - delta_M(2))`
+- m=8: `abs(delta_M(8) - delta_M(4))`
+- m=16: `abs(delta_M(16) - delta_M(8))`
+- m=32: `abs(delta_M(32) - delta_M(16))`
+
+`w_M(m) = max(local_width(m), prefix_width(m))`
+
+これはmechanistic rank-ablation用のempirical widthでありcertificateではない。
+
+結果後に別width definitionへ変更しない。
+
+## Truth comparison
+
+保存済みdirect truthのみ使用。
+
+各rankで:
+
+- `E_M(m)=abs(delta_M(m)-delta_direct)`
+- cheap point error
+- M1/cheap point-error ratio
+- empirical width coverage
+- physical branch diagnostic
+- positive-QPE-allowance diagnostic
+- same-time decision window
+
+を保存する。
+
+既存rank8のformal abstentionは変更しない。
+
+m16/m32が良かったとしても、
+「rank8 decisionをm32へ置換して成功した」
+という再採点はしない。
+
+報告は
+
+- rank convergence diagnostic
+- hypothetical information value diagnostic
+
+に限定する。
+
+## PF/H-reference decomposition
+
+H6/H7/H8では既存same-H identityが閉じているため、各rankで可能なら
+
+`delta_M(m)-delta_direct
+ = PF-side error(m) - H-reference error(m)`
+
+を分解する。
+
+目的はrank増加時に、
+
+- PF Ritz recovery
+- H Ritz recovery
+- cancellation
+
+のどれが改善/悪化するかを見ること。
+
+closure/identityが成立しない座標ではindeterminate。
+
+## Primary outputs
+
+system × coordinateごとに、
+
+- E_M vs rank
+- w_M vs rank
+- PF-side error vs rank
+- H-reference error vs rank
+- positive-QPE allowance vs rank
+
+を出す。
+
+特に以下を明示する。
+
+1. H6のwidthはrank増加で十分小さくなるか。
+2. H7/H8のpoint-error悪化はm16/m32で回復するか。
+3. point convergenceとwidth convergenceは同じrank scaleか。
+4. rankを増やしてもsafe cheap comparatorに対するresource headroom不足が残るか。
+
+H6/H7/H8の3systemを統計的独立sampleとして一般化しない。
+
+---
+
+# 実行順序・freeze
+
+各Trackで以下を守る。
+
+1. protocol/preregistration commit
+2. implementation + focused tests
+3. source/input/time/hash freeze
+4. prediction acquisition
+5. prediction freeze
+6. truthが必要なTrack Gだけtruth acquisition
+7. truth freeze
+8. immutable analysis
+9. commit/push
+10. GPT review stop
+
+Track Rは既存truthを再利用するため、新truth acquisitionは0。
+
+Track Gの新truthはprediction freeze後のみ。
+
+両Trackとも途中結果を見て互いのprotocolを変更しない。
+
+---
+
+# Resource / parallel execution
+
+現在のgeneral-molecule prospective truthと並行実行する場合、独立したCPU/RAM/disk allocationが確認できる場合だけscience jobを起動する。
+
+同じquotaを共有する場合は、prospective truthを優先し、H-chain側はprotocol/implementation/testまでで停止する。
+
+Track GとTrack R同士も、resource isolationが可能なら別worker/jobとして並列可。
+
+BLAS 1 thread / workerを基本とする。
+
+condition/system内でbranch continuationが必要なdirect truthは時刻順に逐次。
+
+worker数、checkpoint、watchdog、technical retry、queueなど研究方針を変えない実装詳細はCodex側で決定してよい。
+
+scientific retryは0。
+technical retryはbyte-identical input/source/protocolで最大1回まで。
+
+---
+
+# 禁止事項
+
+- H9/H10/H12追加
+- H3 rescue
+- 新PF探索
+- new gamma
+- result-dependent geometry追加
+- result-dependent rank追加
+- m>32
+- width retuning
+- q=1探索
+- current prospective truth途中結果の利用
+- prospective M1 packageのrank8からの書き換え
+- failure conditionの置換
+- new basis / active space
+- net classical+quantum advantage claim
+
+---
+
+# 最終停止点
+
+Track G:
+
+`hchain_h6_geometry_sweep_complete_review_required`
+
+Track R:
+
+`hchain_m1_rank_convergence_complete_review_required`
+
+各branchをcommit・pushし、
+
+- branch
+- 40文字commit
+- protocol/freeze identities
+- action counts
+- missing/failure/abstention
+- resource accounting
+- tests
+- main scalar/figure summaries
+
+をhandoffに記載してGPTレビューへ戻してください。
+
+この2検証終了後、追加H-chain scienceを自動継続しない。
+結果を既存H2–H8およびgeneral-molecule prospective validationと統合して、Direction Cの最終claimへ反映するかGPT側で判断する。
