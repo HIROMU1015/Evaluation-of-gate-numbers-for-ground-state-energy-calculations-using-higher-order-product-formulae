@@ -106,6 +106,18 @@ def unique_coordinates(rows, fields):
     require(len(keys) == len(set(keys)), "Duplicate coordinate in a native block")
 
 
+def native_decomposition_is_closed(status):
+    """Classify saved identity-verification outcomes, not a string prefix."""
+    if status in {
+        "same_H_origin_physical_lift_verified_saved_diagnostic",
+        "closed_same_H_origin_physical_branch",
+    }:
+        return True
+    require(status == "indeterminate_identity_or_independent_energy_missing",
+            f"Unknown native decomposition status: {status!r}")
+    return False
+
+
 def assemble(data):
     """Count saved outcomes; never recompute a budget, truth, width, or selector."""
     native = []
@@ -117,6 +129,7 @@ def assemble(data):
         unique_coordinates(c, ("condition", "candidate_id", "time_hex"))
         require({(r["condition"], r["time_hex"]) for r in c} ==
                 {(r["condition"], r["time_hex"]) for r in m}, "Native point tuple mismatch")
+        decomposition_closed = sum(native_decomposition_is_closed(r["decomposition_status"]) for r in d)
         native.append({
             "family": family, "conditions": len({r["condition"] for r in c}),
             "coordinates": len(c), "contract": sorted({r["contract"] for r in c}),
@@ -125,8 +138,8 @@ def assemble(data):
             "M1_point_better_than_cheap": sum(csv_true(r["point_improves_over_cheap"]) for r in m),
             "M1_empirical_width_covers": sum(csv_true(r["empirical_width_covers"]) for r in m),
             "M1_formal_abstentions": sum(csv_true(r["abstained"]) for r in m),
-            "decomposition_closed": sum(r["decomposition_status"].startswith("closed") for r in d),
-            "decomposition_indeterminate": sum(r["decomposition_status"].startswith("indeterminate") for r in d),
+            "decomposition_closed": decomposition_closed,
+            "decomposition_indeterminate": len(d) - decomposition_closed,
         })
     hf_selected = [r for r in data["selected"] if r["condition"].startswith("HF_") and r["arm"] == "B1_gamma_1.01"]
     require(len(hf_selected) == 2, "HF selected decision coverage")

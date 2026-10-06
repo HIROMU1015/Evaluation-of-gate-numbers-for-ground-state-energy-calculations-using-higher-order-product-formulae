@@ -5,7 +5,10 @@ import re
 import unittest
 from pathlib import Path
 
-from study2_evidence_map import assemble, csv_true, finite_budget, read_sources, unique_coordinates
+from study2_evidence_map import (
+    assemble, csv_true, finite_budget, native_decomposition_is_closed,
+    read_sources, unique_coordinates,
+)
 
 
 class EvidenceMapTests(unittest.TestCase):
@@ -87,6 +90,25 @@ class EvidenceMapTests(unittest.TestCase):
         self.assertEqual(self.evidence["prospective"]["decomposition_indeterminate"], 39)
         self.assertEqual(self.evidence["prospective"]["branch_gap_compatible_diagnostics_not_absolute_branch_confirmation"], 37)
 
+    def test_native_verified_decomposition_is_counted_as_closed(self):
+        hchain = [r for r in self.data["decomposition"] if r["family"] == "H-chain"]
+        self.assertEqual(len(hchain), 18)
+        self.assertEqual({r["decomposition_status"] for r in hchain},
+                         {"same_H_origin_physical_lift_verified_saved_diagnostic"})
+        self.assertEqual([r["decomposition_closed"] for r in self.evidence["native_main_analysis"]],
+                         [0, 0, 18])
+        for row in self.evidence["native_main_analysis"]:
+            self.assertEqual(row["decomposition_closed"] + row["decomposition_indeterminate"],
+                             row["coordinates"])
+
+    def test_unknown_decomposition_status_fails_closed(self):
+        self.assertTrue(native_decomposition_is_closed("same_H_origin_physical_lift_verified_saved_diagnostic"))
+        self.assertTrue(native_decomposition_is_closed("closed_same_H_origin_physical_branch"))
+        self.assertFalse(native_decomposition_is_closed("indeterminate_identity_or_independent_energy_missing"))
+        for status in ("", "closed_unverified", "same_H_unverified", "indeterminate_unknown"):
+            with self.assertRaises(ValueError):
+                native_decomposition_is_closed(status)
+
     def test_no_pooled_n_or_new_science(self):
         e = self.evidence
         self.assertIsNone(e["pooled_independent_sample_count"])
@@ -106,8 +128,19 @@ class EvidenceMapTests(unittest.TestCase):
 
     def test_committed_package_matches_scalar_assembly(self):
         import json
-        path = Path(__file__).resolve().parents[1] / "artifacts/study2_evidence_integration_20261006/evidence_scalars.json"
+        path = Path(__file__).resolve().parents[1] / "artifacts/study2_evidence_integration_20261006_correction/evidence_scalars.json"
         self.assertEqual(json.loads(path.read_text()), self.evidence)
+
+    def test_correction_changes_only_the_documentation_count(self):
+        import copy
+        import json
+        path = Path(__file__).resolve().parents[1] / "artifacts/study2_evidence_integration_20261006/evidence_scalars.json"
+        historical = json.loads(path.read_text())
+        corrected = copy.deepcopy(historical)
+        row = next(r for r in corrected["native_main_analysis"] if r["family"] == "H-chain")
+        self.assertEqual(row["decomposition_closed"], 0)
+        row["decomposition_closed"] = 18
+        self.assertEqual(corrected, self.evidence)
 
     def test_review_document_local_links_exist(self):
         root = Path(__file__).resolve().parents[1]

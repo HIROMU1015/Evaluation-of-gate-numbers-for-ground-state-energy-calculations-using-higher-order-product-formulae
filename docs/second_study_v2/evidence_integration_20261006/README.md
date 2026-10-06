@@ -2,14 +2,18 @@
 
 Track R・Track Gはユーザー/GPTのレビューを受けて完了扱いとし、H-chainの新規科学計算はいったん終了する。Direction Cと承認済みRQは変更しない。この資料は、公開済みscalar結果を統合して論文上の位置付けをレビューする入口であり、追加計算の実行許可ではない。
 
+2026-10-06 documentation correction：native H-chainのPF/H-reference分解は原CSVで **18/18 verified**。旧集計JSONの `decomposition_closed: 0` はstatus名の判定漏れで、科学結果として使わない。[訂正記録](documentation_correction.md)と[訂正版scalar](../../../artifacts/study2_evidence_integration_20261006_correction/evidence_scalars.json)を参照する。公開済みの旧package・manifestとscience原本は保持した。
+
 ## 読む順序
 
 1. [承認済み停止境界](approved_closure.md)：完了判定、公開snapshot、再開に必要な別承認。
 2. [Evidence map](evidence_map.md)：native contract別の結果、重複、claimの範囲と不足。
-3. [集計scalar](../../../artifacts/study2_evidence_integration_20261006/evidence_scalars.json) と [source registry](../../../artifacts/study2_evidence_integration_20261006/source_registry.json)：原本の40文字commit、blob、SHA-256、固定GitHubリンク。
+3. [訂正版集計scalar](../../../artifacts/study2_evidence_integration_20261006_correction/evidence_scalars.json) と [source registry](../../../artifacts/study2_evidence_integration_20261006/source_registry.json)：原本の40文字commit、blob、SHA-256、固定GitHubリンク。[旧集計scalar](../../../artifacts/study2_evidence_integration_20261006/evidence_scalars.json)は訂正前の履歴として保持する。
 4. [既存の承認済みRQ・claim scope](../result_synthesis_20261005/approved_scope_and_rq.md)：本資料によって改稿・再freezeしていない。
 
 原本の読む順序は、[主解析][main] → [H-chain H2–H8総括][series] → [Track G][g] → [Track R][r] → [prospective final][p]。各リンクはcommit固定で、最後のprospective branchだけを読むことでTrack G/Rも同じ履歴に入っているとは仮定しない。
+
+[GPU server information completeness audit][audit]はprospectiveの情報完備性を確認した別artifactであり、科学結果の追加や再採点ではない。研究統合に必要な追加server-only科学結果回収は不要と受理されている。元の11-source集計と監査を独立標本として合算しない。
 
 ## 今回行った作業
 
@@ -35,7 +39,8 @@ PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:review_response:. \
 Builderは新規output directoryだけに出力する。公開済みpackageへ上書きせず、再監査も原本を変更しない。[検証記録](../../../artifacts/study2_evidence_integration_20261006/verification.json)、[公開source確認](../../../artifacts/study2_evidence_integration_20261006/source_publication_audit.json)、[自己除外manifest](../../../artifacts/study2_evidence_integration_20261006/publication_manifest.json)を併読する。manifestは自分自身をhash対象から除外し、handoff commitはmanifestへ自己参照で埋め込まない。
 
 [main]: https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/bfe715fc1c04325535a3c4d63ea4584e691dc322/artifacts/budget_safety_mechanism_20261005/report.md
-[series]: https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/971dc7a9b1b138fbbbb95fc684aa52af657e81b1/docs/second_study_v2/hchain_independent_validation_summary_20261005.md
+[series]: https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/a852c41331f2c8e0f7415c34e78c0110e4afd284/docs/second_study_v2/hchain_independent_validation_summary_20261005.md
 [g]: https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/1e03a659f3111623fa2b7afc3d8a87eeda1f4730/artifacts/hchain_h6_truth_continuation_20261006/REPORT.md
 [r]: https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/0c40a3d7987e0961262bfd38bbb214a9e2946824/artifacts/hchain_m1_rank_convergence_20261006/README.md
 [p]: https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/a852c41331f2c8e0f7415c34e78c0110e4afd284/artifacts/prospective_truth_scoring_20261006/final/summary.md
+[audit]: https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/6509d012380a9e02dc1043cc9d84e201bb158baf/artifacts/prospective_gpu_server_information_completeness_audit_20261006/README.md
