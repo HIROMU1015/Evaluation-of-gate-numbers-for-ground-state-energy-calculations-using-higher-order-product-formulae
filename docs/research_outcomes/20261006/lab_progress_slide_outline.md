@@ -4,9 +4,9 @@
 
 ## 1. 発表の流れ
 
-元論文の復習は2枚にまとめ、論文後に調べた「有限時間での時刻選択」「近似状態による予測のずれ」「その予測で決めたQPEの回転数」を順に説明する。本文18枚と、詳細を確認するための補足3枚。各ページの「補足」は口頭説明に使える計算条件である。
+元論文の復習は2枚にまとめ、「有限時間での時刻選択」「近似状態による予測のずれ」「その予測で決めたQPEの回転数」を順に説明する。本文22枚と補足3枚。各ページの「補足」は口頭説明に使える計算条件である。
 
-現状の結果では、短時間で調べた誤差の原因と、長い時刻で生じた費用差をまだ結び付けられていない。原因の切り分け、選択結果の評価、改善法の検証を、それぞれ何が分かり何が未検証かを示して説明する。
+追加検証では、費用を比べた長い時刻で三成分を揃え、状態改善、PF固有成分、HFの上限変更、別の鎖を比較した。**状態の近似だけでは予測差を説明できず、モデルの延長と代理量の読み取りも効いた。** 条件と数値の詳しい結果は[追加検証の統合報告](../20261007/additional_validation_results.md)にまとめた。
 
 | 枚 | タイトル |
 |---|---|
@@ -24,10 +24,14 @@
 | 12 | 選択を保ったまま、PF固有値で精度と費用を確かめる |
 | 13 | H4では目標精度を満たしたが、予算は基準の約1.98倍だった |
 | 14 | 安い時刻は候補にあったが、予測では精度条件を満たさなかった |
-| 15 | N₂・CO・HFの6条件でも、予算の精度と費用を確かめた |
-| 16 | HFでは、長い時刻を採用する根拠が得られなかった |
-| 17 | 二つの近似状態の比較を、時刻選択の診断に使えるか |
-| 18 | 確認できたことと、原因を結ぶために残る検証 |
+| 15 | H4の長い時刻では、モデルの延長と代理量の差も大きかった |
+| 16 | 状態を改善しても、予測と選択は単調には改善しなかった |
+| 17 | 厳密状態でも、他のPF固有成分が代理量へ入る |
+| 18 | H2・H3・H5・H6へ、同じ選択手順を広げた |
+| 19 | N₂・CO・HFの6条件でも、予算の精度と費用を確かめた |
+| 20 | HFの上限を緩めると、予測予算は減ったが精度が不足した |
+| 21 | 二つの近似状態の比較を、時刻選択の診断に使えるか |
+| 22 | 状態、モデル、代理量を分けて、長い時刻の予測を評価する |
 
 ## 2. 各スライドの本文案
 
@@ -139,9 +143,11 @@ $$
 - 基準PFでも、一項モデルの約1.7%から二項モデルの約0.10%へ改善した。
 - 新候補PFではさらに正確に予測できたが、各PFが選んだ$t_*$での必要費用は、基準PFより約15.1%大きかった。
 
+基準PFの一項モデルでは、予測時刻と保存された局所7点の直接最小点がH6で約2.48%、H7で約2.50%ずれていた。選んだ時刻による直接費用の超過は約0.168%、0.172%。二項モデルの予測時刻は、その局所最小点と一致した。
+
 **予測の正確さが改善しても、そのPFを使う費用自体が下がるとは限らない。**
 
-**補足：** 表は、それぞれのPFの$t_*$での$|C_{\rm model}-C_{\rm direct}|/C_{\rm direct}$。まず$0.9,1.0,1.1$倍を対角化し、中央が最小だったので$0.95,1.05$倍、さらにその中間の$0.975,1.025$倍を確認した。H6・H7の両PFで7点内の最小は$t_*$だった。連続時間全体の最適性を証明した結果ではない。[E03, E11, E16]
+**補足：** 表は、それぞれのPFの$t_*$での$|C_{\rm model}-C_{\rm direct}|/C_{\rm direct}$。まず$0.9,1.0,1.1$倍を対角化し、中央が最小だったので$0.95,1.05$倍、さらに$0.975,1.025$倍を確認した。一項モデルの局所比較はそのモデルの$t_{\rm ana}$周辺の保存点を使う。時刻のずれ・直接費用の超過・同時刻の費用予測誤差は異なる指標であり、連続時間全体の最適性は確認していない。[E03, E11, E16, E20]
 
 ### Slide 6：近似状態に置き換えると、誤差予測はどう変わるか
 
@@ -284,7 +290,7 @@ $$
 
 **この短い時刻では、モデルの当てはめを改善しても、入力状態を変えた差が残る。** 一方、この例の状態の差は目標精度の約0.0062%である。「支配」は三成分中で最大という意味で、目標精度を超えたという意味ではない。
 
-次に、CISDからPF・時刻・QPEの回転数を決めた結果を評価する。ただし、そこで選んだ長い時刻で、同じ成分が支配するかはまだ確認できていない。
+次に、CISDからPF・時刻・QPEの回転数を決めた結果を評価する。短時間の判定が長い時刻にも当てはまるかは、Slide 15で同じ三成分を計算して確かめる。
 
 **補足：** 56はPFと状態の組合せの数。ここで比較した時刻の大きさは$0.125$–$0.40\ \mathrm{Ha}^{-1}$。[E05, E16]
 
@@ -360,7 +366,7 @@ $$
 
 **精度は満たしたが、比較した候補の最小費用に対して$B/C_{\rm grid}^*\simeq1.984$の予算になった。**
 
-**補足：** この4PF・401候補での評価は、H-chainではH4で行った。H2–H8の別の評価も実施済みだが、PFを基準PFに固定し、候補は3時刻、費用基準は短い時刻の予算である（補足A1）。H4と同じ選択手順をほかの鎖へ適用した結果ではない。[E05, E09]
+**補足：** 元の4PF・401候補評価はH4で行った。今回H2・H3・H5・H6へ同じ手順を広げた結果はSlide 18。基準PF・3候補の別検証（補足A1）とは条件が異なる。[E05, E09, E19]
 
 ### Slide 14：安い時刻は候補にあったが、予測では精度条件を満たさなかった
 
@@ -379,11 +385,89 @@ $t\simeq3.518$を見逃した理由を、同じPFの候補時刻と誤差予測�
 
 **候補時刻が用意されていても、誤差予測が不正確なら、その候補を選べない。** [E14]
 
-**ここで確認できたのは、誤差の過大評価が安い時刻を選択対象から外したこと。** 状態の近似がその原因だったか、短時間からのモデルの延長が原因だったかは、2.147と3.518での三成分を揃えて比較していないため、未確定である。
+**過大な誤差予測で安い時刻を除外した。では、その過大予測はどこから来たか。** 次に、この2時刻で代理量も計算して三成分を揃える。
 
 **補足：** 短時間の49/56という結果を、この長い時刻の費用差の原因へそのまま当てはめない。[E05, E14, E16]
 
-### Slide 15：N₂・CO・HFの6条件でも、予算の精度と費用を確かめた
+### Slide 15：H4の長い時刻では、モデルの延長と代理量の差も大きかった
+
+**スライド本文**
+
+同じ追加候補Cで、元のCISD予測とその時刻で直接求めた代理量を比べた。三成分は正負を保った値。単位は $10^{-6}$ Ha。
+
+| 時刻 | モデルの差 $\widehat f-g_{\rm CISD}$ | 状態の差 $g_{\rm CISD}-g_0$ | 代理量の差 $g_0-\delta_P$ |
+|---|---:|---:|---:|
+| 2.147：予測で選んだ点 | −11.778 | −2.629 | −10.229 |
+| 3.518：直接評価で最も安い点 | −213.449 | +74.996 | −92.240 |
+
+3.518では、**短時間モデルをこの時刻まで延ばした差が最大だった。** 状態の差と、厳密状態の代理量とPF固有値の差も大きく、一部を打ち消している。
+
+**短時間で状態の差が支配したことだけでは、長い時刻で安い候補を除外した理由を説明できなかった。** モデルを確かめる比較と、状態を改善する比較の両方が必要になる。
+
+**補足：** 元のPF・モデル係数・予算は保ち、1,604候補点の直接誤差を再現した。三成分はエネルギー予測差の分解であり、費用の寄与率ではない。[E17]
+
+### Slide 16：状態を改善しても、予測と選択は単調には改善しなかった
+
+**スライド本文**
+
+H4で、同じHamiltonian・PF・5つのfit時刻・401候補を使い、励起を含める範囲を変えたCI状態で予測を作り直した。人工混入や成分省略とは別の、状態を改善する比較である。
+
+| 入力状態 | 厳密状態との重なり² | 予測で選んだPF・時刻 | 元の採点規則による精度 |
+|---|---:|---|---|
+| RHF・CIS | 約0.936464 | 新候補PF・1.861 | 未達 |
+| CISD | 0.999467 | 追加候補C・2.147 | 達成 |
+| CISDT | 0.999510 | 追加候補C・4.308 | 継続枝の基準不成立で未確認 |
+| 厳密状態 | 1 | 追加候補C・4.219 | 継続枝の基準不成立で未確認 |
+
+CISDTは三電子励起まで含めた35次元、厳密状態は全36次元。同じ2.147ではCISDTで状態差が小さくなったが、3.518ではCISDより少し大きくなった。
+
+**状態との重なりがよくなっても、代理量の予測や選ぶ時刻が一律によくなるとは限らなかった。** 厳密状態を使っても、モデルの延長と代理量そのものの問題が残る。
+
+**補足：** 「未確認」は精度未達と区別する。継続枝と最大重なりのPF固有成分が異なる2点を、その最大重なりの位相で別に調べても、元の予算による補助誤差は4.219で $5.902\times10^{-4}$、4.308で $1.242\times10^{-3}$ Haと目標を超えた。正式分類・選択は変えていない。継続計算自体の誤りを証明した結果ではない。[E17]
+
+### Slide 17：厳密状態でも、他のPF固有成分が代理量へ入る
+
+**スライド本文**
+
+厳密Hamiltonianの基底状態が、有限時間PFの一つの固有状態と一致するとは限らない。重なりの代理量は、その基底状態が含む**複数のPF固有成分の位相**を読む。
+
+$$
+g_0(t)=\sum_j w_j\frac{\sin(\theta_j-E_0t)}{t},
+\qquad w_j=|\langle v_j|\psi_0\rangle|^2
+$$
+
+H4の追加候補Cで、寄与を分けて計算した。
+
+| 時刻 | 追跡したPF固有状態の重なり² | その成分の寄与［Ha］ | 他の成分の合計［Ha］ |
+|---|---:|---:|---:|
+| 0.40 | ほぼ1 | $-2.871\times10^{-8}$ | $+1.731\times10^{-12}$ |
+| 2.147 | 0.999072 | $-7.571\times10^{-6}$ | $-1.024\times10^{-5}$ |
+| 3.518 | 0.998554 | $+6.966\times10^{-6}$ | $-9.223\times10^{-5}$ |
+
+3.518では、他の成分の重みは約0.145%でも、寄与が大きく代理量の符号も変えた。**厳密状態を入力にしても、一つのPF固有位相の誤差をそのまま読めるとは限らない。**
+
+**補足：** この3点では、固有成分の和と直接計算した $g_0$ が数値精度内で一致した。3.518での $\sin(t\delta)/t-\delta$ は約 $-7\times10^{-16}$ Haで、この差の原因ではない。[E17]
+
+### Slide 18：H2・H3・H5・H6へ、同じ選択手順を広げた
+
+**スライド本文**
+
+H4と同じ4PF・5点モデル・PF別401候補を、別の鎖の既存Hamiltonian・CISDへ適用した。
+
+| 系 | 予測で選んだPF・時刻 | 正式な精度分類 | 元予算での補助合計誤差［Ha］ |
+|---|---|---|---:|
+| H2 | 追加候補C・6.786 | 継続枝の基準不成立で未確認 | $7.361\times10^{-4}$ |
+| H3 | 選択なし | 四次係数が決まらず棄権 | — |
+| H5 | 追加候補C・4.727 | 継続枝の基準不成立で未確認 | $5.655\times10^{-4}$ |
+| H6 | 追加候補C・3.039 | 継続枝の基準不成立で未確認 | $2.505\times10^{-4}$ |
+
+継続枝の基底状態への対応条件を満たさない3選択点では、厳密基底状態との重なりが最大のPF位相を独立に調べた。**その補助評価でも3系とも目標 $1.594\times10^{-4}$ Haを超え、元の予算が不足した。**
+
+H2ではCISDが厳密状態と一致する。それでもこの長い時刻の予測は十分でなかった。枝を追えた長い点の三成分にも、状態差よりモデル・代理量の差が大きい例があった。
+
+**補足：** H2/H6は中性一重項、H3/H5は+1価三重項なので、純粋なサイズ依存性とは説明しない。H6は400次元で旧holdoutの200次元と異なる。全16予測を保存してから、適格12PF×401点を直接評価した。補助3点は正式分類を変更する救済には使わない。[E19]
+
+### Slide 19：N₂・CO・HFの6条件でも、予算の精度と費用を確かめた
 
 **スライド本文**
 
@@ -406,37 +490,39 @@ N₂・CO・HFの平衡構造と、結合長を1.5倍に伸ばした構造でも
 | HF 平衡 | 満たす | 2.150 | 両PFともあり |
 | HF 伸長 | 満たす | 2.103 | 両PFともあり |
 
-**1%の余裕を加えた予算は6条件とも精度を満たしたが、費用は保存候補の最小より多かった。** HFの費用比は、設定した上限短縮の影響を含む。約2倍という比率をHF固有の損失と解釈せず、次に上限を短縮した理由を確認する。
+**元の規則で1%の余裕を加えた予算は6条件とも精度を満たした。** HFの費用比は設定した上限短縮の影響を含む。そこで、次に上限だけを変え、予算の精度と費用がどう変わるかを直接比べる。
 
 **補足：** N₂・COは一部の軌道を対象にしたモデル、HFは全電子モデル。上の検査と閾値は、この選択手順で事前に決めたもの。比率の分母は保存済みの直接評価点の最小費用で、HFでは短縮後の上限外の点も含む。[E07, E13, E16]
 
-### Slide 16：HFでは、長い時刻を採用する根拠が得られなかった
+### Slide 20：HFの上限を緩めると、予測予算は減ったが精度が不足した
 
 **スライド本文**
 
-前の検査のうち、HFで該当したのは「状態の差に比べ重なりの虚部が小さい」という条件だった。次の比を$0.1t_{\rm proxy}$で計算した。
+HFでは、$0.1t_{\rm proxy}$での次の比が0.02未満なら、上限を $1.8t_{\rm proxy}$ から $0.5t_{\rm proxy}$ へ縮める規則に該当した。
 
 $$
 r=\frac{|\operatorname{Im}A_\psi(t)|}
 {\|U_P(t)|\psi\rangle-e^{iHt}|\psi\rangle\|}
 $$
 
-分母は、CISDにPFを作用させた状態と、Hamiltonianで正確に発展させた状態の差の大きさ。$r<0.02$なら、候補の上限を$1.8t_{\rm proxy}$から$0.5t_{\rm proxy}$へ縮める、と事前に決めていた。
+この上限が結果をどれだけ変えたかを見るため、**保存モデルを再fitせず、上限だけ0.5、1.0、1.8倍へ変えた。** 各範囲で選んだPF・時刻・予算を保存し、その後に対角化で評価した。
 
-| HFの条件 | 選ばれた基準PFの$r$ | 上限＝選択時刻［$\mathrm{Ha}^{-1}$］ |
-|---|---:|---:|
-| 平衡 | $2.97\times10^{-4}$ | 0.1489 |
-| 伸長 | $1.69\times10^{-4}$ | 0.2060 |
+全6選択で基準PFが選ばれた。費用単位は百万回転、誤差単位は $10^{-6}$ Ha。目標は159.360。
 
-両PFとも検査に該当し、この規則で範囲が縮まった。上限の時刻が選ばれたが、**上限を超えても予測を信用できると判断する根拠は、この検査からは得られなかった。**
+| HF条件 | 上限倍率 | 予測で用意した予算 | 同点の直接必要費用 | 合計誤差 | 精度 |
+|---|---:|---:|---:|---:|---|
+| 平衡 | 0.5 | 468.462 | 466.549 | 158.718 | 達成 |
+| 平衡 | 1.0 / 1.8 | 約275.646 | 約279.48 | 約161.31 | 未達 |
+| 伸長 | 0.5 | 338.266 | 334.004 | 157.359 | 達成 |
+| 伸長 | 1.0 / 1.8 | 約201.700 | 約203.55 | 約160.65 | 未達 |
 
-この短い時刻での予算は精度を満たした。予算／同じPF・時刻の直接必要費用は、平衡で1.004、伸長で1.013だった。保存候補の最小費用に対する約2.1倍との差は、主に時刻を短く制限した影響だった。
+予測予算は約40%減ったが、1%の余裕では足りなかった。長い選択点でのモデル差は約 $3\times10^{-5}$ Ha、状態をCISDへ置き換える差は全12選択で最大 $8.17\times10^{-11}$ Ha。**ここでは状態がほぼ厳密でも、モデルの延長が外れた。**
 
-上限と閾値は事前に設定した選択規則である。費用比はその設定に依存する。ここで残った課題は、**長い時刻の誤差予測を確かめ、安全に選択へ含められる根拠を得ること**である。
+一方、直接必要費用も短い時刻より約40%小さい。**長い時刻そのものが使用不能なのではなく、必要な回転数を予測から十分に用意することが課題である。**
 
-**補足：** $r$は、CISDと厳密状態との距離を測る量ではない。今回のHFのCISDは厳密状態との重なりの二乗がほぼ1でも、この検査に該当した。モデル残差や符号不一致は、HFの上限短縮の理由ではなかった。検査への該当だけで、長い時刻が実際に危険だと確定したわけではない。[E07, E13–E15]
+**補足：** 上限1.0と1.8の最安時刻はほぼ同じ約 $0.93t_{\rm proxy}$。Yoshida4単独なら上限1.0で両条件が達成、1.8では伸長が未達だった。上限0.5や閾値0.02の最適性・必要十分性は示していない。元モデル・他の検査・1%余裕を固定した12選択を評価した。[E18]
 
-### Slide 17：二つの近似状態の比較を、時刻選択の診断に使えるか
+### Slide 21：二つの近似状態の比較を、時刻選択の診断に使えるか
 
 **スライド本文**
 
@@ -458,24 +544,24 @@ $$
 
 **上限のなかったPFにも診断を実施したが、そこで新たに制限を加える判断にはならなかった。全6条件でPF・時刻・予算は元の方法と同じだった。**
 
-分かったのは、**この省略方法と判定規則では、既存の時刻制限を変える情報を得られなかったこと**である。状態を系統的に改善した場合の効果や、この診断が実際の予測のずれを見逃さないかは、ここでは検証していない。
+分かったのは、**この省略方法と判定規則では、既存の時刻制限を変える情報を得られなかったこと**である。新たな状態改善対照でも、状態を正確にするだけでは長い時刻の問題が残った。小さな成分への敏感さを測るこの診断は、モデルの外挿や他のPF固有成分の寄与を直接確かめる検査ではない。
 
 **補足：** 省略状態は予算を作る状態の代わりには使っていない。また、CISDから成分を省いたとき、厳密状態へ近づくか離れるかはこの診断では判定しない。二状態が一致しても厳密状態への近さの保証にはならず、この固定診断による資源改善は確認できなかった。[E06, E07, E15]
 
-### Slide 18：確認できたことと、原因を結ぶために残る検証
+### Slide 22：状態、モデル、代理量を分けて、長い時刻の予測を評価する
 
 **スライド本文**
 
-| 確認できたこと | まだ答えていないこと |
+| 比較 | 今回分かったこと |
 |---|---|
-| H6・H7では二項モデルの予測時刻が局所7点の直接最小点と一致し、費用予測も改善した | 候補範囲外を含む最適性 |
-| H4の短時間では状態の置換差が49/56ケースで支配。同じ重なりでも位相で差が変わった | 費用を比較した長い時刻でも同じ原因が支配するか |
-| H4では過大な誤差予測で安い候補を除外。6分子条件の予算は精度を満たした | 状態を改善すれば、同じ候補からより安く選べるか |
-| HFでは設定した規則で時刻を制限。CISDの省略診断を加えても選択は変わらなかった | 上限を変えた比較と、診断が実際の予測のずれを検出できるか |
+| 有限時間での時刻選択 | H6/H7では二項モデルが局所最小点を選べたが、予測しやすいPFの必要費用自体は増えた |
+| 短時間から長時間への原因比較 | H4の短時間は状態差が支配したが、長い時刻ではモデルの延長・代理量の差も大きかった |
+| 状態品質とPF固有成分 | 厳密状態でも、他のPF固有成分が代理量へ入り、一つの固有位相の誤差と一致しなかった |
+| 別鎖と上限変更 | H2/H5/H6の補助評価とHFの上限を緩めた選択に、予算不足の例があった |
 
-**短時間で見えた状態の影響が、使う時刻での予測と費用をどう変えるかは、まだ検証でつながっていない。** CISDを使った結果と省略診断だけで、近似状態の問題を解決したとは言えない。
+**入力状態を改善すること、代理量を有限時間へ予測すること、代理量から一つのPF固有位相の誤差を読むことは、別々に確かめる必要がある。** 今回は同じ時刻の三成分と条件変更で、その間の比較を追加した。
 
-現在の承認済みの問いは、古典的な校正情報を追加したときの予算の精度・資源効率への効果である。今回残った検証をどこまで追加するかは、研究方針のレビューで決める。[E08]
+残るのは、外挿とモデルの切り詰めをさらに分ける比較、PF固有成分の対応、N₂・COの状態改善・上限感度など。現在の問いである「古典的な校正情報を加える効果」を、今回の適用限界を踏まえて評価する。[E08, E17–E20]
 
 ## 3. 詳細を確認するための補足
 
@@ -518,7 +604,7 @@ H4の原因分析と、6条件の入力元の先行評価で保存されたCISD�
 
 **厳密状態を使えば状態の置換差は消せる。ただし、重なりが高いことだけではPF誤差の代理量が十分正確になると保証できない。**
 
-**補足：** 重なりは評価時だけに参照した値。先行検証はPF固有値から決めた基準時刻を使う条件で、H4のCISDからの予算選択と同じ手順ではない。H4の401候補で、FCIを入力とした選択をCISDと揃えて比較した結果はここに含まれていない。6条件の状態の入力元はE13で固定した先行評価。[E13, E15]
+**補足：** 上の6分子条件の重なりは入力元の先行評価で保存した値。H4の401候補で厳密状態・CISDT・CISDを揃えた今回の対照はSlide 16で説明する。先行検証はPF固有値から決めた基準時刻を使う別手順である。[E13, E15, E17]
 
 ### A3：予算と費用の保存値
 
@@ -553,52 +639,45 @@ H4の原因分析と、6条件の入力元の先行評価で保存されたCISD�
 
 ## 4. 作成者用の根拠資料と確認版
 
-この節はスライド本文へ載せる情報ではなく、数値・計算条件・情報アクセスを確認するための記録である。
+この節は数値・条件・情報アクセスを確認するための記録である。読む順序は、[追加検証の統合報告](../20261007/additional_validation_results.md) → **E17 → E18 → E19 → E20**。承認前の[検証不足の記録](verification_gaps_and_next_checks.md)は作成時点の記録として残し、追加比較の[実行範囲](../20261007/additional_validation_scope.md)と区別する。従来の説明はE01–E16を参照する。
 
-今回の指摘に対応する資料は、[検証不足と追加比較の判断資料](verification_gaps_and_next_checks.md) → **E16 → E05/E15 → E07/E09** の順に読む。従来の説明の根拠は **E01 → E11/E12 → E03 → E04/E05/E14/E15 → E13/E07/E06**。E08–E10は現在の問いと後続検証、E02は歴史的な問題設定の参照用。
+repository：`HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae`。公開branchは`pf-study2-evidence-integration-20261006`、今回の入力snapshotは`869806ff9995b76ef2786ca7b57b9acc02c2731f`。新規結果の40文字commitは最終handoffで示す。
 
-repository：`HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae`。本改訂前に確認した公開branchは`pf-study2-evidence-integration-20261006`、snapshotは`9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`。
-
-下表のorigin/result commitとverified snapshot commitは別の役割である。snapshotは資料を読んだ版を表し、元の科学結果を今回作成したことを意味しない。
+sourceのorigin/result commitとverified snapshot commitは別の役割である。既存結果の作成時点と、今回確認した版を統合しない。
 
 | ID | 資料 | origin/result commitまたは版 | verified snapshot commit |
 |---|---|---|---|
 | E01 | [元論文](https://arxiv.org/html/2605.30967v1) | arXiv:2605.30967v1 | Git対象外 |
-| E02 | [既存の査読対応・有限時間検証構成案](../../../review_response/slide_outline.md) | 歴史的説明資料。数値原本の代替にはしない | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E03 | [H6/H7を含む二項モデルholdout報告](../../../artifacts/two_term_pf_m3_holdout_server2_20260910_d2360f4_cpu/report.md)、[保存scalar](../../../artifacts/two_term_pf_m3_holdout_server2_20260910_d2360f4_cpu/summary.json)、[指標定義と情報アクセスを確認したコード](../../../review_response/run_two_term_pf_m3_holdout_server2.py) | public result origin `92df2dbda9de5f41183af551b7acec06d88a3ada`。manifestのexecution HEAD `d2360f49f9a754d1850eab60cd483f684bd8bffb`とは別 | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E04 | [H4機構・予算評価のprotocol説明](../../../PF_first_study_protocol_20260925.md)、[定義・係数列・時刻の正本JSON](../../../PF_first_study_protocol_20260925.json) | formalization `d3faddebe490dbe8224bd4274578f2edd313dfb0` | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E05 | [H4機構・予算評価の統合結果](../../../PF_first_study_results_20260925.md)、[選択時に保存した予測値](../../../artifacts/pf_first_study_phase_a_20260925_6265243/predictions.json)、[固有値から評価した予算・費用](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/allocation_scoring.csv) | 予測値のpublic origin `5a2f0a2e0315493c892c79f1a6b8c9285cc52ac3`。Phase B result `d13f49dc8923b0553f8c8596de3c44c8a7a6f14f` | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E06 | [機構・診断法評価の最終統合](../../../PF_first_study_final_synthesis_20260925.md)、[診断の固定protocol](../../../review_response/pf_first_study_s4_state_convergence_protocol.md) | synthesis origin `7f0b30d215e8094c95ae895b9469a04180e2385e`。S4 result `4d831b52475a7399b74a048a7471eaba6c4527c0`。診断protocol origin `f66e86f05473dc00790f47cf4ce493d9f64f5a57` | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E07 | [費用定義・許容時刻域・S4定数のcompletion analysis](../../../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/report.md) | analysis origin `6a1e54d5e830a20b8817791f9f1f65729815fc12`。S0 result `cc3626a8135b647fe283fc60c963de70c5f6b2a5` | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E08 | [追加校正についての承認済みscope/RQ](../../second_study_v2/result_synthesis_20261005/approved_scope_and_rq.md) | 承認済み判断の正本。今回変更なし | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E09 | [別protocolによるH2–H8総括](../../second_study_v2/hchain_independent_validation_summary_20261005.md) | 文書origin `50cdc62d69a28bc5d4f4893f3c589e0bbd6d81db`。個別result originは同文書の表で保持 | 本構成案での確認 `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`。同文書のscience確認snapshot `971dc7a9b1b138fbbbb95fc684aa52af657e81b1`は保持 |
-| E10 | [現在の証拠統合入口](../../second_study_v2/evidence_integration_20261006/README.md)、[documentation訂正](../../second_study_v2/evidence_integration_20261006/documentation_correction.md)、[訂正版scalar](../../../artifacts/study2_evidence_integration_20261006_correction/evidence_scalars.json) | docs-only correction `783a2320260fd0e7d1626c96cc5382170c7bf8e5`。science source originは既存registryを保持 | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E11 | [一項・二項モデルの比較報告](../../../artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/report.md)、[保存値](../../../artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/summary.json) | result origin `73cdbf200d348cc610d4c20f45a3208ce7ad2e7e`。入力結果のcommit `92df2dbda9de5f41183af551b7acec06d88a3ada`とは別 | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E12 | [新候補PFの係数探索報告](../../../artifacts/two_term_pf_m3_refinement_local_20260909/report.md)、[H-chainでの候補比較](../../../artifacts/two_term_pf_m3_refinement_local_20260909/hchain_report.md)、[係数を固定したH6/H7検証依頼](../../../review_response/gpu_two_term_pf_m3_holdout_prompt.md) | origin `d2360f49f9a754d1850eab60cd483f684bd8bffb` | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E13 | [6条件の時刻選択・上限ルール](../../../review_response/practical_calibration_minimal_protocol.json)、[選択時の予測・検査値](../../../artifacts/server_practical_calibration_minimal_20260923_79035cc/predictions.json) | protocol origin `79035cc7c414c04cafe8b9f8bdc779a17ec57302`。prediction public origin `4f4374bdf4dbcb7d8e1d14f9682570c221e4c88a` | `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7` |
-| E14 | [コメントに対応した保存値監査](../../../artifacts/lab_progress_slide_comment_audit_20261006/selection_and_model_checks.json)、[再集計コード](../../../artifacts/lab_progress_slide_comment_audit_20261006/audit_saved_selection.py)、[監査manifest](../../../artifacts/lab_progress_slide_comment_audit_20261006/manifest.json) | post-hoc監査 origin `870b4de4af32edde73d514bc6832dc5533b76cb7`。入力6資料のorigin/result commitは監査JSONで個別保持 | 監査artifactの確認版 `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`。入力の確認版 `52261023678c2fc4369ce4312b9385830b843399`は保持 |
-| E15 | [追加コメントに対応した保存値監査](../../../artifacts/lab_progress_slide_followup_audit_20261006/checks.json)、[再集計コード](../../../artifacts/lab_progress_slide_followup_audit_20261006/audit_saved_evidence.py)、[監査manifest](../../../artifacts/lab_progress_slide_followup_audit_20261006/manifest.json)、[H4の一項モデル原本](../../../artifacts/two_term_pf_m3_refinement_local_20260909/refinement_results.json)、[H4の状態診断](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/state_diagnostics.csv)、[6条件の状態診断](../../../artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/aggregate/state_diagnostics.csv)、[厳密状態との先行比較](../../../artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/aggregate/report.md)、[二状態診断の原本](../../../artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f/state_diagnostics.csv)、[診断前後の選択原本](../../../artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f/predictions.json) | post-hoc監査 origin `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`。入力9資料のorigin/result commitを監査JSONで個別保持 | 監査artifactの確認版 `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`。入力確認版 `870b4de4af32edde73d514bc6832dc5533b76cb7`は保持 |
-| E16 | [検証範囲・状態差・費用の保存値監査](../../../artifacts/lab_progress_slide_gap_audit_20261007/checks.json)、[再集計コード](../../../artifacts/lab_progress_slide_gap_audit_20261007/audit_saved_evidence.py)、[監査manifest](../../../artifacts/lab_progress_slide_gap_audit_20261007/manifest.json)、[H4の三成分原本](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/error_decomposition.csv)、[H4の観測原本](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/observables.csv)、[6条件の費用原本](../../../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/cost_factor_decomposition.csv)、[6条件の精度原本](../../../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/calibration_precision.csv) | 今回のpost-hoc監査。入力9資料のorigin/result commitは監査JSONで個別保持 | 入力確認版 `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`。新しい監査は今回のhandoff commit |
+| E02 | [既存の査読対応・有限時間検証構成案](../../../review_response/slide_outline.md) | 歴史的説明資料。数値原本の代替にはしない | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E03 | [H6/H7を含む二項モデルholdout報告](../../../artifacts/two_term_pf_m3_holdout_server2_20260910_d2360f4_cpu/report.md)、[保存scalar](../../../artifacts/two_term_pf_m3_holdout_server2_20260910_d2360f4_cpu/summary.json)、[指標定義と情報アクセスを確認したコード](../../../review_response/run_two_term_pf_m3_holdout_server2.py) | public result origin `92df2dbda9de5f41183af551b7acec06d88a3ada`。manifestのexecution HEAD `d2360f49f9a754d1850eab60cd483f684bd8bffb`とは別 | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E04 | [H4機構・予算評価のprotocol説明](../../../PF_first_study_protocol_20260925.md)、[定義・係数列・時刻の正本JSON](../../../PF_first_study_protocol_20260925.json) | formalization `d3faddebe490dbe8224bd4274578f2edd313dfb0` | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E05 | [H4機構・予算評価の統合結果](../../../PF_first_study_results_20260925.md)、[選択時に保存した予測値](../../../artifacts/pf_first_study_phase_a_20260925_6265243/predictions.json)、[固有値から評価した予算・費用](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/allocation_scoring.csv) | 予測値のpublic origin `5a2f0a2e0315493c892c79f1a6b8c9285cc52ac3`。Phase B result `d13f49dc8923b0553f8c8596de3c44c8a7a6f14f` | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E06 | [機構・診断法評価の最終統合](../../../PF_first_study_final_synthesis_20260925.md)、[診断の固定protocol](../../../review_response/pf_first_study_s4_state_convergence_protocol.md) | synthesis origin `7f0b30d215e8094c95ae895b9469a04180e2385e`。S4 result `4d831b52475a7399b74a048a7471eaba6c4527c0`。診断protocol origin `f66e86f05473dc00790f47cf4ce493d9f64f5a57` | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E07 | [費用定義・許容時刻域・S4定数のcompletion analysis](../../../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/report.md) | analysis origin `6a1e54d5e830a20b8817791f9f1f65729815fc12`。S0 result `cc3626a8135b647fe283fc60c963de70c5f6b2a5` | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E08 | [追加校正についての承認済みscope/RQ](../../second_study_v2/result_synthesis_20261005/approved_scope_and_rq.md) | 承認済み判断の正本。今回変更なし | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E09 | [別protocolによるH2–H8総括](../../second_study_v2/hchain_independent_validation_summary_20261005.md) | 文書origin `50cdc62d69a28bc5d4f4893f3c589e0bbd6d81db`。個別result originは同文書の表で保持 | 本構成案での確認 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。同文書のscience確認snapshot `971dc7a9b1b138fbbbb95fc684aa52af657e81b1`は保持 |
+| E10 | [現在の証拠統合入口](../../second_study_v2/evidence_integration_20261006/README.md)、[documentation訂正](../../second_study_v2/evidence_integration_20261006/documentation_correction.md)、[訂正版scalar](../../../artifacts/study2_evidence_integration_20261006_correction/evidence_scalars.json) | docs-only correction `783a2320260fd0e7d1626c96cc5382170c7bf8e5`。science source originは既存registryを保持 | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E11 | [一項・二項モデルの比較報告](../../../artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/report.md)、[保存値](../../../artifacts/m3_one_two_term_model_comparison_server2_20260910_92df2db_cpu/summary.json) | result origin `73cdbf200d348cc610d4c20f45a3208ce7ad2e7e`。入力結果のcommit `92df2dbda9de5f41183af551b7acec06d88a3ada`とは別 | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E12 | [新候補PFの係数探索報告](../../../artifacts/two_term_pf_m3_refinement_local_20260909/report.md)、[H-chainでの候補比較](../../../artifacts/two_term_pf_m3_refinement_local_20260909/hchain_report.md)、[係数を固定したH6/H7検証依頼](../../../review_response/gpu_two_term_pf_m3_holdout_prompt.md) | origin `d2360f49f9a754d1850eab60cd483f684bd8bffb` | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E13 | [6条件の時刻選択・上限ルール](../../../review_response/practical_calibration_minimal_protocol.json)、[選択時の予測・検査値](../../../artifacts/server_practical_calibration_minimal_20260923_79035cc/predictions.json) | protocol origin `79035cc7c414c04cafe8b9f8bdc779a17ec57302`。prediction public origin `4f4374bdf4dbcb7d8e1d14f9682570c221e4c88a` | `869806ff9995b76ef2786ca7b57b9acc02c2731f` |
+| E14 | [コメントに対応した保存値監査](../../../artifacts/lab_progress_slide_comment_audit_20261006/selection_and_model_checks.json)、[再集計コード](../../../artifacts/lab_progress_slide_comment_audit_20261006/audit_saved_selection.py)、[監査manifest](../../../artifacts/lab_progress_slide_comment_audit_20261006/manifest.json) | post-hoc監査 origin `870b4de4af32edde73d514bc6832dc5533b76cb7`。入力6資料のorigin/result commitは監査JSONで個別保持 | 監査artifactの確認版 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。入力の確認版 `52261023678c2fc4369ce4312b9385830b843399`は保持 |
+| E15 | [追加コメントに対応した保存値監査](../../../artifacts/lab_progress_slide_followup_audit_20261006/checks.json)、[再集計コード](../../../artifacts/lab_progress_slide_followup_audit_20261006/audit_saved_evidence.py)、[監査manifest](../../../artifacts/lab_progress_slide_followup_audit_20261006/manifest.json)、[H4の一項モデル原本](../../../artifacts/two_term_pf_m3_refinement_local_20260909/refinement_results.json)、[H4の状態診断](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/state_diagnostics.csv)、[6条件の状態診断](../../../artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/aggregate/state_diagnostics.csv)、[厳密状態との先行比較](../../../artifacts/server_h01_approximate_state_calibration_20260922_011228_e0692a8/aggregate/report.md)、[二状態診断の原本](../../../artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f/state_diagnostics.csv)、[診断前後の選択原本](../../../artifacts/server_pf_first_study_s4_phase_a_20260925_f66e86f/predictions.json) | post-hoc監査 origin `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`。入力9資料のorigin/result commitを監査JSONで個別保持 | 監査artifactの確認版 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。入力確認版 `870b4de4af32edde73d514bc6832dc5533b76cb7`は保持 |
+| E16 | [検証範囲・状態差・費用の保存値監査](../../../artifacts/lab_progress_slide_gap_audit_20261007/checks.json)、[再集計コード](../../../artifacts/lab_progress_slide_gap_audit_20261007/audit_saved_evidence.py)、[監査manifest](../../../artifacts/lab_progress_slide_gap_audit_20261007/manifest.json)、[H4の三成分原本](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/error_decomposition.csv)、[H4の観測原本](../../../artifacts/pf_first_study_phase_b_20260925_5a2f0a2/observables.csv)、[6条件の費用原本](../../../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/cost_factor_decomposition.csv)、[6条件の精度原本](../../../artifacts/pf_first_study_completion_analysis_20260926_940ee7f/calibration_precision.csv) | post-hoc監査 origin `869806ff9995b76ef2786ca7b57b9acc02c2731f`。入力9資料のorigin/result commitは監査JSONで個別保持 | 監査artifactの確認版 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。入力確認版 `9bddbca9f41b13ddeeefa64dffac4eecf8550ac7`は保持 |
+| E17 | [H4の追加結果](../../../artifacts/lab_progress_h4_state_checks_20261007/report.md)、[protocol](../../../artifacts/lab_progress_h4_state_checks_20261007/protocol.json)、[選択の採点](../../../artifacts/lab_progress_h4_state_checks_20261007/allocations.csv)、[長時間三成分](../../../artifacts/lab_progress_h4_state_checks_20261007/long_time_bridge.csv)、[固有成分の監査](../../../artifacts/lab_progress_h4_state_checks_20261007/spectral_checks.json)、[枝の補助診断](../../../artifacts/lab_progress_h4_state_checks_20261007/branch_diagnostic_checks.json)、[manifest](../../../artifacts/lab_progress_h4_state_checks_20261007/manifest.json) | 今回の新規追加検証・補助診断。各入力のorigin/result commitはprotocolで個別保持 | 入力 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。新規結果は今回のhandoff commit |
+| E18 | [HF上限比較](../../../artifacts/lab_progress_hf_cap_checks_20261007/report.md)、[protocol](../../../artifacts/lab_progress_hf_cap_checks_20261007/protocol.json)、[凍結予測](../../../artifacts/lab_progress_hf_cap_checks_20261007/predictions.json)、[最安選択の採点](../../../artifacts/lab_progress_hf_cap_checks_20261007/joint_selection_scoring.csv)、[監査](../../../artifacts/lab_progress_hf_cap_checks_20261007/audit.json)、[manifest](../../../artifacts/lab_progress_hf_cap_checks_20261007/manifest.json) | 今回の新規上限感度。保存モデルは再fitなし、source originはprotocolで個別保持 | 入力 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。新規結果は今回のhandoff commit |
+| E19 | [別鎖の追加結果](../../../artifacts/lab_progress_hchain_transfer_20261007/report.md)、[protocol](../../../artifacts/lab_progress_hchain_transfer_20261007/protocol.json)、[正式分類と監査](../../../artifacts/lab_progress_hchain_transfer_20261007/audit.json)、[三成分の正本](../../../artifacts/lab_progress_hchain_transfer_20261007/canonical_long_time_error_decomposition.csv)、[補助位相診断](../../../artifacts/lab_progress_hchain_transfer_20261007/supplementary_dominant_phase.json)、[実装訂正freeze](../../../artifacts/lab_progress_hchain_transfer_20261007/IMPLEMENTATION_CORRECTION_FROZEN.json)、[manifest](../../../artifacts/lab_progress_hchain_transfer_20261007/manifest.json) | 今回の新規別鎖比較。元freezeと完了済み数値を保持。各入力originはprotocolで個別保持 | 入力 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。新規結果は今回のhandoff commit |
+| E20 | [横断scalar監査](../../../artifacts/lab_progress_additional_validation_20261007/cross_checks.json)、[再集計コード](../../../review_response/summarize_lab_progress_checks_20261007.py)、[引渡し監査](../../../artifacts/lab_progress_additional_validation_20261007/handoff_checks.json)、[manifest](../../../artifacts/lab_progress_additional_validation_20261007/manifest.json) | 今回の監査と図。新規科学計算・再fitなし | 既存scalar確認版 `869806ff9995b76ef2786ca7b57b9acc02c2731f`。新規資料は今回のhandoff commit |
 
-今回の追加確認は、保存値と手続きの監査である。原本の予測・予算・モデル係数・判定・結果は変更していない。
+E14–E16は保存値の監査として変更せず、新規科学計算を行っていないという作成時の記録を保持した。今回のE17–E19は、ユーザーの追加承認に基づく新しい検証である。元の正式artifact・研究のRQ・PF係数・既存モデル・予算・閾値は変更していない。
 
-- H6・H7の一項モデルはE11のoriginal_one_term、H4はE15に抽出した先行探索の保存値を使う。いずれも同じ解析時刻での予測費用と直接費用の比較。時刻選択の損失とは区別する。
-- H4の3.518は、m5_bestの元の401候補の362番目（0起点361）。保存モデルへの代入ではPF誤差が目標を超え、保存された固有値評価では目標未満となる。E14に再集計を残した。
-- H4の49/56は短い共通時刻での三成分比較。予算評価の長い時刻の費用差を、すべて状態の影響に帰属させない。
-- HFの上限は既存の検査で決まったもの。上限外の安全性や、検査を変更した場合の効果は未確立である。
-- 原S4のQPE定数の不整合については、定数を揃えたE07で精度を確認する。診断を加えても選択・費用が改善しなかった結果は維持する。
-- 費用は量子回転の見積もりであり、古典校正や状態準備まで含む実行全体の費用ではない。最小費用の基準は、各実験で保存した有限個の候補内に限る。
+- 一項モデルの同時刻の費用予測誤差と、局所最小点に対する時刻・直接費用の差を分ける。
+- H4の長時間三成分は同じPF・時刻で揃えた。短時間49/56を長時間の原因へ転用しない。
+- 予測に使う状態の品質と、有限時間PFの固有状態への重なりを分ける。厳密Hamiltonianの基底状態でも代理量の差は残る。
+- 枝が成立した精度達成・未達、枝が不成立で未確認、係数を作れず棄権を区別する。最大重なりの位相による補助診断は正式分類を変えない。
+- HF上限比較の予算減少は精度未達を含む。0.5の上限や0.02の閾値の最適性は示していない。
+- 原S4の定数不整合はE07の揃えた定数で精度を確認する。成分省略診断で選択が変わらなかった結果は保持する。
+- 費用は量子回転数の見積もり。古典校正や状態準備の費用は含まない。候補最小費用は有限個の評価可能な候補内に限る。
 
-E14は新規科学計算・再fitを行わず、入力6資料のhashと確認版のblob一致、費用予測の再集計、H4の候補への包含、HFの上限の発動理由を確認した。manifestは自己除外を明示している。
+三つの追加検証を並列実行し、H4の1,604点、別鎖の4,812点、HFの532枝点などを確認した。公開資料はscalar・code・protocol・report・図・hashのみで、行列・vector・unitary・pickle・厳密状態は含めない。manifestの自己除外、数値式、元入力blob、文書の番号・表・数式区切り・根拠ID・ローカルリンクはE20で監査する。
 
-E15は、H4の一項モデルの同時刻比較、H6/H7のモデル最適時刻の実装、H4の4PFの候補内最小点、状態品質、上限なしの8組を含むS4全12組の診断を、既存の保存値・コードから確認した。原本の再fit、PF・状態・固有値の新規計算は行っていない。
-
-E16では、H6/H7の局所7時刻、H4の三成分の判定が正負の評価点を使うこと、同じ重なりで位相を変えた状態差、6条件の予算・直接必要費用・合計誤差を保存値から確認した。判定の予定点は各ケース12点で、resolved点は44ケースで12点、10ケースで10点、2ケースで9点だった。新規科学計算と再fitは行っていない。
-
-今回の本文修正は、各計算の目的と結果の意味を具体化し、短時間の相対的な状態支配と、長時間の予測・費用差を結び付ける検証が不足していることを明記するもの。6条件の費用比は、設定への依存を説明して本文へ戻した。研究のRQ・正式判定・科学結果の変更は含まない。
-
-未確立として残したのは、H4の同じ候補集合でFCI入力とCISD入力の予算選択を揃えた比較、候補範囲外の最適性・安全性、長い時刻の予測差の三成分の内訳、二つの近似状態の一致から厳密状態への近さを保証すること。追加比較や範囲拡張が必要かは研究判断の対象で、今回の文書改訂では実施していない。
-
-追加実験の候補・固定する比較条件・停止点は[判断資料の第4節](verification_gaps_and_next_checks.md#4-追加比較の候補と停止点未承認)にまとめた。これらは未承認の案で、今回の公開は科学計算の実行承認を意味しない。
-
-文書確認では、本文18枚・補足3枚と構成一覧の一致、数式の区切り、表の列数、16個の根拠ID、本文と判断資料の51個のローカルリンク（重複を含む）を照合した。既存の根拠41ファイルは確認版のblobと同一である。今回追加した資料は判断資料1ファイルと監査3ファイル。監査manifestは自己除外を明示している。
+残る範囲と研究方針の判断項目は[統合報告の第8節](../20261007/additional_validation_results.md#8-残る範囲とgptに判断してほしい点)に示した。条件を結果後に調整して救済する操作や、中心claimの変更は行っていない。

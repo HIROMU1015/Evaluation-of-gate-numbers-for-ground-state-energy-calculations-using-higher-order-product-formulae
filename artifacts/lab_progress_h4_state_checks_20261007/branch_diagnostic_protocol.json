@@ -1,0 +1,58 @@
+{
+  "auxiliary_budget_evaluation": "absolute chosen fixed-point shift + beta*K/(t*unchanged frozen budget); this is not replacement formal scoring or an operational selector",
+  "claim_limit": "maximum-overlap fixed-point correspondence is auxiliary evidence, not proof of continuous eigenbranch identity",
+  "comparison": "compare with original continued PF branch at the exact same frozen coordinate",
+  "constants": {
+    "beta": 1.2,
+    "budget_multiplier": 1.01,
+    "epsilon_E_hartree": 0.00015936001019904
+  },
+  "coordinates": [
+    {
+      "budget_source": "original state-control predictions.json; unchanged",
+      "control_budget_note": "CISD budget evaluated at grid-minimum time as fixed-point counterfactual only",
+      "frozen_budget": 17744668.466670647,
+      "role": "original_reliable_grid_minimum_control",
+      "state_model_id": "cisd",
+      "time": 3.5175172132783867
+    },
+    {
+      "budget_source": "original state-control predictions.json; unchanged",
+      "control_budget_note": null,
+      "frozen_budget": 7241731.608841085,
+      "role": "exact_model_frozen_selection",
+      "state_model_id": "exact",
+      "time": 4.219457387007943
+    },
+    {
+      "budget_source": "original state-control predictions.json; unchanged",
+      "control_budget_note": null,
+      "frozen_budget": 7172189.100076379,
+      "role": "cisdt_model_frozen_selection",
+      "state_model_id": "cisdt",
+      "time": 4.3081171560399
+    }
+  ],
+  "formula_id": "m5_best",
+  "input_classification_sha256": "e550892f0a9d43a1b6faa7c67162b6476a1f6ba05be355d542cc9e39667b85c3",
+  "input_direct_grid_sha256": "0fe93c5211a662324fcc8bcd1c9327e29d2fe3d9983b0418a88109132c424e1b",
+  "input_predictions_sha256": "2d1418322610152931d7937b739161150df0c3c84d8a13deb780629b1c190948",
+  "input_protocol_sha256": "852844ff8e3cec7d8ba391919d2d317d53d6393b15005caab9512fd16b8bf9b6",
+  "input_snapshot_commit": "869806ff9995b76ef2786ca7b57b9acc02c2731f",
+  "input_source_registry": "protocol.json: original source origin_result_commit and verified_snapshot_commit retained separately",
+  "manifest_revision": {
+    "previous_manifest_path": "manifest_before_branch_diagnostic.json",
+    "previous_manifest_sha256": "0e43a20f14b5a7de6bb19e7f8b4bb699fb83a5e2717f4eaaa038b681c92944f5"
+  },
+  "maximum_new_pf_diagonalizations": 3,
+  "phase_unwrap": "for this chosen eigenphase, pick integer k minimizing |(theta+2pi*k)/t-E0|; do not claim continuation",
+  "post_hoc": true,
+  "protocol_id": "h4_m5_fixed_point_branch_correspondence_diagnostic_20261007",
+  "publication": "scalar phases, overlaps, residuals, energy shifts and auxiliary bounds; no eigenvectors/matrices/unitaries",
+  "question": "Does continuation lose the H-ground-corresponding PF phase at the two unscorable selections, or is the dominant-overlap PF phase itself too inaccurate for the frozen budget?",
+  "runner_sha256": "14c732f74e451db7dfc464b3a464ab64af508ca238821347cb637ba569101404",
+  "selection_rule": "at each fixed point choose the Schur eigenvector maximizing |<psi0|v_j>|^2; phase cluster information is also reported",
+  "state_for_overlap": "archived exact H ground state; diagnostic truth only",
+  "step_cost": 3996,
+  "stop": "three fixed points and scalar diagnostics only; no re-selection, no budget/model changes, no replacement scoring policy"
+}
