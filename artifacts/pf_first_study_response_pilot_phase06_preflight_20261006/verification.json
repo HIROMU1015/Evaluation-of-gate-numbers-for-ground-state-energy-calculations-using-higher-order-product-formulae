@@ -1,0 +1,51 @@
+{
+  "phase06_complete": true,
+  "production_execution_ready": true,
+  "science_authorized": false,
+  "science_action_count": 0,
+  "production_truth_access_count": 0,
+  "tests": {
+    "total": 75,
+    "additional": 53,
+    "unchanged_phase05": 22,
+    "passed": 75,
+    "failed": 0,
+    "log": "preflight_tests.log"
+  },
+  "gates": {
+    "adapter_complete": true,
+    "source_identity_complete": true,
+    "truth_barrier_complete": true,
+    "backend_integration_complete": true,
+    "action_count_contract_complete": true,
+    "cold_replay_path_complete": true,
+    "phase_a_strict_schema_complete": true,
+    "code_and_schema_commit_identity_guard": true,
+    "create_only_phase_a_artifact": true,
+    "all_preflight_tests_pass": true,
+    "unresolved_implementation_issue_count": 0
+  },
+  "evidence": {
+    "production_source_identity": "production_source_identity.json",
+    "nominal_and_stopped_rank_counts": "expected_vs_implemented_action_counts.json",
+    "truth_access": "truth_access_audit.json",
+    "code_hashes": "preflight_protocol.json",
+    "unchanged_inherited_sources": "source_manifest.json"
+  },
+  "scipy_expm_source": {
+    "installed_version": "1.14.1",
+    "sha256": "a96e22dcf6909ff729d5af999f41c72482e0e570e2a283cb07291a1fec163f04",
+    "eig_eigh_schur_calls_in_expm_body": [],
+    "backend": "scipy.linalg.expm scaling/Padé, four S2 blocks per independent signed build"
+  },
+  "not_established": [
+    "actual H4 retained rank / SVD ranks",
+    "H4 numerical source/PF gates and conditioning",
+    "H4 proxy or fitted coefficients",
+    "H4 science runtime / memory cost",
+    "improvement / outcome / novel scientific claim"
+  ],
+  "unresolved_issues": [],
+  "protected_science_sources": "No inherited file is edited; commit diff is restricted to the new Phase0.6 directory.",
+  "publication_status_at_artifact_generation": "Commit/push verification is a subsequent handoff step; immutable logs and manifests do not self-reference their containing commit."
+}
