@@ -1,0 +1,71 @@
+{
+  "design_id": "FS-C0-20261007",
+  "status": "gpt_design_selected_pending_repository_source_backend_closure",
+  "science_authorized": false,
+  "historical_results_modified": false,
+  "base_evidence_commit": "5b370ec22f7ffeac687ef70e1bcb87337f5fb976",
+  "primary_question": "Which state/local-evaluation calibration intervention reduces frozen PF-QPE budgets at decision-relevant times without numerical safety failure?",
+  "setting": "classical offline calibration; quantum QPE input state held fixed",
+  "C1": {
+    "conditions": [
+      "N2_active_eq_sto3g",
+      "CO_active_eq_sto3g"
+    ],
+    "PF": "current_m3",
+    "ritz_primary_m": 8,
+    "epsilon_E": 0.00015936001019904,
+    "beta": 1.2,
+    "gamma": 1.01,
+    "eta_saving": 0.02,
+    "coordinate_policy": "original five positive CISD calibration times plus original S0 exact selected positive time; binary64 source values, no rescaling",
+    "arms": {
+      "M00": "CISD_fit",
+      "M10": "Ritz8_fit",
+      "M01": "CISD_local_imag_echo",
+      "M11": "Ritz8_local_imag_echo"
+    },
+    "primary": "M11",
+    "primary_comparator": "M00 / frozen B0",
+    "cheaper_challenger": "M01",
+    "safety": "epsilon_E-abs(delta_direct)-beta*K/(t*B)>=0; numerical model evaluation, not a general certificate",
+    "primary_gain": "valid M11, safe M11, B11 <= (1-eta_saving)*B0 per condition",
+    "local_gain": "valid M01, safe M01, B01 <= (1-eta_saving)*B0 per condition",
+    "state_increment": "safe M01 and safe M11 and B11 <= (1-eta_saving)*B01 per condition",
+    "safety_repair": "unsafe M01 and safe M11; separate from gain",
+    "new_direct_truth": 0,
+    "new_ground_solve": 0,
+    "new_response_solve": 0,
+    "nominal_logical_counts_two_systems_two_passes": {
+      "explicit_refinement_H_matvec": 36,
+      "PF_forward": 48,
+      "PF_adjoint": 0,
+      "exact_H_echo_actions": 48,
+      "small_Ritz": 4,
+      "primary_fits": 4
+    },
+    "counts_exclusions": "H-exponential internal matvecs/group preprocessing/norm estimation/backend work require separate complete ledgers",
+    "truth_distinct_targets": 2,
+    "pre_execution_requirements": [
+      "same-H/sector/order/origin/input identity",
+      "native backend numerical/resource contract",
+      "exact saved t0 truth joins",
+      "historical M00/B0 reproduction gate",
+      "end-to-end serialization/recovery test",
+      "explicit science authorization"
+    ]
+  },
+  "future_scope_cap": {
+    "C1_equilibrium_conditions": 2,
+    "conditional_C2_stretched_conditions": 2,
+    "new_molecular_families_required": 0,
+    "HF_new_science": 0,
+    "Hchain_new_science": 0
+  },
+  "not_established": [
+    "response-specific novelty",
+    "N2/CO intervention benefit",
+    "safe general-molecule operational policy",
+    "net classical+quantum economic advantage",
+    "scaling or quantum advantage"
+  ]
+}

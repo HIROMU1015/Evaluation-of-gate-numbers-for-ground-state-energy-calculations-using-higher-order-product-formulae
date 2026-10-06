@@ -1,0 +1,300 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action_counts": {
+      "additionalProperties": false,
+      "properties": {
+        "PF_adjoint": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "PF_forward": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "exact_H_echo_actions": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "explicit_refinement_H_matvec": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "primary_fits": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "small_Ritz": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "explicit_refinement_H_matvec",
+        "PF_forward",
+        "PF_adjoint",
+        "exact_H_echo_actions",
+        "small_Ritz",
+        "primary_fits"
+      ],
+      "type": "object"
+    },
+    "conditions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "arms": {
+            "additionalProperties": false,
+            "properties": {
+              "M00": {
+                "additionalProperties": false,
+                "properties": {
+                  "classification_uncertainty_hartree": {
+                    "minimum": 0,
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "estimate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "quality_status": {
+                    "enum": [
+                      "resolved",
+                      "marginal",
+                      "unresolved",
+                      "invalid",
+                      "synthetic"
+                    ]
+                  },
+                  "valid": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "estimate",
+                  "valid",
+                  "classification_uncertainty_hartree",
+                  "quality_status"
+                ],
+                "type": "object"
+              },
+              "M01": {
+                "additionalProperties": false,
+                "properties": {
+                  "classification_uncertainty_hartree": {
+                    "minimum": 0,
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "estimate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "quality_status": {
+                    "enum": [
+                      "resolved",
+                      "marginal",
+                      "unresolved",
+                      "invalid",
+                      "synthetic"
+                    ]
+                  },
+                  "valid": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "estimate",
+                  "valid",
+                  "classification_uncertainty_hartree",
+                  "quality_status"
+                ],
+                "type": "object"
+              },
+              "M10": {
+                "additionalProperties": false,
+                "properties": {
+                  "classification_uncertainty_hartree": {
+                    "minimum": 0,
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "estimate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "quality_status": {
+                    "enum": [
+                      "resolved",
+                      "marginal",
+                      "unresolved",
+                      "invalid",
+                      "synthetic"
+                    ]
+                  },
+                  "valid": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "estimate",
+                  "valid",
+                  "classification_uncertainty_hartree",
+                  "quality_status"
+                ],
+                "type": "object"
+              },
+              "M11": {
+                "additionalProperties": false,
+                "properties": {
+                  "classification_uncertainty_hartree": {
+                    "minimum": 0,
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "estimate": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "quality_status": {
+                    "enum": [
+                      "resolved",
+                      "marginal",
+                      "unresolved",
+                      "invalid",
+                      "synthetic"
+                    ]
+                  },
+                  "valid": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "estimate",
+                  "valid",
+                  "classification_uncertainty_hartree",
+                  "quality_status"
+                ],
+                "type": "object"
+              }
+            },
+            "required": [
+              "M00",
+              "M10",
+              "M01",
+              "M11"
+            ],
+            "type": "object"
+          },
+          "baseline_reproduced": {
+            "type": "boolean"
+          },
+          "condition": {
+            "enum": [
+              "N2_active_eq_sto3g",
+              "CO_active_eq_sto3g"
+            ]
+          },
+          "identity": {
+            "additionalProperties": false,
+            "properties": {
+              "hamiltonian_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "ordered_group_identity_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "removed_constant_hartree": {
+                "type": "number"
+              },
+              "sector_metadata_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              "source_pickle_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              }
+            },
+            "required": [
+              "hamiltonian_sha256",
+              "source_pickle_sha256",
+              "ordered_group_identity_sha256",
+              "sector_metadata_sha256",
+              "removed_constant_hartree"
+            ],
+            "type": "object"
+          },
+          "t0": {
+            "exclusiveMinimum": 0,
+            "type": "number"
+          },
+          "training_times": {
+            "items": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "maxItems": 5,
+            "minItems": 3,
+            "type": "array",
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "condition",
+          "identity",
+          "t0",
+          "training_times",
+          "baseline_reproduced",
+          "arms"
+        ],
+        "type": "object"
+      },
+      "maxItems": 2,
+      "minItems": 2,
+      "type": "array"
+    },
+    "payload_kind": {
+      "enum": [
+        "synthetic_fixture",
+        "fs_c1_predictions"
+      ]
+    },
+    "protocol_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "fs_c1_prediction_v1"
+    }
+  },
+  "required": [
+    "schema_version",
+    "payload_kind",
+    "protocol_sha256",
+    "conditions",
+    "action_counts"
+  ],
+  "title": "FS-C1 public scalar prediction v1",
+  "type": "object"
+}
