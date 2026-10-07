@@ -1,0 +1,223 @@
+{
+  "B0_prime_definition": "gamma beta K/[t0(epsilon_E-|new M00p(t0)|)]",
+  "FS_R1_science_authorized": false,
+  "approved_status_amendment": "numerical_contract_amendment.md",
+  "arm_budget_definition": "new v3 uncertainty interval; c_max>=epsilon => NUMERICALLY_INDETERMINATE_BUDGET/null; nominal only when c_max<epsilon; no clipping",
+  "arms": {
+    "M00p": "new CISD 3-point fit at t0; generates NEW B0_prime",
+    "M01p": "new CISD local g(t0), no fit",
+    "M10p": "new Ritz8 same 3 absolute points and fit",
+    "M11p": "same new Ritz8 local g(t0), no fit; primary"
+  },
+  "challenger": "M01p",
+  "cold_replay": "one complete independent source/basis/state/PF/echo/proxy/fit/budget replay; no scientific intermediates shared",
+  "constants": {
+    "beta": 1.2,
+    "epsilon_E": 0.00015936001019904,
+    "eta": 0.02,
+    "gamma": 1.01
+  },
+  "cost_units": {
+    "QPE": "predicted PF rotations",
+    "classical": "source/H/Ritz/PF/echo/groups/fit actions, wall seconds/RSS bytes"
+  },
+  "current_m3_sequence": [
+    0.1960294407008384,
+    0.2092246690782796,
+    0.3316118001935053,
+    -0.4737318199452465,
+    0.3316118001935053,
+    0.2092246690782796,
+    0.1960294407008384
+  ],
+  "development_status": "known N2/CO development conditions; no independent/prospective/transfer guarantee",
+  "execution_ready": true,
+  "execution_wrapper": {
+    "Phase_A_authorized_in_A0": false,
+    "Phase_B_authorized": false,
+    "authorization": "separate explicit Phase A authorization with actual v3 protocol and complete execution-code hash",
+    "entrypoint": "artifacts/pf_first_study_fs_r1_a0_numerical_contract_20261008/phase_a_wrapper.py:execute_phase_a",
+    "execution_code_hash_rule": "SHA256 compact sorted canonical JSON plus newline of parsed execution_code_identity.json",
+    "lease_key": "SHA256(authorization_id), independent of run_id; all existing states forbid reuse",
+    "order": [
+      "N2 initial",
+      "CO initial",
+      "initial aggregate scalar recovery",
+      "N2 cold",
+      "CO cold"
+    ],
+    "private_lease_registry": "/tmp/fs-r1-phase-a-production-private-20261008/leases",
+    "recovery": "per-condition immediate scalar recovery, then all-initial aggregate recovery before cold; final recovery before public validation",
+    "retry": "serialization-only from private snapshot; no production retry from the same authorization"
+  },
+  "final_preflight_status": "GO_FOR_FS_R1_PHASE_A_PRODUCTION",
+  "fit": {
+    "intercept": false,
+    "numerical_function": "review_response/run_h01_approximate_state_calibration.py:_fit_proxy",
+    "powers": [
+      4,
+      6
+    ],
+    "scaling": "times/t_ref; values/max(abs(values)); numpy.linalg.lstsq rcond=None; unscale coefficients",
+    "weighting": "unweighted OLS"
+  },
+  "fit_uncertainty_propagation": {
+    "path": "artifacts/pf_first_study_fs_r1_a0_numerical_contract_20261008/fit_uncertainty_propagation.json",
+    "sha256": "e2a87b40b433dca25d1657fa702ae5e22034d61acaf0c25ad8559ef38a9b4bcc"
+  },
+  "frozen_on": "2026-10-08",
+  "historical_B0_reuse": false,
+  "historical_H_match_gate": false,
+  "historical_recovery_route": "ended",
+  "historical_training_relative": [
+    0.1,
+    0.2,
+    0.3
+  ],
+  "historical_truth_reuse": false,
+  "numerical_contract": {
+    "path": "artifacts/pf_first_study_fs_r1_a0_numerical_contract_20261008/fs_r1_numerical_contract_v1.json",
+    "sha256": "16067176e0d1b211c5c43bd85287741cc93719977a57b675d5e2547b84dae573"
+  },
+  "outcome_rules": {
+    "local_gain": "valid safe M01p B01<=0.98 B0_prime",
+    "primary_gain": "valid safe M11p B11<=0.98 B0_prime",
+    "safety_repair": "valid unsafe M01p and safe M11p, separate from saving",
+    "state_increment": "safe M01p/M11p B11<=0.98 B01"
+  },
+  "phase_A": "new sanitized source only; freeze all estimates/budgets/code/protocol/source hashes in committed prediction; truth unopened",
+  "phase_B": "after actual Phase A freeze/remote/code/source/recovery proof, two ascending six-coordinate truth-only ladders; score final t0 only; v3 prediction/code/numerical binding requires separately reviewed Phase B barrier extension",
+  "primary": "M11p",
+  "protocol_id": "FS-R1-20261007-v3",
+  "relative_0_4_role": "none",
+  "research_question": "At identical regenerated H/PF/external coordinates, can state improvement and/or selected-time local evaluation reduce QPE budgets safely?",
+  "revision_reason": "close physical-production replay/norm acceptance contract before any Phase A observation",
+  "ritz": {
+    "MGS_passes": 2,
+    "full_ground_input": false,
+    "numeric_rules_source": "artifacts/pf_first_study_response_pilot_phase05_20261006/response_pilot_protocol.json",
+    "phase_rule": "largest magnitude component positive; first tie index",
+    "prefix_rank_stop": true,
+    "primary_m": 8,
+    "projected_max_dimension": 9,
+    "rank_sweep": false,
+    "replacement_direction": false
+  },
+  "safety_definition": "epsilon_E-|new direct(t0)|-beta K/(t0 B_j)>=0; keep raw slack, invalid/indeterminate cannot support gain",
+  "sentinel_in_fit": false,
+  "series": "FS-R1",
+  "source_kind": "new regenerated follow-up source",
+  "stage": "FS-R1-A0 numerical-contract freeze",
+  "stop_rules": [
+    "M11p unsafe either condition: resource extension STOP",
+    "both safe but target not met: stop micro-accuracy optimization",
+    "M01p sufficient and no state_increment: simpler local intervention preferred",
+    "state_increment2/2: consider refinement extension",
+    "state_increment1/2: keep condition dependence; no molecules until success",
+    "technical failure separate from science",
+    "R0 stops after handoff regardless GO; separate R1 authorization required"
+  ],
+  "study_interpretation": {
+    "0/2": "no resource-stage support",
+    "1/2": "condition-dependent",
+    "2/2": "small development support",
+    "unsafe_offset_by_average": false
+  },
+  "supersedes_commit": "4e5c3ba2e3497915cd1668d9ac5cd77640ab2938",
+  "supersedes_protocol_id": "FS-R1-20261007-v2",
+  "systems": [
+    {
+      "K": 19176,
+      "M10_training_absolute": [
+        0.06263494343795273,
+        0.12526988687590546,
+        0.18790483031385818
+      ],
+      "condition": "N2_active_eq_sto3g",
+      "coordinate_provenance": "prior development fixed external design; not new-source optimum",
+      "dimension": 1568,
+      "fit_scale_t_ref": 0.6263494343795273,
+      "gate_materializations_per_vector": 324,
+      "group_applications_per_vector": 1121,
+      "group_count": 81,
+      "new_H_sha256": "f4a08b755a4e903f4e9611fee394d6101a5d27279a1bd8af567b97920da5402e",
+      "operational_archive_sha256": "16fcd3966b3ab5d900601318e4911e82bcd49934cc34184f4cbd8e8ec1512dc3",
+      "source_identity_sha256": "6b93735a56638c40a2bcd35e504f1ee823cfdbe396441fce15fd5e02502b044d",
+      "t0": 0.5983202971910435,
+      "t0_hex": "0x1.325709b9efe38p-1",
+      "training_absolute": [
+        0.06263494343795273,
+        0.12526988687590546,
+        0.18790483031385818
+      ]
+    },
+    {
+      "K": 37936,
+      "M10_training_absolute": [
+        0.06546804264781796,
+        0.1309360852956359,
+        0.19640412794345388
+      ],
+      "condition": "CO_active_eq_sto3g",
+      "coordinate_provenance": "prior development fixed external design; not new-source optimum",
+      "dimension": 1568,
+      "fit_scale_t_ref": 0.6546804264781796,
+      "gate_materializations_per_vector": 396,
+      "group_applications_per_vector": 1373,
+      "group_count": 99,
+      "new_H_sha256": "27ed246b354c754a506541dac81650aafdfa413b375fadf0b736822c171fb4c5",
+      "operational_archive_sha256": "483ad1f91127a7d4ba45c8b2c56f7cb60392366c2bc5a70321e421ba387ff6a4",
+      "source_identity_sha256": "ed9ec93d6945a11bd144d2531ffedaf67da829383334b47206b78c11aee34f17",
+      "t0": 0.6127481451622522,
+      "t0_hex": "0x1.39ba1ff850253p-1",
+      "training_absolute": [
+        0.06546804264781796,
+        0.1309360852956359,
+        0.19640412794345388
+      ]
+    }
+  ],
+  "truth_contract": {
+    "adaptive_truth_extension": "forbidden",
+    "branch_continuation_closed": true,
+    "branch_namespace": "FS-R1:<source_identity_sha>:positive:k<ladder index>",
+    "branch_times": [
+      "0.1*t_ref",
+      "0.2*t_ref",
+      "0.3*t_ref",
+      "0.5*t_ref",
+      "0.99*t0",
+      "t0"
+    ],
+    "cluster_ambiguity": "reject chained connected cluster whose pairwise circular diameter >= gap",
+    "cluster_eigenphase": "circular centroid of member eigenphases; projected vector must pass eigenpair residual",
+    "cluster_vector": "normalized reference projection into selected eigenspace, deterministic largest-component phase",
+    "comparator": "diagnostic only; never used for continuation, t0 selection or estimator",
+    "continuation_selector": "maximum_previous_selected_vector_overlap",
+    "direct_shift": "angle(exp(-i E t) lambda)/t, S0 principal-angle energy-origin convention",
+    "eigenpair_residual_gate": 1e-10,
+    "failure_policy": "abort remaining coordinates; no retry/grid/rule rescue; technical, no resource outcome",
+    "failure_status": "BRANCH_CONTINUATION_FAILED",
+    "first_cluster_rule": "seed eigenpair uses max ground overlap; if degenerate use its cluster projector",
+    "first_selector": "maximum_exact_ground_overlap",
+    "ground_isolation": "truth-only original exact state/energy after verified Phase A barrier; no new ground solve",
+    "historical_branch_ID_reuse": false,
+    "historical_truth_reuse": false,
+    "ladder_path": "artifacts/pf_first_study_fs_r01_branch_extension_20261007/branch_ladder.json",
+    "ladder_sha256": "8bf31841545b21df6c1480d0c8b1e7e15a88f2918c06123909bc4104482effeb",
+    "numerical_backend": "CPU complex128 native left-product on identity block; scipy.linalg.schur output complex",
+    "phase_cluster_comparison": "strict <; exactly threshold is singleton separation",
+    "phase_cluster_gap": 1e-08,
+    "phase_cluster_selector": "maximum previous-reference projector overlap; singleton equals maximum vector overlap",
+    "physical_branch_certified_on_production": false,
+    "previous_overlap_gate": 0.9,
+    "primary_scoring": "only final t0 signed direct shift after both complete six-point ladders PASS",
+    "selected_vector_checkpoint": "private npy plus identity/hash metadata, create-only/fsync",
+    "tie_rule": "first deterministic ascending circular eigenphase/real/imag/original ordinal; exact degenerate basis resolved by projector",
+    "truth_branch_certification_coordinates": 10,
+    "truth_primary_scoring_coordinates": 2,
+    "truth_total_coordinates": 12,
+    "unitarity_gate": 1e-10,
+    "unwrap_integer": 0
+  }
+}
