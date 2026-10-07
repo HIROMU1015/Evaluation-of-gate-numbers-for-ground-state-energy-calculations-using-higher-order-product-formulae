@@ -1,0 +1,77 @@
+{
+  "contract_id": "FS-C0.6-functional-equivalence-v1",
+  "fixed_before_decode": true,
+  "source_acceptance_contract": "functional_equivalence",
+  "historical_source_status": "missing",
+  "metadata_absolute_tolerance_hartree": 1e-09,
+  "state_absolute_tolerance": 1e-06,
+  "proxy_absolute_tolerance_hartree": 1e-09,
+  "norm_absolute_tolerance": 1e-10,
+  "selected_prediction_absolute_tolerance_hartree": 1e-09,
+  "fit_coefficient_bound": "propagate the frozen 1e-9 proxy bound through the historical scaled OLS linear map; add binary64 roundoff 2e-14 relative",
+  "additional_gate_rationale": "Norm 1e-10 is the historical H02 scalar-invariance tolerance. Selected prediction bound reuses the historical 1e-9 Ha metadata/echo bound, rather than allowing a large extrapolation error hidden by coefficient uncertainty. Budget bound is propagated from this prediction bound, without tuning.",
+  "cold_replay_proxy_tolerance_hartree": 1e-09,
+  "source_gates": [
+    "H_exact_SHA",
+    "metadata_sector",
+    "ordered_groups",
+    "CISD_fingerprints",
+    "M00_proxy",
+    "M00_fit",
+    "echo_contract",
+    "cold_replay"
+  ],
+  "group_gate": "Keep all group/batch/index orders. Compare historical ordered group and term-count attestations; numerical content requires independently hash-linked group content or pinned reconstruction against it. Sum-H alone is insufficient.",
+  "current_m3_sequence": [
+    0.1960294407008384,
+    0.2092246690782796,
+    0.3316118001935053,
+    -0.4737318199452465,
+    0.3316118001935053,
+    0.2092246690782796,
+    0.1960294407008384
+  ],
+  "existing_candidates": {
+    "N2_active_eq_sto3g": {
+      "path": "/tmp/h02-finite-hQfmVi/artifacts/h02_finite_time_controlled_state_20260922_568f002/server_only_cache/N2_active_eq_sto3g.pkl",
+      "whole_file_sha": "401308552bf924ba4cc8c4367676f9e092f2b44919b4753d9bc06411fe0f66de"
+    },
+    "CO_active_eq_sto3g": {
+      "path": "/tmp/h02-finite-hQfmVi/artifacts/h02_finite_time_controlled_state_20260922_568f002/server_only_cache/CO_active_eq_sto3g.pkl",
+      "whole_file_sha": "b7fb3fda2a15483fe8ef1754b1f9140683a94ab75f4a4990989fad5bcc40cbe6"
+    }
+  },
+  "validation_schedule": {
+    "M00_CISD_points": 3,
+    "cold_independent_passes": 2,
+    "arbitrary_complex_vector": "deterministic exp(i*j)/sqrt(d), same first training time, initial/cold; no Ritz",
+    "optional_exact_ground_echo_points": 0,
+    "component_content_checks": "identity audit only; no new PF eigenvalue truth"
+  },
+  "maximum_reconstruction_per_condition": 1,
+  "reconstruction_only_after_candidate_failure": true,
+  "stop": "Publish FS-C0.6 then stop; no FS-C1 actions even with GO",
+  "reconstruction": {
+    "code_revision": "e0692a83b06cd2660804f70618b142bc39b6209b",
+    "python": "3.12.3",
+    "interpreter": "/home/abe/myproject/pf_external_cache/venv_f_hf_retry1_py312/bin/python",
+    "packages": {
+      "numpy": "1.26.4",
+      "scipy": "1.14.1",
+      "pyscf": "2.7.0",
+      "openfermion": "1.6.1",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1"
+    },
+    "threads": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "component_processes": 1,
+    "random_seed": null,
+    "solver": "unaltered historical prepare_condition",
+    "geometry_and_sector": "historical_metadata per condition; no modifications",
+    "no_second_tuning_attempt": true
+  }
+}
