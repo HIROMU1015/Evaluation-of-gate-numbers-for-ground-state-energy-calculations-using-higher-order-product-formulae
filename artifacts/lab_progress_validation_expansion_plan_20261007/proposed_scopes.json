@@ -1,8 +1,8 @@
 {
-  "schema": "lab_progress_validation_expansion_proposals_v1",
+  "schema": "lab_progress_validation_expansion_proposals_v2",
   "date_JST": "2026-10-07",
   "verified_snapshot_commit": "1d01e77247364b49dbce2e9ce2fe7c32af0fb937",
-  "authorization_scope": "candidate organization and saved-scalar audit only",
+  "authorization_scope": "user-requested narrowing of candidate catalog and saved-scalar audit; exact condition combinations remain proposals",
   "candidate_science_authorized": false,
   "new_scientific_computations": 0,
   "model_refits": 0,
@@ -100,47 +100,208 @@
         "logical vector-action accounting, truth-call and wall-clock caps",
         "formal approval of the inherited protocol on H6"
       ],
+      "science_executed": false,
+      "change_axis": "chain_length",
+      "existing_method_unchanged": true,
+      "new_method": false
+    },
+    {
+      "candidate_id": "B1",
+      "status": "draft_not_authorized_for_execution",
+      "question": "H4の原子間距離だけを変えた同じ短時間比較",
+      "change_axis": "bond_length",
+      "existing_method_unchanged": true,
+      "new_method": false,
+      "proposed_scope": {
+        "system": "H4",
+        "basis": "sto-3g",
+        "charge": 0,
+        "multiplicity": 1,
+        "formula_ids": [
+          "yoshida4",
+          "current_m3",
+          "two_term_center",
+          "m5_best"
+        ],
+        "inherit_method_from": "PF_first_study_protocol_20260925.json#experiment_B_h4.fixed_time_mechanism_track",
+        "training_time_magnitudes": [
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3
+        ],
+        "evaluation_time_magnitudes": [
+          0.125,
+          0.175,
+          0.225,
+          0.275,
+          0.35,
+          0.4
+        ],
+        "signs": [
+          -1,
+          1
+        ],
+        "models": {
+          "raw_positive_even_two_term": {
+            "powers": [
+              4,
+              6
+            ],
+            "input": "positive-time proxy"
+          },
+          "evenized_two_term": {
+            "powers": [
+              4,
+              6
+            ],
+            "input": "(g(+t)+g(-t))/2"
+          },
+          "odd_diagnostic": {
+            "powers": [
+              5,
+              7
+            ],
+            "input": "(g(+t)-g(-t))/2",
+            "selection_active": false
+          }
+        },
+        "classification_and_numerical_gates_unchanged": true,
+        "baseline_spacing_angstrom": 1.0,
+        "proposed_spacings_angstrom": [
+          0.9,
+          1.1
+        ],
+        "number_of_conditions": 2,
+        "physical_states": [
+          "rhf",
+          "cisd"
+        ],
+        "reference_state": "exact",
+        "controlled_direction": "same CISD residual construction separately at each geometry",
+        "q_values": [
+          0.001,
+          0.01,
+          0.05
+        ],
+        "phase_values_radians": [
+          0.0,
+          1.5707963267948966,
+          3.141592653589793,
+          4.71238898038469
+        ],
+        "case_count_per_condition": 56,
+        "total_case_count": 112,
+        "total_evaluation_row_count": 1344,
+        "distinct_pf_time_coordinates": 176,
+        "proposed_max_full_pf_builds_with_two_cold_runs": 352,
+        "input_generation_method": "same original Hamiltonian, RHF, CISD and exact-state construction at each declared geometry",
+        "inputs_generated": false,
+        "stop": "two declared geometries only; no post-result distance or fit-window changes"
+      },
+      "unresolved_before_execution": [
+        "choose exact distances before execution",
+        "source/SCF/input-identity closure for each geometry",
+        "same-method vector-action, truth-call and wall-clock caps"
+      ],
       "science_executed": false
     },
     {
-      "candidate_id": "A2",
+      "candidate_id": "B2",
       "status": "draft_not_authorized_for_execution",
-      "question": "保存fitの項数を変えると長時間のモデル差は減るか",
+      "question": "H4の人工状態の混入量qだけを変えた同じ比較",
+      "change_axis": "controlled_state_mixing_fraction",
+      "existing_method_unchanged": true,
+      "new_method": false,
       "proposed_scope": {
         "system": "H4",
+        "basis": "sto-3g",
+        "charge": 0,
+        "multiplicity": 1,
         "formula_ids": [
+          "yoshida4",
+          "current_m3",
+          "two_term_center",
           "m5_best"
         ],
-        "states": [
-          "cisd",
-          "exact"
+        "inherit_method_from": "PF_first_study_protocol_20260925.json#experiment_B_h4.fixed_time_mechanism_track",
+        "training_time_magnitudes": [
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3
         ],
-        "powers": [
-          [
-            4,
-            6
-          ],
-          [
-            4,
-            6,
-            8
-          ]
+        "evaluation_time_magnitudes": [
+          0.125,
+          0.175,
+          0.225,
+          0.275,
+          0.35,
+          0.4
         ],
-        "fit_count": 4,
-        "training_source": "artifacts/lab_progress_h4_state_checks_20261007/training_proxies.csv",
-        "evaluation_times": [
-          2.1466061014866242,
-          3.5175172132783867
+        "signs": [
+          -1,
+          1
         ],
-        "target": "fhat_minus_direct_proxy",
-        "new_pf_actions": 0,
-        "new_diagonalizations": 0,
-        "new_model_refits": true,
-        "stop": "four saved-value fits only; original models and budgets unchanged"
+        "models": {
+          "raw_positive_even_two_term": {
+            "powers": [
+              4,
+              6
+            ],
+            "input": "positive-time proxy"
+          },
+          "evenized_two_term": {
+            "powers": [
+              4,
+              6
+            ],
+            "input": "(g(+t)+g(-t))/2"
+          },
+          "odd_diagnostic": {
+            "powers": [
+              5,
+              7
+            ],
+            "input": "(g(+t)-g(-t))/2",
+            "selection_active": false
+          }
+        },
+        "classification_and_numerical_gates_unchanged": true,
+        "baseline_q_values": [
+          0.001,
+          0.01,
+          0.05
+        ],
+        "proposed_q_values": [
+          0.005,
+          0.02,
+          0.1
+        ],
+        "controlled_direction": "unchanged phase-aligned CISD residual orthogonal to exact",
+        "phase_values_radians": [
+          0.0,
+          1.5707963267948966,
+          3.141592653589793,
+          4.71238898038469
+        ],
+        "additional_controlled_state_count": 12,
+        "new_case_count": 48,
+        "new_evaluation_row_count": 576,
+        "physical_states_reused_as_baseline": [
+          "rhf",
+          "cisd"
+        ],
+        "physical_baseline_cases_counted_as_new": false,
+        "distinct_pf_time_coordinates_before_reuse": 88,
+        "proposed_max_full_pf_builds_with_two_cold_runs_before_reuse": 176,
+        "stop": "only the three declared q values; no new directions or diagnostic policy"
       },
       "unresolved_before_execution": [
-        "coefficient identifiability and gate policy for three-term model",
-        "approve saved-value refitting; no claim of unique causal attribution"
+        "choose q values before execution",
+        "input/unitary reuse identity and logical action/call limits"
       ],
       "science_executed": false
     },
@@ -158,77 +319,17 @@
         "primary_time_role": "saved pointwise branch_reliable direct minimum",
         "optional_time": 0.4,
         "maximum_distinct_times": 2,
-        "stop": "one or two declared points; closure and component audit; selected unconfirmed point excluded from formal claims"
+        "stop": "one or two declared points; closure and component audit; selected unconfirmed point excluded from formal claims",
+        "new_branch_rule": false
       },
       "unresolved_before_execution": [
         "choose one versus two points",
         "eigenspace matching and degeneracy rule; retain original formal classification"
       ],
-      "science_executed": false
-    },
-    {
-      "candidate_id": "A4",
-      "status": "draft_not_authorized_for_execution",
-      "question": "別鎖の枝不成立の条件は閉じられるか",
-      "proposed_scope": {
-        "stage": "saved-scalar diagnosis before any new branch continuation",
-        "systems_to_choose_from": [
-          "H5",
-          "H6"
-        ],
-        "number_of_systems": 1,
-        "formula_ids": [
-          "m5_best"
-        ],
-        "frozen_selected_times": {
-          "H5": 4.727359531550308,
-          "H6": 3.0391925964974056
-        },
-        "new_point_schedule": null,
-        "maximum_new_points": null,
-        "stop": "diagnosis first; old unconfirmed classification retained"
-      },
-      "unresolved_before_execution": [
-        "physical correspondence and cluster/projector rules",
-        "exact time schedule and numerical/resource caps",
-        "approval before new continuation; no guarantee of branch closure"
-      ],
-      "science_executed": false
-    },
-    {
-      "candidate_id": "A5",
-      "status": "draft_not_authorized_for_execution",
-      "question": "人工状態の感度は混入方向に依存するか",
-      "proposed_scope": {
-        "system": "H4",
-        "formula_ids": [
-          "yoshida4",
-          "current_m3",
-          "two_term_center",
-          "m5_best"
-        ],
-        "additional_direction": "phase-aligned RHF residual orthogonal to exact",
-        "q_values": [
-          0.001,
-          0.01,
-          0.05
-        ],
-        "phase_values_radians": [
-          0.0,
-          1.5707963267948966,
-          3.141592653589793,
-          4.71238898038469
-        ],
-        "inherit_time_grid_from": "A1",
-        "new_case_count": 48,
-        "new_evaluation_row_count": 576,
-        "stop": "one direction; record overlap with old CISD direction; no diagnostic-policy changes"
-      },
-      "unresolved_before_execution": [
-        "check direction distinctness without selecting it post hoc",
-        "private matrix reuse, calls and resource limits"
-      ],
-      "science_executed": false
+      "science_executed": false,
+      "change_axis": "chain_length",
+      "existing_method_unchanged": true,
+      "new_method": false
     },
     {
       "candidate_id": "A6",
@@ -265,54 +366,78 @@
         "repeatability and branch evaluation call caps",
         "approve six new coordinates; no global optimality claim"
       ],
-      "science_executed": false
+      "science_executed": false,
+      "change_axis": "evaluation_time_resolution",
+      "existing_method_unchanged": true,
+      "new_method": false
     },
     {
-      "candidate_id": "A7",
+      "candidate_id": "B3",
       "status": "draft_not_authorized_for_execution",
-      "question": "未使用条件へ凍結手順が移るか",
+      "question": "HFの上限倍率だけを変えた既存比較",
+      "change_axis": "existing_time_cap",
+      "existing_method_unchanged": true,
+      "new_method": false,
       "proposed_scope": {
-        "condition": null,
-        "number_of_conditions": 1,
-        "procedure": null,
-        "new_molecule_or_geometry": true,
-        "stop": "design and source choice first; no tuning from validation truth"
-      },
-      "unresolved_before_execution": [
-        "intended independent claim and overlap with existing second-study validation",
-        "molecule or geometry, exact coordinate set, PFs, input state and source/backend",
-        "frozen caps/margins/gates and call limits"
-      ],
-      "science_executed": false
-    },
-    {
-      "candidate_id": "A8",
-      "status": "draft_not_authorized_for_execution",
-      "question": "状態改善と選択時刻での直接校正の資源効果は何か",
-      "proposed_scope": {
-        "existing_design_snapshot": "9accc300ba7b8049ae9a1ef870ca4e7c0032e6ae",
-        "existing_design_status": "NO_GO_FOR_FS_C1",
         "conditions": [
-          "N2_active_eq_sto3g",
-          "CO_active_eq_sto3g"
+          "HF_full_eq_sto3g",
+          "HF_full_stretch150_sto3g"
         ],
-        "arms": {
-          "M00": "CISD + short-time fit",
-          "M10": "Ritz8 + short-time fit",
-          "M01": "CISD + selected-time direct proxy",
-          "M11": "Ritz8 + selected-time direct proxy"
-        },
-        "pf_and_qpe_time_fixed": true,
-        "stage": "C0 preparation only",
-        "stop": "do not regenerate missing arrays or execute FS-C1"
+        "formula_ids": [
+          "current_m3",
+          "yoshida4"
+        ],
+        "baseline_cap_ratios": [
+          0.5,
+          1.0,
+          1.8
+        ],
+        "proposed_additional_cap_ratios": [
+          0.75
+        ],
+        "inherit_method_from": "artifacts/lab_progress_hf_cap_checks_20261007/protocol.json",
+        "saved_models_unchanged": true,
+        "model_refits": 0,
+        "new_individual_selections": 4,
+        "new_joint_selections": 2,
+        "budget_multiplier": 1.01,
+        "other_gates_and_checks_unchanged": true,
+        "branch_and_coarse_refined_checks_unchanged": true,
+        "truth_access": "save condition-specific selections and budgets before direct scoring",
+        "stop": "one declared cap ratio; no threshold or budget-margin tuning"
       },
       "unresolved_before_execution": [
-        "original three-point baseline versus proposed five-point fit",
-        "private source canonical identities",
-        "native precision and complete cost/call/resource accounting",
-        "explicit readiness and science authorization"
+        "choose exact cap ratio before execution",
+        "freeze prediction coordinate set and original branch-evaluation call caps",
+        "reuse exact original private input identity"
       ],
       "science_executed": false
     }
+  ],
+  "scope_revision": "same existing experiments with input-condition changes only",
+  "user_requested_method_scope": "Only system size and small experimental-condition changes; no new validation methods",
+  "supersedes_proposal_commit": "e9682786a97fc4b6772aaf039cdbb70f375aa981",
+  "allowed_change_axes": [
+    "chain_length",
+    "bond_length",
+    "controlled_state_mixing_fraction",
+    "evaluation_time_resolution",
+    "existing_time_cap"
+  ],
+  "excluded_previous_candidate_ids": [
+    "A2",
+    "A4",
+    "A5",
+    "A7",
+    "A8"
+  ],
+  "forbidden_changes": [
+    "new model powers or fit procedure",
+    "new branch correspondence or rescue rules",
+    "new artificial-state direction or diagnostic method",
+    "new molecule species",
+    "new state-improvement or two-by-two intervention design",
+    "PF coefficient optimization",
+    "gate/threshold/budget-margin tuning"
   ]
 }

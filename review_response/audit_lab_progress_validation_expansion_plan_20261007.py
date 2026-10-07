@@ -41,6 +41,7 @@ PUBLIC_SOURCES = [
     *[f"artifacts/lab_progress_hchain_transfer_20261007/H6/truth_{pf}.json"
       for pf in ("current_m3", "two_term_center", "m5_best", "yoshida4")],
     "artifacts/lab_progress_hf_cap_checks_20261007/report.md",
+    "artifacts/lab_progress_hf_cap_checks_20261007/protocol.json",
     "artifacts/lab_progress_hf_cap_checks_20261007/joint_selection_scoring.csv",
     "artifacts/lab_progress_additional_validation_20261007/followup_sources.json",
     "artifacts/prevalidation_f01_effective_hamiltonian_multipf_20260921_retry1/report.md",
@@ -149,7 +150,10 @@ def build_checks():
     proposals = read_json(str((OUT / "proposed_scopes.json").relative_to(ROOT)))
     assert not proposals["candidate_science_authorized"] and proposals["model_refits"] == 0
     candidates = {x["candidate_id"]: x for x in proposals["candidates"]}
-    assert set(candidates) == {f"A{i}" for i in range(1, 9)}
+    assert set(candidates) == {"A1", "A3", "A6", "B1", "B2", "B3"}
+    assert set(proposals["excluded_previous_candidate_ids"]) == {"A2", "A4", "A5", "A7", "A8"}
+    assert all(x["existing_method_unchanged"] and not x["new_method"] for x in candidates.values())
+    assert all(x["change_axis"] in proposals["allowed_change_axes"] for x in candidates.values())
     assert all(x["status"] == "draft_not_authorized_for_execution" and not x["science_executed"] for x in candidates.values())
     a1 = candidates["A1"]["proposed_scope"]
     assert a1["training_time_magnitudes"] == track["training_time_magnitudes_hartree_inverse"]
@@ -159,12 +163,30 @@ def build_checks():
     assert a1["evaluation_row_count"] == 56 * 6 * 2 == 672
     assert a1["distinct_pf_time_coordinates"] == 4 * (5 + 6) * 2 == 88
     assert a1["proposed_max_full_pf_builds_with_two_cold_runs"] == 176
+    b1 = candidates["B1"]["proposed_scope"]
+    assert b1["models"] == track["model_fits"]
+    assert b1["training_time_magnitudes"] == track["training_time_magnitudes_hartree_inverse"]
+    assert b1["evaluation_time_magnitudes"] == track["evaluation_time_magnitudes_hartree_inverse"]
+    assert not b1["inputs_generated"] and b1["number_of_conditions"] == len(b1["proposed_spacings_angstrom"]) == 2
+    assert b1["total_case_count"] == 2 * 56 and b1["total_evaluation_row_count"] == 2 * 672
+    b2 = candidates["B2"]["proposed_scope"]
+    assert b2["models"] == track["model_fits"]
+    assert b2["phase_values_radians"] == proto["experiment_B_h4"]["controlled_state"]["phase_values_radians"]
+    assert b2["new_case_count"] == 4 * len(b2["proposed_q_values"]) * 4 == 48
+    assert b2["new_evaluation_row_count"] == 48 * 12 == 576
+    assert b2["physical_baseline_cases_counted_as_new"] is False
+    b3 = candidates["B3"]["proposed_scope"]
+    hf_protocol = read_json("artifacts/lab_progress_hf_cap_checks_20261007/protocol.json")
+    assert b3["baseline_cap_ratios"] == hf_protocol["caps"]
+    assert b3["budget_multiplier"] == hf_protocol["budget_multiplier"] == 1.01
+    assert b3["saved_models_unchanged"] and b3["model_refits"] == 0
+    assert b3["new_individual_selections"] == 2 * 2 * 1 and b3["new_joint_selections"] == 2
     a6 = candidates["A6"]["proposed_scope"]
     old_grid = read_csv("artifacts/lab_progress_h4_state_checks_20261007/direct_grid.csv")
     old_times = [float(r["time_hartree_inverse"]) for r in old_grid if r["formula_id"] == "m5_best"]
     matched = sum(any(abs(t - s) < 1e-12 for s in old_times) for t in a6["proposed_nine_point_grid"])
     assert matched == 3 and 9 - matched == a6["distinct_new_coordinates"] == 6
-    return dict(schema="saved_scalar_expansion_checks_v1", verified_snapshot_commit=BASE,
+    return dict(schema="saved_scalar_expansion_checks_v2", verified_snapshot_commit=BASE,
                 new_scientific_computations=0, model_refits=0, formal_results_modified=False,
                 H4_short_time=dict(case_count=56, dominance_counts=h4_counts,
                                    all_case_count=128, all_dominance_counts=all_counts,
@@ -173,6 +195,9 @@ def build_checks():
                 H5_H6_saved_branch_checks=chain, H6_historical_runtime_per_formula=resources,
                 HF_post_hoc_same_point_margin=hf_margins,
                 FS_C0_status_at_referenced_snapshot=c0,
+                current_candidate_ids=list(candidates),
+                excluded_previous_candidate_ids=proposals["excluded_previous_candidate_ids"],
+                same_existing_methods_with_condition_changes_only=True,
                 proposal_scope_arithmetic_passed=True,
                 limitations=["Historical runtimes do not predict new experiment wall time.",
                              "No private arrays are loaded or produced by this audit.",
@@ -212,7 +237,7 @@ def run(write):
     else:
         assert (OUT / "manifest.json").read_bytes() == json_bytes(manifest), "stale manifest"
     print(json.dumps(dict(status="PASS", source_references=len(registry["sources"]),
-                          candidates=8, new_scientific_computations=0, model_refits=0,
+                          candidates=len(checks["current_candidate_ids"]), new_scientific_computations=0, model_refits=0,
                           manifest_hashed_files=len(files), local_links_verified=True)))
 
 
