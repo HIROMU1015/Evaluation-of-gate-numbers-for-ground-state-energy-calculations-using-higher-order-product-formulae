@@ -1,0 +1,24 @@
+Final command: PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 MPLCONFIGDIR=/tmp/fs-c06-mpl-cache PYTHONPATH=src:artifacts/pf_first_study_fs_c0_20261007:artifacts/pf_first_study_fs_c05_execution_closure_20261007 /home/abe/myproject/Evaluation_numGate_highorder/venv/bin/python -m pytest -q -p no:cacheprovider artifacts/pf_first_study_fs_c0_20261007/test_fs_c0.py artifacts/pf_first_study_fs_c05_execution_closure_20261007/test_fs_c05.py artifacts/pf_first_study_fs_c06_functional_equivalence_20261007/test_fs_c06.py
+Test environment: Python3.11.1, NumPy1.26.4, SciPy1.14.1, pytest8.3.3, jsonschema4.26.0. This is the previous 114-test environment; reconstruction retains pinned Python3.12.3 environment.
+Scope: existing114 plus new22; synthetic native PF/echo and saved-scalar arithmetic only. No real source decoding or physical PF/echo.
+
+........................................................................ [ 52%]
+................................................................         [100%]
+136 passed in 1.42s
+
+Earlier collection attempt in pinned reconstruction venv: jsonschema missing; collection stopped, no tests/actions ran. No dependency or reconstruction environment changes were made. Retried tests in existing test environment.
+
+==================================== ERRORS ====================================
+____ ERROR collecting artifacts/pf_first_study_fs_c0_20261007/test_fs_c0.py ____
+ImportError while importing test module '/tmp/pf-first-study-fs-c06-functional-equivalence-20261007/artifacts/pf_first_study_fs_c0_20261007/test_fs_c0.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/abe/.pyenv/versions/3.12.3/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+artifacts/pf_first_study_fs_c0_20261007/test_fs_c0.py:11: in <module>
+    from jsonschema import Draft202012Validator, ValidationError
+E   ModuleNotFoundError: No module named 'jsonschema'
+=========================== short test summary info ============================
+ERROR artifacts/pf_first_study_fs_c0_20261007/test_fs_c0.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.24s

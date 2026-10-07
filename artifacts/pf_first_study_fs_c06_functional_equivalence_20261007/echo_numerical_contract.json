@@ -1,0 +1,17 @@
+{
+  "status": "FROZEN_BOUND_NOT_PRODUCTION_VALIDATED",
+  "contract": "validation_contract.json",
+  "freeze_commit": "a5fb9835657c3e5ac1658d1323b5746bf318fc8c",
+  "proxy_absolute_tolerance_hartree": 1e-09,
+  "state_absolute_tolerance": 1e-06,
+  "metadata_absolute_tolerance_hartree": 1e-09,
+  "norm_absolute_tolerance": 1e-10,
+  "selected_prediction_absolute_tolerance_hartree": 1e-09,
+  "fit_coefficient_bound": "propagate the frozen 1e-9 proxy bound through the historical scaled OLS linear map; add binary64 roundoff 2e-14 relative",
+  "additional_gate_rationale": "Norm 1e-10 is the historical H02 scalar-invariance tolerance. Selected prediction bound reuses the historical 1e-9 Ha metadata/echo bound, rather than allowing a large extrapolation error hidden by coefficient uncertainty. Budget bound is propagated from this prediction bound, without tuning.",
+  "echo": "vdot(CISD, expm_multiply(-1j*t*H, PF(CISD)))",
+  "PF_sign": "+i",
+  "dtype": "complex128",
+  "tolerance_adjusted_after_result": false,
+  "production_validation_pass": null
+}

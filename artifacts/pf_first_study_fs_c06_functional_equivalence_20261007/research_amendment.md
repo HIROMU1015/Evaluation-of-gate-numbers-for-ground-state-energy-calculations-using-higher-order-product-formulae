@@ -1,0 +1,9 @@
+# FS-C0.6 research amendment
+
+ユーザーの2026-10-07添付仕様に基づき、whole-pickle唯一条件からfunctional-equivalence階層へ変更した。H exact SHAは必須のまま、CISDはhistorical diagnostic fingerprintsを用いる。existing candidate decodeと、失敗後のhistorical pinned reconstruction各条件1回だけが今回の承認範囲。FS-C1 scienceの承認はない。
+
+起点 `75fe0d65a2940f160ea42f6414fc2246d67bd0cf`。decode前freeze `a5fb9835657c3e5ac1658d1323b5746bf318fc8c`。validation_contractとfingerprint targetsは以後不変。新v3はv2から派生し、初期operational_source_kind=pending until auditを記録したうえで、監査後statusだけunavailable/NO_GO_RECONSTRUCTION_MISMATCHへ更新した。v2から継承していた旧five-point conflictと旧bytewise-source-only記述は、新v3の未解決事項から除き、今回のH SHA不一致へ置換した。M00/B0、座標、arms、PF係数、gamma、margin/safety規則は変更しない。v1/v2は保存したまま。
+
+両条件の既存candidate・1回再構成ともH SHA不一致。technical errorではなくidentity契約不成立。source equivalenceの成立やhistorical source recoveredは主張しない。原因の物理的解釈やH許容差への変更は研究判断であり、本監査の実行範囲に含めない。
+
+source validation actionsとFS-C1 interventionsを分離した費用会計と、return後private scalar recoveryをpublic writeより先に保存する境界を保持した。科学的sourceはprivate sandboxだけに残し、新しいdirect PF eigentruthは計算せず、operational exportもない。判定はNO-GOとして引き渡し、FS-C0.6で停止する。

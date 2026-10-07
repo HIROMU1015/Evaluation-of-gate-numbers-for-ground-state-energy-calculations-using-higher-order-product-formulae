@@ -80,5 +80,107 @@
     }
   ],
   "private_binary_publication": false,
-  "origin_and_verified_snapshot_separate": true
+  "origin_and_verified_snapshot_separate": true,
+  "initial_registry_freeze_commit": "a5fb9835657c3e5ac1658d1323b5746bf318fc8c",
+  "private_recovery_receipt": {
+    "private_scalar_recovery_saved_before_publication": true,
+    "private_recovery_sha256": "0a22166c7f75556681f37c2f563b05a9eaf5175a90cf8a73218894c3bf3c6271",
+    "validation_contract_freeze_commit": "a5fb9835657c3e5ac1658d1323b5746bf318fc8c"
+  },
+  "validation_sources": [
+    {
+      "condition": "N2_active_eq_sto3g",
+      "source_kind": "existing H02 candidate",
+      "whole_binary_sha256": "401308552bf924ba4cc8c4367676f9e092f2b44919b4753d9bc06411fe0f66de",
+      "actual_H_sha256": "eafba466ff0d7503ab178d5bd90207f5bc33715a1282cce299236ca5077d3e7c",
+      "operationally_accepted": false,
+      "binary_published": false
+    },
+    {
+      "condition": "CO_active_eq_sto3g",
+      "source_kind": "existing H02 candidate",
+      "whole_binary_sha256": "b7fb3fda2a15483fe8ef1754b1f9140683a94ab75f4a4990989fad5bcc40cbe6",
+      "actual_H_sha256": "d54736a5c167508c68cf56baa2b49f61cb35d89c0caa477f406ca5a69e7b45cd",
+      "operationally_accepted": false,
+      "binary_published": false
+    },
+    {
+      "condition": "N2_active_eq_sto3g",
+      "source_kind": "reconstructed candidate",
+      "whole_binary_sha256": "36544fc229a405b2bc77daa76d16cab521c718dee9ef722be564483315e71568",
+      "actual_H_sha256": "f4a08b755a4e903f4e9611fee394d6101a5d27279a1bd8af567b97920da5402e",
+      "operationally_accepted": false,
+      "binary_published": false
+    },
+    {
+      "condition": "CO_active_eq_sto3g",
+      "source_kind": "reconstructed candidate",
+      "whole_binary_sha256": "6d1949c7d4682aad872783bafc65ebea7759efbe77b2b4d220107c1cafae4005",
+      "actual_H_sha256": "27ed246b354c754a506541dac81650aafdfa413b375fadf0b736822c171fb4c5",
+      "operationally_accepted": false,
+      "binary_published": false
+    }
+  ],
+  "execution_code_pins": [
+    {
+      "path": "reconstruct_once.py",
+      "sha256": "82989c3456fbbf7dda6bc0ba8d3f4e437249c08ba99e9c4f343a7eebdc9b4a11",
+      "origin_result_commit": null,
+      "verified_snapshot_commit": null,
+      "commit_resolution": "new FS-C0.6 code; final handoff commit supplied separately"
+    },
+    {
+      "path": "source_adapter.py",
+      "sha256": "d16a4273d14a258edb5f38ad6302eb7a06454b1d71859a0561c7b4064efd0a47",
+      "origin_result_commit": null,
+      "verified_snapshot_commit": null,
+      "commit_resolution": "new FS-C0.6 code; final handoff commit supplied separately"
+    },
+    {
+      "path": "run_identity_audits.py",
+      "sha256": "4e2ed2f4160ecb4753adb9d8042ef3471c6b6fef8df93ac639155ab4618474e3",
+      "origin_result_commit": null,
+      "verified_snapshot_commit": null,
+      "commit_resolution": "new FS-C0.6 code; final handoff commit supplied separately"
+    }
+  ],
+  "execution_dependencies": [
+    {
+      "path": "review_response/run_h01_approximate_state_calibration.py",
+      "origin_result_commit": "e0692a83b06cd2660804f70618b142bc39b6209b",
+      "verified_snapshot_commit": "e0692a83b06cd2660804f70618b142bc39b6209b",
+      "sha256": "8eaf9980a82b3a1a033efea86ce67e52f3115a53793081d727e75607f807e7ef",
+      "role": "pinned historical prepare_condition; entire clean checkout at this commit"
+    }
+  ],
+  "historical_native_function_pins": {
+    "sources": [
+      {
+        "definitions": [
+          "_iter_s2_steps",
+          "iter_s2_sequence_steps"
+        ],
+        "path": "src/trotterlib/pf_decomposition.py",
+        "sha256": "9633e9a441f2a38e01cacdcde7294a8e288c3353b4dd1102b94575c1bb8368ce"
+      },
+      {
+        "definitions": [
+          "ComponentBatch",
+          "ComponentSpectrum",
+          "component_exponential"
+        ],
+        "path": "src/trotterlib/component_sector_pf.py",
+        "sha256": "a0744017269b6069ee8af34585820d926d6aee7b3e7ecca8ca89e8edd36ad74f"
+      },
+      {
+        "definitions": [
+          "_apply_pf_cpu",
+          "_fit_proxy"
+        ],
+        "path": "review_response/run_h01_approximate_state_calibration.py",
+        "sha256": "9f82a2f6b0a4f3d84d59f5bc5e07a79cd52bd2919478acc39cdea983de04ae6c"
+      }
+    ],
+    "verified_snapshot_commit": "9accc300ba7b8049ae9a1ef870ca4e7c0032e6ae"
+  }
 }
