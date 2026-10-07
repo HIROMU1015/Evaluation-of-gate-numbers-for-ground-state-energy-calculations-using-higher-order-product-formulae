@@ -1,0 +1,5 @@
+# 2026-10-07 JST user clarification
+
+ユーザーは、別保存先・実際に接続可能なSSH alias/hostname/IPが分からず、履歴上のサーバーパスだけが残ることを確認した。pickle/runtimeはGitHubから意図的に除外されており、Git履歴からの復元経路も確認されていない。指定SHAに一致する原本が既知のローカル候補から見つからなければ SOURCE_NOT_RECOVERABLE_UNDER_IDENTITY_CONTRACT として停止し、source missingとしてNO-GOを確定する指示を受けた。再生成source/functional equivalenceへ変更するかは後続GPT/user判断であり未承認。
+
+同名H02候補のSHA不一致はcandidate-level identity rejectionとして記録する。最終completionはこの追加入力に従い NO_GO_SOURCE_MISSING とする。

@@ -1,0 +1,5 @@
+# Native backend contract
+
+closure_adapter.pyはpinned sourceのASTから元_apply_pf_cpu、component_exponential、merged S2 iterator、_fit_proxyの関数bodyを変更せず取り出す。科学runnerのimport、prepare_condition、ground/sector construction、group eigensolveを行わない。complex128・ordered spectra・固定current_m3・左からのgate @ current・component exp(+i t λ)を保存する。stateは明示入力、interfaceはstate-independent。
+
+実行可能adapterは最大8次元synthetic fixtureだけに制限した。N2/CO production adapter/FS-C1 runnerは完成していない。原本欠損につきproduction replayはNOT_RUN、saved-scalar arithmeticのPASSをbackend再現PASSと呼ばない。normalizationをsilent repairせず、toy normを監査する。将来matching sourceが見つかった場合のcanonical identity要件はmanifestに保存したが、再生成ルートは実装しない。

@@ -1,0 +1,85 @@
+{
+  "actual_production": {
+    "M00_validation_fits": 0,
+    "M10_cold_validation_fits": 0,
+    "M10_initial_operational_fits": 0,
+    "PF_adjoint": 0,
+    "PF_forward": 0,
+    "explicit_Ritz_H_matvec": 0,
+    "logical_exact_H_echo": 0,
+    "small_Ritz_solve": 0,
+    "total_fit_calls": 0
+  },
+  "categories": [
+    "standalone operational",
+    "incremental over saved baseline",
+    "joint acquisition",
+    "cold validation",
+    "inherited preparation",
+    "failed attempts"
+  ],
+  "cold_fit_amendment": "§27 rebuilds all fits per pass: M00 validation4 + M10 initial2/cold2 =8. C0 v1 saved4 fit plan unchanged in history.",
+  "expm_internal": {
+    "matmat": null,
+    "matvec": null,
+    "norm_estimation": null,
+    "rmatmat": null,
+    "rmatvec": null,
+    "status": "unknown"
+  },
+  "group_schedule": "single vector call; native gate cache local to one forward action; no shared scientific intermediates",
+  "mandatory": [
+    "logical exact-H echo",
+    "explicit Ritz H matvec",
+    "PF forward",
+    "ordered group application",
+    "small Ritz solve",
+    "wall_seconds",
+    "peak_RSS_bytes",
+    "software versions",
+    "thread settings"
+  ],
+  "per_condition_per_vector_PF": {
+    "CO_active_eq_sto3g": {
+      "distinct_gate_materializations": 396,
+      "group_applications": 1373
+    },
+    "N2_active_eq_sto3g": {
+      "distinct_gate_materializations": 324,
+      "group_applications": 1121
+    }
+  },
+  "planned_rank8_joint": {
+    "M00_validation_fits": 4,
+    "M10_cold_validation_fits": 2,
+    "M10_initial_operational_fits": 2,
+    "PF_adjoint": 0,
+    "PF_forward": 32,
+    "explicit_Ritz_H_matvec": 36,
+    "logical_exact_H_echo": 32,
+    "planned_only": true,
+    "small_Ritz_solve": 4,
+    "total_fit_calls": 8
+  },
+  "production_cost_measurement": "NOT_RUN",
+  "single_weighted_sum": null,
+  "standalone_incremental": {
+    "M01": {
+      "PF_forward": 1,
+      "logical_exact_H_echo": 1
+    },
+    "M11": {
+      "PF_forward": 1,
+      "explicit_Ritz_H_matvec": "1+k",
+      "logical_exact_H_echo": 1,
+      "small_Ritz_solve": 1
+    }
+  },
+  "status": "LOGICAL_LEDGER_AND_UNKNOWN_POLICY_CLOSED",
+  "units": {
+    "classical": "seconds/RSS bytes",
+    "logical": "per-vector actions and group calls",
+    "predicted_QPE": "PF rotations"
+  },
+  "unknown_is_not_zero": true
+}

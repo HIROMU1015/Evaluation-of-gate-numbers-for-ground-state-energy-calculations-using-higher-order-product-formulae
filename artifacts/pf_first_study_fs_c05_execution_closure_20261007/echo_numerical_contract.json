@@ -1,0 +1,41 @@
+{
+  "closed": false,
+  "components": {
+    "cold_variability_bound": null,
+    "floating_backend_bound": null,
+    "historical_backend_bound": null
+  },
+  "definition": "Im<psi|exp(-iHt) U(t)|psi>/t = Im<exp(+iHt)psi|U(t)psi>/t",
+  "dtype": "complex128",
+  "energy_origin": "exact same removed-constant restricted H as historical PF",
+  "evidence": [
+    {
+      "condition": "N2_active_eq_sto3g",
+      "fit_diagnostics": {
+        "training_design_condition_number": 105.50388380497913,
+        "training_maximum_absolute_residual_hartree": 7.954296291666062e-13
+      },
+      "use": "fit residual/condition retained as diagnostics; not backend error certificates"
+    },
+    {
+      "condition": "CO_active_eq_sto3g",
+      "fit_diagnostics": {
+        "training_design_condition_number": 105.50388380497913,
+        "training_maximum_absolute_residual_hartree": 1.4321112820622806e-12
+      },
+      "use": "fit residual/condition retained as diagnostics; not backend error certificates"
+    }
+  ],
+  "forbidden_tolerance_inputs": [
+    "direct truth",
+    "exact-ground overlap/gap",
+    "model fit residual as backend certificate",
+    "sentinel sign threshold as numeric bound"
+  ],
+  "historical_threads_benchmark": "N2 time0.1 echoes identical across 1/4/8 threads; not independent cold replay or CO bound",
+  "numerical_failure_policy": "do not tune bound after production result; no source replay scheduled in C0.5",
+  "sign_and_orientation": "native PF exp(+i t weight spectrum); exact reference exp(+iHt)",
+  "status": "M00_REPRODUCTION_TOLERANCE_UNCLOSED",
+  "tolerance_hartree": null,
+  "uncertainty_rule": "echo absolute bound propagates as delta_proxy <= delta_echo/abs(t); actual source-backed echo bound unavailable"
+}

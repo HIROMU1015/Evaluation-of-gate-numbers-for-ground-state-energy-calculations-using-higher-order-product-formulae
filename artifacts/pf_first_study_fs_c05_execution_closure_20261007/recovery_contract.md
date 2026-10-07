@@ -1,0 +1,5 @@
+# Durable recovery before public validation
+
+C0の検証済みserialization_boundary.pyを変更せず使う。各pass science return直後にscalar rows/action ledgerをcreate-only private checkpointとしてfsync/hash/read-only保存し、その後public schema validation、公開write、hash roundtrip、Git commitfreezeへ進む。privateとpublic/freezeは別概念。tuple/numpy scalarはboundaryで変換し、arrays/complex/nonfinite/truthは拒否する。
+
+公開validation failure後もprivate bytesからserializationだけを回復する。science rerunを自動承認しない。checkpoint作成自体の失敗もincidentとして停止し、追加scienceは個別承認が必要。C0.5ではsynthetic checkpoint fixtureのみ。source pickleやprivate working arrayをGitへ追加しない。
