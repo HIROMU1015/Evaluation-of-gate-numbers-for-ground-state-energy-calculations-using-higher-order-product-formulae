@@ -1,0 +1,3 @@
+# Historical vs new source
+
+旧結果はmotivation/design history/prior headroomのみ。原H01 pickleはmissing、旧H SHAと新SHAは異なる。FS-R0では旧H一致をgateにせず、prediction/truth両phaseが同じnew source identityを使うことをgateにする。保存時刻はprior developmentから固定されたexternal design coordinatesで、新sourceの最適時刻ではない。旧B0・direct値とnewB0_prime・truth_prime・saving_primeを同一分母に混ぜない。N2/COは既知development条件。独立/prospective validationやtransfer guaranteeを主張しない。

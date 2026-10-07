@@ -1,0 +1,52 @@
+{
+  "B0_prime_definition": "gamma beta K/[t0(epsilon_E-|new M00p(t0)|)]",
+  "all_conditions": true,
+  "arms": [
+    "M00p",
+    "M10p",
+    "M01p",
+    "M11p"
+  ],
+  "branch_numerical_gates": {
+    "blocker": "NEW_SOURCE_CONTINUATION_ANCHOR_UNAVAILABLE",
+    "branch_continuation_closed": false,
+    "branch_ids": "FS-R1:<new source identity SHA>:<new branch id>; historical6/9 forbidden",
+    "eigenpair_residual_gate": 1e-10,
+    "extra_truth_coordinates_authorized": false,
+    "historical_anchor_reuse": false,
+    "nearest_time_substitution": false,
+    "new_direct_truth_coordinates": 2,
+    "prior_algorithm": "S0 v1.1 needs nearest lower same-source reliable continuous branch anchor",
+    "targets": [
+      {
+        "condition": "N2_active_eq_sto3g",
+        "source_identity_sha256": "6b93735a56638c40a2bcd35e504f1ee823cfdbe396441fce15fd5e02502b044d",
+        "time": 0.5983202971910435
+      },
+      {
+        "condition": "CO_active_eq_sto3g",
+        "source_identity_sha256": "ed9ec93d6945a11bd144d2531ffedaf67da829383334b47206b78c11aee34f17",
+        "time": 0.6127481451622522
+      }
+    ],
+    "unitarity_gate": 1e-10
+  },
+  "challenger": "M01p",
+  "constants": {
+    "beta": 1.2,
+    "epsilon_E": 0.00015936001019904,
+    "eta": 0.02,
+    "gamma": 1.01
+  },
+  "no_posthoc_arm_selection": true,
+  "old_B0_allowed": false,
+  "outcomes": {
+    "local_gain": "valid safe M01p B01<=0.98 B0_prime",
+    "primary_gain": "valid safe M11p B11<=0.98 B0_prime",
+    "safety_repair": "valid unsafe M01p and safe M11p, separate from saving",
+    "state_increment": "safe M01p/M11p B11<=0.98 B01"
+  },
+  "primary": "M11p",
+  "safety": "epsilon_E-|new direct(t0)|-beta K/(t0 B_j)>=0; keep raw slack, invalid/indeterminate cannot support gain",
+  "schema_status": "scalar functions complete; physical truth continuation pending"
+}

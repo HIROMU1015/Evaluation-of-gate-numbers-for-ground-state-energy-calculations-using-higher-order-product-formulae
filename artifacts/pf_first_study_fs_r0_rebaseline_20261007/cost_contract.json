@@ -1,0 +1,71 @@
+{
+  "expm_internal": {
+    "matmat": null,
+    "matvec": null,
+    "norm_estimation": null,
+    "rmatvec": null
+  },
+  "incremental": {
+    "M01p": {
+      "PF_forward": 1,
+      "echo": 1
+    },
+    "M11p": {
+      "PF_forward": 1,
+      "echo": 1,
+      "explicit_H": "1+k",
+      "small_Ritz": "1 if k>0 else 0"
+    }
+  },
+  "internal_count_status": "unknown, not zero",
+  "mandatory": [
+    "source_load",
+    "explicit H matvec",
+    "small Ritz solve",
+    "PF forward vector",
+    "logical exact-H echo",
+    "group application",
+    "group materialization",
+    "scalar fit",
+    "wall_seconds",
+    "peak_RSS_bytes",
+    "threads/software"
+  ],
+  "measured_FS_R1_costs": null,
+  "mixed_unit_single_scalar": null,
+  "nominal": {
+    "PF_adjoint": 0,
+    "PF_forward_vector_actions": 32,
+    "actual_FS_R1_actions": 0,
+    "block_action_schedule": "single vector; block calls0",
+    "cold_validation_fits": 4,
+    "conditions": 2,
+    "explicit_Ritz_H_matvec_nominal": 36,
+    "explicit_Ritz_H_matvec_rank_stop": "sum(1+k), k<=8 over 4 refinement passes",
+    "initial_operational_fits": 4,
+    "logical_exact_H_echo": 32,
+    "new_direct_truth_executed": 0,
+    "passes": 2,
+    "planned_only": true,
+    "planned_phase_A_group_application": 39904,
+    "planned_phase_A_group_materialization": 11520,
+    "proxy_evaluations": 32,
+    "scalar_fits": 8,
+    "small_Ritz_solve_nominal": 4,
+    "small_Ritz_solve_rank_zero": "0 when rank=0; original CISD reused",
+    "state_coordinates_per_condition_pass": 8,
+    "truth_coordinates": 2
+  },
+  "source_regeneration_count_in_R0": 0,
+  "units": {
+    "QPE": "predicted PF rotations",
+    "classical": "source/H/Ritz/PF/echo/groups/fit actions, wall seconds/RSS bytes"
+  },
+  "views": [
+    "joint acquisition",
+    "initial operational",
+    "cold validation",
+    "incremental over available baseline",
+    "inherited source generation"
+  ]
+}

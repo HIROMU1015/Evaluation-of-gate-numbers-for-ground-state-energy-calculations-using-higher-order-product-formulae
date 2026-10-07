@@ -1,0 +1,174 @@
+{
+  "B0_prime_definition": "gamma beta K/[t0(epsilon_E-|new M00p(t0)|)]",
+  "FS_R1_science_authorized": false,
+  "approved_status_amendment": "branch_continuation_amendment.md",
+  "arm_budget_definition": "same formula with each arm magnitude; c>=epsilon => infeasible/null; no clipping",
+  "arms": {
+    "M00p": "new CISD 3-point fit at t0; generates NEW B0_prime",
+    "M01p": "new CISD local g(t0), no fit",
+    "M10p": "new Ritz8 same 3 absolute points and fit",
+    "M11p": "same new Ritz8 local g(t0), no fit; primary"
+  },
+  "challenger": "M01p",
+  "cold_replay": "one complete independent source/basis/state/PF/echo/proxy/fit/budget replay; no scientific intermediates shared",
+  "constants": {
+    "beta": 1.2,
+    "epsilon_E": 0.00015936001019904,
+    "eta": 0.02,
+    "gamma": 1.01
+  },
+  "cost_units": {
+    "QPE": "predicted PF rotations",
+    "classical": "source/H/Ritz/PF/echo/groups/fit actions, wall seconds/RSS bytes"
+  },
+  "current_m3_sequence": [
+    0.1960294407008384,
+    0.2092246690782796,
+    0.3316118001935053,
+    -0.4737318199452465,
+    0.3316118001935053,
+    0.2092246690782796,
+    0.1960294407008384
+  ],
+  "development_status": "known N2/CO development conditions; no independent/prospective/transfer guarantee",
+  "execution_ready": false,
+  "final_preflight_status": "NO_GO_BRANCH_CONTINUATION_UNCLOSED",
+  "fit": {
+    "intercept": false,
+    "numerical_function": "review_response/run_h01_approximate_state_calibration.py:_fit_proxy",
+    "powers": [
+      4,
+      6
+    ],
+    "scaling": "times/t_ref; values/max(abs(values)); numpy.linalg.lstsq rcond=None; unscale coefficients",
+    "weighting": "unweighted OLS"
+  },
+  "historical_B0_reuse": false,
+  "historical_H_match_gate": false,
+  "historical_recovery_route": "ended",
+  "historical_training_relative": [
+    0.1,
+    0.2,
+    0.3
+  ],
+  "historical_truth_reuse": false,
+  "outcome_rules": {
+    "local_gain": "valid safe M01p B01<=0.98 B0_prime",
+    "primary_gain": "valid safe M11p B11<=0.98 B0_prime",
+    "safety_repair": "valid unsafe M01p and safe M11p, separate from saving",
+    "state_increment": "safe M01p/M11p B11<=0.98 B01"
+  },
+  "phase_A": "new sanitized source only; freeze all estimates/budgets/code/protocol/source hashes in committed prediction; truth unopened",
+  "phase_B": "verify actual Phase A commit/blobs and independent remote receipt first; then only two new source truth points",
+  "primary": "M11p",
+  "protocol_id": "FS-R1-20261007-v1",
+  "relative_0_4_role": "none",
+  "research_question": "At identical regenerated H/PF/external coordinates, can state improvement and/or selected-time local evaluation reduce QPE budgets safely?",
+  "ritz": {
+    "MGS_passes": 2,
+    "full_ground_input": false,
+    "numeric_rules_source": "artifacts/pf_first_study_response_pilot_phase05_20261006/response_pilot_protocol.json",
+    "phase_rule": "largest magnitude component positive; first tie index",
+    "prefix_rank_stop": true,
+    "primary_m": 8,
+    "projected_max_dimension": 9,
+    "rank_sweep": false,
+    "replacement_direction": false
+  },
+  "safety_definition": "epsilon_E-|new direct(t0)|-beta K/(t0 B_j)>=0; keep raw slack, invalid/indeterminate cannot support gain",
+  "sentinel_in_fit": false,
+  "series": "FS-R1",
+  "source_kind": "new regenerated follow-up source",
+  "stage": "FS-R0 preflight",
+  "stop_rules": [
+    "M11p unsafe either condition: resource extension STOP",
+    "both safe but target not met: stop micro-accuracy optimization",
+    "M01p sufficient and no state_increment: simpler local intervention preferred",
+    "state_increment2/2: consider refinement extension",
+    "state_increment1/2: keep condition dependence; no molecules until success",
+    "technical failure separate from science",
+    "R0 stops after handoff regardless GO; separate R1 authorization required"
+  ],
+  "study_interpretation": {
+    "0/2": "no resource-stage support",
+    "1/2": "condition-dependent",
+    "2/2": "small development support",
+    "unsafe_offset_by_average": false
+  },
+  "systems": [
+    {
+      "K": 19176,
+      "M10_training_absolute": [
+        0.06263494343795273,
+        0.12526988687590546,
+        0.18790483031385818
+      ],
+      "condition": "N2_active_eq_sto3g",
+      "coordinate_provenance": "prior development fixed external design; not new-source optimum",
+      "dimension": 1568,
+      "fit_scale_t_ref": 0.6263494343795273,
+      "gate_materializations_per_vector": 324,
+      "group_applications_per_vector": 1121,
+      "group_count": 81,
+      "new_H_sha256": "f4a08b755a4e903f4e9611fee394d6101a5d27279a1bd8af567b97920da5402e",
+      "operational_archive_sha256": "16fcd3966b3ab5d900601318e4911e82bcd49934cc34184f4cbd8e8ec1512dc3",
+      "source_identity_sha256": "6b93735a56638c40a2bcd35e504f1ee823cfdbe396441fce15fd5e02502b044d",
+      "t0": 0.5983202971910435,
+      "t0_hex": "0x1.325709b9efe38p-1",
+      "training_absolute": [
+        0.06263494343795273,
+        0.12526988687590546,
+        0.18790483031385818
+      ]
+    },
+    {
+      "K": 37936,
+      "M10_training_absolute": [
+        0.06546804264781796,
+        0.1309360852956359,
+        0.19640412794345388
+      ],
+      "condition": "CO_active_eq_sto3g",
+      "coordinate_provenance": "prior development fixed external design; not new-source optimum",
+      "dimension": 1568,
+      "fit_scale_t_ref": 0.6546804264781796,
+      "gate_materializations_per_vector": 396,
+      "group_applications_per_vector": 1373,
+      "group_count": 99,
+      "new_H_sha256": "27ed246b354c754a506541dac81650aafdfa413b375fadf0b736822c171fb4c5",
+      "operational_archive_sha256": "483ad1f91127a7d4ba45c8b2c56f7cb60392366c2bc5a70321e421ba387ff6a4",
+      "source_identity_sha256": "ed9ec93d6945a11bd144d2531ffedaf67da829383334b47206b78c11aee34f17",
+      "t0": 0.6127481451622522,
+      "t0_hex": "0x1.39ba1ff850253p-1",
+      "training_absolute": [
+        0.06546804264781796,
+        0.1309360852956359,
+        0.19640412794345388
+      ]
+    }
+  ],
+  "truth_contract": {
+    "blocker": "NEW_SOURCE_CONTINUATION_ANCHOR_UNAVAILABLE",
+    "branch_continuation_closed": false,
+    "branch_ids": "FS-R1:<new source identity SHA>:<new branch id>; historical6/9 forbidden",
+    "eigenpair_residual_gate": 1e-10,
+    "extra_truth_coordinates_authorized": false,
+    "historical_anchor_reuse": false,
+    "nearest_time_substitution": false,
+    "new_direct_truth_coordinates": 2,
+    "prior_algorithm": "S0 v1.1 needs nearest lower same-source reliable continuous branch anchor",
+    "targets": [
+      {
+        "condition": "N2_active_eq_sto3g",
+        "source_identity_sha256": "6b93735a56638c40a2bcd35e504f1ee823cfdbe396441fce15fd5e02502b044d",
+        "time": 0.5983202971910435
+      },
+      {
+        "condition": "CO_active_eq_sto3g",
+        "source_identity_sha256": "ed9ec93d6945a11bd144d2531ffedaf67da829383334b47206b78c11aee34f17",
+        "time": 0.6127481451622522
+      }
+    ],
+    "unitarity_gate": 1e-10
+  }
+}
