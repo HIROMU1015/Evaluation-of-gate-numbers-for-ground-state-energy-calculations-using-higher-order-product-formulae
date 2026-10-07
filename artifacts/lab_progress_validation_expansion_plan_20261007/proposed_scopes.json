@@ -1,0 +1,318 @@
+{
+  "schema": "lab_progress_validation_expansion_proposals_v1",
+  "date_JST": "2026-10-07",
+  "verified_snapshot_commit": "1d01e77247364b49dbce2e9ce2fe7c32af0fb937",
+  "authorization_scope": "candidate organization and saved-scalar audit only",
+  "candidate_science_authorized": false,
+  "new_scientific_computations": 0,
+  "model_refits": 0,
+  "formal_results_modified": false,
+  "all_candidates_are_proposals": true,
+  "candidates": [
+    {
+      "candidate_id": "A1",
+      "status": "draft_not_authorized_for_execution",
+      "question": "H6で短時間の状態差支配が現れるか",
+      "proposed_scope": {
+        "system": "H6",
+        "sector_dimension": 400,
+        "basis": "sto-3g",
+        "charge": 0,
+        "multiplicity": 1,
+        "spacing_angstrom": 1.0,
+        "input_registry_source": "artifacts/lab_progress_hchain_transfer_20261007/protocol.json",
+        "formula_ids": [
+          "yoshida4",
+          "current_m3",
+          "two_term_center",
+          "m5_best"
+        ],
+        "physical_states": [
+          "rhf",
+          "cisd"
+        ],
+        "reference_state": "exact",
+        "controlled_direction": "phase-aligned CISD residual orthogonal to exact; oracle mechanism diagnostic",
+        "q_values": [
+          0.001,
+          0.01,
+          0.05
+        ],
+        "phase_values_radians": [
+          0.0,
+          1.5707963267948966,
+          3.141592653589793,
+          4.71238898038469
+        ],
+        "training_time_magnitudes": [
+          0.1,
+          0.15,
+          0.2,
+          0.25,
+          0.3
+        ],
+        "evaluation_time_magnitudes": [
+          0.125,
+          0.175,
+          0.225,
+          0.275,
+          0.35,
+          0.4
+        ],
+        "signs": [
+          -1,
+          1
+        ],
+        "models": {
+          "raw_positive_even_two_term": {
+            "powers": [
+              4,
+              6
+            ],
+            "input": "positive-time proxy"
+          },
+          "evenized_two_term": {
+            "powers": [
+              4,
+              6
+            ],
+            "input": "(g(+t)+g(-t))/2"
+          },
+          "odd_diagnostic": {
+            "powers": [
+              5,
+              7
+            ],
+            "input": "(g(+t)-g(-t))/2",
+            "selection_active": false
+          }
+        },
+        "inherit_noise_gates_and_dominance_from": "PF_first_study_protocol_20260925.json",
+        "case_count": 56,
+        "evaluation_row_count": 672,
+        "distinct_pf_time_coordinates": 88,
+        "proposed_max_full_pf_builds_with_two_cold_runs": 176,
+        "truth_access": "exact reference for oracle-controlled states; freeze scope before PF shift comparisons",
+        "stop": "one fixed H6 condition; report unresolved points; no altered time windows or thresholds"
+      },
+      "unresolved_before_execution": [
+        "backend implementation and private array identity closure",
+        "logical vector-action accounting, truth-call and wall-clock caps",
+        "formal approval of the inherited protocol on H6"
+      ],
+      "science_executed": false
+    },
+    {
+      "candidate_id": "A2",
+      "status": "draft_not_authorized_for_execution",
+      "question": "保存fitの項数を変えると長時間のモデル差は減るか",
+      "proposed_scope": {
+        "system": "H4",
+        "formula_ids": [
+          "m5_best"
+        ],
+        "states": [
+          "cisd",
+          "exact"
+        ],
+        "powers": [
+          [
+            4,
+            6
+          ],
+          [
+            4,
+            6,
+            8
+          ]
+        ],
+        "fit_count": 4,
+        "training_source": "artifacts/lab_progress_h4_state_checks_20261007/training_proxies.csv",
+        "evaluation_times": [
+          2.1466061014866242,
+          3.5175172132783867
+        ],
+        "target": "fhat_minus_direct_proxy",
+        "new_pf_actions": 0,
+        "new_diagonalizations": 0,
+        "new_model_refits": true,
+        "stop": "four saved-value fits only; original models and budgets unchanged"
+      },
+      "unresolved_before_execution": [
+        "coefficient identifiability and gate policy for three-term model",
+        "approve saved-value refitting; no claim of unique causal attribution"
+      ],
+      "science_executed": false
+    },
+    {
+      "candidate_id": "A3",
+      "status": "draft_not_authorized_for_execution",
+      "question": "H6でも他のPF固有成分が代理量へ入るか",
+      "proposed_scope": {
+        "system": "H6",
+        "formula_ids": [
+          "m5_best"
+        ],
+        "reference_state": "exact",
+        "primary_time": 2.2834071119880326,
+        "primary_time_role": "saved pointwise branch_reliable direct minimum",
+        "optional_time": 0.4,
+        "maximum_distinct_times": 2,
+        "stop": "one or two declared points; closure and component audit; selected unconfirmed point excluded from formal claims"
+      },
+      "unresolved_before_execution": [
+        "choose one versus two points",
+        "eigenspace matching and degeneracy rule; retain original formal classification"
+      ],
+      "science_executed": false
+    },
+    {
+      "candidate_id": "A4",
+      "status": "draft_not_authorized_for_execution",
+      "question": "別鎖の枝不成立の条件は閉じられるか",
+      "proposed_scope": {
+        "stage": "saved-scalar diagnosis before any new branch continuation",
+        "systems_to_choose_from": [
+          "H5",
+          "H6"
+        ],
+        "number_of_systems": 1,
+        "formula_ids": [
+          "m5_best"
+        ],
+        "frozen_selected_times": {
+          "H5": 4.727359531550308,
+          "H6": 3.0391925964974056
+        },
+        "new_point_schedule": null,
+        "maximum_new_points": null,
+        "stop": "diagnosis first; old unconfirmed classification retained"
+      },
+      "unresolved_before_execution": [
+        "physical correspondence and cluster/projector rules",
+        "exact time schedule and numerical/resource caps",
+        "approval before new continuation; no guarantee of branch closure"
+      ],
+      "science_executed": false
+    },
+    {
+      "candidate_id": "A5",
+      "status": "draft_not_authorized_for_execution",
+      "question": "人工状態の感度は混入方向に依存するか",
+      "proposed_scope": {
+        "system": "H4",
+        "formula_ids": [
+          "yoshida4",
+          "current_m3",
+          "two_term_center",
+          "m5_best"
+        ],
+        "additional_direction": "phase-aligned RHF residual orthogonal to exact",
+        "q_values": [
+          0.001,
+          0.01,
+          0.05
+        ],
+        "phase_values_radians": [
+          0.0,
+          1.5707963267948966,
+          3.141592653589793,
+          4.71238898038469
+        ],
+        "inherit_time_grid_from": "A1",
+        "new_case_count": 48,
+        "new_evaluation_row_count": 576,
+        "stop": "one direction; record overlap with old CISD direction; no diagnostic-policy changes"
+      },
+      "unresolved_before_execution": [
+        "check direction distinctness without selecting it post hoc",
+        "private matrix reuse, calls and resource limits"
+      ],
+      "science_executed": false
+    },
+    {
+      "candidate_id": "A6",
+      "status": "draft_not_authorized_for_execution",
+      "question": "候補最小費用は時刻の刻みに敏感か",
+      "proposed_scope": {
+        "system": "H4",
+        "formula_ids": [
+          "m5_best"
+        ],
+        "saved_minimum": 3.5175172132783867,
+        "local_window": [
+          3.4992784837768185,
+          3.5358510055922965
+        ],
+        "proposed_nine_point_grid": [
+          3.4992784837768185,
+          3.5038381661522107,
+          3.5083978485276024,
+          3.5129575309029946,
+          3.5175172132783867,
+          3.5221006613568644,
+          3.5266841094353416,
+          3.531267557513819,
+          3.5358510055922965
+        ],
+        "total_coordinates": 9,
+        "reused_coordinates": 3,
+        "distinct_new_coordinates": 6,
+        "stop": "local interval only; new local minimum separate from old grid minimum",
+        "grid_rule": "four subdivisions on each side of the saved minimum; includes existing left, minimum and right"
+      },
+      "unresolved_before_execution": [
+        "repeatability and branch evaluation call caps",
+        "approve six new coordinates; no global optimality claim"
+      ],
+      "science_executed": false
+    },
+    {
+      "candidate_id": "A7",
+      "status": "draft_not_authorized_for_execution",
+      "question": "未使用条件へ凍結手順が移るか",
+      "proposed_scope": {
+        "condition": null,
+        "number_of_conditions": 1,
+        "procedure": null,
+        "new_molecule_or_geometry": true,
+        "stop": "design and source choice first; no tuning from validation truth"
+      },
+      "unresolved_before_execution": [
+        "intended independent claim and overlap with existing second-study validation",
+        "molecule or geometry, exact coordinate set, PFs, input state and source/backend",
+        "frozen caps/margins/gates and call limits"
+      ],
+      "science_executed": false
+    },
+    {
+      "candidate_id": "A8",
+      "status": "draft_not_authorized_for_execution",
+      "question": "状態改善と選択時刻での直接校正の資源効果は何か",
+      "proposed_scope": {
+        "existing_design_snapshot": "9accc300ba7b8049ae9a1ef870ca4e7c0032e6ae",
+        "existing_design_status": "NO_GO_FOR_FS_C1",
+        "conditions": [
+          "N2_active_eq_sto3g",
+          "CO_active_eq_sto3g"
+        ],
+        "arms": {
+          "M00": "CISD + short-time fit",
+          "M10": "Ritz8 + short-time fit",
+          "M01": "CISD + selected-time direct proxy",
+          "M11": "Ritz8 + selected-time direct proxy"
+        },
+        "pf_and_qpe_time_fixed": true,
+        "stage": "C0 preparation only",
+        "stop": "do not regenerate missing arrays or execute FS-C1"
+      },
+      "unresolved_before_execution": [
+        "original three-point baseline versus proposed five-point fit",
+        "private source canonical identities",
+        "native precision and complete cost/call/resource accounting",
+        "explicit readiness and science authorization"
+      ],
+      "science_executed": false
+    }
+  ]
+}
