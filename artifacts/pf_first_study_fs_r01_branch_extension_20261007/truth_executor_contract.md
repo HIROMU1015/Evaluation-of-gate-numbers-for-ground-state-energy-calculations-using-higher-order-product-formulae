@@ -1,0 +1,5 @@
+# Production truth executor preflight
+
+truth_executor.execute_truthは1568-sector metadataにbindしたCPU native PF identity-block construction→complex Schur→ordered branch matching→residual/ unitarity→private scalar/checkpointの経路。condition内は昇順に前checkpointを検証して追跡し、計12以外を受け付けない。N2完了後COへ進む。failureはrun全体の残りtruthを中止する。
+
+RUN_STARTEDのexclusive leaseがretryを防ぐ。scalar returnをfsync/private保存後にvector checkpoint、最後にcomplete ladder検証。public serialization recoveryはprivate scalarsを読み直すだけ。vector/ground/unitaryをGitへ出さない。R0.1ではproduction guardが全経路を拒否し、tiny toy fixturesのみ実行する。
