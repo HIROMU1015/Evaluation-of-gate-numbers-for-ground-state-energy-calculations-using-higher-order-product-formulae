@@ -1,0 +1,187 @@
+{
+  "input_sha256": "1291171246c1f50cf51530f0b6f15103ed98e402cd7b3281986448360f6412ec",
+  "comments": [
+    {
+      "index": 1,
+      "line": 175,
+      "slide": "### Slide 6：予測しやすいPFが、低コストなPFとは限らなかった",
+      "comment": "いちいち20000点とか言わなくてよい",
+      "resolution": "本文の探索点数を削り、費用最小時刻の数値探索と記述した。",
+      "status": "resolved"
+    },
+    {
+      "index": 2,
+      "line": 190,
+      "slide": "### Slide 6：予測しやすいPFが、低コストなPFとは限らなかった",
+      "comment": "これは2項モデルの話か",
+      "resolution": "0.168%・0.172%は一項モデルの時刻選択による費用超過であることを明示した。",
+      "status": "resolved"
+    },
+    {
+      "index": 3,
+      "line": 209,
+      "slide": "### Slide 7：厳密状態を使えない条件では、近似状態が誤差予測へ与える影響を分けて評価する",
+      "comment": "摂動論との違いは",
+      "resolution": "有効Hamiltonianの固有エネルギー補正と、二つの発展の重なりから作る代理量の違いを説明した。",
+      "status": "resolved"
+    },
+    {
+      "index": 4,
+      "line": 252,
+      "slide": "### Slide 8：予測誤差を、モデル・状態・代理量の3成分に分ける",
+      "comment": "この補足はいらない",
+      "resolution": "指定されたSlide 8の補足を削除した。",
+      "status": "resolved"
+    },
+    {
+      "index": 5,
+      "line": 279,
+      "slide": "### Slide 9：H4で状態以外を固定し、状態を置き換えた影響を切り分ける",
+      "comment": "調べた結果みたいのは載せているっけ",
+      "resolution": "保存された正負時刻の代理量から、奇数成分と平均後の状態差の結果を追記した。",
+      "status": "resolved"
+    },
+    {
+      "index": 6,
+      "line": 318,
+      "slide": "### Slide 10：同じ基底状態重なりでも、相対位相によって代理量のずれは変わる",
+      "comment": "そもそもの純粋なCISDやRHFの厳密基底状態との重なりみたいのを先に書いてほしい。",
+      "resolution": "人工状態の説明に先立ち、元のRHF・CISDと厳密状態の重なりの二乗を示した。",
+      "status": "resolved"
+    },
+    {
+      "index": 7,
+      "line": 321,
+      "slide": "### Slide 11：H4の短時間では、49/56ケースで状態差が三成分中で支配した",
+      "comment": "ちなみにこれのH6のものってあったっけ",
+      "resolution": "既存H6結果を追記し、H4・H6とも信号判定成立ケースの集計と元の全56ケース分類を分けた。",
+      "status": "resolved"
+    },
+    {
+      "index": 8,
+      "line": 340,
+      "slide": "### Slide 11：H4の短時間では、49/56ケースで状態差が三成分中で支配した",
+      "comment": "これはFCIからCISDという意味か",
+      "resolution": "厳密状態（FCI）からCISDへ入力を置き換えた代理量差と明示した。",
+      "status": "resolved"
+    },
+    {
+      "index": 9,
+      "line": 353,
+      "slide": "### Slide 12：目標精度達成・過剰予算・PFと時刻の選択による費用差を別々に評価する",
+      "comment": "なぜCISDから予測するのか、FCIからではだめなのか",
+      "resolution": "FCIを使う対照と、FCIを使えない状況を想定したCISDによる選択の目的を区別した。",
+      "status": "resolved"
+    },
+    {
+      "index": 10,
+      "line": 363,
+      "slide": "### Slide 12：目標精度達成・過剰予算・PFと時刻の選択による費用差を別々に評価する",
+      "comment": "認識としては、まずモデル誤差から求めたコストはそもそも誤差が必要精度を満たすかわからないからBで余剰分を持たせる。C_direct はPFもｔもC_model と同じものを使って、誤差だけ違う感じか。そしてC_grid では探索範囲上のPFとｔをすべて調べて最小のコストを見る感じか",
+      "resolution": "Bは1%の事前余裕、C_directは同PF・同時刻で誤差だけ置換、C_gridは固定候補集合の最小費用と説明した。",
+      "status": "resolved"
+    },
+    {
+      "index": 11,
+      "line": 397,
+      "slide": "### Slide 14：選択を固定したまま、PF固有値で目標精度達成と必要費用を直接評価する",
+      "comment": "どのように基底状態との対応を確定する判定を行うのか",
+      "resolution": "直前の固有状態からの連続追跡、位相補正、重なりの二乗0.9等の固定判定条件を説明した。",
+      "status": "resolved"
+    },
+    {
+      "index": 12,
+      "line": 462,
+      "slide": "### Slide 16：最安候補を逃したのは、長時間のPF誤差をモデルが過大評価したためだった",
+      "comment": "この次にの話はどこで出てくるのか",
+      "resolution": "次のSlide 17で二つの時刻を揃えて三成分を計算することを明示した。",
+      "status": "resolved"
+    },
+    {
+      "index": 13,
+      "line": 481,
+      "slide": "### Slide 17：H4の長時間では、状態差だけでなくモデル差・代理量差も大きかった",
+      "comment": "これが何を言っているのかよくわからない、短い時刻とか、長い時刻とかが良くわかっていない",
+      "resolution": "短時間の評価範囲、長時間の二点、資源モデルのfit範囲を具体的な時刻で示した。",
+      "status": "resolved"
+    },
+    {
+      "index": 14,
+      "line": 493,
+      "slide": "### Slide 18：状態を改善すると、同じPF・時刻の予測差は縮んだが残った",
+      "comment": "これは f-g_近似状態 のことか",
+      "resolution": "予測値f自体、モデル差f-g、実際のずれとの差f-deltaを区別した。",
+      "status": "resolved"
+    },
+    {
+      "index": 15,
+      "line": 518,
+      "slide": "### Slide 19：厳密状態でも、代理量が単一のPF固有値誤差と一致するとは限らない",
+      "comment": "な二への寄与",
+      "resolution": "各PF固有成分が厳密状態の代理量g0へ寄与することを明示した。",
+      "status": "resolved"
+    },
+    {
+      "index": 16,
+      "line": 528,
+      "slide": "### Slide 19：厳密状態でも、代理量が単一のPF固有値誤差と一致するとは限らない",
+      "comment": "どの点",
+      "resolution": "この点という表現を時刻3.518へ置き換えた。",
+      "status": "resolved"
+    },
+    {
+      "index": 17,
+      "line": 530,
+      "slide": "### Slide 19：厳密状態でも、代理量が単一のPF固有値誤差と一致するとは限らない",
+      "comment": "この補足で何を言いたいのかが判らない。",
+      "resolution": "固有成分の和の整合性と、単一位相のsine近似差では大きな代理量差を説明できないことを補足した。",
+      "status": "resolved"
+    },
+    {
+      "index": 18,
+      "line": 545,
+      "slide": "### Slide 20：別H-chainの長時間予測は補助評価にとどまり、同じ誤差機構かは未確認",
+      "comment": "どんな条件だっけ",
+      "resolution": "Slide 14の連続枝・重なり等の条件を参照した。",
+      "status": "resolved"
+    },
+    {
+      "index": 19,
+      "line": 545,
+      "slide": "### Slide 20：別H-chainの長時間予測は補助評価にとどまり、同じ誤差機構かは未確認",
+      "comment": "でかいｔではその補助的に選んだ基底状態の固有値誤差が誤差目標値を超えたということか",
+      "resolution": "補助PF誤差と元予算のQPE誤差を分け、H2/H5はPFだけ、H6は合計で目標超過と明示した。",
+      "status": "resolved"
+    },
+    {
+      "index": 20,
+      "line": 557,
+      "slide": "### Slide 21：開発6条件は目標精度を達成したが、HFの予算は候補最小費用の約2.1倍だった",
+      "comment": "計算空間とは",
+      "resolution": "計算空間を対象とする電子・軌道の範囲と説明した。",
+      "status": "resolved"
+    },
+    {
+      "index": 21,
+      "line": 559,
+      "slide": "### Slide 21：開発6条件は目標精度を達成したが、HFの予算は候補最小費用の約2.1倍だった",
+      "comment": "なんの誤差モデル",
+      "resolution": "代理量を二項モデル化し、PFによるエネルギー誤差の見積もりに使うと説明した。",
+      "status": "resolved"
+    },
+    {
+      "index": 22,
+      "line": 595,
+      "slide": "### Slide 22：HFの長時間では必要費用は下がったが、1%余裕の予算は不足した",
+      "comment": "どういうこと",
+      "resolution": "保存したa4・a6を使い続け、候補時刻の上限だけを変えた比較と明示した。",
+      "status": "resolved"
+    }
+  ],
+  "input_kind": "user annotated working file; full duplicate manuscript is not published",
+  "base_outline_commit": "1d01e77247364b49dbce2e9ce2fe7c32af0fb937",
+  "verified_science_snapshot": "19362c23ccdc16b6ad0ff547cc363e138a3930d2",
+  "new_scientific_calculations": false,
+  "refitting_performed": false,
+  "preserved_user_edit": "Slide 21 supplement deletion present in the annotated input was retained."
+}
