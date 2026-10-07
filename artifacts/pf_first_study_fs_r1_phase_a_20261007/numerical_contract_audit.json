@@ -1,0 +1,85 @@
+{
+  "GPT_review_required": "Fix physical-production replay/norm comparison rules before any observation; version/freeze authority and review execution wrapper. No tolerance proposed here.",
+  "additional_execution_review_items": [
+    "explicit production PF/reference vector norm gate definition and propagation across proxies/fits/budgets",
+    "Phase A orchestration must finish both initial conditions before either cold replay; inherited helper replays per condition",
+    "Phase A exclusive lease and complete Ritz/PF diagnostic recovery wrapper still need a reviewed implementation"
+  ],
+  "existing_contracts": {
+    "C05_echo_tolerance_Ha": null,
+    "C05_status": "M00_REPRODUCTION_TOLERANCE_UNCLOSED",
+    "H4_noise_rule": "eta=max(||U†U-I||_F/|t|, |g_full_replay-g_first|,50 eps max(||H||_2,1/|t|)); same formula per arm, no truth in eta. Response conditioning/roundoff diagnostics separately reported, not a bias certificate.",
+    "H4_scope": "H4",
+    "cold_replay_rebuild": "one complete independent source/basis/state/PF/echo/proxy/fit/budget replay; no scientific intermediates shared",
+    "resource_eta": 0.02,
+    "ritz_numeric_rules": {
+      "SVD": "Thin SVD of full B=N x k. Keep sigma_i >64 eps max(N,k) sigma_max. No ridge, inverse, gap truth, parameter search. Cache one factor per distinct nonzero k_m.",
+      "cold_replay": "One complete independent replay: rebuild basis, PF block/echo backend, states, factors, all signed proxies; no cache shared across passes. Local identical S2 block cache inside one build retained. Count all repeat operations.",
+      "dtype": "complex128 / float64",
+      "eps": 2.220446049250313e-16,
+      "inherited_gates_phase_a": {
+        "U_minus_t_minus_U_t_dagger_relative_frobenius": 1e-10,
+        "group_sum_frobenius": 1e-12,
+        "hamiltonian_relative_hermiticity": 1e-12,
+        "pf_unitarity_frobenius": 1e-10,
+        "state_normalization_absolute": 1e-12
+      },
+      "initial_rank_threshold": "64 eps N max(||Hpsi||,|E|,tiny); reject norm <= threshold",
+      "noise_rule": "eta=max(||U†U-I||_F/|t|, |g_full_replay-g_first|,50 eps max(||H||_2,1/|t|)); same formula per arm, no truth in eta. Response conditioning/roundoff diagnostics separately reported, not a bias certificate.",
+      "nonfinite_policy": "Stop affected run before interpretation on any nonfinite coefficient, vector, residual or proxy. Zero-rank response is z=0 and Ritz original psi, reuse baseline.",
+      "orthogonality_gate": "||Z†Z-I||_F and ||psi†Z||_2 <=64 eps N; failure stops, no extra passes.",
+      "orthogonalization": "Exactly two modified Gram-Schmidt passes; project against psi before each pass, then sequential accepted columns. Largest-magnitude component phase made positive, first index wins ties.",
+      "precision_multiplier": 64,
+      "projected_hermiticity_gate": "||H_m-H_m†||_F <=64 eps N max(||H_m||_F,tiny); symmetrize only within this gate.",
+      "rank_stop": "Stop at first rejected direction, use identical retained prefix for all arms/m; no replacement directions or increased m. k_m=min(m,k_max).",
+      "relative_residual_denominator": "max(||a||,epsilon_num), epsilon_num=64 eps N max(||a||,1 Ha); fixed units Ha.",
+      "residual_convergence": "For each of 22 signed coordinates and consecutive m, d_next<=d_prev+eta_prev+eta_next, eta_m=64 eps N(||a||+||B_m||_F||c_m||). All comparisons must pass for Outcome A. Cutoff changes may break monotonicity; record failure, never tune cutoff.",
+      "response_diagnostics": [
+        "d_norm",
+        "relative_residual",
+        "z_norm",
+        "basis_dimension",
+        "SVD_effective_rank",
+        "condition_number_retained",
+        "condition_number_full_or_null_if_singular",
+        "singular_values",
+        "svd_threshold",
+        "rank_thresholds",
+        "orthogonality_residual",
+        "L_m",
+        "a_m"
+      ],
+      "response_residual_claim": "Equation-solving diagnostic, not target-error certificate.",
+      "rho_quality": "rho=abs(g)/max(eta,1e-300); resolved>=100, marginal>=10, unresolved otherwise; applies to each arm. No post-hoc rescue.",
+      "ritz_tie_rule": "lowest projected eigenspace within 64 eps dim(H_m)||H_m||_2; project e0 then e1,... until norm>64 eps dim(H_m), normalize, fix largest-component phase.",
+      "subsequent_rank_threshold": "64 eps N max(||Hz_previous||,||B_previous||,|E|,tiny)"
+    }
+  },
+  "missing_preregistered_acceptance_rules": [
+    "raw_proxy_replay_acceptance",
+    "fit_coefficient_replay_acceptance",
+    "arm_prediction_replay_acceptance",
+    "budget_replay_acceptance",
+    "deterministic_Ritz_diagnostic_replay_acceptance"
+  ],
+  "new_tolerance_selected": false,
+  "non_substitutions": [
+    "H4 eta=max(...,observed cold difference,...) defines a diagnostic, not a frozen upper bound for this replay",
+    "H4 full-unitary Frobenius gates are not a preregistered vector-output norm/replay rule for this 1568-sector schedule",
+    "Ritz MGS/rank/Hermiticity thresholds concern state construction, not echo/fit/budget replay error",
+    "resource eta=0.02 is a Phase B resource criterion, not numerical replay tolerance",
+    "tiny-matrix test atol/rtol do not certify physical-production tolerance",
+    "exact equality or zero tolerance has not been preregistered and is not selected here"
+  ],
+  "numerical_observed_failure": false,
+  "prior_GO_scope": "R0.1 preflight missed this numerical execution condition; old GO artifact preserved as history",
+  "production_started": false,
+  "protocol_id": "FS-R1-20261007-v2",
+  "protocol_sha256": "b2bd74e593b2023f7624bd8ff052694158d34ab7d9bd890a93515975b2e743a5",
+  "required_cold_replay_contract_closed": false,
+  "scientific_observations_used": 0,
+  "source_failure": false,
+  "status": "PHASE_A_NUMERICAL_CONTRACT_UNCLOSED",
+  "stop_authority": "current user request §23",
+  "technical_failure": false
+}
