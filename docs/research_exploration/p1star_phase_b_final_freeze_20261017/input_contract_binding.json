@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "role": "literal scientific input semantics; no operator evaluation",
+  "input_identity": {
+    "path": "docs/research_exploration/p1star_phase_b_final_freeze_20261017/scientific_input.json",
+    "bytes": 1271,
+    "sha256": "eb6581e351cabae863eab4bb40ef659a91655c25685fdd5a0fb988ab9a2521a5",
+    "git_blob_sha1": "d1d7eeb16598966c71061cab8f500464c5bcc79b"
+  },
+  "input_schema": "exact dormant validator grammar from fixed driver; no extra keys accepted",
+  "explicit_input_fields": [
+    "matrices L1/L2 one-body input arrays",
+    "particles=2",
+    "order=4",
+    "primitive factor index and X/P axis",
+    "chronological twelve-segment word",
+    "twelve closed real boxes [-1,1]"
+  ],
+  "source_fixed_semantics": {
+    "mode_count": 4,
+    "mode_indexing": "contract labels 1..4 map to source indices 0..3, preserving order",
+    "factors": "L_j=dGamma(ell_j), using the two literal input arrays",
+    "target_K": "L1^2+L2^2, unit weights; not expanded or normal ordered",
+    "primary_equality_domain": "full Fock",
+    "identification_sector_only": "N=2; no spin/point-group restriction",
+    "bus_count": 1,
+    "bus_CCR": "[X_b,P_b]=i I_b; electron/bus tensor factors",
+    "bus_finite_cutoff": null,
+    "H_known": "0, no added cleanup primitive",
+    "parameters": "x1,...,x12 real and eta-independent, [-1,1]",
+    "segment": "U_j=exp(-i eta x_j G_j), chronological list, U=U12...U1",
+    "target_formal_log": "-i eta^2 K tensor I_b modulo eta^5",
+    "normal_form": "CAR creators ascending / annihilators descending; symmetric Weyl bus",
+    "matching": "all target scalar/one-body/two-body components retained; unwanted scalar, one-body, high-body and nonidentity bus residuals vanish",
+    "source_binding": "science_spec.py, pipeline.py, operators.py, conditions.py at fixed driver commit; exact source identities in source_identity.json"
+  },
+  "uncomputed": [
+    "factor commutators",
+    "factor squares/target normal form",
+    "factor eligibility",
+    "fixed twelve-word formal log",
+    "CAR/CCR coefficient conditions",
+    "actual twelve-variable solver problem"
+  ],
+  "contract_change_required_for_input_format": false
+}
