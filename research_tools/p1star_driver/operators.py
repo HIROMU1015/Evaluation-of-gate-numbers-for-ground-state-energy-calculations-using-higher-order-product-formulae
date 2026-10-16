@@ -8,12 +8,16 @@ from p1star_foundation.exact import I, ONE, QComplex, TermLedger, TermMap
 
 
 class Arena:
-    def __init__(self, nvars=0, term_limit=200_000, event_limit=200_000, check=lambda: None):
+    def __init__(self, nvars=0, term_limit=200_000, event_limit=200_000, check=lambda: None, cached=False):
         self.nvars=nvars
         self.ledger=TermLedger(term_limit)
         self.trace=Trace(event_limit)
         self.check=check
         self.expressions=[]
+        self.cache=None
+        if cached:
+            from .cached_algebra import ProductCache
+            self.cache=ProductCache(self)
 
     def new(self, origin='derived'):
         self.check()
@@ -28,6 +32,7 @@ class Arena:
 
     def close(self):
         for expression in self.expressions:expression.close()
+        if self.cache is not None:self.cache.close()
 
     def __enter__(self):return self
     def __exit__(self,*_):self.close()
@@ -99,6 +104,14 @@ class Expression:
                 degree=left.eta_degree+right.eta_degree
                 if order is not None and degree>order:continue
                 powers=tuple(p+q for p,q in zip(left.parameters,right.parameters))
+                if self.arena.cache is not None:
+                    electron=self.arena.cache.car(left.fermions,right.fermions)
+                    if not len(electron):continue
+                    oscillator=self.arena.cache.bus(left.bus,right.bus)
+                    for ef,c in electron.items():
+                        for bf,d in oscillator.items():
+                            result.terms.add(Basis(degree,ef,bf,powers),a*b*c*d)
+                    continue
                 self.arena.trace.begin_input((self.origin,other.origin),
                     {'operation':'multiply','electron_words':(left.fermions,right.fermions),'bus_basis':(left.bus,right.bus)})
                 with normal_car(left.fermions+right.fermions,self.arena.ledger,self.arena.trace) as e:

@@ -1,6 +1,8 @@
 """Generic one-shot formal verification. This module contains no P1* inputs."""
 import hashlib
 import json
+import os
+from pathlib import Path
 import time
 from collections import Counter
 
@@ -24,9 +26,14 @@ def run_pipeline(spec,settings):
     result={'status':'INCONCLUSIVE','formal_consistent':False,'science_adopted':False,
             'attempts':1,'stages':stages,'primary_domain':'full Fock',
             'sector_failure_implies_general_sector_no_go':False}
-    arena=Arena(len(spec['word']),settings['terms'],settings['trace_events'],deadline.check)
+    arena=Arena(len(spec['word']),settings['terms'],settings['trace_events'],deadline.check,
+                cached=settings.get('algebra_backend')=='cached_tensor_products_v1')
     def stage(name):
         deadline.check();stages.append({'stage':name,'elapsed_seconds':time.monotonic()-started})
+        progress=os.environ.get('P1STAR_PROGRESS_PATH')
+        if progress:
+            Path(progress).write_text(json.dumps({'stage':name,'elapsed_seconds':time.monotonic()-started,
+                'managed_term_peak':arena.ledger.peak,'trace_events':len(arena.trace.events)})+'\n')
     try:
         stage('EXACT_INPUT_ELIGIBILITY')
         gate,factors=eligibility(spec['matrices'],arena,spec['particles'])
@@ -82,6 +89,11 @@ def run_pipeline(spec,settings):
         result['trace']={'events':events,'count':len(events),
                          'sha256':hashlib.sha256(json.dumps(events,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
                          'interpretation':'transformation log, not an independently checked proof'}
+        if arena.cache is not None:result['trace']['cache']=arena.cache.record()
+        if settings.get('trace_output')=='digest_and_derivations':
+            # Cached normalization derivations remain in the bounded record.
+            # Unlike the original implementation, duplicates are not generated.
+            result['trace']['representation']='unique normalization derivations plus cache reuse counters'
         result['managed_term_peak']=arena.ledger.peak
         result['native_terms_counted']=False
         arena.close()
