@@ -32,6 +32,13 @@ def validate_plan(plan):
     check_approval(receipt,action=SCIENCE_ACTION,input_sha256=plan['input_sha256'],settings=settings,
                    code_sha256=code_digest(),environment_sha256=sha256(environment_bytes),
                    contract_sha256=contract,addendum_sha256=sha256((root/ADDENDUM_PATH).read_bytes()))
+    if settings['terms']>200000:
+        recovery=plan.get('execution_campaign_authority',{})
+        if recovery.get('repair_and_resume_authorized') is not True or recovery.get('reference')!=receipt['approval_reference']:
+            raise ApprovalRequired('larger managed budget requires explicit technical recovery authority')
+        path=root/'docs/research_exploration/p1star_phase_b_execution_20261017/resource_recovery_addendum.md'
+        if receipt.get('technical_recovery_addendum_sha256')!=sha256(path.read_bytes()):
+            raise ApprovalRequired('technical recovery resource addendum hash mismatch')
     require_bound_backend()
     if json.loads(environment_bytes)!=collect_runtime():raise ApprovalRequired('runtime differs from approved environment record')
     if not Path(plan['attempt_directory']).is_dir():raise ApprovalRequired('persistent attempt/lock directory required')

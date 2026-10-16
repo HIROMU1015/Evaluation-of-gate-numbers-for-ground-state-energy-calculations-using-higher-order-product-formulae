@@ -19,7 +19,10 @@ def validate_settings(settings):
     for key in ('wall_seconds','rss_bytes','address_space_bytes','output_bytes',
                 'terms','trace_events','solver_timeout_ms'):
         if type(settings.get(key)) is not int or settings[key]<=0:raise ValueError('explicit positive setting required: '+key)
-    if settings['terms']>200000:raise ValueError('managed TermLedger cap cannot exceed 200000')
+    recovery_cap=settings.get('technical_recovery_terms_cap',200000)
+    if type(recovery_cap) is not int or not 200000<=recovery_cap<=2000000:
+        raise ValueError('bounded technical recovery cap must be 200000..2000000')
+    if settings['terms']>recovery_cap:raise ValueError('managed TermLedger cap exceeds explicitly frozen cap')
     if settings['output_bytes']<512:raise ValueError('at least 512 output bytes needed for stop record')
     if settings['output_bytes']>20*1024**2:raise ValueError('managed output cap cannot exceed 20 MiB')
     if settings.get('solver_rlimit') is not None and (type(settings['solver_rlimit']) is not int or settings['solver_rlimit']<=0):

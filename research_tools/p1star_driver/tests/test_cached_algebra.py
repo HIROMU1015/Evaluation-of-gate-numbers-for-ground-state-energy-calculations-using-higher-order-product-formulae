@@ -4,12 +4,20 @@ import unittest
 from p1star_driver.operators import Arena,formal_log,quadrature,dgamma
 from p1star_driver.fixtures import rectangle_fixture,toy_settings
 from p1star_driver.pipeline import run_pipeline
+from p1star_driver.practical import validate_settings
 
 
 def records(expression):return dict(expression.terms.items())
 
 
 class CachedAlgebraTests(unittest.TestCase):
+    def test_bounded_recovery_cap_is_explicit(self):
+        settings=toy_settings();settings['terms']=200001
+        with self.assertRaises(ValueError):validate_settings(settings)
+        settings['technical_recovery_terms_cap']=2000000
+        validate_settings(settings)
+        settings['terms']=2000001
+        with self.assertRaises(ValueError):validate_settings(settings)
     def test_cached_vs_foundation_tensor_products(self):
         snapshots=[]
         for cached in (False,True):
