@@ -1,0 +1,631 @@
+{
+  "schema_version": "1.0",
+  "contract_id": "P1STAR-A-v1",
+  "date_JST": "2026-10-17",
+  "created_at_UTC": "2026-10-16T16:34:44.016633+00:00",
+  "record_kind": "TECHNICAL_IMPLEMENTATION_AND_ARTIFICIAL_TESTS_ONLY",
+  "technical_readiness": "NOT_READY",
+  "scientific_feasibility_result": null,
+  "authority": {
+    "source": "latest user instruction: Codex作業指示：P1* Phase B実行基盤の構築・技術検証",
+    "authorized": [
+      "new independent worktree/branch",
+      "isolated version/hash-pinned exact solver setup",
+      "generic exact CAR/CCR/Weyl/tensor/provenance adapter implementation",
+      "known artificial math and software identity unit tests only",
+      "resource guards and small artificial OS tests",
+      "technical readiness judgement without scientific scope change",
+      "new source/tests/locks/usage/report/results/provenance commit and ordinary non-force push; independent publication verification"
+    ],
+    "P1STAR_scientific_computation_authorized": false,
+    "new_user_authority_supersedes_prior_technical_implementation_prohibition_only": true,
+    "scientific_contract_or_research_state_change_authorized": false,
+    "mandatory_stop": "after technical implementation/tests/publication verification; no P1* science until separate explicit user authorization",
+    "AGENTS_re_read_in_new_worktree": true
+  },
+  "git": {
+    "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+    "branch": "qc-p1star-phase-b-technical-foundation-20261017",
+    "base_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+    "new_worktree_initial_status": "clean",
+    "fetch_urls_checked": [
+      "git@github.com:HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae.git"
+    ],
+    "push_urls_checked": [
+      "git@github.com:HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae.git"
+    ],
+    "remotes_modified": false,
+    "only_allowed_new_paths": [
+      "docs/research_exploration/p1star_technical_foundation_20261017/technical_readiness_report.md",
+      "docs/research_exploration/p1star_technical_foundation_20261017/technical_test_results.json",
+      "research_tools/p1star_foundation/.gitignore",
+      "research_tools/p1star_foundation/README.md",
+      "research_tools/p1star_foundation/__init__.py",
+      "research_tools/p1star_foundation/_probe_worker.py",
+      "research_tools/p1star_foundation/algebra.py",
+      "research_tools/p1star_foundation/environment.py",
+      "research_tools/p1star_foundation/environment_lock.json",
+      "research_tools/p1star_foundation/exact.py",
+      "research_tools/p1star_foundation/guards.py",
+      "research_tools/p1star_foundation/requirements.lock",
+      "research_tools/p1star_foundation/solver.py",
+      "research_tools/p1star_foundation/technical_suite.py",
+      "research_tools/p1star_foundation/tests/__init__.py",
+      "research_tools/p1star_foundation/tests/test_environment.py",
+      "research_tools/p1star_foundation/tests/test_exact_algebra.py",
+      "research_tools/p1star_foundation/tests/test_guards.py",
+      "research_tools/p1star_foundation/tests/test_solver.py",
+      "docs/research_exploration/p1star_technical_foundation_20261017/provenance.json"
+    ],
+    "new_path_count": 20,
+    "existing_files_modified": false,
+    "existing_sources_recreated": false,
+    "nested_gitignore": "new package narrowly unignores only its own tests/*.py; root .gitignore unchanged"
+  },
+  "fixed_sources": [
+    {
+      "path": "docs/research_exploration/p1star_environment_binding_20261017/execution_environment_binding.md",
+      "bytes": 21459,
+      "git_blob_sha1": "af0f73277b8fe3ae62886e69c8391d31a0b7ff82",
+      "sha256": "f5e0dfeae849c6a600cb420cb3030bd9ae1501f9a8284c1e47c0da2957dacae6",
+      "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+      "source_origin_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "source_result_commit": null,
+      "verified_snapshot_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "present_in_base_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "github_url": "https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/90d439e87a9aa83444e5f3e48020c1cc05bf007f/docs/research_exploration/p1star_environment_binding_20261017/execution_environment_binding.md"
+    },
+    {
+      "path": "docs/research_exploration/p1star_environment_binding_20261017/provenance.json",
+      "bytes": 48793,
+      "git_blob_sha1": "c35b8b0162800b5f46b6679eca9ccc3ec9201a7e",
+      "sha256": "d85a23c79bed5bc281df85b9d5ce3ca9c1409a74539eddc91b460aea0cd0e987",
+      "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+      "source_origin_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "source_result_commit": null,
+      "verified_snapshot_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "present_in_base_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "github_url": "https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/90d439e87a9aa83444e5f3e48020c1cc05bf007f/docs/research_exploration/p1star_environment_binding_20261017/provenance.json"
+    },
+    {
+      "path": "docs/research_exploration/p1star_symbolic_preflight_20261017/symbolic_verification_contract_draft.md",
+      "bytes": 24542,
+      "git_blob_sha1": "8697af1403c5f1603bd099655c0b0610b39fcf59",
+      "sha256": "96f6b22768e2a92944259a44a550cb734cb6f789ee8ea5a9a66193a1994887d6",
+      "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+      "source_origin_commit": "1771564d919837e2440a9fcb175ac054284a729c",
+      "source_result_commit": null,
+      "verified_snapshot_commit": "1771564d919837e2440a9fcb175ac054284a729c",
+      "present_in_base_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "github_url": "https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/1771564d919837e2440a9fcb175ac054284a729c/docs/research_exploration/p1star_symbolic_preflight_20261017/symbolic_verification_contract_draft.md"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 5013,
+      "git_blob_sha1": "448f37bf36408dc6693fca0c7b18962ca114cc44",
+      "sha256": "7dd58db99cc6dde592f649c1e7b5b497dfa6f3512b35f0431d8aa31b250cf96b",
+      "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+      "source_origin_commit": "bfe715fc1c04325535a3c4d63ea4584e691dc322",
+      "source_result_commit": null,
+      "verified_snapshot_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "present_in_base_commit": "90d439e87a9aa83444e5f3e48020c1cc05bf007f",
+      "github_url": "https://github.com/HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae/blob/90d439e87a9aa83444e5f3e48020c1cc05bf007f/AGENTS.md"
+    }
+  ],
+  "implementation": {
+    "package_path": "research_tools/p1star_foundation",
+    "generic_infrastructure_only": true,
+    "modules": {
+      "exact": "Q(i) via Fraction pairs; sparse polynomial and managed-map ledger",
+      "algebra": "CAR normal order; exact oscillator XP/Weyl; tensor grades and origin/scope traces",
+      "solver": "single in-process exact QF_NRA call; exact witness; distinct SAT/UNSAT/UNKNOWN",
+      "environment": "runtime version and mapped library identity check; source inventory snapshot",
+      "guards": "cooperative single-job lock; bounded managed terms/output; deadline; read-only readiness; artificial OS probes",
+      "technical_suite": "known artificial tests and evidence JSON only"
+    },
+    "absent_scientific_components": [
+      "P1* factor data or input loader",
+      "factor eligibility calculation",
+      "Magnus/formal-log generator",
+      "P1* coefficient condition generator",
+      "P1* equation solver invocation",
+      "science launcher/driver"
+    ],
+    "arithmetic": "Python int/Fraction pairs representing Q(i); explicit exact SymPy QQ_I round-trip tested; no tolerance or float coefficients",
+    "factor_and_sector_relations": "separate provenance tags and full-Fock rejection for sector tags; no discovery/application of actual factor/sector relations",
+    "transformation_trace": "input ID and origin, local rule, original word; cancellation keeps trace; not a scientific CAR-dependent control selection rule"
+  },
+  "environment": {
+    "environment_lock": {
+      "path": "research_tools/p1star_foundation/environment_lock.json",
+      "bytes": 5447,
+      "git_blob_sha1": "e79636cf911ed049e911a51c31d08315145d31fb",
+      "sha256": "57b4de0028d54f1a8d8fb10dcf668a73cad0dce929ec02d63bbdb1df957a18a2"
+    },
+    "requirements_lock": {
+      "path": "research_tools/p1star_foundation/requirements.lock",
+      "bytes": 429,
+      "git_blob_sha1": "8a8220c7ad879428e26358fe71c11e53cb328dc6",
+      "sha256": "082e1cfa8024f25ef156197679aecff435e5c71486c8f5d8823fae142b7b97cd"
+    },
+    "runtime_versions": {
+      "CPython": "3.11.1",
+      "z3-solver": "4.13.3.0",
+      "SymPy": "1.13.3",
+      "mpmath": "1.3.0"
+    },
+    "new_isolated_venv_count": 1,
+    "new_runtime_packages_installed": 3,
+    "existing_venv_modifications": 0,
+    "sources": "official versioned PyPI JSON and SHA-256-verified Linux x86_64 wheels, then offline --no-index --no-deps installation into the new venv",
+    "acquisition": [
+      {
+        "package": "z3-solver",
+        "version": "4.13.3.0",
+        "metadata_url": "https://pypi.org/pypi/z3-solver/4.13.3.0/json",
+        "metadata_sha256": "a4f7183ac17320bf44204282705374908fd8ba1c5ed780f785124b419776df8e",
+        "url": "https://files.pythonhosted.org/packages/b6/f2/036f6501d3a2835cd4a17fd67364cd56337a5183e20b063d3d8a005f7288/z3_solver-4.13.3.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "filename": "z3_solver-4.13.3.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "bytes": 28124043,
+        "sha256": "794843e4946ade1561e40a75ffc1163b45d36b493fd6cc269ad1d6a65bddb8e5",
+        "requires_python": null
+      },
+      {
+        "package": "sympy",
+        "version": "1.13.3",
+        "metadata_url": "https://pypi.org/pypi/sympy/1.13.3/json",
+        "metadata_sha256": "3d596238dc3871441d8289f27cc8e58517ca72098f2a86541c12545bc9f00fdd",
+        "url": "https://files.pythonhosted.org/packages/99/ff/c87e0622b1dadea79d2fb0b25ade9ed98954c9033722eb707053d310d4f3/sympy-1.13.3-py3-none-any.whl",
+        "filename": "sympy-1.13.3-py3-none-any.whl",
+        "bytes": 6189483,
+        "sha256": "54612cf55a62755ee71824ce692986f23c88ffa77207b30c1368eda4a7060f73",
+        "requires_python": ">=3.8"
+      },
+      {
+        "package": "mpmath",
+        "version": "1.3.0",
+        "metadata_url": "https://pypi.org/pypi/mpmath/1.3.0/json",
+        "metadata_sha256": "87119e683fa33e0fcbca594469c138ecd42294fa5194f525c86787eefdfb77aa",
+        "url": "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl",
+        "filename": "mpmath-1.3.0-py3-none-any.whl",
+        "bytes": 536198,
+        "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+        "requires_python": ""
+      }
+    ],
+    "verified_wheel_binary_members": [
+      {
+        "member": "z3/lib/libz3.so",
+        "bytes": 21715032,
+        "sha256": "fa2f59a2be4292e8eefc4928f9cdc8eaad6f2ae8e44476fd67c1f03ab86e767f",
+        "installed_equals_verified_wheel": true
+      },
+      {
+        "member": "z3_solver-4.13.3.0.data/data/bin/z3",
+        "bytes": 21613408,
+        "sha256": "1cc0766515f49af2b79d2243685f496814b0feb9ceab28744cfecdbf7c5f5d9c",
+        "installed_equals_verified_wheel": true
+      }
+    ],
+    "Z3_execution": "in-process SolverFor(QF_NRA); parallel mode disabled; no solver subprocess",
+    "mapped_library": {
+      "path": "/tmp/qc-p1star-foundation-20261017-4v_c3t_n/venv/lib/python3.11/site-packages/z3/lib/libz3.so",
+      "bytes": 21715032,
+      "sha256": "fa2f59a2be4292e8eefc4928f9cdc8eaad6f2ae8e44476fd67c1f03ab86e767f"
+    },
+    "CLI_binary_not_used_for_solving": {
+      "path": "/tmp/qc-p1star-foundation-20261017-4v_c3t_n/venv/bin/z3",
+      "bytes": 21613408,
+      "sha256": "1cc0766515f49af2b79d2243685f496814b0feb9ceab28744cfecdbf7c5f5d9c"
+    },
+    "runtime_check_scope": "version, mapped-library bytes/SHA-256, runtime distribution versions before each solve; not exhaustive system-library/source revalidation",
+    "whole_environment_reproducibility_not_established": true
+  },
+  "technical_validation": {
+    "result_artifact": {
+      "path": "docs/research_exploration/p1star_technical_foundation_20261017/technical_test_results.json",
+      "bytes": 16259,
+      "git_blob_sha1": "a4dd37913eb27660f9bd87967cadb03a0ed52e37",
+      "sha256": "81dc6efb39f56069c6912398c541a338090799bcdfdaf5a8dc940194d65723e6"
+    },
+    "status": "PASS",
+    "test_count": 41,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "outer_envelope": {
+      "cpu_affinity": [
+        0
+      ],
+      "wall_cap_seconds": 60,
+      "RLIMIT_AS_virtual_bytes": 1073741824,
+      "core_dump": false,
+      "scope": "technical tests only; not 16 GiB RAM or Phase B execution proof"
+    },
+    "artificial_examples": [
+      {
+        "id": "positive_sqrt_two",
+        "status": "SAT",
+        "reason": "exact substitution checked by the same backend",
+        "input_sha256": "aaab33e92e0d3f09c5981a8f60f4fb9f540ea8e16bdaee07e7e6602ccbae9a49",
+        "exact_substitution_verified": true,
+        "independent_certificate_verified": false
+      },
+      {
+        "id": "negative_square_impossible",
+        "status": "UNSAT",
+        "reason": "trusted exact real solver conclusion; no independently checked certificate",
+        "input_sha256": "b8d43d49fe03439952d97f74405fc700f5f9b61e1f87d02724142554788c7bec",
+        "exact_substitution_verified": false,
+        "independent_certificate_verified": false
+      },
+      {
+        "id": "known_SAT_with_tiny_resource_cap",
+        "status": "UNKNOWN",
+        "reason": "max. resource limit exceeded",
+        "input_sha256": "5cfdfb44a836ea82f172d67b66e21b21bcbdc8663cd6f066d136a8209142d02a",
+        "exact_substitution_verified": false,
+        "independent_certificate_verified": false
+      },
+      {
+        "id": "twelve_variable_artificial_chain",
+        "status": "SAT",
+        "reason": "exact substitution checked by the same backend",
+        "input_sha256": "5d63a12397b808e24a0e4bc8c9fbeeeb4b51140b554dcf703866e39f33b9d2aa",
+        "exact_substitution_verified": true,
+        "independent_certificate_verified": false
+      }
+    ],
+    "twelve_variable_fixture": "tiny independent chain u0^2=1/2, other toy variables equal u0, all in closed [0,1]; no P1* conditions",
+    "witness_storage": "exact integer numerator/denominator or SMT root-obj expressions in technical result JSON; artificial scalar solver assignments, not quantum state/vector artifacts",
+    "proof_capability": {
+      "toy_status": "unsat",
+      "independent_certificate_verified": false,
+      "proof_text_available": true,
+      "proof_sha256": "40a45ee3fd6dd5df563b3d1540ad353016fad2b8525775a8e3cf7ebb7cd33d6b",
+      "proof_has_trusted_theory_lemma": true
+    },
+    "UNSAT_trust": "solver-dependent exact decision; exported proof text contains trusted theory lemma; no independent certificate checker or verification",
+    "UNKNOWN_cases": "native rlimit=1 produces UNKNOWN; separate explicitly labelled injection covers control flow; neither becomes UNSAT",
+    "new_scientific_theorem_or_performance_claim": false
+  },
+  "resource_guards": {
+    "fixed_limits": {
+      "jobs": 1,
+      "cpu_processes": 1,
+      "ram_bytes": 17179869184,
+      "wall_seconds": 1800,
+      "terms": 200000,
+      "output_bytes": 20971520
+    },
+    "tested_managed_guards": [
+      "shared-ledger map entry limit before insert, cancellation and exception release",
+      "aggregate writer/capture byte boundary",
+      "same-path exclusive launcher lock",
+      "single monotonic deadline and externally killed TERM-ignoring artificial worker",
+      "child-only single CPU affinity, one thread, hard NPROC and address-space test"
+    ],
+    "uncovered_storage": [
+      "input tuples",
+      "recursive stack",
+      "Python temporaries",
+      "trace metadata",
+      "native Z3 polynomial/projection/AST storage",
+      "SMT serialization and direct/native output"
+    ],
+    "term_limit_scope": "all owned TermMap entries sharing one ledger only; not entire contract expansion storage",
+    "output_limit_scope": "OutputBudget-owned writes and bounded artificial worker stdout/stderr capture; no comprehensive filesystem/native-output quota",
+    "memory_limit_scope": "RLIMIT_AS test bounds virtual address space only; no dedicated aggregate RAM cgroup verified",
+    "cgroup_privilege_escalations": 0,
+    "cgroup_controller_or_service_changes": 0,
+    "readiness_observation": {
+      "status": "NOT_READY",
+      "reasons": [
+        "NO_VERIFIED_DEDICATED_16_GIB_JOB_LIMIT",
+        "OPAQUE_NATIVE_AND_PYTHON_TEMPORARY_TERM_STORAGE"
+      ],
+      "resource_probe": {
+        "cgroup_path": "/sys/fs/cgroup/user.slice/user-1001.slice/session-2059.scope",
+        "cpu_affinity": [
+          0
+        ],
+        "limits": {
+          "jobs": 1,
+          "cpu_processes": 1,
+          "ram_bytes": 17179869184,
+          "wall_seconds": 1800,
+          "terms": 200000,
+          "output_bytes": 20971520
+        },
+        "cgroups_modified": false,
+        "memory.max": {
+          "value": "max",
+          "writable": false
+        },
+        "memory.swap.max": {
+          "value": "max",
+          "writable": false
+        },
+        "pids.max": {
+          "value": "max",
+          "writable": false
+        },
+        "cgroup.controllers": {
+          "value": "memory pids",
+          "writable": false
+        },
+        "cgroup_mount_readonly": true,
+        "dedicated_cgroup_verified": false,
+        "aggregate_16_GiB_limit_verified": false,
+        "native_library_internal_terms_counted": false
+      },
+      "science_authorized": false,
+      "science_entrypoint_present": false,
+      "contract_changed": false
+    },
+    "classification_reason": "actual RAM execution route missing as well as opaque internal term accounting; not merely a proposed contract wording change",
+    "contract_edits": 0,
+    "science_launch_gate": "closed; require_phase_b_ready always refuses, no science CLI option"
+  },
+  "scientific_contract_preservation": {
+    "modes": 4,
+    "identification_N": 2,
+    "primary_identity_domain": "full Fock",
+    "factors": 2,
+    "segments": 12,
+    "formal_order": 4,
+    "parameters": 12,
+    "amplitude_box": "unchanged [-1,1]",
+    "input_values_word_weights_and_controls": "refer fixed original contract only; not instantiated in code",
+    "factor_eligibility": "unevaluated; remains first scientific Phase B gate",
+    "full_Fock_failure_not_general_sector_impossibility": true,
+    "D1_D2_preserved": true,
+    "scientific_go_or_adoption": false
+  },
+  "P1STAR_scientific_action_counts": {
+    "fixed_factor_products_commutators_or_normal_forms": 0,
+    "factor_eligibility": 0,
+    "Magnus_or_formal_log_expansion": 0,
+    "CAR_CCR_coefficient_conditions": 0,
+    "actual_twelve_parameter_solving": 0,
+    "new_proof_or_counterexample_search": 0,
+    "molecular_simulation": 0,
+    "pulse_optimization": 0,
+    "circuit_generation_or_compile": 0,
+    "benchmark": 0,
+    "contract_or_scientific_result_changes": 0,
+    "STOP_PAUSE_releases": 0,
+    "scientific_reviews": 0,
+    "formal_adoptions": 0
+  },
+  "preservation": {
+    "precommit_comparison": {
+      "before_sha256": "ba6795773a33b12d003c619eee1883883e5ee22144be719ffe5ed37a0464e724",
+      "after_sha256": "cdd508934be122bdbc8744ad7d39ff5fa8d265499f38f13456f48d6695282953",
+      "comparisons": {
+        "/home/abe/Project/Partially Randomized Trotter": {
+          "baseline_count": 205,
+          "fully_unchanged_count": 204,
+          "changed_worktrees": [
+            {
+              "worktree": "/home/abe/Project/Partially Randomized Trotter/.worktrees/track-b-m1s-v1-v0-preparation-20261017",
+              "changed_fields": [
+                "head",
+                "index_semantic_sha256",
+                "status_hex",
+                "status_sha256",
+                "untracked_metadata"
+              ],
+              "old_head": "870af3f65e3e31e19d2b002c556216c7340c06f0",
+              "new_head": "be2da2c3c4ed1d826a76e8a08a98ff6c92ce90c5"
+            }
+          ],
+          "missing_worktrees": [],
+          "new_worktrees": []
+        },
+        "/home/abe/myproject/Evaluation_numGate_highorder": {
+          "baseline_count": 90,
+          "fully_unchanged_count": 90,
+          "changed_worktrees": [],
+          "missing_worktrees": [],
+          "new_worktrees": [
+            "/tmp/qc-p1star-foundation-20261017-4v_c3t_n/worktree"
+          ]
+        }
+      }
+    },
+    "local_comparison_receipt_sha256": "edb794d653ed53689a2b13866ea1c48bc035d05005503772bf31c147677fd807",
+    "Evaluation_preexisting_worktrees_unchanged": 90,
+    "concurrent_PR_observation": {
+      "worktree": "/home/abe/Project/Partially Randomized Trotter/.worktrees/track-b-m1s-v1-v0-preparation-20261017",
+      "old_head": "870af3f65e3e31e19d2b002c556216c7340c06f0",
+      "new_head": "be2da2c3c4ed1d826a76e8a08a98ff6c92ce90c5",
+      "untracked_path_count_before": 14,
+      "untracked_path_count_after": 0,
+      "staged_unstaged_diff_and_dirty_tracked_bytes_unchanged": true,
+      "writer_identity": "not independently identified",
+      "task_PR_operations": "read-only; retained without reverting or writing"
+    },
+    "methods": [
+      "GIT_OPTIONAL_LOCKS=0 read-only snapshots of all registered existing worktrees",
+      "HEAD, semantic index, porcelain v2 -z",
+      "staged/unstaged binary diff hashes",
+      "dirty tracked bytes/SHA-256 or symlink/missing status",
+      "untracked path/mode/size/mtime_ns/symlink metadata"
+    ],
+    "limits": [
+      "untracked/ignored/runtime content not exhaustively byte-hashed",
+      "concurrent activity recorded without writer attribution",
+      "unrelated refs not claimed globally immutable; own new worktree/branch/remote-tracking metadata authorized"
+    ],
+    "protected_SOURCE_results_authorization_grant_STOP_PAUSE_edits": 0,
+    "states_retained": [
+      "T1-D withdrawn/closed",
+      "U1/U3/U4 existing STOP",
+      "FS-R1 Phase B unauthorized",
+      "PR existing CLOSED/STOP/PAUSED/HOLD/NOT_ADOPTED",
+      "P1* remains unadopted, scientific Phase B unauthorized"
+    ]
+  },
+  "official_documentation": [
+    {
+      "url": "https://z3prover.github.io/papers/programmingz3.html#sec-nlsat",
+      "scope": "official QF_NRA/NLSat description, read this task; generic capability independently exercised only on artificial problems",
+      "installed_version_evidence": "actual version/library/known-problem tests, not latest documentation alone"
+    },
+    {
+      "url": "https://z3prover.github.io/api/html/z3.z3.html",
+      "scope": "official exact algebraic/model/proof API, read this task; current live document is not a pinned runtime source"
+    },
+    {
+      "scope": "CAR/CCR/Weyl definitions from fixed scientific contract; prior OpenFermion/SymPy comparisons retained as existing context, no copied third-party implementation"
+    }
+  ],
+  "artifact_manifest": {
+    "entries": [
+      {
+        "path": "docs/research_exploration/p1star_technical_foundation_20261017/technical_readiness_report.md",
+        "bytes": 13936,
+        "git_blob_sha1": "219ec4d3a34f07e55119080b898e47e237aa4004",
+        "sha256": "fb0967ab883d3d4980cbf59f7792f94d9d4a7390e63062aa17265d5d0300f8e0"
+      },
+      {
+        "path": "docs/research_exploration/p1star_technical_foundation_20261017/technical_test_results.json",
+        "bytes": 16259,
+        "git_blob_sha1": "a4dd37913eb27660f9bd87967cadb03a0ed52e37",
+        "sha256": "81dc6efb39f56069c6912398c541a338090799bcdfdaf5a8dc940194d65723e6"
+      },
+      {
+        "path": "research_tools/p1star_foundation/.gitignore",
+        "bytes": 39,
+        "git_blob_sha1": "0b9925d56ceb282558b58f74cba704915b0bb547",
+        "sha256": "958cce842c9b7b3428259fc9d5532bcbffa6dc937a311ddee3e6f819029982f2"
+      },
+      {
+        "path": "research_tools/p1star_foundation/README.md",
+        "bytes": 6297,
+        "git_blob_sha1": "5d2474c233ca1ad9aa1e746dab914f021056a75d",
+        "sha256": "ae73fce9e6a135b001cf0e7aa1ba8014559176a2362cbe5d527d518f90a8a3c4"
+      },
+      {
+        "path": "research_tools/p1star_foundation/__init__.py",
+        "bytes": 80,
+        "git_blob_sha1": "2bb773948fa7519b70bddc20ebd5036b1ff9ee69",
+        "sha256": "55dad5b37e52500fbacb07be6cf314ee7154b18ee9fdf9445ae9241085e51737"
+      },
+      {
+        "path": "research_tools/p1star_foundation/_probe_worker.py",
+        "bytes": 1727,
+        "git_blob_sha1": "09647f169a380f72806d2233aaff846a4e6612da",
+        "sha256": "a7023c301a9321eda4aaf264ee194602cb3aba2d1956642f3625276fe5b26f2c"
+      },
+      {
+        "path": "research_tools/p1star_foundation/algebra.py",
+        "bytes": 8206,
+        "git_blob_sha1": "f274e8d1e3ed4dff29cb4c199ce26a9434800cf3",
+        "sha256": "198c143f9623397bdd4af158fb83934241834a974db039bae2e21488afc3356b"
+      },
+      {
+        "path": "research_tools/p1star_foundation/environment.py",
+        "bytes": 3852,
+        "git_blob_sha1": "40f998b8b658efb6e6aabaf1dcbbd8f12e1fb5f3",
+        "sha256": "35cce269dbbeb5c40cc98ff66c69e5f174f76643b85f76a218079f06dc628d3a"
+      },
+      {
+        "path": "research_tools/p1star_foundation/environment_lock.json",
+        "bytes": 5447,
+        "git_blob_sha1": "e79636cf911ed049e911a51c31d08315145d31fb",
+        "sha256": "57b4de0028d54f1a8d8fb10dcf668a73cad0dce929ec02d63bbdb1df957a18a2"
+      },
+      {
+        "path": "research_tools/p1star_foundation/exact.py",
+        "bytes": 5548,
+        "git_blob_sha1": "bc43fafaec1653f1435f3a5d5241115e75be11fb",
+        "sha256": "34dcece6f16cf2eac89166c10a4d6c75540918f1460fff94438d2343f15fbfaf"
+      },
+      {
+        "path": "research_tools/p1star_foundation/guards.py",
+        "bytes": 7792,
+        "git_blob_sha1": "d1f1aac4ecfa60c7cd2c6e6fa0e9cf66d30b13b5",
+        "sha256": "c3b2d4cc1cef7f4cf1dda09b55e0c199875ee43c0b21986d6426b0e3f7d5a5cb"
+      },
+      {
+        "path": "research_tools/p1star_foundation/requirements.lock",
+        "bytes": 429,
+        "git_blob_sha1": "8a8220c7ad879428e26358fe71c11e53cb328dc6",
+        "sha256": "082e1cfa8024f25ef156197679aecff435e5c71486c8f5d8823fae142b7b97cd"
+      },
+      {
+        "path": "research_tools/p1star_foundation/solver.py",
+        "bytes": 7323,
+        "git_blob_sha1": "38f33701f64f24529eb308ad68565ffe743a9dd8",
+        "sha256": "8a09af9f32663949fe7b7b139247529922c72f7444a0ab46d8aefe378531f2be"
+      },
+      {
+        "path": "research_tools/p1star_foundation/technical_suite.py",
+        "bytes": 3845,
+        "git_blob_sha1": "13af7c3b4c35040f98fab529bb07ddf0ae635fa0",
+        "sha256": "02fd7b1fafab0075c808877f52643d869ed447f8d8c2973a1a6aa746f52f6c74"
+      },
+      {
+        "path": "research_tools/p1star_foundation/tests/__init__.py",
+        "bytes": 76,
+        "git_blob_sha1": "f7fb6bd073bf3819137abafcfb2096b66c1e8d9d",
+        "sha256": "8d162d2f3170fa925d85f5efbaa3fd9039773809dc1d81b3c09ec6f3d3c4c2a7"
+      },
+      {
+        "path": "research_tools/p1star_foundation/tests/test_environment.py",
+        "bytes": 1367,
+        "git_blob_sha1": "b87993fcfb4c9c559b756a7f839b3d47c4b96d0b",
+        "sha256": "13a5ea183214c3d4b376713db8562a83ea316d537a88dab4607e9ebe58ba2bd6"
+      },
+      {
+        "path": "research_tools/p1star_foundation/tests/test_exact_algebra.py",
+        "bytes": 8605,
+        "git_blob_sha1": "300854aab6015771f7f4e507729a14686b3e2544",
+        "sha256": "859749fb62aebcf8474544728b07faa018ad257525e4017a80d20ec66808a74f"
+      },
+      {
+        "path": "research_tools/p1star_foundation/tests/test_guards.py",
+        "bytes": 3370,
+        "git_blob_sha1": "5461471a4f5ede3a111f387b281fef3161e09a40",
+        "sha256": "b66775a993a2fa7ec543507c539498ac7811bdbb35539e9dcf878149c7479513"
+      },
+      {
+        "path": "research_tools/p1star_foundation/tests/test_solver.py",
+        "bytes": 4790,
+        "git_blob_sha1": "265222b0a02d06afcf1873e0768062b12942400a",
+        "sha256": "bd2907ee12aee2235e4dc24ec5661967c051536728e16089e3fd5876fcc3db04"
+      }
+    ],
+    "new_artifact_count": 20,
+    "self_exclusion": "provenance.json intentionally excluded from its own hash manifest; independent post-publication receipt verifies all 20 final files",
+    "excluded_from_commit": [
+      "isolated venv and third-party wheels/binaries/source",
+      "local preservation/publication audit scripts and receipts",
+      "unrelated dirty/staged/untracked work",
+      "runtime/secrets/pickle/matrix/vector/unitary/exact quantum states",
+      "P1* scientific inputs or generated scientific conditions/results"
+    ]
+  },
+  "publication_at_record_creation": {
+    "status": "PRECOMMIT_RECORD; final publication identity reported separately",
+    "commit_normal_push_authorized": true,
+    "required_checks": [
+      "remote tip SHA",
+      "fresh independent Git commit/blob retrieval",
+      "GitHub raw bytes",
+      "byte count, Git blob SHA1 and SHA-256 for every new file",
+      "fixed source unchanged",
+      "only 20 allowed added paths"
+    ],
+    "post_publication_receipt": "local separate record; no rewriting fixed sources or precommit provenance to backfill status"
+  },
+  "remaining_conditions": [
+    "authorized dedicated job resource environment and technical enforcement tests",
+    "complete internal term accounting or separately approved contract decision, not changed here",
+    "future science driver scope/source/input/environment/budget freeze",
+    "separate explicit user approval before P1* science"
+  ],
+  "mandatory_stop": "implementation, artificial verification and publication only; no P1* scientific computation/review/adoption"
+}
