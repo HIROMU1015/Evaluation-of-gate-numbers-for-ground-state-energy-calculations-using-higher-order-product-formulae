@@ -1,0 +1,736 @@
+{
+  "schema_version": "1.0",
+  "date_JST": "2026-10-17",
+  "created_at_UTC": "2026-10-16T18:36:19.559034+00:00",
+  "contract_id": "P1STAR-A-v1",
+  "record_kind": "COMPLETED_SCIENTIFIC_EXECUTION_WITH_AUTHORIZED_TECHNICAL_RECOVERY",
+  "scientific_computation_completed": true,
+  "scientific_classification": "NO_SOLUTION_IN_FIXED_ANSATZ",
+  "solver_status": "UNSAT",
+  "authority": {
+    "source": "latest user instruction in current conversation",
+    "exact_text_file": "docs/research_exploration/p1star_phase_b_execution_20261017/user_execution_authority.txt",
+    "exact_text_sha256": "89264c2790cae3304335b622c13ecc07539c9830861bc81efcac2318973004e0",
+    "scientific_execution_authorized": true,
+    "technical_interruption_repair_and_resume_authorized": true,
+    "interpretation": "same frozen P1STAR-A-v1 problem; implementation/logging/resource recovery allowed; no scientific ansatz/factor/sector/order/target changes",
+    "supersedes_prior_no_retry_only_for_current_campaign": true,
+    "prior_freeze_and_false_authorization_records_overwritten": false,
+    "new_proof_or_counterexample_search_scientific_review_formal_adoption_authorized": false,
+    "other_research_STOPs_released": false,
+    "AGENTS_reread_in_independent_worktree": true,
+    "necessary_commit_normal_push_and_identity_audit_authorized_by_handoff_rules": true
+  },
+  "git": {
+    "repository": "HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae",
+    "branch": "qc-p1star-phase-b-execution-20261017",
+    "base_freeze_commit": "77f6b450ac6a4899b537e22420dfa8a7833bccf2",
+    "result_origin_commit": "a63c6dcf310712023e76787b8e9cd991b2c59bfe",
+    "final_computation_source_commit": "227d1541b98aa48147cf92cc91856da5cb87f1e6",
+    "fetch_urls_checked": [
+      "git@github.com:HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae.git"
+    ],
+    "push_urls_checked": [
+      "git@github.com:HIROMU1015/Evaluation-of-gate-numbers-for-ground-state-energy-calculations-using-higher-order-product-formulae.git"
+    ],
+    "remotes_modified": false,
+    "independent_clean_worktree_used": true,
+    "repair_source_commits": [
+      "0aebf2df13de19286b07030626348842e19798ee",
+      "82a55a4fbec165e681e8ea19def5f785dca67301",
+      "227d1541b98aa48147cf92cc91856da5cb87f1e6"
+    ],
+    "source_changes_scope": [
+      "exact normal-form memoization",
+      "deduplicate repeated trace derivations",
+      "explicit finite managed term recovery cap",
+      "skip Cartesian pairs that original code discarded by eta degree",
+      "bounded progress/IO and owned-worker cleanup"
+    ],
+    "only_existing_code_files_modified": [
+      "research_tools/p1star_driver/operators.py",
+      "research_tools/p1star_driver/pipeline.py",
+      "research_tools/p1star_driver/practical.py",
+      "research_tools/p1star_driver/science.py"
+    ],
+    "publication_state_at_manifest_creation": "pending final provenance commit, ordinary push and independent remote/Git/raw audit; final handoff reports actual commit"
+  },
+  "scientific_scope": {
+    "input_sha256": "eb6581e351cabae863eab4bb40ef659a91655c25685fdd5a0fb988ab9a2521a5",
+    "modes": 4,
+    "factors": 2,
+    "identification_N": 2,
+    "primary_domain": "full Fock",
+    "segments": 12,
+    "real_parameters": 12,
+    "closed_box": "[-1,1]^12",
+    "formal_order": 4,
+    "target": "log U = -i eta^2 (L1^2+L2^2) tensor I mod eta^5",
+    "broader_P1star_impossibility_claim": false,
+    "sector_only_no_go_claim": false,
+    "scientific_GO_or_adoption": false
+  },
+  "exact_result": {
+    "status": "UNSAT",
+    "classification": "NO_SOLUTION_IN_FIXED_ANSATZ",
+    "final_run_id": "P1STAR-A-v1-20261017-66736428e878-recovery-04",
+    "eligibility": {
+      "augmented_rank": 17,
+      "checks": {
+        "factors_nonzero_full_and_sector": true,
+        "noncommuting_full_fock": true,
+        "noncommuting_sector": true,
+        "squares_nonzero_full_and_sector": true,
+        "target_nonzero_full_and_sector": true,
+        "two_body_nontrivial_full_fock": true,
+        "two_body_nontrivial_sector": true
+      },
+      "identification_N": 2,
+      "modes": 4,
+      "one_body_span_rank": 16,
+      "passed": true,
+      "primary_domain": "full Fock",
+      "relations_used": {
+        "full_fock": "CAR plus particular input coefficients",
+        "sector": "occupation-basis restriction and exact Q(i) linear span"
+      },
+      "sector_dimension": 6,
+      "sector_role": "input identification only; not an identity rescue"
+    },
+    "equations": 438,
+    "polynomial_monomial_entries": 28503,
+    "categories": {
+      "bus_nonidentity": 356,
+      "one_body": 20,
+      "two_body": 50,
+      "higher_body": 12
+    },
+    "conditions_artifact": "docs/research_exploration/p1star_phase_b_execution_20261017/coefficient_conditions.json",
+    "conditions_sha256": "5fb523ef2c39bb447783e779e6f04564a33a5bf585196c3b15caf0a2f4a2df9a",
+    "exact_solver_input_artifact": "docs/research_exploration/p1star_phase_b_execution_20261017/exact_solver_input.smt2",
+    "exact_solver_input_sha256": "1ad8745ce781e9b471028e7e6102b79f535a1dcdab2fa670439d12524ed4e8bf",
+    "backend": "Z3 QF_NRA/NLSat",
+    "backend_version": "4.13.3.0",
+    "exact_real_closed_box": true,
+    "approximate_or_random_root_search": false,
+    "final_attempt_backend_check_calls": 1,
+    "SAT_witness_substitution": "not applicable; UNSAT, no witness",
+    "independently_verified_UNSAT_certificate": false,
+    "trust_boundary": "condition generator, exact CAR/CCR implementation and trusted pinned solver; no independent proof certificate",
+    "general_P1star_impossibility_or_sector_no_go_claim": false,
+    "scientific_GO_or_adoption": false
+  },
+  "attempt_history": {
+    "final_status": "NO_SOLUTION_IN_FIXED_ANSATZ",
+    "scientific_computation_completed": true,
+    "attempts": [
+      {
+        "ordinal": 1,
+        "run_id": "P1STAR-A-v1-20261017-66736428e878",
+        "source_commit": "d1d57110238d2ea283fb6f49bfcc519d2e8ef11e",
+        "code_sha256": "df274182322caff125a5c43f9a1d80bc407bb31feb7046a62195a115ac03a31e",
+        "input_sha256": "eb6581e351cabae863eab4bb40ef659a91655c25685fdd5a0fb988ab9a2521a5",
+        "settings": {
+          "wall_seconds": 1800,
+          "rss_bytes": 12884901888,
+          "address_space_bytes": 17179869184,
+          "solver_timeout_ms": 900000,
+          "terms": 200000,
+          "trace_events": 1000000,
+          "output_bytes": 19922944,
+          "solver_rlimit": null
+        },
+        "settings_sha256": "d564e2cc7e927fa815ed8da232f7ee4bfbe8e27ab8a38c1bbbc0c651753815ee",
+        "status": "INCONCLUSIVE",
+        "stop_reason": "OUTPUT_LIMIT",
+        "receipt_elapsed_seconds": 36.245416335295886,
+        "plan": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878/approved_plan.json",
+          "bytes": 8997,
+          "sha256": "789b5e5aae5eef8579c6462a82a3c480960848aca2d9dd91b2869ea8a85dcf92"
+        },
+        "result": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878/result.json",
+          "bytes": 710,
+          "sha256": "39ea7503a0f93154a208c1eeb3a325f2a4aa486323e8167e0cbd4de7f44feeca"
+        },
+        "stderr": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878/controller_stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "owned_processes_terminated": true,
+        "marker_preserved": true,
+        "operator_interruption": false
+      },
+      {
+        "ordinal": 2,
+        "run_id": "P1STAR-A-v1-20261017-66736428e878-recovery-02",
+        "source_commit": "0aebf2df13de19286b07030626348842e19798ee",
+        "code_sha256": "8e1d58dd3cbc180204b07603d4ca6967b286d19e78b4d736bf4da2ac3d94c9b8",
+        "input_sha256": "eb6581e351cabae863eab4bb40ef659a91655c25685fdd5a0fb988ab9a2521a5",
+        "settings": {
+          "wall_seconds": 1800,
+          "rss_bytes": 12884901888,
+          "address_space_bytes": 17179869184,
+          "solver_timeout_ms": 900000,
+          "terms": 200000,
+          "trace_events": 1000000,
+          "output_bytes": 19922944,
+          "solver_rlimit": null,
+          "algebra_backend": "cached_tensor_products_v1",
+          "trace_output": "digest_and_derivations"
+        },
+        "settings_sha256": "061e91588158d08598014b811b98da42414d60d335de6ac871d426cdbeead510",
+        "status": "INCONCLUSIVE",
+        "stop_reason": "TermLimitExceeded: INCONCLUSIVE: managed term budget exhausted",
+        "receipt_elapsed_seconds": 21.44825228396803,
+        "plan": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-02/approved_plan.json",
+          "bytes": 9595,
+          "sha256": "55d5dc650904c8decfa4970c36c5d6c791c528a28d9d2ea7978a8e70d7601f6b"
+        },
+        "result": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-02/result.json",
+          "bytes": 1296056,
+          "sha256": "86f4d347f56d763aff49c4dd2164085d51f2fa93346b4eaa8e8d57b75f269dc6"
+        },
+        "stderr": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-02/controller_stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "owned_processes_terminated": true,
+        "marker_preserved": true,
+        "operator_interruption": false
+      },
+      {
+        "ordinal": 3,
+        "run_id": "P1STAR-A-v1-20261017-66736428e878-recovery-03",
+        "source_commit": "82a55a4fbec165e681e8ea19def5f785dca67301",
+        "code_sha256": "415811b5fc0d136760ec82db22ef00d0efc917d92abb2940ac9ee833b715b86d",
+        "input_sha256": "eb6581e351cabae863eab4bb40ef659a91655c25685fdd5a0fb988ab9a2521a5",
+        "settings": {
+          "wall_seconds": 1800,
+          "rss_bytes": 12884901888,
+          "address_space_bytes": 17179869184,
+          "solver_timeout_ms": 900000,
+          "terms": 2000000,
+          "trace_events": 1000000,
+          "output_bytes": 19922944,
+          "solver_rlimit": null,
+          "algebra_backend": "cached_tensor_products_v1",
+          "trace_output": "digest_and_derivations",
+          "technical_recovery_terms_cap": 2000000
+        },
+        "settings_sha256": "e6ec6ce9531e55cadbe1a4ead9608755b85b860aa4e11046ed7c0aca8a958638",
+        "status": "INCONCLUSIVE",
+        "stop_reason": "ABNORMAL_EXIT",
+        "receipt_elapsed_seconds": 141.97272582165897,
+        "plan": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-03/approved_plan.json",
+          "bytes": 9826,
+          "sha256": "2c704bdbacbb0c93ab1e59517af7466bc372f433a50c386f594938b3400dbe07"
+        },
+        "result": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-03/result.json",
+          "bytes": 832,
+          "sha256": "dbf0854a18070056e1f71769c4d65f484538748dc1f826642263b196fd95ad34"
+        },
+        "stderr": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-03/controller_stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "owned_processes_terminated": true,
+        "marker_preserved": true,
+        "operator_interruption": true
+      },
+      {
+        "ordinal": 4,
+        "run_id": "P1STAR-A-v1-20261017-66736428e878-recovery-04",
+        "source_commit": "227d1541b98aa48147cf92cc91856da5cb87f1e6",
+        "code_sha256": "81e798e87630c645557a64b2dc8bae2b04cf60465a5159d8b15f81164d17b17b",
+        "input_sha256": "eb6581e351cabae863eab4bb40ef659a91655c25685fdd5a0fb988ab9a2521a5",
+        "settings": {
+          "wall_seconds": 1800,
+          "rss_bytes": 12884901888,
+          "address_space_bytes": 17179869184,
+          "solver_timeout_ms": 900000,
+          "terms": 2000000,
+          "trace_events": 1000000,
+          "output_bytes": 19922944,
+          "solver_rlimit": null,
+          "algebra_backend": "cached_tensor_products_v1",
+          "trace_output": "digest_and_derivations",
+          "technical_recovery_terms_cap": 2000000
+        },
+        "settings_sha256": "e6ec6ce9531e55cadbe1a4ead9608755b85b860aa4e11046ed7c0aca8a958638",
+        "status": "NO_SOLUTION_IN_FIXED_ANSATZ",
+        "stop_reason": "trusted solver UNSAT over exactly the recorded equations and closed real box; no independent certificate",
+        "receipt_elapsed_seconds": 310.1607669889927,
+        "plan": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-04/approved_plan.json",
+          "bytes": 9868,
+          "sha256": "93011efd74a877d236338262d5c44e101eb5c1ddf5326bed47a967d1925bbef3"
+        },
+        "result": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-04/result.json",
+          "bytes": 6059379,
+          "sha256": "264b7181cabdb89d487272ae4ff2bacaeafd1e897304650d829da072eee4c635"
+        },
+        "stderr": {
+          "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-04/controller_stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "owned_processes_terminated": true,
+        "marker_preserved": true,
+        "operator_interruption": false
+      }
+    ],
+    "all_scientific_inputs_equal": true,
+    "technical_recovery_authority": "user_execution_authority.txt",
+    "failed_attempts_are_not_UNSAT_evidence": true,
+    "only_final_attempt_supplies_reported_math_verdict": true,
+    "initial_backend_calls_not_observable_from_output_limited_result": true,
+    "new_problem_or_policy_change_after_result": false
+  },
+  "technical_recovery": {
+    "initial_output_limit_recorded": true,
+    "managed_term_limit_interruption_recorded": true,
+    "managed_cap_change": {
+      "from": 200000,
+      "to": 2000000,
+      "authority": "latest request permits technical interruption fixes; selected bounded cap from low sampled RSS; explicit addendum and source/hash binding"
+    },
+    "trace_change": "first normalization derivations retained; duplicate replays replaced by cache hits/misses and content hash; not identical byte log to original tracing",
+    "CAR_CCR_rules_changed": false,
+    "factor_sector_identities_in_cache": false,
+    "original_eta_cutoff_changed": false,
+    "third_attempt_operator_stop": "SIGTERM only to owned worker whose cmdline exactly matched the specific recovery-03 plan; no unrelated process or host resource setting changed",
+    "resource_privilege_escalation_or_cgroup_changes": false,
+    "ordinary_sandbox_escalations": "Git metadata/network publication and exact owned-worker stop only",
+    "latest_tests": {
+      "historical_74_retained": true,
+      "total": 80,
+      "PASS": true,
+      "failures": 0,
+      "errors": 0,
+      "source_snapshot_matches_execution_source": true
+    },
+    "scientific_input_SHA256_equal_in_every_attempt": true,
+    "prior_attempts_or_markers_deleted": false
+  },
+  "runtime": {
+    "environment_snapshot_origin_commit": "77f6b450ac6a4899b537e22420dfa8a7833bccf2",
+    "environment_snapshot_path": "docs/research_exploration/p1star_phase_b_final_freeze_20261017/environment_snapshot.json",
+    "environment_snapshot_sha256": "f7ecc84b243071c810f0559d79e0fff29636d7b6ad92b8c9a2adcdf73a41dc66",
+    "Python": "3.11.1",
+    "SymPy": "1.13.3",
+    "mpmath": "1.3.0",
+    "Z3": "4.13.3.0",
+    "existing_isolated_venv_reused": true,
+    "package_installations_or_existing_locks_modified": false,
+    "combined_code_sha256": "81e798e87630c645557a64b2dc8bae2b04cf60465a5159d8b15f81164d17b17b",
+    "final_worker_elapsed_launcher_seconds": 310.1607669889927,
+    "managed_terms_peak": 465502,
+    "sampled_worker_RSS_peak_bytes": 354553856,
+    "trace_events": 14743,
+    "settings": {
+      "address_space_bytes": 17179869184,
+      "algebra_backend": "cached_tensor_products_v1",
+      "output_bytes": 19922944,
+      "rss_bytes": 12884901888,
+      "solver_rlimit": null,
+      "solver_timeout_ms": 900000,
+      "technical_recovery_terms_cap": 2000000,
+      "terms": 2000000,
+      "trace_events": 1000000,
+      "trace_output": "digest_and_derivations",
+      "wall_seconds": 1800
+    },
+    "dedicated_job_RAM_hard_cap_guaranteed": false,
+    "native_all_terms_counted": false,
+    "controller_memory_or_sampling_overshoot_strictly_bounded": false,
+    "one_math_worker_one_CPU": true,
+    "all_owned_workers_terminated": true,
+    "all_attempts_runtime_saved_bytes": 7402387,
+    "final_raw_result_identity": {
+      "path": "/home/abe/myproject/Evaluation_numGate_highorder/.runtime/p1star_phase_b/runs/P1STAR-A-v1-20261017-66736428e878-recovery-04/result.json",
+      "bytes": 6059379,
+      "sha256": "264b7181cabdb89d487272ae4ff2bacaeafd1e897304650d829da072eee4c635",
+      "runtime_only": true
+    },
+    "runtime_data_pushed": false,
+    "computed_matrix_vector_unitary_exact_state_pushed": false
+  },
+  "source_registry": {
+    "path": "docs/research_exploration/p1star_phase_b_execution_20261017/source_registry.json",
+    "verified_snapshot_commit": "a63c6dcf310712023e76787b8e9cd991b2c59bfe",
+    "source_result_and_verified_snapshot_roles_separate": true
+  },
+  "preservation": {
+    "fixed_material_paths_byte_identical_to_freeze": [
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/environment_snapshot.json",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/execution_plan_draft.json",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/freeze_audit.json",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/freeze_report.md",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/input_contract_binding.json",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/operating_settings.json",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/provenance.json",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/scientific_input.json",
+      "docs/research_exploration/p1star_phase_b_final_freeze_20261017/source_identity.json",
+      "docs/research_exploration/p1star_science_driver_20261017/driver_readiness_report.md",
+      "docs/research_exploration/p1star_science_driver_20261017/provenance.json",
+      "docs/research_exploration/p1star_science_driver_20261017/resource_policy_addendum.md",
+      "docs/research_exploration/p1star_science_driver_20261017/technical_test_results.json",
+      "research_tools/p1star_foundation/.gitignore",
+      "research_tools/p1star_foundation/README.md",
+      "research_tools/p1star_foundation/__init__.py",
+      "research_tools/p1star_foundation/_probe_worker.py",
+      "research_tools/p1star_foundation/algebra.py",
+      "research_tools/p1star_foundation/environment.py",
+      "research_tools/p1star_foundation/environment_lock.json",
+      "research_tools/p1star_foundation/exact.py",
+      "research_tools/p1star_foundation/guards.py",
+      "research_tools/p1star_foundation/requirements.lock",
+      "research_tools/p1star_foundation/solver.py",
+      "research_tools/p1star_foundation/technical_suite.py",
+      "research_tools/p1star_foundation/tests/__init__.py",
+      "research_tools/p1star_foundation/tests/test_environment.py",
+      "research_tools/p1star_foundation/tests/test_exact_algebra.py",
+      "research_tools/p1star_foundation/tests/test_guards.py",
+      "research_tools/p1star_foundation/tests/test_solver.py",
+      "docs/research_exploration/p1star_symbolic_preflight_20261017/symbolic_verification_contract_draft.md",
+      "research_tools/p1star_driver/conditions.py",
+      "research_tools/p1star_driver/eligibility.py",
+      "research_tools/p1star_driver/science_spec.py"
+    ],
+    "original_scientific_contract_changed": false,
+    "scientific_input_or_sector_or_box_or_order_changed": false,
+    "comparison_before_publication": {
+      "before_sha256": "32cbc38d3d7d6a23f512e0391e2523481d1e6777e539e6cfac526660f15201e3",
+      "after_sha256": "40b26a326b0fd2a0a2c0de86a08fe80bb51ec5b23614b22c3681c103d72d3058",
+      "comparisons": {
+        "/home/abe/Project/Partially Randomized Trotter": {
+          "baseline_count": 209,
+          "fully_unchanged_count": 208,
+          "changed_worktrees": [
+            {
+              "worktree": "/home/abe/Project/Partially Randomized Trotter",
+              "changed_fields": [
+                "status_hex",
+                "status_sha256",
+                "untracked_metadata"
+              ],
+              "old_head": "e098c54c78f589055082f9cfc2b13de50c90ca94",
+              "new_head": "e098c54c78f589055082f9cfc2b13de50c90ca94"
+            }
+          ],
+          "missing_worktrees": [],
+          "new_worktrees": [
+            "/home/abe/Project/Partially Randomized Trotter/.worktrees/track-b-m1s-gamma-pi3-preparation-20261017"
+          ]
+        },
+        "/home/abe/myproject/Evaluation_numGate_highorder": {
+          "baseline_count": 94,
+          "fully_unchanged_count": 93,
+          "changed_worktrees": [
+            {
+              "worktree": "/home/abe/myproject/Evaluation_numGate_highorder",
+              "changed_fields": [
+                "status_hex",
+                "status_sha256",
+                "untracked_metadata"
+              ],
+              "old_head": "2ba6174b6f9617d51766579c775a77132f3c7f57",
+              "new_head": "2ba6174b6f9617d51766579c775a77132f3c7f57"
+            }
+          ],
+          "missing_worktrees": [],
+          "new_worktrees": [
+            "/tmp/qc-p1star-phase-b-execution-20261017-_wcf8x9s/worktree"
+          ]
+        }
+      }
+    },
+    "authorized_runtime_additions_audit": {
+      "Evaluation_baseline_worktrees": 94,
+      "other_93_fully_unchanged": true,
+      "root_existing_status_after_removing_authorized_new_runtime_files_identical": true,
+      "root_existing_untracked_metadata_identical": true,
+      "root_authorized_runtime_additions": 24,
+      "new_worktree_owned_by_task": "/tmp/qc-p1star-phase-b-execution-20261017-_wcf8x9s/worktree",
+      "PR_observed_parallel_changes": "PR root untracked status changed and one new preparation worktree appeared; no mutations by this task",
+      "comparison_file_hash": "40d0ed03db8e172b3d3ba45eaacd281ceebcc98a7105b7a9c090bc7920468fcd"
+    },
+    "scope": "HEAD, semantic index, dirty/staged diff, dirty tracked bytes/hash, untracked metadata; not complete contents of every untracked/ignored file",
+    "PR_mutated_by_this_task": false,
+    "parallel_PR_changes": "one root untracked change and one new worktree observed; recorded without reverting",
+    "unrelated_scientific_results_STOP_PAUSE_grant_authorization_manifests_changed": false,
+    "unrelated_statuses_preserved": [
+      "T1-D",
+      "U1/U3/U4",
+      "first/second study states",
+      "FS-R1 Phase B unauthorized",
+      "PR Track A/B own states",
+      "D1",
+      "D2"
+    ],
+    "postpublication_comparison": "required separately in final handoff/receipt"
+  },
+  "final_boundary": {
+    "computation_complete": true,
+    "no_further_science_run_after_UNSAT": true,
+    "mandatory_stop": "after results/source/provenance publication and identity verification; no new scientific problem, theorem, review, policy change or adoption"
+  },
+  "manifest": {
+    "files": [
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/attempt_01_receipt.json",
+        "bytes": 1606,
+        "sha256": "a9f0cc4297b054dfb32d94aec48bebb65f47dfa20ca30c7c488dbd4df6320129",
+        "git_blob_sha1": "ee5efacd09eefff139e7bfba0914891a6f1cef46",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/attempt_01_result.json",
+        "bytes": 710,
+        "sha256": "39ea7503a0f93154a208c1eeb3a325f2a4aa486323e8167e0cbd4de7f44feeca",
+        "git_blob_sha1": "2e5b4c02a7ff4c06a632f662b311090561f986b0",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/attempt_02_receipt.json",
+        "bytes": 1672,
+        "sha256": "1f7bef3d17deedf6e0703d7df721364d8ad417ab4f05159d5f955d18ceeba43f",
+        "git_blob_sha1": "6abf1e1eea8aec583501de2be01b18cd1e0b5370",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/attempt_02_result_summary.json",
+        "bytes": 3588,
+        "sha256": "b47e4ca9190832bfe35f26f42ab15d142f10efd32a04c0bf5d5323d8176a5316",
+        "git_blob_sha1": "fbcbfdde6723daa28e7ebf0da34f9b219a06b27a",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/attempt_03_receipt.json",
+        "bytes": 1669,
+        "sha256": "583be1b3d23e5db2c153786ff82f95a211792d083b4b5a9ccea9431b39d7bd34",
+        "git_blob_sha1": "2a933ba88bb8a3e04f84297909f36175e08fc330",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/attempt_03_result.json",
+        "bytes": 832,
+        "sha256": "dbf0854a18070056e1f71769c4d65f484538748dc1f826642263b196fd95ad34",
+        "git_blob_sha1": "88f00d4ff8df2d2d8c49fbda6315be62f4d74dda",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/attempt_04_receipt.json",
+        "bytes": 1687,
+        "sha256": "ba31dffaffeb22b3591936e1edda880c0e26bf406a687c17e963aea626d3b2eb",
+        "git_blob_sha1": "0b3728806a9756c25fe65bcffea186df91b1d384",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/campaign_attempts.json",
+        "bytes": 8382,
+        "sha256": "d3d3e74aeccb8cef7d7c3d8f3720b090e0fe1165577c75d0506996e252c125e9",
+        "git_blob_sha1": "d7004efc1a531080e02ddd1d19a818ab9187b198",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/coefficient_conditions.json",
+        "bytes": 1660955,
+        "sha256": "5fb523ef2c39bb447783e779e6f04564a33a5bf585196c3b15caf0a2f4a2df9a",
+        "git_blob_sha1": "12239d9742a909036667dc6aa56f52f51a63538d",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/exact_solver_input.smt2",
+        "bytes": 2532283,
+        "sha256": "1ad8745ce781e9b471028e7e6102b79f535a1dcdab2fa670439d12524ed4e8bf",
+        "git_blob_sha1": "a7a8986b7fd1b31d4196dd308522984d8f20edbc",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/execution_authority.json",
+        "bytes": 1709,
+        "sha256": "eab3ef4b41849896d1acb0eb84f09446a0cc4b0562596acda82336e6605a0b4c",
+        "git_blob_sha1": "01c3328000a19dc54b61b231691d2636c3869bcb",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/execution_protocol.md",
+        "bytes": 5123,
+        "sha256": "a68910cc6c9ace5dd70aee2212ee09a7d27645eeeb81e96f66ce181fcada5771",
+        "git_blob_sha1": "f96549d4502f7297463c49f609275a788cba56db",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/initial_execution_plan.json",
+        "bytes": 8997,
+        "sha256": "789b5e5aae5eef8579c6462a82a3c480960848aca2d9dd91b2869ea8a85dcf92",
+        "git_blob_sha1": "6e509b1968f681783a6ac12ed7f46943b761e29b",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/recovery_02_execution_plan.json",
+        "bytes": 9595,
+        "sha256": "55d5dc650904c8decfa4970c36c5d6c791c528a28d9d2ea7978a8e70d7601f6b",
+        "git_blob_sha1": "8f5538a30fe1d5b4a6f2fa7c3fdb57b72c01558b",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/recovery_03_execution_plan.json",
+        "bytes": 9826,
+        "sha256": "2c704bdbacbb0c93ab1e59517af7466bc372f433a50c386f594938b3400dbe07",
+        "git_blob_sha1": "c1fbc411198bca47193d61b1b8cef1ccc4d80839",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/recovery_03_technical_tests.json",
+        "bytes": 22054,
+        "sha256": "f16b010dae8efa3e299fdc67be49a7b676fa0bb663f9d4ef785ba45e41ecec18",
+        "git_blob_sha1": "af69d122d4cab26c51b99b1d12282489f82cf150",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/recovery_04_execution_plan.json",
+        "bytes": 9868,
+        "sha256": "93011efd74a877d236338262d5c44e101eb5c1ddf5326bed47a967d1925bbef3",
+        "git_blob_sha1": "594e1f4b4e49eabe0ac8631acb1d389631202768",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/recovery_04_technical_tests.json",
+        "bytes": 22223,
+        "sha256": "bc5cc737c9b6e66a63bd87b8d46700aa5d02476e744e573dbba0d4f1f120331b",
+        "git_blob_sha1": "51d92a23ea1205a03a17296ac63658f27180c86c",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/recovery_technical_tests.json",
+        "bytes": 21875,
+        "sha256": "555d7fe2236f2683c2cb45049f356ad202d93e6835141ec6a52518de554f6f3c",
+        "git_blob_sha1": "8e0fbc43ce706871ed3d904d39b19a92e6c038be",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/repair_01_record.json",
+        "bytes": 1102,
+        "sha256": "9688435e46c3a705180985fc0fa4850a6e3bf2fadf1c00f06448842cda68ef1a",
+        "git_blob_sha1": "ebb848d967e50f4960eeab14c4d5ad249b62b3dc",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/repair_03_record.json",
+        "bytes": 766,
+        "sha256": "7c49929ee2615b91497a55cd8344f96e3e5f3a5c87e22944c456372aa1475612",
+        "git_blob_sha1": "ff5681e8596d663f2fe1bdd2d0dca0e07dbce32d",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/resource_recovery_addendum.md",
+        "bytes": 2482,
+        "sha256": "25c1aaed112b49dfed906090d1ac02e469bc793ac9a150304e626f7527d7e3ec",
+        "git_blob_sha1": "bc36be89ac220313f630d6e820fb8d621f492553",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/result_file_audit.json",
+        "bytes": 1182,
+        "sha256": "16b49de7ba2862082301a1902078eac3a52d66322ae6c9477c9f9cc6453bf28b",
+        "git_blob_sha1": "5b5c6f7c4414a16418a8cfd823a0b16c492abc36",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/scientific_execution_report.md",
+        "bytes": 9594,
+        "sha256": "1050943c98171174afbef483e1f8e8b3575f62bd0d0e14c0aecfb9adf417534b",
+        "git_blob_sha1": "da67362d162c674a2d2b12d0af065dedd773f332",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/scientific_result_summary.json",
+        "bytes": 5954,
+        "sha256": "bb541fe5c55cbc5b8e78558a627ff6eea179ac57df435e2fd6b77db9808257f7",
+        "git_blob_sha1": "85ea00a2e15a7e184309837f134353936a2ccfad",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/source_registry.json",
+        "bytes": 74522,
+        "sha256": "606c2a5845fa67011b05da115d69b328e49a36c46b28e49a1bcfcd1ad1bccfe3",
+        "git_blob_sha1": "eb1e3550c3e959e69cd7adcff448c9bf5c92f5ae",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "docs/research_exploration/p1star_phase_b_execution_20261017/user_execution_authority.txt",
+        "bytes": 103,
+        "sha256": "89264c2790cae3304335b622c13ecc07539c9830861bc81efcac2318973004e0",
+        "git_blob_sha1": "e3e7fc6c07a549de66f4f8cd605854bf27bb1fe2",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "research_tools/p1star_driver/cached_algebra.py",
+        "bytes": 3009,
+        "sha256": "a324f4f4d51ecd9677624cb4bc0478c1ff4bcc01d9d34c5f83114c4f1bc8f6b7",
+        "git_blob_sha1": "e11ccdcd7fd8198a7a45d08dc823f23f51deb191",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "research_tools/p1star_driver/operators.py",
+        "bytes": 9711,
+        "sha256": "4ef1399a895774b8c17238e968fdae0bf9982577c57404b7df50e13f2f2861e8",
+        "git_blob_sha1": "c861799c4c85503fd2167cbc44cda51ffdc8e922",
+        "change_from_freeze": "M"
+      },
+      {
+        "path": "research_tools/p1star_driver/pipeline.py",
+        "bytes": 6676,
+        "sha256": "2870687a45c5e7c65d217bc05ab16a5bc6563dd9ac2746e18890221bed92a087",
+        "git_blob_sha1": "4b38215272a33e512674e345ef187c8865964fe7",
+        "change_from_freeze": "M"
+      },
+      {
+        "path": "research_tools/p1star_driver/practical.py",
+        "bytes": 5121,
+        "sha256": "f4cedc42fc2807a9986386a44c75a9966227f0c4c3111d693d697d66bc1fe66d",
+        "git_blob_sha1": "b528e9fe54c4793ca9e17f47ae31fe62d87eb044",
+        "change_from_freeze": "M"
+      },
+      {
+        "path": "research_tools/p1star_driver/science.py",
+        "bytes": 4943,
+        "sha256": "04c207062e0d77c3b0892c4f2fe4c7ed677fe3b1fe5c25ace635edb097cd0b9e",
+        "git_blob_sha1": "cb38438f1fc20b2406cf9d818bcec60c8b21d634",
+        "change_from_freeze": "M"
+      },
+      {
+        "path": "research_tools/p1star_driver/tests/test_cached_algebra.py",
+        "bytes": 3188,
+        "sha256": "f4d0eecf89412af448d78f84be626e5df27263d64c177a52c1510c97e8f39bf7",
+        "git_blob_sha1": "7a6c2215685d14dcaeb41308344001699e5b608c",
+        "change_from_freeze": "A"
+      },
+      {
+        "path": "research_tools/p1star_execution_launcher.py",
+        "bytes": 5266,
+        "sha256": "c705cf2a7295cb3d21e7ad15583e57e56ce4fa224752aa0b63315fd7eb264680",
+        "git_blob_sha1": "f94cd67f3a436cba21adcf5c82a309773b4ea4dd",
+        "change_from_freeze": "A"
+      }
+    ],
+    "self_excluded_path": "docs/research_exploration/p1star_phase_b_execution_20261017/provenance.json",
+    "self_exclusion_reason": "avoid recursive hash; provenance itself independently checked after final commit/push",
+    "result_artifact_origin_commit": "a63c6dcf310712023e76787b8e9cd991b2c59bfe",
+    "verified_snapshot_commit_for_registry_sources": "a63c6dcf310712023e76787b8e9cd991b2c59bfe",
+    "final_provenance_commit_resolution": "40-character final handoff SHA reported after publication; provenance new file has no self-referential commit hash",
+    "verification_required": "branch tip SHA, fresh independent Git retrieval, local/committed/fetched/GitHub raw bytes, blob SHA-1, byte counts and SHA-256; exactly allowed delta from frozen base; clean isolated worktree"
+  }
+}
