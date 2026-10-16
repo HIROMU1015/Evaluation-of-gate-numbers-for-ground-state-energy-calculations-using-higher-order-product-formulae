@@ -11,6 +11,14 @@ def records(expression):return dict(expression.terms.items())
 
 
 class CachedAlgebraTests(unittest.TestCase):
+    def test_truncated_scalar_product_has_known_convolution(self):
+        with Arena(cached=True) as arena:
+            left=arena.new();right=arena.new()
+            for degree,c in enumerate([1,2,3,4,5]):left.add_word(degree=degree,coefficient=c)
+            for degree,c in enumerate([5,4,3,2,1]):right.add_word(degree=degree,coefficient=c)
+            product=left.multiplied(right,4)
+            actual={key.eta_degree:c.real for key,c in product.terms.items()}
+            self.assertEqual(actual,dict(enumerate([5,14,26,40,55])))
     def test_bounded_recovery_cap_is_explicit(self):
         settings=toy_settings();settings['terms']=200001
         with self.assertRaises(ValueError):validate_settings(settings)

@@ -26,14 +26,27 @@ def run_pipeline(spec,settings):
     result={'status':'INCONCLUSIVE','formal_consistent':False,'science_adopted':False,
             'attempts':1,'stages':stages,'primary_domain':'full Fock',
             'sector_failure_implies_general_sector_no_go':False}
-    arena=Arena(len(spec['word']),settings['terms'],settings['trace_events'],deadline.check,
+    arena=None
+    progress=os.environ.get('P1STAR_PROGRESS_PATH')
+    heartbeat={'checks':0,'last':0.0,'stage':'INITIALIZING'}
+    def write_progress():
+        if progress and arena is not None:
+            row={'stage':heartbeat['stage'],'elapsed_seconds':time.monotonic()-started,
+                 'managed_term_live':arena.ledger.live,'managed_term_peak':arena.ledger.peak,
+                 'trace_events':len(arena.trace.events),'product_checks':heartbeat['checks']}
+            if arena.cache is not None:row['cache_hits']=dict(arena.cache.hits)
+            row['worker_RSS_kib']=int(next(line.split()[1] for line in Path('/proc/self/status').read_text().splitlines() if line.startswith('VmRSS:')))
+            temporary=Path(progress).with_suffix('.tmp')
+            temporary.write_text(json.dumps(row)+'\n');temporary.replace(progress)
+    def check():
+        deadline.check();heartbeat['checks']+=1
+        if heartbeat['checks']%65536==0 and time.monotonic()-heartbeat['last']>=5:
+            write_progress();heartbeat['last']=time.monotonic()
+    arena=Arena(len(spec['word']),settings['terms'],settings['trace_events'],check,
                 cached=settings.get('algebra_backend')=='cached_tensor_products_v1')
     def stage(name):
         deadline.check();stages.append({'stage':name,'elapsed_seconds':time.monotonic()-started})
-        progress=os.environ.get('P1STAR_PROGRESS_PATH')
-        if progress:
-            Path(progress).write_text(json.dumps({'stage':name,'elapsed_seconds':time.monotonic()-started,
-                'managed_term_peak':arena.ledger.peak,'trace_events':len(arena.trace.events)})+'\n')
+        heartbeat['stage']=name;write_progress()
     try:
         stage('EXACT_INPUT_ELIGIBILITY')
         gate,factors=eligibility(spec['matrices'],arena,spec['particles'])

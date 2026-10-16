@@ -98,8 +98,16 @@ class Expression:
         self._compatible(other)
         result=self.arena.new('noncommutative_product')
         result.relation_scopes=self.relation_scopes | other.relation_scopes | {Scope.CAR,Scope.CCR}
+        if order is None:
+            right_groups={0:list(other.terms.items())}
+        else:
+            right_groups={}
+            for key,value in other.terms.items():
+                if key.eta_degree<=order:right_groups.setdefault(key.eta_degree,[]).append((key,value))
         for left,a in self.terms.items():
-            for right,b in other.terms.items():
+            allowed=(rows for degree,rows in right_groups.items()
+                     if order is None or left.eta_degree+degree<=order)
+            for right,b in (item for rows in allowed for item in rows):
                 self.arena.check()
                 degree=left.eta_degree+right.eta_degree
                 if order is not None and degree>order:continue
