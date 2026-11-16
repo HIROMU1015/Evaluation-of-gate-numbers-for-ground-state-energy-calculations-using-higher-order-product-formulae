@@ -1,0 +1,98 @@
+{
+  "baseline_commit": "20d64c2",
+  "previous_poster_commit": "17b30aa",
+  "primary_system": "H8 neutral singlet STO-3G 1.0 angstrom",
+  "aliases": [
+    "w8",
+    "w1016",
+    "wmy4"
+  ],
+  "epsilon_E_hartree": 0.00015936001019904,
+  "beta": 1.2,
+  "coefficient_source": "unchanged artifacts/trotter_expo_coeff_gr_original/*_ave",
+  "rotations_source": "unchanged config.DECOMPO_NUM",
+  "symmetry": {
+    "kind": "automatically_discovered_diagonal_Z2",
+    "pauli_z_mask_integer": 21845,
+    "pauli_z_qubits": [
+      15,
+      13,
+      11,
+      9,
+      7,
+      5,
+      3,
+      1
+    ],
+    "target_eigenvalue": 1,
+    "population_sector_dimension": 4900,
+    "restricted_dimension": 2468,
+    "other_dimension": 2432,
+    "ground_state_outside_norm": 2.3035535999168417e-15,
+    "restricted_ground_state_norm": 1.0,
+    "nullspace_dimension": 3
+  },
+  "coefficient_cutoff": 0,
+  "component_structural_cutoff": 0,
+  "physics_cache_sha256": "f9e3d9e51dd8b14dbd3420afad0ccf10a32f8b04fa3ce7590c34579ac5e93625",
+  "point_cache_identity": "alias + exact float.hex(time) + eigensolver method, valid only with this frozen physics cache",
+  "numerical_gates": {
+    "selected_eigenpair_residual": 1e-10,
+    "unitarity_frobenius": 1e-10,
+    "joint_to_schur_selected_or_max_ground_residual_threshold": 1e-11,
+    "joint_to_schur_minimum_reference_overlap": 0.9
+  },
+  "parallelism": {
+    "physical_gpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "workers": 8,
+    "blas_threads_per_worker": 1,
+    "cpu_group_preparation_workers": 8,
+    "concurrent_pools": 2,
+    "total_worker_processes": 16,
+    "formula_coordinators": "baseline w8 plus concurrent w1016/wmy4 sharing a second 8-worker pool",
+    "memory_policy": "compact spectra per process; memory-mapped checkpoint eigenvectors; array cache scratch excluded from Git"
+  },
+  "domain": {
+    "main_relative_geometric_grid": [
+      0.3,
+      2.0,
+      41
+    ],
+    "extra_short_relative_geometric_grid": [
+      0.03,
+      0.3,
+      15
+    ],
+    "exact_analytic_time": true,
+    "minimum_refinement": "25 points with cost/time/bracket convergence, then 17-point final verification",
+    "tracking": "all points sorted after every insertion; maximum previous vector overlap; maximum exact ground overlap crosscheck"
+  },
+  "user_authorization": "2026-11-16 user requested H8 computation after reviewing prior formula-specific estimates and asked for maximum practical acceleration/parallelization",
+  "time_estimates": [
+    {
+      "alias": "w8",
+      "observed_one_point_seconds": 39.215282805263996,
+      "conservative_200_point_eight_gpu_seconds": 1470.5731051973999
+    },
+    {
+      "alias": "w1016",
+      "observed_one_point_seconds": 39.69079046044499,
+      "conservative_200_point_eight_gpu_seconds": 1488.404642266687
+    },
+    {
+      "alias": "wmy4",
+      "observed_one_point_seconds": 29.334775692783296,
+      "conservative_200_point_eight_gpu_seconds": 1100.0540884793736
+    }
+  ],
+  "claim_scope": "domain-restricted refined sampled minimum with explicit branch diagnostics, not a continuous global optimum"
+}
