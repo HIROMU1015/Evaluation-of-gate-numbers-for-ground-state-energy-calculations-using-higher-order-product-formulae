@@ -1,0 +1,445 @@
+{
+  "baseline_commit": "20d64c2fea1ed2d2188777df4f3d962ee94df486",
+  "h8_analytic": [
+    {
+      "label": "8th(Morales)",
+      "alias": "w8",
+      "formal_order": 8,
+      "alpha": 1.286185525451373e-07,
+      "alpha_source": "artifacts/trotter_expo_coeff_gr_original/H8_sto-3g_singlet_distance_100_charge_0_grouping_Operator_w8_ave",
+      "alpha_sha256": "2cd874c0c65ed00b872a1960456812fedffc540e5506b33f75f475d92fb58cbd",
+      "pauli_rotations_per_step": 116212,
+      "time": 1.8507772510695522,
+      "value": 531926028.9432893,
+      "uses": 4577.2039801680485,
+      "ratios_per_step_uses_total": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "expected_rounded": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "pass": true
+    },
+    {
+      "label": "10th(Morales)",
+      "alias": "w1016",
+      "formal_order": 10,
+      "alpha": 4.04986840864685e-09,
+      "alpha_source": "artifacts/trotter_expo_coeff_gr_original/H8_sto-3g_singlet_distance_100_charge_0_grouping_Operator_w1016_ave",
+      "alpha_sha256": "537567ae06b5e5e402902f96a269131200e49adc9ef9fc23bc926f10040cd283",
+      "pauli_rotations_per_step": 225460,
+      "time": 2.266494007638929,
+      "value": 823966414.3941201,
+      "uses": 3654.601323490287,
+      "ratios_per_step_uses_total": [
+        1.9400750352803497,
+        0.7984353197552081,
+        1.5490244311431625
+      ],
+      "expected_rounded": [
+        1.94,
+        0.798,
+        1.549
+      ],
+      "pass": true
+    },
+    {
+      "label": "4th(new_2)",
+      "alias": "wmy4",
+      "formal_order": 4,
+      "alpha": 0.00013242768892876827,
+      "alpha_source": "artifacts/trotter_expo_coeff_gr_original/H8_sto-3g_singlet_distance_100_charge_0_grouping_Operator_wmy4_ave",
+      "alpha_sha256": "8b50cd360cd4f07b351eb9bbbd2ec6fed7407dcec250de6e3ad023e821dfd634",
+      "pauli_rotations_per_step": 34276,
+      "time": 0.7004185445899016,
+      "value": 460621715.2472762,
+      "uses": 13438.607633541726,
+      "ratios_per_step_uses_total": [
+        0.29494372353973775,
+        2.935986181032801,
+        0.8659506964950288
+      ],
+      "expected_rounded": [
+        0.295,
+        2.936,
+        0.866
+      ],
+      "pass": true
+    }
+  ],
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "platform": "Linux-6.8.0-49-generic-x86_64-with-glibc2.39",
+    "variables": {
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "TROTTER_PROJECT_ROOT": "/home/AbeHiromu/projects/poster-finite-time",
+      "TROTTER_QISKIT_AER_PRECISION": "double",
+      "TROTTER_QISKIT_DEVICE": "CPU"
+    },
+    "versions": {
+      "numpy": "1.26.4",
+      "scipy": "1.14.1",
+      "pyscf": "2.7.0",
+      "openfermion": "1.6.1",
+      "qiskit": "1.3.0",
+      "qiskit-aer": "0.15.1"
+    }
+  },
+  "wide_reproduction": {
+    "script": "review_response/validate_hchain_perturbative_estimator.py",
+    "source_sha256": "b724534a3b392d5c1b40f044be14cc55683520ef3975cafbaff39e8f027fc05b",
+    "source_reference": "artifacts/server_cost_validity/H4_wide_direct_validation.json",
+    "system": {
+      "ham_name": "H4_sto-3g_singlet_distance_100_charge_0",
+      "num_qubits": 8,
+      "num_groups": 13,
+      "ground_energy_without_constant_hartree": -1.834909635217954,
+      "sector": {
+        "kind": "fixed_half_populations",
+        "population_counts": [
+          2,
+          2
+        ],
+        "dimension": 36,
+        "max_group_leakage_frobenius_norm": 0.0,
+        "ground_state_outside_norm": 0.0,
+        "ground_state_eigenpair_residual": 2.475444876802194e-15
+      }
+    },
+    "absolute_tolerance_hartree": 1e-11,
+    "points": [
+      {
+        "time": 0.8,
+        "recomputed": 1.518607462003274e-11,
+        "reference": 1.5185852575427816e-11,
+        "absolute_difference": 2.220446049250313e-16,
+        "relative_difference": 1.4621806962904475e-05,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 1.518607462003274e-11,
+          "matrix_perturbative_error_hartree": 1.5183878460112155e-11,
+          "matrix_overlap_phase_error_hartree": 1.518387846011149e-11,
+          "selected_effective_energy_hartree": -1.8349096352027678,
+          "selected_ground_state_overlap_probability": 1.0000000000000004,
+          "tracking_overlap_probability": 1.0000000000000004,
+          "ground_state_survival_probability": 1.0000000000000875,
+          "raw_eigenphase_radians": -1.4679277081622144,
+          "phase_branch_integer": 0,
+          "phase_branch_reference_energy_hartree": -1.834909635217954,
+          "phase_branch_margin_hartree": 3.9269908169720553,
+          "effective_energy_step_change_hartree": null,
+          "unitarity_residual_frobenius_norm": 3.748409946274335e-12
+        }
+      },
+      {
+        "time": 0.9030703133477512,
+        "recomputed": 3.9433567522451085e-11,
+        "reference": 3.9435787968500335e-11,
+        "absolute_difference": 2.220446049250313e-15,
+        "relative_difference": 5.6305355202333296e-05,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 3.9433567522451085e-11,
+          "matrix_perturbative_error_hartree": 3.943449788369543e-11,
+          "matrix_overlap_phase_error_hartree": 3.9434497883693655e-11,
+          "selected_effective_energy_hartree": -1.8349096351785203,
+          "selected_ground_state_overlap_probability": 1.0000000000000004,
+          "tracking_overlap_probability": 1.0000000000000004,
+          "ground_state_survival_probability": 1.0000000000000902,
+          "raw_eigenphase_radians": -1.6570524192054743,
+          "phase_branch_integer": 0,
+          "phase_branch_reference_energy_hartree": -1.8349096352027678,
+          "phase_branch_margin_hartree": 3.4787907509901084,
+          "effective_energy_step_change_hartree": 2.4247492902418344e-11,
+          "unitarity_residual_frobenius_norm": 3.727510979572505e-12
+        }
+      },
+      {
+        "time": 1.019419988562507,
+        "recomputed": 1.0200107425362148e-10,
+        "reference": 1.0200285061046088e-10,
+        "absolute_difference": 1.7763568394002505e-15,
+        "relative_difference": 1.741477643780748e-05,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 1.0200107425362148e-10,
+          "matrix_perturbative_error_hartree": 1.0200189127942563e-10,
+          "matrix_overlap_phase_error_hartree": 1.0200189127942108e-10,
+          "selected_effective_energy_hartree": -1.8349096351159528,
+          "selected_ground_state_overlap_probability": 1.0,
+          "tracking_overlap_probability": 1.0000000000000004,
+          "ground_state_survival_probability": 1.0000000000000893,
+          "raw_eigenphase_radians": -1.8705435592431385,
+          "phase_branch_integer": 0,
+          "phase_branch_reference_energy_hartree": -1.8349096351785203,
+          "phase_branch_margin_hartree": 3.081745197046801,
+          "effective_energy_step_change_hartree": 6.25675067311704e-11,
+          "unitarity_residual_frobenius_norm": 3.70641819643948e-12
+        }
+      },
+      {
+        "time": 1.1507599106301303,
+        "recomputed": 2.6246516071637416e-10,
+        "reference": 2.6246693707321356e-10,
+        "absolute_difference": 1.7763568394002505e-15,
+        "relative_difference": 6.76792612131846e-06,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 2.6246516071637416e-10,
+          "matrix_perturbative_error_hartree": 2.624647857586884e-10,
+          "matrix_overlap_phase_error_hartree": 2.624647857586786e-10,
+          "selected_effective_energy_hartree": -1.8349096349554888,
+          "selected_ground_state_overlap_probability": 0.999999999999996,
+          "tracking_overlap_probability": 0.9999999999999987,
+          "ground_state_survival_probability": 1.000000000000075,
+          "raw_eigenphase_radians": -2.1115404475357433,
+          "phase_branch_integer": 0,
+          "phase_branch_reference_energy_hartree": -1.8349096351159528,
+          "phase_branch_margin_hartree": 2.7300157264644995,
+          "effective_energy_step_change_hartree": 1.6046408646275268e-10,
+          "unitarity_residual_frobenius_norm": 3.673622730162517e-12
+        }
+      },
+      {
+        "time": 1.2990213913509774,
+        "recomputed": 6.708840150082551e-10,
+        "reference": 6.708851252312797e-10,
+        "absolute_difference": 1.1102230246251565e-15,
+        "relative_difference": 1.654863079938492e-06,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 6.708840150082551e-10,
+          "matrix_perturbative_error_hartree": 6.708779232100352e-10,
+          "matrix_overlap_phase_error_hartree": 6.708779232100477e-10,
+          "selected_effective_energy_hartree": -1.83490963454707,
+          "selected_ground_state_overlap_probability": 0.9999999999999643,
+          "tracking_overlap_probability": 0.9999999999999845,
+          "ground_state_survival_probability": 0.9999999999999627,
+          "raw_eigenphase_radians": -2.383586866472648,
+          "phase_branch_integer": 0,
+          "phase_branch_reference_energy_hartree": -1.8349096349554888,
+          "phase_branch_margin_hartree": 2.4184302691058877,
+          "effective_energy_step_change_hartree": 4.0841885429188096e-10,
+          "unitarity_residual_frobenius_norm": 3.64238453148727e-12
+        }
+      },
+      {
+        "time": 1.4663845686659487,
+        "recomputed": 1.7006149821696681e-09,
+        "reference": 1.7006169805711124e-09,
+        "absolute_difference": 1.9984014443252818e-15,
+        "relative_difference": 1.1751037812489473e-06,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 1.7006149821696681e-09,
+          "matrix_perturbative_error_hartree": 1.7004703892828612e-09,
+          "matrix_overlap_phase_error_hartree": 1.700470389283711e-09,
+          "selected_effective_energy_hartree": -1.834909633517339,
+          "selected_ground_state_overlap_probability": 0.999999999999651,
+          "tracking_overlap_probability": 0.9999999999998392,
+          "ground_state_survival_probability": 0.9999999999990004,
+          "raw_eigenphase_radians": -2.690683171486317,
+          "phase_branch_integer": 0,
+          "phase_branch_reference_energy_hartree": -1.83490963454707,
+          "phase_branch_margin_hartree": 2.1424070596554983,
+          "effective_energy_step_change_hartree": 1.029730967161413e-09,
+          "unitarity_residual_frobenius_norm": 3.5981624746884396e-12
+        }
+      },
+      {
+        "time": 1.6553104648918318,
+        "recomputed": 4.267253217449252e-09,
+        "reference": 4.267254771761486e-09,
+        "absolute_difference": 1.5543122344752192e-15,
+        "relative_difference": 3.6424172392069584e-07,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 4.267253217449252e-09,
+          "matrix_perturbative_error_hartree": 4.265154784542492e-09,
+          "matrix_overlap_phase_error_hartree": 4.265154784561456e-09,
+          "selected_effective_energy_hartree": -1.8349096309507007,
+          "selected_ground_state_overlap_probability": 0.9999999999958944,
+          "tracking_overlap_probability": 0.9999999999979297,
+          "ground_state_survival_probability": 0.9999999999911073,
+          "raw_eigenphase_radians": -3.0373451142435037,
+          "phase_branch_integer": 0,
+          "phase_branch_reference_energy_hartree": -1.834909633517339,
+          "phase_branch_margin_hartree": 1.897887264034485,
+          "effective_energy_step_change_hartree": 2.5666382352795836e-09,
+          "unitarity_residual_frobenius_norm": 3.5539314768112642e-12
+        }
+      },
+      {
+        "time": 1.8685771752720979,
+        "recomputed": 1.0591396648607088e-08,
+        "reference": 1.0591396648607088e-08,
+        "absolute_difference": 0.0,
+        "relative_difference": 0.0,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 1.0591396648607088e-08,
+          "matrix_perturbative_error_hartree": 1.0560810682321296e-08,
+          "matrix_overlap_phase_error_hartree": 1.0560810682704205e-08,
+          "selected_effective_energy_hartree": -1.8349096246265573,
+          "selected_ground_state_overlap_probability": 0.9999999999236204,
+          "tracking_overlap_probability": 0.9999999999545457,
+          "ground_state_survival_probability": 0.9999999999274851,
+          "raw_eigenphase_radians": 2.8545150639153083,
+          "phase_branch_integer": -1,
+          "phase_branch_reference_energy_hartree": -1.8349096309507007,
+          "phase_branch_margin_hartree": 1.6812752950999583,
+          "effective_energy_step_change_hartree": 6.324143431157836e-09,
+          "unitarity_residual_frobenius_norm": 3.4871933614363763e-12
+        }
+      },
+      {
+        "time": 2.1093207189842866,
+        "recomputed": 2.6978240530439734e-08,
+        "reference": 2.6978242750885784e-08,
+        "absolute_difference": 2.220446049250313e-15,
+        "relative_difference": 8.230506596569966e-08,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 2.6978240530439734e-08,
+          "matrix_perturbative_error_hartree": 2.574956428360526e-08,
+          "matrix_overlap_phase_error_hartree": 2.5749564290966116e-08,
+          "selected_effective_energy_hartree": -1.8349096082397134,
+          "selected_ground_state_overlap_probability": 0.999999981431238,
+          "tracking_overlap_probability": 0.9999999835930943,
+          "ground_state_survival_probability": 0.9999999994282742,
+          "raw_eigenphase_radians": 2.4127724530562182,
+          "phase_branch_integer": -1,
+          "phase_branch_reference_energy_hartree": -1.8349096246265573,
+          "phase_branch_margin_hartree": 1.4893859386814694,
+          "effective_energy_step_change_hartree": 1.6386843881832647e-08,
+          "unitarity_residual_frobenius_norm": 3.4169731597206795e-12
+        }
+      },
+      {
+        "time": 2.3810811533050544,
+        "recomputed": 5.653871304467373e-08,
+        "reference": 5.653871459898596e-08,
+        "absolute_difference": 1.5543122344752192e-15,
+        "relative_difference": 2.749111375275405e-08,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 5.653871304467373e-08,
+          "matrix_perturbative_error_hartree": 6.168687967510078e-08,
+          "matrix_overlap_phase_error_hartree": 6.168687980931621e-08,
+          "selected_effective_energy_hartree": -1.8349095786792409,
+          "selected_ground_state_overlap_probability": 0.9999999134370935,
+          "tracking_overlap_probability": 0.9999998640775634,
+          "ground_state_survival_probability": 0.9999999956485011,
+          "raw_eigenphase_radians": 1.9141166913675278,
+          "phase_branch_integer": -1,
+          "phase_branch_reference_energy_hartree": -1.8349096082397134,
+          "phase_branch_margin_hartree": 1.31939752613775,
+          "effective_energy_step_change_hartree": 2.9560472514233993e-08,
+          "unitarity_residual_frobenius_norm": 3.339738974084153e-12
+        }
+      },
+      {
+        "time": 2.6878546290270258,
+        "recomputed": 1.4060373487723155e-07,
+        "reference": 1.4060373576540997e-07,
+        "absolute_difference": 8.881784197001252e-16,
+        "relative_difference": 6.316890620758504e-09,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 1.4060373487723155e-07,
+          "matrix_perturbative_error_hartree": 1.4495834469648073e-07,
+          "matrix_overlap_phase_error_hartree": 1.4495834699138944e-07,
+          "selected_effective_energy_hartree": -1.834909494614219,
+          "selected_ground_state_overlap_probability": 0.9999999698099877,
+          "tracking_overlap_probability": 0.9999999546906749,
+          "ground_state_survival_probability": 0.999999968337042,
+          "raw_eigenphase_radians": 1.351215328235117,
+          "phase_branch_integer": -1,
+          "phase_branch_reference_energy_hartree": -1.8349095786792409,
+          "phase_branch_margin_hartree": 1.1688103938762706,
+          "effective_energy_step_change_hartree": 8.406502183255782e-08,
+          "unitarity_residual_frobenius_norm": 3.251141662208774e-12
+        }
+      },
+      {
+        "time": 3.0341521525857997,
+        "recomputed": 2.306933646334386e-07,
+        "reference": 2.3069336640979543e-07,
+        "absolute_difference": 1.7763568394002505e-15,
+        "relative_difference": 7.700077670394709e-09,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 2.306933646334386e-07,
+          "matrix_perturbative_error_hartree": 3.331884436440679e-07,
+          "matrix_overlap_phase_error_hartree": 3.3318847982678354e-07,
+          "selected_effective_energy_hartree": -1.8349094045245893,
+          "selected_ground_state_overlap_probability": 0.9999871438879694,
+          "tracking_overlap_probability": 0.9999868248809545,
+          "ground_state_survival_probability": 0.9999997828096765,
+          "raw_eigenphase_radians": 0.7157909876413757,
+          "phase_branch_integer": -1,
+          "phase_branch_reference_energy_hartree": -1.834909494614219,
+          "phase_branch_margin_hartree": 1.0354102966018977,
+          "effective_energy_step_change_hartree": 9.008962975620705e-08,
+          "unitarity_residual_frobenius_norm": 3.1537262936247567e-12
+        }
+      },
+      {
+        "time": 3.4250659189755153,
+        "recomputed": 7.592948318979609e-07,
+        "reference": 7.592948334522731e-07,
+        "absolute_difference": 1.5543122344752192e-15,
+        "relative_difference": 2.047047031004088e-09,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 7.592948318979609e-07,
+          "matrix_perturbative_error_hartree": 7.388931031242073e-07,
+          "matrix_overlap_phase_error_hartree": 7.388936123512654e-07,
+          "selected_effective_energy_hartree": -1.834908875923122,
+          "selected_ground_state_overlap_probability": 0.9999988942628192,
+          "tracking_overlap_probability": 0.9999878116495706,
+          "ground_state_survival_probability": 0.999998621652467,
+          "raw_eigenphase_radians": -0.0014985481703707708,
+          "phase_branch_integer": -1,
+          "phase_branch_reference_energy_hartree": -1.8349094045245893,
+          "phase_branch_margin_hartree": 0.9172351474142186,
+          "effective_energy_step_change_hartree": 5.286014672645223e-07,
+          "unitarity_residual_frobenius_norm": 3.0484727175669984e-12
+        }
+      },
+      {
+        "time": 3.866344190857402,
+        "recomputed": 5.500362458832342e-06,
+        "reference": 5.5003624601646095e-06,
+        "absolute_difference": 1.3322676295501878e-15,
+        "relative_difference": 2.422145157158092e-10,
+        "pass_": true,
+        "diagnostics": {
+          "direct_error_hartree": 5.500362458832342e-06,
+          "matrix_perturbative_error_hartree": 1.4913557399409343e-06,
+          "matrix_overlap_phase_error_hartree": 1.491361627370247e-06,
+          "selected_effective_energy_hartree": -1.834904134855495,
+          "selected_ground_state_overlap_probability": 0.999635527293739,
+          "tracking_overlap_probability": 0.9996506684904696,
+          "ground_state_survival_probability": 0.9999921046521247,
+          "raw_eigenphase_radians": -0.8111856353991842,
+          "phase_branch_integer": -1,
+          "phase_branch_reference_energy_hartree": -1.834908875923122,
+          "phase_branch_margin_hartree": 0.8125438832940113,
+          "effective_energy_step_change_hartree": 4.741067626934381e-06,
+          "unitarity_residual_frobenius_norm": 2.9362537760549593e-12
+        }
+      }
+    ],
+    "pass_": true,
+    "maximum_absolute_difference": 2.220446049250313e-15
+  },
+  "pass": true,
+  "elapsed_seconds": 1.0827757865190506
+}

@@ -1,0 +1,63 @@
+{
+  "method": "H6 median build and other time; n^3 and group-count scaling; 160 points and 1.5 safety factor",
+  "numerical_validation_of_three_gpu_path": "parallel_validation.json",
+  "rows": [
+    {
+      "system": "H8",
+      "alias": "w8",
+      "label": "8th(Morales)",
+      "dimension": 4900,
+      "group_count_reference": 136,
+      "planned_points": 160,
+      "safety_factor": 1.5,
+      "estimated_point_seconds": 1502.4521444851978,
+      "estimated_one_gpu_seconds": 360588.5146764475,
+      "ideal_three_gpu_lower_bound_seconds": 120196.17155881583,
+      "resident_device_bytes_with_20percent_margin": 71176021095,
+      "streamed_device_bytes_with_20percent_margin": 8481109095,
+      "host_group_spectra_bytes": 52245760000,
+      "requires_user_approval": true,
+      "status": "not_executed",
+      "caveat": "Cubic extrapolation from current busy shared A100/H6; not a measured H8 benchmark. Three-GPU value is an ideal lower bound; H8 speedup has not been verified. H8 requires streamed spectra."
+    },
+    {
+      "system": "H8",
+      "alias": "w1016",
+      "label": "10th(Morales)",
+      "dimension": 4900,
+      "group_count_reference": 136,
+      "planned_points": 160,
+      "safety_factor": 1.5,
+      "estimated_point_seconds": 2522.3312853804982,
+      "estimated_one_gpu_seconds": 605359.5084913196,
+      "ideal_three_gpu_lower_bound_seconds": 201786.50283043986,
+      "resident_device_bytes_with_20percent_margin": 74863957095,
+      "streamed_device_bytes_with_20percent_margin": 12169045095,
+      "host_group_spectra_bytes": 52245760000,
+      "requires_user_approval": true,
+      "status": "not_executed",
+      "caveat": "Cubic extrapolation from current busy shared A100/H6; not a measured H8 benchmark. Three-GPU value is an ideal lower bound; H8 speedup has not been verified. H8 requires streamed spectra."
+    },
+    {
+      "system": "H8",
+      "alias": "wmy4",
+      "label": "4th(new_2)",
+      "dimension": 4900,
+      "group_count_reference": 136,
+      "planned_points": 160,
+      "safety_factor": 1.5,
+      "estimated_point_seconds": 734.3404799109787,
+      "estimated_one_gpu_seconds": 176241.71517863488,
+      "ideal_three_gpu_lower_bound_seconds": 58747.238392878295,
+      "resident_device_bytes_with_20percent_margin": 68410069095,
+      "streamed_device_bytes_with_20percent_margin": 5715157095,
+      "host_group_spectra_bytes": 52245760000,
+      "requires_user_approval": true,
+      "status": "not_executed",
+      "caveat": "Cubic extrapolation from current busy shared A100/H6; not a measured H8 benchmark. Three-GPU value is an ideal lower bound; H8 speedup has not been verified. H8 requires streamed spectra."
+    }
+  ],
+  "H8_existing_streamed_reference": "0af2a8d:artifacts/server_hchain_direct_optimal_time_h8_phase_a_v1_3_20260927_33040c6/resource_feasibility.json",
+  "H8_resident_spectra_ineligible_on_40GB_A100": true,
+  "preparation_time_and_additional_adaptive_points": "extra; estimates are formula sweep budgets, not guaranteed wall-time caps"
+}

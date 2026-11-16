@@ -1,0 +1,25 @@
+/home/AbeHiromu/projects/poster-finite-time/src/trotterlib/Almost_optimal_grouping.py:222: SyntaxWarning: invalid escape sequence '\s'
+  """
+/home/AbeHiromu/projects/poster-finite-time/src/trotterlib/Almost_optimal_grouping.py:382: SyntaxWarning: invalid escape sequence '\s'
+  """
+/home/AbeHiromu/projects/poster-finite-time/src/trotterlib/Almost_optimal_grouping.py:636: SyntaxWarning: invalid escape sequence '\s'
+  """
+/home/AbeHiromu/projects/poster-finite-time/src/trotterlib/Almost_optimal_grouping.py:747: SyntaxWarning: invalid escape sequence '\s'
+  """
+/home/AbeHiromu/projects/poster-finite-time/src/trotterlib/Almost_optimal_grouping.py:792: SyntaxWarning: invalid escape sequence '\s'
+  """
+主対象の新4次/8次（解析→直接）：H2 1.0479→1.0544、H4 0.8969→0.8848、H6 0.8434→0.8256。H₄・H₆で新4次の優位、H₂で劣位を維持。
+主対象の10次/8次（直接）：H2 1.4554、H4 1.4639、H6 1.4573。3系とも10次が多い。H₈の約13%差は未検証。
+参考H5：新4次/8次 0.7849、10次/8次 1.4208。H₈は見積もり後の確認待ち、H₃・H₇は今回の集計対象外。
+
+| 系 | 公式 | 1 GPU の概算 | 3 GPU の理想下限 | GPUメモリ概算 |
+|---|---|---:|---:|---:|
+| H8 | 8th(Morales) | 100.2 時間 | 33.4 時間 | 7.9 GiB/GPU |
+| H8 | 10th(Morales) | 168.2 時間 | 56.1 時間 | 11.3 GiB/GPU |
+| H8 | 4th(new_2) | 49.0 時間 | 16.3 時間 | 5.3 GiB/GPU |
+
+H₈は未実行。160点/公式、安全係数1.5の外挿であり、系の準備と追加の枝追跡点は別途必要。GPUの空きと負荷は実行前に再確認する。
+H₄の3GPU経路は逐次と数値一致したが、小行列では逐次より遅かった。大きい系でも並列化の効果は実測で確認する。3GPU欄は速度向上の保証ではない。
+H₈の群スペクトルだけで約48.7 GiBあり、40 GB GPUに全常駐できない。後続0af2a8dのホスト常駐・群ごとの転送方式が必要。表のH₈メモリはその方式を仮定し、今回のrunnerによるH₈実行は無効のまま。
+1時間を超える可能性のあるH₈は、公式別の実行予算と停止条件の承認後に進める。
+
